@@ -1,0 +1,23 @@
+{% if include.id %}
+  {% assign image_grid = page[include.id] %}
+{% else %}
+  {% assign image_grid = page.image_grid %}
+{% endif %}
+
+<div class="strip strip-grey">
+  <div class="container pt-2 mb-6">
+    <div class="row justify-content-center">
+      {% for item in image_grid %}
+      <div class="col-12 col-md-6 col-lg-4 pb-2">
+        <div class="feature">
+          <div class="feature-image"><img alt="{{ item.title }} logo" src="{{ item.image | relative_url }}" /></div>
+          <h2 class="feature-title">
+            <a{% if item.url %} href="{{ item.url | relative_url }}"{% endif %}>{{ item.title }}</a>
+          </h2>
+          <div class="feature-content">{{ item.excerpt }}</div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>

@@ -1,0 +1,19 @@
+main:
+  - name: "Get Started"
+    url: /get_started
+  - name: "Team"
+    url: /team
+  - name: "Docs"
+    url: /docs
+  - name: "Contribute"
+    url: /contribute
+  - name: "GitHub"
+    url: https://github.com/DeepGraphLearning/drugdiscovery/
+  - name: "About"
+    url: /about
+
+footer:
+  - name: "Home"
+    url: "/"
+  - name: "Contact"
+    url: "/contact/"

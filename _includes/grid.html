@@ -1,0 +1,36 @@
+{% if include.id %}
+  {% assign grid = page[include.id] %}
+{% else %}
+  {% assign grid = page.grid %}
+{% endif %}
+
+<div class="strip">
+  <div class="container pt-6 pb-6 pb-md-10">
+    <div class="row justify-content-start">
+      {% for item in grid.items %}
+      <div class="col-12 col-md-6 mb-1">
+        <div class="service service-summary">
+          <div class="service-content">
+            <h2 class="service-title">
+              <a{% if item.url %} href="{{ item.url | relative_url }}"{% endif %}>{{ item.title }}</a>
+            </h2>
+            <p>{{ item.excerpt }}</p>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    {% if grid.url %}
+      {% if grid.btn_label %}
+        {% assign btn_label = grid.btn_label %}
+      {% else %}
+        {% assign btn_label = "Learn more" %}
+      {% endif %}
+    <div class="row justify-content-center">
+      <div class="col-auto">
+        <a class="button button-primary" href="{{ grid.url | relative_url }}">{{ btn_label }}</a>
+      </div>
+    </div>
+    {% endif %}
+  </div>
+</div>

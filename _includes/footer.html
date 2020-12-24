@@ -1,0 +1,16 @@
+<div class="footer">
+  <div class="container">
+    <div class="row">
+      <div class="col-12 mt-2 mb-4">
+        <div class="footer-inner">
+          <h3 class="footer-title">{{ site.title }}</h3>
+          <ul>
+            {% if site.footer.copyright %}
+            <li class="copyright">&copy; {{ site.time | date: '%Y' }} {{ site.footer.copyright }}</li>
+            {% endif %}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,40 @@
+.. Dataset
+.. _ClinTox: https://arxiv.org/pdf/1703.00564.pdf
+.. _QM8: https://pubs.acs.org/doi/pdfplus/10.1021/ci300415d
+.. _QM9: https://pubs.acs.org/doi/pdfplus/10.1021/ci300415d
+.. _ChEMBL: https://pubmed.ncbi.nlm.nih.gov/30155234/
+.. _ZINC250k: https://pubs.acs.org/doi/pdfplus/10.1021/ci3001277
+.. _ZINC15: https://pubs.acs.org/doi/10.1021/acs.jcim.5b00559
+.. _USPTO50k: https://aspace.repository.cam.ac.uk/bitstream/handle/1810/244727/lowethesis.pdf
+.. _FB15k: http://papers.nips.cc/paper/5071-translating-embeddings-for-modeling-multi-relational-data.pdf
+.. _FB15k-237: https://www.aclweb.org/anthology/W15-4007
+.. _WN18: http://papers.nips.cc/paper/5071-translating-embeddings-for-modeling-multi-relational-data.pdf
+.. _WN18RR: https://www.aaai.org/ocs/index.php/AAAI/AAAI18/paper/download/17366/15884
+
+.. Molecule property prediction
+.. _NFP: https://papers.nips.cc/paper/5954-convolutional-networks-on-graphs-for-learning-molecular-fingerprints.pdf
+.. _GCN: https://arxiv.org/pdf/1609.02907.pdf
+.. _ENN-S2S: https://arxiv.org/pdf/1704.01212.pdf
+.. _SchNet: https://aip.scitation.org/doi/pdf/10.1063/1.5019779
+.. _GIN: https://arxiv.org/pdf/1810.00826.pdf
+
+.. Molecule property prediction with pre-training
+.. _Edge Prediction: https://arxiv.org/abs/1706.02216
+.. _Deep Graph InfoMax: https://arxiv.org/abs/1809.10341
+.. _Attribute Masking: https://arxiv.org/abs/1905.12265
+.. _Context Prediction: https://arxiv.org/abs/1905.12265
+.. _Supervised Pretraining: https://arxiv.org/abs/1905.12265
+
+.. Graph generation
+.. _GCPN: https://papers.nips.cc/paper/7877-graph-convolutional-policy-network-for-goal-directed-molecular-graph-generation.pdf
+.. _GraphAF: https://arxiv.org/pdf/2001.09382.pdf
+
+.. Retrosynthesis
+.. _G2Gs: https://arxiv.org/pdf/2003.12725.pdf
+
+.. Reasoning
+.. _TransE: http://papers.nips.cc/paper/5071-translating-embeddings-for-modeling-multi-relational-data.pdf
+.. _DistMult: https://arxiv.org/pdf/1412.6575.pdf
+.. _ComplEx: http://proceedings.mlr.press/v48/trouillon16.pdf
+.. _SimplE: https://papers.nips.cc/paper/7682-simple-embedding-for-link-prediction-in-knowledge-graphs.pdf
+.. _RotatE: https://arxiv.org/pdf/1902.10197.pdf

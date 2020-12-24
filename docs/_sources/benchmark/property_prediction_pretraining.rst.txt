@@ -1,0 +1,66 @@
+Molecule Property Prediction with Pre-Training
+==============================================
+
+.. include:: ../bibliography.rst
+
+This page contains benchmarks of property prediction models with pre-training.
+
+We have two main methods for the pre-training.
+
+- Self-supervised pre-training is learning the graph structural information in a self-supervised manner. Here we are pre-training on a subset of 2m molecules from `ZINC15`_.
+- Supervised pre-training is doing pre-training on a large supervised dataset. Here we are using 456k molecuels and 1,310 tasks from `ChEMBL`_.
+
+For the downstream tasks, we consider the scaffold splitting for molecule data.
+The split for train/validation/test sets is 80%:10%:10%.
+For each pre-training method and downstream dataset, we evaluate with 10 random splits and report the mean of the performance.
+
+
+.. contents::
+    :local:
+
+Self-Supervised Pre-training
+----------------------------
+
+- Random
+- Edge Prediction (EP)
+- Deep Graph InfoMax (DGI)
+- Attribute Masking (AM)
+- Context Prediction (CP)
+- Supervised Pre-training (Sup)
+
++--------------+-------+-------+---------+-------+---------+-----+-----+------+-----+
+| Method       | BBBP  | Tox21 | ToxCast | Sider | ClinTox | MUV | HIV | Bace | Avg |
++==============+=======+=======+=========+=======+=========+=====+=====+======+=====+
+| Random       |       |       |         |       |         |     |     |      |     |
++--------------+-------+-------+---------+-------+---------+-----+-----+------+-----+
+| EP           |       |       |         |       |         |     |     |      |     |
++--------------+-------+-------+---------+-------+---------+-----+-----+------+-----+
+| DGI          |       |       |         |       |         |     |     |      |     |
++--------------+-------+-------+---------+-------+---------+-----+-----+------+-----+
+| AM           |       |       |         |       |         |     |     |      |     |
++--------------+-------+-------+---------+-------+---------+-----+-----+------+-----+
+| CP           |       |       |         |       |         |     |     |      |     |
++--------------+-------+-------+---------+-------+---------+-----+-----+------+-----+
+
+
+Supervised Pre-training (Plus Self-Supervised Pre-training)
+-----------------------------------------------------------
+
+- Edge Prediction + Supervised Pre-training (EP+Sup)
+- Deep Graph InfoMax + Supervised Pre-training (DGI+Sup)
+- Attribute Masking + Supervised Pre-training (AM+Sup)
+- Context Prediction + Supervised Pre-training (CP+Sup)
+
++--------------+-------+-------+---------+-------+---------+-----+-----+------+-----+
+| Method       | BBBP  | Tox21 | ToxCast | Sider | ClinTox | MUV | HIV | Bace | Avg |
++==============+=======+=======+=========+=======+=========+=====+=====+======+=====+
+| Sup          |       |       |         |       |         |     |     |      |     |
++--------------+-------+-------+---------+-------+---------+-----+-----+------+-----+
+| EP+Sup       |       |       |         |       |         |     |     |      |     |
++--------------+-------+-------+---------+-------+---------+-----+-----+------+-----+
+| DGI+Sup      |       |       |         |       |         |     |     |      |     |
++--------------+-------+-------+---------+-------+---------+-----+-----+------+-----+
+| AM+Sup       |       |       |         |       |         |     |     |      |     |
++--------------+-------+-------+---------+-------+---------+-----+-----+------+-----+
+| CP+Sup       |       |       |         |       |         |     |     |      |     |
++--------------+-------+-------+---------+-------+---------+-----+-----+------+-----+

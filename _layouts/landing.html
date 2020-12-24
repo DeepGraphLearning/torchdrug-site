@@ -1,0 +1,34 @@
+---
+layout: default
+---
+
+{% if page.landing %}
+<div class="intro">
+  <div class="container">
+    <div class="row justify-content-start">
+      <div class="col-12 col-md-9 order-2 order-md-1">
+        <h1>{{ page.landing.title }}</h1>
+        <p>{{ page.landing.excerpt }}</p>
+        <div class="col-md-9" style="padding-left: 0">
+        {% if page.intro_box %}
+          {% include call.html show_button=true %}
+        {% endif %}
+        </div>
+      </div>
+      {% if page.intro_image %}
+      <div class="col-12 col-md-3 order-1 order-md-2 position-relative">
+        <img alt={{ page.landing.title }} class="intro-image{% if page.intro_image_absolute %} intro-image-absolute{% endif %}{% if page.intro_image_hide_on_mobile %} intro-image-hide-mobile{% endif %}" src="{{ page.intro_image | relative_url }}" />
+      </div>
+      {% endif %}
+    </div>
+  </div>
+</div>
+{% endif %}
+
+<div class="container">
+  <div class="row justify-content-start">
+    <div class="service service-single">
+      {{ content }}
+    </div>
+  </div>
+</div>
