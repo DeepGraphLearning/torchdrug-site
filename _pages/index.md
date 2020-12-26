@@ -29,7 +29,7 @@ image_grid:
     url: /docs/examples/property_prediction
     image: assets/images/task/retrosynthesis.png
   - title: Pretrained Molecular Representations
-    url: /docs/examples/property_prediction_pretrain
+    url: /docs/examples/property_prediction_pretraining
     image: assets/images/task/retrosynthesis.png
   - title: Molecule Generation
     url: /docs/examples/generation
