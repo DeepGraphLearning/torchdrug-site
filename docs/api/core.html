@@ -145,7 +145,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../examples/property_prediction_pretraining.html">Molecule Property Prediction with Pre-Training</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../examples/generation.html">Molecule Generation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../examples/retrosynthesis.html">Retrosynthesis</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../examples/reasoning.html">Reasoning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/reasoning.html">Knowledge Graph Reasoning</a></li>
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../notes/index.html">Notes</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label for="toctree-checkbox-3"><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
@@ -219,7 +219,7 @@ This is convenient for building models from configuration files.</p>
 <dt id="drugdiscovery.core.Engine">
 <em class="property">class </em><code class="sig-name descname">Engine</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">task</span></em>, <em class="sig-param"><span class="n">train_set</span></em>, <em class="sig-param"><span class="n">valid_set</span></em>, <em class="sig-param"><span class="n">test_set</span></em>, <em class="sig-param"><span class="n">optimizer</span></em>, <em class="sig-param"><span class="n">scheduler</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">gpus</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">batch_size</span><span class="o">=</span><span class="default_value">1</span></em>, <em class="sig-param"><span class="n">log_interval</span><span class="o">=</span><span class="default_value">100</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/drugdiscovery/core/engine.html#Engine"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#drugdiscovery.core.Engine" title="Permalink to this definition">¶</a></dt>
 <dd><p>General class that handles everything about training and test of a task.</p>
-<p>This class performs synchronous distributed parallel training over multiple nodes and GPUs.
+<p>This class can perform synchronous distributed parallel training over multiple CPUs or GPUs.
 To invoke with multiple GPUs,</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python -m torch.distributed.launch --nproc_per_node<span class="o">={</span>number_of_gpus<span class="o">}</span> <span class="o">{</span>your_script.py<span class="o">}</span>
 </pre></div>

@@ -17,84 +17,44 @@ And specifically to the self-supervised pre-training for molecule property predi
 it explores the structure information of molecular data from different aspects as illustrated below.
 
 
-Edge Prediction
----------------
+Infograph
+^^^^^^^^^
 
-`Edge Prediction`_ (EP) sets the connected nodes/atoms in the molecular graph as positive,
-and nodes/atoms not connected as negative.
-
-.. code:: python
-
-    from torch import optim
-    from torch.utils import data as torch_data
-    from drugdiscovery import core, datasets, tasks, models
-
-
-    dataset = datasets.ClinTox('datasets', node_feature='pretraining', edge_feature='pretraining')
-
-    lengths = [len(dataset), 0, 0]
-    train_set, _, _ = torch_data.random_split(dataset, lengths)
-
-    model = models.GIN(GIN_version='pretraining', emb_dim=300, num_layer=5, readout='mean')
-    parameters = list(model.parameters())
-    task = tasks.EdgePrediction(model)
-
-    optimizer = optim.Adam(parameters, lr=1e-3)
-    solver = core.Engine(task, train_set, None, None, optimizer,
-                         gpus=[0], batch_size=256, num_workers=0)
-
-    solver.train(num_epoch=100)
-
-The above is the toy example on `ClinTox`_ dataset, and the output is similar to the following.
-
-.. code:: bash
-
-    average BCEWithLogitsLoss() loss: 0.693223
-    average acc: 0.503201
-
-
-
-Deep Graph InfoMax
-------------------
-
-`Deep Graph InfoMax`_ (DGI) sets the node- and graph- representation from the same graph as positive pairs,
+`InfoGraph`_ sets the node- and graph- representation from the same graph as positive pairs,
 while those from different graphs as negative pairs.
 
 .. code:: python
 
-    from torch import optim
+    import torch
+    from torch import nn, optim
     from torch.utils import data as torch_data
-    from drugdiscovery import core, datasets, tasks, layers, models
+
+    from drugdiscovery import core, data, datasets, tasks, models
 
 
-    dataset = datasets.ClinTox('datasets', node_feature='pretraining', edge_feature='pretraining')
+    if __name__ == '__main__':
+        dataset = datasets.ClinTox('datasets', node_feature='pretraining', edge_feature='pretraining')
 
-    lengths = [len(dataset), 0, 0]
-    train_set, _, _ = torch_data.random_split(dataset, lengths)
+        lengths = [len(dataset), 0, 0]
+        train_set, _, _ = torch_data.random_split(dataset, lengths)
 
-    model = models.GIN(GIN_version='pretraining', emb_dim=300, num_layer=5, readout='mean')
-    discriminator = tasks.Discriminator(300)
-    proj_model = layers.MultiLayerPerceptron(input_dim=300, hidden_dims=[300, 300])
-    parameters = list(model.parameters()) + list(discriminator.parameters()) + list(proj_model.parameters())
-    task = tasks.DeepGraphInfoMax(model, proj_model, discriminator)
+        gin_model = models.GIN(GIN_version='pretraining', emb_dim=300, num_layer=5, readout='mean')
+        model = models.InfoGraph(gin_model, separate_model=False)
 
-    optimizer = optim.Adam(parameters, lr=1e-3)
-    solver = core.Engine(task, train_set, None, None, optimizer,
-                         gpus=[0], batch_size=256, num_workers=0)
+        task = tasks.Unsupervised(model)
+        optimizer = optim.Adam(task.parameters(), lr=1e-3)
+        solver = core.Engine(task, train_set, None, None, optimizer, gpus=[0], batch_size=256, num_workers=0)
 
-    solver.train(num_epoch=100)
+        solver.train(num_epoch=100)
 
 The above is the toy example on `ClinTox`_ dataset, and the output is similar to the following.
 
 .. code:: bash
 
-    average BCEWithLogitsLoss() loss: 0.132012
-    average acc: 0.954214
-
-
+    average graph-node mutual information: 1.30305
 
 Attribute Masking
------------------
+~~~~~~~~~~~~~~~~~
 
 `Attribute Masking`_ (AM) predicts the atom node type from its neighbors.
 It can be seen as self-supervised by viewing the actual node type as positive, and all the other node types as negative.
@@ -128,53 +88,12 @@ The above is the toy example on `ClinTox`_ dataset, and the output is similar to
     average CrossEntropyLoss() loss: 0.285154
     average acc: 0.90249
 
+We also include other mainstream self-supervised pre-training methods as below:
 
-
-
-Context Prediction
-------------------
-
-`Context Prediction`_ (CP) first defines two types of sub-structures on molecular graphs.
-The first is called subgraph, it is a K-hop neighborhood around a center node.
-The second is called the context, it is a surrounding graph structure between r1- and r2-hop from then center node.
-Based on the above two definitions, the subgraph-context pair for the same node as positive,
-and those pairs from different nodes as negative.
-
-.. code:: python
-
-    from torch import nn, optim
-    from torch.utils import data as torch_data
-    from drugdiscovery import core, datasets, tasks, layers, models
-
-    dataset = datasets.ClinTox('datasets', node_feature='pretraining', edge_feature='pretraining')
-
-    lengths = [len(dataset), 0, 0]
-    train_set, _, _ = torch_data.random_split(dataset, lengths)
-
-    k = 5
-    l1 = k - 1
-    l2 = l1 + 3
-    model = models.GIN(GIN_version='pretraining', emb_dim=300, num_layer=5, readout='mean')
-    model_context = models.GIN(GIN_version='pretraining', emb_dim=300, num_layer=3, readout='mean')
-    model_context_readout = layers.MeanReadout()
-    parameters = list(model.parameters()) + list(model_context.parameters()) + list(model_context_readout.parameters())
-
-    task = tasks.ContextPrediction(model, model_context, model_context_readout, k, l1, l2, 1)
-
-    optimizer = optim.Adam(parameters, lr=1e-3)
-    solver = core.Engine(task, train_set, None, None, optimizer,
-                         gpus=[0], batch_size=256, num_workers=0)
-
-    solver.train(num_epoch=100)
-
-The above is the toy example on `ClinTox`_ dataset, and the output is similar to the following.
-
-.. code:: bash
-
-    average BCEWithLogitsLoss() loss: 0.606319
-    average acc: 0.662288
-
-
+.. seealso::
+    :func:`Edge Prediction (EP) <drugdiscovery.tasks.EdgePrediction>`
+    :func:`Deep Graph InfoMax (DGI) <drugdiscovery.tasks.DeepGraphInfoMax>`
+    :func:`Context Prediction (CP) <drugdiscovery.tasks.ContextPrediction>`
 
 Supervised Pre-training
 -----------------------

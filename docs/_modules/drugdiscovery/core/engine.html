@@ -145,7 +145,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../../../examples/property_prediction_pretraining.html">Molecule Property Prediction with Pre-Training</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../examples/generation.html">Molecule Generation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../examples/retrosynthesis.html">Retrosynthesis</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../examples/reasoning.html">Reasoning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../examples/reasoning.html">Knowledge Graph Reasoning</a></li>
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../../notes/index.html">Notes</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label for="toctree-checkbox-3"><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
@@ -208,7 +208,7 @@
     <span class="sd">"""</span>
 <span class="sd">    General class that handles everything about training and test of a task.</span>
 
-<span class="sd">    This class performs synchronous distributed parallel training over multiple nodes and GPUs.</span>
+<span class="sd">    This class can perform synchronous distributed parallel training over multiple CPUs or GPUs.</span>
 <span class="sd">    To invoke with multiple GPUs,</span>
 
 <span class="sd">    .. code-block:: bash</span>
@@ -268,6 +268,9 @@
             <span class="n">old_params</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">task</span><span class="o">.</span><span class="n">parameters</span><span class="p">())</span>
             <span class="n">task</span><span class="o">.</span><span class="n">preprocess</span><span class="p">(</span><span class="n">train_set</span><span class="p">)</span>
             <span class="n">new_params</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">task</span><span class="o">.</span><span class="n">parameters</span><span class="p">())</span>
+            <span class="c1">#print(len(new_params), len(old_params))</span>
+            <span class="c1">#print(old_params)</span>
+            <span class="c1">#print(new_params)</span>
             <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">new_params</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">old_params</span><span class="p">):</span>
                 <span class="n">optimizer</span><span class="o">.</span><span class="n">add_param_group</span><span class="p">({</span><span class="s2">"params"</span><span class="p">:</span> <span class="n">new_params</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">old_params</span><span class="p">):]})</span>
 
@@ -300,6 +303,8 @@
                     <span class="n">batch</span> <span class="o">=</span> <span class="n">utils</span><span class="o">.</span><span class="n">cuda</span><span class="p">(</span><span class="n">batch</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">device</span><span class="p">)</span>
 
                 <span class="n">loss</span><span class="p">,</span> <span class="n">metric</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">batch</span><span class="p">)</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="n">loss</span><span class="o">.</span><span class="n">requires_grad</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s2">"Loss doesn't require grad. Did you define any loss in the task?"</span><span class="p">)</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">optimizer</span><span class="o">.</span><span class="n">zero_grad</span><span class="p">()</span>
                 <span class="n">loss</span><span class="o">.</span><span class="n">backward</span><span class="p">()</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">optimizer</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>
