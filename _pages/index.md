@@ -1,11 +1,12 @@
 ---
 layout: landing
 permalink: /
+title:
 landing:
   title: Powerful and flexible machine learning library for drug discovery
   excerpt: > 
-    Drugdiscovery is a graph representation learning toolbox built on top of PyTorch.
-    It provides a comprehensive and flexible interface to support rapid protoyping of deep learning models for graph structured data.
+    TorchDrug is a graph representation learning toolbox built on top of PyTorch.
+    It provides a comprehensive and flexible interface to support rapid protoyping of machine learning models for drug discovery.
 
 grid:
   items:

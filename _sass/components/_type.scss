@@ -37,8 +37,10 @@ h3 {
 }
 ul,
 ol {
-  margin: 0;
-  padding: 0;
+  line-height: 26px;
+  color: $steel;
+  font-family: $font-family-base;
+  margin-bottom: 20px;
   li {
     padding: 0;
     margin: 0;
