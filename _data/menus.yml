@@ -1,8 +1,6 @@
 main:
   - name: "Get Started"
     url: /get_started
-  - name: "Team"
-    url: /team
   - name: "Docs"
     url: /docs
   - name: "Contribute"

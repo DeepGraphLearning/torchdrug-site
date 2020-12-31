@@ -5,7 +5,7 @@ google_analytics_id: ""
 homepage:
   show_call_box: true
 logo:
-  mobile: "assets/images/logo/logo-mobile.svg"
+  mobile: "assets/images/logo/logo-small.svg"
   desktop: "assets/images/logo/logo.svg"
   desktop_height: "36px"
 footer:
