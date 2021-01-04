@@ -18,7 +18,7 @@ grid:
         Empower fast iteration of ideas by a large collection of datasets and building blocks.
     - title: Comprehensive Benchmarks
       excerpt: >
-        Benchmarks provide a systematic comparison of deep learning models for drug discovery.
+        Benchmarks provide a systematic comparison of deep learning architectures for drug discovery.
     - title: Scalable Training and Inference
       excerpt: >
         Seamlessly scale models to multiple CPUs and GPUs, or even distributed settings.

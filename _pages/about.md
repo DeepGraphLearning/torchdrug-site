@@ -35,7 +35,7 @@ team:
 ---
 
 TorchDrug was initiated by [MilaGraph] to integrate recent advances in drug discovery and accelerate development,
-with the vision of creating an ease access to drug discovery techniques for everyone. The library is designed for
+with the vision of creating an easy access to drug discovery techniques for everyone. The library is designed for
 machine learning practitioners to apply fundamental algorithms to drug discovery applications, with minimal efforts
 on domain knowledge and trivial details.
 
