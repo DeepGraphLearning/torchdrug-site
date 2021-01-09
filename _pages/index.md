@@ -32,7 +32,7 @@ image_grid:
   - title: Pretrained Molecular Representations
     url: /docs/examples/property_prediction_pretraining
     image: assets/images/task/pretrain.png
-  - title: Molecule Generation
+  - title: De Novo Molecule Design & Optimization
     url: /docs/examples/generation
     image: assets/images/task/generation.png
   - title: Retrosynthesis
@@ -43,7 +43,7 @@ image_grid:
     image: assets/images/task/reasoning.png
 
 intro_box: "conda install torchdrug"
-intro_image: "assets/images/illustrations/pointing.svg"
+intro_image: "assets/images/intro.svg"
 intro_image_absolute: true
 intro_image_hide_on_mobile: true
 ---

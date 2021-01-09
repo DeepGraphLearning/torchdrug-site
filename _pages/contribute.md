@@ -26,9 +26,9 @@ If you are a new open source contributor, we recommend you to take a look at the
 
 # Submit an Issue
 
-In the following cases, you are encouraged to submit an issue on [GitHub].
+In the following cases, you are encouraged to [submit an issue] on GitHub.
 
-[GitHub]: https://github.com/DeepGraphLearning/drugdiscovery/issues
+[submit an issue]: https://github.com/DeepGraphLearning/drugdiscovery/issues
 
 - Issues or bug reports
 - Feature requests
