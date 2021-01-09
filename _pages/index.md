@@ -27,19 +27,19 @@ grid:
 
 image_grid:
   - title: Property Prediction
-    url: /docs/examples/property_prediction
+    url: /docs/tutorials/property_prediction
     image: assets/images/task/property_prediction.png
   - title: Pretrained Molecular Representations
-    url: /docs/examples/property_prediction_pretraining
+    url: /docs/tutorials/pretrained_representation
     image: assets/images/task/pretrain.png
   - title: De Novo Molecule Design & Optimization
-    url: /docs/examples/generation
+    url: /docs/tutorials/generation
     image: assets/images/task/generation.png
   - title: Retrosynthesis
-    url: /docs/examples/retrosynthesis
+    url: /docs/tutorials/retrosynthesis
     image: assets/images/task/retrosynthesis.png
   - title: Biomedical Knowledge Graph Reasoning
-    url: /docs/examples/reasoning
+    url: /docs/tutorials/reasoning
     image: assets/images/task/reasoning.png
 
 intro_box: "conda install torchdrug"

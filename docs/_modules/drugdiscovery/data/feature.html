@@ -140,12 +140,12 @@
 <li class="toctree-l2"><a class="reference internal" href="../../../benchmark/reasoning.html">Knowledge Graph Reasoning</a></li>
 </ul>
 </li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../../../examples/index.html">Examples</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label for="toctree-checkbox-2"><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../../examples/property_prediction.html">Molecule Property Prediction</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../examples/property_prediction_pretraining.html">Molecule Property Prediction with Pre-Training</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../examples/generation.html">Molecule Generation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../examples/retrosynthesis.html">Retrosynthesis</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../examples/reasoning.html">Knowledge Graph Reasoning</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../tutorials/index.html">Examples</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label for="toctree-checkbox-2"><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../tutorials/property_prediction.html">Property Prediction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../tutorials/pretrained_representation.html">Pretrained Molecular Representations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../tutorials/generation.html">Molecule Generation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../tutorials/retrosynthesis.html">Retrosynthesis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../tutorials/reasoning.html">Knowledge Graph Reasoning</a></li>
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../../notes/index.html">Notes</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label for="toctree-checkbox-3"><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
@@ -163,6 +163,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../../../api/core.html">drugdiscovery.core</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../api/data.html">drugdiscovery.data</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../api/datasets.html">drugdiscovery.datasets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api/metrics.html">drugdiscovery.metrics</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../api/layers.html">drugdiscovery.layers</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../api/models.html">drugdiscovery.models</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../api/tasks.html">drugdiscovery.tasks</a></li>
@@ -262,6 +263,10 @@
             <span class="n">atom</span><span class="o">.</span><span class="n">IsInRing</span><span class="p">()</span> <span class="ow">and</span> <span class="p">(</span><span class="ow">not</span> <span class="n">atom</span><span class="o">.</span><span class="n">IsInRingSize</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span> <span class="ow">and</span> <span class="p">(</span><span class="ow">not</span> <span class="n">atom</span><span class="o">.</span><span class="n">IsInRingSize</span><span class="p">(</span><span class="mi">4</span><span class="p">))</span> \
             <span class="ow">and</span> <span class="p">(</span><span class="ow">not</span> <span class="n">atom</span><span class="o">.</span><span class="n">IsInRingSize</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span> <span class="ow">and</span> <span class="p">(</span><span class="ow">not</span> <span class="n">atom</span><span class="o">.</span><span class="n">IsInRingSize</span><span class="p">(</span><span class="mi">6</span><span class="p">))]</span>
 
+<span class="nd">@R</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="s2">"features.atom.symbolic"</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">symbolic_node_feature</span><span class="p">(</span><span class="n">atom</span><span class="p">):</span>
+    <span class="sd">"""Symbolic node feature."""</span>
+    <span class="k">return</span> <span class="n">onehot</span><span class="p">(</span><span class="n">atom</span><span class="o">.</span><span class="n">GetSymbol</span><span class="p">(),</span> <span class="n">atom_vocab</span><span class="p">,</span> <span class="n">allow_unknown</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
 
 <div class="viewcode-block" id="explicit_property_prediction_node_feature"><a class="viewcode-back" href="../../../api/data.html#drugdiscovery.data.feature.explicit_property_prediction_node_feature">[docs]</a><span class="nd">@R</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="s2">"features.atom.explicit_property_prediction"</span><span class="p">)</span>
@@ -284,6 +289,7 @@
            <span class="n">onehot</span><span class="p">(</span><span class="n">atom</span><span class="o">.</span><span class="n">GetFormalCharge</span><span class="p">(),</span> <span class="n">formal_charge_vocab</span><span class="p">,</span> <span class="n">allow_unknown</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="o">+</span> \
            <span class="p">[</span><span class="n">atom</span><span class="o">.</span><span class="n">GetIsAromatic</span><span class="p">()]</span></div>
 
+
 <div class="viewcode-block" id="atom_position"><a class="viewcode-back" href="../../../api/data.html#drugdiscovery.data.feature.atom_position">[docs]</a><span class="nd">@R</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="s2">"features.atom.position"</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">atom_position</span><span class="p">(</span><span class="n">atom</span><span class="p">):</span>
     <span class="sd">"""</span>
@@ -296,6 +302,21 @@
     <span class="n">conformer</span> <span class="o">=</span> <span class="n">mol</span><span class="o">.</span><span class="n">GetConformer</span><span class="p">()</span>
     <span class="n">pos</span> <span class="o">=</span> <span class="n">conformer</span><span class="o">.</span><span class="n">GetAtomPosition</span><span class="p">(</span><span class="n">atom</span><span class="o">.</span><span class="n">GetIdx</span><span class="p">())</span>
     <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="n">pos</span><span class="p">)</span></div>
+
+
+<span class="nd">@R</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="s2">"features.atom.pretraining"</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">property_prediction_atom_feature_pretraining</span><span class="p">(</span><span class="n">atom</span><span class="p">):</span>
+    <span class="n">atomic_num</span> <span class="o">=</span> <span class="n">atom</span><span class="o">.</span><span class="n">GetAtomicNum</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">atomic_num</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">atomic_num</span> <span class="o">=</span> <span class="mi">5</span>
+    <span class="n">atom_type</span> <span class="o">=</span> <span class="p">[</span><span class="n">atomic_num</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span>
+    <span class="n">chiral_type</span> <span class="o">=</span> <span class="p">[[</span>
+        <span class="n">Chem</span><span class="o">.</span><span class="n">rdchem</span><span class="o">.</span><span class="n">ChiralType</span><span class="o">.</span><span class="n">CHI_UNSPECIFIED</span><span class="p">,</span>
+        <span class="n">Chem</span><span class="o">.</span><span class="n">rdchem</span><span class="o">.</span><span class="n">ChiralType</span><span class="o">.</span><span class="n">CHI_TETRAHEDRAL_CW</span><span class="p">,</span>
+        <span class="n">Chem</span><span class="o">.</span><span class="n">rdchem</span><span class="o">.</span><span class="n">ChiralType</span><span class="o">.</span><span class="n">CHI_TETRAHEDRAL_CCW</span><span class="p">,</span>
+        <span class="n">Chem</span><span class="o">.</span><span class="n">rdchem</span><span class="o">.</span><span class="n">ChiralType</span><span class="o">.</span><span class="n">CHI_OTHER</span>
+    <span class="p">]</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">atom</span><span class="o">.</span><span class="n">GetChiralTag</span><span class="p">())]</span>
+    <span class="k">return</span> <span class="n">atom_type</span> <span class="o">+</span> <span class="n">chiral_type</span>
 
 
 <div class="viewcode-block" id="bond_default"><a class="viewcode-back" href="../../../api/data.html#drugdiscovery.data.feature.bond_default">[docs]</a><span class="nd">@R</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="s2">"features.bond.default"</span><span class="p">)</span>
@@ -330,6 +351,22 @@
     <span class="p">]</span></div>
 
 
+<span class="nd">@R</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="s2">"features.bond.pretraining"</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">property_prediction_edge_feature_pretraining</span><span class="p">(</span><span class="n">bond</span><span class="p">):</span>
+    <span class="n">bond_type</span> <span class="o">=</span> <span class="p">[[</span>
+        <span class="n">Chem</span><span class="o">.</span><span class="n">rdchem</span><span class="o">.</span><span class="n">BondType</span><span class="o">.</span><span class="n">SINGLE</span><span class="p">,</span>
+        <span class="n">Chem</span><span class="o">.</span><span class="n">rdchem</span><span class="o">.</span><span class="n">BondType</span><span class="o">.</span><span class="n">DOUBLE</span><span class="p">,</span>
+        <span class="n">Chem</span><span class="o">.</span><span class="n">rdchem</span><span class="o">.</span><span class="n">BondType</span><span class="o">.</span><span class="n">TRIPLE</span><span class="p">,</span>
+        <span class="n">Chem</span><span class="o">.</span><span class="n">rdchem</span><span class="o">.</span><span class="n">BondType</span><span class="o">.</span><span class="n">AROMATIC</span><span class="p">,</span>
+    <span class="p">]</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">bond</span><span class="o">.</span><span class="n">GetBondType</span><span class="p">())]</span>
+    <span class="n">bond_dir</span> <span class="o">=</span> <span class="p">[[</span>
+        <span class="n">Chem</span><span class="o">.</span><span class="n">rdchem</span><span class="o">.</span><span class="n">BondDir</span><span class="o">.</span><span class="n">NONE</span><span class="p">,</span>
+        <span class="n">Chem</span><span class="o">.</span><span class="n">rdchem</span><span class="o">.</span><span class="n">BondDir</span><span class="o">.</span><span class="n">ENDUPRIGHT</span><span class="p">,</span>
+        <span class="n">Chem</span><span class="o">.</span><span class="n">rdchem</span><span class="o">.</span><span class="n">BondDir</span><span class="o">.</span><span class="n">ENDDOWNRIGHT</span>
+    <span class="p">]</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">bond</span><span class="o">.</span><span class="n">GetBondDir</span><span class="p">())]</span>
+    <span class="k">return</span> <span class="n">bond_type</span> <span class="o">+</span> <span class="n">bond_dir</span>
+
+
 <div class="viewcode-block" id="ECFP"><a class="viewcode-back" href="../../../api/data.html#drugdiscovery.data.feature.ECFP">[docs]</a><span class="nd">@R</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="s2">"features.molecule.ecfp"</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">ECFP</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">radius</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">length</span><span class="o">=</span><span class="mi">1024</span><span class="p">):</span>
     <span class="sd">"""Extended Connectivity Fingerprint graph feature."""</span>
@@ -346,8 +383,8 @@
 <span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
     <span class="s2">"atom_default"</span><span class="p">,</span> <span class="s2">"reaction_center_identification_node_feature"</span><span class="p">,</span>
     <span class="s2">"explicit_property_prediction_node_feature"</span><span class="p">,</span> <span class="s2">"property_prediction_node_feature"</span><span class="p">,</span>
-    <span class="s2">"atom_position"</span><span class="p">,</span>
-    <span class="s2">"bond_default"</span><span class="p">,</span> <span class="s2">"property_prediction_edge_feature"</span><span class="p">,</span>
+    <span class="s2">"atom_position"</span><span class="p">,</span> <span class="s2">"property_prediction_atom_feature_pretraining"</span><span class="p">,</span>
+    <span class="s2">"bond_default"</span><span class="p">,</span> <span class="s2">"property_prediction_edge_feature"</span><span class="p">,</span> <span class="s2">"property_prediction_edge_feature_pretraining"</span><span class="p">,</span>
     <span class="s2">"molecule_default"</span><span class="p">,</span> <span class="s2">"ECFP"</span>
 <span class="p">]</span>
 </pre></div>

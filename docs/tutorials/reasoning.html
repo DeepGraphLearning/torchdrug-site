@@ -1,10 +1,10 @@
 <!doctype html>
 <html class="no-js">
   <head><meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width,initial-scale=1"/><link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Retrosynthesis" href="retrosynthesis.html" /><link rel="prev" title="Molecule Property Prediction with Pre-Training" href="property_prediction_pretraining.html" />
+    <meta name="viewport" content="width=device-width,initial-scale=1"/><link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Notes" href="../notes/index.html" /><link rel="prev" title="Retrosynthesis" href="retrosynthesis.html" />
 
     <meta name="generator" content="sphinx-3.1.2, furo 2020.12.09.beta21"/>
-        <title>Molecule Generation - Drugdiscovery 0.1.0 documentation</title>
+        <title>Knowledge Graph Reasoning - Drugdiscovery 0.1.0 documentation</title>
       <link rel="stylesheet" href="../_static/styles/furo.css?digest=a3f371badb8538d75df213ccffb17a4f6e8f3ac5">
     <link rel="stylesheet" href="../_static/pygments.css">
     <link media="(prefers-color-scheme: dark)" rel="stylesheet" href="../_static/pygments_dark.css">
@@ -109,7 +109,7 @@
       <a href="../index.html"><div class="brand">Drugdiscovery 0.1.0 documentation</div></a>
     </div>
     <div class="header-right">
-      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
         <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
       </label>
     </div>
@@ -141,11 +141,11 @@
 </ul>
 </li>
 <li class="toctree-l1 current has-children"><a class="reference internal" href="index.html">Examples</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label for="toctree-checkbox-2"><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="property_prediction.html">Molecule Property Prediction</a></li>
-<li class="toctree-l2"><a class="reference internal" href="property_prediction_pretraining.html">Molecule Property Prediction with Pre-Training</a></li>
-<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">Molecule Generation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="property_prediction.html">Property Prediction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pretrained_representation.html">Pretrained Molecular Representations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generation.html">Molecule Generation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="retrosynthesis.html">Retrosynthesis</a></li>
-<li class="toctree-l2"><a class="reference internal" href="reasoning.html">Knowledge Graph Reasoning</a></li>
+<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">Knowledge Graph Reasoning</a></li>
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../notes/index.html">Notes</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label for="toctree-checkbox-3"><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
@@ -163,6 +163,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../api/core.html">drugdiscovery.core</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../api/data.html">drugdiscovery.data</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../api/datasets.html">drugdiscovery.datasets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/metrics.html">drugdiscovery.metrics</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../api/layers.html">drugdiscovery.layers</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../api/models.html">drugdiscovery.models</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../api/tasks.html">drugdiscovery.tasks</a></li>
@@ -179,34 +180,95 @@
   <main class="main">
     <div class="content">
       <article role="main">
-        <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+        <label class="toc-overlay-icon toc-content-icon" for="__toc">
           <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
         </label>
-        <div class="section" id="molecule-generation">
-<h1>Molecule Generation<a class="headerlink" href="#molecule-generation" title="Permalink to this headline">¶</a></h1>
+        <div class="section" id="knowledge-graph-reasoning">
+<h1>Knowledge Graph Reasoning<a class="headerlink" href="#knowledge-graph-reasoning" title="Permalink to this headline">¶</a></h1>
+<p>In knowledge graphs, one important task is knowledge graph reasoning, which aims
+at predicting missing (h,r,t)-links given existing (h,r,t)-links in a knowledge
+graph. For knowledge graph reasoning, one popular kind of method is the knowledge
+graph embedding method. The basic idea is to learn an embedding vector for each
+entity and relation in a knowledge graph based on existing (h,r,t)-links. Then
+these embeddings are further used to predict missing links.</p>
+<p>In this tutorial, we provide an example to illustrate how to use Drugdiscovery
+for knowledge graph reasoning.</p>
+<div class="section" id="prepare-the-dataset">
+<h2>Prepare the Dataset<a class="headerlink" href="#prepare-the-dataset" title="Permalink to this headline">¶</a></h2>
+<p>We use the <a class="reference external" href="https://www.aclweb.org/anthology/W15-4007">FB15k-237</a> dataset for illustration. <a class="reference external" href="https://www.aclweb.org/anthology/W15-4007">FB15k-237</a> is constructed from
+Freebase, and the dataset has 14,541 entities as well as 237 relations. For the
+dataset, there is a standard split of training/validation/test sets. We can load
+the dataset using the following code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">from</span> <span class="nn">drugdiscovery</span> <span class="kn">import</span> <span class="n">core</span><span class="p">,</span> <span class="n">datasets</span><span class="p">,</span> <span class="n">tasks</span><span class="p">,</span> <span class="n">models</span>
+
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">FB15k237</span><span class="p">(</span><span class="s2">"~/kg-datasets/"</span><span class="p">)</span>
+<span class="n">train_set</span><span class="p">,</span> <span class="n">valid_set</span><span class="p">,</span> <span class="n">test_set</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="define-our-model">
+<h2>Define our Model<a class="headerlink" href="#define-our-model" title="Permalink to this headline">¶</a></h2>
+<p>Once we load the dataset, we are ready to build the model. Let’s take the RotatE
+model as an example, we can use the following code for model construction.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">model</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">RotatE</span><span class="p">(</span><span class="n">num_entity</span><span class="o">=</span><span class="n">dataset</span><span class="o">.</span><span class="n">num_entity</span><span class="p">,</span> <span class="n">num_relation</span><span class="o">=</span><span class="n">dataset</span><span class="o">.</span><span class="n">num_relation</span><span class="p">,</span>
+                      <span class="n">embedding_dim</span><span class="o">=</span><span class="mi">2048</span><span class="p">,</span> <span class="n">max_score</span><span class="o">=</span><span class="mi">9</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Here, <code class="docutils literal notranslate"><span class="pre">embedding_dim</span></code> specifies the dimension of entity and relation embeddings.
+<code class="docutils literal notranslate"><span class="pre">max_score</span></code> specifies the bias for inferring the plausibility of a (h,r,t)
+triplet.</p>
+<p>You may consider using a smaller embedding dimension for better efficiency.</p>
+<p>Afterwards, we further need to define our task. For the knowledge graph embedding
+task, we can simply use the following code.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">task</span> <span class="o">=</span> <span class="n">tasks</span><span class="o">.</span><span class="n">KnowledgeGraphEmbedding</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">num_negative</span><span class="o">=</span><span class="mi">256</span><span class="p">,</span>
+                                     <span class="n">adversarial_temperature</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Here, <code class="docutils literal notranslate"><span class="pre">num_negative</span></code> is the number of negative examples used for training, and
+<code class="docutils literal notranslate"><span class="pre">adversarial_temperature</span></code> is the temperature for sampling negative examples.</p>
+</div>
+<div class="section" id="train-and-test">
+<h2>Train and Test<a class="headerlink" href="#train-and-test" title="Permalink to this headline">¶</a></h2>
+<p>Afterwards, we can now train and test our model. For model training, we need to
+set up an optimizer and put everything together into an Engine instance with the
+following code.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">optimizer</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">optim</span><span class="o">.</span><span class="n">Adam</span><span class="p">(</span><span class="n">task</span><span class="o">.</span><span class="n">parameters</span><span class="p">(),</span> <span class="n">lr</span><span class="o">=</span><span class="mf">2e-5</span><span class="p">)</span>
+<span class="n">solver</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">Engine</span><span class="p">(</span><span class="n">task</span><span class="p">,</span> <span class="n">train_set</span><span class="p">,</span> <span class="n">valid_set</span><span class="p">,</span> <span class="n">test_set</span><span class="p">,</span> <span class="n">optimizer</span><span class="p">,</span>
+                     <span class="n">gpus</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">1024</span><span class="p">)</span>
+<span class="n">solver</span><span class="o">.</span><span class="n">train</span><span class="p">(</span><span class="n">num_epoch</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Here, we can reduce <code class="docutils literal notranslate"><span class="pre">num_epoch</span></code> for better efficiency.</p>
+<p>Afterwards, we may further evaluate the model on the validation set using the
+following code.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">solver</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="s2">"valid"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
 </div>
 
       </article>
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="retrosynthesis.html">
+          <a class="next-page" href="../notes/index.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title">Retrosynthesis</div>
+                <div class="title">Notes</div>
               </div>
               <svg><use href="#svg-arrow-right"></use></svg>
             </a>
-          <a class="prev-page" href="property_prediction_pretraining.html">
+          <a class="prev-page" href="retrosynthesis.html">
               <svg><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
                 </div>
                 
-                <div class="title">Molecule Property Prediction with Pre-Training</div>
+                <div class="title">Retrosynthesis</div>
                 
               </div>
             </a>
@@ -220,7 +282,7 @@
               <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
               <a href="https://github.com/pradyunsg/furo">Furo theme</a>.
             |
-            <a class="muted-link" href="../_sources/examples/generation.rst.txt"
+            <a class="muted-link" href="../_sources/tutorials/reasoning.rst.txt"
                rel="nofollow">
               Show Source
             </a>
@@ -228,8 +290,29 @@
         
       </footer>
     </div>
-    <aside class="toc-drawer no-toc">
+    <aside class="toc-drawer">
       
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            Contents
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Knowledge Graph Reasoning</a><ul>
+<li><a class="reference internal" href="#prepare-the-dataset">Prepare the Dataset</a></li>
+<li><a class="reference internal" href="#define-our-model">Define our Model</a></li>
+<li><a class="reference internal" href="#train-and-test">Train and Test</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
       
       
     </aside>

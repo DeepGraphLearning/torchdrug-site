@@ -16,7 +16,7 @@ Here are some typical contributions you can make. All of them are equally import
 - Datasets and models
 - Application solutions
 - Documents and tutorials
-- Bug fix
+- Bug fixes
 
 Implementation is not always required. You can also write proposals and discuss them with the community.
 

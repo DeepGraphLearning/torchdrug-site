@@ -14,7 +14,7 @@ as well as approachable and extensible building blocks.
    installation
    quick_start
    benchmark/index
-   examples/index
+   tutorials/index
    notes/index
 
 .. toctree::

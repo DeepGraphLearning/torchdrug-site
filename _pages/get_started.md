@@ -45,7 +45,7 @@ graph.visualize()
 ## Molecules
 {:.no_toc}
 
-A specfic instance of graph in drug discovery is a molecule, which may have additional chemical constraints and features.
+A specfic instance of graphs in drug discovery is a molecule, which may have additional chemical constraints and features.
 For example, we can construct a molecule from [SMILES] string. SMILES is a language that describes complex molecule
 structures using a linear string.
 

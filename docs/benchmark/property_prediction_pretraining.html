@@ -140,12 +140,12 @@
 <li class="toctree-l2"><a class="reference internal" href="reasoning.html">Knowledge Graph Reasoning</a></li>
 </ul>
 </li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../examples/index.html">Examples</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label for="toctree-checkbox-2"><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../examples/property_prediction.html">Molecule Property Prediction</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../examples/property_prediction_pretraining.html">Molecule Property Prediction with Pre-Training</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../examples/generation.html">Molecule Generation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../examples/retrosynthesis.html">Retrosynthesis</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../examples/reasoning.html">Knowledge Graph Reasoning</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../tutorials/index.html">Examples</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label for="toctree-checkbox-2"><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../tutorials/property_prediction.html">Property Prediction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorials/pretrained_representation.html">Pretrained Molecular Representations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorials/generation.html">Molecule Generation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorials/retrosynthesis.html">Retrosynthesis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorials/reasoning.html">Knowledge Graph Reasoning</a></li>
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../notes/index.html">Notes</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label for="toctree-checkbox-3"><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
@@ -163,6 +163,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../api/core.html">drugdiscovery.core</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../api/data.html">drugdiscovery.data</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../api/datasets.html">drugdiscovery.datasets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/metrics.html">drugdiscovery.metrics</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../api/layers.html">drugdiscovery.layers</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../api/models.html">drugdiscovery.models</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../api/tasks.html">drugdiscovery.tasks</a></li>
@@ -195,32 +196,32 @@ The split for train/validation/test sets is 80%:10%:10%.
 For each pre-training method and downstream dataset, we evaluate with 10 random splits and report the mean of the performance.</p>
 <div class="contents local topic" id="contents">
 <ul class="simple">
-<li><p><a class="reference internal" href="#self-supervised-pre-training" id="id1">Self-Supervised Pre-training</a></p></li>
-<li><p><a class="reference internal" href="#supervised-pre-training-plus-self-supervised-pre-training" id="id2">Supervised Pre-training (Plus Self-Supervised Pre-training)</a></p></li>
+<li><p><a class="reference internal" href="#self-supervised-pre-training" id="id2">Self-Supervised Pre-training</a></p></li>
 </ul>
 </div>
 <div class="section" id="self-supervised-pre-training">
-<h2><a class="toc-backref" href="#id1">Self-Supervised Pre-training</a><a class="headerlink" href="#self-supervised-pre-training" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id2">Self-Supervised Pre-training</a><a class="headerlink" href="#self-supervised-pre-training" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li><p>Random</p></li>
-<li><p>Edge Prediction (EP)</p></li>
-<li><p>Deep Graph InfoMax (DGI)</p></li>
-<li><p>Attribute Masking (AM)</p></li>
-<li><p>Context Prediction (CP)</p></li>
-<li><p>Supervised Pre-training (Sup)</p></li>
+<li><p>Random, baseline with random initialization</p></li>
+<li><p><a class="reference internal" href="../api/tasks.html#drugdiscovery.tasks.EdgePrediction" title="drugdiscovery.tasks.EdgePrediction"><code class="xref py py-func docutils literal notranslate"><span class="pre">Edge</span> <span class="pre">Prediction</span> <span class="pre">(EP)</span></code></a></p></li>
+<li><p><a class="reference internal" href="../api/tasks.html#drugdiscovery.tasks.DeepGraphInfoMax" title="drugdiscovery.tasks.DeepGraphInfoMax"><code class="xref py py-func docutils literal notranslate"><span class="pre">Deep</span> <span class="pre">Graph</span> <span class="pre">InfoMax</span> <span class="pre">(DGI)</span></code></a></p></li>
+<li><p><a class="reference internal" href="../api/models.html#drugdiscovery.models.InfoGraph" title="drugdiscovery.models.InfoGraph"><code class="xref py py-func docutils literal notranslate"><span class="pre">InfoGraph</span> <span class="pre">(IG)</span></code></a></p></li>
+<li><p><a class="reference internal" href="../api/tasks.html#drugdiscovery.tasks.AttributeMasking" title="drugdiscovery.tasks.AttributeMasking"><code class="xref py py-func docutils literal notranslate"><span class="pre">Attribute</span> <span class="pre">Masking</span> <span class="pre">(AM)</span></code></a></p></li>
+<li><p><a class="reference internal" href="../api/tasks.html#drugdiscovery.tasks.ContextPrediction" title="drugdiscovery.tasks.ContextPrediction"><code class="xref py py-func docutils literal notranslate"><span class="pre">Context</span> <span class="pre">Prediction</span> <span class="pre">(CP)</span></code></a></p></li>
 </ul>
-<div class="table-wrapper"><table class="docutils align-default">
+<div class="table-wrapper"><table class="colwidths-given docutils align-default" id="id1">
+<caption><span class="caption-text">Results for Self-Supervised Pre-training</span><a class="headerlink" href="#id1" title="Permalink to this table">¶</a></caption>
 <colgroup>
-<col style="width: 19%"/>
-<col style="width: 9%"/>
-<col style="width: 9%"/>
-<col style="width: 12%"/>
-<col style="width: 9%"/>
-<col style="width: 12%"/>
-<col style="width: 7%"/>
-<col style="width: 7%"/>
-<col style="width: 8%"/>
-<col style="width: 7%"/>
+<col style="width: 14%"/>
+<col style="width: 10%"/>
+<col style="width: 10%"/>
+<col style="width: 10%"/>
+<col style="width: 10%"/>
+<col style="width: 10%"/>
+<col style="width: 10%"/>
+<col style="width: 10%"/>
+<col style="width: 10%"/>
+<col style="width: 10%"/>
 </colgroup>
 <thead>
 <tr class="row-odd"><th class="head"><p>Method</p></th>
@@ -237,174 +238,70 @@ For each pre-training method and downstream dataset, we evaluate with 10 random 
 </thead>
 <tbody>
 <tr class="row-even"><td><p>Random</p></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
+<td><p>67.1(2.9)</p></td>
+<td><p>75.0(0.2)</p></td>
+<td><p>60.6(0.7)</p></td>
+<td><p>58.9(0.8)</p></td>
+<td><p>60.8(3.9)</p></td>
+<td><p>64.3(3.4)</p></td>
+<td><p>76.4(1.6)</p></td>
+<td><p>66.5(9.0)</p></td>
+<td><p>66.2</p></td>
 </tr>
 <tr class="row-odd"><td><p>EP</p></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
+<td><p>67.1(2.6)</p></td>
+<td><p>74.6(0.7)</p></td>
+<td><p>69.8(0.5)</p></td>
+<td><p>59.4(1.5)</p></td>
+<td><p>59.0(2.6)</p></td>
+<td><p>66.8(1.0)</p></td>
+<td><p>76.3(2.0)</p></td>
+<td><p>68.4(3.9)</p></td>
+<td><p>67.7</p></td>
 </tr>
 <tr class="row-even"><td><p>DGI</p></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
+<td><p>68.3(2.2)</p></td>
+<td><p>75.9(0.3)</p></td>
+<td><p>71.1(0.5)</p></td>
+<td><p>59.5(0.8)</p></td>
+<td><p>70.8(1.7)</p></td>
+<td><p>68.2(2.1)</p></td>
+<td><p>76.5(0.7)</p></td>
+<td><p>77.3(1.3)</p></td>
+<td><p>70.9</p></td>
 </tr>
 <tr class="row-odd"><td><p>IG</p></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
+<td><p>68.9(0.6)</p></td>
+<td><p>76.4(0.4)</p></td>
+<td><p>71.2(0.6)</p></td>
+<td><p>59.8(0.7)</p></td>
+<td><p>70.3(4.2)</p></td>
+<td><p>69.4(0.8)</p></td>
+<td><p>75.5(0.7)</p></td>
+<td><p>73.7(2.6)</p></td>
+<td><p>70.7</p></td>
 </tr>
 <tr class="row-even"><td><p>AM</p></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
+<td><p>65.2(0.9)</p></td>
+<td><p>75.8(0.5)</p></td>
+<td><p>70.6(0.6)</p></td>
+<td><p>58.9(0.9)</p></td>
+<td><p>79.0(2.3)</p></td>
+<td><p>68.3(2.1)</p></td>
+<td><p>76.9(0.9)</p></td>
+<td><p>78.1(0.8)</p></td>
+<td><p>71.6</p></td>
 </tr>
 <tr class="row-odd"><td><p>CP</p></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-</tbody>
-</table></div>
-</div>
-<div class="section" id="supervised-pre-training-plus-self-supervised-pre-training">
-<h2><a class="toc-backref" href="#id2">Supervised Pre-training (Plus Self-Supervised Pre-training)</a><a class="headerlink" href="#supervised-pre-training-plus-self-supervised-pre-training" title="Permalink to this headline">¶</a></h2>
-<ul class="simple">
-<li><p>Edge Prediction + Supervised Pre-training (EP+Sup)</p></li>
-<li><p>Deep Graph InfoMax + Supervised Pre-training (DGI+Sup)</p></li>
-<li><p>Attribute Masking + Supervised Pre-training (AM+Sup)</p></li>
-<li><p>Context Prediction + Supervised Pre-training (CP+Sup)</p></li>
-</ul>
-<div class="table-wrapper"><table class="docutils align-default">
-<colgroup>
-<col style="width: 19%"/>
-<col style="width: 9%"/>
-<col style="width: 9%"/>
-<col style="width: 12%"/>
-<col style="width: 9%"/>
-<col style="width: 12%"/>
-<col style="width: 7%"/>
-<col style="width: 7%"/>
-<col style="width: 8%"/>
-<col style="width: 7%"/>
-</colgroup>
-<thead>
-<tr class="row-odd"><th class="head"><p>Method</p></th>
-<th class="head"><p>BBBP</p></th>
-<th class="head"><p>Tox21</p></th>
-<th class="head"><p>ToxCast</p></th>
-<th class="head"><p>Sider</p></th>
-<th class="head"><p>ClinTox</p></th>
-<th class="head"><p>MUV</p></th>
-<th class="head"><p>HIV</p></th>
-<th class="head"><p>Bace</p></th>
-<th class="head"><p>Avg</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p>Sup</p></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr class="row-odd"><td><p>EP+Sup</p></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr class="row-even"><td><p>DGI+Sup</p></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr class="row-odd"><td><p>IG+Sup</p></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr class="row-even"><td><p>AM+Sup</p></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr class="row-odd"><td><p>CP+Sup</p></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
+<td><p>71.1(1.8)</p></td>
+<td><p>75.6(0.3)</p></td>
+<td><p>71.1(0.3)</p></td>
+<td><p>61.7(0.5)</p></td>
+<td><p>65.9(1.9)</p></td>
+<td><p>68.5(0.6)</p></td>
+<td><p>77.1(0.3)</p></td>
+<td><p>78.6(0.5)</p></td>
+<td><p>71.2</p></td>
 </tr>
 </tbody>
 </table></div>
@@ -467,7 +364,6 @@ For each pre-training method and downstream dataset, we evaluate with 10 random 
             <ul>
 <li><a class="reference internal" href="#">Molecule Property Prediction with Pre-Training</a><ul>
 <li><a class="reference internal" href="#self-supervised-pre-training">Self-Supervised Pre-training</a></li>
-<li><a class="reference internal" href="#supervised-pre-training-plus-self-supervised-pre-training">Supervised Pre-training (Plus Self-Supervised Pre-training)</a></li>
 </ul>
 </li>
 </ul>
