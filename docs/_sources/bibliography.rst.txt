@@ -20,7 +20,7 @@
 
 .. Molecule property prediction with pre-training
 .. _Edge Prediction: https://arxiv.org/abs/1706.02216
-.. _Deep Graph InfoMax: https://arxiv.org/abs/1809.10341
+.. _Deep Graph Infomax: https://arxiv.org/abs/1809.10341
 .. _InfoGraph: https://openreview.net/pdf?id=r1lfF2NYvH
 .. _Attribute Masking: https://arxiv.org/abs/1905.12265
 .. _Context Prediction: https://arxiv.org/abs/1905.12265

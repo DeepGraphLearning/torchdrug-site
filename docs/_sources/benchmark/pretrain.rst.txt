@@ -1,5 +1,5 @@
-Molecule Property Prediction with Pre-Training
-==============================================
+Pretrained Molecular Representations
+====================================
 
 .. include:: ../bibliography.rst
 
@@ -7,13 +7,16 @@ This page contains benchmarks of property prediction models with pre-training.
 
 We have two main methods for the pre-training.
 
-- Self-supervised pre-training is learning the graph structural information in a self-supervised manner. Here we are pre-training on a subset of 2m molecules from `ZINC15`_.
-- Supervised pre-training is doing pre-training on a large supervised dataset. Here we are using 456k molecuels and 1,310 tasks from `ChEMBL`_.
+- Self-supervised pre-training is learning the graph structural information in a
+self-supervised manner. Here we are pre-training on a subset of 2m molecules from
+`ZINC15`_.
+- Supervised pre-training is doing pre-training on a large supervised dataset.
+Here we are using 456k molecuels and 1,310 tasks from `ChEMBL`_.
 
 For the downstream tasks, we consider the scaffold splitting for molecule data.
-The split for train/validation/test sets is 80%:10%:10%.
-For each pre-training method and downstream dataset, we evaluate with 10 random splits and report the mean of the performance.
-
+The split for train/validation/test sets is 80%:10%:10%. For each pre-training
+method and downstream dataset, we evaluate with 10 random splits and report the
+mean of the performance.
 
 .. contents::
     :local:
@@ -23,7 +26,7 @@ Self-Supervised Pre-training
 
 - Random, baseline with random initialization
 - :func:`Edge Prediction (EP) <drugdiscovery.tasks.EdgePrediction>`
-- :func:`Deep Graph InfoMax (DGI) <drugdiscovery.tasks.DeepGraphInfoMax>`
+- :func:`Deep Graph Infomax (DGI) <drugdiscovery.tasks.DeepGraphInfomax>`
 - :func:`InfoGraph (IG) <drugdiscovery.models.InfoGraph>`
 - :func:`Attribute Masking (AM) <drugdiscovery.tasks.AttributeMasking>`
 - :func:`Context Prediction (CP) <drugdiscovery.tasks.ContextPrediction>`

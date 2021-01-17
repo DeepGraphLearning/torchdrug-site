@@ -4,7 +4,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1"/><link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Graph Generation" href="generation.html" /><link rel="prev" title="Molecule Property Prediction" href="property_prediction.html" />
 
     <meta name="generator" content="sphinx-3.1.2, furo 2020.12.09.beta21"/>
-        <title>Molecule Property Prediction with Pre-Training - Drugdiscovery 0.1.0 documentation</title>
+        <title>Pretrained Molecular Representations - Drugdiscovery 0.1.0 documentation</title>
       <link rel="stylesheet" href="../_static/styles/furo.css?digest=a3f371badb8538d75df213ccffb17a4f6e8f3ac5">
     <link rel="stylesheet" href="../_static/pygments.css">
     <link media="(prefers-color-scheme: dark)" rel="stylesheet" href="../_static/pygments_dark.css">
@@ -134,15 +134,15 @@
 <li class="toctree-l1"><a class="reference internal" href="../quick_start.html">Quick Start</a></li>
 <li class="toctree-l1 current has-children"><a class="reference internal" href="index.html">Benchmark</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label for="toctree-checkbox-1"><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="property_prediction.html">Molecule Property Prediction</a></li>
-<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">Molecule Property Prediction with Pre-Training</a></li>
+<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">Pretrained Molecular Representations</a></li>
 <li class="toctree-l2"><a class="reference internal" href="generation.html">Graph Generation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="retrosynthesis.html">Retrosynthesis</a></li>
 <li class="toctree-l2"><a class="reference internal" href="reasoning.html">Knowledge Graph Reasoning</a></li>
 </ul>
 </li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../tutorials/index.html">Examples</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label for="toctree-checkbox-2"><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../tutorials/index.html">Tutorials</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label for="toctree-checkbox-2"><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../tutorials/property_prediction.html">Property Prediction</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../tutorials/pretrained_representation.html">Pretrained Molecular Representations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorials/pretrain.html">Pretrained Molecular Representations</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../tutorials/generation.html">Molecule Generation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../tutorials/retrosynthesis.html">Retrosynthesis</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../tutorials/reasoning.html">Knowledge Graph Reasoning</a></li>
@@ -183,17 +183,21 @@
         <label class="toc-overlay-icon toc-content-icon" for="__toc">
           <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
         </label>
-        <div class="section" id="molecule-property-prediction-with-pre-training">
-<h1>Molecule Property Prediction with Pre-Training<a class="headerlink" href="#molecule-property-prediction-with-pre-training" title="Permalink to this headline">¶</a></h1>
+        <div class="section" id="pretrained-molecular-representations">
+<h1>Pretrained Molecular Representations<a class="headerlink" href="#pretrained-molecular-representations" title="Permalink to this headline">¶</a></h1>
 <p>This page contains benchmarks of property prediction models with pre-training.</p>
 <p>We have two main methods for the pre-training.</p>
 <ul class="simple">
-<li><p>Self-supervised pre-training is learning the graph structural information in a self-supervised manner. Here we are pre-training on a subset of 2m molecules from <a class="reference external" href="https://pubs.acs.org/doi/10.1021/acs.jcim.5b00559">ZINC15</a>.</p></li>
-<li><p>Supervised pre-training is doing pre-training on a large supervised dataset. Here we are using 456k molecuels and 1,310 tasks from <a class="reference external" href="https://pubmed.ncbi.nlm.nih.gov/30155234/">ChEMBL</a>.</p></li>
+<li><p>Self-supervised pre-training is learning the graph structural information in a</p></li>
 </ul>
+<p>self-supervised manner. Here we are pre-training on a subset of 2m molecules from
+<a class="reference external" href="https://pubs.acs.org/doi/10.1021/acs.jcim.5b00559">ZINC15</a>.
+- Supervised pre-training is doing pre-training on a large supervised dataset.
+Here we are using 456k molecuels and 1,310 tasks from <a class="reference external" href="https://pubmed.ncbi.nlm.nih.gov/30155234/">ChEMBL</a>.</p>
 <p>For the downstream tasks, we consider the scaffold splitting for molecule data.
-The split for train/validation/test sets is 80%:10%:10%.
-For each pre-training method and downstream dataset, we evaluate with 10 random splits and report the mean of the performance.</p>
+The split for train/validation/test sets is 80%:10%:10%. For each pre-training
+method and downstream dataset, we evaluate with 10 random splits and report the
+mean of the performance.</p>
 <div class="contents local topic" id="contents">
 <ul class="simple">
 <li><p><a class="reference internal" href="#self-supervised-pre-training" id="id2">Self-Supervised Pre-training</a></p></li>
@@ -204,7 +208,7 @@ For each pre-training method and downstream dataset, we evaluate with 10 random 
 <ul class="simple">
 <li><p>Random, baseline with random initialization</p></li>
 <li><p><a class="reference internal" href="../api/tasks.html#drugdiscovery.tasks.EdgePrediction" title="drugdiscovery.tasks.EdgePrediction"><code class="xref py py-func docutils literal notranslate"><span class="pre">Edge</span> <span class="pre">Prediction</span> <span class="pre">(EP)</span></code></a></p></li>
-<li><p><a class="reference internal" href="../api/tasks.html#drugdiscovery.tasks.DeepGraphInfoMax" title="drugdiscovery.tasks.DeepGraphInfoMax"><code class="xref py py-func docutils literal notranslate"><span class="pre">Deep</span> <span class="pre">Graph</span> <span class="pre">InfoMax</span> <span class="pre">(DGI)</span></code></a></p></li>
+<li><p><a class="reference internal" href="../api/tasks.html#drugdiscovery.tasks.DeepGraphInfomax" title="drugdiscovery.tasks.DeepGraphInfomax"><code class="xref py py-func docutils literal notranslate"><span class="pre">Deep</span> <span class="pre">Graph</span> <span class="pre">Infomax</span> <span class="pre">(DGI)</span></code></a></p></li>
 <li><p><a class="reference internal" href="../api/models.html#drugdiscovery.models.InfoGraph" title="drugdiscovery.models.InfoGraph"><code class="xref py py-func docutils literal notranslate"><span class="pre">InfoGraph</span> <span class="pre">(IG)</span></code></a></p></li>
 <li><p><a class="reference internal" href="../api/tasks.html#drugdiscovery.tasks.AttributeMasking" title="drugdiscovery.tasks.AttributeMasking"><code class="xref py py-func docutils literal notranslate"><span class="pre">Attribute</span> <span class="pre">Masking</span> <span class="pre">(AM)</span></code></a></p></li>
 <li><p><a class="reference internal" href="../api/tasks.html#drugdiscovery.tasks.ContextPrediction" title="drugdiscovery.tasks.ContextPrediction"><code class="xref py py-func docutils literal notranslate"><span class="pre">Context</span> <span class="pre">Prediction</span> <span class="pre">(CP)</span></code></a></p></li>
@@ -342,7 +346,7 @@ For each pre-training method and downstream dataset, we evaluate with 10 random 
               <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
               <a href="https://github.com/pradyunsg/furo">Furo theme</a>.
             |
-            <a class="muted-link" href="../_sources/benchmark/property_prediction_pretraining.rst.txt"
+            <a class="muted-link" href="../_sources/benchmark/pretrain.rst.txt"
                rel="nofollow">
               Show Source
             </a>
@@ -362,7 +366,7 @@ For each pre-training method and downstream dataset, we evaluate with 10 random 
         <div class="toc-tree-container">
           <div class="toc-tree">
             <ul>
-<li><a class="reference internal" href="#">Molecule Property Prediction with Pre-Training</a><ul>
+<li><a class="reference internal" href="#">Pretrained Molecular Representations</a><ul>
 <li><a class="reference internal" href="#self-supervised-pre-training">Self-Supervised Pre-training</a></li>
 </ul>
 </li>

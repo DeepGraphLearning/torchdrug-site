@@ -5,7 +5,7 @@ Benchmark
     :maxdepth: 2
 
     property_prediction
-    property_prediction_pretraining
+    pretrain
     generation
     retrosynthesis
     reasoning

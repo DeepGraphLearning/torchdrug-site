@@ -100,5 +100,5 @@ We also include other mainstream self-supervised pre-training methods as below:
 
 .. seealso::
     :func:`Edge Prediction (EP) <drugdiscovery.tasks.EdgePrediction>`
-    :func:`Deep Graph InfoMax (DGI) <drugdiscovery.tasks.DeepGraphInfoMax>`
+    :func:`Deep Graph Infomax (DGI) <drugdiscovery.tasks.DeepGraphInfomax>`
     :func:`Context Prediction (CP) <drugdiscovery.tasks.ContextPrediction>`

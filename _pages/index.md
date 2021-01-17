@@ -30,7 +30,7 @@ image_grid:
     url: /docs/tutorials/property_prediction
     image: assets/images/task/property_prediction.png
   - title: Pretrained Molecular Representations
-    url: /docs/tutorials/pretrained_representation
+    url: /docs/tutorials/pretrain
     image: assets/images/task/pretrain.png
   - title: De Novo Molecule Design & Optimization
     url: /docs/tutorials/generation
