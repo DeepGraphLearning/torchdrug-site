@@ -57,6 +57,8 @@ the following.
 
     average graph-node mutual information: 1.30305
 
+.. image:: ../../../asset/graph/infograph.png
+
 Attribute Masking
 ^^^^^^^^^^^^^^^^^
 
@@ -96,9 +98,10 @@ the following.
     average CrossEntropyLoss() loss: 0.285154
     average acc: 0.90249
 
+.. image:: ../../../asset/graph/attrmasking.png
+
 We also include other mainstream self-supervised pre-training methods as below:
 
 .. seealso::
     :func:`Edge Prediction (EP) <drugdiscovery.tasks.EdgePrediction>`
-    :func:`Deep Graph Infomax (DGI) <drugdiscovery.tasks.DeepGraphInfomax>`
     :func:`Context Prediction (CP) <drugdiscovery.tasks.ContextPrediction>`
