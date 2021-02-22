@@ -187,13 +187,19 @@
 <h1>Pretrained Molecular Representations<a class="headerlink" href="#pretrained-molecular-representations" title="Permalink to this headline">¶</a></h1>
 <p>This page contains benchmarks of property prediction models with pre-training.</p>
 <p>We have two main methods for the pre-training.</p>
-<ul class="simple">
-<li><p>Self-supervised pre-training is learning the graph structural information in a</p></li>
+<ul>
+<li><div class="line-block">
+<div class="line">Self-supervised pre-training is learning the graph structural information in a</div>
+<div class="line">self-supervised manner. Here we are pre-training on a subset of 2m molecules from</div>
+<div class="line"><a class="reference external" href="https://pubs.acs.org/doi/10.1021/acs.jcim.5b00559">ZINC15</a>.</div>
+</div>
+</li>
+<li><div class="line-block">
+<div class="line">Supervised pre-training is doing pre-training on a large supervised dataset.</div>
+<div class="line">Here we are using 456k molecuels and 1,310 tasks from <a class="reference external" href="https://pubmed.ncbi.nlm.nih.gov/30155234/">ChEMBL</a>.</div>
+</div>
+</li>
 </ul>
-<p>self-supervised manner. Here we are pre-training on a subset of 2m molecules from
-<a class="reference external" href="https://pubs.acs.org/doi/10.1021/acs.jcim.5b00559">ZINC15</a>.
-- Supervised pre-training is doing pre-training on a large supervised dataset.
-Here we are using 456k molecuels and 1,310 tasks from <a class="reference external" href="https://pubmed.ncbi.nlm.nih.gov/30155234/">ChEMBL</a>.</p>
 <p>For the downstream tasks, we consider the scaffold splitting for molecule data.
 The split for train/validation/test sets is 80%:10%:10%. For each pre-training
 method and downstream dataset, we evaluate with 10 random splits and report the

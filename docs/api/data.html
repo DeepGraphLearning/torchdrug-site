@@ -279,13 +279,13 @@ By default, it will be inferred from the largest id in <cite>edge_list</cite></p
 <dl class="py method">
 <dt id="drugdiscovery.data.Graph.cpu">
 <code class="sig-name descname">cpu</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/drugdiscovery/data/graph.html#Graph.cpu"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#drugdiscovery.data.Graph.cpu" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns a copy of this graph in CPU memory.</p>
+<dd><p>Return a copy of this graph in CPU memory.</p>
 <p>This is a non-op if the graph is already in CPU memory.</p>
 </dd></dl>
 <dl class="py method">
 <dt id="drugdiscovery.data.Graph.cuda">
 <code class="sig-name descname">cuda</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/drugdiscovery/data/graph.html#Graph.cuda"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#drugdiscovery.data.Graph.cuda" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns a copy of this graph in CUDA memory.</p>
+<dd><p>Return a copy of this graph in CUDA memory.</p>
 <p>This is a non-op if the graph is already on the correct device.</p>
 </dd></dl>
 <dl class="py method">
@@ -569,7 +569,7 @@ If not provided, show the figure in window.</p></li>
 </dd></dl>
 <dl class="py class">
 <dt id="drugdiscovery.data.Molecule">
-<em class="property">class </em><code class="sig-name descname">Molecule</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">edge_list</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">atom_type</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">bond_type</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">formal_charge</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">explicit_hs</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">chiral_tag</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">radical_electrons</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">atom_map</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/drugdiscovery/data/molecule.html#Molecule"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#drugdiscovery.data.Molecule" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-name descname">Molecule</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">edge_list</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">atom_type</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">bond_type</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">formal_charge</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">explicit_hs</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">chiral_tag</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">radical_electrons</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">atom_map</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">bond_stereo</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">stereo_atoms</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/drugdiscovery/data/molecule.html#Molecule"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#drugdiscovery.data.Molecule" title="Permalink to this definition">¶</a></dt>
 <dd><p>Molecule graph with chemical features.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -582,7 +582,9 @@ Each tuple is (node_in, node_out, bond_type).</p></li>
 <li><p><strong>explicit_hs</strong> (<em>array_like</em><em>, </em><em>optional</em>) – number of explicit hydrogens of shape <span class="math notranslate nohighlight">\((|V|,)\)</span></p></li>
 <li><p><strong>chiral_tag</strong> (<em>array_like</em><em>, </em><em>optional</em>) – chirality tags of shape <span class="math notranslate nohighlight">\((|V|,)\)</span></p></li>
 <li><p><strong>radical_electrons</strong> (<em>array_like</em><em>, </em><em>optional</em>) – number of radical electrons of shape <span class="math notranslate nohighlight">\((|V|,)\)</span></p></li>
-<li><p><strong>atom_map</strong> (<em>array_like</em><em>, </em><em>optional</em>) – atom mappings of shape <span class="math notranslate nohighlight">\((|V|,)\)</span></p></li>
+<li><p><strong>atom_map</strong> (<em>array_likeb optional</em>) – atom mappings of shape <span class="math notranslate nohighlight">\((|V|,)\)</span></p></li>
+<li><p><strong>bond_stereo</strong> (<em>array_like</em><em>, </em><em>optional</em>) – bond stereochem of shape <span class="math notranslate nohighlight">\((|E|,)\)</span></p></li>
+<li><p><strong>stereo_atoms</strong> (<em>array_like</em><em>, </em><em>optional</em>) – ids of stereo atoms of shape <span class="math notranslate nohighlight">\((|E|,)\)</span></p></li>
 </ul>
 </dd>
 </dl>
@@ -622,13 +624,13 @@ Each tuple is (node_in, node_out, bond_type).</p></li>
 <dl class="py method">
 <dt id="drugdiscovery.data.Molecule.cpu">
 <code class="sig-name descname">cpu</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#drugdiscovery.data.Molecule.cpu" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns a copy of this graph in CPU memory.</p>
+<dd><p>Return a copy of this graph in CPU memory.</p>
 <p>This is a non-op if the graph is already in CPU memory.</p>
 </dd></dl>
 <dl class="py method">
 <dt id="drugdiscovery.data.Molecule.cuda">
 <code class="sig-name descname">cuda</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#drugdiscovery.data.Molecule.cuda" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns a copy of this graph in CUDA memory.</p>
+<dd><p>Return a copy of this graph in CUDA memory.</p>
 <p>This is a non-op if the graph is already on the correct device.</p>
 </dd></dl>
 <dl class="py method">
@@ -1131,13 +1133,13 @@ If provided, nodes in <cite>edge_list</cite> should be absolute index, i.e., the
 <dl class="py method">
 <dt id="drugdiscovery.data.PackedGraph.cpu">
 <code class="sig-name descname">cpu</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/drugdiscovery/data/graph.html#PackedGraph.cpu"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#drugdiscovery.data.PackedGraph.cpu" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns a copy of this graph in CPU memory.</p>
+<dd><p>Return a copy of this graph in CPU memory.</p>
 <p>This is a non-op if the graph is already in CPU memory.</p>
 </dd></dl>
 <dl class="py method">
 <dt id="drugdiscovery.data.PackedGraph.cuda">
 <code class="sig-name descname">cuda</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/drugdiscovery/data/graph.html#PackedGraph.cuda"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#drugdiscovery.data.PackedGraph.cuda" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns a copy of this graph in CUDA memory.</p>
+<dd><p>Return a copy of this graph in CUDA memory.</p>
 <p>This is a non-op if the graph is already on the correct device.</p>
 </dd></dl>
 <dl class="py method">
@@ -1522,13 +1524,13 @@ If provided, nodes in <cite>edge_list</cite> should be absolute index, i.e., the
 <dl class="py method">
 <dt id="drugdiscovery.data.PackedMolecule.cpu">
 <code class="sig-name descname">cpu</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#drugdiscovery.data.PackedMolecule.cpu" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns a copy of this graph in CPU memory.</p>
+<dd><p>Return a copy of this graph in CPU memory.</p>
 <p>This is a non-op if the graph is already in CPU memory.</p>
 </dd></dl>
 <dl class="py method">
 <dt id="drugdiscovery.data.PackedMolecule.cuda">
 <code class="sig-name descname">cuda</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#drugdiscovery.data.PackedMolecule.cuda" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns a copy of this graph in CUDA memory.</p>
+<dd><p>Return a copy of this graph in CUDA memory.</p>
 <p>This is a non-op if the graph is already on the correct device.</p>
 </dd></dl>
 <dl class="py method">

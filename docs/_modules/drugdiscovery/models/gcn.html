@@ -208,6 +208,7 @@
 <span class="sd">        batch_norm (bool, optional): apply batch normalization or not</span>
 <span class="sd">        activation (str or function, optional): activation function</span>
 <span class="sd">        concat_hidden (bool, optional): concat hidden representations from all layers as output</span>
+<span class="sd">        readout (str, optional): readout function. Available functions are ``sum`` and ``mean``.</span>
 <span class="sd">    """</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_dim</span><span class="p">,</span> <span class="n">hidden_dims</span><span class="p">,</span> <span class="n">edge_input_dim</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">short_cut</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">batch_norm</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
@@ -274,6 +275,7 @@
 <span class="sd">        batch_norm (bool, optional): apply batch normalization or not</span>
 <span class="sd">        activation (str or function, optional): activation function</span>
 <span class="sd">        concat_hidden (bool, optional): concat hidden representations from all layers as output</span>
+<span class="sd">        readout (str, optional): readout function. Available functions are ``sum`` and ``mean``.</span>
 <span class="sd">    """</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_dim</span><span class="p">,</span> <span class="n">hidden_dims</span><span class="p">,</span> <span class="n">num_relation</span><span class="p">,</span> <span class="n">edge_input_dim</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">short_cut</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">batch_norm</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>

@@ -216,6 +216,7 @@
 <span class="sd">        dropout_ratio (float, optional): apply drop-out</span>
 <span class="sd">        activation (str or function, optional): activation function</span>
 <span class="sd">        concat_hidden (bool, optional): concat hidden representations from all layers as output</span>
+<span class="sd">        readout (str, optional): readout function. Available functions are ``sum`` and ``mean``.</span>
 <span class="sd">        GIN_version (str, optional): by default it is the standard GIN model,</span>
 <span class="sd">        `   and one specialized GIN model is for the pre-training only</span>
 <span class="sd">    """</span>
@@ -278,18 +279,14 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Unknown readout `</span><span class="si">%s</span><span class="s2">`"</span> <span class="o">%</span> <span class="n">readout</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">graph</span><span class="p">,</span> <span class="nb">input</span><span class="p">,</span> <span class="n">edge_attr</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">all_loss</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">metric</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="c1"># TODO: @Shengchao. If edge_attr always refers to graph.edge_feature, let's remove it for consistency.</span>
-        <span class="c1"># You can access edge_attr from graph.edge_feature.</span>
-        <span class="c1"># This is how it is implemented in most other GNNs in the platform.</span>
-        <span class="sd">""""""</span>
+<div class="viewcode-block" id="GraphIsomorphismNetwork.forward"><a class="viewcode-back" href="../../../api/models.html#drugdiscovery.models.GraphIsomorphismNetwork.forward">[docs]</a>    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">graph</span><span class="p">,</span> <span class="nb">input</span><span class="p">,</span> <span class="n">all_loss</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">metric</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="n">hiddens</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">edge_attr</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">GIN_version</span> <span class="o">==</span> <span class="s2">"pretraining"</span><span class="p">:</span>
             <span class="c1"># TODO: This is dangerous.</span>
             <span class="c1"># If a user passes a float tensor (e.g. a wrong input), this will not raise any error.</span>
             <span class="nb">input</span> <span class="o">=</span> <span class="nb">input</span><span class="o">.</span><span class="n">long</span><span class="p">()</span>
-            <span class="k">if</span> <span class="n">edge_attr</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-                <span class="n">edge_attr</span> <span class="o">=</span> <span class="n">graph</span><span class="o">.</span><span class="n">edge_feature</span>
+            <span class="n">edge_attr</span> <span class="o">=</span> <span class="n">graph</span><span class="o">.</span><span class="n">edge_feature</span>
             <span class="c1"># TODO: same as above</span>
             <span class="n">edge_attr</span> <span class="o">=</span> <span class="n">edge_attr</span><span class="o">.</span><span class="n">long</span><span class="p">()</span>
             <span class="n">layer_input</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">x_embedding1</span><span class="p">(</span><span class="nb">input</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">])</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">x_embedding2</span><span class="p">(</span><span class="nb">input</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">])</span>
@@ -324,7 +321,7 @@
         <span class="k">return</span> <span class="p">{</span>
             <span class="s2">"graph_feature"</span><span class="p">:</span> <span class="n">graph_feature</span><span class="p">,</span>
             <span class="s2">"node_feature"</span><span class="p">:</span> <span class="n">node_feature</span>
-        <span class="p">}</span></div>
+        <span class="p">}</span></div></div>
 </pre></div>
       </article>
       <footer>

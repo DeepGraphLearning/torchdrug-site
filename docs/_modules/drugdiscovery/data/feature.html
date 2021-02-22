@@ -202,7 +202,7 @@
 <span class="n">bond_type_vocab</span> <span class="o">=</span> <span class="p">[</span><span class="n">Chem</span><span class="o">.</span><span class="n">rdchem</span><span class="o">.</span><span class="n">BondType</span><span class="o">.</span><span class="n">SINGLE</span><span class="p">,</span> <span class="n">Chem</span><span class="o">.</span><span class="n">rdchem</span><span class="o">.</span><span class="n">BondType</span><span class="o">.</span><span class="n">DOUBLE</span><span class="p">,</span>
                    <span class="n">Chem</span><span class="o">.</span><span class="n">rdchem</span><span class="o">.</span><span class="n">BondType</span><span class="o">.</span><span class="n">TRIPLE</span><span class="p">,</span> <span class="n">Chem</span><span class="o">.</span><span class="n">rdchem</span><span class="o">.</span><span class="n">BondType</span><span class="o">.</span><span class="n">AROMATIC</span><span class="p">]</span>
 <span class="n">bond_dir_vocab</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">Chem</span><span class="o">.</span><span class="n">rdchem</span><span class="o">.</span><span class="n">BondDir</span><span class="o">.</span><span class="n">values</span><span class="p">))</span>
-<span class="n">stereo_vocab</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">Chem</span><span class="o">.</span><span class="n">rdchem</span><span class="o">.</span><span class="n">BondStereo</span><span class="o">.</span><span class="n">values</span><span class="p">))</span>
+<span class="n">bond_stereo_vocab</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">Chem</span><span class="o">.</span><span class="n">rdchem</span><span class="o">.</span><span class="n">BondStereo</span><span class="o">.</span><span class="n">values</span><span class="p">))</span>
 
 
 <span class="k">def</span> <span class="nf">onehot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">vocab</span><span class="p">,</span> <span class="n">allow_unknown</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
@@ -227,6 +227,7 @@
     <span class="k">return</span> <span class="n">feature</span>
 
 
+<span class="c1"># TODO: this one is too slow</span>
 <div class="viewcode-block" id="atom_default"><a class="viewcode-back" href="../../../api/data.html#drugdiscovery.data.feature.atom_default">[docs]</a><span class="nd">@R</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="s2">"features.atom.default"</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">atom_default</span><span class="p">(</span><span class="n">atom</span><span class="p">):</span>
     <span class="sd">"""Default atom feature."""</span>
@@ -324,7 +325,7 @@
     <span class="sd">"""Default bond feature."""</span>
     <span class="k">return</span> <span class="n">onehot</span><span class="p">(</span><span class="n">bond</span><span class="o">.</span><span class="n">GetBondType</span><span class="p">(),</span> <span class="n">bond_type_vocab</span><span class="p">)</span> <span class="o">+</span> \
            <span class="n">onehot</span><span class="p">(</span><span class="n">bond</span><span class="o">.</span><span class="n">GetBondDir</span><span class="p">(),</span> <span class="n">bond_dir_vocab</span><span class="p">)</span> <span class="o">+</span> \
-           <span class="n">onehot</span><span class="p">(</span><span class="n">bond</span><span class="o">.</span><span class="n">GetStereo</span><span class="p">(),</span> <span class="n">stereo_vocab</span><span class="p">)</span> <span class="o">+</span> \
+           <span class="n">onehot</span><span class="p">(</span><span class="n">bond</span><span class="o">.</span><span class="n">GetStereo</span><span class="p">(),</span> <span class="n">bond_stereo_vocab</span><span class="p">)</span> <span class="o">+</span> \
            <span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">bond</span><span class="o">.</span><span class="n">GetIsConjugated</span><span class="p">())]</span> <span class="o">+</span> \
            <span class="n">bond_length</span><span class="p">(</span><span class="n">bond</span><span class="p">)</span></div>
 

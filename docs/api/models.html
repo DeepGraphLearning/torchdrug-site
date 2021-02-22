@@ -201,6 +201,7 @@
 <li><p><strong>batch_norm</strong> (<em>bool</em><em>, </em><em>optional</em>) – apply batch normalization or not</p></li>
 <li><p><strong>activation</strong> (<em>str</em><em> or </em><em>function</em><em>, </em><em>optional</em>) – activation function</p></li>
 <li><p><strong>concat_hidden</strong> (<em>bool</em><em>, </em><em>optional</em>) – concat hidden representations from all layers as output</p></li>
+<li><p><strong>readout</strong> (<em>str</em><em>, </em><em>optional</em>) – readout function. Available functions are <code class="docutils literal notranslate"><span class="pre">sum</span></code> and <code class="docutils literal notranslate"><span class="pre">mean</span></code>.</p></li>
 </ul>
 </dd>
 </dl>
@@ -235,19 +236,6 @@
 <dd><p>Return the configuration dict of this instance.</p>
 </dd></dl>
 <dl class="py method">
-<dt id="drugdiscovery.models.ComplEx.forward">
-<code class="sig-name descname">forward</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">h_index</span></em>, <em class="sig-param"><span class="n">t_index</span></em>, <em class="sig-param"><span class="n">r_index</span></em>, <em class="sig-param"><span class="n">all_loss</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">metric</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/drugdiscovery/models/embedding.html#ComplEx.forward"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#drugdiscovery.models.ComplEx.forward" title="Permalink to this definition">¶</a></dt>
-<dd><p>Defines the computation performed at every call.</p>
-<p>Should be overridden by all subclasses.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Although the recipe for forward pass needs to be defined within
-this function, one should call the <code class="xref py py-class docutils literal notranslate"><span class="pre">Module</span></code> instance afterwards
-instead of this since the former takes care of running the
-registered hooks while the latter silently ignores them.</p>
-</div>
-</dd></dl>
-<dl class="py method">
 <dt id="drugdiscovery.models.ComplEx.load_config_dict">
 <em class="property">classmethod </em><code class="sig-name descname">load_config_dict</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">config</span></em><span class="sig-paren">)</span><a class="headerlink" href="#drugdiscovery.models.ComplEx.load_config_dict" title="Permalink to this definition">¶</a></dt>
 <dd><p>Construct an instance from the configuration dict.</p>
@@ -271,19 +259,6 @@ registered hooks while the latter silently ignores them.</p>
 <dt id="drugdiscovery.models.DistMult.config_dict">
 <code class="sig-name descname">config_dict</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#drugdiscovery.models.DistMult.config_dict" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return the configuration dict of this instance.</p>
-</dd></dl>
-<dl class="py method">
-<dt id="drugdiscovery.models.DistMult.forward">
-<code class="sig-name descname">forward</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">h_index</span></em>, <em class="sig-param"><span class="n">t_index</span></em>, <em class="sig-param"><span class="n">r_index</span></em>, <em class="sig-param"><span class="n">all_loss</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">metric</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/drugdiscovery/models/embedding.html#DistMult.forward"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#drugdiscovery.models.DistMult.forward" title="Permalink to this definition">¶</a></dt>
-<dd><p>Defines the computation performed at every call.</p>
-<p>Should be overridden by all subclasses.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Although the recipe for forward pass needs to be defined within
-this function, one should call the <code class="xref py py-class docutils literal notranslate"><span class="pre">Module</span></code> instance afterwards
-instead of this since the former takes care of running the
-registered hooks while the latter silently ignores them.</p>
-</div>
 </dd></dl>
 <dl class="py method">
 <dt id="drugdiscovery.models.DistMult.load_config_dict">
@@ -315,6 +290,7 @@ registered hooks while the latter silently ignores them.</p>
 <li><p><strong>batch_norm</strong> (<em>bool</em><em>, </em><em>optional</em>) – apply batch normalization or not</p></li>
 <li><p><strong>activation</strong> (<em>str</em><em> or </em><em>function</em><em>, </em><em>optional</em>) – activation function</p></li>
 <li><p><strong>concat_hidden</strong> (<em>bool</em><em>, </em><em>optional</em>) – concat hidden representations from all layers as output</p></li>
+<li><p><strong>readout</strong> (<em>str</em><em>, </em><em>optional</em>) – readout function. Available functions are <code class="docutils literal notranslate"><span class="pre">sum</span></code> and <code class="docutils literal notranslate"><span class="pre">mean</span></code>.</p></li>
 </ul>
 </dd>
 </dl>
@@ -349,6 +325,7 @@ registered hooks while the latter silently ignores them.</p>
 <li><p><strong>dropout_ratio</strong> (<em>float</em><em>, </em><em>optional</em>) – apply drop-out</p></li>
 <li><p><strong>activation</strong> (<em>str</em><em> or </em><em>function</em><em>, </em><em>optional</em>) – activation function</p></li>
 <li><p><strong>concat_hidden</strong> (<em>bool</em><em>, </em><em>optional</em>) – concat hidden representations from all layers as output</p></li>
+<li><p><strong>readout</strong> (<em>str</em><em>, </em><em>optional</em>) – readout function. Available functions are <code class="docutils literal notranslate"><span class="pre">sum</span></code> and <code class="docutils literal notranslate"><span class="pre">mean</span></code>.</p></li>
 <li><p><strong>GIN_version</strong> (<em>str</em><em>, </em><em>optional</em>) – by default it is the standard GIN model,</p></li>
 <li><p><strong>and one specialized GIN model is for the pre-training only</strong> (<em>`</em>) – </p></li>
 </ul>
@@ -358,6 +335,19 @@ registered hooks while the latter silently ignores them.</p>
 <dt id="drugdiscovery.models.GraphIsomorphismNetwork.config_dict">
 <code class="sig-name descname">config_dict</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#drugdiscovery.models.GraphIsomorphismNetwork.config_dict" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return the configuration dict of this instance.</p>
+</dd></dl>
+<dl class="py method">
+<dt id="drugdiscovery.models.GraphIsomorphismNetwork.forward">
+<code class="sig-name descname">forward</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">graph</span></em>, <em class="sig-param"><span class="n">input</span></em>, <em class="sig-param"><span class="n">all_loss</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">metric</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/drugdiscovery/models/gin.html#GraphIsomorphismNetwork.forward"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#drugdiscovery.models.GraphIsomorphismNetwork.forward" title="Permalink to this definition">¶</a></dt>
+<dd><p>Defines the computation performed at every call.</p>
+<p>Should be overridden by all subclasses.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Although the recipe for forward pass needs to be defined within
+this function, one should call the <code class="xref py py-class docutils literal notranslate"><span class="pre">Module</span></code> instance afterwards
+instead of this since the former takes care of running the
+registered hooks while the latter silently ignores them.</p>
+</div>
 </dd></dl>
 <dl class="py method">
 <dt id="drugdiscovery.models.GraphIsomorphismNetwork.load_config_dict">
@@ -453,6 +443,7 @@ and a transfer loss is applied between the two encoders.</p></li>
 <li><p><strong>batch_norm</strong> (<em>bool</em><em>, </em><em>optional</em>) – apply batch normalization or not</p></li>
 <li><p><strong>activation</strong> (<em>str</em><em> or </em><em>function</em><em>, </em><em>optional</em>) – activation function</p></li>
 <li><p><strong>concat_hidden</strong> (<em>bool</em><em>, </em><em>optional</em>) – concat hidden representations from all layers as output</p></li>
+<li><p><strong>readout</strong> (<em>str</em><em>, </em><em>optional</em>) – readout function. Available functions are <code class="docutils literal notranslate"><span class="pre">sum</span></code> and <code class="docutils literal notranslate"><span class="pre">mean</span></code>.</p></li>
 </ul>
 </dd>
 </dl>
@@ -487,6 +478,7 @@ and a transfer loss is applied between the two encoders.</p></li>
 <li><p><strong>batch_norm</strong> (<em>bool</em><em>, </em><em>optional</em>) – apply batch normalization or not</p></li>
 <li><p><strong>activation</strong> (<em>str</em><em> or </em><em>function</em><em>, </em><em>optional</em>) – activation function</p></li>
 <li><p><strong>concat_hidden</strong> (<em>bool</em><em>, </em><em>optional</em>) – concat hidden representations from all layers as output</p></li>
+<li><p><strong>readout</strong> (<em>str</em><em>, </em><em>optional</em>) – readout function. Available functions are <code class="docutils literal notranslate"><span class="pre">sum</span></code> and <code class="docutils literal notranslate"><span class="pre">mean</span></code>.</p></li>
 </ul>
 </dd>
 </dl>
@@ -519,19 +511,6 @@ and a transfer loss is applied between the two encoders.</p></li>
 <dt id="drugdiscovery.models.RotatE.config_dict">
 <code class="sig-name descname">config_dict</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#drugdiscovery.models.RotatE.config_dict" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return the configuration dict of this instance.</p>
-</dd></dl>
-<dl class="py method">
-<dt id="drugdiscovery.models.RotatE.forward">
-<code class="sig-name descname">forward</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">h_index</span></em>, <em class="sig-param"><span class="n">t_index</span></em>, <em class="sig-param"><span class="n">r_index</span></em>, <em class="sig-param"><span class="n">all_loss</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">metric</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/drugdiscovery/models/embedding.html#RotatE.forward"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#drugdiscovery.models.RotatE.forward" title="Permalink to this definition">¶</a></dt>
-<dd><p>Defines the computation performed at every call.</p>
-<p>Should be overridden by all subclasses.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Although the recipe for forward pass needs to be defined within
-this function, one should call the <code class="xref py py-class docutils literal notranslate"><span class="pre">Module</span></code> instance afterwards
-instead of this since the former takes care of running the
-registered hooks while the latter silently ignores them.</p>
-</div>
 </dd></dl>
 <dl class="py method">
 <dt id="drugdiscovery.models.RotatE.load_config_dict">
@@ -589,19 +568,6 @@ registered hooks while the latter silently ignores them.</p>
 <dd><p>Return the configuration dict of this instance.</p>
 </dd></dl>
 <dl class="py method">
-<dt id="drugdiscovery.models.SimplE.forward">
-<code class="sig-name descname">forward</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">h_index</span></em>, <em class="sig-param"><span class="n">t_index</span></em>, <em class="sig-param"><span class="n">r_index</span></em>, <em class="sig-param"><span class="n">all_loss</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">metric</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/drugdiscovery/models/embedding.html#SimplE.forward"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#drugdiscovery.models.SimplE.forward" title="Permalink to this definition">¶</a></dt>
-<dd><p>Defines the computation performed at every call.</p>
-<p>Should be overridden by all subclasses.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Although the recipe for forward pass needs to be defined within
-this function, one should call the <code class="xref py py-class docutils literal notranslate"><span class="pre">Module</span></code> instance afterwards
-instead of this since the former takes care of running the
-registered hooks while the latter silently ignores them.</p>
-</div>
-</dd></dl>
-<dl class="py method">
 <dt id="drugdiscovery.models.SimplE.load_config_dict">
 <em class="property">classmethod </em><code class="sig-name descname">load_config_dict</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">config</span></em><span class="sig-paren">)</span><a class="headerlink" href="#drugdiscovery.models.SimplE.load_config_dict" title="Permalink to this definition">¶</a></dt>
 <dd><p>Construct an instance from the configuration dict.</p>
@@ -625,19 +591,6 @@ registered hooks while the latter silently ignores them.</p>
 <dt id="drugdiscovery.models.TransE.config_dict">
 <code class="sig-name descname">config_dict</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#drugdiscovery.models.TransE.config_dict" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return the configuration dict of this instance.</p>
-</dd></dl>
-<dl class="py method">
-<dt id="drugdiscovery.models.TransE.forward">
-<code class="sig-name descname">forward</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">h_index</span></em>, <em class="sig-param"><span class="n">t_index</span></em>, <em class="sig-param"><span class="n">r_index</span></em>, <em class="sig-param"><span class="n">all_loss</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">metric</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/drugdiscovery/models/embedding.html#TransE.forward"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#drugdiscovery.models.TransE.forward" title="Permalink to this definition">¶</a></dt>
-<dd><p>Defines the computation performed at every call.</p>
-<p>Should be overridden by all subclasses.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Although the recipe for forward pass needs to be defined within
-this function, one should call the <code class="xref py py-class docutils literal notranslate"><span class="pre">Module</span></code> instance afterwards
-instead of this since the former takes care of running the
-registered hooks while the latter silently ignores them.</p>
-</div>
 </dd></dl>
 <dl class="py method">
 <dt id="drugdiscovery.models.TransE.load_config_dict">

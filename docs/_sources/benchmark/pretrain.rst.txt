@@ -7,11 +7,11 @@ This page contains benchmarks of property prediction models with pre-training.
 
 We have two main methods for the pre-training.
 
-- Self-supervised pre-training is learning the graph structural information in a
-self-supervised manner. Here we are pre-training on a subset of 2m molecules from
-`ZINC15`_.
-- Supervised pre-training is doing pre-training on a large supervised dataset.
-Here we are using 456k molecuels and 1,310 tasks from `ChEMBL`_.
+- | Self-supervised pre-training is learning the graph structural information in a
+  | self-supervised manner. Here we are pre-training on a subset of 2m molecules from
+  | `ZINC15`_.
+- | Supervised pre-training is doing pre-training on a large supervised dataset.
+  | Here we are using 456k molecuels and 1,310 tasks from `ChEMBL`_.
 
 For the downstream tasks, we consider the scaffold splitting for molecule data.
 The split for train/validation/test sets is 80%:10%:10%. For each pre-training
