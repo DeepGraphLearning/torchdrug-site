@@ -18,9 +18,6 @@ The split for train/validation/test sets is 80%:10%:10%. For each pre-training
 method and downstream dataset, we evaluate with 10 random splits and report the
 mean of the performance.
 
-.. contents::
-    :local:
-
 Self-Supervised Pre-training
 ----------------------------
 

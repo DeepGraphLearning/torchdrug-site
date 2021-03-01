@@ -197,37 +197,32 @@ pre-training for molecule property prediction, it explores the structure informa
 of molecular data from different aspects as illustrated below.</p>
 <div class="section" id="id1">
 <h3>Infograph<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
-<p><a class="reference external" href="https://openreview.net/pdf?id=r1lfF2NYvH">InfoGraph</a> (IG) sets the node- and graph- representation from the same graph as positive pairs,
-while those from different graphs as negative pairs.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torch</span>
-<span class="kn">from</span> <span class="nn">torch</span> <span class="kn">import</span> <span class="n">nn</span><span class="p">,</span> <span class="n">optim</span>
+<p><a class="reference external" href="https://openreview.net/pdf?id=r1lfF2NYvH">InfoGraph</a> (IG) sets the node- and graph- representation from the same graph as
+positive pairs, while those from different graphs as negative pairs.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">torch</span> <span class="kn">import</span> <span class="n">nn</span><span class="p">,</span> <span class="n">optim</span>
 <span class="kn">from</span> <span class="nn">torch.utils</span> <span class="kn">import</span> <span class="n">data</span> <span class="k">as</span> <span class="n">torch_data</span>
 
-<span class="kn">from</span> <span class="nn">drugdiscovery</span> <span class="kn">import</span> <span class="n">core</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">datasets</span><span class="p">,</span> <span class="n">tasks</span><span class="p">,</span> <span class="n">models</span>
+<span class="kn">from</span> <span class="nn">drugdiscovery</span> <span class="kn">import</span> <span class="n">core</span><span class="p">,</span> <span class="n">datasets</span><span class="p">,</span> <span class="n">tasks</span><span class="p">,</span> <span class="n">models</span>
 
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">ClinTox</span><span class="p">(</span><span class="s2">"~/molecule-datasets/"</span><span class="p">,</span> <span class="n">node_feature</span><span class="o">=</span><span class="s2">"pretrain"</span><span class="p">,</span>
+                           <span class="n">edge_feature</span><span class="o">=</span><span class="s2">"pretrain"</span><span class="p">)</span>
 
-<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">"__main__"</span><span class="p">:</span>
-    <span class="n">dataset</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">ClinTox</span><span class="p">(</span><span class="s2">"datasets"</span><span class="p">,</span> <span class="n">node_feature</span><span class="o">=</span><span class="s2">"pretraining"</span><span class="p">,</span>
-                               <span class="n">edge_feature</span><span class="o">=</span><span class="s2">"pretraining"</span><span class="p">)</span>
+<span class="n">gin_model</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">GIN</span><span class="p">(</span><span class="n">input_dim</span><span class="o">=</span><span class="n">dataset</span><span class="o">.</span><span class="n">node_feature_dim</span><span class="p">,</span>
+                       <span class="n">hidden_dims</span><span class="o">=</span><span class="p">[</span><span class="mi">300</span><span class="p">,</span> <span class="mi">300</span><span class="p">,</span> <span class="mi">300</span><span class="p">,</span> <span class="mi">300</span><span class="p">,</span> <span class="mi">300</span><span class="p">],</span>
+                       <span class="n">edge_input_dim</span><span class="o">=</span><span class="n">dataset</span><span class="o">.</span><span class="n">edge_feature_dim</span><span class="p">,</span>
+                       <span class="n">batch_norm</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">readout</span><span class="o">=</span><span class="s2">"mean"</span><span class="p">)</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">InfoGraph</span><span class="p">(</span><span class="n">gin_model</span><span class="p">,</span> <span class="n">separate_model</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 
-    <span class="n">lengths</span> <span class="o">=</span> <span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">dataset</span><span class="p">),</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
-    <span class="n">train_set</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">torch_data</span><span class="o">.</span><span class="n">random_split</span><span class="p">(</span><span class="n">dataset</span><span class="p">,</span> <span class="n">lengths</span><span class="p">)</span>
+<span class="n">task</span> <span class="o">=</span> <span class="n">tasks</span><span class="o">.</span><span class="n">Unsupervised</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
+<span class="n">optimizer</span> <span class="o">=</span> <span class="n">optim</span><span class="o">.</span><span class="n">Adam</span><span class="p">(</span><span class="n">task</span><span class="o">.</span><span class="n">parameters</span><span class="p">(),</span> <span class="n">lr</span><span class="o">=</span><span class="mf">1e-3</span><span class="p">)</span>
+<span class="n">solver</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">Engine</span><span class="p">(</span><span class="n">task</span><span class="p">,</span> <span class="n">dataset</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="n">optimizer</span><span class="p">,</span> <span class="n">gpus</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">256</span><span class="p">)</span>
 
-    <span class="n">gin_model</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">GIN</span><span class="p">(</span><span class="n">GIN_version</span><span class="o">=</span><span class="s2">"pretraining"</span><span class="p">,</span> <span class="n">emb_dim</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span> <span class="n">num_layer</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
-                           <span class="n">readout</span><span class="o">=</span><span class="s2">"mean"</span><span class="p">)</span>
-    <span class="n">model</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">InfoGraph</span><span class="p">(</span><span class="n">gin_model</span><span class="p">,</span> <span class="n">separate_model</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-
-    <span class="n">task</span> <span class="o">=</span> <span class="n">tasks</span><span class="o">.</span><span class="n">Unsupervised</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
-    <span class="n">optimizer</span> <span class="o">=</span> <span class="n">optim</span><span class="o">.</span><span class="n">Adam</span><span class="p">(</span><span class="n">task</span><span class="o">.</span><span class="n">parameters</span><span class="p">(),</span> <span class="n">lr</span><span class="o">=</span><span class="mf">1e-3</span><span class="p">)</span>
-    <span class="n">solver</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">Engine</span><span class="p">(</span><span class="n">task</span><span class="p">,</span> <span class="n">train_set</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="n">optimizer</span><span class="p">,</span>
-                         <span class="n">gpus</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">256</span><span class="p">)</span>
-
-    <span class="n">solver</span><span class="o">.</span><span class="n">train</span><span class="p">(</span><span class="n">num_epoch</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">solver</span><span class="o">.</span><span class="n">train</span><span class="p">(</span><span class="n">num_epoch</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>The above is the toy example on <a class="reference external" href="https://arxiv.org/pdf/1703.00564.pdf">ClinTox</a> dataset, and the output is similar to
+<p>The above is a toy example on <a class="reference external" href="https://arxiv.org/pdf/1703.00564.pdf">ClinTox</a> dataset, and the output is similar to
 the following.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>average graph-node mutual information: <span class="m">1</span>.30305
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>average graph-node mutual information: <span class="m">1</span>.30658
 </pre></div>
 </div>
 <img alt="../_images/infograph.png" src="../_images/infograph.png"/>
@@ -239,35 +234,32 @@ be seen as self-supervised by viewing the actual node type as positive, and all
 the other node types as negative.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">torch</span> <span class="kn">import</span> <span class="n">nn</span><span class="p">,</span> <span class="n">optim</span>
 <span class="kn">from</span> <span class="nn">torch.utils</span> <span class="kn">import</span> <span class="n">data</span> <span class="k">as</span> <span class="n">torch_data</span>
+
 <span class="kn">from</span> <span class="nn">drugdiscovery</span> <span class="kn">import</span> <span class="n">core</span><span class="p">,</span> <span class="n">datasets</span><span class="p">,</span> <span class="n">tasks</span><span class="p">,</span> <span class="n">models</span>
 
-<span class="n">dataset</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">ClinTox</span><span class="p">(</span><span class="s2">"datasets"</span><span class="p">,</span> <span class="n">node_feature</span><span class="o">=</span><span class="s2">"pretraining"</span><span class="p">,</span>
-                           <span class="n">edge_feature</span><span class="o">=</span><span class="s2">"pretraining"</span><span class="p">)</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">ClinTox</span><span class="p">(</span><span class="s2">"~/molecule-datasets/"</span><span class="p">,</span> <span class="n">node_feature</span><span class="o">=</span><span class="s2">"pretrain"</span><span class="p">,</span>
+                           <span class="n">edge_feature</span><span class="o">=</span><span class="s2">"pretrain"</span><span class="p">)</span>
 
-<span class="n">lengths</span> <span class="o">=</span> <span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">dataset</span><span class="p">),</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
-<span class="n">train_set</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">torch_data</span><span class="o">.</span><span class="n">random_split</span><span class="p">(</span><span class="n">dataset</span><span class="p">,</span> <span class="n">lengths</span><span class="p">)</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">GIN</span><span class="p">(</span><span class="n">input_dim</span><span class="o">=</span><span class="n">dataset</span><span class="o">.</span><span class="n">node_feature_dim</span><span class="p">,</span>
+                   <span class="n">hidden_dims</span><span class="o">=</span><span class="p">[</span><span class="mi">300</span><span class="p">,</span> <span class="mi">300</span><span class="p">,</span> <span class="mi">300</span><span class="p">,</span> <span class="mi">300</span><span class="p">,</span> <span class="mi">300</span><span class="p">],</span>
+                   <span class="n">edge_input_dim</span><span class="o">=</span><span class="n">dataset</span><span class="o">.</span><span class="n">edge_feature_dim</span><span class="p">,</span>
+                   <span class="n">batch_norm</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">readout</span><span class="o">=</span><span class="s2">"mean"</span><span class="p">)</span>
+<span class="n">task</span> <span class="o">=</span> <span class="n">tasks</span><span class="o">.</span><span class="n">AttributeMasking</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">mask_rate</span><span class="o">=</span><span class="mf">0.15</span><span class="p">)</span>
 
-<span class="n">model</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">GIN</span><span class="p">(</span><span class="n">GIN_version</span><span class="o">=</span><span class="s2">"pretraining"</span><span class="p">,</span> <span class="n">emb_dim</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span> <span class="n">num_layer</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
-                   <span class="n">readout</span><span class="o">=</span><span class="s2">"mean"</span><span class="p">)</span>
-<span class="n">atom_attribute_model</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">300</span><span class="p">,</span> <span class="mi">119</span><span class="p">)</span>
-<span class="n">parameters</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">parameters</span><span class="p">())</span> <span class="o">+</span> <span class="nb">list</span><span class="p">(</span><span class="n">atom_attribute_model</span><span class="o">.</span><span class="n">parameters</span><span class="p">())</span>
-<span class="n">task</span> <span class="o">=</span> <span class="n">tasks</span><span class="o">.</span><span class="n">AttributeMasking</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">atom_attribute_model</span><span class="p">,</span> <span class="mf">0.15</span><span class="p">)</span>
-
-<span class="n">optimizer</span> <span class="o">=</span> <span class="n">optim</span><span class="o">.</span><span class="n">Adam</span><span class="p">(</span><span class="n">parameters</span><span class="p">,</span> <span class="n">lr</span><span class="o">=</span><span class="mf">1e-3</span><span class="p">)</span>
-<span class="n">solver</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">Engine</span><span class="p">(</span><span class="n">task</span><span class="p">,</span> <span class="n">train_set</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="n">optimizer</span><span class="p">,</span>
-                     <span class="n">gpus</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">256</span><span class="p">)</span>
+<span class="n">optimizer</span> <span class="o">=</span> <span class="n">optim</span><span class="o">.</span><span class="n">Adam</span><span class="p">(</span><span class="n">task</span><span class="o">.</span><span class="n">parameters</span><span class="p">(),</span> <span class="n">lr</span><span class="o">=</span><span class="mf">1e-3</span><span class="p">)</span>
+<span class="n">solver</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">Engine</span><span class="p">(</span><span class="n">task</span><span class="p">,</span> <span class="n">dataset</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="n">optimizer</span><span class="p">,</span> <span class="n">gpus</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">256</span><span class="p">)</span>
 
 <span class="n">solver</span><span class="o">.</span><span class="n">train</span><span class="p">(</span><span class="n">num_epoch</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>The above is the toy example on <a class="reference external" href="https://arxiv.org/pdf/1703.00564.pdf">ClinTox</a> dataset, and the output is similar to
+<p>The above is a toy example on <a class="reference external" href="https://arxiv.org/pdf/1703.00564.pdf">ClinTox</a> dataset, and the output is similar to
 the following.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>average CrossEntropyLoss<span class="o">()</span> loss: <span class="m">0</span>.285154
-average acc: <span class="m">0</span>.90249
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>average accuracy: <span class="m">0</span>.920366
+average cross entropy: <span class="m">0</span>.22998
 </pre></div>
 </div>
 <img alt="../_images/attrmasking.png" src="../_images/attrmasking.png"/>
-<p>We also include other mainstream self-supervised pre-training methods as below:</p>
+<p>We also include other popular self-supervised pre-training methods as below:</p>
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
 <p><a class="reference internal" href="../api/tasks.html#drugdiscovery.tasks.EdgePrediction" title="drugdiscovery.tasks.EdgePrediction"><code class="xref py py-func docutils literal notranslate"><span class="pre">Edge</span> <span class="pre">Prediction</span> <span class="pre">(EP)</span></code></a>

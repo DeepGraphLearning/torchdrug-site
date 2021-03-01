@@ -13,9 +13,6 @@ performance.
 For datasets containing a lot of tasks, only the first 16 tasks are showed here due
 to space limitations.
 
-.. contents::
-    :local:
-
 Random Split
 ------------
 

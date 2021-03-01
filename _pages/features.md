@@ -40,7 +40,7 @@ Comprehensive benchmarks have been conducted on several drug discovery tasks to 
 systematic comparison of popular deep learning architectures. The [benchmark results] are 
 expected to track the progress of new models and inspire new research directions.
 
-[benchmark results]: http://localhost:4000/docs/benchmark
+[benchmark results]: {{ "/docs/benchmark" | relative_url }}
 
 # Scalable Training and Inference
 

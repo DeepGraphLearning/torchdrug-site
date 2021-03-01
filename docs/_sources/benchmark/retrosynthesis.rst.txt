@@ -8,9 +8,6 @@ This page contains benchmarks of retrosynthesis models.
 We split the dataset into train/validation/test with ratios of 80%:10%:10%. We
 consider two settings where the reaction class is given or unknown.
 
-.. contents::
-    :local:
-
 Given Reaction Class
 --------------------
 

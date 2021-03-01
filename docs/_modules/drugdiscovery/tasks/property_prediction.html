@@ -192,7 +192,7 @@
 <span class="kn">from</span> <span class="nn">torch</span> <span class="kn">import</span> <span class="n">nn</span>
 <span class="kn">from</span> <span class="nn">torch.nn</span> <span class="kn">import</span> <span class="n">functional</span> <span class="k">as</span> <span class="n">F</span>
 
-<span class="kn">from</span> <span class="nn">drugdiscovery</span> <span class="kn">import</span> <span class="n">core</span><span class="p">,</span> <span class="n">tasks</span><span class="p">,</span> <span class="n">metrics</span>
+<span class="kn">from</span> <span class="nn">drugdiscovery</span> <span class="kn">import</span> <span class="n">core</span><span class="p">,</span> <span class="n">layers</span><span class="p">,</span> <span class="n">tasks</span><span class="p">,</span> <span class="n">metrics</span>
 <span class="kn">from</span> <span class="nn">drugdiscovery.core</span> <span class="kn">import</span> <span class="n">Registry</span> <span class="k">as</span> <span class="n">R</span>
 <span class="kn">from</span> <span class="nn">drugdiscovery.layers</span> <span class="kn">import</span> <span class="n">functional</span>
 
@@ -222,10 +222,11 @@
         <span class="nb">super</span><span class="p">(</span><span class="n">PropertyPrediction</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="n">model</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">task</span> <span class="o">=</span> <span class="n">task</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">linear</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">output_dim</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">task</span><span class="p">))</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">criterion</span> <span class="o">=</span> <span class="n">criterion</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">metric</span> <span class="o">=</span> <span class="n">metric</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">verbose</span> <span class="o">=</span> <span class="n">verbose</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">linear</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">output_dim</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">task</span><span class="p">))</span>
 
 <div class="viewcode-block" id="PropertyPrediction.preprocess"><a class="viewcode-back" href="../../../api/tasks.html#drugdiscovery.tasks.PropertyPrediction.preprocess">[docs]</a>    <span class="k">def</span> <span class="nf">preprocess</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">train_set</span><span class="p">):</span>
         <span class="sd">"""</span>

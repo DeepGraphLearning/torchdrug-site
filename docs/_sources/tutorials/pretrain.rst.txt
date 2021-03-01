@@ -20,42 +20,37 @@ of molecular data from different aspects as illustrated below.
 Infograph
 ^^^^^^^^^
 
-`InfoGraph`_ (IG) sets the node- and graph- representation from the same graph as positive pairs,
-while those from different graphs as negative pairs.
+`InfoGraph`_ (IG) sets the node- and graph- representation from the same graph as
+positive pairs, while those from different graphs as negative pairs.
 
 .. code:: python
 
-    import torch
     from torch import nn, optim
     from torch.utils import data as torch_data
 
-    from drugdiscovery import core, data, datasets, tasks, models
+    from drugdiscovery import core, datasets, tasks, models
 
+    dataset = datasets.ClinTox("~/molecule-datasets/", node_feature="pretrain",
+                               edge_feature="pretrain")
 
-    if __name__ == "__main__":
-        dataset = datasets.ClinTox("datasets", node_feature="pretraining",
-                                   edge_feature="pretraining")
+    gin_model = models.GIN(input_dim=dataset.node_feature_dim,
+                           hidden_dims=[300, 300, 300, 300, 300],
+                           edge_input_dim=dataset.edge_feature_dim,
+                           batch_norm=True, readout="mean")
+    model = models.InfoGraph(gin_model, separate_model=False)
 
-        lengths = [len(dataset), 0, 0]
-        train_set, _, _ = torch_data.random_split(dataset, lengths)
+    task = tasks.Unsupervised(model)
+    optimizer = optim.Adam(task.parameters(), lr=1e-3)
+    solver = core.Engine(task, dataset, None, None, optimizer, gpus=[0], batch_size=256)
 
-        gin_model = models.GIN(GIN_version="pretraining", emb_dim=300, num_layer=5,
-                               readout="mean")
-        model = models.InfoGraph(gin_model, separate_model=False)
+    solver.train(num_epoch=100)
 
-        task = tasks.Unsupervised(model)
-        optimizer = optim.Adam(task.parameters(), lr=1e-3)
-        solver = core.Engine(task, train_set, None, None, optimizer,
-                             gpus=[0], batch_size=256)
-
-        solver.train(num_epoch=100)
-
-The above is the toy example on `ClinTox`_ dataset, and the output is similar to
+The above is a toy example on `ClinTox`_ dataset, and the output is similar to
 the following.
 
 .. code:: bash
 
-    average graph-node mutual information: 1.30305
+    average graph-node mutual information: 1.30658
 
 .. image:: ../../../asset/graph/infograph.png
 
@@ -70,37 +65,34 @@ the other node types as negative.
 
     from torch import nn, optim
     from torch.utils import data as torch_data
+
     from drugdiscovery import core, datasets, tasks, models
 
-    dataset = datasets.ClinTox("datasets", node_feature="pretraining",
-                               edge_feature="pretraining")
+    dataset = datasets.ClinTox("~/molecule-datasets/", node_feature="pretrain",
+                               edge_feature="pretrain")
 
-    lengths = [len(dataset), 0, 0]
-    train_set, _, _ = torch_data.random_split(dataset, lengths)
+    model = models.GIN(input_dim=dataset.node_feature_dim,
+                       hidden_dims=[300, 300, 300, 300, 300],
+                       edge_input_dim=dataset.edge_feature_dim,
+                       batch_norm=True, readout="mean")
+    task = tasks.AttributeMasking(model, mask_rate=0.15)
 
-    model = models.GIN(GIN_version="pretraining", emb_dim=300, num_layer=5,
-                       readout="mean")
-    atom_attribute_model = nn.Linear(300, 119)
-    parameters = list(model.parameters()) + list(atom_attribute_model.parameters())
-    task = tasks.AttributeMasking(model, atom_attribute_model, 0.15)
-
-    optimizer = optim.Adam(parameters, lr=1e-3)
-    solver = core.Engine(task, train_set, None, None, optimizer,
-                         gpus=[0], batch_size=256)
+    optimizer = optim.Adam(task.parameters(), lr=1e-3)
+    solver = core.Engine(task, dataset, None, None, optimizer, gpus=[0], batch_size=256)
 
     solver.train(num_epoch=100)
 
-The above is the toy example on `ClinTox`_ dataset, and the output is similar to
+The above is a toy example on `ClinTox`_ dataset, and the output is similar to
 the following.
 
 .. code:: bash
 
-    average CrossEntropyLoss() loss: 0.285154
-    average acc: 0.90249
+    average accuracy: 0.920366
+    average cross entropy: 0.22998
 
 .. image:: ../../../asset/graph/attrmasking.png
 
-We also include other mainstream self-supervised pre-training methods as below:
+We also include other popular self-supervised pre-training methods as below:
 
 .. seealso::
     :func:`Edge Prediction (EP) <drugdiscovery.tasks.EdgePrediction>`

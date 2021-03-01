@@ -447,23 +447,6 @@ This also corresponds to the radius of the receptive field.</p></li>
 </dl>
 </dd></dl>
 <dl class="py class">
-<dt id="drugdiscovery.layers.conv.GraphIsomorphismConvPretraining">
-<em class="property">class </em><code class="sig-name descname">GraphIsomorphismConvPretraining</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">emb_dim</span></em>, <em class="sig-param"><span class="n">activation</span></em>, <em class="sig-param"><span class="n">dropout_ratio</span></em>, <em class="sig-param"><span class="n">batch_norm</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/drugdiscovery/layers/conv.html#GraphIsomorphismConvPretraining"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#drugdiscovery.layers.conv.GraphIsomorphismConvPretraining" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="py method">
-<dt id="drugdiscovery.layers.conv.GraphIsomorphismConvPretraining.forward">
-<code class="sig-name descname">forward</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">graph</span></em>, <em class="sig-param"><span class="n">input</span></em>, <em class="sig-param"><span class="n">edge_attr</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/drugdiscovery/layers/conv.html#GraphIsomorphismConvPretraining.forward"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#drugdiscovery.layers.conv.GraphIsomorphismConvPretraining.forward" title="Permalink to this definition">¶</a></dt>
-<dd><p>Defines the computation performed at every call.</p>
-<p>Should be overridden by all subclasses.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Although the recipe for forward pass needs to be defined within
-this function, one should call the <code class="xref py py-class docutils literal notranslate"><span class="pre">Module</span></code> instance afterwards
-instead of this since the former takes care of running the
-registered hooks while the latter silently ignores them.</p>
-</div>
-</dd></dl>
-</dd></dl>
-<dl class="py class">
 <dt id="drugdiscovery.layers.conv.MessagePassing">
 <em class="property">class </em><code class="sig-name descname">MessagePassing</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">input_dim</span></em>, <em class="sig-param"><span class="n">edge_input_dim</span></em>, <em class="sig-param"><span class="n">hidden_dims</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">batch_norm</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">activation</span><span class="o">=</span><span class="default_value">'relu'</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/drugdiscovery/layers/conv.html#MessagePassing"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#drugdiscovery.layers.conv.MessagePassing" title="Permalink to this definition">¶</a></dt>
 <dd><p>Message passing operator from <a class="reference external" href="https://arxiv.org/pdf/1704.01212.pdf">Neural Message Passing for Quantum Chemistry</a>.</p>

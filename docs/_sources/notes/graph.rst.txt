@@ -25,7 +25,7 @@ This will plot a ring graph like the following.
     :width: 33%
 
 Internally, the graph is stored as a sparse edge list to save memory footprint. For
-an intuitive comparison, a `scale-free graph`_ may have 1 million nodes and 10 million
+an intuitive comparison, a `scale-free graph`_ mayr have 1 million nodes and 10 million
 edges. The dense version takes about 4TB, while the sparse version only requires 120MB.
 
 .. _scale-free graph:

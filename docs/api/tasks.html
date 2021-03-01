@@ -187,14 +187,14 @@
 <span id="drugdiscovery-tasks"></span><h1>drugdiscovery.tasks<a class="headerlink" href="#module-drugdiscovery.tasks" title="Permalink to this headline">¶</a></h1>
 <dl class="py class">
 <dt id="drugdiscovery.tasks.AttributeMasking">
-<em class="property">class </em><code class="sig-name descname">AttributeMasking</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">model</span></em>, <em class="sig-param"><span class="n">atom_attribute_model</span></em>, <em class="sig-param"><span class="n">mask_rate</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/drugdiscovery/tasks/pretrain.html#AttributeMasking"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#drugdiscovery.tasks.AttributeMasking" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-name descname">AttributeMasking</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">model</span></em>, <em class="sig-param"><span class="n">mask_rate</span><span class="o">=</span><span class="default_value">0.15</span></em>, <em class="sig-param"><span class="n">num_mlp_layer</span><span class="o">=</span><span class="default_value">2</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/drugdiscovery/tasks/pretrain.html#AttributeMasking"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#drugdiscovery.tasks.AttributeMasking" title="Permalink to this definition">¶</a></dt>
 <dd><p>Attribute masking proposed in <a class="reference external" href="https://arxiv.org/abs/1905.12265">Strategies for Pre-training Graph Neural Networks</a>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>model</strong> (<em>nn.Module</em>) – graph representation model</p></li>
+<li><p><strong>model</strong> (<em>nn.Module</em>) – base graph neural network model</p></li>
 <li><p><strong>atom_attribute_model</strong> (<em>nn.Module</em>) – atom (attribute) prediction model</p></li>
-<li><p><strong>mask_rate</strong> – </p></li>
+<li><p><strong>mask_rate</strong> (<em>float</em>) – the rate randomly masked node attributes</p></li>
 </ul>
 </dd>
 </dl>
@@ -322,18 +322,18 @@ bond: original bond feature</p></li>
 </dd></dl>
 <dl class="py class">
 <dt id="drugdiscovery.tasks.ContextPrediction">
-<em class="property">class </em><code class="sig-name descname">ContextPrediction</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">model</span></em>, <em class="sig-param"><span class="n">model_context</span></em>, <em class="sig-param"><span class="n">model_context_readout</span></em>, <em class="sig-param"><span class="n">k</span></em>, <em class="sig-param"><span class="n">l1</span></em>, <em class="sig-param"><span class="n">l2</span></em>, <em class="sig-param"><span class="n">num_negative</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/drugdiscovery/tasks/pretrain.html#ContextPrediction"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#drugdiscovery.tasks.ContextPrediction" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-name descname">ContextPrediction</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">model</span></em>, <em class="sig-param"><span class="n">context_model</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">k</span><span class="o">=</span><span class="default_value">5</span></em>, <em class="sig-param"><span class="n">r1</span><span class="o">=</span><span class="default_value">4</span></em>, <em class="sig-param"><span class="n">r2</span><span class="o">=</span><span class="default_value">7</span></em>, <em class="sig-param"><span class="n">readout</span><span class="o">=</span><span class="default_value">'mean'</span></em>, <em class="sig-param"><span class="n">num_negative</span><span class="o">=</span><span class="default_value">1</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/drugdiscovery/tasks/pretrain.html#ContextPrediction"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#drugdiscovery.tasks.ContextPrediction" title="Permalink to this definition">¶</a></dt>
 <dd><p>Context prediction task proposed in <a class="reference external" href="https://arxiv.org/abs/1905.12265">Strategies for Pre-training Graph Neural Networks</a>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>model</strong> (<em>nn.Module</em>) – graph representation model</p></li>
-<li><p><strong>model_context</strong> (<em>nn.Module</em>) – graph representation model for context prediction</p></li>
-<li><p><strong>model_context_readout</strong> (<em>nn.Module</em>) – graph aggregation function for the context prediction model</p></li>
-<li><p><strong>k</strong> (<em>int</em>) – radius for the K-hop neighborhood</p></li>
-<li><p><strong>l1</strong> (<em>int</em>) – radius for the l1-hop neighborhood, context graph is the subgraph between l1- and l2-hop from the center node.</p></li>
-<li><p><strong>l2</strong> (<em>int</em>) – radius for the l2-hop neighborhood, context graph is the subgraph between l1- and l2-hop from the center node.</p></li>
-<li><p><strong>num_negative</strong> (<em>int</em>) – number of negative substructures per positive substructure</p></li>
+<li><p><strong>model</strong> (<em>nn.Module</em>) – base graph neural network model</p></li>
+<li><p><strong>context_model</strong> (<em>nn.Module</em><em>, </em><em>optional</em>) – graph representation model for context prediction</p></li>
+<li><p><strong>k</strong> (<em>int</em><em>, </em><em>optional</em>) – radius for the K-hop neighborhood</p></li>
+<li><p><strong>r1</strong> (<em>int</em><em>, </em><em>optional</em>) – radius for the l1-hop neighborhood, context graph is the subgraph between l1- and l2-hop from the center node.</p></li>
+<li><p><strong>r2</strong> (<em>int</em><em>, </em><em>optional</em>) – radius for the l2-hop neighborhood, context graph is the subgraph between l1- and l2-hop from the center node.</p></li>
+<li><p><strong>readout</strong> (<em>nn.Module</em><em>, </em><em>optional</em>) – graph aggregation function for the context prediction model</p></li>
+<li><p><strong>num_negative</strong> (<em>int</em><em>, </em><em>optional</em>) – number of negative substructures per positive substructure</p></li>
 </ul>
 </dd>
 </dl>
@@ -362,85 +362,18 @@ registered hooks while the latter silently ignores them.</p>
 </dd></dl>
 </dd></dl>
 <dl class="py class">
-<dt id="drugdiscovery.tasks.DeepGraphInfomax">
-<em class="property">class </em><code class="sig-name descname">DeepGraphInfomax</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">model</span></em>, <em class="sig-param"><span class="n">proj_model</span></em>, <em class="sig-param"><span class="n">discriminator</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/drugdiscovery/tasks/pretrain.html#DeepGraphInfomax"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#drugdiscovery.tasks.DeepGraphInfomax" title="Permalink to this definition">¶</a></dt>
-<dd><p><a class="reference external" href="https://arxiv.org/abs/1809.10341">Deep Graph Infomax</a> task.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>model</strong> (<em>nn.Module</em>) – graph representation model</p></li>
-<li><p><strong>proj_model</strong> (<em>nn.Module</em>) – projection head model</p></li>
-<li><p><strong>discriminator</strong> (<em>nn.Module</em>) – contrastive model</p></li>
-</ul>
-</dd>
-</dl>
-<dl class="py method">
-<dt id="drugdiscovery.tasks.DeepGraphInfomax.config_dict">
-<code class="sig-name descname">config_dict</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#drugdiscovery.tasks.DeepGraphInfomax.config_dict" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return the configuration dict of this instance.</p>
-</dd></dl>
-<dl class="py method">
-<dt id="drugdiscovery.tasks.DeepGraphInfomax.forward">
-<code class="sig-name descname">forward</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">batch</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/drugdiscovery/tasks/pretrain.html#DeepGraphInfomax.forward"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#drugdiscovery.tasks.DeepGraphInfomax.forward" title="Permalink to this definition">¶</a></dt>
-<dd><p>Defines the computation performed at every call.</p>
-<p>Should be overridden by all subclasses.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Although the recipe for forward pass needs to be defined within
-this function, one should call the <code class="xref py py-class docutils literal notranslate"><span class="pre">Module</span></code> instance afterwards
-instead of this since the former takes care of running the
-registered hooks while the latter silently ignores them.</p>
-</div>
-</dd></dl>
-<dl class="py method">
-<dt id="drugdiscovery.tasks.DeepGraphInfomax.load_config_dict">
-<em class="property">classmethod </em><code class="sig-name descname">load_config_dict</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">config</span></em><span class="sig-paren">)</span><a class="headerlink" href="#drugdiscovery.tasks.DeepGraphInfomax.load_config_dict" title="Permalink to this definition">¶</a></dt>
-<dd><p>Construct an instance from the configuration dict.</p>
-</dd></dl>
-</dd></dl>
-<dl class="py class">
-<dt id="drugdiscovery.tasks.Discriminator">
-<em class="property">class </em><code class="sig-name descname">Discriminator</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">hidden_dim</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/drugdiscovery/tasks/pretrain.html#Discriminator"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#drugdiscovery.tasks.Discriminator" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="py method">
-<dt id="drugdiscovery.tasks.Discriminator.forward">
-<code class="sig-name descname">forward</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">x</span></em>, <em class="sig-param"><span class="n">summary</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/drugdiscovery/tasks/pretrain.html#Discriminator.forward"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#drugdiscovery.tasks.Discriminator.forward" title="Permalink to this definition">¶</a></dt>
-<dd><p>Defines the computation performed at every call.</p>
-<p>Should be overridden by all subclasses.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Although the recipe for forward pass needs to be defined within
-this function, one should call the <code class="xref py py-class docutils literal notranslate"><span class="pre">Module</span></code> instance afterwards
-instead of this since the former takes care of running the
-registered hooks while the latter silently ignores them.</p>
-</div>
-</dd></dl>
-</dd></dl>
-<dl class="py class">
 <dt id="drugdiscovery.tasks.EdgePrediction">
-<em class="property">class </em><code class="sig-name descname">EdgePrediction</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">model</span></em>, <em class="sig-param"><span class="n">verbose</span><span class="o">=</span><span class="default_value">0</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/drugdiscovery/tasks/pretrain.html#EdgePrediction"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#drugdiscovery.tasks.EdgePrediction" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-name descname">EdgePrediction</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">model</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/drugdiscovery/tasks/pretrain.html#EdgePrediction"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#drugdiscovery.tasks.EdgePrediction" title="Permalink to this definition">¶</a></dt>
 <dd><p>Edge prediction task proposed in <a class="reference external" href="https://arxiv.org/abs/1706.02216">Inductive Representation Learning on Large Graphs</a>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>model</strong> (<em>nn.Module</em>) – graph representation model</p>
+<dd class="field-odd"><p><strong>model</strong> (<em>nn.Module</em>) – base graph neural network model</p>
 </dd>
 </dl>
 <dl class="py method">
 <dt id="drugdiscovery.tasks.EdgePrediction.config_dict">
 <code class="sig-name descname">config_dict</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#drugdiscovery.tasks.EdgePrediction.config_dict" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return the configuration dict of this instance.</p>
-</dd></dl>
-<dl class="py method">
-<dt id="drugdiscovery.tasks.EdgePrediction.forward">
-<code class="sig-name descname">forward</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">batch</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/drugdiscovery/tasks/pretrain.html#EdgePrediction.forward"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#drugdiscovery.tasks.EdgePrediction.forward" title="Permalink to this definition">¶</a></dt>
-<dd><p>Defines the computation performed at every call.</p>
-<p>Should be overridden by all subclasses.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Although the recipe for forward pass needs to be defined within
-this function, one should call the <code class="xref py py-class docutils literal notranslate"><span class="pre">Module</span></code> instance afterwards
-instead of this since the former takes care of running the
-registered hooks while the latter silently ignores them.</p>
-</div>
 </dd></dl>
 <dl class="py method">
 <dt id="drugdiscovery.tasks.EdgePrediction.load_config_dict">

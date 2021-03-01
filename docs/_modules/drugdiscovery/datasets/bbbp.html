@@ -191,7 +191,7 @@
 <span class="kn">from</span> <span class="nn">drugdiscovery.core</span> <span class="kn">import</span> <span class="n">Registry</span> <span class="k">as</span> <span class="n">R</span>
 
 
-<div class="viewcode-block" id="BBBP"><a class="viewcode-back" href="../../../api/datasets.html#drugdiscovery.datasets.BBBP">[docs]</a><span class="nd">@R</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="s2">"datasets.BBBPDataset"</span><span class="p">)</span>
+<div class="viewcode-block" id="BBBP"><a class="viewcode-back" href="../../../api/datasets.html#drugdiscovery.datasets.BBBP">[docs]</a><span class="nd">@R</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="s2">"datasets.BBBP"</span><span class="p">)</span>
 <span class="nd">@doc</span><span class="o">.</span><span class="n">copy_args</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">MoleculeDataset</span><span class="o">.</span><span class="n">load_csv</span><span class="p">,</span> <span class="n">ignore</span><span class="o">=</span><span class="p">(</span><span class="s2">"smiles_field"</span><span class="p">,</span> <span class="s2">"target_fields"</span><span class="p">))</span>
 <span class="k">class</span> <span class="nc">BBBP</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">MoleculeDataset</span><span class="p">):</span>
     <span class="sd">"""</span>
