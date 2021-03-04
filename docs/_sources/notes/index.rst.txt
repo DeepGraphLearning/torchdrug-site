@@ -4,7 +4,6 @@ Notes
 .. toctree::
 
     graph
-    debug
-    extension
-    layer
     variadic
+    layer
+    model

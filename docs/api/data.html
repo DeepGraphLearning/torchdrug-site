@@ -150,10 +150,9 @@
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../notes/index.html">Notes</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label for="toctree-checkbox-3"><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../notes/graph.html">Graph Data Structures</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../notes/debug.html">Debug Your Models</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../notes/extension.html">Custom Extensions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../notes/layer.html">Graph Neural Network Layers</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../notes/variadic.html">Batch Irregular Structures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../notes/layer.html">Graph Neural Network Layers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../notes/model.html">Customize Models &amp; Tasks</a></li>
 </ul>
 </li>
 </ul>
@@ -1060,6 +1059,29 @@ By default, aromatic bonds are stored.</p></li>
 <dt id="drugdiscovery.data.MoleculeDataset.tasks">
 <em class="property">property </em><code class="sig-name descname">tasks</code><a class="headerlink" href="#drugdiscovery.data.MoleculeDataset.tasks" title="Permalink to this definition">¶</a></dt>
 <dd><p>List of tasks.</p>
+</dd></dl>
+</dd></dl>
+<dl class="py class">
+<dt id="drugdiscovery.data.NodeClassificationDataset">
+<em class="property">class </em><code class="sig-name descname">NodeClassificationDataset</code><a class="reference internal" href="../_modules/drugdiscovery/data/dataset.html#NodeClassificationDataset"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#drugdiscovery.data.NodeClassificationDataset" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="py method">
+<dt id="drugdiscovery.data.NodeClassificationDataset.load_tsv">
+<code class="sig-name descname">load_tsv</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">node_file</span></em>, <em class="sig-param"><span class="n">edge_file</span></em>, <em class="sig-param"><span class="n">verbose</span><span class="o">=</span><span class="default_value">0</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/drugdiscovery/data/dataset.html#NodeClassificationDataset.load_tsv"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#drugdiscovery.data.NodeClassificationDataset.load_tsv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Load the edge list from a tsv file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>node_file</strong> (<em>str</em>) – node feature and label file</p></li>
+<li><p><strong>edge_file</strong> (<em>str</em>) – edge list file</p></li>
+<li><p><strong>verbose</strong> (<em>int</em><em>, </em><em>optional</em>) – output verbose level</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt id="drugdiscovery.data.NodeClassificationDataset.node_feature_dim">
+<em class="property">property </em><code class="sig-name descname">node_feature_dim</code><a class="headerlink" href="#drugdiscovery.data.NodeClassificationDataset.node_feature_dim" title="Permalink to this definition">¶</a></dt>
+<dd><p>Dimension of node features.</p>
 </dd></dl>
 </dd></dl>
 <dl class="py class">

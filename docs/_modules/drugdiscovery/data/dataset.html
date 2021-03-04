@@ -150,10 +150,9 @@
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../../notes/index.html">Notes</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label for="toctree-checkbox-3"><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../../notes/graph.html">Graph Data Structures</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../notes/debug.html">Debug Your Models</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../notes/extension.html">Custom Extensions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../notes/layer.html">Graph Neural Network Layers</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../notes/variadic.html">Batch Irregular Structures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../notes/layer.html">Graph Neural Network Layers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../notes/model.html">Customize Models &amp; Tasks</a></li>
 </ul>
 </li>
 </ul>
@@ -443,6 +442,121 @@
     <span class="k">pass</span>
 
 
+<div class="viewcode-block" id="NodeClassificationDataset"><a class="viewcode-back" href="../../../api/data.html#drugdiscovery.data.NodeClassificationDataset">[docs]</a><span class="k">class</span> <span class="nc">NodeClassificationDataset</span><span class="p">(</span><span class="n">torch_data</span><span class="o">.</span><span class="n">Dataset</span><span class="p">,</span> <span class="n">core</span><span class="o">.</span><span class="n">Configurable</span><span class="p">):</span>
+
+<div class="viewcode-block" id="NodeClassificationDataset.load_tsv"><a class="viewcode-back" href="../../../api/data.html#drugdiscovery.data.NodeClassificationDataset.load_tsv">[docs]</a>    <span class="k">def</span> <span class="nf">load_tsv</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">node_file</span><span class="p">,</span> <span class="n">edge_file</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+        <span class="sd">"""</span>
+<span class="sd">        Load the edge list from a tsv file.</span>
+
+<span class="sd">        Parameters:</span>
+<span class="sd">            node_file (str): node feature and label file</span>
+<span class="sd">            edge_file (str): edge list file</span>
+<span class="sd">            verbose (int, optional): output verbose level</span>
+<span class="sd">        """</span>
+        <span class="n">inv_node_vocab</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">inv_label_vocab</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">node_feature</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">node_label</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">node_file</span><span class="p">,</span> <span class="s2">"r"</span><span class="p">)</span> <span class="k">as</span> <span class="n">fin</span><span class="p">:</span>
+            <span class="n">reader</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">reader</span><span class="p">(</span><span class="n">fin</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s2">"</span><span class="se">\t</span><span class="s2">"</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+                <span class="n">reader</span> <span class="o">=</span> <span class="n">tqdm</span><span class="p">(</span><span class="n">reader</span><span class="p">,</span> <span class="s2">"Loading </span><span class="si">%s</span><span class="s2">"</span> <span class="o">%</span> <span class="n">node_file</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">tokens</span> <span class="ow">in</span> <span class="n">reader</span><span class="p">:</span>
+                <span class="n">node_token</span> <span class="o">=</span> <span class="n">tokens</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+                <span class="n">feature_tokens</span> <span class="o">=</span> <span class="n">tokens</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span> <span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+                <span class="n">label_token</span> <span class="o">=</span> <span class="n">tokens</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+                <span class="n">inv_node_vocab</span><span class="p">[</span><span class="n">node_token</span><span class="p">]</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">inv_node_vocab</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">label_token</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">inv_label_vocab</span><span class="p">:</span>
+                    <span class="n">inv_label_vocab</span><span class="p">[</span><span class="n">label_token</span><span class="p">]</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">inv_label_vocab</span><span class="p">)</span>
+                <span class="n">feature</span> <span class="o">=</span> <span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">f</span><span class="p">)</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">feature_tokens</span><span class="p">]</span>
+                <span class="n">label</span> <span class="o">=</span> <span class="n">inv_label_vocab</span><span class="p">[</span><span class="n">label_token</span><span class="p">]</span>
+                <span class="n">node_feature</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">feature</span><span class="p">)</span>
+                <span class="n">node_label</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">label</span><span class="p">)</span>
+
+        <span class="n">edge_list</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">edge_file</span><span class="p">,</span> <span class="s2">"r"</span><span class="p">)</span> <span class="k">as</span> <span class="n">fin</span><span class="p">:</span>
+            <span class="n">reader</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">reader</span><span class="p">(</span><span class="n">fin</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s2">"</span><span class="se">\t</span><span class="s2">"</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+                <span class="n">reader</span> <span class="o">=</span> <span class="n">tqdm</span><span class="p">(</span><span class="n">reader</span><span class="p">,</span> <span class="s2">"Loading </span><span class="si">%s</span><span class="s2">"</span> <span class="o">%</span> <span class="n">edge_file</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">tokens</span> <span class="ow">in</span> <span class="n">reader</span><span class="p">:</span>
+                <span class="n">h_token</span><span class="p">,</span> <span class="n">t_token</span> <span class="o">=</span> <span class="n">tokens</span>
+                <span class="k">if</span> <span class="n">h_token</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">inv_node_vocab</span><span class="p">:</span>
+                    <span class="n">inv_node_vocab</span><span class="p">[</span><span class="n">h_token</span><span class="p">]</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">inv_node_vocab</span><span class="p">)</span>
+                <span class="n">h</span> <span class="o">=</span> <span class="n">inv_node_vocab</span><span class="p">[</span><span class="n">h_token</span><span class="p">]</span>
+                <span class="k">if</span> <span class="n">t_token</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">inv_node_vocab</span><span class="p">:</span>
+                    <span class="n">inv_node_vocab</span><span class="p">[</span><span class="n">t_token</span><span class="p">]</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">inv_node_vocab</span><span class="p">)</span>
+                <span class="n">t</span> <span class="o">=</span> <span class="n">inv_node_vocab</span><span class="p">[</span><span class="n">t_token</span><span class="p">]</span>
+                <span class="n">edge_list</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">h</span><span class="p">,</span> <span class="n">t</span><span class="p">))</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">load_edge</span><span class="p">(</span><span class="n">edge_list</span><span class="p">,</span> <span class="n">node_feature</span><span class="p">,</span> <span class="n">node_label</span><span class="p">,</span> <span class="n">inv_node_vocab</span><span class="o">=</span><span class="n">inv_node_vocab</span><span class="p">,</span>
+                       <span class="n">inv_label_vocab</span><span class="o">=</span><span class="n">inv_label_vocab</span><span class="p">)</span></div>
+
+    <span class="k">def</span> <span class="nf">load_edge</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">edge_list</span><span class="p">,</span> <span class="n">node_feature</span><span class="p">,</span> <span class="n">node_label</span><span class="p">,</span> <span class="n">node_vocab</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">inv_node_vocab</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">label_vocab</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                  <span class="n">inv_label_vocab</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="n">node_vocab</span><span class="p">,</span> <span class="n">inv_node_vocab</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_standarize_vocab</span><span class="p">(</span><span class="n">node_vocab</span><span class="p">,</span> <span class="n">inv_node_vocab</span><span class="p">)</span>
+        <span class="n">label_vocab</span><span class="p">,</span> <span class="n">inv_label_vocab</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_standarize_vocab</span><span class="p">(</span><span class="n">label_vocab</span><span class="p">,</span> <span class="n">inv_label_vocab</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">num_labeled_node</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">node_feature</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">node_vocab</span><span class="p">)</span> <span class="o">&gt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">node_feature</span><span class="p">):</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">"Missing features &amp; labels for </span><span class="si">%d</span><span class="s2"> / </span><span class="si">%d</span><span class="s2"> nodes"</span> <span class="o">%</span>
+                           <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">node_vocab</span><span class="p">)</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">node_feature</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">node_vocab</span><span class="p">)))</span>
+            <span class="n">dummy_label</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="n">dummy_feature</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">node_feature</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+            <span class="n">node_label</span> <span class="o">+=</span> <span class="p">[</span><span class="n">dummy_label</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">node_vocab</span><span class="p">)</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">node_feature</span><span class="p">))</span>
+            <span class="n">node_feature</span> <span class="o">+=</span> <span class="p">[</span><span class="n">dummy_feature</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">node_vocab</span><span class="p">)</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">node_feature</span><span class="p">))</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">graph</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">Graph</span><span class="p">(</span><span class="n">edge_list</span><span class="p">,</span> <span class="n">num_node</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">node_vocab</span><span class="p">),</span> <span class="n">node_feature</span><span class="o">=</span><span class="n">node_feature</span><span class="p">)</span>
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">graph</span><span class="o">.</span><span class="n">node</span><span class="p">():</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">graph</span><span class="o">.</span><span class="n">node_label</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">as_tensor</span><span class="p">(</span><span class="n">node_label</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">node_vocab</span> <span class="o">=</span> <span class="n">node_vocab</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">inv_node_vocab</span> <span class="o">=</span> <span class="n">inv_node_vocab</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">label_vocab</span> <span class="o">=</span> <span class="n">label_vocab</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">inv_node_vocab</span> <span class="o">=</span> <span class="n">inv_label_vocab</span>
+
+    <span class="k">def</span> <span class="nf">_standarize_vocab</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">vocab</span><span class="p">,</span> <span class="n">inverse_vocab</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">vocab</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">vocab</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+                <span class="k">assert</span> <span class="nb">set</span><span class="p">(</span><span class="n">vocab</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span> <span class="o">==</span> <span class="nb">set</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">vocab</span><span class="p">))),</span> <span class="s2">"Vocab keys should be consecutive numbers"</span>
+                <span class="n">vocab</span> <span class="o">=</span> <span class="p">[</span><span class="n">vocab</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">vocab</span><span class="p">))]</span>
+            <span class="k">if</span> <span class="n">inverse_vocab</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">inverse_vocab</span> <span class="o">=</span> <span class="p">{</span><span class="n">v</span><span class="p">:</span> <span class="n">i</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">vocab</span><span class="p">)}</span>
+        <span class="k">if</span> <span class="n">inverse_vocab</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">assert</span> <span class="nb">set</span><span class="p">(</span><span class="n">inverse_vocab</span><span class="o">.</span><span class="n">values</span><span class="p">())</span> <span class="o">==</span> <span class="nb">set</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">inverse_vocab</span><span class="p">))),</span> \
+                <span class="s2">"Inverse vocab values should be consecutive numbers"</span>
+            <span class="k">if</span> <span class="n">vocab</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">vocab</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">inverse_vocab</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">k</span><span class="p">:</span> <span class="n">inverse_vocab</span><span class="p">[</span><span class="n">k</span><span class="p">])</span>
+        <span class="k">return</span> <span class="n">vocab</span><span class="p">,</span> <span class="n">inverse_vocab</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">num_node</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">graph</span><span class="o">.</span><span class="n">num_node</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">num_edge</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">graph</span><span class="o">.</span><span class="n">num_edge</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">node_feature_dim</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">"""Dimension of node features."""</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">graph</span><span class="o">.</span><span class="n">node_feature</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="fm">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="s2">"node_index"</span><span class="p">:</span> <span class="n">index</span><span class="p">,</span>
+            <span class="s2">"label"</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">graph</span><span class="o">.</span><span class="n">node_label</span><span class="p">[</span><span class="n">index</span><span class="p">]</span>
+        <span class="p">}</span>
+
+    <span class="k">def</span> <span class="fm">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_labeled_node</span>
+
+    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">lines</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"#node: </span><span class="si">%d</span><span class="s2">"</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">graph</span><span class="o">.</span><span class="n">num_node</span><span class="p">,</span> <span class="s2">"#edge: </span><span class="si">%d</span><span class="s2">"</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">graph</span><span class="o">.</span><span class="n">num_edge</span><span class="p">,</span>
+                 <span class="s2">"#class: </span><span class="si">%d</span><span class="s2">"</span> <span class="o">%</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">label_vocab</span><span class="p">)]</span>
+        <span class="k">return</span> <span class="s2">"</span><span class="si">%s</span><span class="s2">(</span><span class="se">\n</span><span class="s2">  </span><span class="si">%s</span><span class="se">\n</span><span class="s2">)"</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="s2">"</span><span class="se">\n</span><span class="s2">  "</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">lines</span><span class="p">))</span></div>
+
+
 <div class="viewcode-block" id="KnowledgeGraphDataset"><a class="viewcode-back" href="../../../api/data.html#drugdiscovery.data.KnowledgeGraphDataset">[docs]</a><span class="k">class</span> <span class="nc">KnowledgeGraphDataset</span><span class="p">(</span><span class="n">torch_data</span><span class="o">.</span><span class="n">Dataset</span><span class="p">,</span> <span class="n">core</span><span class="o">.</span><span class="n">Configurable</span><span class="p">):</span>
 
 <div class="viewcode-block" id="KnowledgeGraphDataset.load_tsv"><a class="viewcode-back" href="../../../api/data.html#drugdiscovery.data.KnowledgeGraphDataset.load_tsv">[docs]</a>    <span class="k">def</span> <span class="nf">load_tsv</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tsv_file</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
@@ -542,6 +656,10 @@
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">num_entity</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">graph</span><span class="o">.</span><span class="n">num_node</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">num_triplet</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">graph</span><span class="o">.</span><span class="n">num_edge</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">num_relation</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>

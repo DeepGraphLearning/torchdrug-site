@@ -103,8 +103,8 @@ other graph representation learning models can also be used here.
 .. code:: python
 
     reaction_optimizer = torch.optim.Adam(reaction_task.parameters(), lr=1e-3)
-    reaction_solver = core.Engine(reaction_task, reaction_train, reaction_valid, reaction_test,
-                                  optimizer, gpus=[0], batch_size=128)
+    reaction_solver = core.Engine(reaction_task, reaction_train, reaction_valid,
+                                  reaction_test, optimizer, gpus=[0], batch_size=128)
     reaction_solver.train(num_epoch=50)
     reaction_solver.evaluate("valid")
 
@@ -207,8 +207,8 @@ Similarly, we train a synthon completion model on the synthon dataset.
     synthon_task = tasks.SynthonCompletion(synthon_model, feature=("graph",))
 
     synthon_optimizer = torch.optim.Adam(synthon_task.parameters(), lr=1e-3)
-    synthon_solver = core.Engine(synthon_task, synthon_train, synthon_valid, synthon_test,
-                                 optimizer, gpus=[0], batch_size=128)
+    synthon_solver = core.Engine(synthon_task, synthon_train, synthon_valid,
+                                 synthon_test, optimizer, gpus=[0], batch_size=128)
     synthon_solver.train(num_epoch=10)
     synthon_solver.evaluate("valid")
 
@@ -281,14 +281,15 @@ if we give more budget to the beam search.
 
 .. code:: python
 
-    lengths = [len(reaction_valid) // 10, len(reaction_valid) - len(reaction_valid) // 10]
+    lengths = [len(reaction_valid) // 10,
+               len(reaction_valid) - len(reaction_valid) // 10]
     reaction_valid_small = torch_data.random_split(reaction_valid, lengths)[0]
 
     task = tasks.Retrosynthesis(reaction_task, synthon_task, center_topk=2, num_beam=5,
                                 max_prediction=10)
     optimizer = torch.optim.Adam(task.parameters(), lr=1e-3)
-    solver = core.Engine(task, reaction_train, reaction_valid_small, reaction_test, optimizer,
-                         gpus=[0], batch_size=32)
+    solver = core.Engine(task, reaction_train, reaction_valid_small, reaction_test,
+                         optimizer, gpus=[0], batch_size=32)
 
 To load parameters two sub tasks, we just load each checkpoint. Note ``load_optimizer``
 should be set to ``False`` to avoid conflicts.

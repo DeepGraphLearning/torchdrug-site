@@ -37,7 +37,8 @@ model as an example, we can use the following code for model construction.
 
 .. code:: python
 
-    model = models.RotatE(num_entity=dataset.num_entity, num_relation=dataset.num_relation,
+    model = models.RotatE(num_entity=dataset.num_entity,
+                          num_relation=dataset.num_relation,
                           embedding_dim=2048, max_score=9)
 
 Here, ``embedding_dim`` specifies the dimension of entity and relation embeddings.

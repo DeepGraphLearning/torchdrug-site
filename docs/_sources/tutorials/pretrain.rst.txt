@@ -25,7 +25,7 @@ positive pairs, while those from different graphs as negative pairs.
 
 .. code:: python
 
-    from torch import nn, optim
+    from torch import nn
     from torch.utils import data as torch_data
 
     from drugdiscovery import core, datasets, tasks, models
@@ -40,7 +40,7 @@ positive pairs, while those from different graphs as negative pairs.
     model = models.InfoGraph(gin_model, separate_model=False)
 
     task = tasks.Unsupervised(model)
-    optimizer = optim.Adam(task.parameters(), lr=1e-3)
+    optimizer = torch.optim.Adam(task.parameters(), lr=1e-3)
     solver = core.Engine(task, dataset, None, None, optimizer, gpus=[0], batch_size=256)
 
     solver.train(num_epoch=100)

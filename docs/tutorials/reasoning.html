@@ -150,10 +150,9 @@
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../notes/index.html">Notes</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label for="toctree-checkbox-3"><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../notes/graph.html">Graph Data Structures</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../notes/debug.html">Debug Your Models</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../notes/extension.html">Custom Extensions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../notes/layer.html">Graph Neural Network Layers</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../notes/variadic.html">Batch Irregular Structures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../notes/layer.html">Graph Neural Network Layers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../notes/model.html">Customize Models &amp; Tasks</a></li>
 </ul>
 </li>
 </ul>
@@ -211,7 +210,8 @@ the dataset using the following code:</p>
 <h2>Define our Model<a class="headerlink" href="#define-our-model" title="Permalink to this headline">¶</a></h2>
 <p>Once we load the dataset, we are ready to build the model. Let’s take the RotatE
 model as an example, we can use the following code for model construction.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">model</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">RotatE</span><span class="p">(</span><span class="n">num_entity</span><span class="o">=</span><span class="n">dataset</span><span class="o">.</span><span class="n">num_entity</span><span class="p">,</span> <span class="n">num_relation</span><span class="o">=</span><span class="n">dataset</span><span class="o">.</span><span class="n">num_relation</span><span class="p">,</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">model</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">RotatE</span><span class="p">(</span><span class="n">num_entity</span><span class="o">=</span><span class="n">dataset</span><span class="o">.</span><span class="n">num_entity</span><span class="p">,</span>
+                      <span class="n">num_relation</span><span class="o">=</span><span class="n">dataset</span><span class="o">.</span><span class="n">num_relation</span><span class="p">,</span>
                       <span class="n">embedding_dim</span><span class="o">=</span><span class="mi">2048</span><span class="p">,</span> <span class="n">max_score</span><span class="o">=</span><span class="mi">9</span><span class="p">)</span>
 </pre></div>
 </div>

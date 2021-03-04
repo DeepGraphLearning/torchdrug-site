@@ -4,7 +4,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1"/><link rel="index" title="Index" href="../../../genindex.html" /><link rel="search" title="Search" href="../../../search.html" />
 
     <meta name="generator" content="sphinx-3.1.2, furo 2020.12.09.beta21"/>
-        <title>drugdiscovery.datasets.clintox - Drugdiscovery 0.1.0 documentation</title>
+        <title>drugdiscovery.datasets.citeseer - Drugdiscovery 0.1.0 documentation</title>
       <link rel="stylesheet" href="../../../_static/styles/furo.css?digest=a3f371badb8538d75df213ccffb17a4f6e8f3ac5">
     <link rel="stylesheet" href="../../../_static/pygments.css">
     <link media="(prefers-color-scheme: dark)" rel="stylesheet" href="../../../_static/pygments_dark.css">
@@ -182,46 +182,41 @@
         <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
           <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
         </label>
-        <h1>Source code for drugdiscovery.datasets.clintox</h1><div class="highlight"><pre>
+        <h1>Source code for drugdiscovery.datasets.citeseer</h1><div class="highlight"><pre>
 <span></span><span class="kn">import</span> <span class="nn">os</span>
 
 <span class="kn">from</span> <span class="nn">drugdiscovery</span> <span class="kn">import</span> <span class="n">data</span><span class="p">,</span> <span class="n">utils</span>
 <span class="kn">from</span> <span class="nn">drugdiscovery.core</span> <span class="kn">import</span> <span class="n">Registry</span> <span class="k">as</span> <span class="n">R</span>
-<span class="kn">from</span> <span class="nn">drugdiscovery.utils</span> <span class="kn">import</span> <span class="n">doc</span>
 
 
-<div class="viewcode-block" id="ClinTox"><a class="viewcode-back" href="../../../api/datasets.html#drugdiscovery.datasets.ClinTox">[docs]</a><span class="nd">@R</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="s2">"datasets.ClinTox"</span><span class="p">)</span>
-<span class="nd">@doc</span><span class="o">.</span><span class="n">copy_args</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">MoleculeDataset</span><span class="o">.</span><span class="n">load_csv</span><span class="p">,</span> <span class="n">ignore</span><span class="o">=</span><span class="p">(</span><span class="s2">"smiles_field"</span><span class="p">,</span> <span class="s2">"target_fields"</span><span class="p">))</span>
-<span class="k">class</span> <span class="nc">ClinTox</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">MoleculeDataset</span><span class="p">):</span>
+<div class="viewcode-block" id="CiteSeer"><a class="viewcode-back" href="../../../api/datasets.html#drugdiscovery.datasets.CiteSeer">[docs]</a><span class="nd">@R</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="s2">"datasets.CiteSeer"</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">CiteSeer</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">NodeClassificationDataset</span><span class="p">):</span>
     <span class="sd">"""</span>
-<span class="sd">    Qualitative data of drugs approved by the FDA and those that have failed clinical</span>
-<span class="sd">    trials for toxicity reasons.</span>
+<span class="sd">    A citation network of scientific publications with binary word features.</span>
 
 <span class="sd">    Statistics:</span>
-<span class="sd">        - #Molecule: 1,478</span>
-<span class="sd">        - #Classification task: 2</span>
+<span class="sd">        - #Node: 2,708</span>
+<span class="sd">        - #Edge: 5,429</span>
+<span class="sd">        - #Class: 7</span>
 
 <span class="sd">    Parameters:</span>
 <span class="sd">        path (str): path to store the dataset</span>
 <span class="sd">        verbose (int, optional): output verbose level</span>
-<span class="sd">        **kwargs</span>
 <span class="sd">    """</span>
 
-    <span class="n">url</span> <span class="o">=</span> <span class="s2">"http://deepchem.io.s3-website-us-west-1.amazonaws.com/datasets/clintox.csv.gz"</span>
-    <span class="n">md5</span> <span class="o">=</span> <span class="s2">"db4f2df08be8ae92814e9d6a2d015284"</span>
-    <span class="n">target_fields</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"FDA_APPROVED"</span><span class="p">,</span> <span class="s2">"CT_TOX"</span><span class="p">]</span>
+    <span class="n">url</span> <span class="o">=</span> <span class="s2">"https://linqs-data.soe.ucsc.edu/public/lbc/citeseer.tgz"</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
         <span class="n">path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">expanduser</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
             <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">path</span> <span class="o">=</span> <span class="n">path</span>
 
-        <span class="n">zip_file</span> <span class="o">=</span> <span class="n">utils</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">url</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">md5</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">md5</span><span class="p">)</span>
-        <span class="n">csv_file</span> <span class="o">=</span> <span class="n">utils</span><span class="o">.</span><span class="n">extract</span><span class="p">(</span><span class="n">zip_file</span><span class="p">)</span>
+        <span class="n">zip_file</span> <span class="o">=</span> <span class="n">utils</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">url</span><span class="p">,</span> <span class="n">path</span><span class="p">)</span>
+        <span class="n">node_file</span> <span class="o">=</span> <span class="n">utils</span><span class="o">.</span><span class="n">extract</span><span class="p">(</span><span class="n">zip_file</span><span class="p">,</span> <span class="s2">"citeseer/citeseer.content"</span><span class="p">)</span>
+        <span class="n">edge_file</span> <span class="o">=</span> <span class="n">utils</span><span class="o">.</span><span class="n">extract</span><span class="p">(</span><span class="n">zip_file</span><span class="p">,</span> <span class="s2">"citeseer/citeseer.cites"</span><span class="p">)</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">load_csv</span><span class="p">(</span><span class="n">csv_file</span><span class="p">,</span> <span class="n">smiles_field</span><span class="o">=</span><span class="s2">"smiles"</span><span class="p">,</span> <span class="n">target_fields</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">target_fields</span><span class="p">,</span>
-                      <span class="n">verbose</span><span class="o">=</span><span class="n">verbose</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">load_tsv</span><span class="p">(</span><span class="n">node_file</span><span class="p">,</span> <span class="n">edge_file</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="n">verbose</span><span class="p">)</span></div>
 </pre></div>
       </article>
       <footer>
