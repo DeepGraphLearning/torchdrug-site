@@ -17,6 +17,7 @@
 .. _ENN-S2S: https://arxiv.org/pdf/1704.01212.pdf
 .. _SchNet: https://aip.scitation.org/doi/pdf/10.1063/1.5019779
 .. _GIN: https://arxiv.org/pdf/1810.00826.pdf
+.. _RGCN: https://arxiv.org/abs/1703.06103.pdf
 
 .. Molecule property prediction with pre-training
 .. _Edge Prediction: https://arxiv.org/abs/1706.02216

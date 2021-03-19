@@ -326,6 +326,10 @@
 
         <span class="c1"># generation takes less time when early_stop=True</span>
         <span class="n">graph</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">generate</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">batch</span><span class="p">[</span><span class="s2">"graph"</span><span class="p">]),</span> <span class="n">off_policy</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">early_stop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="c1">#print(graph.num_nodes)</span>
+        <span class="c1">#print(graph.is_valid)</span>
+        <span class="c1">#print(graph.is_valid_rdkit)</span>
+
         <span class="k">if</span> <span class="n">graph</span><span class="o">.</span><span class="n">num_nodes</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Generation results collapse to singleton molecules"</span><span class="p">)</span>
 
@@ -340,6 +344,8 @@
 
                 <span class="k">if</span> <span class="n">plogp</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="o">.</span><span class="n">item</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">5</span><span class="p">:</span>
                     <span class="nb">print</span><span class="p">(</span><span class="s2">"Penalized logP max = </span><span class="si">%s</span><span class="s2">"</span> <span class="o">%</span> <span class="n">plogp</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="o">.</span><span class="n">item</span><span class="p">())</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">best_results</span><span class="p">[</span><span class="s2">"Penalized logP"</span><span class="p">])</span>
+
             <span class="k">elif</span> <span class="n">task</span> <span class="o">==</span> <span class="s2">"qed"</span><span class="p">:</span>
                 <span class="n">qed</span> <span class="o">=</span> <span class="n">metrics</span><span class="o">.</span><span class="n">QED</span><span class="p">(</span><span class="n">graph</span><span class="p">)</span>
                 <span class="n">metric</span><span class="p">[</span><span class="s2">"QED"</span><span class="p">]</span> <span class="o">=</span> <span class="n">qed</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
@@ -349,6 +355,8 @@
 
                 <span class="k">if</span> <span class="n">qed</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="o">.</span><span class="n">item</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mf">0.9</span><span class="p">:</span>
                     <span class="nb">print</span><span class="p">(</span><span class="s2">"QED max = </span><span class="si">%s</span><span class="s2">"</span> <span class="o">%</span> <span class="n">qed</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="o">.</span><span class="n">item</span><span class="p">())</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">best_results</span><span class="p">[</span><span class="s2">"QED"</span><span class="p">])</span>
+
             <span class="k">else</span><span class="p">:</span>
                 <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Unknown task `</span><span class="si">%s</span><span class="s2">`"</span> <span class="o">%</span> <span class="n">task</span><span class="p">)</span>
 
@@ -554,6 +562,7 @@
         <span class="n">graph</span> <span class="o">=</span> <span class="n">graph</span><span class="o">.</span><span class="n">subgraph</span><span class="p">(</span><span class="n">index</span><span class="p">)</span>
         <span class="n">graph</span><span class="o">.</span><span class="n">atom_type</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">id2atom</span><span class="p">[</span><span class="n">graph</span><span class="o">.</span><span class="n">atom_type</span><span class="p">]</span>
 
+        <span class="n">graph</span> <span class="o">=</span> <span class="n">graph</span><span class="p">[</span><span class="n">graph</span><span class="o">.</span><span class="n">is_valid_rdkit</span><span class="p">]</span>
         <span class="k">return</span> <span class="n">graph</span>
 
     <span class="k">def</span> <span class="nf">_append</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">num_xs</span><span class="p">,</span> <span class="nb">input</span><span class="p">,</span> <span class="n">mask</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
@@ -798,7 +807,7 @@
     <span class="n">_option_members</span> <span class="o">=</span> <span class="nb">set</span><span class="p">([</span><span class="s2">"task"</span><span class="p">,</span> <span class="s2">"criterion"</span><span class="p">])</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">atom_types</span><span class="p">,</span> <span class="n">max_edge_unroll</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">max_node</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">task</span><span class="o">=</span><span class="p">(),</span> <span class="n">criterion</span><span class="o">=</span><span class="s2">"nll"</span><span class="p">,</span> <span class="n">hidden_dim_mlp</span><span class="o">=</span><span class="mi">128</span><span class="p">,</span> 
-                <span class="n">agent_update_interval</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">gamma</span><span class="o">=</span><span class="mf">0.9</span><span class="p">,</span>
+                <span class="n">agent_update_interval</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">gamma</span><span class="o">=</span><span class="mf">0.9</span><span class="p">,</span>
                 <span class="n">reward_temperature</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">baseline_momentum</span><span class="o">=</span><span class="mf">0.9</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">GCPNGeneration</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="n">model</span>
@@ -1018,19 +1027,28 @@
                 <span class="n">metric</span><span class="p">[</span><span class="s2">"Penalized logP"</span><span class="p">]</span> <span class="o">=</span> <span class="n">plogp</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
                 <span class="n">metric</span><span class="p">[</span><span class="s2">"Penalized logP (max)"</span><span class="p">]</span> <span class="o">=</span> <span class="n">plogp</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">update_best_result</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">plogp</span><span class="p">,</span> <span class="s2">"Penalized logP"</span><span class="p">)</span>
+                <span class="c1"># TODO: </span>
                 <span class="n">reward</span> <span class="o">+=</span> <span class="p">(</span><span class="n">plogp</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">reward_temperature</span><span class="p">)</span><span class="o">.</span><span class="n">exp</span><span class="p">()</span>
 
                 <span class="k">if</span> <span class="n">plogp</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="o">.</span><span class="n">item</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">5</span><span class="p">:</span>
                     <span class="nb">print</span><span class="p">(</span><span class="s2">"Penalized logP max = </span><span class="si">%s</span><span class="s2">"</span> <span class="o">%</span> <span class="n">plogp</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="o">.</span><span class="n">item</span><span class="p">())</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">best_results</span><span class="p">[</span><span class="s2">"Penalized logP"</span><span class="p">])</span>
+
             <span class="k">elif</span> <span class="n">task</span> <span class="o">==</span> <span class="s2">"qed"</span><span class="p">:</span>
                 <span class="n">qed</span> <span class="o">=</span> <span class="n">metrics</span><span class="o">.</span><span class="n">QED</span><span class="p">(</span><span class="n">graph</span><span class="p">)</span>
                 <span class="n">metric</span><span class="p">[</span><span class="s2">"QED"</span><span class="p">]</span> <span class="o">=</span> <span class="n">qed</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
                 <span class="n">metric</span><span class="p">[</span><span class="s2">"QED (max)"</span><span class="p">]</span> <span class="o">=</span> <span class="n">qed</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">update_best_result</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">qed</span><span class="p">,</span> <span class="s2">"QED"</span><span class="p">)</span>
+                <span class="c1"># TODO:                 </span>
+                <span class="c1">#reward += ((qed - 0.9) * 20).exp()</span>
+                <span class="c1">#reward += ((qed - 0.4) * 4 / self.reward_temperature).exp()</span>
+                <span class="c1">#reward += qed</span>
                 <span class="n">reward</span> <span class="o">+=</span> <span class="p">(</span><span class="n">qed</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">reward_temperature</span><span class="p">)</span><span class="o">.</span><span class="n">exp</span><span class="p">()</span>
 
-                <span class="k">if</span> <span class="n">qed</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="o">.</span><span class="n">item</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mf">0.9</span><span class="p">:</span>
+
+                <span class="k">if</span> <span class="n">qed</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="o">.</span><span class="n">item</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mf">0.93</span><span class="p">:</span>
                     <span class="nb">print</span><span class="p">(</span><span class="s2">"QED max = </span><span class="si">%s</span><span class="s2">"</span> <span class="o">%</span> <span class="n">qed</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="o">.</span><span class="n">item</span><span class="p">())</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">best_results</span><span class="p">[</span><span class="s2">"QED"</span><span class="p">])</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Unknown task `</span><span class="si">%s</span><span class="s2">`"</span> <span class="o">%</span> <span class="n">task</span><span class="p">)</span>
 
@@ -1065,13 +1083,15 @@
         <span class="n">weight</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">ones_like</span><span class="p">(</span><span class="n">graph</span><span class="o">.</span><span class="n">num_nodes</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">float</span><span class="p">)</span>
         <span class="n">baseline</span> <span class="o">=</span> <span class="n">scatter_add</span><span class="p">(</span><span class="n">reward</span><span class="p">,</span> <span class="n">graph</span><span class="o">.</span><span class="n">num_nodes</span><span class="p">,</span> <span class="n">dim_size</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">max_node</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> \
                    <span class="p">(</span><span class="n">scatter_add</span><span class="p">(</span><span class="n">weight</span><span class="p">,</span> <span class="n">graph</span><span class="o">.</span><span class="n">num_nodes</span><span class="p">,</span> <span class="n">dim_size</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">max_node</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">eps</span><span class="p">)</span>
+        <span class="c1"># TODO:</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">moving_baseline</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">moving_baseline</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">baseline_momentum</span> <span class="o">+</span> <span class="n">baseline</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">baseline_momentum</span><span class="p">)</span>
         <span class="n">reward</span> <span class="o">-=</span> <span class="bp">self</span><span class="o">.</span><span class="n">moving_baseline</span><span class="p">[</span><span class="n">graph</span><span class="o">.</span><span class="n">num_nodes</span><span class="p">]</span>
-        <span class="c1">#reward += graph.is_valid</span>
+        <span class="n">reward</span> <span class="o">+=</span> <span class="n">graph</span><span class="o">.</span><span class="n">is_valid</span>
 
         <span class="c1"># calculate object</span>
         <span class="n">stop_logits</span><span class="p">,</span> <span class="n">node1_logits</span><span class="p">,</span> <span class="n">node2_logits</span><span class="p">,</span> <span class="n">edge_logits</span><span class="p">,</span> <span class="n">index_dict</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">label_dict</span><span class="p">)</span>
-        <span class="n">old_stop_logits</span><span class="p">,</span> <span class="n">old_node1_logits</span><span class="p">,</span> <span class="n">old_node2_logits</span><span class="p">,</span> <span class="n">old_edge_logits</span><span class="p">,</span> <span class="n">old_index_dict</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">label_dict</span><span class="p">,</span> <span class="n">use_agent</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="k">with</span> <span class="n">torch</span><span class="o">.</span><span class="n">no_grad</span><span class="p">():</span>
+            <span class="n">old_stop_logits</span><span class="p">,</span> <span class="n">old_node1_logits</span><span class="p">,</span> <span class="n">old_node2_logits</span><span class="p">,</span> <span class="n">old_edge_logits</span><span class="p">,</span> <span class="n">old_index_dict</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">label_dict</span><span class="p">,</span> <span class="n">use_agent</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
         <span class="n">stop_prob</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">log_softmax</span><span class="p">(</span><span class="n">stop_logits</span><span class="p">,</span> <span class="n">dim</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
         <span class="n">node1_prob</span> <span class="o">=</span> <span class="n">scatter_log_softmax</span><span class="p">(</span><span class="n">node1_logits</span><span class="p">,</span> <span class="n">index_dict</span><span class="p">[</span><span class="s2">"extended_node2graph"</span><span class="p">])</span>
@@ -1578,7 +1598,8 @@
         <span class="c1">#print(graph.node_feature)</span>
 
         <span class="c1">#TODO: workaround</span>
-        <span class="n">graph</span> <span class="o">=</span> <span class="n">graph</span><span class="o">.</span><span class="n">cuda</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">device</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">device</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="s1">'cuda'</span><span class="p">:</span>
+            <span class="n">graph</span> <span class="o">=</span> <span class="n">graph</span><span class="o">.</span><span class="n">cuda</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">device</span><span class="p">)</span>
 
 
         <span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
@@ -1587,11 +1608,11 @@
             <span class="n">new_graph</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_apply_action</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">off_policy</span><span class="p">,</span> <span class="n">max_resample</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="n">max_step</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span>
                 <span class="c1">#last step, collect all graph that is valid</span>
-                <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">new_graph</span><span class="p">)</span>            
+                <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">new_graph</span><span class="p">[(</span><span class="n">new_graph</span><span class="o">.</span><span class="n">num_nodes</span> <span class="o">&lt;=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">max_node</span><span class="p">))])</span>            
             <span class="k">else</span><span class="p">:</span>
-                <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">new_graph</span><span class="p">[</span><span class="n">new_graph</span><span class="o">.</span><span class="n">is_stopped</span><span class="p">])</span>
+                <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">new_graph</span><span class="p">[</span><span class="n">new_graph</span><span class="o">.</span><span class="n">is_stopped</span> <span class="o">|</span> <span class="p">(</span><span class="n">new_graph</span><span class="o">.</span><span class="n">num_nodes</span> <span class="o">==</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">max_node</span><span class="p">))])</span>
 
-                <span class="n">is_continue</span> <span class="o">=</span> <span class="p">(</span><span class="o">~</span><span class="n">new_graph</span><span class="o">.</span><span class="n">is_stopped</span><span class="p">)</span>
+                <span class="n">is_continue</span> <span class="o">=</span> <span class="p">(</span><span class="o">~</span><span class="n">new_graph</span><span class="o">.</span><span class="n">is_stopped</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">new_graph</span><span class="o">.</span><span class="n">num_nodes</span> <span class="o">&lt;</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">max_node</span><span class="p">))</span>
                 <span class="n">graph</span> <span class="o">=</span> <span class="n">new_graph</span><span class="p">[</span><span class="n">is_continue</span><span class="p">]</span>
                 <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">graph</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
                     <span class="k">break</span>

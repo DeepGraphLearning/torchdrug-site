@@ -109,7 +109,7 @@
       <a href="../index.html"><div class="brand">Drugdiscovery 0.1.0 documentation</div></a>
     </div>
     <div class="header-right">
-      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
         <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
       </label>
     </div>
@@ -179,11 +179,186 @@
   <main class="main">
     <div class="content">
       <article role="main">
-        <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+        <label class="toc-overlay-icon toc-content-icon" for="__toc">
           <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
         </label>
         <div class="section" id="molecule-generation">
 <h1>Molecule Generation<a class="headerlink" href="#molecule-generation" title="Permalink to this headline">¶</a></h1>
+<p>Molecular graph generation is a fundamental problem for drug discovery and
+has been attracting growing attention.
+The problem is challenging since it requires
+not only generating chemically valid molecular structures but also optimizing
+their chemical properties in the meantime.</p>
+<p>In this tutorial, we will implement two graph generative models <a class="reference external" href="https://papers.nips.cc/paper/7877-graph-convolutional-policy-network-for-goal-directed-molecular-graph-generation.pdf">GCPN</a> and <a class="reference external" href="https://arxiv.org/pdf/2001.09382.pdf">GraphAF</a>.
+We first pretrain both models on <a class="reference external" href="https://pubs.acs.org/doi/pdfplus/10.1021/ci3001277">ZINC250k</a> dataset.
+Starting from the pretrained checkpoint, we finetune both models with reinforcement learning to optimize two properties (i.e., QED and penalized logP score) of generated molecules.</p>
+<div class="section" id="prepare-the-pretraining-dataset">
+<h2>Prepare the Pretraining Dataset<a class="headerlink" href="#prepare-the-pretraining-dataset" title="Permalink to this headline">¶</a></h2>
+<p>We use <a class="reference external" href="https://pubs.acs.org/doi/pdfplus/10.1021/ci3001277">ZINC250k</a> dataset for pretraining. The dataset contains
+250,000 drug-like molecules with a maximum atom number of 38. It has 9 atom types and 3 edge
+types.</p>
+<p>First, let’s donwload, load, and preprocess the dataset, which takes about 3-5 minutes.
+You are encouraged to dump the preprocessed dataset to save the time for future use.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">from</span> <span class="nn">drugdiscovery</span> <span class="kn">import</span> <span class="n">datasets</span>
+
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">ZINC250k</span><span class="p">(</span><span class="s2">"~/molecule-datasets/"</span><span class="p">,</span>
+                            <span class="n">kekulize</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                            <span class="n">node_feature</span><span class="o">=</span><span class="s2">"symbol"</span><span class="p">)</span>
+<span class="c1"># with open("path_to_dump/zinc250k.pkl", "wb") as fout:</span>
+<span class="c1">#     pickle.dump(dataset, fout)</span>
+<span class="c1"># with open("path_to_dump/zinc250k.pkl", "rb") as fin:</span>
+<span class="c1">#     dataset = pickle.load(fin)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="define-the-model-gcpn">
+<h2>Define the Model: GCPN<a class="headerlink" href="#define-the-model-gcpn" title="Permalink to this headline">¶</a></h2>
+<p>The model consists of two parts, a graph representation model
+and a graph generative module.
+We define a Relational Graph Convolutional Networks (<a class="reference external" href="https://arxiv.org/abs/1703.06103.pdf">RGCN</a>) as our representation model.
+We define a module called <cite>GCPNGeneration</cite> as the graph generative module fpr GCPN.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">drugdiscovery</span> <span class="kn">import</span> <span class="n">core</span><span class="p">,</span> <span class="n">models</span><span class="p">,</span> <span class="n">tasks</span>
+
+<span class="n">model</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">RGCN</span><span class="p">(</span><span class="n">input_dim</span><span class="o">=</span><span class="n">dataset</span><span class="o">.</span><span class="n">node_feature_dim</span><span class="p">,</span>
+                    <span class="n">num_relation</span><span class="o">=</span><span class="n">dataset</span><span class="o">.</span><span class="n">num_bond_type</span><span class="p">,</span>
+                    <span class="n">hidden_dims</span> <span class="o">=</span> <span class="p">[</span><span class="mi">256</span><span class="p">,</span> <span class="mi">256</span><span class="p">,</span> <span class="mi">256</span><span class="p">,</span> <span class="mi">256</span><span class="p">],</span>
+                    <span class="n">batch_norm</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
+<span class="n">task</span> <span class="o">=</span> <span class="n">tasks</span><span class="o">.</span><span class="n">GCPNGeneration</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">dataset</span><span class="o">.</span><span class="n">atom_types</span><span class="p">,</span>
+                            <span class="n">max_edge_unroll</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">max_node</span><span class="o">=</span><span class="mi">38</span><span class="p">,</span>
+                            <span class="n">criterion</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"nll"</span><span class="p">:</span>  <span class="mf">1.0</span><span class="p">})</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="pretraining-and-generation-gcpn">
+<h2>Pretraining and Generation: GCPN<a class="headerlink" href="#pretraining-and-generation-gcpn" title="Permalink to this headline">¶</a></h2>
+<p>Now we can train our model. We setup an optimizer for our model, and put
+everything together into an Engine instance.
+Here we only train the model for 1 epoch, and then save the pretrained model into a directory.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">torch</span> <span class="kn">import</span> <span class="n">nn</span><span class="p">,</span> <span class="n">optim</span>
+<span class="n">optimizer</span> <span class="o">=</span> <span class="n">optim</span><span class="o">.</span><span class="n">Adam</span><span class="p">(</span><span class="n">task</span><span class="o">.</span><span class="n">parameters</span><span class="p">(),</span> <span class="n">lr</span> <span class="o">=</span> <span class="mf">1e-3</span><span class="p">)</span>
+<span class="n">solver</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">Engine</span><span class="p">(</span><span class="n">task</span><span class="p">,</span> <span class="n">dataset</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="n">optimizer</span><span class="p">,</span>
+                     <span class="n">gpus</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,),</span>
+                     <span class="n">batch_size</span> <span class="o">=</span> <span class="mi">128</span><span class="p">,</span>
+                     <span class="n">log_interval</span> <span class="o">=</span> <span class="mi">10</span><span class="p">)</span>
+
+<span class="n">solver</span><span class="o">.</span><span class="n">train</span><span class="p">(</span><span class="n">num_epoch</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">solver</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s2">"path_to_dump/graphgeneration/gcpn_zinc250k_1epoch.pkl"</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>During the pretraining procedure, we may obtain some logs as follows, which report the accuracy of action predictions.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>edge acc: <span class="m">0</span>.896366
+edge loss: <span class="m">0</span>.234644
+node1 acc: <span class="m">0</span>.596209
+node1 loss: <span class="m">1</span>.04997
+node2 acc: <span class="m">0</span>.747235
+node2 loss: <span class="m">0</span>.723717
+stop acc: <span class="m">0</span>.849681
+stop bce loss: <span class="m">0</span>.247942
+total loss: <span class="m">2</span>.25627
+</pre></div>
+</div>
+<p>After the model is pretrained, we can load the parameters from the checkpoint as follows.
+Let’s generate some small molecules from the pretrained GCPN model.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">defaultdict</span>
+
+<span class="n">solver</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">"path_to_dump/graphgeneration/gcpn_zinc250k_1epoch.pkl"</span><span class="p">)</span>
+<span class="n">optimizer</span><span class="o">.</span><span class="n">state</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">dict</span><span class="p">)</span>
+<span class="n">task</span> <span class="o">=</span> <span class="n">task</span><span class="o">.</span><span class="n">cuda</span><span class="p">()</span>
+<span class="n">results</span> <span class="o">=</span> <span class="n">task</span><span class="o">.</span><span class="n">generate</span><span class="p">(</span><span class="n">num_sample</span><span class="o">=</span><span class="mi">32</span><span class="p">,</span> <span class="n">max_resample</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">to_smiles</span><span class="p">())</span>
+</pre></div>
+</div>
+<p>The results are as follows:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nv">C</span><span class="o">=</span>S<span class="o">(</span>C<span class="o">)</span>CC<span class="o">(=</span>O<span class="o">)</span>NC<span class="o">(</span>CCN<span class="o">)</span>CCCC
+CCN<span class="o">(</span>C<span class="o">)</span>C1<span class="o">(</span><span class="nv">C2NC2</span><span class="o">=</span>O<span class="o">)</span>CCCC1C
+<span class="nv">CC1</span><span class="o">=</span><span class="nv">CC</span><span class="o">=</span><span class="nv">CC</span><span class="o">=</span>C1C<span class="o">(=</span>O<span class="o">)</span>N1CC1CS
+<span class="nv">CN</span><span class="o">=</span><span class="nv">NC1</span><span class="o">=</span><span class="nv">NC</span><span class="o">=</span><span class="nv">CC2</span><span class="o">=</span><span class="nv">CC</span><span class="o">=</span>C<span class="o">(</span><span class="nv">C</span><span class="o">=</span>C2<span class="o">)</span>CCNC<span class="o">(=</span>O<span class="o">)</span>C1
+CC<span class="o">(</span>CC<span class="o">(=</span>O<span class="o">)</span><span class="nv">NC1</span><span class="o">=</span><span class="nv">CC</span><span class="o">=</span>C<span class="o">(</span>N<span class="o">)</span><span class="nv">C2</span><span class="o">=</span><span class="nv">CC</span><span class="o">=</span><span class="nv">CC</span><span class="o">=</span>C12<span class="o">)</span><span class="nv">C1</span><span class="o">=</span><span class="nv">CC</span><span class="o">=</span><span class="nv">CC</span><span class="o">=</span>C1
+...
+</pre></div>
+</div>
+<p>Let’s visualize some generated molecules.</p>
+<img alt="../_images/clintox.png" src="../_images/clintox.png"/>
+</div>
+<div class="section" id="goal-directed-molecule-generation-with-reinforcement-learning-gcpn">
+<h2>Goal-Directed Molecule Generation with Reinforcement Learning: GCPN<a class="headerlink" href="#goal-directed-molecule-generation-with-reinforcement-learning-gcpn" title="Permalink to this headline">¶</a></h2>
+<p>For drug discovery, we need to optimize the chemical properties of generated molecules.
+In this part, we introduce how to fine-tune the graph generative model with reinforcement learning to optimize the properties of generated molecules.
+We implemented the Proximal Policy Optimization (PPO) algorithm for both GCPN and GraphAF.
+To finetune the pretrained model with reinforcement learning, we only need to modify several lines of code in the task initialization.
+We provide all the codes for finetuning in the following segment.</p>
+<p>For Penalized logP optimization, the code is as follows:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">from</span> <span class="nn">drugdiscovery</span> <span class="kn">import</span> <span class="n">datasets</span>
+<span class="kn">from</span> <span class="nn">drugdiscovery</span> <span class="kn">import</span> <span class="n">core</span><span class="p">,</span> <span class="n">models</span><span class="p">,</span> <span class="n">tasks</span>
+<span class="kn">from</span> <span class="nn">torch</span> <span class="kn">import</span> <span class="n">nn</span><span class="p">,</span> <span class="n">optim</span>
+<span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">defaultdict</span>
+
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">ZINC250k</span><span class="p">(</span><span class="s2">"~/molecule-datasets/"</span><span class="p">,</span>
+                            <span class="n">kekulize</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                            <span class="n">node_feature</span><span class="o">=</span><span class="s2">"symbol"</span><span class="p">)</span>
+
+<span class="n">model</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">RGCN</span><span class="p">(</span><span class="n">input_dim</span><span class="o">=</span><span class="n">dataset</span><span class="o">.</span><span class="n">node_feature_dim</span><span class="p">,</span>
+                    <span class="n">num_relation</span><span class="o">=</span><span class="n">dataset</span><span class="o">.</span><span class="n">num_bond_type</span><span class="p">,</span>
+                    <span class="n">hidden_dims</span> <span class="o">=</span> <span class="p">[</span><span class="mi">256</span><span class="p">,</span> <span class="mi">256</span><span class="p">,</span> <span class="mi">256</span><span class="p">,</span> <span class="mi">256</span><span class="p">],</span>
+                    <span class="n">batch_norm</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
+<span class="n">task</span> <span class="o">=</span> <span class="n">tasks</span><span class="o">.</span><span class="n">GCPNGeneration</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">dataset</span><span class="o">.</span><span class="n">atom_types</span><span class="p">,</span>
+                            <span class="n">max_edge_unroll</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">max_node</span><span class="o">=</span><span class="mi">38</span><span class="p">,</span>
+                            <span class="n">reward_temperature</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+                            <span class="n">task</span> <span class="o">=</span> <span class="s2">"plogp"</span><span class="p">,</span>
+                            <span class="n">criterion</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"ppo"</span><span class="p">:</span>  <span class="mf">1.0</span><span class="p">},</span>
+                            <span class="n">agent_update_interval</span> <span class="o">=</span> <span class="mi">3</span><span class="p">,</span>
+                            <span class="n">gamma</span> <span class="o">=</span> <span class="mf">0.90</span><span class="p">)</span>
+
+
+<span class="n">optimizer</span> <span class="o">=</span> <span class="n">optim</span><span class="o">.</span><span class="n">Adam</span><span class="p">(</span><span class="n">task</span><span class="o">.</span><span class="n">parameters</span><span class="p">(),</span> <span class="n">lr</span> <span class="o">=</span> <span class="mf">1e-5</span><span class="p">)</span>
+<span class="n">solver</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">Engine</span><span class="p">(</span><span class="n">task</span><span class="p">,</span> <span class="n">dataset</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="n">optimizer</span><span class="p">,</span>
+                     <span class="n">gpus</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,),</span>
+                     <span class="n">batch_size</span> <span class="o">=</span> <span class="mi">16</span><span class="p">,</span>
+                     <span class="n">log_interval</span> <span class="o">=</span> <span class="mi">10</span><span class="p">)</span>
+
+<span class="n">solver</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">"path_to_dump/graphgeneration/gcpn_zinc250k_1epoch.pkl"</span><span class="p">)</span>
+<span class="n">optimizer</span><span class="o">.</span><span class="n">state</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">dict</span><span class="p">)</span>
+
+<span class="c1">#rl finetuning</span>
+<span class="n">solver</span><span class="o">.</span><span class="n">train</span><span class="p">(</span><span class="n">num_epoch</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">solver</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s2">"path_to_dump/graphgeneration/gcpn_zinc250k_1epoch_finetune.pkl"</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The results are as follows:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">(</span><span class="m">6</span>.56, <span class="s1">'CCCCC(CCC)(CCCC)C(C)C(C)(CCC)C(CCC)(CCC)C(C)(C(C)C)C(C)(C)CCCC'</span><span class="o">)</span>
+<span class="o">(</span><span class="m">6</span>.46, <span class="s1">'CCCCC(CCC(C)C)(C(CC)(CCC)C(C)(C)CCC)C(CC(C)C)(CC(C)C)C(C)(C)C(C)(C)C'</span><span class="o">)</span>
+<span class="o">(</span><span class="m">6</span>.40, <span class="s1">'CCCC(CCC)CC(C)(C(C)(C)C(C)(CC)CC)C(C)(C)C(C)(C(C)(C)CCC)C(C)(C)CCC'</span><span class="o">)</span>
+<span class="o">(</span><span class="m">6</span>.18, <span class="s1">'CCCCC(CCC)CC(CC(C)C)C(C)(C)C(CCC)(C(C)CC)C(CCC)(CCCC)CCC(C)C'</span><span class="o">)</span>
+...
+</pre></div>
+</div>
+<p>Let’s visualize some molecules with large Penalized logP scores (&gt; 6).</p>
+<img alt="../_images/clintox.png" src="../_images/clintox.png"/>
+<p>For QED optimization, the task initialization is as follows:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">task</span> <span class="o">=</span> <span class="n">tasks</span><span class="o">.</span><span class="n">GCPNGeneration</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">dataset</span><span class="o">.</span><span class="n">atom_types</span><span class="p">,</span>
+                            <span class="n">max_edge_unroll</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">max_node</span><span class="o">=</span><span class="mi">38</span><span class="p">,</span>
+                            <span class="n">reward_temperature</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+                            <span class="n">task</span> <span class="o">=</span> <span class="s2">"qed"</span><span class="p">,</span>
+                            <span class="n">criterion</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"ppo"</span><span class="p">:</span>  <span class="mf">1.0</span><span class="p">,</span> <span class="s2">"nll"</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">},</span>
+                            <span class="n">agent_update_interval</span> <span class="o">=</span> <span class="mi">3</span><span class="p">,</span>
+                            <span class="n">gamma</span> <span class="o">=</span> <span class="mf">0.90</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The results are as follows:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">(</span><span class="m">0</span>.948, <span class="s1">'C1=CC=C(CNC2=NC=NCC3=CN2C(C2=COCC2)=C3)C=C1'</span><span class="o">)</span>
+<span class="o">(</span><span class="m">0</span>.948, <span class="s1">'CCC1=CC=CC=C1NC(=O)C12CC(=O)N(C1)C1=CC=CC=C12'</span><span class="o">)</span>
+<span class="o">(</span><span class="m">0</span>.947, <span class="s1">'O=C1CCNC(C2=CC=CN=C2)CN1CC1=CC=CC(Cl)=C1'</span><span class="o">)</span>
+<span class="o">(</span><span class="m">0</span>.947, <span class="s1">'CC1=C(C(=O)NC2CCCN(C3=CC=CC=C3)C2)C=CN=C1'</span><span class="o">)</span>
+<span class="o">(</span><span class="m">0</span>.947, <span class="s1">'CCNC1CCC2=CC=CC(=C2)N(C(=O)C2=CC=CC=N2)C1'</span><span class="o">)</span>
+<span class="o">(</span><span class="m">0</span>.946, <span class="s1">'O=C(C1=CC=CC=C1F)N1CC2=CC=CC=C2C(CCO)C1'</span><span class="o">)</span>
+...
+</pre></div>
+</div>
+<p>Let’s visualize some molecules with large QED scores (&gt; 0.945).</p>
+<img alt="../_images/clintox.png" src="../_images/clintox.png"/>
+</div>
 </div>
 
       </article>
@@ -228,8 +403,30 @@
         
       </footer>
     </div>
-    <aside class="toc-drawer no-toc">
+    <aside class="toc-drawer">
       
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            Contents
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Molecule Generation</a><ul>
+<li><a class="reference internal" href="#prepare-the-pretraining-dataset">Prepare the Pretraining Dataset</a></li>
+<li><a class="reference internal" href="#define-the-model-gcpn">Define the Model: GCPN</a></li>
+<li><a class="reference internal" href="#pretraining-and-generation-gcpn">Pretraining and Generation: GCPN</a></li>
+<li><a class="reference internal" href="#goal-directed-molecule-generation-with-reinforcement-learning-gcpn">Goal-Directed Molecule Generation with Reinforcement Learning: GCPN</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
       
       
     </aside>
