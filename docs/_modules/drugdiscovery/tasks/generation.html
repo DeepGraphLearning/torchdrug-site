@@ -202,9 +202,7 @@
 <span class="kn">from</span> <span class="nn">drugdiscovery</span> <span class="kn">import</span> <span class="n">layers</span>
 
 
-
 <span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
-
 
 
 <div class="viewcode-block" id="AutoregressiveGeneration"><a class="viewcode-back" href="../../../api/tasks.html#drugdiscovery.tasks.AutoregressiveGeneration">[docs]</a><span class="nd">@R</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="s2">"tasks.AutoregressiveGeneration"</span><span class="p">)</span>
@@ -264,7 +262,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">best_results</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">list</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">batch_id</span> <span class="o">=</span> <span class="mi">0</span>
 
-<div class="viewcode-block" id="AutoregressiveGeneration.preprocess"><a class="viewcode-back" href="../../../api/tasks.html#drugdiscovery.tasks.AutoregressiveGeneration.preprocess">[docs]</a>    <span class="k">def</span> <span class="nf">preprocess</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">train_set</span><span class="p">):</span>
+<div class="viewcode-block" id="AutoregressiveGeneration.preprocess"><a class="viewcode-back" href="../../../api/tasks.html#drugdiscovery.tasks.AutoregressiveGeneration.preprocess">[docs]</a>    <span class="k">def</span> <span class="nf">preprocess</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">train_set</span><span class="p">,</span> <span class="n">valid_set</span><span class="p">,</span> <span class="n">test_set</span><span class="p">):</span>
         <span class="sd">"""</span>
 <span class="sd">        Add atom id mapping and random BFS order to the training set.</span>
 
@@ -352,8 +350,9 @@
                 <span class="n">metric</span><span class="p">[</span><span class="s2">"QED (max)"</span><span class="p">]</span> <span class="o">=</span> <span class="n">qed</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">update_best_result</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">qed</span><span class="p">,</span> <span class="s2">"QED"</span><span class="p">)</span>
                 <span class="n">reward</span> <span class="o">+=</span> <span class="p">(</span><span class="n">qed</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">reward_temperature</span><span class="p">)</span><span class="o">.</span><span class="n">exp</span><span class="p">()</span>
+                <span class="c1">#reward += qed * 3</span>
 
-                <span class="k">if</span> <span class="n">qed</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="o">.</span><span class="n">item</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mf">0.9</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">qed</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="o">.</span><span class="n">item</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mf">0.93</span><span class="p">:</span>
                     <span class="nb">print</span><span class="p">(</span><span class="s2">"QED max = </span><span class="si">%s</span><span class="s2">"</span> <span class="o">%</span> <span class="n">qed</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="o">.</span><span class="n">item</span><span class="p">())</span>
                     <span class="nb">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">best_results</span><span class="p">[</span><span class="s2">"QED"</span><span class="p">])</span>
 
@@ -783,19 +782,20 @@
 <div class="viewcode-block" id="GCPNGeneration"><a class="viewcode-back" href="../../../api/tasks.html#drugdiscovery.tasks.GCPNGeneration">[docs]</a><span class="nd">@R</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="s2">"tasks.GCPNGeneration"</span><span class="p">)</span>
 <span class="k">class</span> <span class="nc">GCPNGeneration</span><span class="p">(</span><span class="n">tasks</span><span class="o">.</span><span class="n">Task</span><span class="p">,</span> <span class="n">core</span><span class="o">.</span><span class="n">Configurable</span><span class="p">):</span>
     <span class="sd">"""</span>
-<span class="sd">    Autoregressive graph generation task.</span>
+<span class="sd">    The graph generative model from `Graph Convolutional Policy Network for Goal-Directed Molecular Graph Generation`_.</span>
+
+<span class="sd">    .. _Graph Convolutional Policy Network for Goal-Directed Molecular Graph Generation:</span>
+<span class="sd">        https://papers.nips.cc/paper/7877-graph-convolutional-policy-network-for-goal-directed-molecular-graph-generation.pdf</span>
 
 <span class="sd">    Parameters:</span>
-<span class="sd">        node_model (nn.Module): node likelihood model</span>
-<span class="sd">        edge_model (nn.Module): edge likelihood model</span>
+<span class="sd">        model (nn.Module): graph representation model</span>
+<span class="sd">        atom_types (list or set): set of all possible atom types</span>
 <span class="sd">        task (str or list of str, optional): property optimization task(s)</span>
-<span class="sd">        num_node_sample (int, optional): number of node samples per graph. -1 for all samples.</span>
-<span class="sd">        num_edge_sample (int, optional): number of edge samples per graph. -1 for all samples.</span>
-<span class="sd">        max_edge_unroll (int, optional): max node id difference for</span>
+<span class="sd">        max_edge_unroll (int, optional): max node id difference</span>
 <span class="sd">        max_node (int, optional): max number of node</span>
 <span class="sd">        criterion (str, list or dict, optional): training criterion(s). For dict, the keys are criterions and the values</span>
 <span class="sd">            are the corresponding weights. Available criterions are ``nll`` and ``ppo``.</span>
-<span class="sd">        agent_update_interval (int, optional): update agent every n batch</span>
+<span class="sd">        agent_update_interval (int, optional): update the agent every n batch</span>
 <span class="sd">        gamma (float, optional): reward discount rate</span>
 <span class="sd">        reward_temperature (float, optional): temperature for reward. Higher temperature encourages larger mean reward,</span>
 <span class="sd">            while lower temperature encourages larger maximal reward.</span>
@@ -806,9 +806,8 @@
     <span class="n">top_k</span> <span class="o">=</span> <span class="mi">10</span>
     <span class="n">_option_members</span> <span class="o">=</span> <span class="nb">set</span><span class="p">([</span><span class="s2">"task"</span><span class="p">,</span> <span class="s2">"criterion"</span><span class="p">])</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">atom_types</span><span class="p">,</span> <span class="n">max_edge_unroll</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">max_node</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">task</span><span class="o">=</span><span class="p">(),</span> <span class="n">criterion</span><span class="o">=</span><span class="s2">"nll"</span><span class="p">,</span> <span class="n">hidden_dim_mlp</span><span class="o">=</span><span class="mi">128</span><span class="p">,</span> 
-                <span class="n">agent_update_interval</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">gamma</span><span class="o">=</span><span class="mf">0.9</span><span class="p">,</span>
-                <span class="n">reward_temperature</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">baseline_momentum</span><span class="o">=</span><span class="mf">0.9</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">atom_types</span><span class="p">,</span> <span class="n">max_edge_unroll</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">max_node</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">task</span><span class="o">=</span><span class="p">(),</span> <span class="n">criterion</span><span class="o">=</span><span class="s2">"nll"</span><span class="p">,</span>
+                 <span class="n">hidden_dim_mlp</span><span class="o">=</span><span class="mi">128</span><span class="p">,</span> <span class="n">agent_update_interval</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">gamma</span><span class="o">=</span><span class="mf">0.9</span><span class="p">,</span> <span class="n">reward_temperature</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">baseline_momentum</span><span class="o">=</span><span class="mf">0.9</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">GCPNGeneration</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="n">model</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">task</span> <span class="o">=</span> <span class="n">task</span>
@@ -848,7 +847,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">agent_mlp_edge</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mlp_edge</span><span class="p">)</span>
 
 
-<div class="viewcode-block" id="GCPNGeneration.preprocess"><a class="viewcode-back" href="../../../api/tasks.html#drugdiscovery.tasks.GCPNGeneration.preprocess">[docs]</a>    <span class="k">def</span> <span class="nf">preprocess</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">train_set</span><span class="p">):</span>
+<div class="viewcode-block" id="GCPNGeneration.preprocess"><a class="viewcode-back" href="../../../api/tasks.html#drugdiscovery.tasks.GCPNGeneration.preprocess">[docs]</a>    <span class="k">def</span> <span class="nf">preprocess</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">train_set</span><span class="p">,</span> <span class="n">valid_set</span><span class="p">,</span> <span class="n">test_set</span><span class="p">):</span>
         <span class="sd">"""</span>
 <span class="sd">        Add atom id mapping and random BFS order to the training set.</span>
 

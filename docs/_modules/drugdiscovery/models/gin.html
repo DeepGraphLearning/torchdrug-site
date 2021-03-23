@@ -239,7 +239,8 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Unknown readout `</span><span class="si">%s</span><span class="s2">`"</span> <span class="o">%</span> <span class="n">readout</span><span class="p">)</span>
 
-<div class="viewcode-block" id="GraphIsomorphismNetwork.forward"><a class="viewcode-back" href="../../../api/models.html#drugdiscovery.models.GraphIsomorphismNetwork.forward">[docs]</a>    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">graph</span><span class="p">,</span> <span class="nb">input</span><span class="p">,</span> <span class="n">all_loss</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">metric</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">graph</span><span class="p">,</span> <span class="nb">input</span><span class="p">,</span> <span class="n">all_loss</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">metric</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">""""""</span>
         <span class="n">hiddens</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="n">layer_input</span> <span class="o">=</span> <span class="nb">input</span>
 
@@ -259,7 +260,7 @@
         <span class="k">return</span> <span class="p">{</span>
             <span class="s2">"graph_feature"</span><span class="p">:</span> <span class="n">graph_feature</span><span class="p">,</span>
             <span class="s2">"node_feature"</span><span class="p">:</span> <span class="n">node_feature</span>
-        <span class="p">}</span></div></div>
+        <span class="p">}</span></div>
 </pre></div>
       </article>
       <footer>

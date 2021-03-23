@@ -227,7 +227,7 @@
 
         <span class="bp">self</span><span class="o">.</span><span class="n">linear</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">output_dim</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">task</span><span class="p">))</span>
 
-<div class="viewcode-block" id="PropertyPrediction.preprocess"><a class="viewcode-back" href="../../../api/tasks.html#drugdiscovery.tasks.PropertyPrediction.preprocess">[docs]</a>    <span class="k">def</span> <span class="nf">preprocess</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">train_set</span><span class="p">):</span>
+<div class="viewcode-block" id="PropertyPrediction.preprocess"><a class="viewcode-back" href="../../../api/tasks.html#drugdiscovery.tasks.PropertyPrediction.preprocess">[docs]</a>    <span class="k">def</span> <span class="nf">preprocess</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">train_set</span><span class="p">,</span> <span class="n">valid_set</span><span class="p">,</span> <span class="n">test_set</span><span class="p">):</span>
         <span class="sd">"""</span>
 <span class="sd">        Compute the mean and derivation for each task on the training set.</span>
 <span class="sd">        """</span>

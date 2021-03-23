@@ -211,7 +211,6 @@
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">EdgePrediction</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="n">model</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">linear</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">output_dim</span><span class="p">,</span> <span class="n">model</span><span class="o">.</span><span class="n">output_dim</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">_get_directed</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">graph</span><span class="p">):</span>
         <span class="n">mask</span> <span class="o">=</span> <span class="n">graph</span><span class="o">.</span><span class="n">edge_list</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">graph</span><span class="o">.</span><span class="n">edge_list</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span>
@@ -223,7 +222,6 @@
 
         <span class="n">output</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">graph</span><span class="o">.</span><span class="n">node_feature</span><span class="o">.</span><span class="n">float</span><span class="p">(),</span> <span class="n">all_loss</span><span class="p">,</span> <span class="n">metric</span><span class="p">)</span>
         <span class="n">node_feature</span> <span class="o">=</span> <span class="n">output</span><span class="p">[</span><span class="s2">"node_feature"</span><span class="p">]</span>
-        <span class="n">node_feature</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">linear</span><span class="p">(</span><span class="n">node_feature</span><span class="p">)</span>
 
         <span class="n">graph</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_directed</span><span class="p">(</span><span class="n">graph</span><span class="p">)</span>
         <span class="n">node_in</span><span class="p">,</span> <span class="n">node_out</span> <span class="o">=</span> <span class="n">graph</span><span class="o">.</span><span class="n">edge_list</span><span class="o">.</span><span class="n">t</span><span class="p">()[:</span><span class="mi">2</span><span class="p">]</span>
@@ -318,7 +316,8 @@
 
         <span class="k">return</span> <span class="n">metric</span>
 
-<div class="viewcode-block" id="AttributeMasking.forward"><a class="viewcode-back" href="../../../api/tasks.html#drugdiscovery.tasks.AttributeMasking.forward">[docs]</a>    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">batch</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">batch</span><span class="p">):</span>
+        <span class="sd">""""""</span>
         <span class="n">all_loss</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">float32</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">device</span><span class="p">)</span>
         <span class="n">metric</span> <span class="o">=</span> <span class="p">{}</span>
 
@@ -331,7 +330,7 @@
 
         <span class="n">all_loss</span> <span class="o">+=</span> <span class="n">loss</span>
 
-        <span class="k">return</span> <span class="n">all_loss</span><span class="p">,</span> <span class="n">metric</span></div></div>
+        <span class="k">return</span> <span class="n">all_loss</span><span class="p">,</span> <span class="n">metric</span></div>
 
 
 <div class="viewcode-block" id="ContextPrediction"><a class="viewcode-back" href="../../../api/tasks.html#drugdiscovery.tasks.ContextPrediction">[docs]</a><span class="nd">@R</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="s2">"tasks.ContextPrediction"</span><span class="p">)</span>
@@ -371,7 +370,6 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">readout</span> <span class="o">=</span> <span class="n">layers</span><span class="o">.</span><span class="n">MeanReadout</span><span class="p">()</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Unknown readout `</span><span class="si">%s</span><span class="s2">`"</span> <span class="o">%</span> <span class="n">readout</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">linear</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">output_dim</span><span class="p">,</span> <span class="n">model</span><span class="o">.</span><span class="n">output_dim</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">substruct_and_context</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">graph</span><span class="p">):</span>
         <span class="n">center_index</span> <span class="o">=</span> <span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">graph</span><span class="p">),</span> <span class="n">device</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">device</span><span class="p">)</span> <span class="o">*</span> <span class="n">graph</span><span class="o">.</span><span class="n">num_nodes</span><span class="p">)</span><span class="o">.</span><span class="n">long</span><span class="p">()</span>
@@ -379,7 +377,7 @@
         <span class="n">dist</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">full</span><span class="p">((</span><span class="n">graph</span><span class="o">.</span><span class="n">num_node</span><span class="p">,),</span> <span class="bp">self</span><span class="o">.</span><span class="n">r2</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">long</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">device</span><span class="p">)</span>
         <span class="n">dist</span><span class="p">[</span><span class="n">center_index</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
 
-        <span class="c1"># sinlge source shortest path</span>
+        <span class="c1"># single source shortest path</span>
         <span class="n">node_in</span><span class="p">,</span> <span class="n">node_out</span> <span class="o">=</span> <span class="n">graph</span><span class="o">.</span><span class="n">edge_list</span><span class="o">.</span><span class="n">t</span><span class="p">()[:</span><span class="mi">2</span><span class="p">]</span>
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">r2</span><span class="p">):</span>
             <span class="n">new_dist</span> <span class="o">=</span> <span class="n">scatter_min</span><span class="p">(</span><span class="n">dist</span><span class="p">[</span><span class="n">node_in</span><span class="p">],</span> <span class="n">node_out</span><span class="p">,</span> <span class="n">dim_size</span><span class="o">=</span><span class="n">graph</span><span class="o">.</span><span class="n">num_node</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span>
@@ -412,12 +410,10 @@
 
         <span class="n">substruct_output</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">(</span><span class="n">substruct</span><span class="p">,</span> <span class="n">substruct</span><span class="o">.</span><span class="n">node_feature</span><span class="o">.</span><span class="n">float</span><span class="p">(),</span> <span class="n">all_loss</span><span class="p">,</span> <span class="n">metric</span><span class="p">)</span>
         <span class="n">substruct_feature</span> <span class="o">=</span> <span class="n">substruct_output</span><span class="p">[</span><span class="s2">"node_feature"</span><span class="p">][</span><span class="n">substruct</span><span class="o">.</span><span class="n">is_center_node</span><span class="p">]</span>
-        <span class="n">substruct_feature</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">linear</span><span class="p">(</span><span class="n">substruct_feature</span><span class="p">)</span>
 
         <span class="n">context_output</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">context_model</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="n">context</span><span class="o">.</span><span class="n">node_feature</span><span class="o">.</span><span class="n">float</span><span class="p">(),</span> <span class="n">all_loss</span><span class="p">,</span> <span class="n">metric</span><span class="p">)</span>
         <span class="n">anchor_feature</span> <span class="o">=</span> <span class="n">context_output</span><span class="p">[</span><span class="s2">"node_feature"</span><span class="p">][</span><span class="n">context</span><span class="o">.</span><span class="n">is_anchor_node</span><span class="p">]</span>
         <span class="n">context_feature</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">readout</span><span class="p">(</span><span class="n">anchor</span><span class="p">,</span> <span class="n">anchor_feature</span><span class="p">)</span>
-        <span class="n">context_feature</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">linear</span><span class="p">(</span><span class="n">context_feature</span><span class="p">)</span>
 
         <span class="c1"># shift = torch.randint(1, len(context), (self.num_negative,), device=self.device)</span>
         <span class="n">shift</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">num_negative</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">device</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>

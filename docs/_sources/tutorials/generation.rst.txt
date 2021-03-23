@@ -3,23 +3,22 @@ Molecule Generation
 
 .. include:: ../bibliography.rst
 
-Molecular graph generation is a fundamental problem for drug discovery and
-has been attracting growing attention. 
-The problem is challenging since it requires
+Molecular graph generation is a fundamental problem for drug discovery and has
+been attracting growing attention. The problem is challenging since it requires
 not only generating chemically valid molecular structures but also optimizing
 their chemical properties in the meantime.
 
-In this tutorial, we will implement two graph generative models `GCPN`_ and `GraphAF`_.
-We first pretrain both models on `ZINC250k`_ dataset. 
-Starting from the pretrained checkpoint, we finetune both models with reinforcement learning to optimize two properties (i.e., QED and penalized logP score) of generated molecules.
-
+In this tutorial, we will implement two graph generative models `GCPN`_ and
+`GraphAF`_. We first pretrain both models on `ZINC250k`_ dataset. Starting from
+the pretrained checkpoint, we finetune both models with reinforcement learning to
+optimize two properties (i.e., QED and penalized logP score) of generated
+molecules.
 
 Prepare the Pretraining Dataset
 -------------------------------
 
-We use `ZINC250k`_ dataset for pretraining. The dataset contains
-250,000 drug-like molecules with a maximum atom number of 38. It has 9 atom types and 3 edge
-types.
+We use `ZINC250k`_ dataset for pretraining. The dataset contains 250,000 drug-like
+molecules with a maximum atom number of 38. It has 9 atom types and 3 edge types.
 
 First, let's donwload, load, and preprocess the dataset, which takes about 3-5 minutes.
 You are encouraged to dump the preprocessed dataset to save the time for future use.
@@ -29,24 +28,21 @@ You are encouraged to dump the preprocessed dataset to save the time for future 
     import torch
     from drugdiscovery import datasets
 
-    dataset = datasets.ZINC250k("~/molecule-datasets/", 
-                                kekulize=True, 
+    dataset = datasets.ZINC250k("~/molecule-datasets/", kekulize=True,
                                 node_feature="symbol")
     # with open("path_to_dump/zinc250k.pkl", "wb") as fout:
     #     pickle.dump(dataset, fout)
     # with open("path_to_dump/zinc250k.pkl", "rb") as fin:
     #     dataset = pickle.load(fin)
 
-
-
 Define the Model: GCPN
 ----------------------
 
-The model consists of two parts, a graph representation model
-and a graph generative module. 
-We define a Relational Graph Convolutional Networks (`RGCN`_) as our representation model. 
-We define a module called `GCPNGeneration` as the graph generative module fpr GCPN.
-
+The model consists of two parts, a graph representation model and a graph generative
+module. We define a Relational Graph Convolutional Networks (`RGCN`_) as our
+representation model. We use the module
+:class:`GCPNGeneration <drugdiscovery.tasks.GCPNGeneration>` as the training task
+for GCPN.
 
 .. code:: python
 
@@ -54,12 +50,9 @@ We define a module called `GCPNGeneration` as the graph generative module fpr GC
 
     model = models.RGCN(input_dim=dataset.node_feature_dim, 
                         num_relation=dataset.num_bond_type,
-                        hidden_dims = [256, 256, 256, 256], 
-                        batch_norm = False)
-    task = tasks.GCPNGeneration(model, dataset.atom_types, 
-                                max_edge_unroll=12, max_node=38, 
-                                criterion = {"nll":  1.0})
-            
+                        hidden_dims=[256, 256, 256, 256], batch_norm=False)
+    task = tasks.GCPNGeneration(model, dataset.atom_types, max_edge_unroll=12,
+                                max_node=38, criterion="nll")
 
 Pretraining and Generation: GCPN
 --------------------------------
@@ -73,14 +66,13 @@ Here we only train the model for 1 epoch, and then save the pretrained model int
     from torch import nn, optim
     optimizer = optim.Adam(task.parameters(), lr = 1e-3)
     solver = core.Engine(task, dataset, None, None, optimizer, 
-                         gpus = (0,),
-                         batch_size = 128,
-                         log_interval = 10)
+                         gpus=(0,), batch_size=128, log_interval=10)
 
     solver.train(num_epoch=1)
     solver.save("path_to_dump/graphgeneration/gcpn_zinc250k_1epoch.pkl")
 
-During the pretraining procedure, we may obtain some logs as follows, which report the accuracy of action predictions.
+During the pretraining procedure, we may obtain some logs as follows, which report
+the accuracy of action predictions.
 
 .. code:: bash
 
@@ -99,11 +91,7 @@ Let's generate some small molecules from the pretrained GCPN model.
 
 .. code:: python
 
-    from collections import defaultdict
-
     solver.load("path_to_dump/graphgeneration/gcpn_zinc250k_1epoch.pkl")
-    optimizer.state = defaultdict(dict)
-    task = task.cuda()
     results = task.generate(num_sample=32, max_resample=5)
     print(results.to_smiles())
 
@@ -120,55 +108,50 @@ The results are as follows:
 
 Let’s visualize some generated molecules.
 
-.. image:: ../../../asset/dataset/clintox.png
+.. image:: ../../../asset/dataset/zinc250k_gcpn_pretrain_generated.png
 
 
 Goal-Directed Molecule Generation with Reinforcement Learning: GCPN
 -------------------------------------------------------------------
 
-For drug discovery, we need to optimize the chemical properties of generated molecules. 
-In this part, we introduce how to fine-tune the graph generative model with reinforcement learning to optimize the properties of generated molecules.
-We implemented the Proximal Policy Optimization (PPO) algorithm for both GCPN and GraphAF.
-To finetune the pretrained model with reinforcement learning, we only need to modify several lines of code in the task initialization.
-We provide all the codes for finetuning in the following segment.
+For drug discovery, we need to optimize the chemical properties of generated
+molecules. In this part, we introduce how to fine-tune the graph generative model
+with reinforcement learning to optimize the properties of generated molecules. We
+implemented the Proximal Policy Optimization (PPO) algorithm for both GCPN and
+GraphAF. To finetune the pretrained model with reinforcement learning, we only
+need to modify several lines of code in the task initialization. We provide all the
+codes for finetuning in the following segment.
 
 For Penalized logP optimization, the code is as follows:
 
 .. code:: python
 
     import torch
-    from drugdiscovery import datasets
-    from drugdiscovery import core, models, tasks
+    from drugdiscovery import core, datasets, models, tasks
     from torch import nn, optim
     from collections import defaultdict
 
-    dataset = datasets.ZINC250k("~/molecule-datasets/", 
-                                kekulize=True, 
-                                node_feature="symbol")    
+    dataset = datasets.ZINC250k("~/molecule-datasets/", kekulize=True,
+                                node_feature="symbol")
 
     model = models.RGCN(input_dim=dataset.node_feature_dim, 
                         num_relation=dataset.num_bond_type,
-                        hidden_dims = [256, 256, 256, 256], 
-                        batch_norm = False)
+                        hidden_dims=[256, 256, 256, 256], batch_norm=False)
     task = tasks.GCPNGeneration(model, dataset.atom_types, 
-                                max_edge_unroll=12, max_node=38, 
-                                reward_temperature = 1,
-                                task = "plogp",
-                                criterion = {"ppo":  1.0},
-                                agent_update_interval = 3,
-                                gamma = 0.90)
+                                max_edge_unroll=12, max_node=38,
+                                task="plogp", criterion="ppo",
+                                reward_temperature=1,
+                                agent_update_interval=3, gamma=0.9)
 
 
-    optimizer = optim.Adam(task.parameters(), lr = 1e-5)
+    optimizer = optim.Adam(task.parameters(), lr=1e-5)
     solver = core.Engine(task, dataset, None, None, optimizer, 
-                         gpus = (0,),
-                         batch_size = 16,
-                         log_interval = 10)
+                         gpus=(0,), batch_size=16, log_interval=10)
 
-    solver.load("path_to_dump/graphgeneration/gcpn_zinc250k_1epoch.pkl")
-    optimizer.state = defaultdict(dict)                         
+    solver.load("path_to_dump/graphgeneration/gcpn_zinc250k_1epoch.pkl",
+                load_optimizer=False)
 
-    #rl finetuning
+    # RL finetuning
     solver.train(num_epoch=10)
     solver.save("path_to_dump/graphgeneration/gcpn_zinc250k_1epoch_finetune.pkl")    
 
@@ -185,7 +168,7 @@ The results are as follows:
 
 Let’s visualize some molecules with large Penalized logP scores (> 6).
 
-.. image:: ../../../asset/dataset/clintox.png
+.. image:: ../../../asset/dataset/zinc250k_gcpn_plogp_generated.png
 
 
 For QED optimization, the task initialization is as follows:
@@ -194,11 +177,9 @@ For QED optimization, the task initialization is as follows:
     
     task = tasks.GCPNGeneration(model, dataset.atom_types, 
                                 max_edge_unroll=12, max_node=38, 
-                                reward_temperature = 1,
-                                task = "qed",
-                                criterion = {"ppo":  1.0, "nll": 1.0},
-                                agent_update_interval = 3,
-                                gamma = 0.90)    
+                                task="qed", criterion=("ppo", "nll"),
+                                reward_temperature=1,
+                                agent_update_interval=3, gamma=0.9)
 
 The results are as follows:
 
@@ -214,4 +195,162 @@ The results are as follows:
 
 Let’s visualize some molecules with large QED scores (> 0.945).
 
-.. image:: ../../../asset/dataset/clintox.png
+.. image:: ../../../asset/dataset/zinc250k_gcpn_qed_generated.png
+
+Define the Model: GraphAF
+-------------------------
+
+The model consists of two parts, a graph representation model and a graph generative
+module. We define a Relational Graph Convolutional Networks (`RGCN`_) as our
+representation model. We use the module
+:class:`AutoregressiveGeneration <drugdiscovery.tasks.AutoregressiveGeneration>` as
+the training task for GraphAF. The task consists of a node flow model and an edge
+flow model, which define invertible mapping between node / edge types and noise
+distributions.
+
+.. code:: python
+
+    from drugdiscovery import core, models, tasks
+    from drugdiscovery.layers import distribution
+
+    model = models.RGCN(input_dim=dataset.num_atom_type, 
+                        num_relation=dataset.num_bond_type,
+                        hidden_dims=[256, 256, 256], batch_norm=True)
+                                        
+    num_atom_type = dataset.num_atom_type
+    # add one class for non-edge
+    num_bond_type = dataset.num_bond_type + 1
+
+    node_prior = distribution.IndependentGaussian(torch.zeros(num_atom_type),
+                                                  torch.ones(num_atom_type))
+    edge_prior = distribution.IndependentGaussian(torch.zeros(num_bond_type),
+                                                  torch.ones(num_bond_type))
+    node_flow = models.GraphAF(model, node_prior, num_layer=12)
+    edge_flow = models.GraphAF(model, edge_prior, use_edge=True, num_layer=12)
+
+    task = tasks.AutoregressiveGeneration(node_flow, edge_flow,
+                                          max_node=38, max_edge_unroll=12,
+                                          criterion="nll")
+
+Pretraining and Generation: GraphAF
+-----------------------------------
+
+Now we can train our model. We setup an optimizer for our model, and put everything
+together into an Engine instance. Here we train the model for 10 epochs, and then
+save the pretrained model into a directory.
+
+.. code:: python
+
+    from torch import nn, optim
+    optimizer = optim.Adam(task.parameters(), lr = 1e-3)
+    solver = core.Engine(task, dataset, None, None, optimizer, 
+                         gpus=(0,), batch_size=128, log_interval=10)
+
+    solver.train(num_epoch=10)
+    solver.save("path_to_dump/graphgeneration/graphaf_zinc250k_10epoch.pkl")
+
+After the model is pretrained, we can load the parameters from the checkpoint.
+Let's then generate some small molecules from the pretrained GraphAF model.
+
+.. code:: python
+
+    from collections import defaultdict
+
+    solver.load("path_to_dump/graphgeneration/graphaf_zinc250k_10epoch.pkl")
+    results = task.generate(32)
+    print(results.to_smiles())
+
+The results are as follows:
+
+.. code:: bash
+
+    CC(C)C=C(Cl)NC1=CC=CC=C1
+    CCOC(=NNCC(C=CC(C)=CC=CC=CC(C)=CC=O)(CO)CO)C(C)C
+    CCC(C)(NC(C)Cl)C1=CC=CNC#CO1
+    O=C1NC2=CC(=CC=S)C1=CC=CC=C2
+    C=[SH]1(CC)C#SC(=NC(C)=C(C)Cl)C1N
+    ...
+
+Finetuning: GraphAF
+-------------------
+
+For Penalized logP optimization, the code is as follows:
+
+.. code:: python
+
+    import torch
+    from drugdiscovery import core, datasets, models, tasks
+    from drugdiscovery.layers import distribution
+    from torch import nn, optim
+    from collections import defaultdict
+
+    dataset = datasets.ZINC250k("~/molecule-datasets/", 
+                                kekulize=True, 
+                                node_feature="symbol")
+
+    model = models.RGCN(input_dim=dataset.num_atom_type,
+                        num_relation=dataset.num_bond_type,
+                        hidden_dims=[256, 256, 256], batch_norm=True)
+                                        
+    num_atom_type = dataset.num_atom_type
+    # add one class for non-edge
+    num_bond_type = dataset.num_bond_type + 1
+
+    node_prior = distribution.IndependentGaussian(torch.zeros(num_atom_type),
+                                                  torch.ones(num_atom_type))
+    edge_prior = distribution.IndependentGaussian(torch.zeros(num_bond_type),
+                                                  torch.ones(num_bond_type))
+    node_flow = models.GraphAF(model, node_prior, num_layer=12)
+    edge_flow = models.GraphAF(model, edge_prior, use_edge=True, num_layer=12)
+
+    task = tasks.AutoregressiveGeneration(node_flow, edge_flow,
+                                          max_node=38, max_edge_unroll=12,
+                                          task="plogp", criterion="ppo",
+                                          reward_temperature=20, baseline_momentum=0.9,
+                                          agent_update_interval=5, gamma=0.9)
+
+
+    optimizer = optim.Adam(task.parameters(), lr=1e-5)
+    solver = core.Engine(task, dataset, None, None, optimizer, 
+                         gpus=(0,), batch_size=64, log_interval=10)
+
+    solver.load("path_to_dump/graphgeneration/graphaf_zinc250k_10epoch.pkl",
+                load_optimizer=False)
+
+    # RL finetuning
+    solver.train(num_epoch=10)
+    solver.save("path_to_dump/graphgeneration/graphaf_zinc250k_10epoch_finetune.pkl")
+
+                             
+The results are as follows:
+
+.. code:: bash
+
+    (5.63, 'CC=CC=CC=CC=CC=CC=CC=CC=CC=CC=CC=CC=CC=CC=CC=CC=C(I)C(C)(C)C')
+    (5.60, 'CCC=CC=CC=CC=CC=CC=CC=CC=CC=CC=CC=CC=CC=CC=CC=CC(C)(C)CCC')
+    (5.44, 'CC=CC=CC=CC(Cl)=CC=CC=CC=CC=CC=C(C)C=CC=CC=C(C)C=CC(Br)=CC=CCCC')
+    (5.35, 'CC=CC=CC=CC=CC=CC=CC=CC=CC=CC=CC=CC=CC=CC=CC=CC=C(CC)C(C)C')
+    ...
+
+For QED optimization, the task initialization is as follows:
+
+.. code:: python
+    
+    task = tasks.AutoregressiveGeneration(node_flow, edge_flow,
+                                          max_node=38, max_edge_unroll=12,
+                                          task="qed",
+                                          criterion={"ppo": 0.25, "nll": 1.0},
+                                          reward_temperature=10, baseline_momentum=0.9,
+                                          agent_update_interval=5, gamma=0.9)
+
+The results are as follows:
+
+.. code:: bash
+    
+    (0.948, 'O=S(=O)(NC1=CC=CC=C1Br)C1=CC=CC=N1')
+    (0.947, 'CC1CCNC(C2=CC=CC=C2)N1S(=O)(=O)C1=CC=CC=C1')
+    (0.947, 'O=C(NCC1=C(Br)C=CC=C1F)C1=CC=CN=C1')    
+    (0.947, 'COC1=C(C2=C(Cl)C=CC(S(N)(=O)=O)=C2)C=CC=C1')    
+    (0.946, 'O=S(=O)(NC1=CC=CC=C1)C1=CC=C(Br)C=C1')
+    (0.945, 'O=S(=O)(NC1=CC=CC(Br)=C1)C1=CC=CC=C1')    
+    ...

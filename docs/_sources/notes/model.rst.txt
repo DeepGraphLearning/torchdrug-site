@@ -130,7 +130,7 @@ for the predictions.
             super(LinkPrediction, self).__init__()
             self.model = model
 
-        def preprocess(self, train_set):
+        def preprocess(self, train_set, valid_set, test_set):
             dataset = train_set.dataset
             graph = dataset.graph
             train_graph = dataset.graph.edge_mask(train_set.indices)
