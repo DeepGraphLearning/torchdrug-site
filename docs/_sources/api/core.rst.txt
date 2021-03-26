@@ -1,6 +1,24 @@
-drugdiscovery.core
+torchdrug.core
 ==================
 
-.. automodule:: drugdiscovery.core
-    :members:
-    :private-members: _MetaContainer
+.. currentmodule:: torchdrug.core
+
+Configurable
+----------------------------------
+.. autoclass:: Configurable
+
+Engine
+----------------------------------
+.. autoclass:: Engine
+
+Meter
+----------------------------------
+.. autoclass:: Meter
+
+Registry
+----------------------------------
+.. autoclass:: Registry
+
+Meta Container
+----------------------------------
+.. autoclass:: _MetaContainer

@@ -27,7 +27,7 @@ completion.
 
 .. code:: python
 
-    from drugdiscovery import datasets
+    from torchdrug import datasets
 
     reaction_dataset = datasets.USPTO50k("~/molecule-datasets/",
                                          node_feature="reaction_reaction_identification",
@@ -38,13 +38,13 @@ completion.
 
 Then we visualize some samples from the dataset. For the reaction dataset, we can
 split reactant and product graphs into individual molecules using
-:meth:`connected_components() <drugdiscovery.data.Graph.connected_components>`.
+:meth:`connected_components() <torchdrug.data.Graph.connected_components>`.
 Note `USPTO50k`_ ignores all non-target products, so there is only one product on
 the right hand side.
 
 .. code:: python
 
-    from drugdiscovery.utils import plot
+    from torchdrug.utils import plot
 
     for i in range(2):
         sample = reaction_dataset[i]
@@ -75,7 +75,7 @@ Here are the corresponding samples in the synthon dataset.
     :width: 24%
 
 To ensure the same split is used by both datasets, we can set the random seed
-before calling :meth:`split() <drugdiscovery.datasets.USPTO50k.split>`.
+before calling :meth:`split() <torchdrug.datasets.USPTO50k.split>`.
 
 .. code::
 
@@ -92,7 +92,7 @@ other graph representation learning models can also be used here.
 
 .. code:: python
 
-    from drugdiscovery import core, models, tasks
+    from torchdrug import core, models, tasks
 
     reaction_model = models.RGCN(input_dim=dataset.node_feature_dim,
                         hidden_dims=[256, 256, 256, 256, 256, 256],

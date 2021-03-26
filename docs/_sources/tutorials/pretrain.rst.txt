@@ -28,7 +28,7 @@ positive pairs, while those from different graphs as negative pairs.
     from torch import nn
     from torch.utils import data as torch_data
 
-    from drugdiscovery import core, datasets, tasks, models
+    from torchdrug import core, datasets, tasks, models
 
     dataset = datasets.ClinTox("~/molecule-datasets/", node_feature="pretrain",
                                edge_feature="pretrain")
@@ -66,7 +66,7 @@ the other node types as negative.
     from torch import nn, optim
     from torch.utils import data as torch_data
 
-    from drugdiscovery import core, datasets, tasks, models
+    from torchdrug import core, datasets, tasks, models
 
     dataset = datasets.ClinTox("~/molecule-datasets/", node_feature="pretrain",
                                edge_feature="pretrain")
@@ -95,5 +95,5 @@ the following.
 We also include other popular self-supervised pre-training methods as below:
 
 .. seealso::
-    :func:`Edge Prediction (EP) <drugdiscovery.tasks.EdgePrediction>`
-    :func:`Context Prediction (CP) <drugdiscovery.tasks.ContextPrediction>`
+    :func:`Edge Prediction (EP) <torchdrug.tasks.EdgePrediction>`
+    :func:`Context Prediction (CP) <torchdrug.tasks.ContextPrediction>`

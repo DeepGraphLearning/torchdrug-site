@@ -3,62 +3,32 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/><link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Batch Irregular Structures" href="variadic.html" /><link rel="prev" title="Notes" href="index.html" />
 
-    <meta name="generator" content="sphinx-3.1.2, furo 2020.12.09.beta21"/>
+    <meta name="generator" content="sphinx-3.5.3, furo 2020.10.15.beta13"/>
         <title>Graph Data Structures - Drugdiscovery 0.1.0 documentation</title>
-      <link rel="stylesheet" href="../_static/styles/furo.css?digest=a3f371badb8538d75df213ccffb17a4f6e8f3ac5">
+      <link id="pygments_dark_css" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css" href="../_static/pygments_dark.css" />
+    <link rel="stylesheet" href="../_static/styles/default.css?a60e212ea949d8b05072a279">
     <link rel="stylesheet" href="../_static/pygments.css">
     <link media="(prefers-color-scheme: dark)" rel="stylesheet" href="../_static/pygments_dark.css">
     
-
-
 <style>
   :root {
     --color-code-background: #f8f8f8;
-  --color-code-foreground: black;
-  --font-stack: Helvetica, Arial, sans-serif, -apple-system;
-  --font-stack--monospace: Courier, monospace;
-  --color-brand-primary: #E5261F;
-  --color-brand-content: #E5261F;
-  --admonition-font-size: 1rem;
-  --admonition-title-font-size: 1rem;
-  --font-size--small--2: var(--font-size--small);
+    --color-code-foreground: black;
   
   }
   @media (prefers-color-scheme: dark) {
     :root {
-      --color-code-background: #202020;
-  --color-code-foreground: #d0d0d0;
-  
+    --color-code-background: #202020;
+    --color-code-foreground: #d0d0d0;
+      
     }
   }
-
-  /* For allowing end-user-specific overrides */
-  .override-light {
-    --color-code-background: #f8f8f8;
-  --color-code-foreground: black;
-  --font-stack: Helvetica, Arial, sans-serif, -apple-system;
-  --font-stack--monospace: Courier, monospace;
-  --color-brand-primary: #E5261F;
-  --color-brand-content: #E5261F;
-  --admonition-font-size: 1rem;
-  --admonition-title-font-size: 1rem;
-  --font-size--small--2: var(--font-size--small);
-  
-  }
-  .override-dark {
-    --color-code-background: #202020;
-  --color-code-foreground: #d0d0d0;
-  
-  }
-</style><link id="pygments_dark_css" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css" href="../_static/pygments_dark.css" />
-    <link rel="stylesheet" href="../_static/styles/furo-extensions.css?digest=26485485040e7aaf717c13fd0188a5ad2c2deb60">
-    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-    <script defer src="../_static/jquery.js"></script>
-    <script defer src="../_static/underscore.js"></script>
-    <script defer src="../_static/doctools.js"></script>
-    <script defer src="../_static/language_data.js"></script>
-    <script defer async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script defer src="../_static/scripts/main.js?digest=e931d09b2a40c1bb82b542effe772014573baf67"></script></head>
+</style>
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script><script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script src="../_static/scripts/main.js?a60e212ea949d8b05072a279"></script></head>
   <body dir="">
     
 <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
@@ -100,35 +70,25 @@
 
 <div class="page">
   <header class="mobile-header">
-    <div class="header-left">
-      <label class="nav-overlay-icon" for="__navigation">
-        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
-      </label>
-    </div>
-    <div class="header-center">
-      <a href="../index.html"><div class="brand">Drugdiscovery 0.1.0 documentation</div></a>
-    </div>
-    <div class="header-right">
-      <label class="toc-overlay-icon toc-header-icon" for="__toc">
-        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
-      </label>
-    </div>
+    <label class="header-left nav-overlay-icon" for="__navigation">
+      <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+    </label>
+    <div class="header-center"><div class="brand">Drugdiscovery 0.1.0 documentation</div></div>
+    <div class="header-right"></div>
   </header>
   <aside class="sidebar-drawer">
     <div class="sidebar-container">
       
       <div class="sidebar-sticky"><a class="sidebar-brand centered" href="../index.html">
-  
   <div class="sidebar-logo-container">
     <img class="sidebar-logo" src="../_static/logo.svg" alt="Logo"/>
   </div>
-  
   
 </a><form class="sidebar-search-container" method="get" action="../search.html">
   <input class="sidebar-search" placeholder="Search" name="q">
   <input type="hidden" name="check_keywords" value="yes">
   <input type="hidden" name="area" value="default">
-</form><div class="sidebar-scroll"><div class="sidebar-tree">
+</form><div class="sidebar-tree sidebar-scroll">
   <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../quick_start.html">Quick Start</a></li>
@@ -159,18 +119,17 @@
 <p class="caption"><span class="caption-text">Package Reference</span></p>
 <ul>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../api/index.html">Documentation</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label for="toctree-checkbox-4"><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../api/core.html">drugdiscovery.core</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../api/data.html">drugdiscovery.data</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../api/datasets.html">drugdiscovery.datasets</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../api/metrics.html">drugdiscovery.metrics</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../api/layers.html">drugdiscovery.layers</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../api/models.html">drugdiscovery.models</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../api/tasks.html">drugdiscovery.tasks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/core.html">torchdrug.core</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/data.html">torchdrug.data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/datasets.html">torchdrug.datasets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/metrics.html">torchdrug.metrics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/layers.html">torchdrug.layers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/models.html">torchdrug.models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/tasks.html">torchdrug.tasks</a></li>
 </ul>
 </li>
 </ul>
 
-</div>
 </div>
       </div>
       
@@ -179,7 +138,7 @@
   <main class="main">
     <div class="content">
       <article role="main">
-        <label class="toc-overlay-icon toc-content-icon" for="__toc">
+        <label class="toc-overlay-icon" for="__toc">
           <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
         </label>
         <div class="section" id="graph-data-structures">
@@ -190,7 +149,7 @@ operations in graph representation learning.</p>
 <h2>Create a Graph<a class="headerlink" href="#create-a-graph" title="Permalink to this headline">¶</a></h2>
 <p>To begin with, let’s create a graph.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torch</span>
-<span class="kn">from</span> <span class="nn">drugdiscovery</span> <span class="kn">import</span> <span class="n">data</span>
+<span class="kn">from</span> <span class="nn">torchdrug</span> <span class="kn">import</span> <span class="n">data</span>
 
 <span class="n">edge_list</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">0</span><span class="p">]]</span>
 <span class="n">graph</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">Graph</span><span class="p">(</span><span class="n">edge_list</span><span class="p">,</span> <span class="n">num_node</span><span class="o">=</span><span class="mi">6</span><span class="p">)</span>
@@ -265,7 +224,7 @@ during any graph operation.</p>
 <span class="nb">print</span><span class="p">(</span><span class="n">mol</span><span class="o">.</span><span class="n">graph_feature</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>There are a bunch of popular feature functions provided in <a class="reference internal" href="../api/data.html#module-drugdiscovery.data.feature" title="drugdiscovery.data.feature"><code class="xref py py-mod docutils literal notranslate"><span class="pre">drugdiscovery.data.feature</span></code></a>.
+<p>There are a bunch of popular feature functions provided in <a class="reference internal" href="../api/data.html#module-torchdrug.data.feature" title="torchdrug.data.feature"><code class="xref py py-mod docutils literal notranslate"><span class="pre">torchdrug.data.feature</span></code></a>.
 We may also want to define our own attributes. This only requires to wrap the
 assignment lines with a context manager. The following example defines edge importance
 as the reciprocal of node degrees.</p>
@@ -291,7 +250,7 @@ is an example of creating a batch of 4 graphs.</p>
 </pre></div>
 </div>
 <img alt="../_images/batch.png" src="../_images/batch.png"/>
-<p>This returns a <a class="reference internal" href="../api/data.html#drugdiscovery.data.PackedGraph" title="drugdiscovery.data.PackedGraph"><code class="xref py py-class docutils literal notranslate"><span class="pre">PackedGraph</span></code></a> instance with
+<p>This returns a <a class="reference internal" href="../api/data.html#torchdrug.data.PackedGraph" title="torchdrug.data.PackedGraph"><code class="xref py py-class docutils literal notranslate"><span class="pre">PackedGraph</span></code></a> instance with
 all attributes automatically batched. The essential trick behind this operation is
 based on a property of graphs. A batch of <span class="math notranslate nohighlight">\(n\)</span> graphs is equivalent to a large
 graph with <span class="math notranslate nohighlight">\(n\)</span> connected components. The equivalent adjacency matrix for a
@@ -305,7 +264,7 @@ batch is</p>
 \end{bmatrix}\end{split}\]</div></div>
 <p>where <span class="math notranslate nohighlight">\(A_i\)</span> is the adjacency of <span class="math notranslate nohighlight">\(i\)</span>-th graph.</p>
 <p>To get a single graph from the batch, use the conventional index or
-<a class="reference internal" href="../api/data.html#drugdiscovery.data.PackedGraph.unpack" title="drugdiscovery.data.PackedGraph.unpack"><code class="xref py py-meth docutils literal notranslate"><span class="pre">PackedGraph.unpack</span></code></a>.</p>
+<a class="reference internal" href="../api/data.html#torchdrug.data.PackedGraph.unpack" title="torchdrug.data.PackedGraph.unpack"><code class="xref py py-meth docutils literal notranslate"><span class="pre">PackedGraph.unpack</span></code></a>.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">graph</span> <span class="o">=</span> <span class="n">batch</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
 <span class="n">graphs</span> <span class="o">=</span> <span class="n">batch</span><span class="o">.</span><span class="n">unpack</span><span class="p">()</span>
 </pre></div>
@@ -337,11 +296,11 @@ or masked graphs in a sparse manner. Some typical operations include</p>
 <a class="reference internal image-reference" href="../_images/edge_mask.png"><img alt="../_images/edge_mask.png" src="../_images/edge_mask.png" style="width: 24%;"/></a>
 <a class="reference internal image-reference" href="../_images/compact.png"><img alt="../_images/compact.png" src="../_images/compact.png" style="width: 24%;"/></a>
 <p>All the above operations accept either integer node indexes or binary node masks.
-<a class="reference internal" href="../api/data.html#drugdiscovery.data.Graph.subgraph" title="drugdiscovery.data.Graph.subgraph"><code class="xref py py-meth docutils literal notranslate"><span class="pre">subgraph()</span></code></a> extracts a subgraph based on
+<a class="reference internal" href="../api/data.html#torchdrug.data.Graph.subgraph" title="torchdrug.data.Graph.subgraph"><code class="xref py py-meth docutils literal notranslate"><span class="pre">subgraph()</span></code></a> extracts a subgraph based on
 the given nodes. The node ids are re-mapped to produce a compact index.
-<a class="reference internal" href="../api/data.html#drugdiscovery.data.Graph.node_mask" title="drugdiscovery.data.Graph.node_mask"><code class="xref py py-meth docutils literal notranslate"><span class="pre">node_mask()</span></code></a> keeps edges among the given
-nodes. <a class="reference internal" href="../api/data.html#drugdiscovery.data.Graph.edge_mask" title="drugdiscovery.data.Graph.edge_mask"><code class="xref py py-meth docutils literal notranslate"><span class="pre">edge_mask()</span></code></a> keeps edges of the
-given edge indexes. <a class="reference internal" href="../api/data.html#drugdiscovery.data.Graph.compact" title="drugdiscovery.data.Graph.compact"><code class="xref py py-meth docutils literal notranslate"><span class="pre">compact()</span></code></a> removes all
+<a class="reference internal" href="../api/data.html#torchdrug.data.Graph.node_mask" title="torchdrug.data.Graph.node_mask"><code class="xref py py-meth docutils literal notranslate"><span class="pre">node_mask()</span></code></a> keeps edges among the given
+nodes. <a class="reference internal" href="../api/data.html#torchdrug.data.Graph.edge_mask" title="torchdrug.data.Graph.edge_mask"><code class="xref py py-meth docutils literal notranslate"><span class="pre">edge_mask()</span></code></a> keeps edges of the
+given edge indexes. <a class="reference internal" href="../api/data.html#torchdrug.data.Graph.compact" title="torchdrug.data.Graph.compact"><code class="xref py py-meth docutils literal notranslate"><span class="pre">compact()</span></code></a> removes all
 isolated nodes.</p>
 <p>The same operations can also be applied to batches. In this case, we need to convert
 the index of a single graph into the index in a batch.</p>
@@ -389,17 +348,10 @@ the index of a single graph into the index in a batch.</p>
         </div>
 
         <div class="related-information">
-              Copyright &#169; 2020, MilaGraph Group
-            |
-            Built with <a href="https://www.sphinx-doc.org/">Sphinx</a>
-              and
-              <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
-              <a href="https://github.com/pradyunsg/furo">Furo theme</a>.
-            |
-            <a class="muted-link" href="../_sources/notes/graph.rst.txt"
-               rel="nofollow">
-              Show Source
-            </a>
+          <span class="copyright">Copyright &copy; 2021, MilaGraph Group</span> |
+          Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using
+          <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+          <a href="https://github.com/pradyunsg/furo">Furo theme</a>.
         </div>
         
       </footer>
@@ -413,9 +365,8 @@ the index of a single graph into the index in a batch.</p>
             Contents
           </span>
         </div>
-        <div class="toc-tree-container">
-          <div class="toc-tree">
-            <ul>
+        <div class="toc-tree">
+          <ul>
 <li><a class="reference internal" href="#">Graph Data Structures</a><ul>
 <li><a class="reference internal" href="#create-a-graph">Create a Graph</a></li>
 <li><a class="reference internal" href="#graph-attributes">Graph Attributes</a></li>
@@ -425,7 +376,6 @@ the index of a single graph into the index in a batch.</p>
 </li>
 </ul>
 
-          </div>
         </div>
       </div>
       

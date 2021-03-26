@@ -41,13 +41,13 @@ sample.
 
 .. code:: python
 
-    from drugdiscovery.layers import functional
+    from torchdrug.layers import functional
 
     sum = functional.variadic_sum(value, size)
     max = functional.variadic_max(value, size)[0]
     top3_value, top3_index = functional.variadic_topk(value, size, k=3)
 
-Note :meth:`variadic_topk <drugdiscovery.layers.functional.variadic_topk>` accepts
+Note :meth:`variadic_topk <torchdrug.layers.functional.variadic_topk>` accepts
 samples smaller than :math:`k`. In this case, it will fill the output with the
 smallest element from that sample.
 
@@ -81,12 +81,12 @@ functions. For example,
 Here we demonstrate how to perform classification over nodes. We create a toy
 task, where the model needs to predict the heaviest atom of each molecule. Note
 that node attributes form variadic tensors with ``num_nodes`` from the same graph.
-Therefore, we can use :meth:`variadic_max <drugdiscovery.layers.functional.variadic_max>`
+Therefore, we can use :meth:`variadic_max <torchdrug.layers.functional.variadic_max>`
 to get our ground truth.
 
 .. code:: python
 
-    from drugdiscovery import data, models, metrics
+    from torchdrug import data, models, metrics
 
     smiles_list = ["CC(=C)C#N", "CCNC(=S)NCC", "BrC1=CC=C(Br)C=C1"]
     graph = data.PackedMolecule.from_smiles(smiles_list)
@@ -105,13 +105,13 @@ Naturally, the prediction over nodes also forms a variadic tensor with ``num_nod
     accuracy = metrics.variadic_accuracy(pred, target, graph.num_nodes)
 
 .. seealso::
-    :func:`variadic_sum <drugdiscovery.layers.functional.variadic_sum>`,
-    :func:`variadic_mean <drugdiscovery.layers.functional.variadic_mean>`,
-    :func:`variadic_max <drugdiscovery.layers.functional.variadic_max>`,
-    :func:`variadic_topk <drugdiscovery.layers.functional.variadic_topk>`,
-    :func:`variadic_log_softmax <drugdiscovery.layers.functional.variadic_log_softmax>`,
-    :func:`variadic_cross_entropy <drugdiscovery.layers.functional.variadic_cross_entropy>`,
-    :func:`variadic_accuracy <drugdiscovery.metrics.variadic_accuracy>`
+    :func:`variadic_sum <torchdrug.layers.functional.variadic_sum>`,
+    :func:`variadic_mean <torchdrug.layers.functional.variadic_mean>`,
+    :func:`variadic_max <torchdrug.layers.functional.variadic_max>`,
+    :func:`variadic_topk <torchdrug.layers.functional.variadic_topk>`,
+    :func:`variadic_log_softmax <torchdrug.layers.functional.variadic_log_softmax>`,
+    :func:`variadic_cross_entropy <torchdrug.layers.functional.variadic_cross_entropy>`,
+    :func:`variadic_accuracy <torchdrug.metrics.variadic_accuracy>`
 
 Variadic Output
 ---------------
@@ -145,7 +145,7 @@ The generation of edge prefixes consists 3 steps.
 3. Remove excess or invalid graphs.
 
 The first step can be implemented through
-:meth:`Graph.repeat <drugdiscovery.data.Graph.repeat>`. For the following steps, we
+:meth:`Graph.repeat <torchdrug.data.Graph.repeat>`. For the following steps, we
 define an auxiliary function ``all_prefix_slice``. This function takes in a size
 tensor and desired prefix lengths, and outputs :math:`n*l` prefix slices for the
 extended batch, where :math:`n` is the batch size and :math:`l` is the number of

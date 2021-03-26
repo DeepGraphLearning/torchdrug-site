@@ -1,0 +1,510 @@
+<!doctype html>
+<html class="no-js">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/><link rel="index" title="Index" href="../../../genindex.html" /><link rel="search" title="Search" href="../../../search.html" />
+
+    <meta name="generator" content="sphinx-3.5.3, furo 2020.10.15.beta13"/>
+        <title>torchdrug.core.core - Drugdiscovery 0.1.0 documentation</title>
+      <link id="pygments_dark_css" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css" href="../../../_static/pygments_dark.css" />
+    <link rel="stylesheet" href="../../../_static/styles/default.css?80b90f0e710e748766183ebc">
+    <link rel="stylesheet" href="../../../_static/pygments.css">
+    <link media="(prefers-color-scheme: dark)" rel="stylesheet" href="../../../_static/pygments_dark.css">
+    
+<style>
+  :root {
+    --color-code-background: #f8f8f8;
+    --color-code-foreground: black;
+  
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+    --color-code-background: #202020;
+    --color-code-foreground: #d0d0d0;
+      
+    }
+  }
+</style>
+    <script id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script><script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/scripts/main.js?80b90f0e710e748766183ebc"></script></head>
+  <body dir="">
+    
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+      stroke-width="1.5" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+      <path stroke="none" d="M0 0h24v24H0z"/>
+      <line x1="4" y1="6" x2="20" y2="6" />
+      <line x1="10" y1="12" x2="20" y2="12" />
+      <line x1="6" y1="18" x2="20" y2="18" />
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+      stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+      class="feather feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+      stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+      class="feather feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation"></label>
+<label class="overlay toc-overlay" for="__toc"></label>
+
+
+<div class="page">
+  <header class="mobile-header">
+    <label class="header-left nav-overlay-icon" for="__navigation">
+      <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+    </label>
+    <div class="header-center"><div class="brand">Drugdiscovery 0.1.0 documentation</div></div>
+    <div class="header-right"></div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand centered" href="../../../index.html">
+  <div class="sidebar-logo-container">
+    <img class="sidebar-logo" src="../../../_static/logo.svg" alt="Logo"/>
+  </div>
+  
+</a><form class="sidebar-search-container" method="get" action="../../../search.html">
+  <input class="sidebar-search" placeholder="Search" name="q">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form><div class="sidebar-tree sidebar-scroll">
+  <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../quick_start.html">Quick Start</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../benchmark/index.html">Benchmark</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label for="toctree-checkbox-1"><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../benchmark/property_prediction.html">Molecule Property Prediction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../benchmark/pretrain.html">Pretrained Molecular Representations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../benchmark/generation.html">Graph Generation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../benchmark/retrosynthesis.html">Retrosynthesis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../benchmark/reasoning.html">Knowledge Graph Reasoning</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../tutorials/index.html">Tutorials</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label for="toctree-checkbox-2"><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../tutorials/property_prediction.html">Property Prediction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../tutorials/pretrain.html">Pretrained Molecular Representations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../tutorials/generation.html">Molecule Generation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../tutorials/retrosynthesis.html">Retrosynthesis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../tutorials/reasoning.html">Knowledge Graph Reasoning</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../notes/index.html">Notes</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label for="toctree-checkbox-3"><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../notes/graph.html">Graph Data Structures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../notes/variadic.html">Batch Irregular Structures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../notes/layer.html">Graph Neural Network Layers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../notes/model.html">Customize Models &amp; Tasks</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Package Reference</span></p>
+<ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../api/index.html">Documentation</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label for="toctree-checkbox-4"><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../api/core.html">torchdrug.core</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api/data.html">torchdrug.data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api/datasets.html">torchdrug.datasets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api/metrics.html">torchdrug.metrics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api/layers.html">torchdrug.layers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api/models.html">torchdrug.models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api/tasks.html">torchdrug.tasks</a></li>
+</ul>
+</li>
+</ul>
+
+</div>
+      </div>
+      
+    </div>
+  </aside>
+  <main class="main">
+    <div class="content">
+      <article role="main">
+        <label class="toc-overlay-icon no-toc" for="__toc">
+          <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+        </label>
+        <h1>Source code for torchdrug.core.core</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">import</span> <span class="nn">types</span>
+<span class="kn">import</span> <span class="nn">inspect</span>
+<span class="kn">from</span> <span class="nn">decorator</span> <span class="kn">import</span> <span class="n">decorator</span>
+<span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">defaultdict</span>
+<span class="kn">from</span> <span class="nn">contextlib</span> <span class="kn">import</span> <span class="n">contextmanager</span>
+
+
+<div class="viewcode-block" id="_MetaContainer"><a class="viewcode-back" href="../../../api/core.html#torchdrug.core._MetaContainer">[docs]</a><span class="k">class</span> <span class="nc">_MetaContainer</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">"""</span>
+<span class="sd">    Meta container that maintains meta types about members.</span>
+
+<span class="sd">    The meta type of each member is tracked when a member is assigned.</span>
+<span class="sd">    We use a context manager to define the meta types for a bunch of assignment.</span>
+
+<span class="sd">    The meta types are stored as a dict in ``instance.meta_dict``,</span>
+<span class="sd">    where keys are member names and values are meta types.</span>
+
+<span class="sd">    &gt;&gt;&gt; class MyClass(_MetaContainer):</span>
+<span class="sd">    &gt;&gt;&gt;     ...</span>
+
+<span class="sd">    &gt;&gt;&gt; instance = MyClass()</span>
+<span class="sd">    &gt;&gt;&gt; with instance.context("important"):</span>
+<span class="sd">    &gt;&gt;&gt;     instance.value = 1</span>
+<span class="sd">    &gt;&gt;&gt; assert instance.meta_dict["value"] == "important"</span>
+
+<span class="sd">    Members assigned with :meth:`context(None) &lt;context&gt;` or without a context won't be traked.</span>
+
+<span class="sd">    &gt;&gt;&gt; instance.random = 0</span>
+<span class="sd">    &gt;&gt;&gt; assert "random" not in instance.meta_dict</span>
+
+<span class="sd">    You can also restrict available meta types by defining a set :attr:`_meta_types` in the derived class.</span>
+
+<span class="sd">    .. note::</span>
+
+<span class="sd">        Meta container also supports auto inference of meta types.</span>
+<span class="sd">        This can be enabled by setting :attr:`enable_auto_context` to ``True`` in the derived class.</span>
+
+<span class="sd">        Once auto inference is on, any member without an explicit context will be recognized through their name prefix.</span>
+<span class="sd">        For example, ``instance.node_value`` will be recognized as ``node`` if ``node`` is defined in ``meta_types``.</span>
+
+<span class="sd">        This may make code hard to maintain. Use with caution.</span>
+<span class="sd">    """</span>
+
+    <span class="n">_meta_types</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+    <span class="n">enable_auto_context</span> <span class="o">=</span> <span class="kc">False</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">meta_dict</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">meta_dict</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">meta_dict</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">meta_dict</span> <span class="o">=</span> <span class="n">meta_dict</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_setattr</span><span class="p">(</span><span class="s2">"_meta_context"</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_setattr</span><span class="p">(</span><span class="s2">"meta_dict"</span><span class="p">,</span> <span class="n">meta_dict</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_setattr</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
+
+<div class="viewcode-block" id="_MetaContainer.context"><a class="viewcode-back" href="../../../api/core.html#torchdrug.core._MetaContainer.context">[docs]</a>    <span class="nd">@contextmanager</span>
+    <span class="k">def</span> <span class="nf">context</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">type</span><span class="p">):</span>
+        <span class="sd">"""</span>
+<span class="sd">        Context manager for assigning members with a specific meta type.</span>
+<span class="sd">        """</span>
+        <span class="k">if</span> <span class="nb">type</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_meta_types</span> <span class="ow">and</span> <span class="nb">type</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_meta_types</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Expect context type in </span><span class="si">%s</span><span class="s2">, but got `</span><span class="si">%s</span><span class="s2">`"</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_meta_types</span><span class="p">,</span> <span class="nb">type</span><span class="p">))</span>
+        <span class="n">backup</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_meta_context</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_setattr</span><span class="p">(</span><span class="s2">"_meta_context"</span><span class="p">,</span> <span class="nb">type</span><span class="p">)</span>
+        <span class="k">yield</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_setattr</span><span class="p">(</span><span class="s2">"_meta_context"</span><span class="p">,</span> <span class="n">backup</span><span class="p">)</span></div>
+
+    <span class="k">def</span> <span class="fm">__setattr__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">"meta_dict"</span><span class="p">):</span>
+            <span class="nb">type</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_meta_context</span>
+            <span class="k">if</span> <span class="nb">type</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">enable_auto_context</span><span class="p">:</span>
+                <span class="k">for</span> <span class="n">_type</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_meta_types</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">key</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="n">_type</span><span class="p">):</span>
+                        <span class="nb">type</span> <span class="o">=</span> <span class="n">_type</span>
+                        <span class="k">break</span>
+            <span class="k">if</span> <span class="nb">type</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">meta_dict</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="nb">type</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_setattr</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__delattr__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">"meta_dict"</span><span class="p">)</span> <span class="ow">and</span> <span class="n">key</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">meta_dict</span><span class="p">:</span>
+            <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">meta_dict</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+            <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">data_dict</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">_MetaContainer</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__delattr__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_setattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">super</span><span class="p">(</span><span class="n">_MetaContainer</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__setattr__</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">data_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">"""A dict that maps tracked names to members."""</span>
+        <span class="k">return</span> <span class="p">{</span><span class="n">k</span><span class="p">:</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">meta_dict</span><span class="p">}</span>
+
+<div class="viewcode-block" id="_MetaContainer.data_by_meta"><a class="viewcode-back" href="../../../api/core.html#torchdrug.core._MetaContainer.data_by_meta">[docs]</a>    <span class="k">def</span> <span class="nf">data_by_meta</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">include</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">exclude</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">"""</span>
+<span class="sd">        Return members based on the specific meta types.</span>
+
+<span class="sd">        Parameters:</span>
+<span class="sd">            include (list of string, optional): meta types to include</span>
+<span class="sd">            exclude (list of string, optional): meta types to exclude</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            (dict, dict): data member dict and meta type dict</span>
+<span class="sd">        """</span>
+        <span class="k">if</span> <span class="n">include</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">exclude</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">data_dict</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">meta_dict</span>
+
+        <span class="n">include</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_standarize_type</span><span class="p">(</span><span class="n">include</span><span class="p">)</span>
+        <span class="n">exclude</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_standarize_type</span><span class="p">(</span><span class="n">exclude</span><span class="p">)</span>
+        <span class="n">types</span> <span class="o">=</span> <span class="n">include</span> <span class="ow">or</span> <span class="nb">set</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">meta_dict</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
+        <span class="n">types</span> <span class="o">=</span> <span class="n">types</span> <span class="o">-</span> <span class="n">exclude</span>
+        <span class="n">data_dict</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">meta_dict</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">meta_dict</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">types</span><span class="p">:</span>
+                <span class="n">data_dict</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span>
+                <span class="n">meta_dict</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">v</span>
+        <span class="k">return</span> <span class="n">data_dict</span><span class="p">,</span> <span class="n">meta_dict</span></div>
+
+    <span class="k">def</span> <span class="nf">_standarize_type</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">types</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">types</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">types</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">types</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="n">types</span> <span class="o">=</span> <span class="p">{</span><span class="n">types</span><span class="p">}</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">types</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">types</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">types</span></div>
+
+
+<span class="k">class</span> <span class="nc">Tree</span><span class="p">(</span><span class="n">defaultdict</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">Tree</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">Tree</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">flatten</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">prefix</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">result</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">prefix</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">prefix</span> <span class="o">=</span> <span class="s2">""</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">prefix</span> <span class="o">=</span> <span class="n">prefix</span> <span class="o">+</span> <span class="s2">"."</span>
+        <span class="k">if</span> <span class="n">result</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">Tree</span><span class="p">):</span>
+                <span class="n">v</span><span class="o">.</span><span class="n">flatten</span><span class="p">(</span><span class="n">prefix</span> <span class="o">+</span> <span class="n">k</span><span class="p">,</span> <span class="n">result</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">result</span><span class="p">[</span><span class="n">prefix</span> <span class="o">+</span> <span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">v</span>
+        <span class="k">return</span> <span class="n">result</span>
+
+
+<div class="viewcode-block" id="Registry"><a class="viewcode-back" href="../../../api/core.html#torchdrug.core.Registry">[docs]</a><span class="k">class</span> <span class="nc">Registry</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">"""</span>
+<span class="sd">    Registry class for managing all call-by-name access to objects.</span>
+
+<span class="sd">    Typical scenarios:</span>
+
+<span class="sd">    1. Create a model according to a string.</span>
+
+<span class="sd">    &gt;&gt;&gt; gcn = R.search("GCN")(128, [128])</span>
+
+<span class="sd">    2. Register a customize hook to the package.</span>
+
+<span class="sd">    &gt;&gt;&gt; @R.register("features.atom.my_feature")</span>
+<span class="sd">    &gt;&gt;&gt; def my_featurizer(atom):</span>
+<span class="sd">    &gt;&gt;&gt;     ...</span>
+<span class="sd">    &gt;&gt;&gt;</span>
+<span class="sd">    &gt;&gt;&gt; data.Molecule.from_smiles("C1=CC=CC=C1", node_feature="my_feature")</span>
+<span class="sd">    """</span>
+
+    <span class="n">table</span> <span class="o">=</span> <span class="n">Tree</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="fm">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Registry shouldn't be instantiated."</span><span class="p">)</span>
+
+<div class="viewcode-block" id="Registry.register"><a class="viewcode-back" href="../../../api/core.html#torchdrug.core.Registry.register">[docs]</a>    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">register</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+        <span class="sd">"""</span>
+<span class="sd">        Register an object with a canonical name. Hierarchical names are separated by ``.``.</span>
+<span class="sd">        """</span>
+
+        <span class="k">def</span> <span class="nf">wrapper</span><span class="p">(</span><span class="n">obj</span><span class="p">):</span>
+            <span class="n">entry</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">table</span>
+            <span class="n">keys</span> <span class="o">=</span> <span class="n">name</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">"."</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">keys</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]:</span>
+                <span class="n">entry</span> <span class="o">=</span> <span class="n">entry</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">keys</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="ow">in</span> <span class="n">entry</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="s2">"`</span><span class="si">%s</span><span class="s2">` has already been registered by </span><span class="si">%s</span><span class="s2">"</span> <span class="o">%</span> <span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">entry</span><span class="p">[</span><span class="n">keys</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]]))</span>
+
+            <span class="n">entry</span><span class="p">[</span><span class="n">keys</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]]</span> <span class="o">=</span> <span class="n">obj</span>
+            <span class="n">obj</span><span class="o">.</span><span class="n">_registry_key</span> <span class="o">=</span> <span class="n">name</span>
+
+            <span class="k">return</span> <span class="n">obj</span>
+
+        <span class="k">return</span> <span class="n">wrapper</span></div>
+
+<div class="viewcode-block" id="Registry.get"><a class="viewcode-back" href="../../../api/core.html#torchdrug.core.Registry.get">[docs]</a>    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+        <span class="sd">"""</span>
+<span class="sd">        Get an object with a canonical name. Hierachical names are separated by ``.``.</span>
+<span class="sd">        """</span>
+        <span class="n">entry</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">table</span>
+        <span class="n">keys</span> <span class="o">=</span> <span class="n">name</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">"."</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">key</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">keys</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">key</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">entry</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="s2">"Can't find `</span><span class="si">%s</span><span class="s2">` in `</span><span class="si">%s</span><span class="s2">`"</span> <span class="o">%</span> <span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="s2">"."</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">keys</span><span class="p">[:</span><span class="n">i</span><span class="p">])))</span>
+            <span class="n">entry</span> <span class="o">=</span> <span class="n">entry</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">entry</span></div>
+
+<div class="viewcode-block" id="Registry.search"><a class="viewcode-back" href="../../../api/core.html#torchdrug.core.Registry.search">[docs]</a>    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">search</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+        <span class="sd">"""</span>
+<span class="sd">        Search an object with the given name. The name doesn't need to be canonical.</span>
+
+<span class="sd">        For example, we can search ``GCN`` and get the object of ``models.GCN``.</span>
+<span class="sd">        """</span>
+        <span class="n">keys</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">pattern</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">"\b</span><span class="si">%s</span><span class="s2">\b"</span> <span class="o">%</span> <span class="n">name</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="bp">cls</span><span class="o">.</span><span class="n">table</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">pattern</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">k</span><span class="p">):</span>
+                <span class="n">keys</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
+                <span class="n">value</span> <span class="o">=</span> <span class="n">v</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">keys</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="s2">"Can't find any registered key containing `</span><span class="si">%s</span><span class="s2">`"</span> <span class="o">%</span> <span class="n">name</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">keys</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">keys</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"`</span><span class="si">%s</span><span class="s2">`"</span> <span class="o">%</span> <span class="n">key</span> <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">keys</span><span class="p">]</span>
+            <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="s2">"Ambiguous key `</span><span class="si">%s</span><span class="s2">`. Found </span><span class="si">%s</span><span class="s2">"</span> <span class="o">%</span> <span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="s2">", "</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">keys</span><span class="p">)))</span>
+        <span class="k">return</span> <span class="n">value</span></div></div>
+
+
+<span class="k">class</span> <span class="nc">_Configurable</span><span class="p">(</span><span class="nb">type</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">config_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">"""</span>
+<span class="sd">        Return the configuration dict of this instance.</span>
+<span class="sd">        """</span>
+        <span class="bp">cls</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">"_registry_key"</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">)</span>
+        <span class="n">config</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"class"</span><span class="p">:</span> <span class="bp">cls</span><span class="p">}</span>
+
+        <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_config</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">Configurable</span><span class="p">):</span>
+                <span class="n">v</span> <span class="o">=</span> <span class="n">v</span><span class="o">.</span><span class="n">config_dict</span><span class="p">()</span>
+            <span class="n">config</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">v</span>
+        <span class="k">return</span> <span class="n">config</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">load_config_dict</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">config</span><span class="p">):</span>
+        <span class="sd">"""</span>
+<span class="sd">        Construct an instance from the configuration dict.</span>
+<span class="sd">        """</span>
+        <span class="k">if</span> <span class="bp">cls</span> <span class="o">==</span> <span class="n">_Configurable</span><span class="p">:</span>
+            <span class="n">real_cls</span> <span class="o">=</span> <span class="n">Registry</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">config</span><span class="p">[</span><span class="s2">"class"</span><span class="p">])</span>
+            <span class="n">custom_load_func</span> <span class="o">=</span> <span class="n">real_cls</span><span class="o">.</span><span class="n">load_config_dict</span><span class="o">.</span><span class="vm">__func__</span> <span class="o">!=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">load_config_dict</span><span class="o">.</span><span class="vm">__func__</span>
+            <span class="k">if</span> <span class="n">custom_load_func</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">real_cls</span><span class="o">.</span><span class="n">load_config_dict</span><span class="p">(</span><span class="n">config</span><span class="p">)</span>
+            <span class="bp">cls</span> <span class="o">=</span> <span class="n">real_cls</span>
+        <span class="k">elif</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="s2">"_registry_key"</span><span class="p">,</span> <span class="bp">cls</span><span class="o">.</span><span class="vm">__name__</span><span class="p">)</span> <span class="o">!=</span> <span class="n">config</span><span class="p">[</span><span class="s2">"class"</span><span class="p">]:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Expect config class to be `</span><span class="si">%s</span><span class="s2">`, but found `</span><span class="si">%s</span><span class="s2">`"</span> <span class="o">%</span> <span class="p">(</span><span class="bp">cls</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="n">config</span><span class="p">[</span><span class="s2">"class"</span><span class="p">]))</span>
+
+        <span class="n">new_config</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">config</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="nb">dict</span><span class="p">)</span> <span class="ow">and</span> <span class="s2">"class"</span> <span class="ow">in</span> <span class="n">v</span><span class="p">:</span>
+                <span class="n">v</span> <span class="o">=</span> <span class="n">_Configurable</span><span class="o">.</span><span class="n">load_config_dict</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">k</span> <span class="o">!=</span> <span class="s2">"class"</span><span class="p">:</span>
+                <span class="n">new_config</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">v</span>
+
+        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="o">**</span><span class="n">new_config</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__new__</span><span class="p">(</span><span class="n">typ</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+
+        <span class="bp">cls</span> <span class="o">=</span> <span class="nb">type</span><span class="o">.</span><span class="fm">__new__</span><span class="p">(</span><span class="n">typ</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+        <span class="nd">@decorator</span>
+        <span class="k">def</span> <span class="nf">wrapper</span><span class="p">(</span><span class="n">init</span><span class="p">,</span> <span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+            <span class="n">sig</span> <span class="o">=</span> <span class="n">inspect</span><span class="o">.</span><span class="n">signature</span><span class="p">(</span><span class="n">init</span><span class="p">)</span>
+            <span class="n">func</span> <span class="o">=</span> <span class="n">sig</span><span class="o">.</span><span class="n">bind</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+            <span class="n">func</span><span class="o">.</span><span class="n">apply_defaults</span><span class="p">()</span>
+            <span class="n">config</span> <span class="o">=</span> <span class="p">{}</span>
+            <span class="n">keys</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">sig</span><span class="o">.</span><span class="n">parameters</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+            <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">keys</span><span class="p">[</span><span class="mi">1</span><span class="p">:],</span> <span class="n">func</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="mi">1</span><span class="p">:]):</span> <span class="c1"># exclude self</span>
+                <span class="n">config</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">v</span>
+            <span class="n">config</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">func</span><span class="o">.</span><span class="n">kwargs</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">"_ignore_args"</span><span class="p">,</span> <span class="p">{}):</span>
+                <span class="n">config</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_config</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">config</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">init</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+        <span class="k">def</span> <span class="nf">get_function</span><span class="p">(</span><span class="n">method</span><span class="p">):</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">method</span><span class="p">,</span> <span class="n">types</span><span class="o">.</span><span class="n">MethodType</span><span class="p">):</span>
+                <span class="k">return</span> <span class="n">method</span><span class="o">.</span><span class="vm">__func__</span>
+            <span class="k">return</span> <span class="n">method</span>
+
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">cls</span><span class="o">.</span><span class="fm">__init__</span><span class="p">,</span> <span class="n">types</span><span class="o">.</span><span class="n">FunctionType</span><span class="p">):</span>
+            <span class="bp">cls</span><span class="o">.</span><span class="fm">__init__</span> <span class="o">=</span> <span class="n">wrapper</span><span class="p">(</span><span class="bp">cls</span><span class="o">.</span><span class="fm">__init__</span><span class="p">)</span>
+            <span class="n">custom_load_func</span> <span class="o">=</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="s2">"load_config_dict"</span><span class="p">)</span> <span class="ow">and</span> \
+                          <span class="n">get_function</span><span class="p">(</span><span class="bp">cls</span><span class="o">.</span><span class="n">load_config_dict</span><span class="p">)</span> <span class="o">!=</span> <span class="n">get_function</span><span class="p">(</span><span class="n">typ</span><span class="o">.</span><span class="n">load_config_dict</span><span class="p">)</span>
+            <span class="n">custom_config_func</span> <span class="o">=</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="s2">"config_dict"</span><span class="p">)</span> <span class="ow">and</span> \
+                                 <span class="n">get_function</span><span class="p">(</span><span class="bp">cls</span><span class="o">.</span><span class="n">config_dict</span><span class="p">)</span> <span class="o">!=</span> <span class="n">get_function</span><span class="p">(</span><span class="n">typ</span><span class="o">.</span><span class="n">config_dict</span><span class="p">)</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">custom_load_func</span><span class="p">:</span>
+                <span class="bp">cls</span><span class="o">.</span><span class="n">load_config_dict</span> <span class="o">=</span> <span class="n">_Configurable</span><span class="o">.</span><span class="n">load_config_dict</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">custom_config_func</span><span class="p">:</span>
+                <span class="bp">cls</span><span class="o">.</span><span class="n">config_dict</span> <span class="o">=</span> <span class="n">_Configurable</span><span class="o">.</span><span class="n">config_dict</span>
+
+        <span class="k">return</span> <span class="bp">cls</span>
+
+
+<div class="viewcode-block" id="Configurable"><a class="viewcode-back" href="../../../api/core.html#torchdrug.core.Configurable">[docs]</a><span class="k">class</span> <span class="nc">Configurable</span><span class="p">(</span><span class="n">metaclass</span><span class="o">=</span><span class="n">_Configurable</span><span class="p">):</span>
+    <span class="sd">"""</span>
+<span class="sd">    Class for load/save configuration.</span>
+<span class="sd">    It will automatically record every argument passed to ``__init__`` function.</span>
+
+<span class="sd">    This class is inspired by :meth:`state_dict()` in PyTorch, but designed for hyperparameters.</span>
+
+<span class="sd">    Inherit this class to construct a configurable class.</span>
+
+<span class="sd">    &gt;&gt;&gt; class MyClass(nn.Module, core.Configurable):</span>
+
+<span class="sd">    Note :class:`Configurable` only applies to the current class rather than any derived class.</span>
+<span class="sd">    For example, the following definition only records the arguments of ``MyClass``.</span>
+
+<span class="sd">    &gt;&gt;&gt; class DerivedClass(MyClass):</span>
+
+<span class="sd">    In order to record the arguments of ``DerivedClass``, explicitly specify the inheritance.</span>
+
+<span class="sd">    &gt;&gt;&gt; class DerivedClass(MyClass, core.Configurable):</span>
+
+<span class="sd">    To get the configuration of an instance, use :meth:`config_dict()`,</span>
+<span class="sd">    which returns a dict of argument names and values.</span>
+<span class="sd">    If an argument is also an instance of :class:`Configurable`, it will be recursively expanded in the dict.</span>
+<span class="sd">    The configuration dict can be passed to :meth:`load_config_dict()` to create a copy of the instance.</span>
+
+<span class="sd">    For classes already registered in :class:`Registry`,</span>
+<span class="sd">    they can be directly created from the :class:`Configurable` class.</span>
+<span class="sd">    This is convenient for building models from configuration files.</span>
+
+<span class="sd">    &gt;&gt;&gt; config = models.GCN(128, [128]).config_dict()</span>
+<span class="sd">    &gt;&gt;&gt; gcn = Configurable.load_config_dict(config)</span>
+<span class="sd">    """</span>
+    <span class="k">pass</span></div>
+</pre></div>
+      </article>
+      <footer>
+        
+        <div class="related-pages">
+          
+          
+        </div>
+
+        <div class="related-information">
+          <span class="copyright">Copyright &copy; 2021, MilaGraph Group</span> |
+          Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using
+          <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+          <a href="https://github.com/pradyunsg/furo">Furo theme</a>.
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer no-toc">
+      
+      
+      
+    </aside>
+  </main>
+</div>
+  </body>
+</html>

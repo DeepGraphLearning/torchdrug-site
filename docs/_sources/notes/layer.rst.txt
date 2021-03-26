@@ -53,7 +53,7 @@ We use the convention that :math:`degree\_in_j` represents the degree of node
 .. code:: python
 
     from torch_scatter import scatter_add
-    from drugdiscovery import layers
+    from torchdrug import layers
 
     class PageRankIteration(layers.MessagePassingBase):
 
@@ -96,8 +96,8 @@ passing on a bipartite graph -- one side are original nodes, and the other side 
 "graph" nodes.
 
 Drugdiscovery provides effcient primitives to support this kind of message passing.
-Specifically, :attr:`node2graph <drugdiscovery.data.PackedGraph.node2graph>` maps
-node IDs to graph IDs, and :attr:`edge2graph <drugdiscovery.data.PackedGraph.edge2graph>`
+Specifically, :attr:`node2graph <torchdrug.data.PackedGraph.node2graph>` maps
+node IDs to graph IDs, and :attr:`edge2graph <torchdrug.data.PackedGraph.edge2graph>`
 maps edge IDs to graph IDs.
 
 In this example, we will use the above primitives to compute the variance of node
@@ -118,6 +118,6 @@ the difference. Finally, we readout the mean of the squared difference as the va
             var = scatter_mean(diff * diff, graph.node2graph, dim=0, dim_size=graph.batch_size)
             return var
 
-Notice that :attr:`node2graph <drugdiscovery.data.PackedGraph.node2graph>` is used
+Notice that :attr:`node2graph <torchdrug.data.PackedGraph.node2graph>` is used
 for both readout and broadcast. When used in a scatter function, it serves as
 readout. When used in a conventional indexing, it is equivalent to broadcast.

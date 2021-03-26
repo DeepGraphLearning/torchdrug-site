@@ -24,7 +24,7 @@ the dataset using the following code:
 .. code:: python
 
     import torch
-    from drugdiscovery import core, datasets, tasks, models
+    from torchdrug import core, datasets, tasks, models
 
     dataset = datasets.FB15k237("~/kg-datasets/")
     train_set, valid_set, test_set = dataset.split()

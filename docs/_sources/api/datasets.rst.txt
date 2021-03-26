@@ -1,7 +1,124 @@
-drugdiscovery.datasets
+torchdrug.datasets
 ======================
 
-.. automodule:: drugdiscovery.datasets
-    :members:
-    :inherited-members:
-    :exclude-members: load_csv, load_smiles
+.. currentmodule:: torchdrug.datasets
+
+
+Knowledge Graph Datasets
+----------------------------------
+
+FB15k
+~~~~~~~~~~~~~~~~
+.. autoclass:: FB15k
+
+FB15k237
+~~~~~~~~~~~~~~~~
+.. autoclass:: FB15k237
+
+WN18
+~~~~~~~~~~~~~~~~
+.. autoclass:: WN18
+
+WN18RR
+~~~~~~~~~~~~~~~~
+.. autoclass:: WN18RR
+
+
+Molecule Property Prediction Datasets
+----------------------------------
+
+BACE
+~~~~~~~~~~~~~~~~
+.. autoclass:: BACE
+
+BBBP
+~~~~~~~~~~~~~~~~
+.. autoclass:: BBBP
+
+CEP
+~~~~~~~~~~~~~~~~
+.. autoclass:: CEP
+
+ChEMBLFiltered
+~~~~~~~~~~~~~~~~
+.. autoclass:: ChEMBLFiltered
+
+ClinTox
+~~~~~~~~~~~~~~~~
+.. autoclass:: ClinTox
+
+Delaney
+~~~~~~~~~~~~~~~~
+.. autoclass:: Delaney
+
+FreeSolv
+~~~~~~~~~~~~~~~~
+.. autoclass:: FreeSolv
+
+HIV
+~~~~~~~~~~~~~~~~
+.. autoclass:: HIV
+
+Lipophilicity
+~~~~~~~~~~~~~~~~
+.. autoclass:: Lipophilicity
+
+MUV
+~~~~~~~~~~~~~~~~
+.. autoclass:: MUV
+
+Malaria
+~~~~~~~~~~~~~~~~
+.. autoclass:: Malaria
+
+OPV
+~~~~~~~~~~~~~~~~
+.. autoclass:: OPV
+
+QM8
+~~~~~~~~~~~~~~~~
+.. autoclass:: QM8
+
+QM9
+~~~~~~~~~~~~~~~~
+.. autoclass:: QM9
+
+SIDER
+~~~~~~~~~~~~~~~~
+.. autoclass:: SIDER
+
+Tox21
+~~~~~~~~~~~~~~~~
+.. autoclass:: Tox21
+
+ToxCast
+~~~~~~~~~~~~~~~~
+.. autoclass:: ToxCast
+
+ZINC250k
+~~~~~~~~~~~~~~~~
+.. autoclass:: ZINC250k
+
+ZINC2m
+~~~~~~~~~~~~~~~~
+.. autoclass:: ZINC2m
+
+
+Retrosynthesis Datasets
+----------------------------------
+
+USPTO50k
+~~~~~~~~~~~~~~~~
+.. autoclass:: USPTO50k
+
+
+Social Network Datasets
+----------------------------------
+
+CiteSeer
+~~~~~~~~~~~~~~~~
+.. autoclass:: CiteSeer
+
+Cora
+~~~~~~~~~~~~~~~~
+.. autoclass:: Cora

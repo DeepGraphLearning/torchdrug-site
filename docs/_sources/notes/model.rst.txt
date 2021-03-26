@@ -22,7 +22,7 @@ Node Representation Model
 In VGAE, the node representation model is a variational graph convolutional network
 (VGCN). This can be implemented via standard graph convolution layers, plus a
 variational regularization loss. We define our model as a subclass of `nn.Module`
-and `core.Configurable <drugdiscovery.core.Configurable>`.
+and `core.Configurable <torchdrug.core.Configurable>`.
 
 .. code:: python
 
@@ -31,8 +31,8 @@ and `core.Configurable <drugdiscovery.core.Configurable>`.
     from torch.nn import functional as F
     from torch.utils import data as torch_data
 
-    from drugdiscovery import core, layers, datasets, metrics
-    from drugdiscovery.core import Registry as R
+    from torchdrug import core, layers, datasets, metrics
+    from torchdrug.core import Registry as R
 
     @R.register("models.VGCN")
     class VariationalGraphConvolutionalNetwork(nn.Module, core.Configurable):

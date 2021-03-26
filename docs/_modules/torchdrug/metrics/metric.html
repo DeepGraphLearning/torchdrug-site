@@ -1,0 +1,363 @@
+<!doctype html>
+<html class="no-js">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/><link rel="index" title="Index" href="../../../genindex.html" /><link rel="search" title="Search" href="../../../search.html" />
+
+    <meta name="generator" content="sphinx-3.5.3, furo 2020.10.15.beta13"/>
+        <title>torchdrug.metrics.metric - Drugdiscovery 0.1.0 documentation</title>
+      <link id="pygments_dark_css" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css" href="../../../_static/pygments_dark.css" />
+    <link rel="stylesheet" href="../../../_static/styles/default.css?ff272265f628507515701eff">
+    <link rel="stylesheet" href="../../../_static/pygments.css">
+    <link media="(prefers-color-scheme: dark)" rel="stylesheet" href="../../../_static/pygments_dark.css">
+    
+<style>
+  :root {
+    --color-code-background: #f8f8f8;
+    --color-code-foreground: black;
+  
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+    --color-code-background: #202020;
+    --color-code-foreground: #d0d0d0;
+      
+    }
+  }
+</style>
+    <script id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script><script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/scripts/main.js?ff272265f628507515701eff"></script></head>
+  <body dir="">
+    
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+      stroke-width="1.5" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+      <path stroke="none" d="M0 0h24v24H0z"/>
+      <line x1="4" y1="6" x2="20" y2="6" />
+      <line x1="10" y1="12" x2="20" y2="12" />
+      <line x1="6" y1="18" x2="20" y2="18" />
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+      stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+      class="feather feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+      stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+      class="feather feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation"></label>
+<label class="overlay toc-overlay" for="__toc"></label>
+
+
+<div class="page">
+  <header class="mobile-header">
+    <label class="header-left nav-overlay-icon" for="__navigation">
+      <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+    </label>
+    <div class="header-center"><div class="brand">Drugdiscovery 0.1.0 documentation</div></div>
+    <div class="header-right"></div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand centered" href="../../../index.html">
+  <div class="sidebar-logo-container">
+    <img class="sidebar-logo" src="../../../_static/logo.svg" alt="Logo"/>
+  </div>
+  
+</a><form class="sidebar-search-container" method="get" action="../../../search.html">
+  <input class="sidebar-search" placeholder="Search" name="q">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form><div class="sidebar-tree sidebar-scroll">
+  <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../quick_start.html">Quick Start</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../benchmark/index.html">Benchmark</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label for="toctree-checkbox-1"><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../benchmark/property_prediction.html">Molecule Property Prediction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../benchmark/pretrain.html">Pretrained Molecular Representations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../benchmark/generation.html">Graph Generation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../benchmark/retrosynthesis.html">Retrosynthesis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../benchmark/reasoning.html">Knowledge Graph Reasoning</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../tutorials/index.html">Tutorials</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label for="toctree-checkbox-2"><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../tutorials/property_prediction.html">Property Prediction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../tutorials/pretrain.html">Pretrained Molecular Representations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../tutorials/generation.html">Molecule Generation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../tutorials/retrosynthesis.html">Retrosynthesis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../tutorials/reasoning.html">Knowledge Graph Reasoning</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../notes/index.html">Notes</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label for="toctree-checkbox-3"><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../notes/graph.html">Graph Data Structures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../notes/variadic.html">Batch Irregular Structures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../notes/layer.html">Graph Neural Network Layers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../notes/model.html">Customize Models &amp; Tasks</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Package Reference</span></p>
+<ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../api/index.html">Documentation</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label for="toctree-checkbox-4"><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../api/core.html">torchdrug.core</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api/data.html">torchdrug.data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api/datasets.html">torchdrug.datasets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api/metrics.html">torchdrug.metrics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api/layers.html">torchdrug.layers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api/models.html">torchdrug.models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api/tasks.html">torchdrug.tasks</a></li>
+</ul>
+</li>
+</ul>
+
+</div>
+      </div>
+      
+    </div>
+  </aside>
+  <main class="main">
+    <div class="content">
+      <article role="main">
+        <label class="toc-overlay-icon no-toc" for="__toc">
+          <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+        </label>
+        <h1>Source code for torchdrug.metrics.metric</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+
+<span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">from</span> <span class="nn">torch.nn</span> <span class="kn">import</span> <span class="n">functional</span> <span class="k">as</span> <span class="n">F</span>
+<span class="kn">from</span> <span class="nn">torch_scatter</span> <span class="kn">import</span> <span class="n">scatter_max</span>
+<span class="kn">import</span> <span class="nn">networkx</span> <span class="k">as</span> <span class="nn">nx</span>
+<span class="kn">from</span> <span class="nn">rdkit</span> <span class="kn">import</span> <span class="n">Chem</span>
+<span class="kn">from</span> <span class="nn">rdkit.Chem</span> <span class="kn">import</span> <span class="n">RDConfig</span><span class="p">,</span> <span class="n">Descriptors</span>
+
+<span class="kn">from</span> <span class="nn">torchdrug</span> <span class="kn">import</span> <span class="n">utils</span>
+<span class="kn">from</span> <span class="nn">torchdrug.layers</span> <span class="kn">import</span> <span class="n">functional</span>
+<span class="kn">from</span> <span class="nn">torchdrug.core</span> <span class="kn">import</span> <span class="n">Registry</span> <span class="k">as</span> <span class="n">R</span>
+
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">RDConfig</span><span class="o">.</span><span class="n">RDContribDir</span><span class="p">,</span> <span class="s2">"SA_Score"</span><span class="p">))</span>
+<span class="kn">import</span> <span class="nn">sascorer</span>
+
+
+<div class="viewcode-block" id="area_under_roc"><a class="viewcode-back" href="../../../api/metrics.html#torchdrug.metrics.area_under_roc">[docs]</a><span class="nd">@R</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="s2">"metrics.auroc"</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">area_under_roc</span><span class="p">(</span><span class="n">pred</span><span class="p">,</span> <span class="n">target</span><span class="p">):</span>
+    <span class="sd">"""</span>
+<span class="sd">    Area under receiver operating characteristic curve (ROC).</span>
+
+<span class="sd">    Parameters:</span>
+<span class="sd">        pred (Tensor):</span>
+<span class="sd">        target (Tensor): binary</span>
+<span class="sd">    """</span>
+    <span class="n">order</span> <span class="o">=</span> <span class="n">pred</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="n">descending</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">target</span> <span class="o">=</span> <span class="n">target</span><span class="p">[</span><span class="n">order</span><span class="p">]</span>
+    <span class="n">hit</span> <span class="o">=</span> <span class="n">target</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+    <span class="nb">all</span> <span class="o">=</span> <span class="p">(</span><span class="n">target</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">*</span> <span class="p">(</span><span class="n">target</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+    <span class="n">auroc</span> <span class="o">=</span> <span class="n">hit</span><span class="p">[</span><span class="n">target</span> <span class="o">==</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">/</span> <span class="p">(</span><span class="nb">all</span> <span class="o">+</span> <span class="mf">1e-10</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">auroc</span></div>
+
+
+<div class="viewcode-block" id="area_under_prc"><a class="viewcode-back" href="../../../api/metrics.html#torchdrug.metrics.area_under_prc">[docs]</a><span class="nd">@R</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="s2">"metrics.auprc"</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">area_under_prc</span><span class="p">(</span><span class="n">pred</span><span class="p">,</span> <span class="n">target</span><span class="p">):</span>
+    <span class="sd">"""</span>
+<span class="sd">    Area under precision-recall curve (PRC).</span>
+<span class="sd">    """</span>
+    <span class="n">order</span> <span class="o">=</span> <span class="n">pred</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="n">descending</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">target</span> <span class="o">=</span> <span class="n">target</span><span class="p">[</span><span class="n">order</span><span class="p">]</span>
+    <span class="n">precision</span> <span class="o">=</span> <span class="n">target</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">/</span> <span class="n">torch</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">target</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="n">target</span><span class="o">.</span><span class="n">device</span><span class="p">)</span>
+    <span class="n">auprc</span> <span class="o">=</span> <span class="n">precision</span><span class="p">[</span><span class="n">target</span> <span class="o">==</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">/</span> <span class="p">((</span><span class="n">target</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">+</span> <span class="mf">1e-10</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">auprc</span></div>
+
+
+<div class="viewcode-block" id="r2"><a class="viewcode-back" href="../../../api/metrics.html#torchdrug.metrics.r2">[docs]</a><span class="nd">@R</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="s2">"metrics.r2"</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">r2</span><span class="p">(</span><span class="n">pred</span><span class="p">,</span> <span class="n">target</span><span class="p">):</span>
+    <span class="sd">"""</span>
+<span class="sd">    :math:`R^2` regression score.</span>
+<span class="sd">    """</span>
+    <span class="n">total</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">var</span><span class="p">(</span><span class="n">target</span><span class="p">,</span> <span class="n">unbiased</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">residual</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">mse_loss</span><span class="p">(</span><span class="n">pred</span><span class="p">,</span> <span class="n">target</span><span class="p">)</span>
+    <span class="k">return</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">residual</span> <span class="o">/</span> <span class="n">total</span></div>
+
+
+<div class="viewcode-block" id="logP"><a class="viewcode-back" href="../../../api/metrics.html#torchdrug.metrics.logP">[docs]</a><span class="nd">@R</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="s2">"metrics.logp"</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">logP</span><span class="p">(</span><span class="n">pred</span><span class="p">):</span>
+    <span class="sd">"""</span>
+<span class="sd">    Logarithm of partition coefficient between octanol and water for a compound.</span>
+
+<span class="sd">    Parameters:</span>
+<span class="sd">        pred (data.PackedMolecule): molecules to evaluate</span>
+<span class="sd">    """</span>
+    <span class="n">logp</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">mol</span> <span class="ow">in</span> <span class="n">pred</span><span class="p">:</span>
+        <span class="n">mol</span> <span class="o">=</span> <span class="n">mol</span><span class="o">.</span><span class="n">to_molecule</span><span class="p">()</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">with</span> <span class="n">utils</span><span class="o">.</span><span class="n">no_rdkit_log</span><span class="p">():</span>
+                <span class="n">mol</span><span class="o">.</span><span class="n">UpdatePropertyCache</span><span class="p">()</span>
+                <span class="n">score</span> <span class="o">=</span> <span class="n">Descriptors</span><span class="o">.</span><span class="n">MolLogP</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>
+        <span class="k">except</span> <span class="n">Chem</span><span class="o">.</span><span class="n">AtomValenceException</span><span class="p">:</span>
+            <span class="n">score</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">logp</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">score</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">logp</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">float</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="n">pred</span><span class="o">.</span><span class="n">device</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="penalized_logP"><a class="viewcode-back" href="../../../api/metrics.html#torchdrug.metrics.penalized_logP">[docs]</a><span class="nd">@R</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="s2">"metrics.penalized_logp"</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">penalized_logP</span><span class="p">(</span><span class="n">pred</span><span class="p">):</span>
+    <span class="sd">"""</span>
+<span class="sd">    Logarithm of partition coefficient, penalized by cycle length and synthetic accessibility.</span>
+
+<span class="sd">    Parameters:</span>
+<span class="sd">        pred (data.PackedMolecule): molecules to evaluate</span>
+<span class="sd">    """</span>
+    <span class="c1"># statistics from ZINC250k</span>
+    <span class="n">logp_mean</span> <span class="o">=</span> <span class="mf">2.4570953396190123</span>
+    <span class="n">logp_std</span> <span class="o">=</span> <span class="mf">1.434324401111988</span>
+    <span class="n">sa_mean</span> <span class="o">=</span> <span class="mf">3.0525811293166134</span>
+    <span class="n">sa_std</span> <span class="o">=</span> <span class="mf">0.8335207024513095</span>
+    <span class="n">cycle_mean</span> <span class="o">=</span> <span class="mf">0.0485696876403053</span>
+    <span class="n">cycle_std</span> <span class="o">=</span> <span class="mf">0.2860212110245455</span>
+
+    <span class="n">plogp</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">mol</span> <span class="ow">in</span> <span class="n">pred</span><span class="p">:</span>
+        <span class="n">cycles</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">cycle_basis</span><span class="p">(</span><span class="n">nx</span><span class="o">.</span><span class="n">Graph</span><span class="p">(</span><span class="n">mol</span><span class="o">.</span><span class="n">edge_list</span><span class="p">[:,</span> <span class="p">:</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">()))</span>
+        <span class="k">if</span> <span class="n">cycles</span><span class="p">:</span>
+            <span class="n">max_cycle</span> <span class="o">=</span> <span class="nb">max</span><span class="p">([</span><span class="nb">len</span><span class="p">(</span><span class="n">cycle</span><span class="p">)</span> <span class="k">for</span> <span class="n">cycle</span> <span class="ow">in</span> <span class="n">cycles</span><span class="p">])</span>
+            <span class="n">cycle</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">max_cycle</span> <span class="o">-</span> <span class="mi">6</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">cycle</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">mol</span> <span class="o">=</span> <span class="n">mol</span><span class="o">.</span><span class="n">to_molecule</span><span class="p">()</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">with</span> <span class="n">utils</span><span class="o">.</span><span class="n">no_rdkit_log</span><span class="p">():</span>
+                <span class="n">mol</span><span class="o">.</span><span class="n">UpdatePropertyCache</span><span class="p">()</span>
+                <span class="n">Chem</span><span class="o">.</span><span class="n">GetSymmSSSR</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>
+                <span class="n">logp</span> <span class="o">=</span> <span class="n">Descriptors</span><span class="o">.</span><span class="n">MolLogP</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>
+                <span class="n">sa</span> <span class="o">=</span> <span class="n">sascorer</span><span class="o">.</span><span class="n">calculateScore</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>
+            <span class="n">logp</span> <span class="o">=</span> <span class="p">(</span><span class="n">logp</span> <span class="o">-</span> <span class="n">logp_mean</span><span class="p">)</span> <span class="o">/</span> <span class="n">logp_std</span>
+            <span class="n">sa</span> <span class="o">=</span> <span class="p">(</span><span class="n">sa</span> <span class="o">-</span> <span class="n">sa_mean</span><span class="p">)</span> <span class="o">/</span> <span class="n">sa_std</span>
+            <span class="n">cycle</span> <span class="o">=</span> <span class="p">(</span><span class="n">cycle</span> <span class="o">-</span> <span class="n">cycle_mean</span><span class="p">)</span> <span class="o">/</span> <span class="n">cycle_std</span>
+            <span class="n">score</span> <span class="o">=</span> <span class="n">logp</span> <span class="o">-</span> <span class="n">sa</span> <span class="o">-</span> <span class="n">cycle</span>
+        <span class="k">except</span> <span class="n">Chem</span><span class="o">.</span><span class="n">AtomValenceException</span><span class="p">:</span>
+            <span class="n">score</span> <span class="o">=</span> <span class="o">-</span><span class="mi">30</span>
+        <span class="n">plogp</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">score</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">plogp</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">float</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="n">pred</span><span class="o">.</span><span class="n">device</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="SA"><a class="viewcode-back" href="../../../api/metrics.html#torchdrug.metrics.SA">[docs]</a><span class="nd">@R</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="s2">"metrics.SA"</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">SA</span><span class="p">(</span><span class="n">pred</span><span class="p">):</span>
+    <span class="sd">"""</span>
+<span class="sd">    Synthetic accesibility score.</span>
+
+<span class="sd">    Parameters:</span>
+<span class="sd">        pred (data.PackedMolecule): molecules to evaluate</span>
+<span class="sd">    """</span>
+    <span class="n">sa</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">mol</span> <span class="ow">in</span> <span class="n">pred</span><span class="p">:</span>
+        <span class="k">with</span> <span class="n">utils</span><span class="o">.</span><span class="n">no_rdkit_log</span><span class="p">():</span>
+            <span class="n">score</span> <span class="o">=</span> <span class="n">sascorer</span><span class="o">.</span><span class="n">calculateScore</span><span class="p">(</span><span class="n">mol</span><span class="o">.</span><span class="n">to_molecule</span><span class="p">())</span>
+        <span class="n">sa</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">score</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">sa</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">float</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="n">pred</span><span class="o">.</span><span class="n">device</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="QED"><a class="viewcode-back" href="../../../api/metrics.html#torchdrug.metrics.QED">[docs]</a><span class="nd">@R</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="s2">"metrics.qed"</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">QED</span><span class="p">(</span><span class="n">pred</span><span class="p">):</span>
+    <span class="sd">"""</span>
+<span class="sd">    Quantitative estimation of drug-likeness.</span>
+
+<span class="sd">    Parameters:</span>
+<span class="sd">        pred (data.PackedMolecule): molecules to evaluate</span>
+<span class="sd">    """</span>
+    <span class="n">qed</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">mol</span> <span class="ow">in</span> <span class="n">pred</span><span class="p">:</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">with</span> <span class="n">utils</span><span class="o">.</span><span class="n">no_rdkit_log</span><span class="p">():</span>
+                <span class="n">score</span> <span class="o">=</span> <span class="n">Descriptors</span><span class="o">.</span><span class="n">qed</span><span class="p">(</span><span class="n">mol</span><span class="o">.</span><span class="n">to_molecule</span><span class="p">())</span>
+        <span class="k">except</span> <span class="n">Chem</span><span class="o">.</span><span class="n">AtomValenceException</span><span class="p">:</span>
+            <span class="n">score</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+        <span class="n">qed</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">score</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">qed</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">float</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="n">pred</span><span class="o">.</span><span class="n">device</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="chemical_validity"><a class="viewcode-back" href="../../../api/metrics.html#torchdrug.metrics.chemical_validity">[docs]</a><span class="nd">@R</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="s2">"metrics.validity"</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">chemical_validity</span><span class="p">(</span><span class="n">pred</span><span class="p">):</span>
+    <span class="sd">"""</span>
+<span class="sd">    Chemical validity of molecules.</span>
+
+<span class="sd">    Parameters:</span>
+<span class="sd">        pred (data.PackedMolecule): molecules to evaluate</span>
+<span class="sd">    """</span>
+    <span class="n">validity</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">mol</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">pred</span><span class="p">):</span>
+        <span class="k">with</span> <span class="n">utils</span><span class="o">.</span><span class="n">no_rdkit_log</span><span class="p">():</span>
+            <span class="n">smiles</span> <span class="o">=</span> <span class="n">mol</span><span class="o">.</span><span class="n">to_smiles</span><span class="p">()</span>
+            <span class="n">mol</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmiles</span><span class="p">(</span><span class="n">smiles</span><span class="p">)</span>
+        <span class="n">validity</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">1</span> <span class="k">if</span> <span class="n">mol</span> <span class="k">else</span> <span class="mi">0</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">validity</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">float</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="n">pred</span><span class="o">.</span><span class="n">device</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="variadic_accuracy"><a class="viewcode-back" href="../../../api/metrics.html#torchdrug.metrics.variadic_accuracy">[docs]</a><span class="k">def</span> <span class="nf">variadic_accuracy</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="n">target</span><span class="p">,</span> <span class="n">size</span><span class="p">):</span>
+    <span class="sd">"""</span>
+<span class="sd">    Compute classification accuracy over variadic sizes of categories.</span>
+
+<span class="sd">    Suppose there are :math:`N` samples, and the number of categories in all samples is summed to :math`B`.</span>
+
+<span class="sd">    Parameters:</span>
+<span class="sd">        input (Tensor): prediction of shape :math:`(B,)`</span>
+<span class="sd">        target (Tensor): target of shape :math:`(N,)`. Each target is a relative index in a sample.</span>
+<span class="sd">        size (Tensor): number of categories of shape :math:`(N,)`</span>
+<span class="sd">    """</span>
+    <span class="n">index2graph</span> <span class="o">=</span> <span class="n">functional</span><span class="o">.</span><span class="n">_size_to_index</span><span class="p">(</span><span class="n">size</span><span class="p">)</span>
+
+    <span class="n">input_class</span> <span class="o">=</span> <span class="n">scatter_max</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="n">index2graph</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">target_index</span> <span class="o">=</span> <span class="n">target</span> <span class="o">+</span> <span class="n">size</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">-</span> <span class="n">size</span>
+    <span class="n">accuracy</span> <span class="o">=</span> <span class="p">(</span><span class="n">input_class</span> <span class="o">==</span> <span class="n">target_index</span><span class="p">)</span><span class="o">.</span><span class="n">float</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">accuracy</span></div>
+</pre></div>
+      </article>
+      <footer>
+        
+        <div class="related-pages">
+          
+          
+        </div>
+
+        <div class="related-information">
+          <span class="copyright">Copyright &copy; 2021, MilaGraph Group</span> |
+          Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using
+          <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+          <a href="https://github.com/pradyunsg/furo">Furo theme</a>.
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer no-toc">
+      
+      
+      
+    </aside>
+  </main>
+</div>
+  </body>
+</html>

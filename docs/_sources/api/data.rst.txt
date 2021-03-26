@@ -1,15 +1,62 @@
-drugdiscovery.data
+torchdrug.data
 ==================
 
-data
-----
+Data Structure
+----------------------------------
 
-.. automodule:: drugdiscovery.data
-    :members:
-    :inherited-members:
+.. currentmodule:: torchdrug.data
 
-data.feature
+Graph
+~~~~~~~~~~~~~~~~
+.. autoclass:: Graph
+
+Molecule
+~~~~~~~~~~~~~~~~
+.. autoclass:: Molecule
+
+PackedGraph
+~~~~~~~~~~~~~~~~
+.. autoclass:: PackedGraph
+
+PackedMolecule
+~~~~~~~~~~~~~~~~
+.. autoclass:: PackedMolecule
+
+
+Datasets
+----------------------------------
+.. currentmodule:: torchdrug.data
+
+KnowledgeGraphDataset
+~~~~~~~~~~~~~~~~
+.. autoclass:: KnowledgeGraphDataset
+
+MoleculeDataset
+~~~~~~~~~~~~~~~~
+.. autoclass:: MoleculeDataset
+
+NodeClassificationDataset
+~~~~~~~~~~~~~~~~
+.. autoclass:: NodeClassificationDataset
+
+ReactionDataset
+~~~~~~~~~~~~~~~~
+.. autoclass:: ReactionDataset
+
+Data Processing
+----------------------------------
+
+DataLoader
+~~~~~~~~~~~~~~~~
+.. autoclass:: DataLoader
+
+.. autofunction:: graph_collate
+.. autofunction:: ordered_scaffold_split
+.. autofunction:: scaffold_split
+.. autofunction:: semisupervised
+
+
+Feature Function
 ------------
 
-.. automodule:: drugdiscovery.data.feature
-    :members:
+.. currentmodule:: torchdrug.data.feature

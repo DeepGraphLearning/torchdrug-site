@@ -19,7 +19,7 @@ The splits for train/valid/test sets are 80%, 10% and 10% respectively.
 .. code:: python
 
     import torch
-    from drugdiscovery import data, datasets
+    from torchdrug import data, datasets
 
     dataset = datasets.ClinTox("~/molecule-datasets/")
     lengths = [int(0.8 * len(dataset)), int(0.1 * len(dataset))]
@@ -53,7 +53,7 @@ optimized through multi-task training by the task-specific module.
 
 .. code:: python
 
-    from drugdiscovery import core, models, tasks
+    from torchdrug import core, models, tasks
 
     model = models.GIN(input_dim=dataset.node_feature_dim,
                        hidden_dims=[256, 256, 256, 256],

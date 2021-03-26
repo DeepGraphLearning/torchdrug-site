@@ -1,0 +1,797 @@
+<!doctype html>
+<html class="no-js">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/><link rel="index" title="Index" href="../../../genindex.html" /><link rel="search" title="Search" href="../../../search.html" />
+
+    <meta name="generator" content="sphinx-3.5.3, furo 2020.10.15.beta13"/>
+        <title>torchdrug.data.dataset - Drugdiscovery 0.1.0 documentation</title>
+      <link id="pygments_dark_css" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css" href="../../../_static/pygments_dark.css" />
+    <link rel="stylesheet" href="../../../_static/styles/default.css?521cf6a70d019494dd71d80d">
+    <link rel="stylesheet" href="../../../_static/pygments.css">
+    <link media="(prefers-color-scheme: dark)" rel="stylesheet" href="../../../_static/pygments_dark.css">
+    
+<style>
+  :root {
+    --color-code-background: #f8f8f8;
+    --color-code-foreground: black;
+  
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+    --color-code-background: #202020;
+    --color-code-foreground: #d0d0d0;
+      
+    }
+  }
+</style>
+    <script id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script><script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/scripts/main.js?521cf6a70d019494dd71d80d"></script></head>
+  <body dir="">
+    
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+      stroke-width="1.5" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+      <path stroke="none" d="M0 0h24v24H0z"/>
+      <line x1="4" y1="6" x2="20" y2="6" />
+      <line x1="10" y1="12" x2="20" y2="12" />
+      <line x1="6" y1="18" x2="20" y2="18" />
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+      stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+      class="feather feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+      stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+      class="feather feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation"></label>
+<label class="overlay toc-overlay" for="__toc"></label>
+
+
+<div class="page">
+  <header class="mobile-header">
+    <label class="header-left nav-overlay-icon" for="__navigation">
+      <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+    </label>
+    <div class="header-center"><div class="brand">Drugdiscovery 0.1.0 documentation</div></div>
+    <div class="header-right"></div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand centered" href="../../../index.html">
+  <div class="sidebar-logo-container">
+    <img class="sidebar-logo" src="../../../_static/logo.svg" alt="Logo"/>
+  </div>
+  
+</a><form class="sidebar-search-container" method="get" action="../../../search.html">
+  <input class="sidebar-search" placeholder="Search" name="q">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form><div class="sidebar-tree sidebar-scroll">
+  <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../quick_start.html">Quick Start</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../benchmark/index.html">Benchmark</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label for="toctree-checkbox-1"><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../benchmark/property_prediction.html">Molecule Property Prediction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../benchmark/pretrain.html">Pretrained Molecular Representations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../benchmark/generation.html">Graph Generation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../benchmark/retrosynthesis.html">Retrosynthesis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../benchmark/reasoning.html">Knowledge Graph Reasoning</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../tutorials/index.html">Tutorials</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label for="toctree-checkbox-2"><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../tutorials/property_prediction.html">Property Prediction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../tutorials/pretrain.html">Pretrained Molecular Representations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../tutorials/generation.html">Molecule Generation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../tutorials/retrosynthesis.html">Retrosynthesis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../tutorials/reasoning.html">Knowledge Graph Reasoning</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../notes/index.html">Notes</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label for="toctree-checkbox-3"><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../notes/graph.html">Graph Data Structures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../notes/variadic.html">Batch Irregular Structures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../notes/layer.html">Graph Neural Network Layers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../notes/model.html">Customize Models &amp; Tasks</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Package Reference</span></p>
+<ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../api/index.html">Documentation</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label for="toctree-checkbox-4"><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../api/core.html">torchdrug.core</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api/data.html">torchdrug.data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api/datasets.html">torchdrug.datasets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api/metrics.html">torchdrug.metrics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api/layers.html">torchdrug.layers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api/models.html">torchdrug.models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api/tasks.html">torchdrug.tasks</a></li>
+</ul>
+</li>
+</ul>
+
+</div>
+      </div>
+      
+    </div>
+  </aside>
+  <main class="main">
+    <div class="content">
+      <article role="main">
+        <label class="toc-overlay-icon no-toc" for="__toc">
+          <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+        </label>
+        <h1>Source code for torchdrug.data.dataset</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">csv</span>
+<span class="kn">import</span> <span class="nn">math</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+
+<span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">defaultdict</span>
+<span class="kn">from</span> <span class="nn">tqdm</span> <span class="kn">import</span> <span class="n">tqdm</span>
+
+<span class="kn">from</span> <span class="nn">rdkit</span> <span class="kn">import</span> <span class="n">Chem</span>
+<span class="kn">from</span> <span class="nn">rdkit.Chem.Scaffolds</span> <span class="kn">import</span> <span class="n">MurckoScaffold</span>
+<span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">from</span> <span class="nn">torch.utils</span> <span class="kn">import</span> <span class="n">data</span> <span class="k">as</span> <span class="n">torch_data</span>
+
+<span class="kn">from</span> <span class="nn">torchdrug</span> <span class="kn">import</span> <span class="n">core</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">utils</span>
+<span class="kn">from</span> <span class="nn">torchdrug.utils</span> <span class="kn">import</span> <span class="n">doc</span>
+
+
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="MoleculeDataset"><a class="viewcode-back" href="../../../api/data.html#torchdrug.data.MoleculeDataset">[docs]</a><span class="k">class</span> <span class="nc">MoleculeDataset</span><span class="p">(</span><span class="n">torch_data</span><span class="o">.</span><span class="n">Dataset</span><span class="p">,</span> <span class="n">core</span><span class="o">.</span><span class="n">Configurable</span><span class="p">):</span>
+    <span class="sd">"""</span>
+<span class="sd">    Molecule dataset.</span>
+
+<span class="sd">    Each sample contains a molecule graph, and any number of prediction targets.</span>
+<span class="sd">    """</span>
+
+<div class="viewcode-block" id="MoleculeDataset.load_smiles"><a class="viewcode-back" href="../../../api/data.html#torchdrug.data.MoleculeDataset.load_smiles">[docs]</a>    <span class="nd">@doc</span><span class="o">.</span><span class="n">copy_args</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">Molecule</span><span class="o">.</span><span class="n">from_molecule</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">load_smiles</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">smiles_list</span><span class="p">,</span> <span class="n">targets</span><span class="p">,</span> <span class="n">transform</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">"""</span>
+<span class="sd">        Load the dataset from SMILES and targets.</span>
+
+<span class="sd">        Parameters:</span>
+<span class="sd">            smiles_list (list of str): SMILES string</span>
+<span class="sd">            targets (dict of list): prediction targets</span>
+<span class="sd">            transform (Callable, optional): data transformation function</span>
+<span class="sd">            verbose (int, optional): output verbose level</span>
+<span class="sd">            **kwargs</span>
+<span class="sd">        """</span>
+        <span class="n">num_sample</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">smiles_list</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">field</span><span class="p">,</span> <span class="n">target_list</span> <span class="ow">in</span> <span class="n">targets</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">target_list</span><span class="p">)</span> <span class="o">!=</span> <span class="n">num_sample</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Number of target `</span><span class="si">%s</span><span class="s2">` doesn't match with number of molecules. "</span>
+                                 <span class="s2">"Expect </span><span class="si">%d</span><span class="s2"> but found </span><span class="si">%d</span><span class="s2">"</span> <span class="o">%</span> <span class="p">(</span><span class="n">field</span><span class="p">,</span> <span class="n">num_sample</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">target_list</span><span class="p">)))</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">smiles_list</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">targets</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">list</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+            <span class="n">smiles_list</span> <span class="o">=</span> <span class="n">tqdm</span><span class="p">(</span><span class="n">smiles_list</span><span class="p">,</span> <span class="s2">"Constructing molecules from SMILES"</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">smiles</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">smiles_list</span><span class="p">):</span>
+            <span class="n">mol</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmiles</span><span class="p">(</span><span class="n">smiles</span><span class="p">)</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">mol</span><span class="p">:</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">"Can't construct molecule from SMILES `</span><span class="si">%s</span><span class="s2">`. Ignore this sample."</span> <span class="o">%</span> <span class="n">smiles</span><span class="p">)</span>
+                <span class="k">continue</span>
+            <span class="n">mol</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">Molecule</span><span class="o">.</span><span class="n">from_molecule</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">smiles_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">smiles</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">field</span> <span class="ow">in</span> <span class="n">targets</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">targets</span><span class="p">[</span><span class="n">field</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">targets</span><span class="p">[</span><span class="n">field</span><span class="p">][</span><span class="n">i</span><span class="p">])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">transform</span> <span class="o">=</span> <span class="n">transform</span></div>
+
+<div class="viewcode-block" id="MoleculeDataset.load_csv"><a class="viewcode-back" href="../../../api/data.html#torchdrug.data.MoleculeDataset.load_csv">[docs]</a>    <span class="nd">@doc</span><span class="o">.</span><span class="n">copy_args</span><span class="p">(</span><span class="n">load_smiles</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">load_csv</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">csv_file</span><span class="p">,</span> <span class="n">smiles_field</span><span class="o">=</span><span class="s2">"smiles"</span><span class="p">,</span> <span class="n">target_fields</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">"""</span>
+<span class="sd">        Load the dataset from a csv file.</span>
+
+<span class="sd">        Parameters:</span>
+<span class="sd">            csv_file (str): file name</span>
+<span class="sd">            smiles_field (str, optional): name of SMILES column in the table.</span>
+<span class="sd">                Use ``None`` if there is no SMILES column.</span>
+<span class="sd">            target_fields (list of str, optional): name of target columns in the table.</span>
+<span class="sd">                Default is all columns other than the SMILES column.</span>
+<span class="sd">            verbose (int, optional): output verbose level</span>
+<span class="sd">            **kwargs</span>
+<span class="sd">        """</span>
+        <span class="k">if</span> <span class="n">target_fields</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">target_fields</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">target_fields</span><span class="p">)</span>
+
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">csv_file</span><span class="p">,</span> <span class="s2">"r"</span><span class="p">)</span> <span class="k">as</span> <span class="n">fin</span><span class="p">:</span>
+            <span class="n">reader</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">reader</span><span class="p">(</span><span class="n">fin</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+                <span class="n">reader</span> <span class="o">=</span> <span class="nb">iter</span><span class="p">(</span><span class="n">tqdm</span><span class="p">(</span><span class="n">reader</span><span class="p">,</span> <span class="s2">"Loading </span><span class="si">%s</span><span class="s2">"</span> <span class="o">%</span> <span class="n">csv_file</span><span class="p">,</span> <span class="n">utils</span><span class="o">.</span><span class="n">get_line_count</span><span class="p">(</span><span class="n">csv_file</span><span class="p">)))</span>
+            <span class="n">fields</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="n">reader</span><span class="p">)</span>
+            <span class="n">smiles</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="n">targets</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">list</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">values</span> <span class="ow">in</span> <span class="n">reader</span><span class="p">:</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="nb">any</span><span class="p">(</span><span class="n">values</span><span class="p">):</span>
+                    <span class="k">continue</span>
+                <span class="k">if</span> <span class="n">smiles_field</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="n">smiles</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">""</span><span class="p">)</span>
+                <span class="k">for</span> <span class="n">field</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">fields</span><span class="p">,</span> <span class="n">values</span><span class="p">):</span>
+                    <span class="k">if</span> <span class="n">field</span> <span class="o">==</span> <span class="n">smiles_field</span><span class="p">:</span>
+                        <span class="n">smiles</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+                    <span class="k">elif</span> <span class="n">target_fields</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">field</span> <span class="ow">in</span> <span class="n">target_fields</span><span class="p">:</span>
+                        <span class="n">value</span> <span class="o">=</span> <span class="n">utils</span><span class="o">.</span><span class="n">literal_eval</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+                        <span class="k">if</span> <span class="n">value</span> <span class="o">==</span> <span class="s2">""</span><span class="p">:</span>
+                            <span class="n">value</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">nan</span>
+                        <span class="n">targets</span><span class="p">[</span><span class="n">field</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">load_smiles</span><span class="p">(</span><span class="n">smiles</span><span class="p">,</span> <span class="n">targets</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="n">verbose</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
+
+    <span class="k">def</span> <span class="nf">_standarize_index</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="n">count</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="nb">slice</span><span class="p">):</span>
+            <span class="n">start</span> <span class="o">=</span> <span class="n">index</span><span class="o">.</span><span class="n">start</span> <span class="ow">or</span> <span class="mi">0</span>
+            <span class="k">if</span> <span class="n">start</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">start</span> <span class="o">+=</span> <span class="n">count</span>
+            <span class="n">stop</span> <span class="o">=</span> <span class="n">index</span><span class="o">.</span><span class="n">stop</span> <span class="ow">or</span> <span class="n">count</span>
+            <span class="k">if</span> <span class="n">stop</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">stop</span> <span class="o">+=</span> <span class="n">count</span>
+            <span class="n">step</span> <span class="o">=</span> <span class="n">index</span><span class="o">.</span><span class="n">step</span> <span class="ow">or</span> <span class="mi">1</span>
+            <span class="n">index</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">stop</span><span class="p">,</span> <span class="n">step</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Unknown index `</span><span class="si">%s</span><span class="s2">`"</span> <span class="o">%</span> <span class="n">index</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">index</span>
+
+    <span class="k">def</span> <span class="nf">get_item</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
+        <span class="n">item</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"graph"</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">index</span><span class="p">]}</span>
+        <span class="n">item</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="n">k</span><span class="p">:</span> <span class="n">v</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">targets</span><span class="o">.</span><span class="n">items</span><span class="p">()})</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">transform</span><span class="p">:</span>
+            <span class="n">item</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">item</span>
+
+    <span class="k">def</span> <span class="fm">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_item</span><span class="p">(</span><span class="n">index</span><span class="p">)</span>
+
+        <span class="n">index</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_standarize_index</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span>
+        <span class="k">return</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">get_item</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">index</span><span class="p">]</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">tasks</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">"""List of tasks."""</span>
+        <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">targets</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">node_feature_dim</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">"""Dimension of node features."""</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">node_feature</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">edge_feature_dim</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">"""Dimension of edge features."""</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">edge_feature</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">num_atom_type</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">"""Number of different atom types."""</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">atom_types</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">num_bond_type</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">"""Number of different bond types."""</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">bond_types</span><span class="p">)</span>
+
+    <span class="nd">@utils</span><span class="o">.</span><span class="n">cached_property</span>
+    <span class="k">def</span> <span class="nf">atom_types</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">"""All atom types."""</span>
+        <span class="n">atom_types</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">graph</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">:</span>
+            <span class="n">atom_types</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">graph</span><span class="o">.</span><span class="n">atom_type</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span>
+        <span class="k">return</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">atom_types</span><span class="p">)</span>
+
+    <span class="nd">@utils</span><span class="o">.</span><span class="n">cached_property</span>
+    <span class="k">def</span> <span class="nf">bond_types</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">"""All bond types."""</span>
+        <span class="n">bond_types</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">graph</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">:</span>
+            <span class="n">bond_types</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">graph</span><span class="o">.</span><span class="n">edge_list</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span>
+        <span class="k">return</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">bond_types</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">lines</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"#sample: </span><span class="si">%d</span><span class="s2">"</span> <span class="o">%</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="p">),</span> <span class="s2">"#task: </span><span class="si">%d</span><span class="s2">"</span> <span class="o">%</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">tasks</span><span class="p">)]</span>
+        <span class="k">return</span> <span class="s2">"</span><span class="si">%s</span><span class="s2">(</span><span class="se">\n</span><span class="s2">  </span><span class="si">%s</span><span class="se">\n</span><span class="s2">)"</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="s2">"</span><span class="se">\n</span><span class="s2">  "</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">lines</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="ReactionDataset"><a class="viewcode-back" href="../../../api/data.html#torchdrug.data.ReactionDataset">[docs]</a><span class="k">class</span> <span class="nc">ReactionDataset</span><span class="p">(</span><span class="n">MoleculeDataset</span><span class="p">,</span> <span class="n">core</span><span class="o">.</span><span class="n">Configurable</span><span class="p">):</span>
+    <span class="sd">"""</span>
+<span class="sd">    Chemical reaction dataset.</span>
+
+<span class="sd">    Each sample contains two molecule graphs, and any number of prediction targets.</span>
+<span class="sd">    """</span>
+
+<div class="viewcode-block" id="ReactionDataset.load_smiles"><a class="viewcode-back" href="../../../api/data.html#torchdrug.data.ReactionDataset.load_smiles">[docs]</a>    <span class="k">def</span> <span class="nf">load_smiles</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">smiles_list</span><span class="p">,</span> <span class="n">targets</span><span class="p">,</span> <span class="n">transform</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="n">num_sample</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">smiles_list</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">field</span><span class="p">,</span> <span class="n">target_list</span> <span class="ow">in</span> <span class="n">targets</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">target_list</span><span class="p">)</span> <span class="o">!=</span> <span class="n">num_sample</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Number of target `</span><span class="si">%s</span><span class="s2">` doesn't match with number of molecules. "</span>
+                                 <span class="s2">"Expect </span><span class="si">%d</span><span class="s2"> but found </span><span class="si">%d</span><span class="s2">"</span> <span class="o">%</span> <span class="p">(</span><span class="n">field</span><span class="p">,</span> <span class="n">num_sample</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">target_list</span><span class="p">)))</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">smiles_list</span> <span class="o">=</span> <span class="n">smiles_list</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">targets</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">list</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+            <span class="n">smiles_list</span> <span class="o">=</span> <span class="n">tqdm</span><span class="p">(</span><span class="n">smiles_list</span><span class="p">,</span> <span class="s2">"Constructing molecules from SMILES"</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">smiles</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">smiles_list</span><span class="p">):</span>
+            <span class="n">smiles_reactant</span><span class="p">,</span> <span class="n">agent</span><span class="p">,</span> <span class="n">smiles_product</span> <span class="o">=</span> <span class="n">smiles</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">"&gt;"</span><span class="p">)</span>
+            <span class="n">mols</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">for</span> <span class="n">_smiles</span> <span class="ow">in</span> <span class="p">[</span><span class="n">smiles_reactant</span><span class="p">,</span> <span class="n">smiles_product</span><span class="p">]:</span>
+                <span class="n">mol</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmiles</span><span class="p">(</span><span class="n">_smiles</span><span class="p">)</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="n">mol</span><span class="p">:</span>
+                    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">"Can't construct molecule from SMILES `</span><span class="si">%s</span><span class="s2">`. Ignore this sample."</span> <span class="o">%</span> <span class="n">_smiles</span><span class="p">)</span>
+                    <span class="k">break</span>
+                <span class="n">mol</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">Molecule</span><span class="o">.</span><span class="n">from_molecule</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+                <span class="n">mols</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">mols</span><span class="p">)</span>
+                <span class="k">for</span> <span class="n">field</span> <span class="ow">in</span> <span class="n">targets</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">targets</span><span class="p">[</span><span class="n">field</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">targets</span><span class="p">[</span><span class="n">field</span><span class="p">][</span><span class="n">i</span><span class="p">])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">transform</span> <span class="o">=</span> <span class="n">transform</span></div>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">node_feature_dim</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">"""Dimension of node features."""</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">node_feature</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">edge_feature_dim</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">"""Dimension of edge features."""</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">edge_feature</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">num_atom_type</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">"""Number of different atom types."""</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">atom_types</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">num_bond_type</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">"""Number of different bond types."""</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">bond_types</span><span class="p">)</span>
+
+    <span class="nd">@utils</span><span class="o">.</span><span class="n">cached_property</span>
+    <span class="k">def</span> <span class="nf">atom_types</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">"""All atom types."""</span>
+        <span class="n">atom_types</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">graphs</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">graph</span> <span class="ow">in</span> <span class="n">graphs</span><span class="p">:</span>
+                <span class="n">atom_types</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">graph</span><span class="o">.</span><span class="n">atom_type</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span>
+        <span class="k">return</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">atom_types</span><span class="p">)</span>
+
+    <span class="nd">@utils</span><span class="o">.</span><span class="n">cached_property</span>
+    <span class="k">def</span> <span class="nf">bond_types</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">"""All bond types."""</span>
+        <span class="n">bond_types</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">graphs</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">graph</span> <span class="ow">in</span> <span class="n">graphs</span><span class="p">:</span>
+                <span class="n">bond_types</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">graph</span><span class="o">.</span><span class="n">edge_list</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span>
+        <span class="k">return</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">bond_types</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">)</span></div>
+
+
+<span class="k">class</span> <span class="nc">GraphDataset</span><span class="p">(</span><span class="n">torch_data</span><span class="o">.</span><span class="n">Dataset</span><span class="p">,</span> <span class="n">core</span><span class="o">.</span><span class="n">Configurable</span><span class="p">):</span>
+    <span class="c1"># reserved for drug repurposing / combination</span>
+    <span class="k">pass</span>
+
+
+<div class="viewcode-block" id="NodeClassificationDataset"><a class="viewcode-back" href="../../../api/data.html#torchdrug.data.NodeClassificationDataset">[docs]</a><span class="k">class</span> <span class="nc">NodeClassificationDataset</span><span class="p">(</span><span class="n">torch_data</span><span class="o">.</span><span class="n">Dataset</span><span class="p">,</span> <span class="n">core</span><span class="o">.</span><span class="n">Configurable</span><span class="p">):</span>
+
+<div class="viewcode-block" id="NodeClassificationDataset.load_tsv"><a class="viewcode-back" href="../../../api/data.html#torchdrug.data.NodeClassificationDataset.load_tsv">[docs]</a>    <span class="k">def</span> <span class="nf">load_tsv</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">node_file</span><span class="p">,</span> <span class="n">edge_file</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+        <span class="sd">"""</span>
+<span class="sd">        Load the edge list from a tsv file.</span>
+
+<span class="sd">        Parameters:</span>
+<span class="sd">            node_file (str): node feature and label file</span>
+<span class="sd">            edge_file (str): edge list file</span>
+<span class="sd">            verbose (int, optional): output verbose level</span>
+<span class="sd">        """</span>
+        <span class="n">inv_node_vocab</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">inv_label_vocab</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">node_feature</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">node_label</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">node_file</span><span class="p">,</span> <span class="s2">"r"</span><span class="p">)</span> <span class="k">as</span> <span class="n">fin</span><span class="p">:</span>
+            <span class="n">reader</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">reader</span><span class="p">(</span><span class="n">fin</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s2">"</span><span class="se">\t</span><span class="s2">"</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+                <span class="n">reader</span> <span class="o">=</span> <span class="n">tqdm</span><span class="p">(</span><span class="n">reader</span><span class="p">,</span> <span class="s2">"Loading </span><span class="si">%s</span><span class="s2">"</span> <span class="o">%</span> <span class="n">node_file</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">tokens</span> <span class="ow">in</span> <span class="n">reader</span><span class="p">:</span>
+                <span class="n">node_token</span> <span class="o">=</span> <span class="n">tokens</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+                <span class="n">feature_tokens</span> <span class="o">=</span> <span class="n">tokens</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span> <span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+                <span class="n">label_token</span> <span class="o">=</span> <span class="n">tokens</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+                <span class="n">inv_node_vocab</span><span class="p">[</span><span class="n">node_token</span><span class="p">]</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">inv_node_vocab</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">label_token</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">inv_label_vocab</span><span class="p">:</span>
+                    <span class="n">inv_label_vocab</span><span class="p">[</span><span class="n">label_token</span><span class="p">]</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">inv_label_vocab</span><span class="p">)</span>
+                <span class="n">feature</span> <span class="o">=</span> <span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">f</span><span class="p">)</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">feature_tokens</span><span class="p">]</span>
+                <span class="n">label</span> <span class="o">=</span> <span class="n">inv_label_vocab</span><span class="p">[</span><span class="n">label_token</span><span class="p">]</span>
+                <span class="n">node_feature</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">feature</span><span class="p">)</span>
+                <span class="n">node_label</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">label</span><span class="p">)</span>
+
+        <span class="n">edge_list</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">edge_file</span><span class="p">,</span> <span class="s2">"r"</span><span class="p">)</span> <span class="k">as</span> <span class="n">fin</span><span class="p">:</span>
+            <span class="n">reader</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">reader</span><span class="p">(</span><span class="n">fin</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s2">"</span><span class="se">\t</span><span class="s2">"</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+                <span class="n">reader</span> <span class="o">=</span> <span class="n">tqdm</span><span class="p">(</span><span class="n">reader</span><span class="p">,</span> <span class="s2">"Loading </span><span class="si">%s</span><span class="s2">"</span> <span class="o">%</span> <span class="n">edge_file</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">tokens</span> <span class="ow">in</span> <span class="n">reader</span><span class="p">:</span>
+                <span class="n">h_token</span><span class="p">,</span> <span class="n">t_token</span> <span class="o">=</span> <span class="n">tokens</span>
+                <span class="k">if</span> <span class="n">h_token</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">inv_node_vocab</span><span class="p">:</span>
+                    <span class="n">inv_node_vocab</span><span class="p">[</span><span class="n">h_token</span><span class="p">]</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">inv_node_vocab</span><span class="p">)</span>
+                <span class="n">h</span> <span class="o">=</span> <span class="n">inv_node_vocab</span><span class="p">[</span><span class="n">h_token</span><span class="p">]</span>
+                <span class="k">if</span> <span class="n">t_token</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">inv_node_vocab</span><span class="p">:</span>
+                    <span class="n">inv_node_vocab</span><span class="p">[</span><span class="n">t_token</span><span class="p">]</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">inv_node_vocab</span><span class="p">)</span>
+                <span class="n">t</span> <span class="o">=</span> <span class="n">inv_node_vocab</span><span class="p">[</span><span class="n">t_token</span><span class="p">]</span>
+                <span class="n">edge_list</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">h</span><span class="p">,</span> <span class="n">t</span><span class="p">))</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">load_edge</span><span class="p">(</span><span class="n">edge_list</span><span class="p">,</span> <span class="n">node_feature</span><span class="p">,</span> <span class="n">node_label</span><span class="p">,</span> <span class="n">inv_node_vocab</span><span class="o">=</span><span class="n">inv_node_vocab</span><span class="p">,</span>
+                       <span class="n">inv_label_vocab</span><span class="o">=</span><span class="n">inv_label_vocab</span><span class="p">)</span></div>
+
+    <span class="k">def</span> <span class="nf">load_edge</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">edge_list</span><span class="p">,</span> <span class="n">node_feature</span><span class="p">,</span> <span class="n">node_label</span><span class="p">,</span> <span class="n">node_vocab</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">inv_node_vocab</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">label_vocab</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                  <span class="n">inv_label_vocab</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="n">node_vocab</span><span class="p">,</span> <span class="n">inv_node_vocab</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_standarize_vocab</span><span class="p">(</span><span class="n">node_vocab</span><span class="p">,</span> <span class="n">inv_node_vocab</span><span class="p">)</span>
+        <span class="n">label_vocab</span><span class="p">,</span> <span class="n">inv_label_vocab</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_standarize_vocab</span><span class="p">(</span><span class="n">label_vocab</span><span class="p">,</span> <span class="n">inv_label_vocab</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">num_labeled_node</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">node_feature</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">node_vocab</span><span class="p">)</span> <span class="o">&gt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">node_feature</span><span class="p">):</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">"Missing features &amp; labels for </span><span class="si">%d</span><span class="s2"> / </span><span class="si">%d</span><span class="s2"> nodes"</span> <span class="o">%</span>
+                           <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">node_vocab</span><span class="p">)</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">node_feature</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">node_vocab</span><span class="p">)))</span>
+            <span class="n">dummy_label</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="n">dummy_feature</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">node_feature</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+            <span class="n">node_label</span> <span class="o">+=</span> <span class="p">[</span><span class="n">dummy_label</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">node_vocab</span><span class="p">)</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">node_feature</span><span class="p">))</span>
+            <span class="n">node_feature</span> <span class="o">+=</span> <span class="p">[</span><span class="n">dummy_feature</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">node_vocab</span><span class="p">)</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">node_feature</span><span class="p">))</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">graph</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">Graph</span><span class="p">(</span><span class="n">edge_list</span><span class="p">,</span> <span class="n">num_node</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">node_vocab</span><span class="p">),</span> <span class="n">node_feature</span><span class="o">=</span><span class="n">node_feature</span><span class="p">)</span>
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">graph</span><span class="o">.</span><span class="n">node</span><span class="p">():</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">graph</span><span class="o">.</span><span class="n">node_label</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">as_tensor</span><span class="p">(</span><span class="n">node_label</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">node_vocab</span> <span class="o">=</span> <span class="n">node_vocab</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">inv_node_vocab</span> <span class="o">=</span> <span class="n">inv_node_vocab</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">label_vocab</span> <span class="o">=</span> <span class="n">label_vocab</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">inv_node_vocab</span> <span class="o">=</span> <span class="n">inv_label_vocab</span>
+
+    <span class="k">def</span> <span class="nf">_standarize_vocab</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">vocab</span><span class="p">,</span> <span class="n">inverse_vocab</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">vocab</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">vocab</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+                <span class="k">assert</span> <span class="nb">set</span><span class="p">(</span><span class="n">vocab</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span> <span class="o">==</span> <span class="nb">set</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">vocab</span><span class="p">))),</span> <span class="s2">"Vocab keys should be consecutive numbers"</span>
+                <span class="n">vocab</span> <span class="o">=</span> <span class="p">[</span><span class="n">vocab</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">vocab</span><span class="p">))]</span>
+            <span class="k">if</span> <span class="n">inverse_vocab</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">inverse_vocab</span> <span class="o">=</span> <span class="p">{</span><span class="n">v</span><span class="p">:</span> <span class="n">i</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">vocab</span><span class="p">)}</span>
+        <span class="k">if</span> <span class="n">inverse_vocab</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">assert</span> <span class="nb">set</span><span class="p">(</span><span class="n">inverse_vocab</span><span class="o">.</span><span class="n">values</span><span class="p">())</span> <span class="o">==</span> <span class="nb">set</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">inverse_vocab</span><span class="p">))),</span> \
+                <span class="s2">"Inverse vocab values should be consecutive numbers"</span>
+            <span class="k">if</span> <span class="n">vocab</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">vocab</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">inverse_vocab</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">k</span><span class="p">:</span> <span class="n">inverse_vocab</span><span class="p">[</span><span class="n">k</span><span class="p">])</span>
+        <span class="k">return</span> <span class="n">vocab</span><span class="p">,</span> <span class="n">inverse_vocab</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">num_node</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">graph</span><span class="o">.</span><span class="n">num_node</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">num_edge</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">graph</span><span class="o">.</span><span class="n">num_edge</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">node_feature_dim</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">"""Dimension of node features."""</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">graph</span><span class="o">.</span><span class="n">node_feature</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="fm">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="s2">"node_index"</span><span class="p">:</span> <span class="n">index</span><span class="p">,</span>
+            <span class="s2">"label"</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">graph</span><span class="o">.</span><span class="n">node_label</span><span class="p">[</span><span class="n">index</span><span class="p">]</span>
+        <span class="p">}</span>
+
+    <span class="k">def</span> <span class="fm">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_labeled_node</span>
+
+    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">lines</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"#node: </span><span class="si">%d</span><span class="s2">"</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">graph</span><span class="o">.</span><span class="n">num_node</span><span class="p">,</span> <span class="s2">"#edge: </span><span class="si">%d</span><span class="s2">"</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">graph</span><span class="o">.</span><span class="n">num_edge</span><span class="p">,</span>
+                 <span class="s2">"#class: </span><span class="si">%d</span><span class="s2">"</span> <span class="o">%</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">label_vocab</span><span class="p">)]</span>
+        <span class="k">return</span> <span class="s2">"</span><span class="si">%s</span><span class="s2">(</span><span class="se">\n</span><span class="s2">  </span><span class="si">%s</span><span class="se">\n</span><span class="s2">)"</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="s2">"</span><span class="se">\n</span><span class="s2">  "</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">lines</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="KnowledgeGraphDataset"><a class="viewcode-back" href="../../../api/data.html#torchdrug.data.KnowledgeGraphDataset">[docs]</a><span class="k">class</span> <span class="nc">KnowledgeGraphDataset</span><span class="p">(</span><span class="n">torch_data</span><span class="o">.</span><span class="n">Dataset</span><span class="p">,</span> <span class="n">core</span><span class="o">.</span><span class="n">Configurable</span><span class="p">):</span>
+
+<div class="viewcode-block" id="KnowledgeGraphDataset.load_tsv"><a class="viewcode-back" href="../../../api/data.html#torchdrug.data.KnowledgeGraphDataset.load_tsv">[docs]</a>    <span class="k">def</span> <span class="nf">load_tsv</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tsv_file</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+        <span class="sd">"""</span>
+<span class="sd">        Load the dataset from a tsv file.</span>
+
+<span class="sd">        Parameters:</span>
+<span class="sd">            tsv_file (str): file name</span>
+<span class="sd">            verbose (int, optional): output verbose level</span>
+<span class="sd">        """</span>
+        <span class="n">inv_entity_vocab</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">inv_relation_vocab</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">triplets</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">tsv_file</span><span class="p">,</span> <span class="s2">"r"</span><span class="p">)</span> <span class="k">as</span> <span class="n">fin</span><span class="p">:</span>
+            <span class="n">reader</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">reader</span><span class="p">(</span><span class="n">fin</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s2">"</span><span class="se">\t</span><span class="s2">"</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+                <span class="n">reader</span> <span class="o">=</span> <span class="n">tqdm</span><span class="p">(</span><span class="n">reader</span><span class="p">,</span> <span class="s2">"Loading </span><span class="si">%s</span><span class="s2">"</span> <span class="o">%</span> <span class="n">tsv_file</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">tokens</span> <span class="ow">in</span> <span class="n">reader</span><span class="p">:</span>
+                <span class="n">h_token</span><span class="p">,</span> <span class="n">r_token</span><span class="p">,</span> <span class="n">t_token</span> <span class="o">=</span> <span class="n">tokens</span>
+                <span class="k">if</span> <span class="n">h_token</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">inv_entity_vocab</span><span class="p">:</span>
+                    <span class="n">inv_entity_vocab</span><span class="p">[</span><span class="n">h_token</span><span class="p">]</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">inv_entity_vocab</span><span class="p">)</span>
+                <span class="n">h</span> <span class="o">=</span> <span class="n">inv_entity_vocab</span><span class="p">[</span><span class="n">h_token</span><span class="p">]</span>
+                <span class="k">if</span> <span class="n">r_token</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">inv_relation_vocab</span><span class="p">:</span>
+                    <span class="n">inv_relation_vocab</span><span class="p">[</span><span class="n">r_token</span><span class="p">]</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">inv_relation_vocab</span><span class="p">)</span>
+                <span class="n">r</span> <span class="o">=</span> <span class="n">inv_relation_vocab</span><span class="p">[</span><span class="n">r_token</span><span class="p">]</span>
+                <span class="k">if</span> <span class="n">t_token</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">inv_entity_vocab</span><span class="p">:</span>
+                    <span class="n">inv_entity_vocab</span><span class="p">[</span><span class="n">t_token</span><span class="p">]</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">inv_entity_vocab</span><span class="p">)</span>
+                <span class="n">t</span> <span class="o">=</span> <span class="n">inv_entity_vocab</span><span class="p">[</span><span class="n">t_token</span><span class="p">]</span>
+                <span class="n">triplets</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">h</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">r</span><span class="p">))</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">load_triplet</span><span class="p">(</span><span class="n">triplets</span><span class="p">,</span> <span class="n">inv_entity_vocab</span><span class="o">=</span><span class="n">inv_entity_vocab</span><span class="p">,</span> <span class="n">inv_relation_vocab</span><span class="o">=</span><span class="n">inv_relation_vocab</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="KnowledgeGraphDataset.load_tsvs"><a class="viewcode-back" href="../../../api/data.html#torchdrug.data.KnowledgeGraphDataset.load_tsvs">[docs]</a>    <span class="k">def</span> <span class="nf">load_tsvs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tsv_files</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+        <span class="sd">"""</span>
+<span class="sd">        Load the dataset from multiple tsv files.</span>
+
+<span class="sd">        Parameters:</span>
+<span class="sd">            tsv_files (list of str): list of file names</span>
+<span class="sd">            verbose (int, optional): output verbose level</span>
+<span class="sd">        """</span>
+        <span class="n">inv_entity_vocab</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">inv_relation_vocab</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">triplets</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">num_samples</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="k">for</span> <span class="n">tsv_file</span> <span class="ow">in</span> <span class="n">tsv_files</span><span class="p">:</span>
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">tsv_file</span><span class="p">,</span> <span class="s2">"r"</span><span class="p">)</span> <span class="k">as</span> <span class="n">fin</span><span class="p">:</span>
+                <span class="n">reader</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">reader</span><span class="p">(</span><span class="n">fin</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s2">"</span><span class="se">\t</span><span class="s2">"</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+                    <span class="n">reader</span> <span class="o">=</span> <span class="n">tqdm</span><span class="p">(</span><span class="n">reader</span><span class="p">,</span> <span class="s2">"Loading </span><span class="si">%s</span><span class="s2">"</span> <span class="o">%</span> <span class="n">tsv_file</span><span class="p">)</span>
+
+                <span class="n">num_sample</span> <span class="o">=</span> <span class="mi">0</span>
+                <span class="k">for</span> <span class="n">tokens</span> <span class="ow">in</span> <span class="n">reader</span><span class="p">:</span>
+                    <span class="n">h_token</span><span class="p">,</span> <span class="n">r_token</span><span class="p">,</span> <span class="n">t_token</span> <span class="o">=</span> <span class="n">tokens</span>
+                    <span class="k">if</span> <span class="n">h_token</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">inv_entity_vocab</span><span class="p">:</span>
+                        <span class="n">inv_entity_vocab</span><span class="p">[</span><span class="n">h_token</span><span class="p">]</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">inv_entity_vocab</span><span class="p">)</span>
+                    <span class="n">h</span> <span class="o">=</span> <span class="n">inv_entity_vocab</span><span class="p">[</span><span class="n">h_token</span><span class="p">]</span>
+                    <span class="k">if</span> <span class="n">r_token</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">inv_relation_vocab</span><span class="p">:</span>
+                        <span class="n">inv_relation_vocab</span><span class="p">[</span><span class="n">r_token</span><span class="p">]</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">inv_relation_vocab</span><span class="p">)</span>
+                    <span class="n">r</span> <span class="o">=</span> <span class="n">inv_relation_vocab</span><span class="p">[</span><span class="n">r_token</span><span class="p">]</span>
+                    <span class="k">if</span> <span class="n">t_token</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">inv_entity_vocab</span><span class="p">:</span>
+                        <span class="n">inv_entity_vocab</span><span class="p">[</span><span class="n">t_token</span><span class="p">]</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">inv_entity_vocab</span><span class="p">)</span>
+                    <span class="n">t</span> <span class="o">=</span> <span class="n">inv_entity_vocab</span><span class="p">[</span><span class="n">t_token</span><span class="p">]</span>
+                    <span class="n">triplets</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">h</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">r</span><span class="p">))</span>
+                    <span class="n">num_sample</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="n">num_samples</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">num_sample</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">load_triplet</span><span class="p">(</span><span class="n">triplets</span><span class="p">,</span> <span class="n">inv_entity_vocab</span><span class="o">=</span><span class="n">inv_entity_vocab</span><span class="p">,</span> <span class="n">inv_relation_vocab</span><span class="o">=</span><span class="n">inv_relation_vocab</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">num_samples</span> <span class="o">=</span> <span class="n">num_samples</span></div>
+
+    <span class="k">def</span> <span class="nf">load_triplet</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">triplets</span><span class="p">,</span> <span class="n">entity_vocab</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">relation_vocab</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">inv_entity_vocab</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                     <span class="n">inv_relation_vocab</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="n">entity_vocab</span><span class="p">,</span> <span class="n">inv_entity_vocab</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_standarize_vocab</span><span class="p">(</span><span class="n">entity_vocab</span><span class="p">,</span> <span class="n">inv_entity_vocab</span><span class="p">)</span>
+        <span class="n">relation_vocab</span><span class="p">,</span> <span class="n">inv_relation_vocab</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_standarize_vocab</span><span class="p">(</span><span class="n">relation_vocab</span><span class="p">,</span> <span class="n">inv_relation_vocab</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">graph</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">Graph</span><span class="p">(</span><span class="n">triplets</span><span class="p">,</span> <span class="n">num_node</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">entity_vocab</span><span class="p">),</span> <span class="n">num_relation</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">relation_vocab</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">entity_vocab</span> <span class="o">=</span> <span class="n">entity_vocab</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">relation_vocab</span> <span class="o">=</span> <span class="n">relation_vocab</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">inv_entity_vocab</span> <span class="o">=</span> <span class="n">inv_entity_vocab</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">inv_relation_vocab</span> <span class="o">=</span> <span class="n">inv_relation_vocab</span>
+
+    <span class="k">def</span> <span class="nf">_standarize_vocab</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">vocab</span><span class="p">,</span> <span class="n">inverse_vocab</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">vocab</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">vocab</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+                <span class="k">assert</span> <span class="nb">set</span><span class="p">(</span><span class="n">vocab</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span> <span class="o">==</span> <span class="nb">set</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">vocab</span><span class="p">))),</span> <span class="s2">"Vocab keys should be consecutive numbers"</span>
+                <span class="n">vocab</span> <span class="o">=</span> <span class="p">[</span><span class="n">vocab</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">vocab</span><span class="p">))]</span>
+            <span class="k">if</span> <span class="n">inverse_vocab</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">inverse_vocab</span> <span class="o">=</span> <span class="p">{</span><span class="n">v</span><span class="p">:</span> <span class="n">i</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">vocab</span><span class="p">)}</span>
+        <span class="k">if</span> <span class="n">inverse_vocab</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">assert</span> <span class="nb">set</span><span class="p">(</span><span class="n">inverse_vocab</span><span class="o">.</span><span class="n">values</span><span class="p">())</span> <span class="o">==</span> <span class="nb">set</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">inverse_vocab</span><span class="p">))),</span> \
+                <span class="s2">"Inverse vocab values should be consecutive numbers"</span>
+            <span class="k">if</span> <span class="n">vocab</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">vocab</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">inverse_vocab</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">k</span><span class="p">:</span> <span class="n">inverse_vocab</span><span class="p">[</span><span class="n">k</span><span class="p">])</span>
+        <span class="k">return</span> <span class="n">vocab</span><span class="p">,</span> <span class="n">inverse_vocab</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">num_entity</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">graph</span><span class="o">.</span><span class="n">num_node</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">num_triplet</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">graph</span><span class="o">.</span><span class="n">num_edge</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">num_relation</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">graph</span><span class="o">.</span><span class="n">num_relation</span>
+
+    <span class="k">def</span> <span class="fm">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">graph</span><span class="o">.</span><span class="n">edge_list</span><span class="p">[</span><span class="n">index</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="fm">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">graph</span><span class="o">.</span><span class="n">num_edge</span>
+
+    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">lines</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"#entity: </span><span class="si">%d</span><span class="s2">"</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">graph</span><span class="o">.</span><span class="n">num_node</span><span class="p">,</span> <span class="s2">"#relation: </span><span class="si">%d</span><span class="s2">"</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">graph</span><span class="o">.</span><span class="n">num_relation</span><span class="p">,</span>
+                 <span class="s2">"#triplet: </span><span class="si">%d</span><span class="s2">"</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">graph</span><span class="o">.</span><span class="n">num_edge</span><span class="p">]</span>
+        <span class="k">return</span> <span class="s2">"</span><span class="si">%s</span><span class="s2">(</span><span class="se">\n</span><span class="s2">  </span><span class="si">%s</span><span class="se">\n</span><span class="s2">)"</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="s2">"</span><span class="se">\n</span><span class="s2">  "</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">lines</span><span class="p">))</span></div>
+
+
+<span class="k">class</span> <span class="nc">SemiSupervised</span><span class="p">(</span><span class="n">torch_data</span><span class="o">.</span><span class="n">Dataset</span><span class="p">,</span> <span class="n">core</span><span class="o">.</span><span class="n">Configurable</span><span class="p">):</span>
+    <span class="sd">"""</span>
+<span class="sd">    Semi-supervised dataset.</span>
+
+<span class="sd">    Parameters:</span>
+<span class="sd">        dataset (Dataset): supervised dataset</span>
+<span class="sd">        indices (list of int): sample indices to keep supervision</span>
+<span class="sd">    """</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dataset</span><span class="p">,</span> <span class="n">indices</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dataset</span> <span class="o">=</span> <span class="n">dataset</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">indices</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">indices</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">idx</span><span class="p">):</span>
+        <span class="n">item</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dataset</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span>
+        <span class="n">item</span><span class="p">[</span><span class="s2">"labeled"</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">idx</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">indices</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">item</span>
+
+    <span class="k">def</span> <span class="fm">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dataset</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="semisupervised"><a class="viewcode-back" href="../../../api/data.html#torchdrug.data.semisupervised">[docs]</a><span class="k">def</span> <span class="nf">semisupervised</span><span class="p">(</span><span class="n">dataset</span><span class="p">,</span> <span class="n">length</span><span class="p">):</span>
+    <span class="sd">"""</span>
+<span class="sd">    Randomly construct a semi-supervised dataset based on the given length.</span>
+
+<span class="sd">    Parameters:</span>
+<span class="sd">        dataset (Dataset): supervised dataset</span>
+<span class="sd">        length (int): length of supervised data to keep</span>
+<span class="sd">    """</span>
+    <span class="k">if</span> <span class="n">length</span> <span class="o">&gt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">dataset</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Length of labeled data exceeds the length of the dataset"</span><span class="p">)</span>
+
+    <span class="n">indexes</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">randperm</span><span class="p">(</span><span class="n">length</span><span class="p">)[:</span><span class="n">length</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">SemiSupervised</span><span class="p">(</span><span class="n">dataset</span><span class="p">,</span> <span class="n">indexes</span><span class="p">)</span></div>
+
+
+<span class="k">def</span> <span class="nf">key_split</span><span class="p">(</span><span class="n">dataset</span><span class="p">,</span> <span class="n">keys</span><span class="p">,</span> <span class="n">lengths</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">key_lengths</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">round_to_boundary</span><span class="p">(</span><span class="n">i</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">dataset</span><span class="p">)</span> <span class="o">-</span> <span class="n">i</span><span class="p">)):</span>
+            <span class="k">if</span> <span class="n">keys</span><span class="p">[</span><span class="n">indexes</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="n">j</span><span class="p">]]</span> <span class="o">!=</span> <span class="n">keys</span><span class="p">[</span><span class="n">indexes</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="n">j</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]]:</span>
+                <span class="k">return</span> <span class="n">i</span> <span class="o">-</span> <span class="n">j</span>
+            <span class="k">if</span> <span class="n">keys</span><span class="p">[</span><span class="n">indexes</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="n">j</span><span class="p">]]</span> <span class="o">!=</span> <span class="n">keys</span><span class="p">[</span><span class="n">indexes</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="n">j</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]]:</span>
+                <span class="k">return</span> <span class="n">i</span> <span class="o">+</span> <span class="n">j</span>
+        <span class="k">if</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">dataset</span><span class="p">)</span> <span class="o">-</span> <span class="n">i</span><span class="p">:</span>
+            <span class="k">return</span> <span class="mi">0</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="n">dataset</span><span class="p">)</span>
+
+    <span class="n">keys</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">as_tensor</span><span class="p">(</span><span class="n">keys</span><span class="p">)</span>
+    <span class="n">key_set</span><span class="p">,</span> <span class="n">keys</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">keys</span><span class="p">,</span> <span class="n">return_inverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">perm</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">randperm</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">key_set</span><span class="p">))</span>
+    <span class="n">keys</span> <span class="o">=</span> <span class="n">perm</span><span class="p">[</span><span class="n">keys</span><span class="p">]</span>
+    <span class="n">indexes</span> <span class="o">=</span> <span class="n">keys</span><span class="o">.</span><span class="n">argsort</span><span class="p">()</span>
+
+    <span class="k">if</span> <span class="n">key_lengths</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">assert</span> <span class="n">lengths</span> <span class="ow">is</span> <span class="kc">None</span>
+        <span class="n">key2count</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">bincount</span><span class="p">(</span><span class="n">keys</span><span class="p">)</span>
+        <span class="n">key_offset</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">lengths</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">key_length</span> <span class="ow">in</span> <span class="n">key_lengths</span><span class="p">:</span>
+            <span class="n">lengths</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">key2count</span><span class="p">[</span><span class="n">key_offset</span><span class="p">:</span> <span class="n">key_offset</span> <span class="o">+</span> <span class="n">key_length</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">item</span><span class="p">())</span>
+            <span class="n">key_offset</span> <span class="o">+=</span> <span class="n">key_length</span>
+
+    <span class="n">offset</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">offsets</span> <span class="o">=</span> <span class="p">[</span><span class="n">offset</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">length</span> <span class="ow">in</span> <span class="n">lengths</span><span class="p">:</span>
+        <span class="n">offset</span> <span class="o">=</span> <span class="n">round_to_boundary</span><span class="p">(</span><span class="n">offset</span> <span class="o">+</span> <span class="n">length</span><span class="p">)</span>
+        <span class="n">offsets</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">offset</span><span class="p">)</span>
+    <span class="n">offsets</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">dataset</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">torch_data</span><span class="o">.</span><span class="n">Subset</span><span class="p">(</span><span class="n">dataset</span><span class="p">,</span> <span class="n">indexes</span><span class="p">[</span><span class="n">offsets</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span> <span class="n">offsets</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]])</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">lengths</span><span class="p">))]</span>
+
+
+<div class="viewcode-block" id="scaffold_split"><a class="viewcode-back" href="../../../api/data.html#torchdrug.data.scaffold_split">[docs]</a><span class="k">def</span> <span class="nf">scaffold_split</span><span class="p">(</span><span class="n">dataset</span><span class="p">,</span> <span class="n">lengths</span><span class="p">):</span>
+    <span class="sd">"""</span>
+<span class="sd">    Randomly split a dataset into new datasets with non-overlapping scaffolds.</span>
+
+<span class="sd">    Parameters:</span>
+<span class="sd">        dataset (Dataset): dataset to split</span>
+<span class="sd">        lengths (list of int): expected length for each split.</span>
+<span class="sd">            Note the results may be different in length due to rounding.</span>
+<span class="sd">    """</span>
+
+    <span class="n">scaffold2id</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">keys</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">sample</span> <span class="ow">in</span> <span class="n">dataset</span><span class="p">:</span>
+        <span class="n">scaffold</span> <span class="o">=</span> <span class="n">sample</span><span class="p">[</span><span class="s2">"graph"</span><span class="p">]</span><span class="o">.</span><span class="n">to_scaffold</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">scaffold</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">scaffold2id</span><span class="p">:</span>
+            <span class="nb">id</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">scaffold2id</span><span class="p">)</span>
+            <span class="n">scaffold2id</span><span class="p">[</span><span class="n">scaffold</span><span class="p">]</span> <span class="o">=</span> <span class="nb">id</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">id</span> <span class="o">=</span> <span class="n">scaffold2id</span><span class="p">[</span><span class="n">scaffold</span><span class="p">]</span>
+        <span class="n">keys</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">id</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">key_split</span><span class="p">(</span><span class="n">dataset</span><span class="p">,</span> <span class="n">keys</span><span class="p">,</span> <span class="n">lengths</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="ordered_scaffold_split"><a class="viewcode-back" href="../../../api/data.html#torchdrug.data.ordered_scaffold_split">[docs]</a><span class="k">def</span> <span class="nf">ordered_scaffold_split</span><span class="p">(</span><span class="n">dataset</span><span class="p">,</span> <span class="n">lengths</span><span class="p">,</span> <span class="n">chirality</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+    <span class="sd">"""</span>
+<span class="sd">    Split a dataset into new datasets with non-overlapping scaffolds and sorted w.r.t. number of each scaffold.</span>
+
+<span class="sd">    Parameters:</span>
+<span class="sd">        dataset (Dataset): dataset to split</span>
+<span class="sd">        lengths (list of int): expected length for each split.</span>
+<span class="sd">            Note the results may be different in length due to rounding.</span>
+<span class="sd">    """</span>
+    <span class="n">frac_train</span><span class="p">,</span> <span class="n">frac_valid</span><span class="p">,</span> <span class="n">frac_test</span> <span class="o">=</span> <span class="mf">0.8</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.1</span>
+
+    <span class="n">scaffold2id</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">list</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">smiles</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">dataset</span><span class="o">.</span><span class="n">smiles_list</span><span class="p">):</span>
+        <span class="n">scaffold</span> <span class="o">=</span> <span class="n">MurckoScaffold</span><span class="o">.</span><span class="n">MurckoScaffoldSmiles</span><span class="p">(</span><span class="n">smiles</span><span class="o">=</span><span class="n">smiles</span><span class="p">,</span> <span class="n">includeChirality</span><span class="o">=</span><span class="n">chirality</span><span class="p">)</span>
+        <span class="n">scaffold2id</span><span class="p">[</span><span class="n">scaffold</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">idx</span><span class="p">)</span>
+
+    <span class="n">scaffold2id</span> <span class="o">=</span> <span class="p">{</span><span class="n">key</span><span class="p">:</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">scaffold2id</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
+    <span class="n">scaffold_sets</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="n">scaffold_set</span> <span class="k">for</span> <span class="p">(</span><span class="n">scaffold</span><span class="p">,</span> <span class="n">scaffold_set</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span>
+            <span class="n">scaffold2id</span><span class="o">.</span><span class="n">items</span><span class="p">(),</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]),</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="p">]</span>
+    <span class="n">train_cutoff</span> <span class="o">=</span> <span class="n">frac_train</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">dataset</span><span class="p">)</span>
+    <span class="n">valid_cutoff</span> <span class="o">=</span> <span class="p">(</span><span class="n">frac_train</span> <span class="o">+</span> <span class="n">frac_valid</span><span class="p">)</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">dataset</span><span class="p">)</span>
+    <span class="n">train_idx</span><span class="p">,</span> <span class="n">valid_idx</span><span class="p">,</span> <span class="n">test_idx</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[],</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">scaffold_set</span> <span class="ow">in</span> <span class="n">scaffold_sets</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">train_idx</span><span class="p">)</span> <span class="o">+</span> <span class="nb">len</span><span class="p">(</span><span class="n">scaffold_set</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">train_cutoff</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">train_idx</span><span class="p">)</span> <span class="o">+</span> <span class="nb">len</span><span class="p">(</span><span class="n">valid_idx</span><span class="p">)</span> <span class="o">+</span> <span class="nb">len</span><span class="p">(</span><span class="n">scaffold_set</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">valid_cutoff</span><span class="p">:</span>
+                <span class="n">test_idx</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">scaffold_set</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">valid_idx</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">scaffold_set</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">train_idx</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">scaffold_set</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">torch_data</span><span class="o">.</span><span class="n">Subset</span><span class="p">(</span><span class="n">dataset</span><span class="p">,</span> <span class="n">train_idx</span><span class="p">),</span> <span class="n">torch_data</span><span class="o">.</span><span class="n">Subset</span><span class="p">(</span><span class="n">dataset</span><span class="p">,</span> <span class="n">valid_idx</span><span class="p">),</span> <span class="n">torch_data</span><span class="o">.</span><span class="n">Subset</span><span class="p">(</span><span class="n">dataset</span><span class="p">,</span> <span class="n">test_idx</span><span class="p">)</span></div>
+</pre></div>
+      </article>
+      <footer>
+        
+        <div class="related-pages">
+          
+          
+        </div>
+
+        <div class="related-information">
+          <span class="copyright">Copyright &copy; 2021, MilaGraph Group</span> |
+          Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using
+          <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+          <a href="https://github.com/pradyunsg/furo">Furo theme</a>.
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer no-toc">
+      
+      
+      
+    </aside>
+  </main>
+</div>
+  </body>
+</html>

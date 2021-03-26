@@ -1,5 +1,55 @@
-drugdiscovery.metrics
+torchdrug.metrics
 =====================
 
-.. automodule:: drugdiscovery.metrics
-    :members:
+.. currentmodule:: torchdrug.metrics
+
+
+Classification and Regression Metrics
+----------------------------------
+
+
+AUROC
+~~~~~~~~~~~~~~~~
+.. autoclass:: area_under_roc
+.. autoclass:: AUROC
+
+
+AUPRC
+~~~~~~~~~~~~~~~~
+.. autoclass:: area_under_prc
+.. autoclass:: AUPRC
+
+
+R2
+~~~~~~~~~~~~~~~~
+.. autoclass:: r2
+
+Variadic Accuracy
+~~~~~~~~~~~~~~~~
+.. autoclass:: variadic_accuracy
+
+
+
+
+Molecular Property Metrics
+----------------------------------
+
+SA
+~~~~~~~~~~~~~~~~
+.. autoclass:: SA
+
+QED
+~~~~~~~~~~~~~~~~
+.. autoclass:: QED
+
+Chemical Validity
+~~~~~~~~~~~~~~~~
+.. autoclass:: chemical_validity
+
+LogP
+~~~~~~~~~~~~~~~~
+.. autoclass:: logP
+
+Penalized LogP
+~~~~~~~~~~~~~~~~
+.. autoclass:: penalized_logP

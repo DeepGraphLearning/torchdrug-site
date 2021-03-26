@@ -1,0 +1,436 @@
+<!doctype html>
+<html class="no-js">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/><link rel="index" title="Index" href="../../../genindex.html" /><link rel="search" title="Search" href="../../../search.html" />
+
+    <meta name="generator" content="sphinx-3.5.3, furo 2020.10.15.beta13"/>
+        <title>torchdrug.tasks.pretrain - Drugdiscovery 0.1.0 documentation</title>
+      <link id="pygments_dark_css" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css" href="../../../_static/pygments_dark.css" />
+    <link rel="stylesheet" href="../../../_static/styles/default.css?57fcbb562259c567e1ad48b8">
+    <link rel="stylesheet" href="../../../_static/pygments.css">
+    <link media="(prefers-color-scheme: dark)" rel="stylesheet" href="../../../_static/pygments_dark.css">
+    
+<style>
+  :root {
+    --color-code-background: #f8f8f8;
+    --color-code-foreground: black;
+  
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+    --color-code-background: #202020;
+    --color-code-foreground: #d0d0d0;
+      
+    }
+  }
+</style>
+    <script id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script><script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/scripts/main.js?57fcbb562259c567e1ad48b8"></script></head>
+  <body dir="">
+    
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+      stroke-width="1.5" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+      <path stroke="none" d="M0 0h24v24H0z"/>
+      <line x1="4" y1="6" x2="20" y2="6" />
+      <line x1="10" y1="12" x2="20" y2="12" />
+      <line x1="6" y1="18" x2="20" y2="18" />
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+      stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+      class="feather feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+      stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+      class="feather feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation"></label>
+<label class="overlay toc-overlay" for="__toc"></label>
+
+
+<div class="page">
+  <header class="mobile-header">
+    <label class="header-left nav-overlay-icon" for="__navigation">
+      <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+    </label>
+    <div class="header-center"><div class="brand">Drugdiscovery 0.1.0 documentation</div></div>
+    <div class="header-right"></div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand centered" href="../../../index.html">
+  <div class="sidebar-logo-container">
+    <img class="sidebar-logo" src="../../../_static/logo.svg" alt="Logo"/>
+  </div>
+  
+</a><form class="sidebar-search-container" method="get" action="../../../search.html">
+  <input class="sidebar-search" placeholder="Search" name="q">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form><div class="sidebar-tree sidebar-scroll">
+  <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../quick_start.html">Quick Start</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../benchmark/index.html">Benchmark</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label for="toctree-checkbox-1"><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../benchmark/property_prediction.html">Molecule Property Prediction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../benchmark/pretrain.html">Pretrained Molecular Representations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../benchmark/generation.html">Graph Generation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../benchmark/retrosynthesis.html">Retrosynthesis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../benchmark/reasoning.html">Knowledge Graph Reasoning</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../tutorials/index.html">Tutorials</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label for="toctree-checkbox-2"><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../tutorials/property_prediction.html">Property Prediction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../tutorials/pretrain.html">Pretrained Molecular Representations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../tutorials/generation.html">Molecule Generation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../tutorials/retrosynthesis.html">Retrosynthesis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../tutorials/reasoning.html">Knowledge Graph Reasoning</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../notes/index.html">Notes</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label for="toctree-checkbox-3"><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../notes/graph.html">Graph Data Structures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../notes/variadic.html">Batch Irregular Structures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../notes/layer.html">Graph Neural Network Layers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../notes/model.html">Customize Models &amp; Tasks</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Package Reference</span></p>
+<ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../api/index.html">Documentation</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label for="toctree-checkbox-4"><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../api/core.html">torchdrug.core</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api/data.html">torchdrug.data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api/datasets.html">torchdrug.datasets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api/metrics.html">torchdrug.metrics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api/layers.html">torchdrug.layers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api/models.html">torchdrug.models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api/tasks.html">torchdrug.tasks</a></li>
+</ul>
+</li>
+</ul>
+
+</div>
+      </div>
+      
+    </div>
+  </aside>
+  <main class="main">
+    <div class="content">
+      <article role="main">
+        <label class="toc-overlay-icon no-toc" for="__toc">
+          <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+        </label>
+        <h1>Source code for torchdrug.tasks.pretrain</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">copy</span>
+
+<span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">from</span> <span class="nn">torch</span> <span class="kn">import</span> <span class="n">nn</span>
+<span class="kn">from</span> <span class="nn">torch.nn</span> <span class="kn">import</span> <span class="n">functional</span> <span class="k">as</span> <span class="n">F</span>
+<span class="kn">from</span> <span class="nn">torch_scatter</span> <span class="kn">import</span> <span class="n">scatter_max</span><span class="p">,</span> <span class="n">scatter_min</span>
+
+<span class="kn">from</span> <span class="nn">torchdrug</span> <span class="kn">import</span> <span class="n">core</span><span class="p">,</span> <span class="n">tasks</span><span class="p">,</span> <span class="n">layers</span>
+<span class="kn">from</span> <span class="nn">torchdrug.data</span> <span class="kn">import</span> <span class="n">constant</span>
+<span class="kn">from</span> <span class="nn">torchdrug.layers</span> <span class="kn">import</span> <span class="n">functional</span>
+<span class="kn">from</span> <span class="nn">torchdrug.core</span> <span class="kn">import</span> <span class="n">Registry</span> <span class="k">as</span> <span class="n">R</span>
+
+
+<div class="viewcode-block" id="EdgePrediction"><a class="viewcode-back" href="../../../api/tasks.html#torchdrug.tasks.EdgePrediction">[docs]</a><span class="nd">@R</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="s2">"tasks.EdgePrediction"</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">EdgePrediction</span><span class="p">(</span><span class="n">tasks</span><span class="o">.</span><span class="n">Task</span><span class="p">,</span> <span class="n">core</span><span class="o">.</span><span class="n">Configurable</span><span class="p">):</span>
+    <span class="sd">"""</span>
+<span class="sd">    Edge prediction task proposed in `Inductive Representation Learning on Large Graphs`_.</span>
+
+<span class="sd">    .. _Inductive Representation Learning on Large Graphs:</span>
+<span class="sd">        https://arxiv.org/abs/1706.02216</span>
+
+<span class="sd">    Parameters:</span>
+<span class="sd">        model (nn.Module): base graph neural network model</span>
+<span class="sd">    """</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">EdgePrediction</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="n">model</span>
+
+    <span class="k">def</span> <span class="nf">_get_directed</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">graph</span><span class="p">):</span>
+        <span class="n">mask</span> <span class="o">=</span> <span class="n">graph</span><span class="o">.</span><span class="n">edge_list</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">graph</span><span class="o">.</span><span class="n">edge_list</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span>
+        <span class="n">graph</span> <span class="o">=</span> <span class="n">graph</span><span class="o">.</span><span class="n">edge_mask</span><span class="p">(</span><span class="n">mask</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">graph</span>
+
+    <span class="k">def</span> <span class="nf">predict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">batch</span><span class="p">,</span> <span class="n">all_loss</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">metric</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="n">graph</span> <span class="o">=</span> <span class="n">batch</span><span class="p">[</span><span class="s2">"graph"</span><span class="p">]</span>
+
+        <span class="n">output</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">graph</span><span class="o">.</span><span class="n">node_feature</span><span class="o">.</span><span class="n">float</span><span class="p">(),</span> <span class="n">all_loss</span><span class="p">,</span> <span class="n">metric</span><span class="p">)</span>
+        <span class="n">node_feature</span> <span class="o">=</span> <span class="n">output</span><span class="p">[</span><span class="s2">"node_feature"</span><span class="p">]</span>
+
+        <span class="n">graph</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_directed</span><span class="p">(</span><span class="n">graph</span><span class="p">)</span>
+        <span class="n">node_in</span><span class="p">,</span> <span class="n">node_out</span> <span class="o">=</span> <span class="n">graph</span><span class="o">.</span><span class="n">edge_list</span><span class="o">.</span><span class="n">t</span><span class="p">()[:</span><span class="mi">2</span><span class="p">]</span>
+        <span class="n">neg_index</span> <span class="o">=</span> <span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">graph</span><span class="o">.</span><span class="n">num_edge</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">device</span><span class="p">)</span> <span class="o">*</span> <span class="n">graph</span><span class="o">.</span><span class="n">num_nodes</span><span class="p">[</span><span class="n">graph</span><span class="o">.</span><span class="n">edge2graph</span><span class="p">])</span><span class="o">.</span><span class="n">long</span><span class="p">()</span>
+        <span class="n">neg_index</span> <span class="o">=</span> <span class="n">neg_index</span> <span class="o">+</span> <span class="p">(</span><span class="n">graph</span><span class="o">.</span><span class="n">num_cum_nodes</span> <span class="o">-</span> <span class="n">graph</span><span class="o">.</span><span class="n">num_nodes</span><span class="p">)[</span><span class="n">graph</span><span class="o">.</span><span class="n">edge2graph</span><span class="p">]</span>
+        <span class="n">node_in</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">cat</span><span class="p">([</span><span class="n">node_in</span><span class="p">,</span> <span class="n">neg_index</span><span class="p">[</span><span class="mi">0</span><span class="p">]])</span>
+        <span class="n">node_out</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">cat</span><span class="p">([</span><span class="n">node_out</span><span class="p">,</span> <span class="n">neg_index</span><span class="p">[</span><span class="mi">1</span><span class="p">]])</span>
+
+        <span class="n">pred</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s2">"bd, bd -&gt; b"</span><span class="p">,</span> <span class="n">node_feature</span><span class="p">[</span><span class="n">node_in</span><span class="p">],</span> <span class="n">node_feature</span><span class="p">[</span><span class="n">node_out</span><span class="p">])</span>
+        <span class="k">return</span> <span class="n">pred</span>
+
+    <span class="k">def</span> <span class="nf">target</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">batch</span><span class="p">):</span>
+        <span class="n">graph</span> <span class="o">=</span> <span class="n">batch</span><span class="p">[</span><span class="s2">"graph"</span><span class="p">]</span>
+        <span class="n">target</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">graph</span><span class="o">.</span><span class="n">num_edge</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">device</span><span class="p">)</span>
+        <span class="n">target</span><span class="p">[</span><span class="n">graph</span><span class="o">.</span><span class="n">num_edge</span> <span class="o">//</span> <span class="mi">2</span><span class="p">:]</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">return</span> <span class="n">target</span>
+
+    <span class="k">def</span> <span class="nf">evaluate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pred</span><span class="p">,</span> <span class="n">target</span><span class="p">):</span>
+        <span class="n">metric</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">accuracy</span> <span class="o">=</span> <span class="p">((</span><span class="n">pred</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="o">==</span> <span class="p">(</span><span class="n">target</span> <span class="o">&gt;</span> <span class="mf">0.5</span><span class="p">))</span><span class="o">.</span><span class="n">float</span><span class="p">()</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+
+        <span class="n">name</span> <span class="o">=</span> <span class="n">tasks</span><span class="o">.</span><span class="n">_get_metric_name</span><span class="p">(</span><span class="s2">"acc"</span><span class="p">)</span>
+        <span class="n">metric</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">accuracy</span>
+
+        <span class="k">return</span> <span class="n">metric</span>
+
+    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">batch</span><span class="p">):</span>
+        <span class="sd">""""""</span>
+        <span class="n">all_loss</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">float32</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">device</span><span class="p">)</span>
+        <span class="n">metric</span> <span class="o">=</span> <span class="p">{}</span>
+
+        <span class="n">pred</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">batch</span><span class="p">,</span> <span class="n">all_loss</span><span class="p">,</span> <span class="n">metric</span><span class="p">)</span>
+        <span class="n">target</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">target</span><span class="p">(</span><span class="n">batch</span><span class="p">)</span>
+        <span class="n">loss</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">binary_cross_entropy_with_logits</span><span class="p">(</span><span class="n">pred</span><span class="p">,</span> <span class="n">target</span><span class="p">)</span>
+        <span class="n">name</span> <span class="o">=</span> <span class="n">tasks</span><span class="o">.</span><span class="n">_get_criterion_name</span><span class="p">(</span><span class="s2">"bce"</span><span class="p">)</span>
+        <span class="n">metric</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">loss</span>
+        <span class="n">metric</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="n">pred</span><span class="p">,</span> <span class="n">target</span><span class="p">))</span>
+
+        <span class="n">all_loss</span> <span class="o">+=</span> <span class="n">loss</span>
+
+        <span class="k">return</span> <span class="n">all_loss</span><span class="p">,</span> <span class="n">metric</span></div>
+
+
+<div class="viewcode-block" id="AttributeMasking"><a class="viewcode-back" href="../../../api/tasks.html#torchdrug.tasks.AttributeMasking">[docs]</a><span class="nd">@R</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="s2">"tasks.AttributeMasking"</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">AttributeMasking</span><span class="p">(</span><span class="n">tasks</span><span class="o">.</span><span class="n">Task</span><span class="p">,</span> <span class="n">core</span><span class="o">.</span><span class="n">Configurable</span><span class="p">):</span>
+    <span class="sd">"""</span>
+<span class="sd">    Attribute masking proposed in `Strategies for Pre-training Graph Neural Networks`_.</span>
+
+<span class="sd">    .. _Strategies for Pre-training Graph Neural Networks:</span>
+<span class="sd">        https://arxiv.org/abs/1905.12265</span>
+
+<span class="sd">    Parameters:</span>
+<span class="sd">        model (nn.Module): base graph neural network model</span>
+<span class="sd">        atom_attribute_model (nn.Module): atom (attribute) prediction model</span>
+<span class="sd">        mask_rate (float): the rate randomly masked node attributes</span>
+<span class="sd">    """</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">mask_rate</span><span class="o">=</span><span class="mf">0.15</span><span class="p">,</span> <span class="n">num_mlp_layer</span><span class="o">=</span><span class="mi">2</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">AttributeMasking</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="n">model</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mask_rate</span> <span class="o">=</span> <span class="n">mask_rate</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">num_mlp_layer</span> <span class="o">=</span> <span class="n">num_mlp_layer</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">mlp</span> <span class="o">=</span> <span class="n">layers</span><span class="o">.</span><span class="n">MLP</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">output_dim</span><span class="p">,</span> <span class="p">[</span><span class="n">model</span><span class="o">.</span><span class="n">output_dim</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="n">num_mlp_layer</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="p">[</span><span class="n">constant</span><span class="o">.</span><span class="n">NUM_ATOM</span><span class="p">])</span>
+
+    <span class="k">def</span> <span class="nf">predict_and_target</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">batch</span><span class="p">,</span> <span class="n">all_loss</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">metric</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="n">graph</span> <span class="o">=</span> <span class="n">batch</span><span class="p">[</span><span class="s2">"graph"</span><span class="p">]</span>
+
+        <span class="n">num_samples</span> <span class="o">=</span> <span class="p">(</span><span class="n">graph</span><span class="o">.</span><span class="n">num_nodes</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">mask_rate</span><span class="p">)</span><span class="o">.</span><span class="n">long</span><span class="p">()</span><span class="o">.</span><span class="n">clamp</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">num_sample</span> <span class="o">=</span> <span class="n">num_samples</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+        <span class="n">sample2graph</span> <span class="o">=</span> <span class="n">functional</span><span class="o">.</span><span class="n">_size_to_index</span><span class="p">(</span><span class="n">num_samples</span><span class="p">)</span>
+        <span class="n">node_index</span> <span class="o">=</span> <span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">num_sample</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">device</span><span class="p">)</span> <span class="o">*</span> <span class="n">graph</span><span class="o">.</span><span class="n">num_nodes</span><span class="p">[</span><span class="n">sample2graph</span><span class="p">])</span><span class="o">.</span><span class="n">long</span><span class="p">()</span>
+        <span class="n">node_index</span> <span class="o">=</span> <span class="n">node_index</span> <span class="o">+</span> <span class="p">(</span><span class="n">graph</span><span class="o">.</span><span class="n">num_cum_nodes</span> <span class="o">-</span> <span class="n">graph</span><span class="o">.</span><span class="n">num_nodes</span><span class="p">)[</span><span class="n">sample2graph</span><span class="p">]</span>
+
+        <span class="n">target</span> <span class="o">=</span> <span class="n">graph</span><span class="o">.</span><span class="n">atom_type</span><span class="p">[</span><span class="n">node_index</span><span class="p">]</span>
+        <span class="n">node_feature</span> <span class="o">=</span> <span class="n">graph</span><span class="o">.</span><span class="n">node_feature</span><span class="o">.</span><span class="n">clone</span><span class="p">()</span>
+        <span class="n">node_feature</span><span class="p">[</span><span class="n">node_index</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+
+        <span class="n">output</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">node_feature</span><span class="o">.</span><span class="n">float</span><span class="p">(),</span> <span class="n">all_loss</span><span class="p">,</span> <span class="n">metric</span><span class="p">)</span>
+        <span class="n">node_feature</span> <span class="o">=</span> <span class="n">output</span><span class="p">[</span><span class="s2">"node_feature"</span><span class="p">]</span>
+        <span class="n">node_feature</span> <span class="o">=</span> <span class="n">node_feature</span><span class="p">[</span><span class="n">node_index</span><span class="p">]</span>
+        <span class="n">pred</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mlp</span><span class="p">(</span><span class="n">node_feature</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">pred</span><span class="p">,</span> <span class="n">target</span>
+
+    <span class="k">def</span> <span class="nf">evaluate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pred</span><span class="p">,</span> <span class="n">target</span><span class="p">):</span>
+        <span class="n">metric</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">accuracy</span> <span class="o">=</span> <span class="p">(</span><span class="n">pred</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">dim</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span> <span class="o">==</span> <span class="n">target</span><span class="p">)</span><span class="o">.</span><span class="n">float</span><span class="p">()</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+
+        <span class="n">name</span> <span class="o">=</span> <span class="n">tasks</span><span class="o">.</span><span class="n">_get_metric_name</span><span class="p">(</span><span class="s2">"acc"</span><span class="p">)</span>
+        <span class="n">metric</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">accuracy</span>
+
+        <span class="k">return</span> <span class="n">metric</span>
+
+    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">batch</span><span class="p">):</span>
+        <span class="sd">""""""</span>
+        <span class="n">all_loss</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">float32</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">device</span><span class="p">)</span>
+        <span class="n">metric</span> <span class="o">=</span> <span class="p">{}</span>
+
+        <span class="n">pred</span><span class="p">,</span> <span class="n">target</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">predict_and_target</span><span class="p">(</span><span class="n">batch</span><span class="p">,</span> <span class="n">all_loss</span><span class="p">,</span> <span class="n">metric</span><span class="p">)</span>
+        <span class="n">metric</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="n">pred</span><span class="p">,</span> <span class="n">target</span><span class="p">))</span>
+
+        <span class="n">loss</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">cross_entropy</span><span class="p">(</span><span class="n">pred</span><span class="p">,</span> <span class="n">target</span><span class="p">)</span>
+        <span class="n">name</span> <span class="o">=</span> <span class="n">tasks</span><span class="o">.</span><span class="n">_get_criterion_name</span><span class="p">(</span><span class="s2">"ce"</span><span class="p">)</span>
+        <span class="n">metric</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">loss</span>
+
+        <span class="n">all_loss</span> <span class="o">+=</span> <span class="n">loss</span>
+
+        <span class="k">return</span> <span class="n">all_loss</span><span class="p">,</span> <span class="n">metric</span></div>
+
+
+<div class="viewcode-block" id="ContextPrediction"><a class="viewcode-back" href="../../../api/tasks.html#torchdrug.tasks.ContextPrediction">[docs]</a><span class="nd">@R</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="s2">"tasks.ContextPrediction"</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">ContextPrediction</span><span class="p">(</span><span class="n">tasks</span><span class="o">.</span><span class="n">Task</span><span class="p">,</span> <span class="n">core</span><span class="o">.</span><span class="n">Configurable</span><span class="p">):</span>
+    <span class="sd">"""</span>
+<span class="sd">    Context prediction task proposed in `Strategies for Pre-training Graph Neural Networks`_.</span>
+
+<span class="sd">    .. _Strategies for Pre-training Graph Neural Networks:</span>
+<span class="sd">        https://arxiv.org/abs/1905.12265</span>
+
+<span class="sd">    Parameters:</span>
+<span class="sd">        model (nn.Module): base graph neural network model</span>
+<span class="sd">        context_model (nn.Module, optional): graph representation model for context prediction</span>
+<span class="sd">        k (int, optional): radius for the K-hop neighborhood</span>
+<span class="sd">        r1 (int, optional): radius for the l1-hop neighborhood, context graph is the subgraph between l1- and l2-hop from the center node.</span>
+<span class="sd">        r2 (int, optional): radius for the l2-hop neighborhood, context graph is the subgraph between l1- and l2-hop from the center node.</span>
+<span class="sd">        readout (nn.Module, optional): graph aggregation function for the context prediction model</span>
+<span class="sd">        num_negative (int, optional): number of negative substructures per positive substructure</span>
+<span class="sd">    """</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">context_model</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">r1</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">r2</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span> <span class="n">readout</span><span class="o">=</span><span class="s2">"mean"</span><span class="p">,</span> <span class="n">num_negative</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">ContextPrediction</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="n">model</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">k</span> <span class="o">=</span> <span class="n">k</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">r1</span> <span class="o">=</span> <span class="n">r1</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">r2</span> <span class="o">=</span> <span class="n">r2</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">num_negative</span> <span class="o">=</span> <span class="n">num_negative</span>
+        <span class="k">assert</span> <span class="n">r1</span> <span class="o">&lt;</span> <span class="n">k</span> <span class="o">&lt;</span> <span class="n">r2</span>
+
+        <span class="k">if</span> <span class="n">context_model</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">context_model</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">context_model</span> <span class="o">=</span> <span class="n">context_model</span>
+        <span class="k">if</span> <span class="n">readout</span> <span class="o">==</span> <span class="s2">"sum"</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">readout</span> <span class="o">=</span> <span class="n">layers</span><span class="o">.</span><span class="n">SumReadout</span><span class="p">()</span>
+        <span class="k">elif</span> <span class="n">readout</span> <span class="o">==</span> <span class="s2">"mean"</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">readout</span> <span class="o">=</span> <span class="n">layers</span><span class="o">.</span><span class="n">MeanReadout</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Unknown readout `</span><span class="si">%s</span><span class="s2">`"</span> <span class="o">%</span> <span class="n">readout</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">substruct_and_context</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">graph</span><span class="p">):</span>
+        <span class="n">center_index</span> <span class="o">=</span> <span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">graph</span><span class="p">),</span> <span class="n">device</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">device</span><span class="p">)</span> <span class="o">*</span> <span class="n">graph</span><span class="o">.</span><span class="n">num_nodes</span><span class="p">)</span><span class="o">.</span><span class="n">long</span><span class="p">()</span>
+        <span class="n">center_index</span> <span class="o">=</span> <span class="n">center_index</span> <span class="o">+</span> <span class="n">graph</span><span class="o">.</span><span class="n">num_cum_nodes</span> <span class="o">-</span> <span class="n">graph</span><span class="o">.</span><span class="n">num_nodes</span>
+        <span class="n">dist</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">full</span><span class="p">((</span><span class="n">graph</span><span class="o">.</span><span class="n">num_node</span><span class="p">,),</span> <span class="bp">self</span><span class="o">.</span><span class="n">r2</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">long</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">device</span><span class="p">)</span>
+        <span class="n">dist</span><span class="p">[</span><span class="n">center_index</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+
+        <span class="c1"># single source shortest path</span>
+        <span class="n">node_in</span><span class="p">,</span> <span class="n">node_out</span> <span class="o">=</span> <span class="n">graph</span><span class="o">.</span><span class="n">edge_list</span><span class="o">.</span><span class="n">t</span><span class="p">()[:</span><span class="mi">2</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">r2</span><span class="p">):</span>
+            <span class="n">new_dist</span> <span class="o">=</span> <span class="n">scatter_min</span><span class="p">(</span><span class="n">dist</span><span class="p">[</span><span class="n">node_in</span><span class="p">],</span> <span class="n">node_out</span><span class="p">,</span> <span class="n">dim_size</span><span class="o">=</span><span class="n">graph</span><span class="o">.</span><span class="n">num_node</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span>
+            <span class="n">dist</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">dist</span><span class="p">,</span> <span class="n">new_dist</span><span class="p">)</span>
+
+        <span class="n">substruct_mask</span> <span class="o">=</span> <span class="n">dist</span> <span class="o">&lt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">k</span>
+        <span class="n">context_mask</span> <span class="o">=</span> <span class="p">(</span><span class="n">dist</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">r1</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">dist</span> <span class="o">&lt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">r2</span><span class="p">)</span>
+        <span class="n">is_center_node</span> <span class="o">=</span> <span class="n">functional</span><span class="o">.</span><span class="n">as_mask</span><span class="p">(</span><span class="n">center_index</span><span class="p">,</span> <span class="n">graph</span><span class="o">.</span><span class="n">num_node</span><span class="p">)</span>
+        <span class="n">is_anchor_node</span> <span class="o">=</span> <span class="p">(</span><span class="n">dist</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">r1</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">dist</span> <span class="o">&lt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">k</span><span class="p">)</span>
+
+        <span class="n">substruct</span> <span class="o">=</span> <span class="n">graph</span><span class="o">.</span><span class="n">clone</span><span class="p">()</span>
+        <span class="n">context</span> <span class="o">=</span> <span class="n">graph</span><span class="o">.</span><span class="n">clone</span><span class="p">()</span>
+        <span class="k">with</span> <span class="n">substruct</span><span class="o">.</span><span class="n">node</span><span class="p">():</span>
+            <span class="n">substruct</span><span class="o">.</span><span class="n">is_center_node</span> <span class="o">=</span> <span class="n">is_center_node</span>
+        <span class="k">with</span> <span class="n">context</span><span class="o">.</span><span class="n">node</span><span class="p">():</span>
+            <span class="n">context</span><span class="o">.</span><span class="n">is_anchor_node</span> <span class="o">=</span> <span class="n">is_anchor_node</span>
+
+        <span class="n">substruct</span> <span class="o">=</span> <span class="n">substruct</span><span class="o">.</span><span class="n">subgraph</span><span class="p">(</span><span class="n">substruct_mask</span><span class="p">)</span>
+        <span class="n">context</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="n">subgraph</span><span class="p">(</span><span class="n">context_mask</span><span class="p">)</span>
+        <span class="n">valid</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="n">num_nodes</span> <span class="o">&gt;</span> <span class="mi">0</span>
+        <span class="n">substruct</span> <span class="o">=</span> <span class="n">substruct</span><span class="p">[</span><span class="n">valid</span><span class="p">]</span>
+        <span class="n">context</span> <span class="o">=</span> <span class="n">context</span><span class="p">[</span><span class="n">valid</span><span class="p">]</span>
+
+        <span class="k">return</span> <span class="n">substruct</span><span class="p">,</span> <span class="n">context</span>
+
+    <span class="k">def</span> <span class="nf">predict_and_target</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">batch</span><span class="p">,</span> <span class="n">all_loss</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">metric</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="n">graph</span> <span class="o">=</span> <span class="n">batch</span><span class="p">[</span><span class="s2">"graph"</span><span class="p">]</span>
+        <span class="n">substruct</span><span class="p">,</span> <span class="n">context</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">substruct_and_context</span><span class="p">(</span><span class="n">graph</span><span class="p">)</span>
+        <span class="n">anchor</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="n">subgraph</span><span class="p">(</span><span class="n">context</span><span class="o">.</span><span class="n">is_anchor_node</span><span class="p">)</span>
+
+        <span class="n">substruct_output</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">(</span><span class="n">substruct</span><span class="p">,</span> <span class="n">substruct</span><span class="o">.</span><span class="n">node_feature</span><span class="o">.</span><span class="n">float</span><span class="p">(),</span> <span class="n">all_loss</span><span class="p">,</span> <span class="n">metric</span><span class="p">)</span>
+        <span class="n">substruct_feature</span> <span class="o">=</span> <span class="n">substruct_output</span><span class="p">[</span><span class="s2">"node_feature"</span><span class="p">][</span><span class="n">substruct</span><span class="o">.</span><span class="n">is_center_node</span><span class="p">]</span>
+
+        <span class="n">context_output</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">context_model</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="n">context</span><span class="o">.</span><span class="n">node_feature</span><span class="o">.</span><span class="n">float</span><span class="p">(),</span> <span class="n">all_loss</span><span class="p">,</span> <span class="n">metric</span><span class="p">)</span>
+        <span class="n">anchor_feature</span> <span class="o">=</span> <span class="n">context_output</span><span class="p">[</span><span class="s2">"node_feature"</span><span class="p">][</span><span class="n">context</span><span class="o">.</span><span class="n">is_anchor_node</span><span class="p">]</span>
+        <span class="n">context_feature</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">readout</span><span class="p">(</span><span class="n">anchor</span><span class="p">,</span> <span class="n">anchor_feature</span><span class="p">)</span>
+
+        <span class="c1"># shift = torch.randint(1, len(context), (self.num_negative,), device=self.device)</span>
+        <span class="n">shift</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">num_negative</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">device</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="n">neg_index</span> <span class="o">=</span> <span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">context</span><span class="p">),</span> <span class="n">device</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">device</span><span class="p">)</span><span class="o">.</span><span class="n">unsqueeze</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="n">shift</span><span class="p">)</span> <span class="o">%</span> <span class="nb">len</span><span class="p">(</span><span class="n">context</span><span class="p">)</span> <span class="c1"># (batch_size, num_negative)</span>
+        <span class="n">context_feature</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">cat</span><span class="p">([</span><span class="n">context_feature</span><span class="o">.</span><span class="n">unsqueeze</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="n">context_feature</span><span class="p">[</span><span class="n">neg_index</span><span class="p">]],</span> <span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">substruct_feature</span> <span class="o">=</span> <span class="n">substruct_feature</span><span class="o">.</span><span class="n">unsqueeze</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">expand_as</span><span class="p">(</span><span class="n">context_feature</span><span class="p">)</span>
+
+        <span class="n">pred</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s2">"bnd, bnd -&gt; bn"</span><span class="p">,</span> <span class="n">substruct_feature</span><span class="p">,</span> <span class="n">context_feature</span><span class="p">)</span>
+        <span class="n">target</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">pred</span><span class="p">)</span>
+        <span class="n">target</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="k">return</span> <span class="n">pred</span><span class="p">,</span> <span class="n">target</span>
+
+    <span class="k">def</span> <span class="nf">evaluate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pred</span><span class="p">,</span> <span class="n">target</span><span class="p">):</span>
+        <span class="n">metric</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">accuracy</span> <span class="o">=</span> <span class="p">((</span><span class="n">pred</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="o">==</span> <span class="p">(</span><span class="n">target</span> <span class="o">&gt;</span> <span class="mf">0.5</span><span class="p">))</span><span class="o">.</span><span class="n">float</span><span class="p">()</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+
+        <span class="n">name</span> <span class="o">=</span> <span class="n">tasks</span><span class="o">.</span><span class="n">_get_metric_name</span><span class="p">(</span><span class="s2">"acc"</span><span class="p">)</span>
+        <span class="n">metric</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">accuracy</span>
+
+        <span class="k">return</span> <span class="n">metric</span>
+
+<div class="viewcode-block" id="ContextPrediction.forward"><a class="viewcode-back" href="../../../api/tasks.html#torchdrug.tasks.ContextPrediction.forward">[docs]</a>    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">batch</span><span class="p">):</span>
+        <span class="n">all_loss</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">float32</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">device</span><span class="p">)</span>
+        <span class="n">metric</span> <span class="o">=</span> <span class="p">{}</span>
+
+        <span class="n">pred</span><span class="p">,</span> <span class="n">target</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">predict_and_target</span><span class="p">(</span><span class="n">batch</span><span class="p">,</span> <span class="n">all_loss</span><span class="p">,</span> <span class="n">metric</span><span class="p">)</span>
+        <span class="n">metric</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="n">pred</span><span class="p">,</span> <span class="n">target</span><span class="p">))</span>
+
+        <span class="n">loss</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">binary_cross_entropy_with_logits</span><span class="p">(</span><span class="n">pred</span><span class="p">,</span> <span class="n">target</span><span class="p">)</span>
+        <span class="n">name</span> <span class="o">=</span> <span class="n">tasks</span><span class="o">.</span><span class="n">_get_criterion_name</span><span class="p">(</span><span class="s2">"bce"</span><span class="p">)</span>
+        <span class="n">metric</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">loss</span>
+
+        <span class="n">all_loss</span> <span class="o">+=</span> <span class="n">loss</span>
+
+        <span class="k">return</span> <span class="n">all_loss</span><span class="p">,</span> <span class="n">metric</span></div></div>
+</pre></div>
+      </article>
+      <footer>
+        
+        <div class="related-pages">
+          
+          
+        </div>
+
+        <div class="related-information">
+          <span class="copyright">Copyright &copy; 2021, MilaGraph Group</span> |
+          Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using
+          <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+          <a href="https://github.com/pradyunsg/furo">Furo theme</a>.
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer no-toc">
+      
+      
+      
+    </aside>
+  </main>
+</div>
+  </body>
+</html>

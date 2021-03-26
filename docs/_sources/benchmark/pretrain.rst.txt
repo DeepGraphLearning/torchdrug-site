@@ -22,10 +22,10 @@ Self-Supervised Pre-training
 ----------------------------
 
 - Random, baseline with random initialization
-- :func:`Edge Prediction (EP) <drugdiscovery.tasks.EdgePrediction>`
-- :func:`InfoGraph (IG) <drugdiscovery.models.InfoGraph>`
-- :func:`Attribute Masking (AM) <drugdiscovery.tasks.AttributeMasking>`
-- :func:`Context Prediction (CP) <drugdiscovery.tasks.ContextPrediction>`
+- :func:`Edge Prediction (EP) <torchdrug.tasks.EdgePrediction>`
+- :func:`InfoGraph (IG) <torchdrug.models.InfoGraph>`
+- :func:`Attribute Masking (AM) <torchdrug.tasks.AttributeMasking>`
+- :func:`Context Prediction (CP) <torchdrug.tasks.ContextPrediction>`
 
 .. csv-table:: Results for Self-Supervised Pre-training
     :header: Method, BBBP, Tox21, ToxCast, Sider, ClinTox, MUV, HIV, Bace, Avg

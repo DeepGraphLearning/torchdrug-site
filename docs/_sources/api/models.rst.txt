@@ -1,5 +1,74 @@
-drugdiscovery.models
+torchdrug.models
 ====================
 
-.. automodule:: drugdiscovery.models
-    :members:
+.. currentmodule:: torchdrug.models
+
+
+Knowledge Graph Embedding
+----------------------------------
+
+ComplEx
+~~~~~~~~~~~~~~~~
+.. autoclass:: ComplEx
+
+DistMult
+~~~~~~~~~~~~~~~~
+.. autoclass:: DistMult
+
+RotatE
+~~~~~~~~~~~~~~~~
+.. autoclass:: RotatE
+
+SimplE
+~~~~~~~~~~~~~~~~
+.. autoclass:: SimplE
+
+TransE
+~~~~~~~~~~~~~~~~
+.. autoclass:: TransE
+
+
+Graph Neural Networks
+----------------------------------
+
+ChebNet
+~~~~~~~~~~~~~~~~
+.. autofunction:: ChebyshevConvolutionalNetwork
+
+GCN
+~~~~~~~~~~~~~~~~
+.. autofunction:: GraphConvolutionalNetwork
+
+.. autofunction:: GCN
+
+GIN
+~~~~~~~~~~~~~~~~
+.. autofunction:: GraphIsomorphismNetwork
+
+.. autofunction:: GIN
+
+InfoGraph
+~~~~~~~~~~~~~~~~
+.. autofunction:: InfoGraph
+
+MPNN
+~~~~~~~~~~~~~~~~
+.. autofunction:: MessagePassingNeuralNetwork
+
+.. autofunction:: MPNN
+
+NFP
+~~~~~~~~~~~~~~~~
+.. autofunction:: NeuralFingerprint
+
+.. autofunction:: NFP
+
+RGCN
+~~~~~~~~~~~~~~~~
+.. autofunction:: RelationalGraphConvolutionalNetwork
+
+.. autofunction:: RGCN
+
+SchNet
+~~~~~~~~~~~~~~~~
+.. autofunction:: SchNet

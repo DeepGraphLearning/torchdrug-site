@@ -26,7 +26,7 @@ You are encouraged to dump the preprocessed dataset to save the time for future 
 .. code:: python
 
     import torch
-    from drugdiscovery import datasets
+    from torchdrug import datasets
 
     dataset = datasets.ZINC250k("~/molecule-datasets/", kekulize=True,
                                 node_feature="symbol")
@@ -41,12 +41,12 @@ Define the Model: GCPN
 The model consists of two parts, a graph representation model and a graph generative
 module. We define a Relational Graph Convolutional Networks (`RGCN`_) as our
 representation model. We use the module
-:class:`GCPNGeneration <drugdiscovery.tasks.GCPNGeneration>` as the training task
+:class:`GCPNGeneration <torchdrug.tasks.GCPNGeneration>` as the training task
 for GCPN.
 
 .. code:: python
 
-    from drugdiscovery import core, models, tasks
+    from torchdrug import core, models, tasks
 
     model = models.RGCN(input_dim=dataset.node_feature_dim, 
                         num_relation=dataset.num_bond_type,
@@ -127,7 +127,7 @@ For Penalized logP optimization, the code is as follows:
 .. code:: python
 
     import torch
-    from drugdiscovery import core, datasets, models, tasks
+    from torchdrug import core, datasets, models, tasks
     from torch import nn, optim
     from collections import defaultdict
 
@@ -203,15 +203,15 @@ Define the Model: GraphAF
 The model consists of two parts, a graph representation model and a graph generative
 module. We define a Relational Graph Convolutional Networks (`RGCN`_) as our
 representation model. We use the module
-:class:`AutoregressiveGeneration <drugdiscovery.tasks.AutoregressiveGeneration>` as
+:class:`AutoregressiveGeneration <torchdrug.tasks.AutoregressiveGeneration>` as
 the training task for GraphAF. The task consists of a node flow model and an edge
 flow model, which define invertible mapping between node / edge types and noise
 distributions.
 
 .. code:: python
 
-    from drugdiscovery import core, models, tasks
-    from drugdiscovery.layers import distribution
+    from torchdrug import core, models, tasks
+    from torchdrug.layers import distribution
 
     model = models.RGCN(input_dim=dataset.num_atom_type, 
                         num_relation=dataset.num_bond_type,
@@ -279,8 +279,8 @@ For Penalized logP optimization, the code is as follows:
 .. code:: python
 
     import torch
-    from drugdiscovery import core, datasets, models, tasks
-    from drugdiscovery.layers import distribution
+    from torchdrug import core, datasets, models, tasks
+    from torchdrug.layers import distribution
     from torch import nn, optim
     from collections import defaultdict
 

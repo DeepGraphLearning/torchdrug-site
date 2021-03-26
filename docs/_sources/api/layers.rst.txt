@@ -1,26 +1,81 @@
-drugdiscovery.layers
+torchdrug.layers
 ====================
 
-layers.common
+Common Layers
 -------------
 
-.. automodule:: drugdiscovery.layers.common
-    :members:
+.. currentmodule:: torchdrug.layers.common
 
-layers.conv
------------
+GaussianSmearing
+~~~~~~~~~~~~~~~~
+.. autoclass:: GaussianSmearing
 
-.. automodule:: drugdiscovery.layers.conv
-    :members:
+MultiLayerPerceptron
+~~~~~~~~~~~~~~~~
+.. autoclass:: MultiLayerPerceptron
 
-layers.distribution
+MutualInformation
+~~~~~~~~~~~~~~~~
+.. autoclass:: MutualInformation
+
+PairNorm
+~~~~~~~~~~~~~~~~
+.. autoclass:: PairNorm
+
+Sequential
+~~~~~~~~~~~~~~~~
+.. autoclass:: Sequential
+
+
+Convolution Layers
+----------------------------------
+
+.. currentmodule:: torchdrug.layers.conv
+
+ChebyshevConv
+~~~~~~~~~~~~~~~~
+.. autoclass:: ChebyshevConv
+
+ContinuousFilterConv
+~~~~~~~~~~~~~~~~
+.. autoclass:: ContinuousFilterConv
+
+GraphAttentionConv
+~~~~~~~~~~~~~~~~
+.. autoclass:: GraphAttentionConv
+
+GraphConv
+~~~~~~~~~~~~~~~~
+.. autoclass:: GraphConv
+
+GraphIsomorphismConv
+~~~~~~~~~~~~~~~~
+.. autoclass:: GraphIsomorphismConv
+
+MessagePassing
+~~~~~~~~~~~~~~~~
+.. autoclass:: MessagePassing
+
+.. autoclass:: MessagePassingBase
+
+NeuralFingerprintConv
+~~~~~~~~~~~~~~~~
+.. autoclass:: NeuralFingerprintConv
+
+RelationalGraphConv
+~~~~~~~~~~~~~~~~
+.. autoclass:: RelationalGraphConv
+
+
+Distribution Layers
 -------------------
 
-.. automodule:: drugdiscovery.layers.distribution
+.. automodule:: torchdrug.layers.distribution
     :members:
 
-layers.functional
+
+Functional Layers
 -----------------
 
-.. automodule:: drugdiscovery.layers.functional
+.. automodule:: torchdrug.layers.functional
     :members:

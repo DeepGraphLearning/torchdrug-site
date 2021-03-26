@@ -12,7 +12,7 @@ To begin with, let's create a graph.
 .. code-block:: python
 
     import torch
-    from drugdiscovery import data
+    from torchdrug import data
 
     edge_list = [[0, 1], [1, 2], [2, 3], [3, 4], [4, 5], [5, 0]]
     graph = data.Graph(edge_list, num_node=6)
@@ -117,7 +117,7 @@ Here we specify some features during the construction of the molecule graph.
     print(mol.edge_feature.shape)
     print(mol.graph_feature.shape)
 
-There are a bunch of popular feature functions provided in :mod:`drugdiscovery.data.feature`.
+There are a bunch of popular feature functions provided in :mod:`torchdrug.data.feature`.
 We may also want to define our own attributes. This only requires to wrap the
 assignment lines with a context manager. The following example defines edge importance
 as the reciprocal of node degrees.
@@ -150,7 +150,7 @@ is an example of creating a batch of 4 graphs.
 
 .. image:: ../../../asset/graph/batch.png
 
-This returns a :class:`PackedGraph <drugdiscovery.data.PackedGraph>` instance with
+This returns a :class:`PackedGraph <torchdrug.data.PackedGraph>` instance with
 all attributes automatically batched. The essential trick behind this operation is
 based on a property of graphs. A batch of :math:`n` graphs is equivalent to a large
 graph with :math:`n` connected components. The equivalent adjacency matrix for a
@@ -168,7 +168,7 @@ batch is
 where :math:`A_i` is the adjacency of :math:`i`-th graph.
 
 To get a single graph from the batch, use the conventional index or
-:meth:`PackedGraph.unpack <drugdiscovery.data.PackedGraph.unpack>`.
+:meth:`PackedGraph.unpack <torchdrug.data.PackedGraph.unpack>`.
 
 .. code-block:: python
 
@@ -210,11 +210,11 @@ or masked graphs in a sparse manner. Some typical operations include
     :width: 24%
 
 All the above operations accept either integer node indexes or binary node masks.
-:meth:`subgraph() <drugdiscovery.data.Graph.subgraph>` extracts a subgraph based on
+:meth:`subgraph() <torchdrug.data.Graph.subgraph>` extracts a subgraph based on
 the given nodes. The node ids are re-mapped to produce a compact index.
-:meth:`node_mask() <drugdiscovery.data.Graph.node_mask>` keeps edges among the given
-nodes. :meth:`edge_mask() <drugdiscovery.data.Graph.edge_mask>` keeps edges of the
-given edge indexes. :meth:`compact() <drugdiscovery.data.Graph.compact>` removes all
+:meth:`node_mask() <torchdrug.data.Graph.node_mask>` keeps edges among the given
+nodes. :meth:`edge_mask() <torchdrug.data.Graph.edge_mask>` keeps edges of the
+given edge indexes. :meth:`compact() <torchdrug.data.Graph.compact>` removes all
 isolated nodes.
 
 The same operations can also be applied to batches. In this case, we need to convert

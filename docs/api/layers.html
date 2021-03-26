@@ -1,64 +1,34 @@
 <!doctype html>
 <html class="no-js">
   <head><meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width,initial-scale=1"/><link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="drugdiscovery.models" href="models.html" /><link rel="prev" title="drugdiscovery.metrics" href="metrics.html" />
+    <meta name="viewport" content="width=device-width,initial-scale=1"/><link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="torchdrug.models" href="models.html" /><link rel="prev" title="torchdrug.metrics" href="metrics.html" />
 
-    <meta name="generator" content="sphinx-3.1.2, furo 2020.12.09.beta21"/>
-        <title>drugdiscovery.layers - Drugdiscovery 0.1.0 documentation</title>
-      <link rel="stylesheet" href="../_static/styles/furo.css?digest=a3f371badb8538d75df213ccffb17a4f6e8f3ac5">
+    <meta name="generator" content="sphinx-3.5.3, furo 2020.10.15.beta13"/>
+        <title>torchdrug.layers - Drugdiscovery 0.1.0 documentation</title>
+      <link id="pygments_dark_css" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css" href="../_static/pygments_dark.css" />
+    <link rel="stylesheet" href="../_static/styles/default.css?c302dd7ba090ab08fca24c99">
     <link rel="stylesheet" href="../_static/pygments.css">
     <link media="(prefers-color-scheme: dark)" rel="stylesheet" href="../_static/pygments_dark.css">
     
-
-
 <style>
   :root {
     --color-code-background: #f8f8f8;
-  --color-code-foreground: black;
-  --font-stack: Helvetica, Arial, sans-serif, -apple-system;
-  --font-stack--monospace: Courier, monospace;
-  --color-brand-primary: #E5261F;
-  --color-brand-content: #E5261F;
-  --admonition-font-size: 1rem;
-  --admonition-title-font-size: 1rem;
-  --font-size--small--2: var(--font-size--small);
+    --color-code-foreground: black;
   
   }
   @media (prefers-color-scheme: dark) {
     :root {
-      --color-code-background: #202020;
-  --color-code-foreground: #d0d0d0;
-  
+    --color-code-background: #202020;
+    --color-code-foreground: #d0d0d0;
+      
     }
   }
-
-  /* For allowing end-user-specific overrides */
-  .override-light {
-    --color-code-background: #f8f8f8;
-  --color-code-foreground: black;
-  --font-stack: Helvetica, Arial, sans-serif, -apple-system;
-  --font-stack--monospace: Courier, monospace;
-  --color-brand-primary: #E5261F;
-  --color-brand-content: #E5261F;
-  --admonition-font-size: 1rem;
-  --admonition-title-font-size: 1rem;
-  --font-size--small--2: var(--font-size--small);
-  
-  }
-  .override-dark {
-    --color-code-background: #202020;
-  --color-code-foreground: #d0d0d0;
-  
-  }
-</style><link id="pygments_dark_css" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css" href="../_static/pygments_dark.css" />
-    <link rel="stylesheet" href="../_static/styles/furo-extensions.css?digest=26485485040e7aaf717c13fd0188a5ad2c2deb60">
-    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-    <script defer src="../_static/jquery.js"></script>
-    <script defer src="../_static/underscore.js"></script>
-    <script defer src="../_static/doctools.js"></script>
-    <script defer src="../_static/language_data.js"></script>
-    <script defer async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script defer src="../_static/scripts/main.js?digest=e931d09b2a40c1bb82b542effe772014573baf67"></script></head>
+</style>
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script><script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script src="../_static/scripts/main.js?c302dd7ba090ab08fca24c99"></script></head>
   <body dir="">
     
 <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
@@ -100,35 +70,25 @@
 
 <div class="page">
   <header class="mobile-header">
-    <div class="header-left">
-      <label class="nav-overlay-icon" for="__navigation">
-        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
-      </label>
-    </div>
-    <div class="header-center">
-      <a href="../index.html"><div class="brand">Drugdiscovery 0.1.0 documentation</div></a>
-    </div>
-    <div class="header-right">
-      <label class="toc-overlay-icon toc-header-icon" for="__toc">
-        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
-      </label>
-    </div>
+    <label class="header-left nav-overlay-icon" for="__navigation">
+      <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+    </label>
+    <div class="header-center"><div class="brand">Drugdiscovery 0.1.0 documentation</div></div>
+    <div class="header-right"></div>
   </header>
   <aside class="sidebar-drawer">
     <div class="sidebar-container">
       
       <div class="sidebar-sticky"><a class="sidebar-brand centered" href="../index.html">
-  
   <div class="sidebar-logo-container">
     <img class="sidebar-logo" src="../_static/logo.svg" alt="Logo"/>
   </div>
-  
   
 </a><form class="sidebar-search-container" method="get" action="../search.html">
   <input class="sidebar-search" placeholder="Search" name="q">
   <input type="hidden" name="check_keywords" value="yes">
   <input type="hidden" name="area" value="default">
-</form><div class="sidebar-scroll"><div class="sidebar-tree">
+</form><div class="sidebar-tree sidebar-scroll">
   <ul>
 <li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../quick_start.html">Quick Start</a></li>
@@ -159,18 +119,17 @@
 <p class="caption"><span class="caption-text">Package Reference</span></p>
 <ul class="current">
 <li class="toctree-l1 current has-children"><a class="reference internal" href="index.html">Documentation</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label for="toctree-checkbox-4"><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="core.html">drugdiscovery.core</a></li>
-<li class="toctree-l2"><a class="reference internal" href="data.html">drugdiscovery.data</a></li>
-<li class="toctree-l2"><a class="reference internal" href="datasets.html">drugdiscovery.datasets</a></li>
-<li class="toctree-l2"><a class="reference internal" href="metrics.html">drugdiscovery.metrics</a></li>
-<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">drugdiscovery.layers</a></li>
-<li class="toctree-l2"><a class="reference internal" href="models.html">drugdiscovery.models</a></li>
-<li class="toctree-l2"><a class="reference internal" href="tasks.html">drugdiscovery.tasks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="core.html">torchdrug.core</a></li>
+<li class="toctree-l2"><a class="reference internal" href="data.html">torchdrug.data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="datasets.html">torchdrug.datasets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="metrics.html">torchdrug.metrics</a></li>
+<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">torchdrug.layers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="models.html">torchdrug.models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tasks.html">torchdrug.tasks</a></li>
 </ul>
 </li>
 </ul>
 
-</div>
 </div>
       </div>
       
@@ -179,16 +138,18 @@
   <main class="main">
     <div class="content">
       <article role="main">
-        <label class="toc-overlay-icon toc-content-icon" for="__toc">
+        <label class="toc-overlay-icon" for="__toc">
           <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
         </label>
-        <div class="section" id="drugdiscovery-layers">
-<h1>drugdiscovery.layers<a class="headerlink" href="#drugdiscovery-layers" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="module-drugdiscovery.layers.common">
-<span id="layers-common"></span><h2>layers.common<a class="headerlink" href="#module-drugdiscovery.layers.common" title="Permalink to this headline">¶</a></h2>
+        <div class="section" id="torchdrug-layers">
+<h1>torchdrug.layers<a class="headerlink" href="#torchdrug-layers" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="common-layers">
+<h2>Common Layers<a class="headerlink" href="#common-layers" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="gaussiansmearing">
+<h3>GaussianSmearing<a class="headerlink" href="#gaussiansmearing" title="Permalink to this headline">¶</a></h3>
 <dl class="py class">
-<dt id="drugdiscovery.layers.common.GaussianSmearing">
-<em class="property">class </em><code class="sig-name descname">GaussianSmearing</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">start</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">stop</span><span class="o">=</span><span class="default_value">5</span></em>, <em class="sig-param"><span class="n">num_kernel</span><span class="o">=</span><span class="default_value">100</span></em>, <em class="sig-param"><span class="n">centered</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">learnable</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/drugdiscovery/layers/common.html#GaussianSmearing"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#drugdiscovery.layers.common.GaussianSmearing" title="Permalink to this definition">¶</a></dt>
+<dt id="torchdrug.layers.common.GaussianSmearing">
+<em class="property"><span class="pre">class</span> </em><code class="sig-name descname"><span class="pre">GaussianSmearing</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">start</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stop</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_kernel</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">centered</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">learnable</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/common.html#GaussianSmearing"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.layers.common.GaussianSmearing" title="Permalink to this definition">¶</a></dt>
 <dd><p>Gaussian smearing from
 <a class="reference external" href="https://arxiv.org/pdf/1706.08566.pdf">SchNet: A continuous-filter convolutional neural network for modeling quantum interactions</a>.</p>
 <p>There are two modes for Gaussian smearing.</p>
@@ -209,29 +170,13 @@
 </ul>
 </dd>
 </dl>
-<dl class="py method">
-<dt id="drugdiscovery.layers.common.GaussianSmearing.forward">
-<code class="sig-name descname">forward</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">x</span></em>, <em class="sig-param"><span class="n">y</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/drugdiscovery/layers/common.html#GaussianSmearing.forward"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#drugdiscovery.layers.common.GaussianSmearing.forward" title="Permalink to this definition">¶</a></dt>
-<dd><p>Compute smeared gaussian features between data.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>x</strong> (<em>Tensor</em>) – data of shape <span class="math notranslate nohighlight">\((..., d)\)</span></p></li>
-<li><p><strong>y</strong> (<em>Tensor</em>) – data of shape <span class="math notranslate nohighlight">\((..., d)\)</span></p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>features of shape <span class="math notranslate nohighlight">\((..., num\_kernel)\)</span></p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>Tensor</p>
-</dd>
-</dl>
 </dd></dl>
-</dd></dl>
+</div>
+<div class="section" id="multilayerperceptron">
+<h3>MultiLayerPerceptron<a class="headerlink" href="#multilayerperceptron" title="Permalink to this headline">¶</a></h3>
 <dl class="py class">
-<dt id="drugdiscovery.layers.common.MultiLayerPerceptron">
-<em class="property">class </em><code class="sig-name descname">MultiLayerPerceptron</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">input_dim</span></em>, <em class="sig-param"><span class="n">hidden_dims</span></em>, <em class="sig-param"><span class="n">activation</span><span class="o">=</span><span class="default_value">'relu'</span></em>, <em class="sig-param"><span class="n">dropout</span><span class="o">=</span><span class="default_value">0</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/drugdiscovery/layers/common.html#MultiLayerPerceptron"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#drugdiscovery.layers.common.MultiLayerPerceptron" title="Permalink to this definition">¶</a></dt>
+<dt id="torchdrug.layers.common.MultiLayerPerceptron">
+<em class="property"><span class="pre">class</span> </em><code class="sig-name descname"><span class="pre">MultiLayerPerceptron</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_dim</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hidden_dims</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">activation</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'relu'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dropout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/common.html#MultiLayerPerceptron"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.layers.common.MultiLayerPerceptron" title="Permalink to this definition">¶</a></dt>
 <dd><p>Multi-layer Perceptron.</p>
 <p>Note there is no activation or dropout in the last layer.</p>
 <dl class="field-list simple">
@@ -245,9 +190,12 @@
 </dd>
 </dl>
 </dd></dl>
+</div>
+<div class="section" id="mutualinformation">
+<h3>MutualInformation<a class="headerlink" href="#mutualinformation" title="Permalink to this headline">¶</a></h3>
 <dl class="py class">
-<dt id="drugdiscovery.layers.common.MutualInformation">
-<em class="property">class </em><code class="sig-name descname">MutualInformation</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">input_dim</span></em>, <em class="sig-param"><span class="n">num_mlp_layer</span><span class="o">=</span><span class="default_value">2</span></em>, <em class="sig-param"><span class="n">activation</span><span class="o">=</span><span class="default_value">'relu'</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/drugdiscovery/layers/common.html#MutualInformation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#drugdiscovery.layers.common.MutualInformation" title="Permalink to this definition">¶</a></dt>
+<dt id="torchdrug.layers.common.MutualInformation">
+<em class="property"><span class="pre">class</span> </em><code class="sig-name descname"><span class="pre">MutualInformation</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_dim</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_mlp_layer</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">activation</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'relu'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/common.html#MutualInformation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.layers.common.MutualInformation" title="Permalink to this definition">¶</a></dt>
 <dd><p>Mutual information estimator from
 <a class="reference external" href="https://arxiv.org/pdf/1808.06670.pdf">Learning deep representations by mutual information estimation and maximization</a>.</p>
 <dl class="field-list simple">
@@ -260,13 +208,19 @@
 </dd>
 </dl>
 </dd></dl>
+</div>
+<div class="section" id="pairnorm">
+<h3>PairNorm<a class="headerlink" href="#pairnorm" title="Permalink to this headline">¶</a></h3>
 <dl class="py class">
-<dt id="drugdiscovery.layers.common.PairNorm">
-<em class="property">class </em><code class="sig-name descname">PairNorm</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">scale_individual</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/drugdiscovery/layers/common.html#PairNorm"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#drugdiscovery.layers.common.PairNorm" title="Permalink to this definition">¶</a></dt>
+<dt id="torchdrug.layers.common.PairNorm">
+<em class="property"><span class="pre">class</span> </em><code class="sig-name descname"><span class="pre">PairNorm</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">scale_individual</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/common.html#PairNorm"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.layers.common.PairNorm" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
+</div>
+<div class="section" id="sequential">
+<h3>Sequential<a class="headerlink" href="#sequential" title="Permalink to this headline">¶</a></h3>
 <dl class="py class">
-<dt id="drugdiscovery.layers.common.Sequential">
-<em class="property">class </em><code class="sig-name descname">Sequential</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="n">global_args</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">allow_unused</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/drugdiscovery/layers/common.html#Sequential"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#drugdiscovery.layers.common.Sequential" title="Permalink to this definition">¶</a></dt>
+<dt id="torchdrug.layers.common.Sequential">
+<em class="property"><span class="pre">class</span> </em><code class="sig-name descname"><span class="pre">Sequential</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">global_args</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">allow_unused</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/common.html#Sequential"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.layers.common.Sequential" title="Permalink to this definition">¶</a></dt>
 <dd><p>Improved sequential container.
 Modules will be called in the order they are passed to the constructor.</p>
 <p>Compared to the vanilla nn.Sequential, this layer additionally supports the following features.</p>
@@ -309,26 +263,16 @@ overwritten by any layer outputs.</p>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">layer</span> <span class="o">=</span> <span class="n">layers</span><span class="o">.</span><span class="n">Sequential</span><span class="p">(</span><span class="n">layer1</span><span class="p">,</span> <span class="n">layer2</span><span class="p">,</span> <span class="n">global_args</span><span class="o">=</span><span class="p">(</span><span class="s2">"graph"</span><span class="p">,))</span>
 </pre></div>
 </div>
-<dl class="py method">
-<dt id="drugdiscovery.layers.common.Sequential.forward">
-<code class="sig-name descname">forward</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/drugdiscovery/layers/common.html#Sequential.forward"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#drugdiscovery.layers.common.Sequential.forward" title="Permalink to this definition">¶</a></dt>
-<dd><p>Defines the computation performed at every call.</p>
-<p>Should be overridden by all subclasses.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Although the recipe for forward pass needs to be defined within
-this function, one should call the <code class="xref py py-class docutils literal notranslate"><span class="pre">Module</span></code> instance afterwards
-instead of this since the former takes care of running the
-registered hooks while the latter silently ignores them.</p>
-</div>
-</dd></dl>
 </dd></dl>
 </div>
-<div class="section" id="module-drugdiscovery.layers.conv">
-<span id="layers-conv"></span><h2>layers.conv<a class="headerlink" href="#module-drugdiscovery.layers.conv" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="convolution-layers">
+<h2>Convolution Layers<a class="headerlink" href="#convolution-layers" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="chebyshevconv">
+<h3>ChebyshevConv<a class="headerlink" href="#chebyshevconv" title="Permalink to this headline">¶</a></h3>
 <dl class="py class">
-<dt id="drugdiscovery.layers.conv.ChebyshevConv">
-<em class="property">class </em><code class="sig-name descname">ChebyshevConv</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">input_dim</span></em>, <em class="sig-param"><span class="n">output_dim</span></em>, <em class="sig-param"><span class="n">edge_input_dim</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">k</span><span class="o">=</span><span class="default_value">1</span></em>, <em class="sig-param"><span class="n">batch_norm</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">activation</span><span class="o">=</span><span class="default_value">'relu'</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/drugdiscovery/layers/conv.html#ChebyshevConv"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#drugdiscovery.layers.conv.ChebyshevConv" title="Permalink to this definition">¶</a></dt>
+<dt id="torchdrug.layers.conv.ChebyshevConv">
+<em class="property"><span class="pre">class</span> </em><code class="sig-name descname"><span class="pre">ChebyshevConv</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_dim</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_dim</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">edge_input_dim</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_norm</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">activation</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'relu'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/conv.html#ChebyshevConv"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.layers.conv.ChebyshevConv" title="Permalink to this definition">¶</a></dt>
 <dd><p>Chebyshev spectral graph convolution operator from
 <a class="reference external" href="https://arxiv.org/pdf/1606.09375.pdf">Convolutional Neural Networks on Graphs with Fast Localized Spectral Filtering</a>.</p>
 <dl class="field-list simple">
@@ -345,23 +289,13 @@ This also corresponds to the radius of the receptive field.</p></li>
 </ul>
 </dd>
 </dl>
-<dl class="py method">
-<dt id="drugdiscovery.layers.conv.ChebyshevConv.forward">
-<code class="sig-name descname">forward</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">graph</span></em>, <em class="sig-param"><span class="n">input</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/drugdiscovery/layers/conv.html#ChebyshevConv.forward"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#drugdiscovery.layers.conv.ChebyshevConv.forward" title="Permalink to this definition">¶</a></dt>
-<dd><p>Perform message passing over the graph.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>graph</strong> (<a class="reference internal" href="data.html#drugdiscovery.data.Graph" title="drugdiscovery.data.Graph"><em>Graph</em></a>) – graph</p></li>
-<li><p><strong>input</strong> (<em>Tensor</em>) – input node representations</p></li>
-</ul>
-</dd>
-</dl>
 </dd></dl>
-</dd></dl>
+</div>
+<div class="section" id="continuousfilterconv">
+<h3>ContinuousFilterConv<a class="headerlink" href="#continuousfilterconv" title="Permalink to this headline">¶</a></h3>
 <dl class="py class">
-<dt id="drugdiscovery.layers.conv.ContinuousFilterConv">
-<em class="property">class </em><code class="sig-name descname">ContinuousFilterConv</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">input_dim</span></em>, <em class="sig-param"><span class="n">output_dim</span></em>, <em class="sig-param"><span class="n">edge_input_dim</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">hidden_dim</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">cutoff</span><span class="o">=</span><span class="default_value">5</span></em>, <em class="sig-param"><span class="n">num_gaussian</span><span class="o">=</span><span class="default_value">100</span></em>, <em class="sig-param"><span class="n">batch_norm</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">activation</span><span class="o">=</span><span class="default_value">'shifted_softplus'</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/drugdiscovery/layers/conv.html#ContinuousFilterConv"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#drugdiscovery.layers.conv.ContinuousFilterConv" title="Permalink to this definition">¶</a></dt>
+<dt id="torchdrug.layers.conv.ContinuousFilterConv">
+<em class="property"><span class="pre">class</span> </em><code class="sig-name descname"><span class="pre">ContinuousFilterConv</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_dim</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_dim</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">edge_input_dim</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hidden_dim</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cutoff</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_gaussian</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_norm</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">activation</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'shifted_softplus'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/conv.html#ContinuousFilterConv"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.layers.conv.ContinuousFilterConv" title="Permalink to this definition">¶</a></dt>
 <dd><p>Continuous filter operator from
 <a class="reference external" href="https://arxiv.org/pdf/1706.08566.pdf">SchNet: A continuous-filter convolutional neural network for modeling quantum interactions</a>.</p>
 <dl class="field-list simple">
@@ -379,9 +313,12 @@ This also corresponds to the radius of the receptive field.</p></li>
 </dd>
 </dl>
 </dd></dl>
+</div>
+<div class="section" id="graphattentionconv">
+<h3>GraphAttentionConv<a class="headerlink" href="#graphattentionconv" title="Permalink to this headline">¶</a></h3>
 <dl class="py class">
-<dt id="drugdiscovery.layers.conv.GraphAttentionConv">
-<em class="property">class </em><code class="sig-name descname">GraphAttentionConv</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">input_dim</span></em>, <em class="sig-param"><span class="n">output_dim</span></em>, <em class="sig-param"><span class="n">edge_input_dim</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">num_head</span><span class="o">=</span><span class="default_value">1</span></em>, <em class="sig-param"><span class="n">negative_slope</span><span class="o">=</span><span class="default_value">0.2</span></em>, <em class="sig-param"><span class="n">concat</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">batch_norm</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">activation</span><span class="o">=</span><span class="default_value">'relu'</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/drugdiscovery/layers/conv.html#GraphAttentionConv"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#drugdiscovery.layers.conv.GraphAttentionConv" title="Permalink to this definition">¶</a></dt>
+<dt id="torchdrug.layers.conv.GraphAttentionConv">
+<em class="property"><span class="pre">class</span> </em><code class="sig-name descname"><span class="pre">GraphAttentionConv</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_dim</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_dim</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">edge_input_dim</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_head</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">negative_slope</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">concat</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_norm</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">activation</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'relu'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/conv.html#GraphAttentionConv"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.layers.conv.GraphAttentionConv" title="Permalink to this definition">¶</a></dt>
 <dd><p>Graph attentional convolution operator from <a class="reference external" href="https://arxiv.org/pdf/1710.10903.pdf">Graph Attention Networks</a>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -397,9 +334,12 @@ This also corresponds to the radius of the receptive field.</p></li>
 </dd>
 </dl>
 </dd></dl>
+</div>
+<div class="section" id="graphconv">
+<h3>GraphConv<a class="headerlink" href="#graphconv" title="Permalink to this headline">¶</a></h3>
 <dl class="py class">
-<dt id="drugdiscovery.layers.conv.GraphConv">
-<em class="property">class </em><code class="sig-name descname">GraphConv</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">input_dim</span></em>, <em class="sig-param"><span class="n">output_dim</span></em>, <em class="sig-param"><span class="n">edge_input_dim</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">batch_norm</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">activation</span><span class="o">=</span><span class="default_value">'relu'</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/drugdiscovery/layers/conv.html#GraphConv"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#drugdiscovery.layers.conv.GraphConv" title="Permalink to this definition">¶</a></dt>
+<dt id="torchdrug.layers.conv.GraphConv">
+<em class="property"><span class="pre">class</span> </em><code class="sig-name descname"><span class="pre">GraphConv</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_dim</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_dim</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">edge_input_dim</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_norm</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">activation</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'relu'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/conv.html#GraphConv"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.layers.conv.GraphConv" title="Permalink to this definition">¶</a></dt>
 <dd><p>Graph convolution operator from <a class="reference external" href="https://arxiv.org/pdf/1609.02907.pdf">Semi-Supervised Classification with Graph Convolutional Networks</a>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -413,9 +353,12 @@ This also corresponds to the radius of the receptive field.</p></li>
 </dd>
 </dl>
 </dd></dl>
+</div>
+<div class="section" id="graphisomorphismconv">
+<h3>GraphIsomorphismConv<a class="headerlink" href="#graphisomorphismconv" title="Permalink to this headline">¶</a></h3>
 <dl class="py class">
-<dt id="drugdiscovery.layers.conv.GraphIsomorphismConv">
-<em class="property">class </em><code class="sig-name descname">GraphIsomorphismConv</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">input_dim</span></em>, <em class="sig-param"><span class="n">output_dim</span></em>, <em class="sig-param"><span class="n">edge_input_dim</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">hidden_dims</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">eps</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">learn_eps</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">batch_norm</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">activation</span><span class="o">=</span><span class="default_value">'relu'</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/drugdiscovery/layers/conv.html#GraphIsomorphismConv"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#drugdiscovery.layers.conv.GraphIsomorphismConv" title="Permalink to this definition">¶</a></dt>
+<dt id="torchdrug.layers.conv.GraphIsomorphismConv">
+<em class="property"><span class="pre">class</span> </em><code class="sig-name descname"><span class="pre">GraphIsomorphismConv</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_dim</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_dim</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">edge_input_dim</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hidden_dims</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eps</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">learn_eps</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_norm</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">activation</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'relu'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/conv.html#GraphIsomorphismConv"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.layers.conv.GraphIsomorphismConv" title="Permalink to this definition">¶</a></dt>
 <dd><p>Graph isomorphism convolution operator from <a class="reference external" href="https://arxiv.org/pdf/1810.00826.pdf">How Powerful are Graph Neural Networks?</a>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -432,9 +375,12 @@ This also corresponds to the radius of the receptive field.</p></li>
 </dd>
 </dl>
 </dd></dl>
+</div>
+<div class="section" id="messagepassing">
+<h3>MessagePassing<a class="headerlink" href="#messagepassing" title="Permalink to this headline">¶</a></h3>
 <dl class="py class">
-<dt id="drugdiscovery.layers.conv.MessagePassing">
-<em class="property">class </em><code class="sig-name descname">MessagePassing</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">input_dim</span></em>, <em class="sig-param"><span class="n">edge_input_dim</span></em>, <em class="sig-param"><span class="n">hidden_dims</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">batch_norm</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">activation</span><span class="o">=</span><span class="default_value">'relu'</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/drugdiscovery/layers/conv.html#MessagePassing"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#drugdiscovery.layers.conv.MessagePassing" title="Permalink to this definition">¶</a></dt>
+<dt id="torchdrug.layers.conv.MessagePassing">
+<em class="property"><span class="pre">class</span> </em><code class="sig-name descname"><span class="pre">MessagePassing</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_dim</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">edge_input_dim</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hidden_dims</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_norm</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">activation</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'relu'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/conv.html#MessagePassing"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.layers.conv.MessagePassing" title="Permalink to this definition">¶</a></dt>
 <dd><p>Message passing operator from <a class="reference external" href="https://arxiv.org/pdf/1704.01212.pdf">Neural Message Passing for Quantum Chemistry</a>.</p>
 <p>This implements the edge network variant in the original paper.</p>
 <dl class="field-list simple">
@@ -450,27 +396,17 @@ This also corresponds to the radius of the receptive field.</p></li>
 </dl>
 </dd></dl>
 <dl class="py class">
-<dt id="drugdiscovery.layers.conv.MessagePassingBase">
-<em class="property">class </em><code class="sig-name descname">MessagePassingBase</code><a class="reference internal" href="../_modules/drugdiscovery/layers/conv.html#MessagePassingBase"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#drugdiscovery.layers.conv.MessagePassingBase" title="Permalink to this definition">¶</a></dt>
+<dt id="torchdrug.layers.conv.MessagePassingBase">
+<em class="property"><span class="pre">class</span> </em><code class="sig-name descname"><span class="pre">MessagePassingBase</span></code><a class="reference internal" href="../_modules/torchdrug/layers/conv.html#MessagePassingBase"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.layers.conv.MessagePassingBase" title="Permalink to this definition">¶</a></dt>
 <dd><p>Base module for message passing.</p>
 <p>Any custom message passing module should be derived from this class.</p>
-<dl class="py method">
-<dt id="drugdiscovery.layers.conv.MessagePassingBase.forward">
-<code class="sig-name descname">forward</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">graph</span></em>, <em class="sig-param"><span class="n">input</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/drugdiscovery/layers/conv.html#MessagePassingBase.forward"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#drugdiscovery.layers.conv.MessagePassingBase.forward" title="Permalink to this definition">¶</a></dt>
-<dd><p>Perform message passing over the graph.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>graph</strong> (<a class="reference internal" href="data.html#drugdiscovery.data.Graph" title="drugdiscovery.data.Graph"><em>Graph</em></a>) – graph</p></li>
-<li><p><strong>input</strong> (<em>Tensor</em>) – input node representations</p></li>
-</ul>
-</dd>
-</dl>
 </dd></dl>
-</dd></dl>
+</div>
+<div class="section" id="neuralfingerprintconv">
+<h3>NeuralFingerprintConv<a class="headerlink" href="#neuralfingerprintconv" title="Permalink to this headline">¶</a></h3>
 <dl class="py class">
-<dt id="drugdiscovery.layers.conv.NeuralFingerprintConv">
-<em class="property">class </em><code class="sig-name descname">NeuralFingerprintConv</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">input_dim</span></em>, <em class="sig-param"><span class="n">output_dim</span></em>, <em class="sig-param"><span class="n">edge_input_dim</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">batch_norm</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">activation</span><span class="o">=</span><span class="default_value">'relu'</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/drugdiscovery/layers/conv.html#NeuralFingerprintConv"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#drugdiscovery.layers.conv.NeuralFingerprintConv" title="Permalink to this definition">¶</a></dt>
+<dt id="torchdrug.layers.conv.NeuralFingerprintConv">
+<em class="property"><span class="pre">class</span> </em><code class="sig-name descname"><span class="pre">NeuralFingerprintConv</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_dim</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_dim</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">edge_input_dim</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_norm</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">activation</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'relu'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/conv.html#NeuralFingerprintConv"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.layers.conv.NeuralFingerprintConv" title="Permalink to this definition">¶</a></dt>
 <dd><p>Graph neural network operator from <a class="reference external" href="https://arxiv.org/pdf/1509.09292.pdf">Convolutional Networks on Graphs for Learning Molecular Fingerprints</a>.</p>
 <p>Note this operator doesn’t include the sparsifying step of the original paper.</p>
 <dl class="field-list simple">
@@ -485,9 +421,12 @@ This also corresponds to the radius of the receptive field.</p></li>
 </dd>
 </dl>
 </dd></dl>
+</div>
+<div class="section" id="relationalgraphconv">
+<h3>RelationalGraphConv<a class="headerlink" href="#relationalgraphconv" title="Permalink to this headline">¶</a></h3>
 <dl class="py class">
-<dt id="drugdiscovery.layers.conv.RelationalGraphConv">
-<em class="property">class </em><code class="sig-name descname">RelationalGraphConv</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">input_dim</span></em>, <em class="sig-param"><span class="n">output_dim</span></em>, <em class="sig-param"><span class="n">num_relation</span></em>, <em class="sig-param"><span class="n">edge_input_dim</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">batch_norm</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">activation</span><span class="o">=</span><span class="default_value">'relu'</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/drugdiscovery/layers/conv.html#RelationalGraphConv"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#drugdiscovery.layers.conv.RelationalGraphConv" title="Permalink to this definition">¶</a></dt>
+<dt id="torchdrug.layers.conv.RelationalGraphConv">
+<em class="property"><span class="pre">class</span> </em><code class="sig-name descname"><span class="pre">RelationalGraphConv</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_dim</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_dim</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_relation</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">edge_input_dim</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_norm</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">activation</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'relu'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/conv.html#RelationalGraphConv"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.layers.conv.RelationalGraphConv" title="Permalink to this definition">¶</a></dt>
 <dd><p>Relational graph convolution operator from <a class="reference external" href="https://arxiv.org/pdf/1703.06103.pdf">Modeling Relational Data with Graph Convolutional Networks?</a>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -503,11 +442,12 @@ This also corresponds to the radius of the receptive field.</p></li>
 </dl>
 </dd></dl>
 </div>
-<div class="section" id="module-drugdiscovery.layers.distribution">
-<span id="layers-distribution"></span><h2>layers.distribution<a class="headerlink" href="#module-drugdiscovery.layers.distribution" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-torchdrug.layers.distribution">
+<span id="distribution-layers"></span><h2>Distribution Layers<a class="headerlink" href="#module-torchdrug.layers.distribution" title="Permalink to this headline">¶</a></h2>
 <dl class="py class">
-<dt id="drugdiscovery.layers.distribution.IndependentGaussian">
-<em class="property">class </em><code class="sig-name descname">IndependentGaussian</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">mu</span></em>, <em class="sig-param"><span class="n">sigma2</span></em>, <em class="sig-param"><span class="n">learnable</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/drugdiscovery/layers/distribution.html#IndependentGaussian"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#drugdiscovery.layers.distribution.IndependentGaussian" title="Permalink to this definition">¶</a></dt>
+<dt id="torchdrug.layers.distribution.IndependentGaussian">
+<em class="property"><span class="pre">class</span> </em><code class="sig-name descname"><span class="pre">IndependentGaussian</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mu</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sigma2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">learnable</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/distribution.html#IndependentGaussian"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.layers.distribution.IndependentGaussian" title="Permalink to this definition">¶</a></dt>
 <dd><p>Independent Gaussian distribution.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -519,8 +459,8 @@ This also corresponds to the radius of the receptive field.</p></li>
 </dd>
 </dl>
 <dl class="py method">
-<dt id="drugdiscovery.layers.distribution.IndependentGaussian.forward">
-<code class="sig-name descname">forward</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">input</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/drugdiscovery/layers/distribution.html#IndependentGaussian.forward"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#drugdiscovery.layers.distribution.IndependentGaussian.forward" title="Permalink to this definition">¶</a></dt>
+<dt id="torchdrug.layers.distribution.IndependentGaussian.forward">
+<code class="sig-name descname"><span class="pre">forward</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/distribution.html#IndependentGaussian.forward"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.layers.distribution.IndependentGaussian.forward" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compute the likelihood of input data.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -530,11 +470,11 @@ This also corresponds to the radius of the receptive field.</p></li>
 </dd></dl>
 </dd></dl>
 </div>
-<div class="section" id="module-drugdiscovery.layers.functional">
-<span id="layers-functional"></span><h2>layers.functional<a class="headerlink" href="#module-drugdiscovery.layers.functional" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-torchdrug.layers.functional">
+<span id="functional-layers"></span><h2>Functional Layers<a class="headerlink" href="#module-torchdrug.layers.functional" title="Permalink to this headline">¶</a></h2>
 <dl class="py function">
-<dt id="drugdiscovery.layers.functional.as_mask">
-<code class="sig-name descname">as_mask</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">indexes</span></em>, <em class="sig-param"><span class="n">length</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/drugdiscovery/layers/functional/functional.html#as_mask"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#drugdiscovery.layers.functional.as_mask" title="Permalink to this definition">¶</a></dt>
+<dt id="torchdrug.layers.functional.as_mask">
+<code class="sig-name descname"><span class="pre">as_mask</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">indexes</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">length</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/functional/functional.html#as_mask"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.layers.functional.as_mask" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert indexes into a binary mask.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -546,8 +486,8 @@ This also corresponds to the radius of the receptive field.</p></li>
 </dl>
 </dd></dl>
 <dl class="py function">
-<dt id="drugdiscovery.layers.functional.masked_mean">
-<code class="sig-name descname">masked_mean</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">input</span></em>, <em class="sig-param"><span class="n">mask</span></em>, <em class="sig-param"><span class="n">dim</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">keepdim</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/drugdiscovery/layers/functional/functional.html#masked_mean"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#drugdiscovery.layers.functional.masked_mean" title="Permalink to this definition">¶</a></dt>
+<dt id="torchdrug.layers.functional.masked_mean">
+<code class="sig-name descname"><span class="pre">masked_mean</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mask</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dim</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">keepdim</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/functional/functional.html#masked_mean"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.layers.functional.masked_mean" title="Permalink to this definition">¶</a></dt>
 <dd><p>Masked mean of a tensor.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -561,8 +501,8 @@ This also corresponds to the radius of the receptive field.</p></li>
 </dl>
 </dd></dl>
 <dl class="py function">
-<dt id="drugdiscovery.layers.functional.mean_with_nan">
-<code class="sig-name descname">mean_with_nan</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">input</span></em>, <em class="sig-param"><span class="n">dim</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">keepdim</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/drugdiscovery/layers/functional/functional.html#mean_with_nan"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#drugdiscovery.layers.functional.mean_with_nan" title="Permalink to this definition">¶</a></dt>
+<dt id="torchdrug.layers.functional.mean_with_nan">
+<code class="sig-name descname"><span class="pre">mean_with_nan</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dim</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">keepdim</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/functional/functional.html#mean_with_nan"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.layers.functional.mean_with_nan" title="Permalink to this definition">¶</a></dt>
 <dd><p>Mean of a tensor. Ignore all nan values.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -575,8 +515,8 @@ This also corresponds to the radius of the receptive field.</p></li>
 </dl>
 </dd></dl>
 <dl class="py function">
-<dt id="drugdiscovery.layers.functional.multi_slice_mask">
-<code class="sig-name descname">multi_slice_mask</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">starts</span></em>, <em class="sig-param"><span class="n">ends</span></em>, <em class="sig-param"><span class="n">length</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/drugdiscovery/layers/functional/functional.html#multi_slice_mask"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#drugdiscovery.layers.functional.multi_slice_mask" title="Permalink to this definition">¶</a></dt>
+<dt id="torchdrug.layers.functional.multi_slice_mask">
+<code class="sig-name descname"><span class="pre">multi_slice_mask</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">starts</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ends</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">length</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/functional/functional.html#multi_slice_mask"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.layers.functional.multi_slice_mask" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compute the union of multiple slices into a binary mask.</p>
 <p>Example:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mask</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">multi_slice_mask</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">]),</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">6</span><span class="p">]),</span> <span class="mi">6</span><span class="p">)</span>
@@ -594,8 +534,8 @@ This also corresponds to the radius of the receptive field.</p></li>
 </dl>
 </dd></dl>
 <dl class="py function">
-<dt id="drugdiscovery.layers.functional.multinomial">
-<code class="sig-name descname">multinomial</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">input</span></em>, <em class="sig-param"><span class="n">num_samples</span></em>, <em class="sig-param"><span class="n">replacement</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/drugdiscovery/layers/functional/functional.html#multinomial"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#drugdiscovery.layers.functional.multinomial" title="Permalink to this definition">¶</a></dt>
+<dt id="torchdrug.layers.functional.multinomial">
+<code class="sig-name descname"><span class="pre">multinomial</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_samples</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">replacement</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/functional/functional.html#multinomial"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.layers.functional.multinomial" title="Permalink to this definition">¶</a></dt>
 <dd><p>Fast multinomial sampling. This is the default implementation in PyTorch v1.6.0+.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -608,8 +548,8 @@ This also corresponds to the radius of the receptive field.</p></li>
 </dl>
 </dd></dl>
 <dl class="py function">
-<dt id="drugdiscovery.layers.functional.one_hot">
-<code class="sig-name descname">one_hot</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">index</span></em>, <em class="sig-param"><span class="n">size</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/drugdiscovery/layers/functional/functional.html#one_hot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#drugdiscovery.layers.functional.one_hot" title="Permalink to this definition">¶</a></dt>
+<dt id="torchdrug.layers.functional.one_hot">
+<code class="sig-name descname"><span class="pre">one_hot</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">index</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">size</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/functional/functional.html#one_hot"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.layers.functional.one_hot" title="Permalink to this definition">¶</a></dt>
 <dd><p>Expand indexes into one-hot vectors.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -621,8 +561,8 @@ This also corresponds to the radius of the receptive field.</p></li>
 </dl>
 </dd></dl>
 <dl class="py function">
-<dt id="drugdiscovery.layers.functional.shifted_softplus">
-<code class="sig-name descname">shifted_softplus</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">input</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/drugdiscovery/layers/functional/functional.html#shifted_softplus"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#drugdiscovery.layers.functional.shifted_softplus" title="Permalink to this definition">¶</a></dt>
+<dt id="torchdrug.layers.functional.shifted_softplus">
+<code class="sig-name descname"><span class="pre">shifted_softplus</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/functional/functional.html#shifted_softplus"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.layers.functional.shifted_softplus" title="Permalink to this definition">¶</a></dt>
 <dd><p>Shifted softplus function.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -631,8 +571,8 @@ This also corresponds to the radius of the receptive field.</p></li>
 </dl>
 </dd></dl>
 <dl class="py function">
-<dt id="drugdiscovery.layers.functional.variadic_cross_entropy">
-<code class="sig-name descname">variadic_cross_entropy</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">input</span></em>, <em class="sig-param"><span class="n">target</span></em>, <em class="sig-param"><span class="n">size</span></em>, <em class="sig-param"><span class="n">reduction</span><span class="o">=</span><span class="default_value">'mean'</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/drugdiscovery/layers/functional/functional.html#variadic_cross_entropy"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#drugdiscovery.layers.functional.variadic_cross_entropy" title="Permalink to this definition">¶</a></dt>
+<dt id="torchdrug.layers.functional.variadic_cross_entropy">
+<code class="sig-name descname"><span class="pre">variadic_cross_entropy</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">size</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reduction</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'mean'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/functional/functional.html#variadic_cross_entropy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.layers.functional.variadic_cross_entropy" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compute cross entropy loss over categories with variadic sizes.</p>
 <p>Suppose there are <span class="math notranslate nohighlight">\(N\)</span> samples, and the numbers of categories in all samples are summed to <span class="math notranslate nohighlight">\(B\)</span>.</p>
 <dl class="field-list simple">
@@ -648,8 +588,8 @@ Available reductions are <code class="docutils literal notranslate"><span class=
 </dl>
 </dd></dl>
 <dl class="py function">
-<dt id="drugdiscovery.layers.functional.variadic_log_softmax">
-<code class="sig-name descname">variadic_log_softmax</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">input</span></em>, <em class="sig-param"><span class="n">size</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/drugdiscovery/layers/functional/functional.html#variadic_log_softmax"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#drugdiscovery.layers.functional.variadic_log_softmax" title="Permalink to this definition">¶</a></dt>
+<dt id="torchdrug.layers.functional.variadic_log_softmax">
+<code class="sig-name descname"><span class="pre">variadic_log_softmax</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">size</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/functional/functional.html#variadic_log_softmax"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.layers.functional.variadic_log_softmax" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compute log softmax over categories with variadic sizes.</p>
 <p>Suppose there are <span class="math notranslate nohighlight">\(N\)</span> samples, and the numbers of categories in all samples are summed to <span class="math notranslate nohighlight">\(B\)</span>.</p>
 <dl class="field-list simple">
@@ -662,8 +602,8 @@ Available reductions are <code class="docutils literal notranslate"><span class=
 </dl>
 </dd></dl>
 <dl class="py function">
-<dt id="drugdiscovery.layers.functional.variadic_max">
-<code class="sig-name descname">variadic_max</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">input</span></em>, <em class="sig-param"><span class="n">size</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/drugdiscovery/layers/functional/functional.html#variadic_max"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#drugdiscovery.layers.functional.variadic_max" title="Permalink to this definition">¶</a></dt>
+<dt id="torchdrug.layers.functional.variadic_max">
+<code class="sig-name descname"><span class="pre">variadic_max</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">size</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/functional/functional.html#variadic_max"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.layers.functional.variadic_max" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compute max over sets with variadic sizes.</p>
 <p>Suppose there are <span class="math notranslate nohighlight">\(N\)</span> sets, and the sizes of all sets are summed to <span class="math notranslate nohighlight">\(B\)</span>.</p>
 <dl class="field-list simple">
@@ -680,8 +620,8 @@ Available reductions are <code class="docutils literal notranslate"><span class=
 </dl>
 </dd></dl>
 <dl class="py function">
-<dt id="drugdiscovery.layers.functional.variadic_mean">
-<code class="sig-name descname">variadic_mean</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">input</span></em>, <em class="sig-param"><span class="n">size</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/drugdiscovery/layers/functional/functional.html#variadic_mean"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#drugdiscovery.layers.functional.variadic_mean" title="Permalink to this definition">¶</a></dt>
+<dt id="torchdrug.layers.functional.variadic_mean">
+<code class="sig-name descname"><span class="pre">variadic_mean</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">size</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/functional/functional.html#variadic_mean"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.layers.functional.variadic_mean" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compute mean over sets with variadic sizes.</p>
 <p>Suppose there are <span class="math notranslate nohighlight">\(N\)</span> sets, and the sizes of all sets are summed to <span class="math notranslate nohighlight">\(B\)</span>.</p>
 <dl class="field-list simple">
@@ -698,8 +638,8 @@ Available reductions are <code class="docutils literal notranslate"><span class=
 </dl>
 </dd></dl>
 <dl class="py function">
-<dt id="drugdiscovery.layers.functional.variadic_sum">
-<code class="sig-name descname">variadic_sum</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">input</span></em>, <em class="sig-param"><span class="n">size</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/drugdiscovery/layers/functional/functional.html#variadic_sum"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#drugdiscovery.layers.functional.variadic_sum" title="Permalink to this definition">¶</a></dt>
+<dt id="torchdrug.layers.functional.variadic_sum">
+<code class="sig-name descname"><span class="pre">variadic_sum</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">size</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/functional/functional.html#variadic_sum"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.layers.functional.variadic_sum" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compute sum over sets with variadic sizes.</p>
 <p>Suppose there are <span class="math notranslate nohighlight">\(N\)</span> sets, and the sizes of all sets are summed to <span class="math notranslate nohighlight">\(B\)</span>.</p>
 <dl class="field-list simple">
@@ -716,8 +656,8 @@ Available reductions are <code class="docutils literal notranslate"><span class=
 </dl>
 </dd></dl>
 <dl class="py function">
-<dt id="drugdiscovery.layers.functional.variadic_topk">
-<code class="sig-name descname">variadic_topk</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">input</span></em>, <em class="sig-param"><span class="n">size</span></em>, <em class="sig-param"><span class="n">k</span></em>, <em class="sig-param"><span class="n">largest</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/drugdiscovery/layers/functional/functional.html#variadic_topk"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#drugdiscovery.layers.functional.variadic_topk" title="Permalink to this definition">¶</a></dt>
+<dt id="torchdrug.layers.functional.variadic_topk">
+<code class="sig-name descname"><span class="pre">variadic_topk</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">size</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">largest</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/functional/functional.html#variadic_topk"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.layers.functional.variadic_topk" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compute the <span class="math notranslate nohighlight">\(k\)</span> largest elements over sets with variadic sizes.</p>
 <p>Suppose there are <span class="math notranslate nohighlight">\(N\)</span> sets, and the sizes of all sets are summed to <span class="math notranslate nohighlight">\(B\)</span>.</p>
 <p>If any set has less than than <span class="math notranslate nohighlight">\(k\)</span> elements, the size-th largest element will be
@@ -749,7 +689,7 @@ repeated to pad the output to <span class="math notranslate nohighlight">\(k\)</
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title">drugdiscovery.models</div>
+                <div class="title">torchdrug.models</div>
               </div>
               <svg><use href="#svg-arrow-right"></use></svg>
             </a>
@@ -760,24 +700,17 @@ repeated to pad the output to <span class="math notranslate nohighlight">\(k\)</
                   <span>Previous</span>
                 </div>
                 
-                <div class="title">drugdiscovery.metrics</div>
+                <div class="title">torchdrug.metrics</div>
                 
               </div>
             </a>
         </div>
 
         <div class="related-information">
-              Copyright &#169; 2020, MilaGraph Group
-            |
-            Built with <a href="https://www.sphinx-doc.org/">Sphinx</a>
-              and
-              <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
-              <a href="https://github.com/pradyunsg/furo">Furo theme</a>.
-            |
-            <a class="muted-link" href="../_sources/api/layers.rst.txt"
-               rel="nofollow">
-              Show Source
-            </a>
+          <span class="copyright">Copyright &copy; 2021, MilaGraph Group</span> |
+          Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using
+          <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+          <a href="https://github.com/pradyunsg/furo">Furo theme</a>.
         </div>
         
       </footer>
@@ -791,19 +724,34 @@ repeated to pad the output to <span class="math notranslate nohighlight">\(k\)</
             Contents
           </span>
         </div>
-        <div class="toc-tree-container">
-          <div class="toc-tree">
-            <ul>
-<li><a class="reference internal" href="#">drugdiscovery.layers</a><ul>
-<li><a class="reference internal" href="#module-drugdiscovery.layers.common">layers.common</a></li>
-<li><a class="reference internal" href="#module-drugdiscovery.layers.conv">layers.conv</a></li>
-<li><a class="reference internal" href="#module-drugdiscovery.layers.distribution">layers.distribution</a></li>
-<li><a class="reference internal" href="#module-drugdiscovery.layers.functional">layers.functional</a></li>
+        <div class="toc-tree">
+          <ul>
+<li><a class="reference internal" href="#">torchdrug.layers</a><ul>
+<li><a class="reference internal" href="#common-layers">Common Layers</a><ul>
+<li><a class="reference internal" href="#gaussiansmearing">GaussianSmearing</a></li>
+<li><a class="reference internal" href="#multilayerperceptron">MultiLayerPerceptron</a></li>
+<li><a class="reference internal" href="#mutualinformation">MutualInformation</a></li>
+<li><a class="reference internal" href="#pairnorm">PairNorm</a></li>
+<li><a class="reference internal" href="#sequential">Sequential</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#convolution-layers">Convolution Layers</a><ul>
+<li><a class="reference internal" href="#chebyshevconv">ChebyshevConv</a></li>
+<li><a class="reference internal" href="#continuousfilterconv">ContinuousFilterConv</a></li>
+<li><a class="reference internal" href="#graphattentionconv">GraphAttentionConv</a></li>
+<li><a class="reference internal" href="#graphconv">GraphConv</a></li>
+<li><a class="reference internal" href="#graphisomorphismconv">GraphIsomorphismConv</a></li>
+<li><a class="reference internal" href="#messagepassing">MessagePassing</a></li>
+<li><a class="reference internal" href="#neuralfingerprintconv">NeuralFingerprintConv</a></li>
+<li><a class="reference internal" href="#relationalgraphconv">RelationalGraphConv</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-torchdrug.layers.distribution">Distribution Layers</a></li>
+<li><a class="reference internal" href="#module-torchdrug.layers.functional">Functional Layers</a></li>
 </ul>
 </li>
 </ul>
 
-          </div>
         </div>
       </div>
       
