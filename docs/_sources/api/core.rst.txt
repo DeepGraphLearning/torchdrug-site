@@ -1,24 +1,24 @@
 torchdrug.core
-==================
+==============
 
 .. currentmodule:: torchdrug.core
 
 Configurable
-----------------------------------
+------------
 .. autoclass:: Configurable
 
 Engine
-----------------------------------
+------
 .. autoclass:: Engine
 
 Meter
-----------------------------------
+-----
 .. autoclass:: Meter
 
 Registry
-----------------------------------
+--------
 .. autoclass:: Registry
 
 Meta Container
-----------------------------------
+--------------
 .. autoclass:: _MetaContainer

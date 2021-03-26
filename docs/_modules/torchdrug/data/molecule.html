@@ -3,31 +3,62 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/><link rel="index" title="Index" href="../../../genindex.html" /><link rel="search" title="Search" href="../../../search.html" />
 
-    <meta name="generator" content="sphinx-3.5.3, furo 2020.10.15.beta13"/>
+    <meta name="generator" content="sphinx-3.1.2, furo 2020.12.09.beta21"/>
         <title>torchdrug.data.molecule - Drugdiscovery 0.1.0 documentation</title>
-      <link id="pygments_dark_css" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css" href="../../../_static/pygments_dark.css" />
-    <link rel="stylesheet" href="../../../_static/styles/default.css?dc388a239e33ae01a60cf2ea">
+      <link rel="stylesheet" href="../../../_static/styles/furo.css?digest=a3f371badb8538d75df213ccffb17a4f6e8f3ac5">
     <link rel="stylesheet" href="../../../_static/pygments.css">
     <link media="(prefers-color-scheme: dark)" rel="stylesheet" href="../../../_static/pygments_dark.css">
     
+
+
 <style>
   :root {
     --color-code-background: #f8f8f8;
-    --color-code-foreground: black;
+  --color-code-foreground: black;
+  --font-stack: Helvetica, Arial, sans-serif, -apple-system;
+  --font-stack--monospace: Courier, monospace;
+  --color-brand-primary: #E5261F;
+  --color-brand-content: #E5261F;
+  --admonition-font-size: 1rem;
+  --admonition-title-font-size: 1rem;
+  --font-size--small--2: var(--font-size--small);
   
   }
   @media (prefers-color-scheme: dark) {
     :root {
-    --color-code-background: #202020;
-    --color-code-foreground: #d0d0d0;
-      
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
     }
   }
-</style>
-    <script id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script><script src="../../../_static/jquery.js"></script>
-    <script src="../../../_static/underscore.js"></script>
-    <script src="../../../_static/doctools.js"></script>
-    <script src="../../../_static/scripts/main.js?dc388a239e33ae01a60cf2ea"></script></head>
+
+  /* For allowing end-user-specific overrides */
+  .override-light {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  --font-stack: Helvetica, Arial, sans-serif, -apple-system;
+  --font-stack--monospace: Courier, monospace;
+  --color-brand-primary: #E5261F;
+  --color-brand-content: #E5261F;
+  --admonition-font-size: 1rem;
+  --admonition-title-font-size: 1rem;
+  --font-size--small--2: var(--font-size--small);
+  
+  }
+  .override-dark {
+    --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+  }
+</style><link id="pygments_dark_css" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css" href="../../../_static/pygments_dark.css" />
+    <link rel="stylesheet" href="../../../_static/styles/furo-extensions.css?digest=26485485040e7aaf717c13fd0188a5ad2c2deb60">
+    <script id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+    <script defer src="../../../_static/jquery.js"></script>
+    <script defer src="../../../_static/underscore.js"></script>
+    <script defer src="../../../_static/doctools.js"></script>
+    <script defer src="../../../_static/language_data.js"></script>
+    <script defer async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script defer src="../../../_static/scripts/main.js?digest=e931d09b2a40c1bb82b542effe772014573baf67"></script></head>
   <body dir="">
     
 <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
@@ -69,25 +100,35 @@
 
 <div class="page">
   <header class="mobile-header">
-    <label class="header-left nav-overlay-icon" for="__navigation">
-      <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
-    </label>
-    <div class="header-center"><div class="brand">Drugdiscovery 0.1.0 documentation</div></div>
-    <div class="header-right"></div>
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../../../index.html"><div class="brand">Drugdiscovery 0.1.0 documentation</div></a>
+    </div>
+    <div class="header-right">
+      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
   </header>
   <aside class="sidebar-drawer">
     <div class="sidebar-container">
       
       <div class="sidebar-sticky"><a class="sidebar-brand centered" href="../../../index.html">
+  
   <div class="sidebar-logo-container">
     <img class="sidebar-logo" src="../../../_static/logo.svg" alt="Logo"/>
   </div>
+  
   
 </a><form class="sidebar-search-container" method="get" action="../../../search.html">
   <input class="sidebar-search" placeholder="Search" name="q">
   <input type="hidden" name="check_keywords" value="yes">
   <input type="hidden" name="area" value="default">
-</form><div class="sidebar-tree sidebar-scroll">
+</form><div class="sidebar-scroll"><div class="sidebar-tree">
   <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../installation.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../quick_start.html">Quick Start</a></li>
@@ -114,6 +155,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../../../notes/model.html">Customize Models &amp; Tasks</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="../../../paper.html">Papers Implemented</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Package Reference</span></p>
 <ul>
@@ -130,6 +172,7 @@
 </ul>
 
 </div>
+</div>
       </div>
       
     </div>
@@ -137,12 +180,11 @@
   <main class="main">
     <div class="content">
       <article role="main">
-        <label class="toc-overlay-icon no-toc" for="__toc">
+        <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
           <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
         </label>
         <h1>Source code for torchdrug.data.molecule</h1><div class="highlight"><pre>
 <span></span><span class="kn">import</span> <span class="nn">math</span>
-<span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">defaultdict</span>
 
 <span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
 <span class="kn">from</span> <span class="nn">rdkit</span> <span class="kn">import</span> <span class="n">Chem</span><span class="p">,</span> <span class="n">RDLogger</span>
@@ -249,7 +291,7 @@
             <span class="n">attribute</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">size</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">long</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">device</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">attribute</span>
 
-<div class="viewcode-block" id="Molecule.from_smiles"><a class="viewcode-back" href="../../../api/data.html#torchdrug.data.Molecule.from_smiles">[docs]</a>    <span class="nd">@classmethod</span>
+    <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">from_smiles</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">smiles</span><span class="p">,</span> <span class="n">node_feature</span><span class="o">=</span><span class="s2">"default"</span><span class="p">,</span> <span class="n">edge_feature</span><span class="o">=</span><span class="s2">"default"</span><span class="p">,</span> <span class="n">graph_feature</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                     <span class="n">with_hydrogen</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">kekulize</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">"""</span>
@@ -271,9 +313,9 @@
         <span class="k">if</span> <span class="n">mol</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Invalid SMILES `</span><span class="si">%s</span><span class="s2">`"</span> <span class="o">%</span> <span class="n">smiles</span><span class="p">)</span>
 
-        <span class="k">return</span> <span class="bp">cls</span><span class="o">.</span><span class="n">from_molecule</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">node_feature</span><span class="p">,</span> <span class="n">edge_feature</span><span class="p">,</span> <span class="n">graph_feature</span><span class="p">,</span> <span class="n">with_hydrogen</span><span class="p">,</span> <span class="n">kekulize</span><span class="p">)</span></div>
+        <span class="k">return</span> <span class="bp">cls</span><span class="o">.</span><span class="n">from_molecule</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">node_feature</span><span class="p">,</span> <span class="n">edge_feature</span><span class="p">,</span> <span class="n">graph_feature</span><span class="p">,</span> <span class="n">with_hydrogen</span><span class="p">,</span> <span class="n">kekulize</span><span class="p">)</span>
 
-<div class="viewcode-block" id="Molecule.from_molecule"><a class="viewcode-back" href="../../../api/data.html#torchdrug.data.Molecule.from_molecule">[docs]</a>    <span class="nd">@classmethod</span>
+    <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">from_molecule</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">mol</span><span class="p">,</span> <span class="n">node_feature</span><span class="o">=</span><span class="s2">"default"</span><span class="p">,</span> <span class="n">edge_feature</span><span class="o">=</span><span class="s2">"default"</span><span class="p">,</span> <span class="n">graph_feature</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                       <span class="n">with_hydrogen</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">kekulize</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">"""</span>
@@ -387,7 +429,7 @@
                    <span class="n">chiral_tag</span><span class="o">=</span><span class="n">chiral_tag</span><span class="p">,</span> <span class="n">radical_electrons</span><span class="o">=</span><span class="n">radical_electrons</span><span class="p">,</span> <span class="n">atom_map</span><span class="o">=</span><span class="n">atom_map</span><span class="p">,</span>
                    <span class="n">bond_stereo</span><span class="o">=</span><span class="n">bond_stereo</span><span class="p">,</span> <span class="n">stereo_atoms</span><span class="o">=</span><span class="n">stereo_atoms</span><span class="p">,</span>
                    <span class="n">node_feature</span><span class="o">=</span><span class="n">_node_feature</span><span class="p">,</span> <span class="n">edge_feature</span><span class="o">=</span><span class="n">_edge_feature</span><span class="p">,</span> <span class="n">graph_feature</span><span class="o">=</span><span class="n">_graph_feature</span><span class="p">,</span>
-                   <span class="n">num_node</span><span class="o">=</span><span class="n">mol</span><span class="o">.</span><span class="n">GetNumAtoms</span><span class="p">(),</span> <span class="n">num_relation</span><span class="o">=</span><span class="n">num_relation</span><span class="p">)</span></div>
+                   <span class="n">num_node</span><span class="o">=</span><span class="n">mol</span><span class="o">.</span><span class="n">GetNumAtoms</span><span class="p">(),</span> <span class="n">num_relation</span><span class="o">=</span><span class="n">num_relation</span><span class="p">)</span>
 
     <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">_standarize_option</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">option</span><span class="p">):</span>
@@ -397,7 +439,7 @@
             <span class="n">option</span> <span class="o">=</span> <span class="p">[</span><span class="n">option</span><span class="p">]</span>
         <span class="k">return</span> <span class="n">option</span>
 
-<div class="viewcode-block" id="Molecule.to_smiles"><a class="viewcode-back" href="../../../api/data.html#torchdrug.data.Molecule.to_smiles">[docs]</a>    <span class="k">def</span> <span class="nf">to_smiles</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">isomeric</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">atom_map</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">canonical</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">to_smiles</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">isomeric</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">atom_map</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">canonical</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">"""</span>
 <span class="sd">        Return a SMILES string of this molecule.</span>
 
@@ -420,9 +462,9 @@
                 <span class="n">smiles_set</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">smiles</span><span class="p">)</span>
                 <span class="n">mol</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmiles</span><span class="p">(</span><span class="n">smiles</span><span class="p">)</span>
                 <span class="n">smiles</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">MolToSmiles</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">isomericSmiles</span><span class="o">=</span><span class="n">isomeric</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">smiles</span></div>
+        <span class="k">return</span> <span class="n">smiles</span>
 
-<div class="viewcode-block" id="Molecule.to_molecule"><a class="viewcode-back" href="../../../api/data.html#torchdrug.data.Molecule.to_molecule">[docs]</a>    <span class="k">def</span> <span class="nf">to_molecule</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ignore_error</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">to_molecule</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ignore_error</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">"""</span>
 <span class="sd">        Return a RDKit object of this molecule.</span>
 
@@ -479,7 +521,7 @@
             <span class="n">mol</span><span class="o">.</span><span class="n">UpdatePropertyCache</span><span class="p">()</span>
             <span class="n">Chem</span><span class="o">.</span><span class="n">AssignStereochemistry</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>
 
-        <span class="k">return</span> <span class="n">mol</span></div>
+        <span class="k">return</span> <span class="n">mol</span>
 
     <span class="nd">@utils</span><span class="o">.</span><span class="n">cached_property</span>
     <span class="k">def</span> <span class="nf">explicit_valence</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -487,7 +529,7 @@
         <span class="n">explicit_valence</span> <span class="o">=</span> <span class="n">scatter_add</span><span class="p">(</span><span class="n">bond2valence</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">edge_list</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">]],</span> <span class="bp">self</span><span class="o">.</span><span class="n">edge_list</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">dim_size</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">num_node</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">explicit_valence</span><span class="o">.</span><span class="n">round</span><span class="p">()</span><span class="o">.</span><span class="n">long</span><span class="p">()</span>
 
-<div class="viewcode-block" id="Molecule.ion_to_molecule"><a class="viewcode-back" href="../../../api/data.html#torchdrug.data.Molecule.ion_to_molecule">[docs]</a>    <span class="k">def</span> <span class="nf">ion_to_molecule</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">ion_to_molecule</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">"""</span>
 <span class="sd">        Convert ions to molecules by adjusting hydrogens and electrons.</span>
 
@@ -506,9 +548,9 @@
         <span class="k">return</span> <span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)(</span><span class="bp">self</span><span class="o">.</span><span class="n">edge_list</span><span class="p">,</span> <span class="n">edge_weight</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">edge_weight</span><span class="p">,</span>
                           <span class="n">num_node</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">num_node</span><span class="p">,</span> <span class="n">num_relation</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">num_relation</span><span class="p">,</span>
                           <span class="n">formal_charge</span><span class="o">=</span><span class="n">formal_charge</span><span class="p">,</span> <span class="n">explicit_hs</span><span class="o">=</span><span class="n">explicit_hs</span><span class="p">,</span> <span class="n">radical_electrons</span><span class="o">=</span><span class="n">radical_electrons</span><span class="p">,</span>
-                          <span class="n">meta_dict</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">meta_dict</span><span class="p">,</span> <span class="o">**</span><span class="n">data_dict</span><span class="p">)</span></div>
+                          <span class="n">meta_dict</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">meta_dict</span><span class="p">,</span> <span class="o">**</span><span class="n">data_dict</span><span class="p">)</span>
 
-<div class="viewcode-block" id="Molecule.to_scaffold"><a class="viewcode-back" href="../../../api/data.html#torchdrug.data.Molecule.to_scaffold">[docs]</a>    <span class="k">def</span> <span class="nf">to_scaffold</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">chirality</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">to_scaffold</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">chirality</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">"""</span>
 <span class="sd">        Return a scaffold SMILES string of this molecule.</span>
 
@@ -520,7 +562,7 @@
 <span class="sd">        """</span>
         <span class="n">smiles</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">to_smiles</span><span class="p">()</span>
         <span class="n">scaffold</span> <span class="o">=</span> <span class="n">MurckoScaffold</span><span class="o">.</span><span class="n">MurckoScaffoldSmiles</span><span class="p">(</span><span class="n">smiles</span><span class="p">,</span> <span class="n">includeChirality</span><span class="o">=</span><span class="n">chirality</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">scaffold</span></div>
+        <span class="k">return</span> <span class="n">scaffold</span>
 
     <span class="k">def</span> <span class="nf">_maybe_num_node</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">edge_list</span><span class="p">):</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">edge_list</span><span class="p">):</span>
@@ -569,7 +611,7 @@
             <span class="n">is_valid</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">bool</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">device</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">is_valid</span>
 
-<div class="viewcode-block" id="Molecule.visualize"><a class="viewcode-back" href="../../../api/data.html#torchdrug.data.Molecule.visualize">[docs]</a>    <span class="k">def</span> <span class="nf">visualize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">save_file</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">figure_size</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">ax</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">atom_map</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">visualize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">save_file</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">figure_size</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">ax</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">atom_map</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">"""</span>
 <span class="sd">        Visualize this molecule with matplotlib.</span>
 
@@ -602,7 +644,7 @@
             <span class="k">if</span> <span class="n">save_file</span><span class="p">:</span>
                 <span class="n">fig</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">save_file</span><span class="p">)</span>
             <span class="k">else</span><span class="p">:</span>
-                <span class="n">fig</span><span class="o">.</span><span class="n">show</span><span class="p">()</span></div>
+                <span class="n">fig</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 
     <span class="k">def</span> <span class="fm">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
         <span class="n">smiles</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">to_smiles</span><span class="p">(</span><span class="n">isomeric</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">atom_map</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">canonical</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -643,7 +685,7 @@
         <span class="c1"># with self.edge():</span>
         <span class="c1">#     self.bond_type = bond_type</span>
 
-<div class="viewcode-block" id="PackedMolecule.ion_to_molecule"><a class="viewcode-back" href="../../../api/data.html#torchdrug.data.PackedMolecule.ion_to_molecule">[docs]</a>    <span class="k">def</span> <span class="nf">ion_to_molecule</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">ion_to_molecule</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">"""</span>
 <span class="sd">        Convert ions to molecules by adjusting hydrogens and electrons.</span>
 
@@ -662,7 +704,7 @@
         <span class="k">return</span> <span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)(</span><span class="bp">self</span><span class="o">.</span><span class="n">edge_list</span><span class="p">,</span> <span class="n">edge_weight</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">edge_weight</span><span class="p">,</span>
                           <span class="n">num_nodes</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">num_nodes</span><span class="p">,</span> <span class="n">num_edges</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">num_edges</span><span class="p">,</span> <span class="n">num_relation</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">num_relation</span><span class="p">,</span>
                           <span class="n">offsets</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_offsets</span><span class="p">,</span> <span class="n">formal_charge</span><span class="o">=</span><span class="n">formal_charge</span><span class="p">,</span> <span class="n">explicit_hs</span><span class="o">=</span><span class="n">explicit_hs</span><span class="p">,</span>
-                          <span class="n">radical_electrons</span><span class="o">=</span><span class="n">radical_electrons</span><span class="p">,</span> <span class="n">meta_dict</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">meta_dict</span><span class="p">,</span> <span class="o">**</span><span class="n">data_dict</span><span class="p">)</span></div>
+                          <span class="n">radical_electrons</span><span class="o">=</span><span class="n">radical_electrons</span><span class="p">,</span> <span class="n">meta_dict</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">meta_dict</span><span class="p">,</span> <span class="o">**</span><span class="n">data_dict</span><span class="p">)</span>
 
     <span class="nd">@utils</span><span class="o">.</span><span class="n">cached_property</span>
     <span class="k">def</span> <span class="nf">is_valid</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -689,7 +731,7 @@
     <span class="k">def</span> <span class="nf">is_valid_rdkit</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">torch</span><span class="o">.</span><span class="n">cat</span><span class="p">([</span><span class="n">mol</span><span class="o">.</span><span class="n">is_valid_rdkit</span> <span class="k">for</span> <span class="n">mol</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">])</span>
 
-<div class="viewcode-block" id="PackedMolecule.from_smiles"><a class="viewcode-back" href="../../../api/data.html#torchdrug.data.PackedMolecule.from_smiles">[docs]</a>    <span class="nd">@classmethod</span>
+    <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">from_smiles</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">smiles_list</span><span class="p">,</span> <span class="n">node_feature</span><span class="o">=</span><span class="s2">"default"</span><span class="p">,</span> <span class="n">edge_feature</span><span class="o">=</span><span class="s2">"default"</span><span class="p">,</span> <span class="n">graph_feature</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                     <span class="n">with_hydrogen</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">kekulize</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">"""</span>
@@ -714,9 +756,9 @@
                 <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Invalid SMILES `</span><span class="si">%s</span><span class="s2">`"</span> <span class="o">%</span> <span class="n">smiles</span><span class="p">)</span>
             <span class="n">mols</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>
 
-        <span class="k">return</span> <span class="bp">cls</span><span class="o">.</span><span class="n">from_molecule</span><span class="p">(</span><span class="n">mols</span><span class="p">,</span> <span class="n">node_feature</span><span class="p">,</span> <span class="n">edge_feature</span><span class="p">,</span> <span class="n">graph_feature</span><span class="p">,</span> <span class="n">with_hydrogen</span><span class="p">,</span> <span class="n">kekulize</span><span class="p">)</span></div>
+        <span class="k">return</span> <span class="bp">cls</span><span class="o">.</span><span class="n">from_molecule</span><span class="p">(</span><span class="n">mols</span><span class="p">,</span> <span class="n">node_feature</span><span class="p">,</span> <span class="n">edge_feature</span><span class="p">,</span> <span class="n">graph_feature</span><span class="p">,</span> <span class="n">with_hydrogen</span><span class="p">,</span> <span class="n">kekulize</span><span class="p">)</span>
 
-<div class="viewcode-block" id="PackedMolecule.from_molecule"><a class="viewcode-back" href="../../../api/data.html#torchdrug.data.PackedMolecule.from_molecule">[docs]</a>    <span class="nd">@classmethod</span>
+    <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">from_molecule</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">mols</span><span class="p">,</span> <span class="n">node_feature</span><span class="o">=</span><span class="s2">"default"</span><span class="p">,</span> <span class="n">edge_feature</span><span class="o">=</span><span class="s2">"default"</span><span class="p">,</span> <span class="n">graph_feature</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                       <span class="n">with_hydrogen</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">kekulize</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">"""</span>
@@ -842,9 +884,9 @@
                    <span class="n">chiral_tag</span><span class="o">=</span><span class="n">chiral_tag</span><span class="p">,</span> <span class="n">radical_electrons</span><span class="o">=</span><span class="n">radical_electrons</span><span class="p">,</span> <span class="n">atom_map</span><span class="o">=</span><span class="n">atom_map</span><span class="p">,</span>
                    <span class="n">bond_stereo</span><span class="o">=</span><span class="n">bond_stereo</span><span class="p">,</span> <span class="n">stereo_atoms</span><span class="o">=</span><span class="n">stereo_atoms</span><span class="p">,</span>
                    <span class="n">node_feature</span><span class="o">=</span><span class="n">_node_feature</span><span class="p">,</span> <span class="n">edge_feature</span><span class="o">=</span><span class="n">_edge_feature</span><span class="p">,</span> <span class="n">graph_feature</span><span class="o">=</span><span class="n">_graph_feature</span><span class="p">,</span>
-                   <span class="n">num_nodes</span><span class="o">=</span><span class="n">num_nodes</span><span class="p">,</span> <span class="n">num_edges</span><span class="o">=</span><span class="n">num_edges</span><span class="p">,</span> <span class="n">num_relation</span><span class="o">=</span><span class="n">num_relation</span><span class="p">)</span></div>
+                   <span class="n">num_nodes</span><span class="o">=</span><span class="n">num_nodes</span><span class="p">,</span> <span class="n">num_edges</span><span class="o">=</span><span class="n">num_edges</span><span class="p">,</span> <span class="n">num_relation</span><span class="o">=</span><span class="n">num_relation</span><span class="p">)</span>
 
-<div class="viewcode-block" id="PackedMolecule.to_smiles"><a class="viewcode-back" href="../../../api/data.html#torchdrug.data.PackedMolecule.to_smiles">[docs]</a>    <span class="k">def</span> <span class="nf">to_smiles</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">isomeric</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">atom_map</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">canonical</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">to_smiles</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">isomeric</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">atom_map</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">canonical</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">"""</span>
 <span class="sd">        Return a list of SMILES strings.</span>
 
@@ -870,9 +912,9 @@
                     <span class="n">mol</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmiles</span><span class="p">(</span><span class="n">smiles</span><span class="p">)</span>
                     <span class="n">smiles</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">MolToSmiles</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">isomericSmiles</span><span class="o">=</span><span class="n">isomeric</span><span class="p">)</span>
             <span class="n">smiles_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">smiles</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">smiles_list</span></div>
+        <span class="k">return</span> <span class="n">smiles_list</span>
 
-<div class="viewcode-block" id="PackedMolecule.to_molecule"><a class="viewcode-back" href="../../../api/data.html#torchdrug.data.PackedMolecule.to_molecule">[docs]</a>    <span class="k">def</span> <span class="nf">to_molecule</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ignore_error</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">to_molecule</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ignore_error</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">"""</span>
 <span class="sd">        Return a list of RDKit objects.</span>
 
@@ -940,9 +982,9 @@
                 <span class="n">Chem</span><span class="o">.</span><span class="n">AssignStereochemistry</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>
             <span class="n">mols</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>
 
-        <span class="k">return</span> <span class="n">mols</span></div>
+        <span class="k">return</span> <span class="n">mols</span>
 
-<div class="viewcode-block" id="PackedMolecule.visualize"><a class="viewcode-back" href="../../../api/data.html#torchdrug.data.PackedMolecule.visualize">[docs]</a>    <span class="k">def</span> <span class="nf">visualize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">titles</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">save_file</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">figure_size</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">num_row</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">num_col</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">atom_map</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">visualize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">titles</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">save_file</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">figure_size</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">num_row</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">num_col</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">atom_map</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">"""</span>
 <span class="sd">        Visualize the packed molecules with matplotlib.</span>
 
@@ -979,7 +1021,7 @@
         <span class="k">if</span> <span class="n">save_file</span><span class="p">:</span>
             <span class="n">fig</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">save_file</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">fig</span><span class="o">.</span><span class="n">show</span><span class="p">()</span></div></div>
+            <span class="n">fig</span><span class="o">.</span><span class="n">show</span><span class="p">()</span></div>
 
 
 <span class="n">Molecule</span><span class="o">.</span><span class="n">packed_type</span> <span class="o">=</span> <span class="n">PackedMolecule</span>
@@ -993,10 +1035,12 @@
         </div>
 
         <div class="related-information">
-          <span class="copyright">Copyright &copy; 2021, MilaGraph Group</span> |
-          Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using
-          <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
-          <a href="https://github.com/pradyunsg/furo">Furo theme</a>.
+              Copyright &#169; 2021, MilaGraph Group
+            |
+            Built with <a href="https://www.sphinx-doc.org/">Sphinx</a>
+              and
+              <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+              <a href="https://github.com/pradyunsg/furo">Furo theme</a>.
         </div>
         
       </footer>

@@ -3,31 +3,62 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/><link rel="index" title="Index" href="../../../genindex.html" /><link rel="search" title="Search" href="../../../search.html" />
 
-    <meta name="generator" content="sphinx-3.5.3, furo 2020.10.15.beta13"/>
+    <meta name="generator" content="sphinx-3.1.2, furo 2020.12.09.beta21"/>
         <title>torchdrug.data.dataset - Drugdiscovery 0.1.0 documentation</title>
-      <link id="pygments_dark_css" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css" href="../../../_static/pygments_dark.css" />
-    <link rel="stylesheet" href="../../../_static/styles/default.css?521cf6a70d019494dd71d80d">
+      <link rel="stylesheet" href="../../../_static/styles/furo.css?digest=a3f371badb8538d75df213ccffb17a4f6e8f3ac5">
     <link rel="stylesheet" href="../../../_static/pygments.css">
     <link media="(prefers-color-scheme: dark)" rel="stylesheet" href="../../../_static/pygments_dark.css">
     
+
+
 <style>
   :root {
     --color-code-background: #f8f8f8;
-    --color-code-foreground: black;
+  --color-code-foreground: black;
+  --font-stack: Helvetica, Arial, sans-serif, -apple-system;
+  --font-stack--monospace: Courier, monospace;
+  --color-brand-primary: #E5261F;
+  --color-brand-content: #E5261F;
+  --admonition-font-size: 1rem;
+  --admonition-title-font-size: 1rem;
+  --font-size--small--2: var(--font-size--small);
   
   }
   @media (prefers-color-scheme: dark) {
     :root {
-    --color-code-background: #202020;
-    --color-code-foreground: #d0d0d0;
-      
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
     }
   }
-</style>
-    <script id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script><script src="../../../_static/jquery.js"></script>
-    <script src="../../../_static/underscore.js"></script>
-    <script src="../../../_static/doctools.js"></script>
-    <script src="../../../_static/scripts/main.js?521cf6a70d019494dd71d80d"></script></head>
+
+  /* For allowing end-user-specific overrides */
+  .override-light {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  --font-stack: Helvetica, Arial, sans-serif, -apple-system;
+  --font-stack--monospace: Courier, monospace;
+  --color-brand-primary: #E5261F;
+  --color-brand-content: #E5261F;
+  --admonition-font-size: 1rem;
+  --admonition-title-font-size: 1rem;
+  --font-size--small--2: var(--font-size--small);
+  
+  }
+  .override-dark {
+    --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+  }
+</style><link id="pygments_dark_css" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css" href="../../../_static/pygments_dark.css" />
+    <link rel="stylesheet" href="../../../_static/styles/furo-extensions.css?digest=26485485040e7aaf717c13fd0188a5ad2c2deb60">
+    <script id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+    <script defer src="../../../_static/jquery.js"></script>
+    <script defer src="../../../_static/underscore.js"></script>
+    <script defer src="../../../_static/doctools.js"></script>
+    <script defer src="../../../_static/language_data.js"></script>
+    <script defer async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script defer src="../../../_static/scripts/main.js?digest=e931d09b2a40c1bb82b542effe772014573baf67"></script></head>
   <body dir="">
     
 <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
@@ -69,25 +100,35 @@
 
 <div class="page">
   <header class="mobile-header">
-    <label class="header-left nav-overlay-icon" for="__navigation">
-      <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
-    </label>
-    <div class="header-center"><div class="brand">Drugdiscovery 0.1.0 documentation</div></div>
-    <div class="header-right"></div>
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../../../index.html"><div class="brand">Drugdiscovery 0.1.0 documentation</div></a>
+    </div>
+    <div class="header-right">
+      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
   </header>
   <aside class="sidebar-drawer">
     <div class="sidebar-container">
       
       <div class="sidebar-sticky"><a class="sidebar-brand centered" href="../../../index.html">
+  
   <div class="sidebar-logo-container">
     <img class="sidebar-logo" src="../../../_static/logo.svg" alt="Logo"/>
   </div>
+  
   
 </a><form class="sidebar-search-container" method="get" action="../../../search.html">
   <input class="sidebar-search" placeholder="Search" name="q">
   <input type="hidden" name="check_keywords" value="yes">
   <input type="hidden" name="area" value="default">
-</form><div class="sidebar-tree sidebar-scroll">
+</form><div class="sidebar-scroll"><div class="sidebar-tree">
   <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../installation.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../quick_start.html">Quick Start</a></li>
@@ -114,6 +155,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../../../notes/model.html">Customize Models &amp; Tasks</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="../../../paper.html">Papers Implemented</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Package Reference</span></p>
 <ul>
@@ -130,6 +172,7 @@
 </ul>
 
 </div>
+</div>
       </div>
       
     </div>
@@ -137,15 +180,15 @@
   <main class="main">
     <div class="content">
       <article role="main">
-        <label class="toc-overlay-icon no-toc" for="__toc">
+        <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
           <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
         </label>
         <h1>Source code for torchdrug.data.dataset</h1><div class="highlight"><pre>
 <span></span><span class="kn">import</span> <span class="nn">csv</span>
 <span class="kn">import</span> <span class="nn">math</span>
 <span class="kn">import</span> <span class="nn">logging</span>
-
 <span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">defaultdict</span>
+
 <span class="kn">from</span> <span class="nn">tqdm</span> <span class="kn">import</span> <span class="n">tqdm</span>
 
 <span class="kn">from</span> <span class="nn">rdkit</span> <span class="kn">import</span> <span class="n">Chem</span>
@@ -167,7 +210,7 @@
 <span class="sd">    Each sample contains a molecule graph, and any number of prediction targets.</span>
 <span class="sd">    """</span>
 
-<div class="viewcode-block" id="MoleculeDataset.load_smiles"><a class="viewcode-back" href="../../../api/data.html#torchdrug.data.MoleculeDataset.load_smiles">[docs]</a>    <span class="nd">@doc</span><span class="o">.</span><span class="n">copy_args</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">Molecule</span><span class="o">.</span><span class="n">from_molecule</span><span class="p">)</span>
+    <span class="nd">@doc</span><span class="o">.</span><span class="n">copy_args</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">Molecule</span><span class="o">.</span><span class="n">from_molecule</span><span class="p">)</span>
     <span class="k">def</span> <span class="nf">load_smiles</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">smiles_list</span><span class="p">,</span> <span class="n">targets</span><span class="p">,</span> <span class="n">transform</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="sd">"""</span>
 <span class="sd">        Load the dataset from SMILES and targets.</span>
@@ -200,9 +243,9 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">smiles_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">smiles</span><span class="p">)</span>
             <span class="k">for</span> <span class="n">field</span> <span class="ow">in</span> <span class="n">targets</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">targets</span><span class="p">[</span><span class="n">field</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">targets</span><span class="p">[</span><span class="n">field</span><span class="p">][</span><span class="n">i</span><span class="p">])</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">transform</span> <span class="o">=</span> <span class="n">transform</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">transform</span> <span class="o">=</span> <span class="n">transform</span>
 
-<div class="viewcode-block" id="MoleculeDataset.load_csv"><a class="viewcode-back" href="../../../api/data.html#torchdrug.data.MoleculeDataset.load_csv">[docs]</a>    <span class="nd">@doc</span><span class="o">.</span><span class="n">copy_args</span><span class="p">(</span><span class="n">load_smiles</span><span class="p">)</span>
+    <span class="nd">@doc</span><span class="o">.</span><span class="n">copy_args</span><span class="p">(</span><span class="n">load_smiles</span><span class="p">)</span>
     <span class="k">def</span> <span class="nf">load_csv</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">csv_file</span><span class="p">,</span> <span class="n">smiles_field</span><span class="o">=</span><span class="s2">"smiles"</span><span class="p">,</span> <span class="n">target_fields</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="sd">"""</span>
 <span class="sd">        Load the dataset from a csv file.</span>
@@ -240,7 +283,7 @@
                             <span class="n">value</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">nan</span>
                         <span class="n">targets</span><span class="p">[</span><span class="n">field</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">load_smiles</span><span class="p">(</span><span class="n">smiles</span><span class="p">,</span> <span class="n">targets</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="n">verbose</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">load_smiles</span><span class="p">(</span><span class="n">smiles</span><span class="p">,</span> <span class="n">targets</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="n">verbose</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">_standarize_index</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="n">count</span><span class="p">):</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="nb">slice</span><span class="p">):</span>
@@ -326,7 +369,7 @@
 <span class="sd">    Each sample contains two molecule graphs, and any number of prediction targets.</span>
 <span class="sd">    """</span>
 
-<div class="viewcode-block" id="ReactionDataset.load_smiles"><a class="viewcode-back" href="../../../api/data.html#torchdrug.data.ReactionDataset.load_smiles">[docs]</a>    <span class="k">def</span> <span class="nf">load_smiles</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">smiles_list</span><span class="p">,</span> <span class="n">targets</span><span class="p">,</span> <span class="n">transform</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">load_smiles</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">smiles_list</span><span class="p">,</span> <span class="n">targets</span><span class="p">,</span> <span class="n">transform</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="n">num_sample</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">smiles_list</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">field</span><span class="p">,</span> <span class="n">target_list</span> <span class="ow">in</span> <span class="n">targets</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
             <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">target_list</span><span class="p">)</span> <span class="o">!=</span> <span class="n">num_sample</span><span class="p">:</span>
@@ -352,7 +395,7 @@
                 <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">mols</span><span class="p">)</span>
                 <span class="k">for</span> <span class="n">field</span> <span class="ow">in</span> <span class="n">targets</span><span class="p">:</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">targets</span><span class="p">[</span><span class="n">field</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">targets</span><span class="p">[</span><span class="n">field</span><span class="p">][</span><span class="n">i</span><span class="p">])</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">transform</span> <span class="o">=</span> <span class="n">transform</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">transform</span> <span class="o">=</span> <span class="n">transform</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">node_feature_dim</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -403,7 +446,7 @@
 
 <div class="viewcode-block" id="NodeClassificationDataset"><a class="viewcode-back" href="../../../api/data.html#torchdrug.data.NodeClassificationDataset">[docs]</a><span class="k">class</span> <span class="nc">NodeClassificationDataset</span><span class="p">(</span><span class="n">torch_data</span><span class="o">.</span><span class="n">Dataset</span><span class="p">,</span> <span class="n">core</span><span class="o">.</span><span class="n">Configurable</span><span class="p">):</span>
 
-<div class="viewcode-block" id="NodeClassificationDataset.load_tsv"><a class="viewcode-back" href="../../../api/data.html#torchdrug.data.NodeClassificationDataset.load_tsv">[docs]</a>    <span class="k">def</span> <span class="nf">load_tsv</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">node_file</span><span class="p">,</span> <span class="n">edge_file</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">load_tsv</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">node_file</span><span class="p">,</span> <span class="n">edge_file</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
         <span class="sd">"""</span>
 <span class="sd">        Load the edge list from a tsv file.</span>
 
@@ -450,7 +493,7 @@
                 <span class="n">edge_list</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">h</span><span class="p">,</span> <span class="n">t</span><span class="p">))</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">load_edge</span><span class="p">(</span><span class="n">edge_list</span><span class="p">,</span> <span class="n">node_feature</span><span class="p">,</span> <span class="n">node_label</span><span class="p">,</span> <span class="n">inv_node_vocab</span><span class="o">=</span><span class="n">inv_node_vocab</span><span class="p">,</span>
-                       <span class="n">inv_label_vocab</span><span class="o">=</span><span class="n">inv_label_vocab</span><span class="p">)</span></div>
+                       <span class="n">inv_label_vocab</span><span class="o">=</span><span class="n">inv_label_vocab</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">load_edge</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">edge_list</span><span class="p">,</span> <span class="n">node_feature</span><span class="p">,</span> <span class="n">node_label</span><span class="p">,</span> <span class="n">node_vocab</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">inv_node_vocab</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">label_vocab</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                   <span class="n">inv_label_vocab</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
@@ -518,7 +561,7 @@
 
 <div class="viewcode-block" id="KnowledgeGraphDataset"><a class="viewcode-back" href="../../../api/data.html#torchdrug.data.KnowledgeGraphDataset">[docs]</a><span class="k">class</span> <span class="nc">KnowledgeGraphDataset</span><span class="p">(</span><span class="n">torch_data</span><span class="o">.</span><span class="n">Dataset</span><span class="p">,</span> <span class="n">core</span><span class="o">.</span><span class="n">Configurable</span><span class="p">):</span>
 
-<div class="viewcode-block" id="KnowledgeGraphDataset.load_tsv"><a class="viewcode-back" href="../../../api/data.html#torchdrug.data.KnowledgeGraphDataset.load_tsv">[docs]</a>    <span class="k">def</span> <span class="nf">load_tsv</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tsv_file</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">load_tsv</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tsv_file</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
         <span class="sd">"""</span>
 <span class="sd">        Load the dataset from a tsv file.</span>
 
@@ -547,9 +590,9 @@
                 <span class="n">t</span> <span class="o">=</span> <span class="n">inv_entity_vocab</span><span class="p">[</span><span class="n">t_token</span><span class="p">]</span>
                 <span class="n">triplets</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">h</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">r</span><span class="p">))</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">load_triplet</span><span class="p">(</span><span class="n">triplets</span><span class="p">,</span> <span class="n">inv_entity_vocab</span><span class="o">=</span><span class="n">inv_entity_vocab</span><span class="p">,</span> <span class="n">inv_relation_vocab</span><span class="o">=</span><span class="n">inv_relation_vocab</span><span class="p">)</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">load_triplet</span><span class="p">(</span><span class="n">triplets</span><span class="p">,</span> <span class="n">inv_entity_vocab</span><span class="o">=</span><span class="n">inv_entity_vocab</span><span class="p">,</span> <span class="n">inv_relation_vocab</span><span class="o">=</span><span class="n">inv_relation_vocab</span><span class="p">)</span>
 
-<div class="viewcode-block" id="KnowledgeGraphDataset.load_tsvs"><a class="viewcode-back" href="../../../api/data.html#torchdrug.data.KnowledgeGraphDataset.load_tsvs">[docs]</a>    <span class="k">def</span> <span class="nf">load_tsvs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tsv_files</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">load_tsvs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tsv_files</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
         <span class="sd">"""</span>
 <span class="sd">        Load the dataset from multiple tsv files.</span>
 
@@ -585,7 +628,7 @@
             <span class="n">num_samples</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">num_sample</span><span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">load_triplet</span><span class="p">(</span><span class="n">triplets</span><span class="p">,</span> <span class="n">inv_entity_vocab</span><span class="o">=</span><span class="n">inv_entity_vocab</span><span class="p">,</span> <span class="n">inv_relation_vocab</span><span class="o">=</span><span class="n">inv_relation_vocab</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">num_samples</span> <span class="o">=</span> <span class="n">num_samples</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">num_samples</span> <span class="o">=</span> <span class="n">num_samples</span>
 
     <span class="k">def</span> <span class="nf">load_triplet</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">triplets</span><span class="p">,</span> <span class="n">entity_vocab</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">relation_vocab</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">inv_entity_vocab</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                      <span class="n">inv_relation_vocab</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
@@ -778,10 +821,12 @@
         </div>
 
         <div class="related-information">
-          <span class="copyright">Copyright &copy; 2021, MilaGraph Group</span> |
-          Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using
-          <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
-          <a href="https://github.com/pradyunsg/furo">Furo theme</a>.
+              Copyright &#169; 2021, MilaGraph Group
+            |
+            Built with <a href="https://www.sphinx-doc.org/">Sphinx</a>
+              and
+              <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+              <a href="https://github.com/pradyunsg/furo">Furo theme</a>.
         </div>
         
       </footer>

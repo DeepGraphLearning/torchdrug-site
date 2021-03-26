@@ -3,31 +3,62 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/><link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="torchdrug.tasks" href="tasks.html" /><link rel="prev" title="torchdrug.layers" href="layers.html" />
 
-    <meta name="generator" content="sphinx-3.5.3, furo 2020.10.15.beta13"/>
+    <meta name="generator" content="sphinx-3.1.2, furo 2020.12.09.beta21"/>
         <title>torchdrug.models - Drugdiscovery 0.1.0 documentation</title>
-      <link id="pygments_dark_css" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css" href="../_static/pygments_dark.css" />
-    <link rel="stylesheet" href="../_static/styles/default.css?703922a4f51e488e7a50558c">
+      <link rel="stylesheet" href="../_static/styles/furo.css?digest=a3f371badb8538d75df213ccffb17a4f6e8f3ac5">
     <link rel="stylesheet" href="../_static/pygments.css">
     <link media="(prefers-color-scheme: dark)" rel="stylesheet" href="../_static/pygments_dark.css">
     
+
+
 <style>
   :root {
     --color-code-background: #f8f8f8;
-    --color-code-foreground: black;
+  --color-code-foreground: black;
+  --font-stack: Helvetica, Arial, sans-serif, -apple-system;
+  --font-stack--monospace: Courier, monospace;
+  --color-brand-primary: #E5261F;
+  --color-brand-content: #E5261F;
+  --admonition-font-size: 1rem;
+  --admonition-title-font-size: 1rem;
+  --font-size--small--2: var(--font-size--small);
   
   }
   @media (prefers-color-scheme: dark) {
     :root {
-    --color-code-background: #202020;
-    --color-code-foreground: #d0d0d0;
-      
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
     }
   }
-</style>
-    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script><script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/doctools.js"></script>
-    <script src="../_static/scripts/main.js?703922a4f51e488e7a50558c"></script></head>
+
+  /* For allowing end-user-specific overrides */
+  .override-light {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  --font-stack: Helvetica, Arial, sans-serif, -apple-system;
+  --font-stack--monospace: Courier, monospace;
+  --color-brand-primary: #E5261F;
+  --color-brand-content: #E5261F;
+  --admonition-font-size: 1rem;
+  --admonition-title-font-size: 1rem;
+  --font-size--small--2: var(--font-size--small);
+  
+  }
+  .override-dark {
+    --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+  }
+</style><link id="pygments_dark_css" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css" href="../_static/pygments_dark.css" />
+    <link rel="stylesheet" href="../_static/styles/furo-extensions.css?digest=26485485040e7aaf717c13fd0188a5ad2c2deb60">
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script defer src="../_static/jquery.js"></script>
+    <script defer src="../_static/underscore.js"></script>
+    <script defer src="../_static/doctools.js"></script>
+    <script defer src="../_static/language_data.js"></script>
+    <script defer async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script defer src="../_static/scripts/main.js?digest=e931d09b2a40c1bb82b542effe772014573baf67"></script></head>
   <body dir="">
     
 <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
@@ -69,25 +100,35 @@
 
 <div class="page">
   <header class="mobile-header">
-    <label class="header-left nav-overlay-icon" for="__navigation">
-      <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
-    </label>
-    <div class="header-center"><div class="brand">Drugdiscovery 0.1.0 documentation</div></div>
-    <div class="header-right"></div>
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../index.html"><div class="brand">Drugdiscovery 0.1.0 documentation</div></a>
+    </div>
+    <div class="header-right">
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
   </header>
   <aside class="sidebar-drawer">
     <div class="sidebar-container">
       
       <div class="sidebar-sticky"><a class="sidebar-brand centered" href="../index.html">
+  
   <div class="sidebar-logo-container">
     <img class="sidebar-logo" src="../_static/logo.svg" alt="Logo"/>
   </div>
+  
   
 </a><form class="sidebar-search-container" method="get" action="../search.html">
   <input class="sidebar-search" placeholder="Search" name="q">
   <input type="hidden" name="check_keywords" value="yes">
   <input type="hidden" name="area" value="default">
-</form><div class="sidebar-tree sidebar-scroll">
+</form><div class="sidebar-scroll"><div class="sidebar-tree">
   <ul>
 <li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../quick_start.html">Quick Start</a></li>
@@ -114,6 +155,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../notes/model.html">Customize Models &amp; Tasks</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="../paper.html">Papers Implemented</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Package Reference</span></p>
 <ul class="current">
@@ -130,6 +172,7 @@
 </ul>
 
 </div>
+</div>
       </div>
       
     </div>
@@ -137,7 +180,7 @@
   <main class="main">
     <div class="content">
       <article role="main">
-        <label class="toc-overlay-icon" for="__toc">
+        <label class="toc-overlay-icon toc-content-icon" for="__toc">
           <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
         </label>
         <div class="section" id="torchdrug-models">
@@ -148,7 +191,7 @@
 <h3>ComplEx<a class="headerlink" href="#complex" title="Permalink to this headline">¶</a></h3>
 <dl class="py class">
 <dt id="torchdrug.models.ComplEx">
-<em class="property"><span class="pre">class</span> </em><code class="sig-name descname"><span class="pre">ComplEx</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">num_entity</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_relation</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">embedding_dim</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">l3_regularization</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/models/embedding.html#ComplEx"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.models.ComplEx" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-name descname">ComplEx</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">num_entity</span></em>, <em class="sig-param"><span class="n">num_relation</span></em>, <em class="sig-param"><span class="n">embedding_dim</span></em>, <em class="sig-param"><span class="n">l3_regularization</span><span class="o">=</span><span class="default_value">0</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/models/embedding.html#ComplEx"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.models.ComplEx" title="Permalink to this definition">¶</a></dt>
 <dd><p>ComplEx embedding proposed in <a class="reference external" href="http://proceedings.mlr.press/v48/trouillon16.pdf">Complex Embeddings for Simple Link Prediction</a>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -166,7 +209,7 @@
 <h3>DistMult<a class="headerlink" href="#distmult" title="Permalink to this headline">¶</a></h3>
 <dl class="py class">
 <dt id="torchdrug.models.DistMult">
-<em class="property"><span class="pre">class</span> </em><code class="sig-name descname"><span class="pre">DistMult</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">num_entity</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_relation</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">embedding_dim</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">l3_regularization</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/models/embedding.html#DistMult"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.models.DistMult" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-name descname">DistMult</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">num_entity</span></em>, <em class="sig-param"><span class="n">num_relation</span></em>, <em class="sig-param"><span class="n">embedding_dim</span></em>, <em class="sig-param"><span class="n">l3_regularization</span><span class="o">=</span><span class="default_value">0</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/models/embedding.html#DistMult"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.models.DistMult" title="Permalink to this definition">¶</a></dt>
 <dd><p>DistMult embedding proposed in <a class="reference external" href="https://arxiv.org/pdf/1412.6575.pdf">Embedding Entities and Relations for Learning and Inference in Knowledge Bases</a>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -184,7 +227,7 @@
 <h3>RotatE<a class="headerlink" href="#rotate" title="Permalink to this headline">¶</a></h3>
 <dl class="py class">
 <dt id="torchdrug.models.RotatE">
-<em class="property"><span class="pre">class</span> </em><code class="sig-name descname"><span class="pre">RotatE</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">num_entity</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_relation</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">embedding_dim</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_score</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">12</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/models/embedding.html#RotatE"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.models.RotatE" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-name descname">RotatE</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">num_entity</span></em>, <em class="sig-param"><span class="n">num_relation</span></em>, <em class="sig-param"><span class="n">embedding_dim</span></em>, <em class="sig-param"><span class="n">max_score</span><span class="o">=</span><span class="default_value">12</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/models/embedding.html#RotatE"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.models.RotatE" title="Permalink to this definition">¶</a></dt>
 <dd><p>RotatE embedding proposed in <a class="reference external" href="https://arxiv.org/pdf/1902.10197.pdf">RotatE: Knowledge Graph Embedding by Relational Rotation in Complex Space</a>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -202,7 +245,7 @@
 <h3>SimplE<a class="headerlink" href="#simple" title="Permalink to this headline">¶</a></h3>
 <dl class="py class">
 <dt id="torchdrug.models.SimplE">
-<em class="property"><span class="pre">class</span> </em><code class="sig-name descname"><span class="pre">SimplE</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">num_entity</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_relation</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">embedding_dim</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">l3_regularization</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/models/embedding.html#SimplE"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.models.SimplE" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-name descname">SimplE</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">num_entity</span></em>, <em class="sig-param"><span class="n">num_relation</span></em>, <em class="sig-param"><span class="n">embedding_dim</span></em>, <em class="sig-param"><span class="n">l3_regularization</span><span class="o">=</span><span class="default_value">0</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/models/embedding.html#SimplE"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.models.SimplE" title="Permalink to this definition">¶</a></dt>
 <dd><p>SimplE embedding proposed in <a class="reference external" href="https://papers.nips.cc/paper/2018/file/b2ab001909a8a6f04b51920306046ce5-Paper.pdf">SimplE Embedding for Link Prediction in Knowledge Graphs</a>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -220,7 +263,7 @@
 <h3>TransE<a class="headerlink" href="#transe" title="Permalink to this headline">¶</a></h3>
 <dl class="py class">
 <dt id="torchdrug.models.TransE">
-<em class="property"><span class="pre">class</span> </em><code class="sig-name descname"><span class="pre">TransE</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">num_entity</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_relation</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">embedding_dim</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_score</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">12</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/models/embedding.html#TransE"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.models.TransE" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-name descname">TransE</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">num_entity</span></em>, <em class="sig-param"><span class="n">num_relation</span></em>, <em class="sig-param"><span class="n">embedding_dim</span></em>, <em class="sig-param"><span class="n">max_score</span><span class="o">=</span><span class="default_value">12</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/models/embedding.html#TransE"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.models.TransE" title="Permalink to this definition">¶</a></dt>
 <dd><p>TransE embedding proposed in <a class="reference external" href="https://proceedings.neurips.cc/paper/2013/file/1cecc7a77928ca8133fa24680a88d2f9-Paper.pdf">Translating Embeddings for Modeling Multi-relational Data</a>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -241,7 +284,7 @@
 <h3>ChebNet<a class="headerlink" href="#chebnet" title="Permalink to this headline">¶</a></h3>
 <dl class="py function">
 <dt id="torchdrug.models.ChebyshevConvolutionalNetwork">
-<code class="sig-name descname"><span class="pre">ChebyshevConvolutionalNetwork</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_dim</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hidden_dims</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">edge_input_dim</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">short_cut</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_norm</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">activation</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'relu'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">concat_hidden</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">readout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'sum'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/models/chebnet.html#ChebyshevConvolutionalNetwork"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.models.ChebyshevConvolutionalNetwork" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">ChebyshevConvolutionalNetwork</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">input_dim</span></em>, <em class="sig-param"><span class="n">hidden_dims</span></em>, <em class="sig-param"><span class="n">edge_input_dim</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">k</span><span class="o">=</span><span class="default_value">1</span></em>, <em class="sig-param"><span class="n">short_cut</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">batch_norm</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">activation</span><span class="o">=</span><span class="default_value">'relu'</span></em>, <em class="sig-param"><span class="n">concat_hidden</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">readout</span><span class="o">=</span><span class="default_value">'sum'</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/models/chebnet.html#ChebyshevConvolutionalNetwork"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.models.ChebyshevConvolutionalNetwork" title="Permalink to this definition">¶</a></dt>
 <dd><p>Chebyshev convolutional network proposed in
 <a class="reference external" href="https://arxiv.org/pdf/1606.09375.pdf">Convolutional Neural Networks on Graphs with Fast Localized Spectral Filtering</a>.</p>
 <dl class="field-list simple">
@@ -265,7 +308,7 @@
 <h3>GCN<a class="headerlink" href="#gcn" title="Permalink to this headline">¶</a></h3>
 <dl class="py function">
 <dt id="torchdrug.models.GraphConvolutionalNetwork">
-<code class="sig-name descname"><span class="pre">GraphConvolutionalNetwork</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_dim</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hidden_dims</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">edge_input_dim</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">short_cut</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_norm</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">activation</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'relu'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">concat_hidden</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">readout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'sum'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/models/gcn.html#GraphConvolutionalNetwork"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.models.GraphConvolutionalNetwork" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">GraphConvolutionalNetwork</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">input_dim</span></em>, <em class="sig-param"><span class="n">hidden_dims</span></em>, <em class="sig-param"><span class="n">edge_input_dim</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">short_cut</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">batch_norm</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">activation</span><span class="o">=</span><span class="default_value">'relu'</span></em>, <em class="sig-param"><span class="n">concat_hidden</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">readout</span><span class="o">=</span><span class="default_value">'sum'</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/models/gcn.html#GraphConvolutionalNetwork"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.models.GraphConvolutionalNetwork" title="Permalink to this definition">¶</a></dt>
 <dd><p>Graph Convolutional Network proposed in <a class="reference external" href="https://arxiv.org/pdf/1609.02907.pdf">Semi-Supervised Classification with Graph Convolutional Networks</a>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -284,7 +327,7 @@
 </dd></dl>
 <dl class="py function">
 <dt id="torchdrug.models.GCN">
-<code class="sig-name descname"><span class="pre">GCN</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_dim</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hidden_dims</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">edge_input_dim</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">short_cut</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_norm</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">activation</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'relu'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">concat_hidden</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">readout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'sum'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#torchdrug.models.GCN" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">GCN</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">input_dim</span></em>, <em class="sig-param"><span class="n">hidden_dims</span></em>, <em class="sig-param"><span class="n">edge_input_dim</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">short_cut</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">batch_norm</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">activation</span><span class="o">=</span><span class="default_value">'relu'</span></em>, <em class="sig-param"><span class="n">concat_hidden</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">readout</span><span class="o">=</span><span class="default_value">'sum'</span></em><span class="sig-paren">)</span><a class="headerlink" href="#torchdrug.models.GCN" title="Permalink to this definition">¶</a></dt>
 <dd><p>Graph Convolutional Network proposed in <a class="reference external" href="https://arxiv.org/pdf/1609.02907.pdf">Semi-Supervised Classification with Graph Convolutional Networks</a>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -302,11 +345,56 @@
 </dl>
 </dd></dl>
 </div>
+<div class="section" id="gat">
+<h3>GAT<a class="headerlink" href="#gat" title="Permalink to this headline">¶</a></h3>
+<dl class="py function">
+<dt id="torchdrug.models.GraphAttentionNetwork">
+<code class="sig-name descname">GraphAttentionNetwork</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">input_dim</span></em>, <em class="sig-param"><span class="n">hidden_dims</span></em>, <em class="sig-param"><span class="n">edge_input_dim</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">num_head</span><span class="o">=</span><span class="default_value">1</span></em>, <em class="sig-param"><span class="n">negative_slope</span><span class="o">=</span><span class="default_value">0.2</span></em>, <em class="sig-param"><span class="n">short_cut</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">batch_norm</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">activation</span><span class="o">=</span><span class="default_value">'relu'</span></em>, <em class="sig-param"><span class="n">concat_hidden</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">readout</span><span class="o">=</span><span class="default_value">'sum'</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/models/gat.html#GraphAttentionNetwork"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.models.GraphAttentionNetwork" title="Permalink to this definition">¶</a></dt>
+<dd><p>Graph Attention Network proposed in <a class="reference external" href="https://arxiv.org/pdf/1710.10903.pdf">Graph Attention Networks</a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input_dim</strong> (<em>int</em>) – input dimension</p></li>
+<li><p><strong>hidden_dims</strong> (<em>list of int</em>) – hidden dimensions</p></li>
+<li><p><strong>edge_input_dim</strong> (<em>int</em><em>, </em><em>optional</em>) – dimension of edge features</p></li>
+<li><p><strong>num_head</strong> (<em>int</em><em>, </em><em>optional</em>) – number of attention heads</p></li>
+<li><p><strong>negative_slope</strong> (<em>float</em><em>, </em><em>optional</em>) – negative slope of leaky relu activation</p></li>
+<li><p><strong>short_cut</strong> (<em>bool</em><em>, </em><em>optional</em>) – use short cut or not</p></li>
+<li><p><strong>batch_norm</strong> (<em>bool</em><em>, </em><em>optional</em>) – apply batch normalization or not</p></li>
+<li><p><strong>activation</strong> (<em>str</em><em> or </em><em>function</em><em>, </em><em>optional</em>) – activation function</p></li>
+<li><p><strong>concat_hidden</strong> (<em>bool</em><em>, </em><em>optional</em>) – concat hidden representations from all layers as output</p></li>
+<li><p><strong>readout</strong> (<em>str</em><em>, </em><em>optional</em>) – readout function. Available functions are <code class="docutils literal notranslate"><span class="pre">sum</span></code> and <code class="docutils literal notranslate"><span class="pre">mean</span></code>.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py function">
+<dt id="torchdrug.models.GAT">
+<code class="sig-name descname">GAT</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">input_dim</span></em>, <em class="sig-param"><span class="n">hidden_dims</span></em>, <em class="sig-param"><span class="n">edge_input_dim</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">num_head</span><span class="o">=</span><span class="default_value">1</span></em>, <em class="sig-param"><span class="n">negative_slope</span><span class="o">=</span><span class="default_value">0.2</span></em>, <em class="sig-param"><span class="n">short_cut</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">batch_norm</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">activation</span><span class="o">=</span><span class="default_value">'relu'</span></em>, <em class="sig-param"><span class="n">concat_hidden</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">readout</span><span class="o">=</span><span class="default_value">'sum'</span></em><span class="sig-paren">)</span><a class="headerlink" href="#torchdrug.models.GAT" title="Permalink to this definition">¶</a></dt>
+<dd><p>Graph Attention Network proposed in <a class="reference external" href="https://arxiv.org/pdf/1710.10903.pdf">Graph Attention Networks</a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input_dim</strong> (<em>int</em>) – input dimension</p></li>
+<li><p><strong>hidden_dims</strong> (<em>list of int</em>) – hidden dimensions</p></li>
+<li><p><strong>edge_input_dim</strong> (<em>int</em><em>, </em><em>optional</em>) – dimension of edge features</p></li>
+<li><p><strong>num_head</strong> (<em>int</em><em>, </em><em>optional</em>) – number of attention heads</p></li>
+<li><p><strong>negative_slope</strong> (<em>float</em><em>, </em><em>optional</em>) – negative slope of leaky relu activation</p></li>
+<li><p><strong>short_cut</strong> (<em>bool</em><em>, </em><em>optional</em>) – use short cut or not</p></li>
+<li><p><strong>batch_norm</strong> (<em>bool</em><em>, </em><em>optional</em>) – apply batch normalization or not</p></li>
+<li><p><strong>activation</strong> (<em>str</em><em> or </em><em>function</em><em>, </em><em>optional</em>) – activation function</p></li>
+<li><p><strong>concat_hidden</strong> (<em>bool</em><em>, </em><em>optional</em>) – concat hidden representations from all layers as output</p></li>
+<li><p><strong>readout</strong> (<em>str</em><em>, </em><em>optional</em>) – readout function. Available functions are <code class="docutils literal notranslate"><span class="pre">sum</span></code> and <code class="docutils literal notranslate"><span class="pre">mean</span></code>.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+</div>
 <div class="section" id="gin">
 <h3>GIN<a class="headerlink" href="#gin" title="Permalink to this headline">¶</a></h3>
 <dl class="py function">
 <dt id="torchdrug.models.GraphIsomorphismNetwork">
-<code class="sig-name descname"><span class="pre">GraphIsomorphismNetwork</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_dim</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hidden_dims</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">edge_input_dim</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_mlp_layer</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eps</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">learn_eps</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">short_cut</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_norm</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">activation</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'relu'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">concat_hidden</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">readout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'sum'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/models/gin.html#GraphIsomorphismNetwork"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.models.GraphIsomorphismNetwork" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">GraphIsomorphismNetwork</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">input_dim</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">hidden_dims</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">edge_input_dim</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">num_mlp_layer</span><span class="o">=</span><span class="default_value">2</span></em>, <em class="sig-param"><span class="n">eps</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">learn_eps</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">short_cut</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">batch_norm</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">activation</span><span class="o">=</span><span class="default_value">'relu'</span></em>, <em class="sig-param"><span class="n">concat_hidden</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">readout</span><span class="o">=</span><span class="default_value">'sum'</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/models/gin.html#GraphIsomorphismNetwork"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.models.GraphIsomorphismNetwork" title="Permalink to this definition">¶</a></dt>
 <dd><p>Graph Ismorphism Network proposed in <a class="reference external" href="https://arxiv.org/pdf/1810.00826.pdf">How Powerful are Graph Neural Networks?</a></p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -328,7 +416,7 @@
 </dd></dl>
 <dl class="py function">
 <dt id="torchdrug.models.GIN">
-<code class="sig-name descname"><span class="pre">GIN</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_dim</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hidden_dims</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">edge_input_dim</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_mlp_layer</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eps</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">learn_eps</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">short_cut</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_norm</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">activation</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'relu'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">concat_hidden</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">readout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'sum'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#torchdrug.models.GIN" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">GIN</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">input_dim</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">hidden_dims</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">edge_input_dim</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">num_mlp_layer</span><span class="o">=</span><span class="default_value">2</span></em>, <em class="sig-param"><span class="n">eps</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">learn_eps</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">short_cut</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">batch_norm</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">activation</span><span class="o">=</span><span class="default_value">'relu'</span></em>, <em class="sig-param"><span class="n">concat_hidden</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">readout</span><span class="o">=</span><span class="default_value">'sum'</span></em><span class="sig-paren">)</span><a class="headerlink" href="#torchdrug.models.GIN" title="Permalink to this definition">¶</a></dt>
 <dd><p>Graph Ismorphism Network proposed in <a class="reference external" href="https://arxiv.org/pdf/1810.00826.pdf">How Powerful are Graph Neural Networks?</a></p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -353,7 +441,7 @@
 <h3>InfoGraph<a class="headerlink" href="#infograph" title="Permalink to this headline">¶</a></h3>
 <dl class="py function">
 <dt id="torchdrug.models.InfoGraph">
-<code class="sig-name descname"><span class="pre">InfoGraph</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_mlp_layer</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">activation</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'relu'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">loss_weight</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">separate_model</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/models/infograph.html#InfoGraph"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.models.InfoGraph" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">InfoGraph</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">model</span></em>, <em class="sig-param"><span class="n">num_mlp_layer</span><span class="o">=</span><span class="default_value">2</span></em>, <em class="sig-param"><span class="n">activation</span><span class="o">=</span><span class="default_value">'relu'</span></em>, <em class="sig-param"><span class="n">loss_weight</span><span class="o">=</span><span class="default_value">1</span></em>, <em class="sig-param"><span class="n">separate_model</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/models/infograph.html#InfoGraph"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.models.InfoGraph" title="Permalink to this definition">¶</a></dt>
 <dd><p>InfoGraph proposed in
 <a class="reference external" href="https://arxiv.org/pdf/1908.01000.pdf">InfoGraph: Unsupervised and Semi-supervised Graph-Level Representation Learning via Mutual Information
 Maximization</a>.</p>
@@ -376,7 +464,7 @@ and a transfer loss is applied between the two encoders.</p></li>
 <h3>MPNN<a class="headerlink" href="#mpnn" title="Permalink to this headline">¶</a></h3>
 <dl class="py function">
 <dt id="torchdrug.models.MessagePassingNeuralNetwork">
-<code class="sig-name descname"><span class="pre">MessagePassingNeuralNetwork</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_dim</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hidden_dim</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">edge_input_dim</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_layer</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_gru_layer</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_mlp_layer</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_s2s_step</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">short_cut</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_norm</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">activation</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'relu'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">concat_hidden</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/models/mpnn.html#MessagePassingNeuralNetwork"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.models.MessagePassingNeuralNetwork" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">MessagePassingNeuralNetwork</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">input_dim</span></em>, <em class="sig-param"><span class="n">hidden_dim</span></em>, <em class="sig-param"><span class="n">edge_input_dim</span></em>, <em class="sig-param"><span class="n">num_layer</span><span class="o">=</span><span class="default_value">1</span></em>, <em class="sig-param"><span class="n">num_gru_layer</span><span class="o">=</span><span class="default_value">1</span></em>, <em class="sig-param"><span class="n">num_mlp_layer</span><span class="o">=</span><span class="default_value">2</span></em>, <em class="sig-param"><span class="n">num_s2s_step</span><span class="o">=</span><span class="default_value">3</span></em>, <em class="sig-param"><span class="n">short_cut</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">batch_norm</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">activation</span><span class="o">=</span><span class="default_value">'relu'</span></em>, <em class="sig-param"><span class="n">concat_hidden</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/models/mpnn.html#MessagePassingNeuralNetwork"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.models.MessagePassingNeuralNetwork" title="Permalink to this definition">¶</a></dt>
 <dd><p>Message Passing Neural Network proposed in <a class="reference external" href="https://arxiv.org/pdf/1704.01212.pdf">Neural Message Passing for Quantum Chemistry</a>.</p>
 <p>This implements the enn-s2s variant in the original paper.</p>
 <dl class="field-list simple">
@@ -399,7 +487,7 @@ and a transfer loss is applied between the two encoders.</p></li>
 </dd></dl>
 <dl class="py function">
 <dt id="torchdrug.models.MPNN">
-<code class="sig-name descname"><span class="pre">MPNN</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_dim</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hidden_dim</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">edge_input_dim</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_layer</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_gru_layer</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_mlp_layer</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_s2s_step</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">short_cut</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_norm</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">activation</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'relu'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">concat_hidden</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#torchdrug.models.MPNN" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">MPNN</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">input_dim</span></em>, <em class="sig-param"><span class="n">hidden_dim</span></em>, <em class="sig-param"><span class="n">edge_input_dim</span></em>, <em class="sig-param"><span class="n">num_layer</span><span class="o">=</span><span class="default_value">1</span></em>, <em class="sig-param"><span class="n">num_gru_layer</span><span class="o">=</span><span class="default_value">1</span></em>, <em class="sig-param"><span class="n">num_mlp_layer</span><span class="o">=</span><span class="default_value">2</span></em>, <em class="sig-param"><span class="n">num_s2s_step</span><span class="o">=</span><span class="default_value">3</span></em>, <em class="sig-param"><span class="n">short_cut</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">batch_norm</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">activation</span><span class="o">=</span><span class="default_value">'relu'</span></em>, <em class="sig-param"><span class="n">concat_hidden</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="headerlink" href="#torchdrug.models.MPNN" title="Permalink to this definition">¶</a></dt>
 <dd><p>Message Passing Neural Network proposed in <a class="reference external" href="https://arxiv.org/pdf/1704.01212.pdf">Neural Message Passing for Quantum Chemistry</a>.</p>
 <p>This implements the enn-s2s variant in the original paper.</p>
 <dl class="field-list simple">
@@ -425,7 +513,7 @@ and a transfer loss is applied between the two encoders.</p></li>
 <h3>NFP<a class="headerlink" href="#nfp" title="Permalink to this headline">¶</a></h3>
 <dl class="py function">
 <dt id="torchdrug.models.NeuralFingerprint">
-<code class="sig-name descname"><span class="pre">NeuralFingerprint</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_dim</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_dim</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hidden_dims</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">edge_input_dim</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">short_cut</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_norm</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">activation</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'relu'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">concat_hidden</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">readout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'sum'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/models/neuralfp.html#NeuralFingerprint"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.models.NeuralFingerprint" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">NeuralFingerprint</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">input_dim</span></em>, <em class="sig-param"><span class="n">output_dim</span></em>, <em class="sig-param"><span class="n">hidden_dims</span></em>, <em class="sig-param"><span class="n">edge_input_dim</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">short_cut</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">batch_norm</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">activation</span><span class="o">=</span><span class="default_value">'relu'</span></em>, <em class="sig-param"><span class="n">concat_hidden</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">readout</span><span class="o">=</span><span class="default_value">'sum'</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/models/neuralfp.html#NeuralFingerprint"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.models.NeuralFingerprint" title="Permalink to this definition">¶</a></dt>
 <dd><p>Neural Fingerprints from <a class="reference external" href="https://arxiv.org/pdf/1509.09292.pdf">Convolutional Networks on Graphs for Learning Molecular Fingerprints</a>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -445,7 +533,7 @@ and a transfer loss is applied between the two encoders.</p></li>
 </dd></dl>
 <dl class="py function">
 <dt id="torchdrug.models.NFP">
-<code class="sig-name descname"><span class="pre">NFP</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_dim</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_dim</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hidden_dims</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">edge_input_dim</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">short_cut</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_norm</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">activation</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'relu'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">concat_hidden</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">readout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'sum'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#torchdrug.models.NFP" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">NFP</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">input_dim</span></em>, <em class="sig-param"><span class="n">output_dim</span></em>, <em class="sig-param"><span class="n">hidden_dims</span></em>, <em class="sig-param"><span class="n">edge_input_dim</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">short_cut</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">batch_norm</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">activation</span><span class="o">=</span><span class="default_value">'relu'</span></em>, <em class="sig-param"><span class="n">concat_hidden</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">readout</span><span class="o">=</span><span class="default_value">'sum'</span></em><span class="sig-paren">)</span><a class="headerlink" href="#torchdrug.models.NFP" title="Permalink to this definition">¶</a></dt>
 <dd><p>Neural Fingerprints from <a class="reference external" href="https://arxiv.org/pdf/1509.09292.pdf">Convolutional Networks on Graphs for Learning Molecular Fingerprints</a>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -468,7 +556,7 @@ and a transfer loss is applied between the two encoders.</p></li>
 <h3>RGCN<a class="headerlink" href="#rgcn" title="Permalink to this headline">¶</a></h3>
 <dl class="py function">
 <dt id="torchdrug.models.RelationalGraphConvolutionalNetwork">
-<code class="sig-name descname"><span class="pre">RelationalGraphConvolutionalNetwork</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_dim</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hidden_dims</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_relation</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">edge_input_dim</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">short_cut</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_norm</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">activation</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'relu'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">concat_hidden</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">readout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'sum'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/models/gcn.html#RelationalGraphConvolutionalNetwork"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.models.RelationalGraphConvolutionalNetwork" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">RelationalGraphConvolutionalNetwork</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">input_dim</span></em>, <em class="sig-param"><span class="n">hidden_dims</span></em>, <em class="sig-param"><span class="n">num_relation</span></em>, <em class="sig-param"><span class="n">edge_input_dim</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">short_cut</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">batch_norm</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">activation</span><span class="o">=</span><span class="default_value">'relu'</span></em>, <em class="sig-param"><span class="n">concat_hidden</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">readout</span><span class="o">=</span><span class="default_value">'sum'</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/models/gcn.html#RelationalGraphConvolutionalNetwork"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.models.RelationalGraphConvolutionalNetwork" title="Permalink to this definition">¶</a></dt>
 <dd><p>Relational graph convolutional Network proposed in <a class="reference external" href="https://arxiv.org/pdf/1703.06103.pdf">Modeling Relational Data with Graph Convolutional Networks?</a>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -488,7 +576,7 @@ and a transfer loss is applied between the two encoders.</p></li>
 </dd></dl>
 <dl class="py function">
 <dt id="torchdrug.models.RGCN">
-<code class="sig-name descname"><span class="pre">RGCN</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_dim</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hidden_dims</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_relation</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">edge_input_dim</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">short_cut</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_norm</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">activation</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'relu'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">concat_hidden</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">readout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'sum'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#torchdrug.models.RGCN" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">RGCN</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">input_dim</span></em>, <em class="sig-param"><span class="n">hidden_dims</span></em>, <em class="sig-param"><span class="n">num_relation</span></em>, <em class="sig-param"><span class="n">edge_input_dim</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">short_cut</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">batch_norm</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">activation</span><span class="o">=</span><span class="default_value">'relu'</span></em>, <em class="sig-param"><span class="n">concat_hidden</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">readout</span><span class="o">=</span><span class="default_value">'sum'</span></em><span class="sig-paren">)</span><a class="headerlink" href="#torchdrug.models.RGCN" title="Permalink to this definition">¶</a></dt>
 <dd><p>Relational graph convolutional Network proposed in <a class="reference external" href="https://arxiv.org/pdf/1703.06103.pdf">Modeling Relational Data with Graph Convolutional Networks?</a>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -511,7 +599,7 @@ and a transfer loss is applied between the two encoders.</p></li>
 <h3>SchNet<a class="headerlink" href="#schnet" title="Permalink to this headline">¶</a></h3>
 <dl class="py function">
 <dt id="torchdrug.models.SchNet">
-<code class="sig-name descname"><span class="pre">SchNet</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_dim</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hidden_dims</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">edge_input_dim</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cutoff</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_gaussian</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">short_cut</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_norm</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">activation</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'shifted_softplus'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">concat_hidden</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/models/schnet.html#SchNet"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.models.SchNet" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">SchNet</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">input_dim</span></em>, <em class="sig-param"><span class="n">hidden_dims</span></em>, <em class="sig-param"><span class="n">edge_input_dim</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">cutoff</span><span class="o">=</span><span class="default_value">5</span></em>, <em class="sig-param"><span class="n">num_gaussian</span><span class="o">=</span><span class="default_value">100</span></em>, <em class="sig-param"><span class="n">short_cut</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">batch_norm</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">activation</span><span class="o">=</span><span class="default_value">'shifted_softplus'</span></em>, <em class="sig-param"><span class="n">concat_hidden</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/models/schnet.html#SchNet"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.models.SchNet" title="Permalink to this definition">¶</a></dt>
 <dd><p>SchNet from <a class="reference external" href="https://arxiv.org/pdf/1706.08566.pdf">SchNet: A continuous-filter convolutional neural network for modeling quantum interactions</a>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -560,10 +648,17 @@ and a transfer loss is applied between the two encoders.</p></li>
         </div>
 
         <div class="related-information">
-          <span class="copyright">Copyright &copy; 2021, MilaGraph Group</span> |
-          Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using
-          <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
-          <a href="https://github.com/pradyunsg/furo">Furo theme</a>.
+              Copyright &#169; 2021, MilaGraph Group
+            |
+            Built with <a href="https://www.sphinx-doc.org/">Sphinx</a>
+              and
+              <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+              <a href="https://github.com/pradyunsg/furo">Furo theme</a>.
+            |
+            <a class="muted-link" href="../_sources/api/models.rst.txt"
+               rel="nofollow">
+              Show Source
+            </a>
         </div>
         
       </footer>
@@ -577,8 +672,9 @@ and a transfer loss is applied between the two encoders.</p></li>
             Contents
           </span>
         </div>
-        <div class="toc-tree">
-          <ul>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
 <li><a class="reference internal" href="#">torchdrug.models</a><ul>
 <li><a class="reference internal" href="#knowledge-graph-embedding">Knowledge Graph Embedding</a><ul>
 <li><a class="reference internal" href="#complex">ComplEx</a></li>
@@ -591,6 +687,7 @@ and a transfer loss is applied between the two encoders.</p></li>
 <li><a class="reference internal" href="#graph-neural-networks">Graph Neural Networks</a><ul>
 <li><a class="reference internal" href="#chebnet">ChebNet</a></li>
 <li><a class="reference internal" href="#gcn">GCN</a></li>
+<li><a class="reference internal" href="#gat">GAT</a></li>
 <li><a class="reference internal" href="#gin">GIN</a></li>
 <li><a class="reference internal" href="#infograph">InfoGraph</a></li>
 <li><a class="reference internal" href="#mpnn">MPNN</a></li>
@@ -603,6 +700,7 @@ and a transfer loss is applied between the two encoders.</p></li>
 </li>
 </ul>
 
+          </div>
         </div>
       </div>
       

@@ -1,53 +1,53 @@
 torchdrug.data
-==================
+==============
 
 Data Structure
-----------------------------------
+--------------
 
 .. currentmodule:: torchdrug.data
 
 Graph
-~~~~~~~~~~~~~~~~
+^^^^^
 .. autoclass:: Graph
 
 Molecule
-~~~~~~~~~~~~~~~~
+^^^^^^^^
 .. autoclass:: Molecule
 
 PackedGraph
-~~~~~~~~~~~~~~~~
+^^^^^^^^^^^
 .. autoclass:: PackedGraph
 
 PackedMolecule
-~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^
 .. autoclass:: PackedMolecule
 
 
 Datasets
-----------------------------------
+--------
 .. currentmodule:: torchdrug.data
 
 KnowledgeGraphDataset
-~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^^^^^^
 .. autoclass:: KnowledgeGraphDataset
 
 MoleculeDataset
-~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^
 .. autoclass:: MoleculeDataset
 
 NodeClassificationDataset
-~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^^^^^^^^^^
 .. autoclass:: NodeClassificationDataset
 
 ReactionDataset
-~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^
 .. autoclass:: ReactionDataset
 
 Data Processing
-----------------------------------
+---------------
 
 DataLoader
-~~~~~~~~~~~~~~~~
+^^^^^^^^^^
 .. autoclass:: DataLoader
 
 .. autofunction:: graph_collate
@@ -57,6 +57,6 @@ DataLoader
 
 
 Feature Function
-------------
+----------------
 
 .. currentmodule:: torchdrug.data.feature

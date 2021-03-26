@@ -1,69 +1,69 @@
 torchdrug.layers
-====================
+================
 
 Common Layers
 -------------
 
-.. currentmodule:: torchdrug.layers.common
+.. currentmodule:: torchdrug.layers
 
 GaussianSmearing
-~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^
 .. autoclass:: GaussianSmearing
 
 MultiLayerPerceptron
-~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^^^^^
 .. autoclass:: MultiLayerPerceptron
 
 MutualInformation
-~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^^
 .. autoclass:: MutualInformation
 
 PairNorm
-~~~~~~~~~~~~~~~~
+^^^^^^^^
 .. autoclass:: PairNorm
 
 Sequential
-~~~~~~~~~~~~~~~~
+^^^^^^^^^^
 .. autoclass:: Sequential
 
 
 Convolution Layers
-----------------------------------
+------------------
 
-.. currentmodule:: torchdrug.layers.conv
-
-ChebyshevConv
-~~~~~~~~~~~~~~~~
-.. autoclass:: ChebyshevConv
-
-ContinuousFilterConv
-~~~~~~~~~~~~~~~~
-.. autoclass:: ContinuousFilterConv
-
-GraphAttentionConv
-~~~~~~~~~~~~~~~~
-.. autoclass:: GraphAttentionConv
-
-GraphConv
-~~~~~~~~~~~~~~~~
-.. autoclass:: GraphConv
-
-GraphIsomorphismConv
-~~~~~~~~~~~~~~~~
-.. autoclass:: GraphIsomorphismConv
-
-MessagePassing
-~~~~~~~~~~~~~~~~
-.. autoclass:: MessagePassing
+.. currentmodule:: torchdrug.layers
 
 .. autoclass:: MessagePassingBase
 
+ChebyshevConv
+^^^^^^^^^^^^^
+.. autoclass:: ChebyshevConv
+
+ContinuousFilterConv
+^^^^^^^^^^^^^^^^^^^^
+.. autoclass:: ContinuousFilterConv
+
+GraphAttentionConv
+^^^^^^^^^^^^^^^^^^
+.. autoclass:: GraphAttentionConv
+
+GraphConv
+^^^^^^^^^
+.. autoclass:: GraphConv
+
+GraphIsomorphismConv
+^^^^^^^^^^^^^^^^^^^^
+.. autoclass:: GraphIsomorphismConv
+
+MessagePassing
+^^^^^^^^^^^^^^
+.. autoclass:: MessagePassing
+
 NeuralFingerprintConv
-~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^^^^^^
 .. autoclass:: NeuralFingerprintConv
 
 RelationalGraphConv
-~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^^^^
 .. autoclass:: RelationalGraphConv
 
 

@@ -16,6 +16,7 @@ as well as approachable and extensible building blocks.
    benchmark/index
    tutorials/index
    notes/index
+   paper
 
 .. toctree::
    :maxdepth: 2

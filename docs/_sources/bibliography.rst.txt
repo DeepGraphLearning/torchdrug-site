@@ -14,6 +14,7 @@
 .. Molecule property prediction
 .. _NFP: https://papers.nips.cc/paper/5954-convolutional-networks-on-graphs-for-learning-molecular-fingerprints.pdf
 .. _GCN: https://arxiv.org/pdf/1609.02907.pdf
+.. _GAT: https://arxiv.org/pdf/1710.10903.pdf
 .. _ENN-S2S: https://arxiv.org/pdf/1704.01212.pdf
 .. _SchNet: https://aip.scitation.org/doi/pdf/10.1063/1.5019779
 .. _GIN: https://arxiv.org/pdf/1810.00826.pdf
@@ -40,4 +41,5 @@
 .. _ComplEx: http://proceedings.mlr.press/v48/trouillon16.pdf
 .. _SimplE: https://papers.nips.cc/paper/7682-simple-embedding-for-link-prediction-in-knowledge-graphs.pdf
 .. _RotatE: https://arxiv.org/pdf/1902.10197.pdf
+.. _KBGAT: https://www.aclweb.org/anthology/P19-1466.pdf
 .. _NeuralLP: https://papers.nips.cc/paper/2017/file/0e55666a4ad822e0e34299df3591d979-Paper.pdf

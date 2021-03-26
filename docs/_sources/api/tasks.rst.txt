@@ -1,52 +1,55 @@
 torchdrug.tasks
-===================
+===============
 
 .. currentmodule:: torchdrug.tasks
 
 
 Pre-trained Molecular Representation Tasks
-----------------------------------
+------------------------------------------
+
 AttributeMasking
-~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^
 .. autoclass:: AttributeMasking
 
 ContextPrediction
-~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^^
 .. autoclass:: ContextPrediction
 
 Unsupervised
-~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^
 .. autoclass:: Unsupervised
 
 
 Molecule Generation Tasks
-----------------------------------
+-------------------------
+
 AutoregressiveGeneration
-~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^^^^^^^^^
 .. autoclass:: AutoregressiveGeneration
 
 GCPNGeneration
-~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^
 .. autoclass:: GCPNGeneration
 
 
 Retrosynthesis Tasks
-----------------------------------
+--------------------
+
 CenterIdentification
-~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^^^^^
 .. autoclass:: CenterIdentification
 
 SynthonCompletion
-~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^^
 .. autoclass:: SynthonCompletion
 
 
 Property Prediction Tasks
-----------------------------------
+-------------------------
 EdgePrediction
-~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^
 .. autoclass:: EdgePrediction
 
 PropertyPrediction
-~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^^^
 .. autoclass:: PropertyPrediction

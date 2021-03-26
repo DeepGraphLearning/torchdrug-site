@@ -3,31 +3,62 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/><link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="prev" title="torchdrug.models" href="models.html" />
 
-    <meta name="generator" content="sphinx-3.5.3, furo 2020.10.15.beta13"/>
+    <meta name="generator" content="sphinx-3.1.2, furo 2020.12.09.beta21"/>
         <title>torchdrug.tasks - Drugdiscovery 0.1.0 documentation</title>
-      <link id="pygments_dark_css" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css" href="../_static/pygments_dark.css" />
-    <link rel="stylesheet" href="../_static/styles/default.css?68ea069a464bff0d822fabe7">
+      <link rel="stylesheet" href="../_static/styles/furo.css?digest=a3f371badb8538d75df213ccffb17a4f6e8f3ac5">
     <link rel="stylesheet" href="../_static/pygments.css">
     <link media="(prefers-color-scheme: dark)" rel="stylesheet" href="../_static/pygments_dark.css">
     
+
+
 <style>
   :root {
     --color-code-background: #f8f8f8;
-    --color-code-foreground: black;
+  --color-code-foreground: black;
+  --font-stack: Helvetica, Arial, sans-serif, -apple-system;
+  --font-stack--monospace: Courier, monospace;
+  --color-brand-primary: #E5261F;
+  --color-brand-content: #E5261F;
+  --admonition-font-size: 1rem;
+  --admonition-title-font-size: 1rem;
+  --font-size--small--2: var(--font-size--small);
   
   }
   @media (prefers-color-scheme: dark) {
     :root {
-    --color-code-background: #202020;
-    --color-code-foreground: #d0d0d0;
-      
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
     }
   }
-</style>
-    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script><script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/doctools.js"></script>
-    <script src="../_static/scripts/main.js?68ea069a464bff0d822fabe7"></script></head>
+
+  /* For allowing end-user-specific overrides */
+  .override-light {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  --font-stack: Helvetica, Arial, sans-serif, -apple-system;
+  --font-stack--monospace: Courier, monospace;
+  --color-brand-primary: #E5261F;
+  --color-brand-content: #E5261F;
+  --admonition-font-size: 1rem;
+  --admonition-title-font-size: 1rem;
+  --font-size--small--2: var(--font-size--small);
+  
+  }
+  .override-dark {
+    --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+  }
+</style><link id="pygments_dark_css" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css" href="../_static/pygments_dark.css" />
+    <link rel="stylesheet" href="../_static/styles/furo-extensions.css?digest=26485485040e7aaf717c13fd0188a5ad2c2deb60">
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script defer src="../_static/jquery.js"></script>
+    <script defer src="../_static/underscore.js"></script>
+    <script defer src="../_static/doctools.js"></script>
+    <script defer src="../_static/language_data.js"></script>
+    <script defer async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script defer src="../_static/scripts/main.js?digest=e931d09b2a40c1bb82b542effe772014573baf67"></script></head>
   <body dir="">
     
 <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
@@ -69,25 +100,35 @@
 
 <div class="page">
   <header class="mobile-header">
-    <label class="header-left nav-overlay-icon" for="__navigation">
-      <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
-    </label>
-    <div class="header-center"><div class="brand">Drugdiscovery 0.1.0 documentation</div></div>
-    <div class="header-right"></div>
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../index.html"><div class="brand">Drugdiscovery 0.1.0 documentation</div></a>
+    </div>
+    <div class="header-right">
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
   </header>
   <aside class="sidebar-drawer">
     <div class="sidebar-container">
       
       <div class="sidebar-sticky"><a class="sidebar-brand centered" href="../index.html">
+  
   <div class="sidebar-logo-container">
     <img class="sidebar-logo" src="../_static/logo.svg" alt="Logo"/>
   </div>
+  
   
 </a><form class="sidebar-search-container" method="get" action="../search.html">
   <input class="sidebar-search" placeholder="Search" name="q">
   <input type="hidden" name="check_keywords" value="yes">
   <input type="hidden" name="area" value="default">
-</form><div class="sidebar-tree sidebar-scroll">
+</form><div class="sidebar-scroll"><div class="sidebar-tree">
   <ul>
 <li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../quick_start.html">Quick Start</a></li>
@@ -114,6 +155,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../notes/model.html">Customize Models &amp; Tasks</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="../paper.html">Papers Implemented</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Package Reference</span></p>
 <ul class="current">
@@ -130,6 +172,7 @@
 </ul>
 
 </div>
+</div>
       </div>
       
     </div>
@@ -137,7 +180,7 @@
   <main class="main">
     <div class="content">
       <article role="main">
-        <label class="toc-overlay-icon" for="__toc">
+        <label class="toc-overlay-icon toc-content-icon" for="__toc">
           <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
         </label>
         <div class="section" id="torchdrug-tasks">
@@ -148,7 +191,7 @@
 <h3>AttributeMasking<a class="headerlink" href="#attributemasking" title="Permalink to this headline">¶</a></h3>
 <dl class="py class">
 <dt id="torchdrug.tasks.AttributeMasking">
-<em class="property"><span class="pre">class</span> </em><code class="sig-name descname"><span class="pre">AttributeMasking</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mask_rate</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.15</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_mlp_layer</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/tasks/pretrain.html#AttributeMasking"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.tasks.AttributeMasking" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-name descname">AttributeMasking</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">model</span></em>, <em class="sig-param"><span class="n">mask_rate</span><span class="o">=</span><span class="default_value">0.15</span></em>, <em class="sig-param"><span class="n">num_mlp_layer</span><span class="o">=</span><span class="default_value">2</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/tasks/pretrain.html#AttributeMasking"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.tasks.AttributeMasking" title="Permalink to this definition">¶</a></dt>
 <dd><p>Attribute masking proposed in <a class="reference external" href="https://arxiv.org/abs/1905.12265">Strategies for Pre-training Graph Neural Networks</a>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -165,7 +208,7 @@
 <h3>ContextPrediction<a class="headerlink" href="#contextprediction" title="Permalink to this headline">¶</a></h3>
 <dl class="py class">
 <dt id="torchdrug.tasks.ContextPrediction">
-<em class="property"><span class="pre">class</span> </em><code class="sig-name descname"><span class="pre">ContextPrediction</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">context_model</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">r1</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">4</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">r2</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">7</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">readout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'mean'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_negative</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/tasks/pretrain.html#ContextPrediction"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.tasks.ContextPrediction" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-name descname">ContextPrediction</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">model</span></em>, <em class="sig-param"><span class="n">context_model</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">k</span><span class="o">=</span><span class="default_value">5</span></em>, <em class="sig-param"><span class="n">r1</span><span class="o">=</span><span class="default_value">4</span></em>, <em class="sig-param"><span class="n">r2</span><span class="o">=</span><span class="default_value">7</span></em>, <em class="sig-param"><span class="n">readout</span><span class="o">=</span><span class="default_value">'mean'</span></em>, <em class="sig-param"><span class="n">num_negative</span><span class="o">=</span><span class="default_value">1</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/tasks/pretrain.html#ContextPrediction"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.tasks.ContextPrediction" title="Permalink to this definition">¶</a></dt>
 <dd><p>Context prediction task proposed in <a class="reference external" href="https://arxiv.org/abs/1905.12265">Strategies for Pre-training Graph Neural Networks</a>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -186,7 +229,7 @@
 <h3>Unsupervised<a class="headerlink" href="#unsupervised" title="Permalink to this headline">¶</a></h3>
 <dl class="py class">
 <dt id="torchdrug.tasks.Unsupervised">
-<em class="property"><span class="pre">class</span> </em><code class="sig-name descname"><span class="pre">Unsupervised</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/tasks/property_prediction.html#Unsupervised"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.tasks.Unsupervised" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-name descname">Unsupervised</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">model</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/tasks/property_prediction.html#Unsupervised"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.tasks.Unsupervised" title="Permalink to this definition">¶</a></dt>
 <dd><p>Wrapper task for unsupervised learning.</p>
 <p>The unsupervised loss should be computed by the model.</p>
 <dl class="field-list simple">
@@ -203,7 +246,7 @@
 <h3>AutoregressiveGeneration<a class="headerlink" href="#autoregressivegeneration" title="Permalink to this headline">¶</a></h3>
 <dl class="py class">
 <dt id="torchdrug.tasks.AutoregressiveGeneration">
-<em class="property"><span class="pre">class</span> </em><code class="sig-name descname"><span class="pre">AutoregressiveGeneration</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">node_model</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">edge_model</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">task</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">()</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_node_sample</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-</span> <span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_edge_sample</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-</span> <span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_edge_unroll</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_node</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">criterion</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'nll'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">agent_update_interval</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gamma</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.9</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reward_temperature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">baseline_momentum</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.9</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/tasks/generation.html#AutoregressiveGeneration"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.tasks.AutoregressiveGeneration" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-name descname">AutoregressiveGeneration</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">node_model</span></em>, <em class="sig-param"><span class="n">edge_model</span></em>, <em class="sig-param"><span class="n">task</span><span class="o">=</span><span class="default_value">()</span></em>, <em class="sig-param"><span class="n">num_node_sample</span><span class="o">=</span><span class="default_value">- 1</span></em>, <em class="sig-param"><span class="n">num_edge_sample</span><span class="o">=</span><span class="default_value">- 1</span></em>, <em class="sig-param"><span class="n">max_edge_unroll</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">max_node</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">criterion</span><span class="o">=</span><span class="default_value">'nll'</span></em>, <em class="sig-param"><span class="n">agent_update_interval</span><span class="o">=</span><span class="default_value">5</span></em>, <em class="sig-param"><span class="n">gamma</span><span class="o">=</span><span class="default_value">0.9</span></em>, <em class="sig-param"><span class="n">reward_temperature</span><span class="o">=</span><span class="default_value">1</span></em>, <em class="sig-param"><span class="n">baseline_momentum</span><span class="o">=</span><span class="default_value">0.9</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/tasks/generation.html#AutoregressiveGeneration"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.tasks.AutoregressiveGeneration" title="Permalink to this definition">¶</a></dt>
 <dd><p>Autoregressive graph generation task.</p>
 <p>This class can be used to implement GraphAF proposed in
 <a class="reference external" href="https://arxiv.org/pdf/2001.09382.pdf">GraphAF: A Flow-based Autoregressive Model for Molecular Graph Generation</a>.
@@ -235,7 +278,7 @@ while lower temperature encourages larger maximal reward.</p></li>
 <h3>GCPNGeneration<a class="headerlink" href="#gcpngeneration" title="Permalink to this headline">¶</a></h3>
 <dl class="py class">
 <dt id="torchdrug.tasks.GCPNGeneration">
-<em class="property"><span class="pre">class</span> </em><code class="sig-name descname"><span class="pre">GCPNGeneration</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">atom_types</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_edge_unroll</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_node</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">task</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">()</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">criterion</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'nll'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hidden_dim_mlp</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">128</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">agent_update_interval</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gamma</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.9</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reward_temperature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">baseline_momentum</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.9</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/tasks/generation.html#GCPNGeneration"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.tasks.GCPNGeneration" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-name descname">GCPNGeneration</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">model</span></em>, <em class="sig-param"><span class="n">atom_types</span></em>, <em class="sig-param"><span class="n">max_edge_unroll</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">max_node</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">task</span><span class="o">=</span><span class="default_value">()</span></em>, <em class="sig-param"><span class="n">criterion</span><span class="o">=</span><span class="default_value">'nll'</span></em>, <em class="sig-param"><span class="n">hidden_dim_mlp</span><span class="o">=</span><span class="default_value">128</span></em>, <em class="sig-param"><span class="n">agent_update_interval</span><span class="o">=</span><span class="default_value">10</span></em>, <em class="sig-param"><span class="n">gamma</span><span class="o">=</span><span class="default_value">0.9</span></em>, <em class="sig-param"><span class="n">reward_temperature</span><span class="o">=</span><span class="default_value">1</span></em>, <em class="sig-param"><span class="n">baseline_momentum</span><span class="o">=</span><span class="default_value">0.9</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/tasks/generation.html#GCPNGeneration"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.tasks.GCPNGeneration" title="Permalink to this definition">¶</a></dt>
 <dd><p>The graph generative model from <a class="reference external" href="https://papers.nips.cc/paper/7877-graph-convolutional-policy-network-for-goal-directed-molecular-graph-generation.pdf">Graph Convolutional Policy Network for Goal-Directed Molecular Graph Generation</a>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -264,7 +307,7 @@ while lower temperature encourages larger maximal reward.</p></li>
 <h3>CenterIdentification<a class="headerlink" href="#centeridentification" title="Permalink to this headline">¶</a></h3>
 <dl class="py class">
 <dt id="torchdrug.tasks.CenterIdentification">
-<em class="property"><span class="pre">class</span> </em><code class="sig-name descname"><span class="pre">CenterIdentification</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">('reaction',</span> <span class="pre">'graph',</span> <span class="pre">'atom',</span> <span class="pre">'bond')</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_mlp_layer</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/tasks/retrosynthesis.html#CenterIdentification"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.tasks.CenterIdentification" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-name descname">CenterIdentification</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">model</span></em>, <em class="sig-param"><span class="n">feature</span><span class="o">=</span><span class="default_value">'reaction', 'graph', 'atom', 'bond'</span></em>, <em class="sig-param"><span class="n">num_mlp_layer</span><span class="o">=</span><span class="default_value">2</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/tasks/retrosynthesis.html#CenterIdentification"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.tasks.CenterIdentification" title="Permalink to this definition">¶</a></dt>
 <dd><p>Reaction center identification task.</p>
 <p>This class is a part of retrosynthesis prediction.</p>
 <dl class="field-list simple">
@@ -286,7 +329,7 @@ bond: original bond feature</p></li>
 <h3>SynthonCompletion<a class="headerlink" href="#synthoncompletion" title="Permalink to this headline">¶</a></h3>
 <dl class="py class">
 <dt id="torchdrug.tasks.SynthonCompletion">
-<em class="property"><span class="pre">class</span> </em><code class="sig-name descname"><span class="pre">SynthonCompletion</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">('reaction',</span> <span class="pre">'graph',</span> <span class="pre">'atom')</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_mlp_layer</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/tasks/retrosynthesis.html#SynthonCompletion"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.tasks.SynthonCompletion" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-name descname">SynthonCompletion</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">model</span></em>, <em class="sig-param"><span class="n">feature</span><span class="o">=</span><span class="default_value">'reaction', 'graph', 'atom'</span></em>, <em class="sig-param"><span class="n">num_mlp_layer</span><span class="o">=</span><span class="default_value">2</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/tasks/retrosynthesis.html#SynthonCompletion"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.tasks.SynthonCompletion" title="Permalink to this definition">¶</a></dt>
 <dd><p>Synthon completion task.</p>
 <p>This class is a part of retrosynthesis prediction.</p>
 <dl class="field-list simple">
@@ -310,7 +353,7 @@ atom: original atom feature</p></li>
 <h3>EdgePrediction<a class="headerlink" href="#edgeprediction" title="Permalink to this headline">¶</a></h3>
 <dl class="py class">
 <dt id="torchdrug.tasks.EdgePrediction">
-<em class="property"><span class="pre">class</span> </em><code class="sig-name descname"><span class="pre">EdgePrediction</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/tasks/pretrain.html#EdgePrediction"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.tasks.EdgePrediction" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-name descname">EdgePrediction</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">model</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/tasks/pretrain.html#EdgePrediction"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.tasks.EdgePrediction" title="Permalink to this definition">¶</a></dt>
 <dd><p>Edge prediction task proposed in <a class="reference external" href="https://arxiv.org/abs/1706.02216">Inductive Representation Learning on Large Graphs</a>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -323,7 +366,7 @@ atom: original atom feature</p></li>
 <h3>PropertyPrediction<a class="headerlink" href="#propertyprediction" title="Permalink to this headline">¶</a></h3>
 <dl class="py class">
 <dt id="torchdrug.tasks.PropertyPrediction">
-<em class="property"><span class="pre">class</span> </em><code class="sig-name descname"><span class="pre">PropertyPrediction</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">task</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">()</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">criterion</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'mse'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metric</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">('mae',</span> <span class="pre">'rmse')</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/tasks/property_prediction.html#PropertyPrediction"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.tasks.PropertyPrediction" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-name descname">PropertyPrediction</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">model</span></em>, <em class="sig-param"><span class="n">task</span><span class="o">=</span><span class="default_value">()</span></em>, <em class="sig-param"><span class="n">criterion</span><span class="o">=</span><span class="default_value">'mse'</span></em>, <em class="sig-param"><span class="n">metric</span><span class="o">=</span><span class="default_value">'mae', 'rmse'</span></em>, <em class="sig-param"><span class="n">verbose</span><span class="o">=</span><span class="default_value">0</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/tasks/property_prediction.html#PropertyPrediction"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.tasks.PropertyPrediction" title="Permalink to this definition">¶</a></dt>
 <dd><p>Graph / molecule property prediction task.</p>
 <p>This class is also compatible with semi-supervised learning.</p>
 <dl class="field-list simple">
@@ -364,10 +407,17 @@ Available metrics are <code class="docutils literal notranslate"><span class="pr
         </div>
 
         <div class="related-information">
-          <span class="copyright">Copyright &copy; 2021, MilaGraph Group</span> |
-          Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using
-          <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
-          <a href="https://github.com/pradyunsg/furo">Furo theme</a>.
+              Copyright &#169; 2021, MilaGraph Group
+            |
+            Built with <a href="https://www.sphinx-doc.org/">Sphinx</a>
+              and
+              <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+              <a href="https://github.com/pradyunsg/furo">Furo theme</a>.
+            |
+            <a class="muted-link" href="../_sources/api/tasks.rst.txt"
+               rel="nofollow">
+              Show Source
+            </a>
         </div>
         
       </footer>
@@ -381,8 +431,9 @@ Available metrics are <code class="docutils literal notranslate"><span class="pr
             Contents
           </span>
         </div>
-        <div class="toc-tree">
-          <ul>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
 <li><a class="reference internal" href="#">torchdrug.tasks</a><ul>
 <li><a class="reference internal" href="#pre-trained-molecular-representation-tasks">Pre-trained Molecular Representation Tasks</a><ul>
 <li><a class="reference internal" href="#attributemasking">AttributeMasking</a></li>
@@ -409,6 +460,7 @@ Available metrics are <code class="docutils literal notranslate"><span class="pr
 </li>
 </ul>
 
+          </div>
         </div>
       </div>
       

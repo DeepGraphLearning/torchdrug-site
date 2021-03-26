@@ -3,31 +3,62 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/><link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="torchdrug.data" href="data.html" /><link rel="prev" title="Documentation" href="index.html" />
 
-    <meta name="generator" content="sphinx-3.5.3, furo 2020.10.15.beta13"/>
+    <meta name="generator" content="sphinx-3.1.2, furo 2020.12.09.beta21"/>
         <title>torchdrug.core - Drugdiscovery 0.1.0 documentation</title>
-      <link id="pygments_dark_css" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css" href="../_static/pygments_dark.css" />
-    <link rel="stylesheet" href="../_static/styles/default.css?fdedfe50776a173356af8a61">
+      <link rel="stylesheet" href="../_static/styles/furo.css?digest=a3f371badb8538d75df213ccffb17a4f6e8f3ac5">
     <link rel="stylesheet" href="../_static/pygments.css">
     <link media="(prefers-color-scheme: dark)" rel="stylesheet" href="../_static/pygments_dark.css">
     
+
+
 <style>
   :root {
     --color-code-background: #f8f8f8;
-    --color-code-foreground: black;
+  --color-code-foreground: black;
+  --font-stack: Helvetica, Arial, sans-serif, -apple-system;
+  --font-stack--monospace: Courier, monospace;
+  --color-brand-primary: #E5261F;
+  --color-brand-content: #E5261F;
+  --admonition-font-size: 1rem;
+  --admonition-title-font-size: 1rem;
+  --font-size--small--2: var(--font-size--small);
   
   }
   @media (prefers-color-scheme: dark) {
     :root {
-    --color-code-background: #202020;
-    --color-code-foreground: #d0d0d0;
-      
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
     }
   }
-</style>
-    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script><script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/doctools.js"></script>
-    <script src="../_static/scripts/main.js?fdedfe50776a173356af8a61"></script></head>
+
+  /* For allowing end-user-specific overrides */
+  .override-light {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  --font-stack: Helvetica, Arial, sans-serif, -apple-system;
+  --font-stack--monospace: Courier, monospace;
+  --color-brand-primary: #E5261F;
+  --color-brand-content: #E5261F;
+  --admonition-font-size: 1rem;
+  --admonition-title-font-size: 1rem;
+  --font-size--small--2: var(--font-size--small);
+  
+  }
+  .override-dark {
+    --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+  }
+</style><link id="pygments_dark_css" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css" href="../_static/pygments_dark.css" />
+    <link rel="stylesheet" href="../_static/styles/furo-extensions.css?digest=26485485040e7aaf717c13fd0188a5ad2c2deb60">
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script defer src="../_static/jquery.js"></script>
+    <script defer src="../_static/underscore.js"></script>
+    <script defer src="../_static/doctools.js"></script>
+    <script defer src="../_static/language_data.js"></script>
+    <script defer async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script defer src="../_static/scripts/main.js?digest=e931d09b2a40c1bb82b542effe772014573baf67"></script></head>
   <body dir="">
     
 <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
@@ -69,25 +100,35 @@
 
 <div class="page">
   <header class="mobile-header">
-    <label class="header-left nav-overlay-icon" for="__navigation">
-      <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
-    </label>
-    <div class="header-center"><div class="brand">Drugdiscovery 0.1.0 documentation</div></div>
-    <div class="header-right"></div>
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../index.html"><div class="brand">Drugdiscovery 0.1.0 documentation</div></a>
+    </div>
+    <div class="header-right">
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
   </header>
   <aside class="sidebar-drawer">
     <div class="sidebar-container">
       
       <div class="sidebar-sticky"><a class="sidebar-brand centered" href="../index.html">
+  
   <div class="sidebar-logo-container">
     <img class="sidebar-logo" src="../_static/logo.svg" alt="Logo"/>
   </div>
+  
   
 </a><form class="sidebar-search-container" method="get" action="../search.html">
   <input class="sidebar-search" placeholder="Search" name="q">
   <input type="hidden" name="check_keywords" value="yes">
   <input type="hidden" name="area" value="default">
-</form><div class="sidebar-tree sidebar-scroll">
+</form><div class="sidebar-scroll"><div class="sidebar-tree">
   <ul>
 <li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../quick_start.html">Quick Start</a></li>
@@ -114,6 +155,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../notes/model.html">Customize Models &amp; Tasks</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="../paper.html">Papers Implemented</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Package Reference</span></p>
 <ul class="current">
@@ -130,6 +172,7 @@
 </ul>
 
 </div>
+</div>
       </div>
       
     </div>
@@ -137,7 +180,7 @@
   <main class="main">
     <div class="content">
       <article role="main">
-        <label class="toc-overlay-icon" for="__toc">
+        <label class="toc-overlay-icon toc-content-icon" for="__toc">
           <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
         </label>
         <div class="section" id="torchdrug-core">
@@ -146,7 +189,7 @@
 <h2>Configurable<a class="headerlink" href="#configurable" title="Permalink to this headline">¶</a></h2>
 <dl class="py class">
 <dt id="torchdrug.core.Configurable">
-<em class="property"><span class="pre">class</span> </em><code class="sig-name descname"><span class="pre">Configurable</span></code><a class="reference internal" href="../_modules/torchdrug/core/core.html#Configurable"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.core.Configurable" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-name descname">Configurable</code><a class="reference internal" href="../_modules/torchdrug/core/core.html#Configurable"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.core.Configurable" title="Permalink to this definition">¶</a></dt>
 <dd><p>Class for load/save configuration.
 It will automatically record every argument passed to <code class="docutils literal notranslate"><span class="pre">__init__</span></code> function.</p>
 <p>This class is inspired by <code class="xref py py-meth docutils literal notranslate"><span class="pre">state_dict()</span></code> in PyTorch, but designed for hyperparameters.</p>
@@ -180,7 +223,7 @@ This is convenient for building models from configuration files.</p>
 <h2>Engine<a class="headerlink" href="#engine" title="Permalink to this headline">¶</a></h2>
 <dl class="py class">
 <dt id="torchdrug.core.Engine">
-<em class="property"><span class="pre">class</span> </em><code class="sig-name descname"><span class="pre">Engine</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">task</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">train_set</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">valid_set</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_set</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">optimizer</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scheduler</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gpus</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">log_interval</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/core/engine.html#Engine"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.core.Engine" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-name descname">Engine</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">task</span></em>, <em class="sig-param"><span class="n">train_set</span></em>, <em class="sig-param"><span class="n">valid_set</span></em>, <em class="sig-param"><span class="n">test_set</span></em>, <em class="sig-param"><span class="n">optimizer</span></em>, <em class="sig-param"><span class="n">scheduler</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">gpus</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">batch_size</span><span class="o">=</span><span class="default_value">1</span></em>, <em class="sig-param"><span class="n">log_interval</span><span class="o">=</span><span class="default_value">100</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/core/engine.html#Engine"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.core.Engine" title="Permalink to this definition">¶</a></dt>
 <dd><p>General class that handles everything about training and test of a task.</p>
 <p>This class can perform synchronous distributed parallel training over multiple CPUs or GPUs.
 To invoke with multiple GPUs,</p>
@@ -209,7 +252,7 @@ To invoke with multiple GPUs,</p>
 <h2>Meter<a class="headerlink" href="#meter" title="Permalink to this headline">¶</a></h2>
 <dl class="py class">
 <dt id="torchdrug.core.Meter">
-<em class="property"><span class="pre">class</span> </em><code class="sig-name descname"><span class="pre">Meter</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">log_interval</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">silent</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/core/meter.html#Meter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.core.Meter" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-name descname">Meter</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">log_interval</span><span class="o">=</span><span class="default_value">100</span></em>, <em class="sig-param"><span class="n">silent</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/core/meter.html#Meter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.core.Meter" title="Permalink to this definition">¶</a></dt>
 <dd><p>Meter for recording metrics and training progress.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -225,7 +268,7 @@ To invoke with multiple GPUs,</p>
 <h2>Registry<a class="headerlink" href="#registry" title="Permalink to this headline">¶</a></h2>
 <dl class="py class">
 <dt id="torchdrug.core.Registry">
-<em class="property"><span class="pre">class</span> </em><code class="sig-name descname"><span class="pre">Registry</span></code><a class="reference internal" href="../_modules/torchdrug/core/core.html#Registry"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.core.Registry" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-name descname">Registry</code><a class="reference internal" href="../_modules/torchdrug/core/core.html#Registry"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.core.Registry" title="Permalink to this definition">¶</a></dt>
 <dd><p>Registry class for managing all call-by-name access to objects.</p>
 <p>Typical scenarios:</p>
 <ol class="arabic simple">
@@ -250,7 +293,7 @@ To invoke with multiple GPUs,</p>
 <h2>Meta Container<a class="headerlink" href="#meta-container" title="Permalink to this headline">¶</a></h2>
 <dl class="py class">
 <dt id="torchdrug.core._MetaContainer">
-<em class="property"><span class="pre">class</span> </em><code class="sig-name descname"><span class="pre">_MetaContainer</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">meta_dict</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/core/core.html#_MetaContainer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.core._MetaContainer" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-name descname">_MetaContainer</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">meta_dict</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/core/core.html#_MetaContainer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.core._MetaContainer" title="Permalink to this definition">¶</a></dt>
 <dd><p>Meta container that maintains meta types about members.</p>
 <p>The meta type of each member is tracked when a member is assigned.
 We use a context manager to define the meta types for a bunch of assignment.</p>
@@ -311,10 +354,17 @@ For example, <code class="docutils literal notranslate"><span class="pre">instan
         </div>
 
         <div class="related-information">
-          <span class="copyright">Copyright &copy; 2021, MilaGraph Group</span> |
-          Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using
-          <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
-          <a href="https://github.com/pradyunsg/furo">Furo theme</a>.
+              Copyright &#169; 2021, MilaGraph Group
+            |
+            Built with <a href="https://www.sphinx-doc.org/">Sphinx</a>
+              and
+              <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+              <a href="https://github.com/pradyunsg/furo">Furo theme</a>.
+            |
+            <a class="muted-link" href="../_sources/api/core.rst.txt"
+               rel="nofollow">
+              Show Source
+            </a>
         </div>
         
       </footer>
@@ -328,8 +378,9 @@ For example, <code class="docutils literal notranslate"><span class="pre">instan
             Contents
           </span>
         </div>
-        <div class="toc-tree">
-          <ul>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
 <li><a class="reference internal" href="#">torchdrug.core</a><ul>
 <li><a class="reference internal" href="#configurable">Configurable</a></li>
 <li><a class="reference internal" href="#engine">Engine</a></li>
@@ -340,6 +391,7 @@ For example, <code class="docutils literal notranslate"><span class="pre">instan
 </li>
 </ul>
 
+          </div>
         </div>
       </div>
       

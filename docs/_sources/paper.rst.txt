@@ -1,0 +1,66 @@
+Papers Implemented
+==================
+
+.. include:: bibliography.rst
+
+Graph Representation Learning
+-----------------------------
+
+1. `Semi-Supervised Classification with Graph Convolutional Networks <GCN_>`_
+
+   Thomas N. Kipf, Max Welling. ICLR 2017.
+
+   :class:`GraphConv <torchdrug.layers.GraphConv>`,
+   :class:`GraphConvolutionalNetwork <torchdrug.models.GraphConvolutionalNetwork>`
+
+2. `Graph Attention Networks <GAT_>`_
+
+   Petar Veličković, Guillem Cucurull, Arantxa Casanova, Adriana Romero, Pietro Liò, Yoshua Bengio. ICLR 2018.
+
+   :class:`GraphAttentionConv <torchdrug.layers.GraphAttentionConv>`,
+   :class:`GraphAttentionNetwork <torchdrug.models.GraphAttentionNetwork>`
+
+Pretrain Molecular Representations
+----------------------------------
+
+1. `InfoGraph: Unsupervised and Semi-supervised Graph-Level Representation Learning via Mutual Information Maximization <InfoGraph_>`_
+   Fan-Yun Sun, Jordan Hoffman, Vikas Verma, Jian Tang. ICLR 2020.
+
+   :class:`InfoGraph <torchdrug.models.InfoGraph>`
+
+2. `Strategies for Pre-training Graph Neural Networks <Attribute Masking_>`_
+   Weihua Hu, Bowen Liu, Joseph Gomes, Marinka Zitnik, Percy Liang, Vijay Pande, Jure Leskovec. ICLR 2020.
+
+   :class:`EdgePrediction <torchdrug.tasks.EdgePrediction>`,
+   :class:`AttributeMasking <torchdrug.tasks.AttributeMasking>`,
+   :class:`ContextPrediction <torchdrug.tasks.ContextPrediction>`
+
+De Novo Molecule Design
+-----------------------
+
+Retrosynthesis
+--------------
+
+Knowledge Graph Reasoning
+-------------------------
+
+1. `Translating Embeddings for Modeling Multi-relational Data <TransE_>`_
+
+   Antoine Bordes, Nicolas Usunier, Alberto García-Durán. NIPS 2013.
+
+   :func:`transe_score <torchdrug.layers.functional.transe_score>`,
+   :class:`TransE <torchdrug.models.DistMult>`
+
+2. `Embedding Entities and Relations for Learning and Inference in Knowledge Bases <DistMult_>`_
+
+   Bishan Yang, Wen-tau Yih, Xiaodong He, Jianfeng Gao, Li Deng. ICLR 2015.
+
+   :func:`distmult_score <torchdrug.layers.functional.distmult_score>`,
+   :class:`DistMult <torchdrug.models.DistMult>`
+
+3. `Complex Embeddings for Simple Link Prediction <ComplEx_>`_
+
+   Théo Trouillon, Johannes Welbl, Sebastian Riedel, Éric Gaussier, Guillaume Bouchard. ICML 2016.
+
+   :func:`complex_score <torchdrug.layers.functional.complex_score>`,
+   :class:`ComplEx <torchdrug.models.DistMult>`
