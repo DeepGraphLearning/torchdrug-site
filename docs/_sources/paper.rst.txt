@@ -20,15 +20,60 @@ Graph Representation Learning
    :class:`GraphAttentionConv <torchdrug.layers.GraphAttentionConv>`,
    :class:`GraphAttentionNetwork <torchdrug.models.GraphAttentionNetwork>`
 
+3. `Convolutional Neural Networks on Graphs with Fast Localized Spectral Filtering <ChebNet_>`_
+
+   Michaël Defferrard, Xavier Bresson, Pierre Vandergheynst. NIPS 2016.
+
+   :class:`ChebyshevConv <torchdrug.layers.ChebyshevConv>`,
+   :class:`ChebyshevConvolutionalNetwork <torchdrug.models.ChebyshevConvolutionalNetwork>`
+
+4. `How Powerful Are Graph Neural Nerworks? <GIN_>`_
+
+   Keyulu Xu, Weihua Hu, Jure Leskovec, Stefanie Jegelka. ICLR 2019.
+
+   :class:`GraphIsomorphismConv <torchdrug.layers.GraphIsomorphismConv>`,
+   :class:`GraphIsomorphismNetwork <torchdrug.models.GraphIsomorphismNetwork>`
+
+5. `Neural Message Passing for Quantum Chemistry <ENN-S2S_>`_
+
+   Justin Gilmer, Samuel S. Schoenholz, Patrick F. Riley, Oriol Vinyals, George E. Dahl. ICML 2017.
+
+   :class:`MessagePassing <torchdrug.layers.MessagePassing>`,
+   :class:`MessagePassingNeuralNetwork <torchdrug.models.MessagePassingNeuralNetwork>`
+
+6. `SchNet: A continuous-filter convolutional neural network for modeling quantum interactions <SchNet_>`_
+
+   K. T. Schütt, P.-J. Kindermans, H. E. Sauceda, S. Chmiela, A. Tkatchenko, K.-R. Müller. NeurIPS 2017.
+
+   :class:`ContinuousFilterConv <torchdrug.layers.ContinuousFilterConv>`,
+   :class:`SchNet <torchdrug.models.SchNet>`
+
+7. `Convolutional Networks on Graphs for Learning Molecular Fingerprints <NFP_>`_
+
+   David Duvenaud, Dougal Maclaurin, Jorge Aguilera-Iparraguirre, Rafael Gómez-Bombarelli, Timothy Hirzel, Alán Aspuru-Guzik, Ryan P. Adams. NIPS 2015.
+
+   :class:`NeuralFingerprintConv <torchdrug.layers.NeuralFingerprintConv>`,
+   :class:`NeuralFingerprint <torchdrug.models.NeuralFingerprint>`
+
+8. `Modeling Relational Data with Graph Convolutional Networks <RGCN_>`_
+
+   Michael Schlichtkrull, Thomas N. Kipf, Peter Bloem, Rianne van den Berg, Ivan Titov, Max Welling. ESWC 2018.
+
+   :class:`RelationalGraphConv <torchdrug.layers.RelationalGraphConv>`,
+   :class:`RelationalGraphConvolutionalNetwork <torchdrug.models.RelationalGraphConvolutionalNetwork>`
+
+
 Pretrain Molecular Representations
 ----------------------------------
 
 1. `InfoGraph: Unsupervised and Semi-supervised Graph-Level Representation Learning via Mutual Information Maximization <InfoGraph_>`_
+
    Fan-Yun Sun, Jordan Hoffman, Vikas Verma, Jian Tang. ICLR 2020.
 
    :class:`InfoGraph <torchdrug.models.InfoGraph>`
 
 2. `Strategies for Pre-training Graph Neural Networks <Attribute Masking_>`_
+
    Weihua Hu, Bowen Liu, Joseph Gomes, Marinka Zitnik, Percy Liang, Vijay Pande, Jure Leskovec. ICLR 2020.
 
    :class:`EdgePrediction <torchdrug.tasks.EdgePrediction>`,
@@ -40,6 +85,25 @@ De Novo Molecule Design
 
 Retrosynthesis
 --------------
+
+1. `A Graph to Graphs Framework for Retrosynthesis Prediction. <G2Gs_>`_
+ 
+   Chence Shi, Minkai Xu, Hongyu Guo, Ming Zhang, Jian Tang. ICML 2020.
+
+Graph Generation
+----------------
+
+1. `Graph Convolutional Policy Network for Goal-Directed Molecular Graph Generation. <GCPN_>`_
+  
+   Jiaxuan You, Bowen Liu, Rex Ying, Vijay Pande, Jure Leskovec. NeurIPS 2018.
+
+   :class:`GCPNGeneration <torchdrug.tasks.GCPNGeneration>`
+
+2. `GraphAF: A Flow-based Autoregressive Model for Molecular Graph Generation. <GraphAF_>`_
+  
+   Chence Shi, Minkai Xu, Zhaocheng Zhu, Weinan Zhang, Ming Zhang, Jian Tang. ICLR 2020.
+
+   :class:`AutoregressiveGeneration <torchdrug.tasks.AutoregressiveGeneration>`
 
 Knowledge Graph Reasoning
 -------------------------
@@ -64,3 +128,21 @@ Knowledge Graph Reasoning
 
    :func:`complex_score <torchdrug.layers.functional.complex_score>`,
    :class:`ComplEx <torchdrug.models.DistMult>`
+
+4. `RotatE: Knowledge Graph Embedding by Relational Rotation in Complex Space <RotatE_>`_
+
+   Zhiqing Sun, Zhi-Hong Deng, Jian-Yun Nie, Jian Tang. ICLR 2019.
+
+   :func:`rotate_score <torchdrug.layers.functional.rotate_score>`,
+   :class:`RotatE <torchdrug.models.RotatE>`
+
+5. `SimplE Embedding for Link Prediction in Knowledge Graphs <SimplE_>`_
+
+   Seyed Mehran Kazemi, David Poole. NeurIPS 2018.
+
+   :func:`simple_score <torchdrug.layers.functional.simple_score>`,
+   :class:`SimplE <torchdrug.models.SimplE>`
+
+6. `Differentiable Learning of Logical Rules for Knowledge Base Reasoning <NeuralLP_>`_
+
+   Fan Yang, Zhilin Yang, William W. Cohen. NIPS 2017.
