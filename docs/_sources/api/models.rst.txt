@@ -3,79 +3,87 @@ torchdrug.models
 
 .. currentmodule:: torchdrug.models
 
-
 Knowledge Graph Embedding
 -------------------------
-
-ComplEx
-^^^^^^^
-.. autoclass:: ComplEx
-
-DistMult
-^^^^^^^^
-.. autoclass:: DistMult
-
-RotatE
-^^^^^^
-.. autoclass:: RotatE
-
-SimplE
-^^^^^^
-.. autoclass:: SimplE
 
 TransE
 ^^^^^^
 .. autoclass:: TransE
 
+DistMult
+^^^^^^^^
+.. autoclass:: DistMult
+
+ComplEx
+^^^^^^^
+.. autoclass:: ComplEx
+
+SimplE
+^^^^^^
+.. autoclass:: SimplE
+
+RotatE
+^^^^^^
+.. autoclass:: RotatE
+
+NeuralLP
+^^^^^^^^
+.. autoclass:: NeuralLogicProgramming
+.. autoclass:: NeuralLP
 
 Graph Neural Networks
 ---------------------
 
 ChebNet
 ^^^^^^^
-.. autofunction:: ChebyshevConvolutionalNetwork
+.. autoclass:: ChebyshevConvolutionalNetwork
+.. autoclass:: ChebNet
 
 GCN
 ^^^
-.. autofunction:: GraphConvolutionalNetwork
-
-.. autofunction:: GCN
+.. autoclass:: GraphConvolutionalNetwork
+.. autoclass:: GCN
 
 GAT
 ^^^
-
-.. autofunction:: GraphAttentionNetwork
-
-.. autofunction:: GAT
+.. autoclass:: GraphAttentionNetwork
+.. autoclass:: GAT
 
 GIN
 ^^^
-.. autofunction:: GraphIsomorphismNetwork
-
-.. autofunction:: GIN
-
-InfoGraph
-^^^^^^^^^
-.. autofunction:: InfoGraph
+.. autoclass:: GraphIsomorphismNetwork
+.. autoclass:: GIN
 
 MPNN
 ^^^^
-.. autofunction:: MessagePassingNeuralNetwork
-
-.. autofunction:: MPNN
+.. autoclass:: MessagePassingNeuralNetwork
+.. autoclass:: MPNN
 
 NFP
 ^^^
-.. autofunction:: NeuralFingerprint
-
-.. autofunction:: NFP
+.. autoclass:: NeuralFingerprint
+.. autoclass:: NFP
 
 RGCN
 ^^^^
-.. autofunction:: RelationalGraphConvolutionalNetwork
-
-.. autofunction:: RGCN
+.. autoclass:: RelationalGraphConvolutionalNetwork
+.. autoclass:: RGCN
 
 SchNet
 ^^^^^^
-.. autofunction:: SchNet
+.. autoclass:: SchNet
+
+Normalizing Flow
+----------------
+
+GraphAutoregressiveFlow
+^^^^^^^^^^^^^^^^^^^^^^^
+.. autoclass:: GraphAutoregressiveFlow
+.. autoclass:: GraphAF
+
+Self-supervised Models
+----------------------
+
+InfoGraph
+^^^^^^^^^
+.. autoclass:: InfoGraph

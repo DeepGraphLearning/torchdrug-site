@@ -3,9 +3,9 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/><link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="torchdrug.datasets" href="datasets.html" /><link rel="prev" title="torchdrug.core" href="core.html" />
 
-    <meta name="generator" content="sphinx-3.5.3, furo 2021.02.21.beta25"/>
+    <meta name="generator" content="sphinx-3.1.2, furo 2020.12.09.beta21"/>
         <title>torchdrug.data - Drugdiscovery 0.1.0 documentation</title>
-      <link rel="stylesheet" href="../_static/styles/furo.css?digest=33d2fc4f3f180ec1ffc6524e273e21d7d58cbe49">
+      <link rel="stylesheet" href="../_static/styles/furo.css?digest=a3f371badb8538d75df213ccffb17a4f6e8f3ac5">
     <link rel="stylesheet" href="../_static/pygments.css">
     <link media="(prefers-color-scheme: dark)" rel="stylesheet" href="../_static/pygments_dark.css">
     
@@ -50,7 +50,15 @@
   --color-code-foreground: #d0d0d0;
   
   }
-</style><link rel="stylesheet" href="../_static/styles/furo-extensions.css?digest=d391b54134226e4196576da3bdb6dddb7e05ba2b"></head>
+</style><link id="pygments_dark_css" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css" href="../_static/pygments_dark.css" />
+    <link rel="stylesheet" href="../_static/styles/furo-extensions.css?digest=26485485040e7aaf717c13fd0188a5ad2c2deb60">
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script defer src="../_static/jquery.js"></script>
+    <script defer src="../_static/underscore.js"></script>
+    <script defer src="../_static/doctools.js"></script>
+    <script defer src="../_static/language_data.js"></script>
+    <script defer async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script defer src="../_static/scripts/main.js?digest=e931d09b2a40c1bb82b542effe772014573baf67"></script></head>
   <body dir="">
     
 <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
@@ -90,7 +98,6 @@
 <label class="overlay toc-overlay" for="__toc"></label>
 
 
-
 <div class="page">
   <header class="mobile-header">
     <div class="header-left">
@@ -118,7 +125,7 @@
   
   
 </a><form class="sidebar-search-container" method="get" action="../search.html">
-  <input class="sidebar-search" placeholder=Search name="q">
+  <input class="sidebar-search" placeholder="Search" name="q">
   <input type="hidden" name="check_keywords" value="yes">
   <input type="hidden" name="area" value="default">
 </form><div class="sidebar-scroll"><div class="sidebar-tree">
@@ -184,7 +191,7 @@
 <h3>Graph<a class="headerlink" href="#graph" title="Permalink to this headline">¶</a></h3>
 <dl class="py class">
 <dt id="torchdrug.data.Graph">
-<em class="property"><span class="pre">class</span> </em><code class="sig-name descname"><span class="pre">Graph</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">edge_list</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">edge_weight</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_node</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_relation</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">node_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">edge_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">graph_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/data/graph.html#Graph"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.data.Graph" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-name descname">Graph</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">edge_list</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">edge_weight</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">num_node</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">num_relation</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">node_feature</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">edge_feature</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">graph_feature</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/data/graph.html#Graph"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.data.Graph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Basic container for sparse graphs.</p>
 <p>To batch graphs with variadic sizes, use <code class="xref py py-meth docutils literal notranslate"><span class="pre">data.Graph.pack()</span></code>.
 This will return a PackedGraph object with the following block diagonal adjacency matrix.</p>
@@ -224,7 +231,7 @@ By default, it will be inferred from the largest id in <cite>edge_list</cite></p
 <h3>Molecule<a class="headerlink" href="#molecule" title="Permalink to this headline">¶</a></h3>
 <dl class="py class">
 <dt id="torchdrug.data.Molecule">
-<em class="property"><span class="pre">class</span> </em><code class="sig-name descname"><span class="pre">Molecule</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">edge_list</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">atom_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bond_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">formal_charge</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">explicit_hs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">chiral_tag</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">radical_electrons</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">atom_map</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bond_stereo</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stereo_atoms</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/data/molecule.html#Molecule"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.data.Molecule" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-name descname">Molecule</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">edge_list</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">atom_type</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">bond_type</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">formal_charge</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">explicit_hs</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">chiral_tag</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">radical_electrons</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">atom_map</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">bond_stereo</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">stereo_atoms</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/data/molecule.html#Molecule"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.data.Molecule" title="Permalink to this definition">¶</a></dt>
 <dd><p>Molecule graph with chemical features.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -249,7 +256,7 @@ Each tuple is (node_in, node_out, bond_type).</p></li>
 <h3>PackedGraph<a class="headerlink" href="#packedgraph" title="Permalink to this headline">¶</a></h3>
 <dl class="py class">
 <dt id="torchdrug.data.PackedGraph">
-<em class="property"><span class="pre">class</span> </em><code class="sig-name descname"><span class="pre">PackedGraph</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">edge_list</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">edge_weight</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_nodes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_edges</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_relation</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">offsets</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/data/graph.html#PackedGraph"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.data.PackedGraph" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-name descname">PackedGraph</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">edge_list</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">edge_weight</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">num_nodes</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">num_edges</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">num_relation</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">offsets</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/data/graph.html#PackedGraph"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.data.PackedGraph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Container for sparse graphs with variadic sizes.</p>
 <p>To create a PackedGraph from Graph objects</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">batch</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">Graph</span><span class="o">.</span><span class="n">pack</span><span class="p">(</span><span class="n">graphs</span><span class="p">)</span>
@@ -283,7 +290,7 @@ If provided, nodes in <cite>edge_list</cite> should be absolute index, i.e., the
 <h3>PackedMolecule<a class="headerlink" href="#packedmolecule" title="Permalink to this headline">¶</a></h3>
 <dl class="py class">
 <dt id="torchdrug.data.PackedMolecule">
-<em class="property"><span class="pre">class</span> </em><code class="sig-name descname"><span class="pre">PackedMolecule</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">edge_list</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">atom_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bond_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_nodes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_edges</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">offsets</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/data/molecule.html#PackedMolecule"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.data.PackedMolecule" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-name descname">PackedMolecule</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">edge_list</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">atom_type</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">bond_type</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">num_nodes</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">num_edges</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">offsets</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/data/molecule.html#PackedMolecule"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.data.PackedMolecule" title="Permalink to this definition">¶</a></dt>
 <dd><p>Container for molecules with variadic sizes.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -311,14 +318,14 @@ If provided, nodes in <cite>edge_list</cite> should be absolute index, i.e., the
 <h3>KnowledgeGraphDataset<a class="headerlink" href="#knowledgegraphdataset" title="Permalink to this headline">¶</a></h3>
 <dl class="py class">
 <dt id="torchdrug.data.KnowledgeGraphDataset">
-<em class="property"><span class="pre">class</span> </em><code class="sig-name descname"><span class="pre">KnowledgeGraphDataset</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwds</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/data/dataset.html#KnowledgeGraphDataset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.data.KnowledgeGraphDataset" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-name descname">KnowledgeGraphDataset</code><a class="reference internal" href="../_modules/torchdrug/data/dataset.html#KnowledgeGraphDataset"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.data.KnowledgeGraphDataset" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 </div>
 <div class="section" id="moleculedataset">
 <h3>MoleculeDataset<a class="headerlink" href="#moleculedataset" title="Permalink to this headline">¶</a></h3>
 <dl class="py class">
 <dt id="torchdrug.data.MoleculeDataset">
-<em class="property"><span class="pre">class</span> </em><code class="sig-name descname"><span class="pre">MoleculeDataset</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwds</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/data/dataset.html#MoleculeDataset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.data.MoleculeDataset" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-name descname">MoleculeDataset</code><a class="reference internal" href="../_modules/torchdrug/data/dataset.html#MoleculeDataset"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.data.MoleculeDataset" title="Permalink to this definition">¶</a></dt>
 <dd><p>Molecule dataset.</p>
 <p>Each sample contains a molecule graph, and any number of prediction targets.</p>
 </dd></dl>
@@ -327,14 +334,14 @@ If provided, nodes in <cite>edge_list</cite> should be absolute index, i.e., the
 <h3>NodeClassificationDataset<a class="headerlink" href="#nodeclassificationdataset" title="Permalink to this headline">¶</a></h3>
 <dl class="py class">
 <dt id="torchdrug.data.NodeClassificationDataset">
-<em class="property"><span class="pre">class</span> </em><code class="sig-name descname"><span class="pre">NodeClassificationDataset</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwds</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/data/dataset.html#NodeClassificationDataset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.data.NodeClassificationDataset" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-name descname">NodeClassificationDataset</code><a class="reference internal" href="../_modules/torchdrug/data/dataset.html#NodeClassificationDataset"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.data.NodeClassificationDataset" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 </div>
 <div class="section" id="reactiondataset">
 <h3>ReactionDataset<a class="headerlink" href="#reactiondataset" title="Permalink to this headline">¶</a></h3>
 <dl class="py class">
 <dt id="torchdrug.data.ReactionDataset">
-<em class="property"><span class="pre">class</span> </em><code class="sig-name descname"><span class="pre">ReactionDataset</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwds</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/data/dataset.html#ReactionDataset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.data.ReactionDataset" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-name descname">ReactionDataset</code><a class="reference internal" href="../_modules/torchdrug/data/dataset.html#ReactionDataset"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.data.ReactionDataset" title="Permalink to this definition">¶</a></dt>
 <dd><p>Chemical reaction dataset.</p>
 <p>Each sample contains two molecule graphs, and any number of prediction targets.</p>
 </dd></dl>
@@ -346,7 +353,7 @@ If provided, nodes in <cite>edge_list</cite> should be absolute index, i.e., the
 <h3>DataLoader<a class="headerlink" href="#dataloader" title="Permalink to this headline">¶</a></h3>
 <dl class="py class">
 <dt id="torchdrug.data.DataLoader">
-<em class="property"><span class="pre">class</span> </em><code class="sig-name descname"><span class="pre">DataLoader</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="pre">dataset</span></em>, <em class="sig-param"><span class="pre">batch_size=1</span></em>, <em class="sig-param"><span class="pre">shuffle=False</span></em>, <em class="sig-param"><span class="pre">sampler=None</span></em>, <em class="sig-param"><span class="pre">batch_sampler=None</span></em>, <em class="sig-param"><span class="pre">num_workers=0</span></em>, <em class="sig-param"><span class="pre">collate_fn=&lt;function</span> <span class="pre">graph_collate&gt;</span></em>, <em class="sig-param"><span class="pre">**kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/data/dataloader.html#DataLoader"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.data.DataLoader" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-name descname">DataLoader</code><span class="sig-paren">(</span><em class="sig-param">dataset</em>, <em class="sig-param">batch_size=1</em>, <em class="sig-param">shuffle=False</em>, <em class="sig-param">sampler=None</em>, <em class="sig-param">batch_sampler=None</em>, <em class="sig-param">num_workers=0</em>, <em class="sig-param">collate_fn=&lt;function graph_collate&gt;</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/data/dataloader.html#DataLoader"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.data.DataLoader" title="Permalink to this definition">¶</a></dt>
 <dd><p>Extended data loader for batching graph structured data.</p>
 <p>See <a class="reference external" href="https://pytorch.org/docs/stable/data.html#torch.utils.data.DataLoader">torch.utils.data.DataLoader</a> for more details.</p>
 <dl class="field-list simple">
@@ -366,7 +373,7 @@ If provided, nodes in <cite>edge_list</cite> should be absolute index, i.e., the
 </dd></dl>
 <dl class="py function">
 <dt id="torchdrug.data.graph_collate">
-<code class="sig-name descname"><span class="pre">graph_collate</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">batch</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/data/dataloader.html#graph_collate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.data.graph_collate" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">graph_collate</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">batch</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/data/dataloader.html#graph_collate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.data.graph_collate" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert any list of same nested container into a container of tensors.</p>
 <p>For instances of <a class="reference internal" href="#torchdrug.data.Graph" title="torchdrug.data.Graph"><code class="xref py py-class docutils literal notranslate"><span class="pre">torchdrug.data.Graph</span></code></a>, they are collated
 by <code class="xref py py-meth docutils literal notranslate"><span class="pre">torchdrug.data.Graph.pack()</span></code></p>
@@ -378,7 +385,7 @@ by <code class="xref py py-meth docutils literal notranslate"><span class="pre">
 </dd></dl>
 <dl class="py function">
 <dt id="torchdrug.data.ordered_scaffold_split">
-<code class="sig-name descname"><span class="pre">ordered_scaffold_split</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataset</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lengths</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">chirality</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/data/dataset.html#ordered_scaffold_split"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.data.ordered_scaffold_split" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">ordered_scaffold_split</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dataset</span></em>, <em class="sig-param"><span class="n">lengths</span></em>, <em class="sig-param"><span class="n">chirality</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/data/dataset.html#ordered_scaffold_split"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.data.ordered_scaffold_split" title="Permalink to this definition">¶</a></dt>
 <dd><p>Split a dataset into new datasets with non-overlapping scaffolds and sorted w.r.t. number of each scaffold.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -392,7 +399,7 @@ Note the results may be different in length due to rounding.</p></li>
 </dd></dl>
 <dl class="py function">
 <dt id="torchdrug.data.scaffold_split">
-<code class="sig-name descname"><span class="pre">scaffold_split</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataset</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lengths</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/data/dataset.html#scaffold_split"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.data.scaffold_split" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">scaffold_split</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dataset</span></em>, <em class="sig-param"><span class="n">lengths</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/data/dataset.html#scaffold_split"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.data.scaffold_split" title="Permalink to this definition">¶</a></dt>
 <dd><p>Randomly split a dataset into new datasets with non-overlapping scaffolds.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -406,7 +413,7 @@ Note the results may be different in length due to rounding.</p></li>
 </dd></dl>
 <dl class="py function">
 <dt id="torchdrug.data.semisupervised">
-<code class="sig-name descname"><span class="pre">semisupervised</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataset</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">length</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/data/dataset.html#semisupervised"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.data.semisupervised" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">semisupervised</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dataset</span></em>, <em class="sig-param"><span class="n">length</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/data/dataset.html#semisupervised"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.data.semisupervised" title="Permalink to this definition">¶</a></dt>
 <dd><p>Randomly construct a semi-supervised dataset based on the given length.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -510,10 +517,5 @@ Note the results may be different in length due to rounding.</p></li>
     </aside>
   </main>
 </div>
-    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/doctools.js"></script>
-    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script src="../_static/scripts/main.js?digest=e931d09b2a40c1bb82b542effe772014573baf67"></script></body>
+  </body>
 </html>

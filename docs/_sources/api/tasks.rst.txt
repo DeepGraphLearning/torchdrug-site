@@ -7,6 +7,10 @@ torchdrug.tasks
 Pre-trained Molecular Representation Tasks
 ------------------------------------------
 
+EdgePrediction
+^^^^^^^^^^^^^^
+.. autoclass:: EdgePrediction
+
 AttributeMasking
 ^^^^^^^^^^^^^^^^
 .. autoclass:: AttributeMasking
@@ -43,12 +47,13 @@ SynthonCompletion
 ^^^^^^^^^^^^^^^^^
 .. autoclass:: SynthonCompletion
 
+Retrosynthesis
+^^^^^^^^^^^^^^
+.. autoclass:: Retrosynthesis
+
 
 Property Prediction Tasks
 -------------------------
-EdgePrediction
-^^^^^^^^^^^^^^
-.. autoclass:: EdgePrediction
 
 PropertyPrediction
 ^^^^^^^^^^^^^^^^^^

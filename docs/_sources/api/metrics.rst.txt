@@ -10,23 +10,23 @@ Classification and Regression Metrics
 
 AUROC
 ^^^^^
-.. autoclass:: area_under_roc
-.. autoclass:: AUROC
+.. autofunction:: area_under_roc
+.. autofunction:: AUROC
 
 
 AUPRC
 ^^^^^
-.. autoclass:: area_under_prc
-.. autoclass:: AUPRC
+.. autofunction:: area_under_prc
+.. autofunction:: AUPRC
 
 
 R2
 ^^
-.. autoclass:: r2
+.. autofunction:: r2
 
 Variadic Accuracy
 ^^^^^^^^^^^^^^^^^
-.. autoclass:: variadic_accuracy
+.. autofunction:: variadic_accuracy
 
 
 
@@ -36,20 +36,20 @@ Molecular Property Metrics
 
 SA
 ^^
-.. autoclass:: SA
+.. autofunction:: SA
 
 QED
 ^^^
-.. autoclass:: QED
+.. autofunction:: QED
 
 Chemical Validity
 ^^^^^^^^^^^^^^^^^
-.. autoclass:: chemical_validity
+.. autofunction:: chemical_validity
 
 LogP
 ^^^^
-.. autoclass:: logP
+.. autofunction:: logP
 
 Penalized LogP
 ^^^^^^^^^^^^^^
-.. autoclass:: penalized_logP
+.. autofunction:: penalized_logP

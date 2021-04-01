@@ -3,9 +3,9 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/><link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="Documentation" href="api/index.html" /><link rel="prev" title="Customize Models &amp; Tasks" href="notes/model.html" />
 
-    <meta name="generator" content="sphinx-3.5.3, furo 2021.02.21.beta25"/>
+    <meta name="generator" content="sphinx-3.1.2, furo 2020.12.09.beta21"/>
         <title>Papers Implemented - Drugdiscovery 0.1.0 documentation</title>
-      <link rel="stylesheet" href="_static/styles/furo.css?digest=33d2fc4f3f180ec1ffc6524e273e21d7d58cbe49">
+      <link rel="stylesheet" href="_static/styles/furo.css?digest=a3f371badb8538d75df213ccffb17a4f6e8f3ac5">
     <link rel="stylesheet" href="_static/pygments.css">
     <link media="(prefers-color-scheme: dark)" rel="stylesheet" href="_static/pygments_dark.css">
     
@@ -50,7 +50,15 @@
   --color-code-foreground: #d0d0d0;
   
   }
-</style><link rel="stylesheet" href="_static/styles/furo-extensions.css?digest=d391b54134226e4196576da3bdb6dddb7e05ba2b"></head>
+</style><link id="pygments_dark_css" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css" href="_static/pygments_dark.css" />
+    <link rel="stylesheet" href="_static/styles/furo-extensions.css?digest=26485485040e7aaf717c13fd0188a5ad2c2deb60">
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script defer src="_static/jquery.js"></script>
+    <script defer src="_static/underscore.js"></script>
+    <script defer src="_static/doctools.js"></script>
+    <script defer src="_static/language_data.js"></script>
+    <script defer async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script defer src="_static/scripts/main.js?digest=e931d09b2a40c1bb82b542effe772014573baf67"></script></head>
   <body dir="">
     
 <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
@@ -90,7 +98,6 @@
 <label class="overlay toc-overlay" for="__toc"></label>
 
 
-
 <div class="page">
   <header class="mobile-header">
     <div class="header-left">
@@ -118,7 +125,7 @@
   
   
 </a><form class="sidebar-search-container" method="get" action="search.html">
-  <input class="sidebar-search" placeholder=Search name="q">
+  <input class="sidebar-search" placeholder="Search" name="q">
   <input type="hidden" name="check_keywords" value="yes">
   <input type="hidden" name="area" value="default">
 </form><div class="sidebar-scroll"><div class="sidebar-tree">
@@ -181,25 +188,20 @@
 <div class="section" id="graph-representation-learning">
 <h2>Graph Representation Learning<a class="headerlink" href="#graph-representation-learning" title="Permalink to this headline">¶</a></h2>
 <ol class="arabic">
-<li><p><a class="reference external" href="https://arxiv.org/pdf/1609.02907.pdf">Semi-Supervised Classification with Graph Convolutional Networks</a></p>
-<p>Thomas N. Kipf, Max Welling. ICLR 2017.</p>
-<p><a class="reference internal" href="api/layers.html#torchdrug.layers.GraphConv" title="torchdrug.layers.GraphConv"><code class="xref py py-class docutils literal notranslate"><span class="pre">GraphConv</span></code></a>,
-<a class="reference internal" href="api/models.html#torchdrug.models.GraphConvolutionalNetwork" title="torchdrug.models.GraphConvolutionalNetwork"><code class="xref py py-class docutils literal notranslate"><span class="pre">GraphConvolutionalNetwork</span></code></a></p>
-</li>
-<li><p><a class="reference external" href="https://arxiv.org/pdf/1710.10903.pdf">Graph Attention Networks</a></p>
-<p>Petar Veličković, Guillem Cucurull, Arantxa Casanova, Adriana Romero, Pietro Liò, Yoshua Bengio. ICLR 2018.</p>
-<p><a class="reference internal" href="api/layers.html#torchdrug.layers.GraphAttentionConv" title="torchdrug.layers.GraphAttentionConv"><code class="xref py py-class docutils literal notranslate"><span class="pre">GraphAttentionConv</span></code></a>,
-<a class="reference internal" href="api/models.html#torchdrug.models.GraphAttentionNetwork" title="torchdrug.models.GraphAttentionNetwork"><code class="xref py py-class docutils literal notranslate"><span class="pre">GraphAttentionNetwork</span></code></a></p>
+<li><p><a class="reference external" href="https://papers.nips.cc/paper/5954-convolutional-networks-on-graphs-for-learning-molecular-fingerprints.pdf">Convolutional Networks on Graphs for Learning Molecular Fingerprints</a></p>
+<p>David Duvenaud, Dougal Maclaurin, Jorge Aguilera-Iparraguirre, Rafael Gómez-Bombarelli, Timothy Hirzel, Alán Aspuru-Guzik, Ryan P. Adams. NIPS 2015.</p>
+<p><a class="reference internal" href="api/layers.html#torchdrug.layers.NeuralFingerprintConv" title="torchdrug.layers.NeuralFingerprintConv"><code class="xref py py-class docutils literal notranslate"><span class="pre">NeuralFingerprintConv</span></code></a>,
+<a class="reference internal" href="api/models.html#torchdrug.models.NeuralFingerprint" title="torchdrug.models.NeuralFingerprint"><code class="xref py py-class docutils literal notranslate"><span class="pre">NeuralFingerprint</span></code></a></p>
 </li>
 <li><p><a class="reference external" href="https://arxiv.org/pdf/1606.09375.pdf">Convolutional Neural Networks on Graphs with Fast Localized Spectral Filtering</a></p>
 <p>Michaël Defferrard, Xavier Bresson, Pierre Vandergheynst. NIPS 2016.</p>
 <p><a class="reference internal" href="api/layers.html#torchdrug.layers.ChebyshevConv" title="torchdrug.layers.ChebyshevConv"><code class="xref py py-class docutils literal notranslate"><span class="pre">ChebyshevConv</span></code></a>,
 <a class="reference internal" href="api/models.html#torchdrug.models.ChebyshevConvolutionalNetwork" title="torchdrug.models.ChebyshevConvolutionalNetwork"><code class="xref py py-class docutils literal notranslate"><span class="pre">ChebyshevConvolutionalNetwork</span></code></a></p>
 </li>
-<li><p><a class="reference external" href="https://arxiv.org/pdf/1810.00826.pdf">How Powerful Are Graph Neural Nerworks?</a></p>
-<p>Keyulu Xu, Weihua Hu, Jure Leskovec, Stefanie Jegelka. ICLR 2019.</p>
-<p><a class="reference internal" href="api/layers.html#torchdrug.layers.GraphIsomorphismConv" title="torchdrug.layers.GraphIsomorphismConv"><code class="xref py py-class docutils literal notranslate"><span class="pre">GraphIsomorphismConv</span></code></a>,
-<a class="reference internal" href="api/models.html#torchdrug.models.GraphIsomorphismNetwork" title="torchdrug.models.GraphIsomorphismNetwork"><code class="xref py py-class docutils literal notranslate"><span class="pre">GraphIsomorphismNetwork</span></code></a></p>
+<li><p><a class="reference external" href="https://arxiv.org/pdf/1609.02907.pdf">Semi-Supervised Classification with Graph Convolutional Networks</a></p>
+<p>Thomas N. Kipf, Max Welling. ICLR 2017.</p>
+<p><a class="reference internal" href="api/layers.html#torchdrug.layers.GraphConv" title="torchdrug.layers.GraphConv"><code class="xref py py-class docutils literal notranslate"><span class="pre">GraphConv</span></code></a>,
+<a class="reference internal" href="api/models.html#torchdrug.models.GraphConvolutionalNetwork" title="torchdrug.models.GraphConvolutionalNetwork"><code class="xref py py-class docutils literal notranslate"><span class="pre">GraphConvolutionalNetwork</span></code></a></p>
 </li>
 <li><p><a class="reference external" href="https://arxiv.org/pdf/1704.01212.pdf">Neural Message Passing for Quantum Chemistry</a></p>
 <p>Justin Gilmer, Samuel S. Schoenholz, Patrick F. Riley, Oriol Vinyals, George E. Dahl. ICML 2017.</p>
@@ -207,24 +209,38 @@
 <a class="reference internal" href="api/models.html#torchdrug.models.MessagePassingNeuralNetwork" title="torchdrug.models.MessagePassingNeuralNetwork"><code class="xref py py-class docutils literal notranslate"><span class="pre">MessagePassingNeuralNetwork</span></code></a></p>
 </li>
 <li><p><a class="reference external" href="https://aip.scitation.org/doi/pdf/10.1063/1.5019779">SchNet: A continuous-filter convolutional neural network for modeling quantum interactions</a></p>
-<ol class="upperalpha simple" start="11">
-<li><ol class="upperalpha simple" start="20">
-<li><p>Schütt, P.-J. Kindermans, H. E. Sauceda, S. Chmiela, A. Tkatchenko, K.-R. Müller. NeurIPS 2017.</p></li>
-</ol>
-</li>
-</ol>
+<p>Kristof T. Schütt, Pieter-Jan Kindermans, Huziel E. Sauceda, Stefan Chmiela, Alexandre Tkatchenko,
+Klaus-Robert Müller. NeurIPS 2017.</p>
 <p><a class="reference internal" href="api/layers.html#torchdrug.layers.ContinuousFilterConv" title="torchdrug.layers.ContinuousFilterConv"><code class="xref py py-class docutils literal notranslate"><span class="pre">ContinuousFilterConv</span></code></a>,
 <a class="reference internal" href="api/models.html#torchdrug.models.SchNet" title="torchdrug.models.SchNet"><code class="xref py py-class docutils literal notranslate"><span class="pre">SchNet</span></code></a></p>
 </li>
-<li><p><a class="reference external" href="https://papers.nips.cc/paper/5954-convolutional-networks-on-graphs-for-learning-molecular-fingerprints.pdf">Convolutional Networks on Graphs for Learning Molecular Fingerprints</a></p>
-<p>David Duvenaud, Dougal Maclaurin, Jorge Aguilera-Iparraguirre, Rafael Gómez-Bombarelli, Timothy Hirzel, Alán Aspuru-Guzik, Ryan P. Adams. NIPS 2015.</p>
-<p><a class="reference internal" href="api/layers.html#torchdrug.layers.NeuralFingerprintConv" title="torchdrug.layers.NeuralFingerprintConv"><code class="xref py py-class docutils literal notranslate"><span class="pre">NeuralFingerprintConv</span></code></a>,
-<a class="reference internal" href="api/models.html#torchdrug.models.NeuralFingerprint" title="torchdrug.models.NeuralFingerprint"><code class="xref py py-class docutils literal notranslate"><span class="pre">NeuralFingerprint</span></code></a></p>
+<li><p><a class="reference external" href="https://arxiv.org/pdf/1710.10903.pdf">Graph Attention Networks</a></p>
+<p>Petar Veličković, Guillem Cucurull, Arantxa Casanova, Adriana Romero, Pietro Liò, Yoshua Bengio. ICLR 2018.</p>
+<p><a class="reference internal" href="api/layers.html#torchdrug.layers.GraphAttentionConv" title="torchdrug.layers.GraphAttentionConv"><code class="xref py py-class docutils literal notranslate"><span class="pre">GraphAttentionConv</span></code></a>,
+<a class="reference internal" href="api/models.html#torchdrug.models.GraphAttentionNetwork" title="torchdrug.models.GraphAttentionNetwork"><code class="xref py py-class docutils literal notranslate"><span class="pre">GraphAttentionNetwork</span></code></a></p>
 </li>
 <li><p><a class="reference external" href="https://arxiv.org/abs/1703.06103.pdf">Modeling Relational Data with Graph Convolutional Networks</a></p>
 <p>Michael Schlichtkrull, Thomas N. Kipf, Peter Bloem, Rianne van den Berg, Ivan Titov, Max Welling. ESWC 2018.</p>
 <p><a class="reference internal" href="api/layers.html#torchdrug.layers.RelationalGraphConv" title="torchdrug.layers.RelationalGraphConv"><code class="xref py py-class docutils literal notranslate"><span class="pre">RelationalGraphConv</span></code></a>,
 <a class="reference internal" href="api/models.html#torchdrug.models.RelationalGraphConvolutionalNetwork" title="torchdrug.models.RelationalGraphConvolutionalNetwork"><code class="xref py py-class docutils literal notranslate"><span class="pre">RelationalGraphConvolutionalNetwork</span></code></a></p>
+</li>
+<li><p><a class="reference external" href="https://arxiv.org/pdf/1810.00826.pdf">How Powerful Are Graph Neural Nerworks?</a></p>
+<p>Keyulu Xu, Weihua Hu, Jure Leskovec, Stefanie Jegelka. ICLR 2019.</p>
+<p><a class="reference internal" href="api/layers.html#torchdrug.layers.GraphIsomorphismConv" title="torchdrug.layers.GraphIsomorphismConv"><code class="xref py py-class docutils literal notranslate"><span class="pre">GraphIsomorphismConv</span></code></a>,
+<a class="reference internal" href="api/models.html#torchdrug.models.GraphIsomorphismNetwork" title="torchdrug.models.GraphIsomorphismNetwork"><code class="xref py py-class docutils literal notranslate"><span class="pre">GraphIsomorphismNetwork</span></code></a></p>
+</li>
+</ol>
+</div>
+<div class="section" id="differentiable-graph-pooling">
+<h2>Differentiable Graph Pooling<a class="headerlink" href="#differentiable-graph-pooling" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic">
+<li><p><a class="reference external" href="https://papers.nips.cc/paper/2018/file/e77dbaf6759253c7c6d0efc5690369c7-Paper.pdf">Hierarchical Graph Representation Learning with Differentiable Pooling</a></p>
+<p>Rex Ying, Jiaxuan You, Christopher Morris, Xiang Ren, William L. Hamilton, Jure Leskovec. NeurIPS 2018.</p>
+<p><a class="reference internal" href="api/layers.html#torchdrug.layers.DiffPool" title="torchdrug.layers.DiffPool"><code class="xref py py-class docutils literal notranslate"><span class="pre">DiffPool</span></code></a></p>
+</li>
+<li><p><a class="reference external" href="http://proceedings.mlr.press/v119/bianchi20a/bianchi20a.pdf">Spectral Clustering with Graph Neural Networks for Graph Pooling</a></p>
+<p>Filippo Maria Bianchi, Daniele Grattarola, Cesare Alippi. ICML 2020.</p>
+<p><a class="reference internal" href="api/layers.html#torchdrug.layers.MinCutPool" title="torchdrug.layers.MinCutPool"><code class="xref py py-class docutils literal notranslate"><span class="pre">MinCutPool</span></code></a></p>
 </li>
 </ol>
 </div>
@@ -245,17 +261,6 @@
 </div>
 <div class="section" id="de-novo-molecule-design">
 <h2>De Novo Molecule Design<a class="headerlink" href="#de-novo-molecule-design" title="Permalink to this headline">¶</a></h2>
-</div>
-<div class="section" id="retrosynthesis">
-<h2>Retrosynthesis<a class="headerlink" href="#retrosynthesis" title="Permalink to this headline">¶</a></h2>
-<ol class="arabic">
-<li><p><a class="reference external" href="https://arxiv.org/pdf/2003.12725.pdf">A Graph to Graphs Framework for Retrosynthesis Prediction.</a></p>
-<p>Chence Shi, Minkai Xu, Hongyu Guo, Ming Zhang, Jian Tang. ICML 2020.</p>
-</li>
-</ol>
-</div>
-<div class="section" id="graph-generation">
-<h2>Graph Generation<a class="headerlink" href="#graph-generation" title="Permalink to this headline">¶</a></h2>
 <ol class="arabic">
 <li><p><a class="reference external" href="https://papers.nips.cc/paper/7877-graph-convolutional-policy-network-for-goal-directed-molecular-graph-generation.pdf">Graph Convolutional Policy Network for Goal-Directed Molecular Graph Generation.</a></p>
 <p>Jiaxuan You, Bowen Liu, Rex Ying, Vijay Pande, Jure Leskovec. NeurIPS 2018.</p>
@@ -263,7 +268,19 @@
 </li>
 <li><p><a class="reference external" href="https://arxiv.org/pdf/2001.09382.pdf">GraphAF: A Flow-based Autoregressive Model for Molecular Graph Generation.</a></p>
 <p>Chence Shi, Minkai Xu, Zhaocheng Zhu, Weinan Zhang, Ming Zhang, Jian Tang. ICLR 2020.</p>
-<p><a class="reference internal" href="api/tasks.html#torchdrug.tasks.AutoregressiveGeneration" title="torchdrug.tasks.AutoregressiveGeneration"><code class="xref py py-class docutils literal notranslate"><span class="pre">AutoregressiveGeneration</span></code></a></p>
+<p><a class="reference internal" href="api/models.html#torchdrug.models.GraphAutoregressiveFlow" title="torchdrug.models.GraphAutoregressiveFlow"><code class="xref py py-class docutils literal notranslate"><span class="pre">GraphAutoregressiveFlow</span></code></a>,
+<a class="reference internal" href="api/tasks.html#torchdrug.tasks.AutoregressiveGeneration" title="torchdrug.tasks.AutoregressiveGeneration"><code class="xref py py-class docutils literal notranslate"><span class="pre">AutoregressiveGeneration</span></code></a></p>
+</li>
+</ol>
+</div>
+<div class="section" id="retrosynthesis">
+<h2>Retrosynthesis<a class="headerlink" href="#retrosynthesis" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic">
+<li><p><a class="reference external" href="https://arxiv.org/pdf/2003.12725.pdf">A Graph to Graphs Framework for Retrosynthesis Prediction.</a></p>
+<p>Chence Shi, Minkai Xu, Hongyu Guo, Ming Zhang, Jian Tang. ICML 2020.</p>
+<p><a class="reference internal" href="api/tasks.html#torchdrug.tasks.CenterIdentification" title="torchdrug.tasks.CenterIdentification"><code class="xref py py-class docutils literal notranslate"><span class="pre">CenterIdentification</span></code></a>,
+<a class="reference internal" href="api/tasks.html#torchdrug.tasks.SynthonCompletion" title="torchdrug.tasks.SynthonCompletion"><code class="xref py py-class docutils literal notranslate"><span class="pre">SynthonCompletion</span></code></a>,
+<a class="reference internal" href="api/tasks.html#torchdrug.tasks.Retrosynthesis" title="torchdrug.tasks.Retrosynthesis"><code class="xref py py-class docutils literal notranslate"><span class="pre">Retrosynthesis</span></code></a></p>
 </li>
 </ol>
 </div>
@@ -272,31 +289,32 @@
 <ol class="arabic">
 <li><p><a class="reference external" href="http://papers.nips.cc/paper/5071-translating-embeddings-for-modeling-multi-relational-data.pdf">Translating Embeddings for Modeling Multi-relational Data</a></p>
 <p>Antoine Bordes, Nicolas Usunier, Alberto García-Durán. NIPS 2013.</p>
-<p><code class="xref py py-func docutils literal notranslate"><span class="pre">transe_score</span></code>,
+<p><a class="reference internal" href="api/layers.html#torchdrug.layers.functional.transe_score" title="torchdrug.layers.functional.transe_score"><code class="xref py py-func docutils literal notranslate"><span class="pre">transe_score</span></code></a>,
 <a class="reference internal" href="api/models.html#torchdrug.models.DistMult" title="torchdrug.models.DistMult"><code class="xref py py-class docutils literal notranslate"><span class="pre">TransE</span></code></a></p>
 </li>
 <li><p><a class="reference external" href="https://arxiv.org/pdf/1412.6575.pdf">Embedding Entities and Relations for Learning and Inference in Knowledge Bases</a></p>
 <p>Bishan Yang, Wen-tau Yih, Xiaodong He, Jianfeng Gao, Li Deng. ICLR 2015.</p>
-<p><code class="xref py py-func docutils literal notranslate"><span class="pre">distmult_score</span></code>,
+<p><a class="reference internal" href="api/layers.html#torchdrug.layers.functional.distmult_score" title="torchdrug.layers.functional.distmult_score"><code class="xref py py-func docutils literal notranslate"><span class="pre">distmult_score</span></code></a>,
 <a class="reference internal" href="api/models.html#torchdrug.models.DistMult" title="torchdrug.models.DistMult"><code class="xref py py-class docutils literal notranslate"><span class="pre">DistMult</span></code></a></p>
 </li>
 <li><p><a class="reference external" href="http://proceedings.mlr.press/v48/trouillon16.pdf">Complex Embeddings for Simple Link Prediction</a></p>
 <p>Théo Trouillon, Johannes Welbl, Sebastian Riedel, Éric Gaussier, Guillaume Bouchard. ICML 2016.</p>
-<p><code class="xref py py-func docutils literal notranslate"><span class="pre">complex_score</span></code>,
+<p><a class="reference internal" href="api/layers.html#torchdrug.layers.functional.complex_score" title="torchdrug.layers.functional.complex_score"><code class="xref py py-func docutils literal notranslate"><span class="pre">complex_score</span></code></a>,
 <a class="reference internal" href="api/models.html#torchdrug.models.DistMult" title="torchdrug.models.DistMult"><code class="xref py py-class docutils literal notranslate"><span class="pre">ComplEx</span></code></a></p>
-</li>
-<li><p><a class="reference external" href="https://arxiv.org/pdf/1902.10197.pdf">RotatE: Knowledge Graph Embedding by Relational Rotation in Complex Space</a></p>
-<p>Zhiqing Sun, Zhi-Hong Deng, Jian-Yun Nie, Jian Tang. ICLR 2019.</p>
-<p><code class="xref py py-func docutils literal notranslate"><span class="pre">rotate_score</span></code>,
-<a class="reference internal" href="api/models.html#torchdrug.models.RotatE" title="torchdrug.models.RotatE"><code class="xref py py-class docutils literal notranslate"><span class="pre">RotatE</span></code></a></p>
-</li>
-<li><p><a class="reference external" href="https://papers.nips.cc/paper/7682-simple-embedding-for-link-prediction-in-knowledge-graphs.pdf">SimplE Embedding for Link Prediction in Knowledge Graphs</a></p>
-<p>Seyed Mehran Kazemi, David Poole. NeurIPS 2018.</p>
-<p><code class="xref py py-func docutils literal notranslate"><span class="pre">simple_score</span></code>,
-<a class="reference internal" href="api/models.html#torchdrug.models.SimplE" title="torchdrug.models.SimplE"><code class="xref py py-class docutils literal notranslate"><span class="pre">SimplE</span></code></a></p>
 </li>
 <li><p><a class="reference external" href="https://papers.nips.cc/paper/2017/file/0e55666a4ad822e0e34299df3591d979-Paper.pdf">Differentiable Learning of Logical Rules for Knowledge Base Reasoning</a></p>
 <p>Fan Yang, Zhilin Yang, William W. Cohen. NIPS 2017.</p>
+<p><a class="reference internal" href="api/models.html#torchdrug.models.NeuralLogicProgramming" title="torchdrug.models.NeuralLogicProgramming"><code class="xref py py-class docutils literal notranslate"><span class="pre">NeuralLogicProgramming</span></code></a></p>
+</li>
+<li><p><a class="reference external" href="https://papers.nips.cc/paper/7682-simple-embedding-for-link-prediction-in-knowledge-graphs.pdf">SimplE Embedding for Link Prediction in Knowledge Graphs</a></p>
+<p>Seyed Mehran Kazemi, David Poole. NeurIPS 2018.</p>
+<p><a class="reference internal" href="api/layers.html#torchdrug.layers.functional.simple_score" title="torchdrug.layers.functional.simple_score"><code class="xref py py-func docutils literal notranslate"><span class="pre">simple_score</span></code></a>,
+<a class="reference internal" href="api/models.html#torchdrug.models.SimplE" title="torchdrug.models.SimplE"><code class="xref py py-class docutils literal notranslate"><span class="pre">SimplE</span></code></a></p>
+</li>
+<li><p><a class="reference external" href="https://arxiv.org/pdf/1902.10197.pdf">RotatE: Knowledge Graph Embedding by Relational Rotation in Complex Space</a></p>
+<p>Zhiqing Sun, Zhi-Hong Deng, Jian-Yun Nie, Jian Tang. ICLR 2019.</p>
+<p><a class="reference internal" href="api/layers.html#torchdrug.layers.functional.rotate_score" title="torchdrug.layers.functional.rotate_score"><code class="xref py py-func docutils literal notranslate"><span class="pre">rotate_score</span></code></a>,
+<a class="reference internal" href="api/models.html#torchdrug.models.RotatE" title="torchdrug.models.RotatE"><code class="xref py py-class docutils literal notranslate"><span class="pre">RotatE</span></code></a></p>
 </li>
 </ol>
 </div>
@@ -358,10 +376,10 @@
             <ul>
 <li><a class="reference internal" href="#">Papers Implemented</a><ul>
 <li><a class="reference internal" href="#graph-representation-learning">Graph Representation Learning</a></li>
+<li><a class="reference internal" href="#differentiable-graph-pooling">Differentiable Graph Pooling</a></li>
 <li><a class="reference internal" href="#pretrain-molecular-representations">Pretrain Molecular Representations</a></li>
 <li><a class="reference internal" href="#de-novo-molecule-design">De Novo Molecule Design</a></li>
 <li><a class="reference internal" href="#retrosynthesis">Retrosynthesis</a></li>
-<li><a class="reference internal" href="#graph-generation">Graph Generation</a></li>
 <li><a class="reference internal" href="#knowledge-graph-reasoning">Knowledge Graph Reasoning</a></li>
 </ul>
 </li>
@@ -375,9 +393,5 @@
     </aside>
   </main>
 </div>
-    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-    <script src="_static/jquery.js"></script>
-    <script src="_static/underscore.js"></script>
-    <script src="_static/doctools.js"></script>
-    <script src="_static/scripts/main.js?digest=e931d09b2a40c1bb82b542effe772014573baf67"></script></body>
+  </body>
 </html>

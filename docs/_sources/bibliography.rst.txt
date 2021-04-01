@@ -21,6 +21,10 @@
 .. _RGCN: https://arxiv.org/abs/1703.06103.pdf
 .. _ChebNet: https://arxiv.org/pdf/1606.09375.pdf
 
+.. Differentiable graph pooling
+.. _DiffPool: https://papers.nips.cc/paper/2018/file/e77dbaf6759253c7c6d0efc5690369c7-Paper.pdf
+.. _MinCutPool: http://proceedings.mlr.press/v119/bianchi20a/bianchi20a.pdf
+
 .. Molecule property prediction with pre-training
 .. _Edge Prediction: https://arxiv.org/abs/1706.02216
 .. _Deep Graph Infomax: https://arxiv.org/abs/1809.10341

@@ -66,6 +66,16 @@ RelationalGraphConv
 ^^^^^^^^^^^^^^^^^^^
 .. autoclass:: RelationalGraphConv
 
+Pooling Layers
+--------------
+
+DiffPool
+^^^^^^^^
+.. autoclass:: DiffPool
+
+MinCutPool
+^^^^^^^^^^
+.. autoclass:: MinCutPool
 
 Distribution Layers
 -------------------
