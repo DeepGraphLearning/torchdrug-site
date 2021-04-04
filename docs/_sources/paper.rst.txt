@@ -86,9 +86,9 @@ Normalization Layer
 
 1. `PairNorm: Tackling Oversmoothing in GNNs <PairNorm_>`_
 
-    Lingxiao Zhao, Leman Akoglu. ICLR 2020.
+   Lingxiao Zhao, Leman Akoglu. ICLR 2020.
 
-    :class:`PairNorm <torchdrug.layers.PairNorm>`
+   :class:`PairNorm <torchdrug.layers.PairNorm>`
 
 
 Drug Discovery

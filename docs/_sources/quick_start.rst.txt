@@ -59,7 +59,9 @@ utilization of hardware. They can also be transferred between CPUs and GPUs usin
 
 .. code:: python
 
-    mols = data.PackedMolecule.from_smiles(["CCSCCSP(=S)(OC)OC", "CCOC(=O)N", "N(Nc1ccccc1)c2ccccc2", "NC(=O)c1cccnc1"])
+    smiles_list = ["CCSCCSP(=S)(OC)OC", "CCOC(=O)N",
+                   "N(Nc1ccccc1)c2ccccc2", "NC(=O)c1cccnc1"]
+    mols = data.PackedMolecule.from_smiles(smiles_list)
     mols.visualize()
     mols = mols.cuda()
     print(mols)
@@ -68,7 +70,8 @@ utilization of hardware. They can also be transferred between CPUs and GPUs usin
 
 .. code:: bash
 
-    PackedMolecule(batch_size=4, num_nodes=[12, 6, 14, 9], num_edges=[22, 10, 30, 18], device='cuda:0')
+    PackedMolecule(batch_size=4, num_nodes=[12, 6, 14, 9], num_edges=[22, 10, 30, 18],
+                   device='cuda:0')
 
 Just like original PyTorch tensors, graphs support a wide range of indexing
 operations. Typical usages include applying node masking, edge masking or graph
@@ -80,7 +83,8 @@ carbon. For more graph operations, please see the `notes`_.
 .. code:: python
 
     node_in, node_out, bond_type = mols.edge_list.t()
-    edge_mask = (mols.atom_type[node_in] == td.CARBON) | (mols.atom_type[node_out] == td.CARBON)
+    edge_mask = (mols.atom_type[node_in] == td.CARBON) | \
+                (mols.atom_type[node_out] == td.CARBON)
     mols = mols.edge_mask(edge_mask)
     mols.visualize()
 
@@ -127,7 +131,8 @@ use the a `Graph Isomorphism Network (GIN) <GIN_>`_ with 4 hidden layers.
 
     from drugdiscovery import core, models, tasks
 
-    model = models.GIN(input_dim=dataset.node_feature_dim, hidden_dims=[256, 256, 256, 256],
+    model = models.GIN(input_dim=dataset.node_feature_dim,
+                       hidden_dims=[256, 256, 256, 256],
                        short_cut=True, batch_norm=True, concat_hidden=True)
 
 Note the model is simply a neural network without any training target. To adapt it
@@ -149,22 +154,24 @@ routines for training and test.
 .. code:: python
 
     optimizer = torch.optim.Adam(task.parameters(), lr=1e-3)
-    solver = core.Engine(task, train_set, valid_set, test_set, optimizer, batch_size=1024)
+    solver = core.Engine(task, train_set, valid_set, test_set, optimizer,
+                         batch_size=1024)
     solver.train(num_epoch=100)
 
 If we have any GPU, we can specify it in the engine to accelerate training.
 
 .. code:: python
 
-    solver = core.Engine(task, train_set, valid_set, test_set, optimizer, batch_size=1024, gpus=[0])
+    solver = core.Engine(task, train_set, valid_set, test_set, optimizer,
+                         batch_size=1024, gpus=[0])
 
 More acceleration can be achieved by multiple GPUs. In this case, we need to launch
 the script using ``python -m torch.distributed.launch --nproc_per_node=4``.
 
 .. code:: python
 
-    solver = core.Engine(task, train_set, valid_set, test_set, optimizer, batch_size=256,
-                         gpus=[0, 1, 2, 3])
+    solver = core.Engine(task, train_set, valid_set, test_set, optimizer,
+                         batch_size=256, gpus=[0, 1, 2, 3])
 
 Test the Model
 --------------
@@ -199,8 +206,8 @@ the trained weights.
     solver.save("clintox_gin.pth")
 
 To load a pretrained model, we don't bother to define the model again. Use
-``core.Configurable.load_config_dict`` and TorchDrug will automatically parse the
-model from the hyperparameters.
+:class:`core.Configurable.load_config_dict <torchdrug.core.Configurable>`
+and TorchDrug will automatically parse the model from the hyperparameters.
 
 .. code:: python
 

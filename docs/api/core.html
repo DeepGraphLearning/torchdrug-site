@@ -311,7 +311,7 @@ where keys are member names and values are meta types.</p>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">assert</span> <span class="n">instance</span><span class="o">.</span><span class="n">meta_dict</span><span class="p">[</span><span class="s2">"value"</span><span class="p">]</span> <span class="o">==</span> <span class="s2">"important"</span>
 </pre></div>
 </div>
-<p>Members assigned with <code class="xref py py-meth docutils literal notranslate"><span class="pre">context(None)</span></code> or without a context won’t be traked.</p>
+<p>Members assigned with <code class="xref py py-meth docutils literal notranslate"><span class="pre">context(None)</span></code> or without a context won’t be tracked.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">instance</span><span class="o">.</span><span class="n">random</span> <span class="o">=</span> <span class="mi">0</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">assert</span> <span class="s2">"random"</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">instance</span><span class="o">.</span><span class="n">meta_dict</span>
 </pre></div>

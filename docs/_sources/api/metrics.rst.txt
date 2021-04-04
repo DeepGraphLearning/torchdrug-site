@@ -10,14 +10,17 @@ Basic Metrics
 AUROC
 ^^^^^
 .. autofunction:: area_under_roc
-.. autofunction:: AUROC
+.. function:: AUROC
+
+    ailas of ``torchdrug.metrics.area_under_roc``
 
 
 AUPRC
 ^^^^^
 .. autofunction:: area_under_prc
-.. autofunction:: AUPRC
+.. function:: AUPRC
 
+    alias of ``torchdrug.metrics.area_under_prc``
 
 R2
 ^^
