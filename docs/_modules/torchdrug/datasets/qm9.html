@@ -167,6 +167,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../../../api/layers.html">torchdrug.layers</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../api/models.html">torchdrug.models</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../api/tasks.html">torchdrug.tasks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api/utils.html">torchdrug.utils</a></li>
 </ul>
 </li>
 </ul>
@@ -247,8 +248,8 @@
                 <span class="n">mol</span> <span class="o">=</span> <span class="n">molecules</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
             <span class="k">if</span> <span class="n">mol</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
                 <span class="k">continue</span>
-            <span class="k">if</span> <span class="n">log</span><span class="o">.</span><span class="n">result</span><span class="p">:</span>
-                <span class="nb">print</span><span class="p">(</span><span class="n">log</span><span class="o">.</span><span class="n">result</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">log</span><span class="o">.</span><span class="n">content</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="n">log</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
             <span class="n">d</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">Molecule</span><span class="o">.</span><span class="n">from_molecule</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">node_position</span><span class="p">:</span>
                 <span class="k">with</span> <span class="n">d</span><span class="o">.</span><span class="n">node</span><span class="p">():</span>

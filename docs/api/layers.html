@@ -167,6 +167,7 @@
 <li class="toctree-l2 current current-page"><a class="current reference internal" href="#">torchdrug.layers</a></li>
 <li class="toctree-l2"><a class="reference internal" href="models.html">torchdrug.models</a></li>
 <li class="toctree-l2"><a class="reference internal" href="tasks.html">torchdrug.tasks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils.html">torchdrug.utils</a></li>
 </ul>
 </li>
 </ul>
@@ -256,7 +257,13 @@
 <dl class="py class">
 <dt id="torchdrug.layers.PairNorm">
 <em class="property">class </em><code class="sig-name descname">PairNorm</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">scale_individual</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/common.html#PairNorm"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.layers.PairNorm" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Pair normalization layer proposed in <a class="reference external" href="https://openreview.net/pdf?id=rkecl1rtwB">PairNorm: Tackling Oversmoothing in GNNs</a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>scale_individual</strong> (<em>bool</em><em>, </em><em>optional</em>) – additionally normalize each node representation to have the same L2-norm</p>
+</dd>
+</dl>
+</dd></dl>
 </div>
 <div class="section" id="sequential">
 <h3>Sequential<a class="headerlink" href="#sequential" title="Permalink to this headline">¶</a></h3>
@@ -278,7 +285,7 @@ Modules will be called in the order they are passed to the constructor.</p>
 <li><p>Global arguments.</p></li>
 </ol>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># layer1 signature: (graph, a) -&gt; b</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="c1"># layer3 signature: (graph, b) -&gt; c</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># layer2 signature: (graph, b) -&gt; c</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">layer</span> <span class="o">=</span> <span class="n">layers</span><span class="o">.</span><span class="n">Sequential</span><span class="p">(</span><span class="n">layer1</span><span class="p">,</span> <span class="n">layer2</span><span class="p">,</span> <span class="n">global_args</span><span class="o">=</span><span class="p">(</span><span class="s2">"graph"</span><span class="p">,))</span>
 </pre></div>
 </div>
@@ -407,7 +414,7 @@ This also corresponds to the radius of the receptive field.</p></li>
 <dl class="py class">
 <dt id="torchdrug.layers.GraphIsomorphismConv">
 <em class="property">class </em><code class="sig-name descname">GraphIsomorphismConv</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">input_dim</span></em>, <em class="sig-param"><span class="n">output_dim</span></em>, <em class="sig-param"><span class="n">edge_input_dim</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">hidden_dims</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">eps</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">learn_eps</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">batch_norm</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">activation</span><span class="o">=</span><span class="default_value">'relu'</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/conv.html#GraphIsomorphismConv"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.layers.GraphIsomorphismConv" title="Permalink to this definition">¶</a></dt>
-<dd><p>Graph isomorphism convolution operator from <a class="reference external" href="https://arxiv.org/pdf/1810.00826.pdf">How Powerful are Graph Neural Networks?</a>.</p>
+<dd><p>Graph isomorphism convolution operator from <a class="reference external" href="https://arxiv.org/pdf/1810.00826.pdf">How Powerful are Graph Neural Networks?</a></p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -469,7 +476,7 @@ This also corresponds to the radius of the receptive field.</p></li>
 <dl class="py class">
 <dt id="torchdrug.layers.RelationalGraphConv">
 <em class="property">class </em><code class="sig-name descname">RelationalGraphConv</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">input_dim</span></em>, <em class="sig-param"><span class="n">output_dim</span></em>, <em class="sig-param"><span class="n">num_relation</span></em>, <em class="sig-param"><span class="n">edge_input_dim</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">batch_norm</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">activation</span><span class="o">=</span><span class="default_value">'relu'</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/conv.html#RelationalGraphConv"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.layers.RelationalGraphConv" title="Permalink to this definition">¶</a></dt>
-<dd><p>Relational graph convolution operator from <a class="reference external" href="https://arxiv.org/pdf/1703.06103.pdf">Modeling Relational Data with Graph Convolutional Networks?</a>.</p>
+<dd><p>Relational graph convolution operator from <a class="reference external" href="https://arxiv.org/pdf/1703.06103.pdf">Modeling Relational Data with Graph Convolutional Networks</a>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -479,6 +486,58 @@ This also corresponds to the radius of the receptive field.</p></li>
 <li><p><strong>edge_input_dim</strong> (<em>int</em><em>, </em><em>optional</em>) – dimension of edge features</p></li>
 <li><p><strong>batch_norm</strong> (<em>bool</em><em>, </em><em>optional</em>) – apply batch normalization on nodes or not</p></li>
 <li><p><strong>activation</strong> (<em>str</em><em> or </em><em>function</em><em>, </em><em>optional</em>) – activation function</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+</div>
+</div>
+<div class="section" id="readout-layers">
+<h2>Readout Layers<a class="headerlink" href="#readout-layers" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="meanreadout">
+<h3>MeanReadout<a class="headerlink" href="#meanreadout" title="Permalink to this headline">¶</a></h3>
+<dl class="py class">
+<dt id="torchdrug.layers.MeanReadout">
+<em class="property">class </em><code class="sig-name descname">MeanReadout</code><a class="reference internal" href="../_modules/torchdrug/layers/readout.html#MeanReadout"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.layers.MeanReadout" title="Permalink to this definition">¶</a></dt>
+<dd><p>Mean readout operator over graphs with variadic sizes.</p>
+</dd></dl>
+</div>
+<div class="section" id="sumreadout">
+<h3>SumReadout<a class="headerlink" href="#sumreadout" title="Permalink to this headline">¶</a></h3>
+<dl class="py class">
+<dt id="torchdrug.layers.SumReadout">
+<em class="property">class </em><code class="sig-name descname">SumReadout</code><a class="reference internal" href="../_modules/torchdrug/layers/readout.html#SumReadout"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.layers.SumReadout" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sum readout operator over graphs with variadic sizes.</p>
+</dd></dl>
+</div>
+<div class="section" id="maxreadout">
+<h3>MaxReadout<a class="headerlink" href="#maxreadout" title="Permalink to this headline">¶</a></h3>
+<dl class="py class">
+<dt id="torchdrug.layers.MaxReadout">
+<em class="property">class </em><code class="sig-name descname">MaxReadout</code><a class="reference internal" href="../_modules/torchdrug/layers/readout.html#MaxReadout"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.layers.MaxReadout" title="Permalink to this definition">¶</a></dt>
+<dd><p>Max readout operator over graphs with variadic sizes.</p>
+</dd></dl>
+</div>
+<div class="section" id="softmax">
+<h3>Softmax<a class="headerlink" href="#softmax" title="Permalink to this headline">¶</a></h3>
+<dl class="py class">
+<dt id="torchdrug.layers.Softmax">
+<em class="property">class </em><code class="sig-name descname">Softmax</code><a class="reference internal" href="../_modules/torchdrug/layers/readout.html#Softmax"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.layers.Softmax" title="Permalink to this definition">¶</a></dt>
+<dd><p>Softmax operator over graphs with variadic sizes.</p>
+</dd></dl>
+</div>
+<div class="section" id="set2set">
+<h3>Set2Set<a class="headerlink" href="#set2set" title="Permalink to this headline">¶</a></h3>
+<dl class="py class">
+<dt id="torchdrug.layers.Set2Set">
+<em class="property">class </em><code class="sig-name descname">Set2Set</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">input_dim</span></em>, <em class="sig-param"><span class="n">num_step</span><span class="o">=</span><span class="default_value">3</span></em>, <em class="sig-param"><span class="n">num_lstm_layer</span><span class="o">=</span><span class="default_value">1</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/readout.html#Set2Set"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.layers.Set2Set" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set2Set operator from <cite>Order Matters: Sequence to sequence for sets</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input_dim</strong> (<em>int</em>) – input dimension</p></li>
+<li><p><strong>num_step</strong> (<em>int</em><em>, </em><em>optional</em>) – number of process steps</p></li>
+<li><p><strong>num_lstm_layer</strong> (<em>int</em><em>, </em><em>optional</em>) – number of LSTM layers</p></li>
 </ul>
 </dd>
 </dl>
@@ -513,7 +572,21 @@ This also corresponds to the radius of the receptive field.</p></li>
 <dl class="py class">
 <dt id="torchdrug.layers.MinCutPool">
 <em class="property">class </em><code class="sig-name descname">MinCutPool</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">input_dim</span></em>, <em class="sig-param"><span class="n">output_node</span></em>, <em class="sig-param"><span class="n">feature_layer</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">pool_layer</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">loss_weight</span><span class="o">=</span><span class="default_value">1</span></em>, <em class="sig-param"><span class="n">zero_diagonal</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">sparse</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/pool.html#MinCutPool"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.layers.MinCutPool" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Min cut pooling operator from <a class="reference external" href="http://proceedings.mlr.press/v119/bianchi20a/bianchi20a.pdf">Spectral Clustering with Graph Neural Networks for Graph Pooling</a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input_dim</strong> (<em>int</em>) – input dimension</p></li>
+<li><p><strong>output_node</strong> (<em>int</em>) – number of nodes after pooling</p></li>
+<li><p><strong>feature_layer</strong> (<em>Module</em><em>, </em><em>optional</em>) – graph convolution layer for embedding</p></li>
+<li><p><strong>pool_layer</strong> (<em>Module</em><em>, </em><em>optional</em>) – graph convolution layer for pooling assignment</p></li>
+<li><p><strong>loss_weight</strong> (<em>float</em><em>, </em><em>optional</em>) – weight of entropy regularization</p></li>
+<li><p><strong>zero_diagonal</strong> (<em>bool</em><em>, </em><em>optional</em>) – remove self loops in the pooled graph or not</p></li>
+<li><p><strong>sparse</strong> (<em>bool</em><em>, </em><em>optional</em>) – use sparse assignment or not</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
 </div>
 </div>
 <div class="section" id="module-torchdrug.layers.distribution">
@@ -538,6 +611,16 @@ This also corresponds to the radius of the receptive field.</p></li>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>input</strong> (<em>Tensor</em>) – input data of shape <span class="math notranslate nohighlight">\((..., N)\)</span></p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt id="torchdrug.layers.distribution.IndependentGaussian.sample">
+<code class="sig-name descname">sample</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">size</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/distribution.html#IndependentGaussian.sample"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.layers.distribution.IndependentGaussian.sample" title="Permalink to this definition">¶</a></dt>
+<dd><p>Draw samples from the distribution.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>size</strong> (<em>tuple of int</em>) – shape of the samples</p>
 </dd>
 </dl>
 </dd></dl>
@@ -893,6 +976,14 @@ repeated to pad the output to <span class="math notranslate nohighlight">\(k\)</
 <li><a class="reference internal" href="#messagepassing">MessagePassing</a></li>
 <li><a class="reference internal" href="#neuralfingerprintconv">NeuralFingerprintConv</a></li>
 <li><a class="reference internal" href="#relationalgraphconv">RelationalGraphConv</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#readout-layers">Readout Layers</a><ul>
+<li><a class="reference internal" href="#meanreadout">MeanReadout</a></li>
+<li><a class="reference internal" href="#sumreadout">SumReadout</a></li>
+<li><a class="reference internal" href="#maxreadout">MaxReadout</a></li>
+<li><a class="reference internal" href="#softmax">Softmax</a></li>
+<li><a class="reference internal" href="#set2set">Set2Set</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#pooling-layers">Pooling Layers</a><ul>

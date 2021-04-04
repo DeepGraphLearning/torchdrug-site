@@ -167,6 +167,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../../../../api/layers.html">torchdrug.layers</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../../api/models.html">torchdrug.models</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../../api/tasks.html">torchdrug.tasks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../api/utils.html">torchdrug.utils</a></li>
 </ul>
 </li>
 </ul>
@@ -195,13 +196,12 @@
 
 <span class="n">path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">),</span> <span class="s2">"extension"</span><span class="p">)</span>
 
-<span class="k">try</span><span class="p">:</span>
+
+<span class="k">if</span> <span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">is_available</span><span class="p">():</span>
     <span class="n">embedding</span> <span class="o">=</span> <span class="n">utils</span><span class="o">.</span><span class="n">load_extension</span><span class="p">(</span><span class="s2">"embedding"</span><span class="p">,</span>
                                      <span class="p">[</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="s2">"embedding.cpp"</span><span class="p">),</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="s2">"embedding.cu"</span><span class="p">)],</span>
                                      <span class="n">extra_cflags</span><span class="o">=</span><span class="p">[</span><span class="s2">"-g"</span><span class="p">,</span> <span class="s2">"-Ofast"</span><span class="p">,</span> <span class="s2">"-fopenmp"</span><span class="p">,</span> <span class="s2">"-DCUDA_OP"</span><span class="p">],</span> <span class="n">extra_cuda_cflags</span><span class="o">=</span><span class="p">[</span><span class="s2">"-O3"</span><span class="p">])</span>
-<span class="k">except</span> <span class="ne">BaseException</span> <span class="k">as</span> <span class="n">err</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">err</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">"Fail to compile with CUDA. Compile CPU-only instead."</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
     <span class="n">embedding</span> <span class="o">=</span> <span class="n">utils</span><span class="o">.</span><span class="n">load_extension</span><span class="p">(</span><span class="s2">"score"</span><span class="p">,</span> <span class="p">[</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="s2">"embedding.cpp"</span><span class="p">)],</span>
                                      <span class="n">extra_cflags</span><span class="o">=</span><span class="p">[</span><span class="s2">"-g"</span><span class="p">,</span> <span class="s2">"-Ofast"</span><span class="p">])</span>
 

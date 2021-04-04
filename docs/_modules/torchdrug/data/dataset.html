@@ -167,6 +167,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../../../api/layers.html">torchdrug.layers</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../api/models.html">torchdrug.models</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../api/tasks.html">torchdrug.tasks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api/utils.html">torchdrug.utils</a></li>
 </ul>
 </li>
 </ul>
@@ -219,7 +220,8 @@
 <span class="sd">            smiles_list (list of str): SMILES string</span>
 <span class="sd">            targets (dict of list): prediction targets</span>
 <span class="sd">            transform (Callable, optional): data transformation function</span>
-<span class="sd">            lazy (bool, optional):</span>
+<span class="sd">            lazy (bool, optional): if lazy mode is used, the molecules are processed on-the-fly.</span>
+<span class="sd">                This may slow down the data loading process, but save a lot of CPU memory.</span>
 <span class="sd">            verbose (int, optional): output verbose level</span>
 <span class="sd">            **kwargs</span>
 <span class="sd">        """</span>
@@ -447,11 +449,6 @@
 
     <span class="k">def</span> <span class="fm">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">)</span></div>
-
-
-<span class="k">class</span> <span class="nc">GraphDataset</span><span class="p">(</span><span class="n">torch_data</span><span class="o">.</span><span class="n">Dataset</span><span class="p">,</span> <span class="n">core</span><span class="o">.</span><span class="n">Configurable</span><span class="p">):</span>
-    <span class="c1"># reserved for drug repurposing / combination</span>
-    <span class="k">pass</span>
 
 
 <div class="viewcode-block" id="NodeClassificationDataset"><a class="viewcode-back" href="../../../api/data.html#torchdrug.data.NodeClassificationDataset">[docs]</a><span class="k">class</span> <span class="nc">NodeClassificationDataset</span><span class="p">(</span><span class="n">torch_data</span><span class="o">.</span><span class="n">Dataset</span><span class="p">,</span> <span class="n">core</span><span class="o">.</span><span class="n">Configurable</span><span class="p">):</span>

@@ -4,9 +4,8 @@ torchdrug.metrics
 .. currentmodule:: torchdrug.metrics
 
 
-Classification and Regression Metrics
--------------------------------------
-
+Basic Metrics
+-------------
 
 AUROC
 ^^^^^
@@ -29,10 +28,8 @@ Variadic Accuracy
 .. autofunction:: variadic_accuracy
 
 
-
-
-Molecular Property Metrics
---------------------------
+Chemical Metrics
+----------------
 
 SA
 ^^

@@ -167,6 +167,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../../../api/layers.html">torchdrug.layers</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../api/models.html">torchdrug.models</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../api/tasks.html">torchdrug.tasks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api/utils.html">torchdrug.utils</a></li>
 </ul>
 </li>
 </ul>
@@ -301,6 +302,15 @@
 
 
 <div class="viewcode-block" id="PairNorm"><a class="viewcode-back" href="../../../api/layers.html#torchdrug.layers.PairNorm">[docs]</a><span class="k">class</span> <span class="nc">PairNorm</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="sd">"""</span>
+<span class="sd">    Pair normalization layer proposed in `PairNorm: Tackling Oversmoothing in GNNs`_.</span>
+
+<span class="sd">    .. _PairNorm\: Tackling Oversmoothing in GNNs:</span>
+<span class="sd">        https://openreview.net/pdf?id=rkecl1rtwB</span>
+
+<span class="sd">    Parameters:</span>
+<span class="sd">        scale_individual (bool, optional): additionally normalize each node representation to have the same L2-norm</span>
+<span class="sd">    """</span>
 
     <span class="n">eps</span> <span class="o">=</span> <span class="mf">1e-8</span>
 
@@ -375,7 +385,7 @@
 <span class="sd">    2. Global arguments.</span>
 
 <span class="sd">    &gt;&gt;&gt; # layer1 signature: (graph, a) -&gt; b</span>
-<span class="sd">    &gt;&gt;&gt; # layer3 signature: (graph, b) -&gt; c</span>
+<span class="sd">    &gt;&gt;&gt; # layer2 signature: (graph, b) -&gt; c</span>
 <span class="sd">    &gt;&gt;&gt; layer = layers.Sequential(layer1, layer2, global_args=("graph",))</span>
 
 <span class="sd">    Note the global arguments don't need to be present in every layer.</span>

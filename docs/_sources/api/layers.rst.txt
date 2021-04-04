@@ -66,6 +66,31 @@ RelationalGraphConv
 ^^^^^^^^^^^^^^^^^^^
 .. autoclass:: RelationalGraphConv
 
+
+Readout Layers
+--------------
+
+MeanReadout
+^^^^^^^^^^^
+.. autoclass:: MeanReadout
+
+SumReadout
+^^^^^^^^^^
+.. autoclass:: SumReadout
+
+MaxReadout
+^^^^^^^^^^
+.. autoclass:: MaxReadout
+
+Softmax
+^^^^^^^
+.. autoclass:: Softmax
+
+Set2Set
+^^^^^^^
+.. autoclass:: Set2Set
+
+
 Pooling Layers
 --------------
 
@@ -76,6 +101,7 @@ DiffPool
 MinCutPool
 ^^^^^^^^^^
 .. autoclass:: MinCutPool
+
 
 Distribution Layers
 -------------------

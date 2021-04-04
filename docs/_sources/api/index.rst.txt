@@ -10,3 +10,4 @@ Documentation
     layers
     models
     tasks
+    utils
