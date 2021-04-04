@@ -135,7 +135,7 @@
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../../benchmark/index.html">Benchmark</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label for="toctree-checkbox-1"><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../../benchmark/property_prediction.html">Molecule Property Prediction</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../benchmark/pretrain.html">Pretrained Molecular Representations</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../benchmark/generation.html">Graph Generation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../benchmark/generation.html">Molecule Generation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../benchmark/retrosynthesis.html">Retrosynthesis</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../benchmark/reasoning.html">Knowledge Graph Reasoning</a></li>
 </ul>
@@ -220,10 +220,20 @@
         <span class="n">nn</span><span class="o">.</span><span class="n">init</span><span class="o">.</span><span class="n">uniform_</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">entity</span><span class="p">,</span> <span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">max_score</span> <span class="o">/</span> <span class="n">embedding_dim</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_score</span> <span class="o">/</span> <span class="n">embedding_dim</span><span class="p">)</span>
         <span class="n">nn</span><span class="o">.</span><span class="n">init</span><span class="o">.</span><span class="n">uniform_</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">relation</span><span class="p">,</span> <span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">max_score</span> <span class="o">/</span> <span class="n">embedding_dim</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_score</span> <span class="o">/</span> <span class="n">embedding_dim</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">graph</span><span class="p">,</span> <span class="n">h_index</span><span class="p">,</span> <span class="n">t_index</span><span class="p">,</span> <span class="n">r_index</span><span class="p">,</span> <span class="n">all_loss</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">metric</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">""""""</span>
+<div class="viewcode-block" id="TransE.forward"><a class="viewcode-back" href="../../../api/models.html#torchdrug.models.TransE.forward">[docs]</a>    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">graph</span><span class="p">,</span> <span class="n">h_index</span><span class="p">,</span> <span class="n">t_index</span><span class="p">,</span> <span class="n">r_index</span><span class="p">,</span> <span class="n">all_loss</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">metric</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">"""</span>
+<span class="sd">        Compute the score for each triplet.</span>
+
+<span class="sd">        Parameters:</span>
+<span class="sd">            graph (Tensor): fact graph</span>
+<span class="sd">            h_index (Tensor): indexes of head entities</span>
+<span class="sd">            t_index (Tensor): indexes of tail entities</span>
+<span class="sd">            r_index (Tensor): indexes of relations</span>
+<span class="sd">            all_loss (Tensor, optional): if specified, add loss to this tensor</span>
+<span class="sd">            metric (dict, optional): if specified, output metrics to this dict</span>
+<span class="sd">        """</span>
         <span class="n">score</span> <span class="o">=</span> <span class="n">functional</span><span class="o">.</span><span class="n">transe_score</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">entity</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">relation</span><span class="p">,</span> <span class="n">h_index</span><span class="p">,</span> <span class="n">t_index</span><span class="p">,</span> <span class="n">r_index</span><span class="p">)</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_score</span> <span class="o">-</span> <span class="n">score</span></div>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_score</span> <span class="o">-</span> <span class="n">score</span></div></div>
 
 
 <div class="viewcode-block" id="DistMult"><a class="viewcode-back" href="../../../api/models.html#torchdrug.models.DistMult">[docs]</a><span class="nd">@R</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="s2">"models.DistMult"</span><span class="p">)</span>
@@ -253,8 +263,18 @@
         <span class="n">nn</span><span class="o">.</span><span class="n">init</span><span class="o">.</span><span class="n">uniform_</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">entity</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">)</span>
         <span class="n">nn</span><span class="o">.</span><span class="n">init</span><span class="o">.</span><span class="n">uniform_</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">relation</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">graph</span><span class="p">,</span> <span class="n">h_index</span><span class="p">,</span> <span class="n">t_index</span><span class="p">,</span> <span class="n">r_index</span><span class="p">,</span> <span class="n">all_loss</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">metric</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">""""""</span>
+<div class="viewcode-block" id="DistMult.forward"><a class="viewcode-back" href="../../../api/models.html#torchdrug.models.DistMult.forward">[docs]</a>    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">graph</span><span class="p">,</span> <span class="n">h_index</span><span class="p">,</span> <span class="n">t_index</span><span class="p">,</span> <span class="n">r_index</span><span class="p">,</span> <span class="n">all_loss</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">metric</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">"""</span>
+<span class="sd">        Compute the score for each triplet.</span>
+
+<span class="sd">        Parameters:</span>
+<span class="sd">            graph (Tensor): fact graph</span>
+<span class="sd">            h_index (Tensor): indexes of head entities</span>
+<span class="sd">            t_index (Tensor): indexes of tail entities</span>
+<span class="sd">            r_index (Tensor): indexes of relations</span>
+<span class="sd">            all_loss (Tensor, optional): if specified, add loss to this tensor</span>
+<span class="sd">            metric (dict, optional): if specified, output metrics to this dict</span>
+<span class="sd">        """</span>
         <span class="n">score</span> <span class="o">=</span> <span class="n">functional</span><span class="o">.</span><span class="n">distmult_score</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">entity</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">relation</span><span class="p">,</span> <span class="n">h_index</span><span class="p">,</span> <span class="n">t_index</span><span class="p">,</span> <span class="n">r_index</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="n">all_loss</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">l3_regularization</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
@@ -262,7 +282,7 @@
             <span class="n">all_loss</span> <span class="o">+=</span> <span class="n">loss</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">l3_regularization</span>
             <span class="n">metric</span><span class="p">[</span><span class="s2">"l3 regularization"</span><span class="p">]</span> <span class="o">=</span> <span class="n">loss</span> <span class="o">/</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">num_entity</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_relation</span><span class="p">)</span>
 
-        <span class="k">return</span> <span class="n">score</span></div>
+        <span class="k">return</span> <span class="n">score</span></div></div>
 
 
 <div class="viewcode-block" id="ComplEx"><a class="viewcode-back" href="../../../api/models.html#torchdrug.models.ComplEx">[docs]</a><span class="nd">@R</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="s2">"models.ComplEx"</span><span class="p">)</span>
@@ -292,8 +312,18 @@
         <span class="n">nn</span><span class="o">.</span><span class="n">init</span><span class="o">.</span><span class="n">uniform_</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">entity</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">)</span>
         <span class="n">nn</span><span class="o">.</span><span class="n">init</span><span class="o">.</span><span class="n">uniform_</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">relation</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">graph</span><span class="p">,</span> <span class="n">h_index</span><span class="p">,</span> <span class="n">t_index</span><span class="p">,</span> <span class="n">r_index</span><span class="p">,</span> <span class="n">all_loss</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">metric</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">""""""</span>
+<div class="viewcode-block" id="ComplEx.forward"><a class="viewcode-back" href="../../../api/models.html#torchdrug.models.ComplEx.forward">[docs]</a>    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">graph</span><span class="p">,</span> <span class="n">h_index</span><span class="p">,</span> <span class="n">t_index</span><span class="p">,</span> <span class="n">r_index</span><span class="p">,</span> <span class="n">all_loss</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">metric</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">"""</span>
+<span class="sd">        Compute the score for triplets.</span>
+
+<span class="sd">        Parameters:</span>
+<span class="sd">            graph (Tensor): fact graph</span>
+<span class="sd">            h_index (Tensor): indexes of head entities</span>
+<span class="sd">            t_index (Tensor): indexes of tail entities</span>
+<span class="sd">            r_index (Tensor): indexes of relations</span>
+<span class="sd">            all_loss (Tensor, optional): if specified, add loss to this tensor</span>
+<span class="sd">            metric (dict, optional): if specified, output metrics to this dict</span>
+<span class="sd">        """</span>
         <span class="n">score</span> <span class="o">=</span> <span class="n">functional</span><span class="o">.</span><span class="n">complex_score</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">entity</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">relation</span><span class="p">,</span> <span class="n">h_index</span><span class="p">,</span> <span class="n">t_index</span><span class="p">,</span> <span class="n">r_index</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="n">all_loss</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">l3_regularization</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
@@ -301,7 +331,7 @@
             <span class="n">all_loss</span> <span class="o">+=</span> <span class="n">loss</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">l3_regularization</span>
             <span class="n">metric</span><span class="p">[</span><span class="s2">"l3 regularization"</span><span class="p">]</span> <span class="o">=</span> <span class="n">loss</span> <span class="o">/</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">num_entity</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_relation</span><span class="p">)</span>
 
-        <span class="k">return</span> <span class="n">score</span></div>
+        <span class="k">return</span> <span class="n">score</span></div></div>
 
 
 <div class="viewcode-block" id="RotatE"><a class="viewcode-back" href="../../../api/models.html#torchdrug.models.RotatE">[docs]</a><span class="nd">@R</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="s2">"models.RotatE"</span><span class="p">)</span>
@@ -333,11 +363,21 @@
         <span class="n">pi</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">acos</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span><span class="o">.</span><span class="n">item</span><span class="p">()</span> <span class="o">*</span> <span class="mi">2</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">relation_scale</span> <span class="o">=</span> <span class="n">pi</span> <span class="o">*</span> <span class="n">embedding_dim</span> <span class="o">/</span> <span class="n">max_score</span> <span class="o">/</span> <span class="mi">2</span>
 
-    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">graph</span><span class="p">,</span> <span class="n">h_index</span><span class="p">,</span> <span class="n">t_index</span><span class="p">,</span> <span class="n">r_index</span><span class="p">,</span> <span class="n">all_loss</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">metric</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">""""""</span>
+<div class="viewcode-block" id="RotatE.forward"><a class="viewcode-back" href="../../../api/models.html#torchdrug.models.RotatE.forward">[docs]</a>    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">graph</span><span class="p">,</span> <span class="n">h_index</span><span class="p">,</span> <span class="n">t_index</span><span class="p">,</span> <span class="n">r_index</span><span class="p">,</span> <span class="n">all_loss</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">metric</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">"""</span>
+<span class="sd">        Compute the score for each triplet.</span>
+
+<span class="sd">        Parameters:</span>
+<span class="sd">            graph (Tensor): fact graph</span>
+<span class="sd">            h_index (Tensor): indexes of head entities</span>
+<span class="sd">            t_index (Tensor): indexes of tail entities</span>
+<span class="sd">            r_index (Tensor): indexes of relations</span>
+<span class="sd">            all_loss (Tensor, optional): if specified, add loss to this tensor</span>
+<span class="sd">            metric (dict, optional): if specified, output metrics to this dict</span>
+<span class="sd">        """</span>
         <span class="n">score</span> <span class="o">=</span> <span class="n">functional</span><span class="o">.</span><span class="n">rotate_score</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">entity</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">relation</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">relation_scale</span><span class="p">,</span>
                                         <span class="n">h_index</span><span class="p">,</span> <span class="n">t_index</span><span class="p">,</span> <span class="n">r_index</span><span class="p">)</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_score</span> <span class="o">-</span> <span class="n">score</span></div>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_score</span> <span class="o">-</span> <span class="n">score</span></div></div>
 
 
 <div class="viewcode-block" id="SimplE"><a class="viewcode-back" href="../../../api/models.html#torchdrug.models.SimplE">[docs]</a><span class="nd">@R</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="s2">"models.SimplE"</span><span class="p">)</span>
@@ -367,8 +407,18 @@
         <span class="n">nn</span><span class="o">.</span><span class="n">init</span><span class="o">.</span><span class="n">uniform_</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">entity</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">)</span>
         <span class="n">nn</span><span class="o">.</span><span class="n">init</span><span class="o">.</span><span class="n">uniform_</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">relation</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">graph</span><span class="p">,</span> <span class="n">h_index</span><span class="p">,</span> <span class="n">t_index</span><span class="p">,</span> <span class="n">r_index</span><span class="p">,</span> <span class="n">all_loss</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">metric</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">""""""</span>
+<div class="viewcode-block" id="SimplE.forward"><a class="viewcode-back" href="../../../api/models.html#torchdrug.models.SimplE.forward">[docs]</a>    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">graph</span><span class="p">,</span> <span class="n">h_index</span><span class="p">,</span> <span class="n">t_index</span><span class="p">,</span> <span class="n">r_index</span><span class="p">,</span> <span class="n">all_loss</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">metric</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">"""</span>
+<span class="sd">        Compute the score for each triplet.</span>
+
+<span class="sd">        Parameters:</span>
+<span class="sd">            graph (Tensor): fact graph</span>
+<span class="sd">            h_index (Tensor): indexes of head entities</span>
+<span class="sd">            t_index (Tensor): indexes of tail entities</span>
+<span class="sd">            r_index (Tensor): indexes of relations</span>
+<span class="sd">            all_loss (Tensor, optional): if specified, add loss to this tensor</span>
+<span class="sd">            metric (dict, optional): if specified, output metrics to this dict</span>
+<span class="sd">        """</span>
         <span class="n">score</span> <span class="o">=</span> <span class="n">functional</span><span class="o">.</span><span class="n">simple_score</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">entity</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">relation</span><span class="p">,</span> <span class="n">h_index</span><span class="p">,</span> <span class="n">t_index</span><span class="p">,</span> <span class="n">r_index</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="n">all_loss</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">l3_regularization</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
@@ -376,7 +426,7 @@
             <span class="n">all_loss</span> <span class="o">+=</span> <span class="n">loss</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">l3_regularization</span>
             <span class="n">metric</span><span class="p">[</span><span class="s2">"l3 regularization"</span><span class="p">]</span> <span class="o">=</span> <span class="n">loss</span> <span class="o">/</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">num_entity</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_relation</span><span class="p">)</span>
 
-        <span class="k">return</span> <span class="n">score</span></div>
+        <span class="k">return</span> <span class="n">score</span></div></div>
 </pre></div>
       </article>
       <footer>

@@ -135,7 +135,7 @@
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../../benchmark/index.html">Benchmark</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label for="toctree-checkbox-1"><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../../benchmark/property_prediction.html">Molecule Property Prediction</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../benchmark/pretrain.html">Pretrained Molecular Representations</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../benchmark/generation.html">Graph Generation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../benchmark/generation.html">Molecule Generation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../benchmark/retrosynthesis.html">Retrosynthesis</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../benchmark/reasoning.html">Knowledge Graph Reasoning</a></li>
 </ul>
@@ -371,7 +371,7 @@
                            <span class="n">num_edges</span><span class="o">=</span><span class="n">graph</span><span class="o">.</span><span class="n">num_edges</span> <span class="o">*</span> <span class="mi">2</span><span class="p">,</span> <span class="n">num_relation</span><span class="o">=</span><span class="n">graph</span><span class="o">.</span><span class="n">num_relation</span><span class="p">,</span> <span class="n">offsets</span><span class="o">=</span><span class="n">offsets</span><span class="p">,</span>
                            <span class="n">meta_dict</span><span class="o">=</span><span class="n">meta_dict</span><span class="p">,</span> <span class="o">**</span><span class="n">data_dict</span><span class="p">)</span>
 
-    <span class="nd">@torch</span><span class="o">.</span><span class="n">no_grad</span><span class="p">()</span>
+<div class="viewcode-block" id="CenterIdentification.predict_synthon"><a class="viewcode-back" href="../../../api/tasks.html#torchdrug.tasks.CenterIdentification.predict_synthon">[docs]</a>    <span class="nd">@torch</span><span class="o">.</span><span class="n">no_grad</span><span class="p">()</span>
     <span class="k">def</span> <span class="nf">predict_synthon</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">batch</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
         <span class="sd">"""</span>
 <span class="sd">        Predict top-k synthons from target molecules.</span>
@@ -381,7 +381,7 @@
 <span class="sd">            k (int, optional): return top-k results</span>
 
 <span class="sd">        Returns:</span>
-<span class="sd">            list of dict: top k records</span>
+<span class="sd">            list of dict: top k records.</span>
 <span class="sd">                Each record is a batch dict of keys ``synthon``, ``num_synthon``, ``reaction_center``,</span>
 <span class="sd">                ``log_likelihood`` and ``reaction``.</span>
 <span class="sd">        """</span>
@@ -439,7 +439,7 @@
             <span class="s2">"reaction"</span><span class="p">:</span> <span class="n">reaction</span><span class="p">,</span>
         <span class="p">}</span>
 
-        <span class="k">return</span> <span class="n">result</span></div>
+        <span class="k">return</span> <span class="n">result</span></div></div>
 
 
 <span class="k">class</span> <span class="nc">RandomBFSOrder</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
@@ -1280,14 +1280,14 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">max_prediction</span> <span class="o">=</span> <span class="n">max_prediction</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">metric</span> <span class="o">=</span> <span class="n">metric</span>
 
-    <span class="k">def</span> <span class="nf">load_state_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state_dict</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<div class="viewcode-block" id="Retrosynthesis.load_state_dict"><a class="viewcode-back" href="../../../api/tasks.html#torchdrug.tasks.Retrosynthesis.load_state_dict">[docs]</a>    <span class="k">def</span> <span class="nf">load_state_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state_dict</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">strict</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Retrosynthesis only supports load_state_dict() with strict=True"</span><span class="p">)</span>
         <span class="n">keys</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">state_dict</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
         <span class="k">for</span> <span class="n">model</span> <span class="ow">in</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">center_identification</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">synthon_completion</span><span class="p">]:</span>
             <span class="k">if</span> <span class="nb">set</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">state_dict</span><span class="p">()</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span> <span class="o">==</span> <span class="n">keys</span><span class="p">:</span>
                 <span class="k">return</span> <span class="n">model</span><span class="o">.</span><span class="n">load_state_dict</span><span class="p">(</span><span class="n">state_dict</span><span class="p">,</span> <span class="n">strict</span><span class="p">)</span>
-        <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s2">"Neither of sub modules matches with state_dict"</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s2">"Neither of sub modules matches with state_dict"</span><span class="p">)</span></div>
 
     <span class="k">def</span> <span class="nf">predict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">batch</span><span class="p">,</span> <span class="n">all_loss</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">metric</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="n">synthon_batch</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">center_identification</span><span class="o">.</span><span class="n">predict_synthon</span><span class="p">(</span><span class="n">batch</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">center_topk</span><span class="p">)</span>

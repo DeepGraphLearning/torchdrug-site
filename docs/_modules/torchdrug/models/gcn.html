@@ -135,7 +135,7 @@
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../../benchmark/index.html">Benchmark</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label for="toctree-checkbox-1"><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../../benchmark/property_prediction.html">Molecule Property Prediction</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../benchmark/pretrain.html">Pretrained Molecular Representations</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../benchmark/generation.html">Graph Generation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../benchmark/generation.html">Molecule Generation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../benchmark/retrosynthesis.html">Retrosynthesis</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../benchmark/reasoning.html">Knowledge Graph Reasoning</a></li>
 </ul>
@@ -235,8 +235,20 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Unknown readout `</span><span class="si">%s</span><span class="s2">`"</span> <span class="o">%</span> <span class="n">readout</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">graph</span><span class="p">,</span> <span class="nb">input</span><span class="p">,</span> <span class="n">all_loss</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">metric</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">""""""</span>
+<div class="viewcode-block" id="GraphConvolutionalNetwork.forward"><a class="viewcode-back" href="../../../api/models.html#torchdrug.models.GraphConvolutionalNetwork.forward">[docs]</a>    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">graph</span><span class="p">,</span> <span class="nb">input</span><span class="p">,</span> <span class="n">all_loss</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">metric</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">"""</span>
+<span class="sd">        Compute the node representations and the graph representation(s).</span>
+
+<span class="sd">        Parameters:</span>
+<span class="sd">            graph (Graph): :math:`n` graph(s)</span>
+<span class="sd">            input (Tensor): input node representations</span>
+<span class="sd">            all_loss (Tensor, optional): if specified, add loss to this tensor</span>
+<span class="sd">            metric (dict, optional): if specified, output metrics to this dict</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            dict with ``node_feature`` and ``graph_feature`` fields:</span>
+<span class="sd">                node representations of shape :math:`(|V|, d)`, graph representations of shape :math:`(n, d)`</span>
+<span class="sd">        """</span>
         <span class="n">hiddens</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="n">layer_input</span> <span class="o">=</span> <span class="nb">input</span>
 
@@ -256,7 +268,7 @@
         <span class="k">return</span> <span class="p">{</span>
             <span class="s2">"graph_feature"</span><span class="p">:</span> <span class="n">graph_feature</span><span class="p">,</span>
             <span class="s2">"node_feature"</span><span class="p">:</span> <span class="n">node_feature</span>
-        <span class="p">}</span></div>
+        <span class="p">}</span></div></div>
 
 
 <div class="viewcode-block" id="RelationalGraphConvolutionalNetwork"><a class="viewcode-back" href="../../../api/models.html#torchdrug.models.RelationalGraphConvolutionalNetwork">[docs]</a><span class="nd">@R</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="s2">"models.RGCN"</span><span class="p">)</span>
@@ -304,8 +316,22 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Unknown readout `</span><span class="si">%s</span><span class="s2">`"</span> <span class="o">%</span> <span class="n">readout</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">graph</span><span class="p">,</span> <span class="nb">input</span><span class="p">,</span> <span class="n">all_loss</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">metric</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">""""""</span>
+<div class="viewcode-block" id="RelationalGraphConvolutionalNetwork.forward"><a class="viewcode-back" href="../../../api/models.html#torchdrug.models.RelationalGraphConvolutionalNetwork.forward">[docs]</a>    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">graph</span><span class="p">,</span> <span class="nb">input</span><span class="p">,</span> <span class="n">all_loss</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">metric</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">"""</span>
+<span class="sd">        Compute the node representations and the graph representation(s).</span>
+
+<span class="sd">        Require the graph(s) to have the same number of relations as this module.</span>
+
+<span class="sd">        Parameters:</span>
+<span class="sd">            graph (Graph): :math:`n` graph(s)</span>
+<span class="sd">            input (Tensor): input node representations</span>
+<span class="sd">            all_loss (Tensor, optional): if specified, add loss to this tensor</span>
+<span class="sd">            metric (dict, optional): if specified, output metrics to this dict</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            dict with ``node_feature`` and ``graph_feature`` fields:</span>
+<span class="sd">                node representations of shape :math:`(|V|, d)`, graph representations of shape :math:`(n, d)`</span>
+<span class="sd">        """</span>
         <span class="n">hiddens</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="n">layer_input</span> <span class="o">=</span> <span class="nb">input</span>
 
@@ -325,7 +351,7 @@
         <span class="k">return</span> <span class="p">{</span>
             <span class="s2">"graph_feature"</span><span class="p">:</span> <span class="n">graph_feature</span><span class="p">,</span>
             <span class="s2">"node_feature"</span><span class="p">:</span> <span class="n">node_feature</span>
-        <span class="p">}</span></div>
+        <span class="p">}</span></div></div>
 </pre></div>
       </article>
       <footer>

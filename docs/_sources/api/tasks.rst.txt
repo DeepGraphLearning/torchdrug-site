@@ -10,18 +10,22 @@ Pre-trained Molecular Representation Tasks
 EdgePrediction
 ^^^^^^^^^^^^^^
 .. autoclass:: EdgePrediction
+    :members:
 
 AttributeMasking
 ^^^^^^^^^^^^^^^^
 .. autoclass:: AttributeMasking
+    :members:
 
 ContextPrediction
 ^^^^^^^^^^^^^^^^^
 .. autoclass:: ContextPrediction
+    :members:
 
 Unsupervised
 ^^^^^^^^^^^^
 .. autoclass:: Unsupervised
+    :members:
 
 
 Molecule Generation Tasks
@@ -30,10 +34,12 @@ Molecule Generation Tasks
 AutoregressiveGeneration
 ^^^^^^^^^^^^^^^^^^^^^^^^
 .. autoclass:: AutoregressiveGeneration
+    :members:
 
 GCPNGeneration
 ^^^^^^^^^^^^^^
 .. autoclass:: GCPNGeneration
+    :members:
 
 
 Retrosynthesis Tasks
@@ -42,14 +48,17 @@ Retrosynthesis Tasks
 CenterIdentification
 ^^^^^^^^^^^^^^^^^^^^
 .. autoclass:: CenterIdentification
+    :members:
 
 SynthonCompletion
 ^^^^^^^^^^^^^^^^^
 .. autoclass:: SynthonCompletion
+    :members:
 
 Retrosynthesis
 ^^^^^^^^^^^^^^
 .. autoclass:: Retrosynthesis
+    :members:
 
 
 Property Prediction Tasks
@@ -58,3 +67,4 @@ Property Prediction Tasks
 PropertyPrediction
 ^^^^^^^^^^^^^^^^^^
 .. autoclass:: PropertyPrediction
+    :members:

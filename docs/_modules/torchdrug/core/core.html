@@ -135,7 +135,7 @@
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../../benchmark/index.html">Benchmark</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label for="toctree-checkbox-1"><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../../benchmark/property_prediction.html">Molecule Property Prediction</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../benchmark/pretrain.html">Pretrained Molecular Representations</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../benchmark/generation.html">Graph Generation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../benchmark/generation.html">Molecule Generation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../benchmark/retrosynthesis.html">Retrosynthesis</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../benchmark/reasoning.html">Knowledge Graph Reasoning</a></li>
 </ul>
@@ -244,7 +244,7 @@
         <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_setattr</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
 
-    <span class="nd">@contextmanager</span>
+<div class="viewcode-block" id="_MetaContainer.context"><a class="viewcode-back" href="../../../api/core.html#torchdrug.core._MetaContainer.context">[docs]</a>    <span class="nd">@contextmanager</span>
     <span class="k">def</span> <span class="nf">context</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">type</span><span class="p">):</span>
         <span class="sd">"""</span>
 <span class="sd">        Context manager for assigning members with a specific meta type.</span>
@@ -254,7 +254,7 @@
         <span class="n">backup</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_meta_context</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_setattr</span><span class="p">(</span><span class="s2">"_meta_context"</span><span class="p">,</span> <span class="nb">type</span><span class="p">)</span>
         <span class="k">yield</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_setattr</span><span class="p">(</span><span class="s2">"_meta_context"</span><span class="p">,</span> <span class="n">backup</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_setattr</span><span class="p">(</span><span class="s2">"_meta_context"</span><span class="p">,</span> <span class="n">backup</span><span class="p">)</span></div>
 
     <span class="k">def</span> <span class="fm">__setattr__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
         <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">"meta_dict"</span><span class="p">):</span>
@@ -282,7 +282,7 @@
         <span class="sd">"""A dict that maps tracked names to members."""</span>
         <span class="k">return</span> <span class="p">{</span><span class="n">k</span><span class="p">:</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">meta_dict</span><span class="p">}</span>
 
-    <span class="k">def</span> <span class="nf">data_by_meta</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">include</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">exclude</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="_MetaContainer.data_by_meta"><a class="viewcode-back" href="../../../api/core.html#torchdrug.core._MetaContainer.data_by_meta">[docs]</a>    <span class="k">def</span> <span class="nf">data_by_meta</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">include</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">exclude</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">"""</span>
 <span class="sd">        Return members based on the specific meta types.</span>
 
@@ -306,7 +306,7 @@
             <span class="k">if</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">types</span><span class="p">:</span>
                 <span class="n">data_dict</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span>
                 <span class="n">meta_dict</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">v</span>
-        <span class="k">return</span> <span class="n">data_dict</span><span class="p">,</span> <span class="n">meta_dict</span>
+        <span class="k">return</span> <span class="n">data_dict</span><span class="p">,</span> <span class="n">meta_dict</span></div>
 
     <span class="k">def</span> <span class="nf">_standarize_type</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">types</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">types</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
@@ -362,7 +362,7 @@
     <span class="k">def</span> <span class="fm">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Registry shouldn't be instantiated."</span><span class="p">)</span>
 
-    <span class="nd">@classmethod</span>
+<div class="viewcode-block" id="Registry.register"><a class="viewcode-back" href="../../../api/core.html#torchdrug.core.Registry.register">[docs]</a>    <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">register</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
         <span class="sd">"""</span>
 <span class="sd">        Register an object with a canonical name. Hierarchical names are separated by ``.``.</span>
@@ -381,9 +381,9 @@
 
             <span class="k">return</span> <span class="n">obj</span>
 
-        <span class="k">return</span> <span class="n">wrapper</span>
+        <span class="k">return</span> <span class="n">wrapper</span></div>
 
-    <span class="nd">@classmethod</span>
+<div class="viewcode-block" id="Registry.get"><a class="viewcode-back" href="../../../api/core.html#torchdrug.core.Registry.get">[docs]</a>    <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
         <span class="sd">"""</span>
 <span class="sd">        Get an object with a canonical name. Hierachical names are separated by ``.``.</span>
@@ -394,9 +394,9 @@
             <span class="k">if</span> <span class="n">key</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">entry</span><span class="p">:</span>
                 <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="s2">"Can't find `</span><span class="si">%s</span><span class="s2">` in `</span><span class="si">%s</span><span class="s2">`"</span> <span class="o">%</span> <span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="s2">"."</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">keys</span><span class="p">[:</span><span class="n">i</span><span class="p">])))</span>
             <span class="n">entry</span> <span class="o">=</span> <span class="n">entry</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
-        <span class="k">return</span> <span class="n">entry</span>
+        <span class="k">return</span> <span class="n">entry</span></div>
 
-    <span class="nd">@classmethod</span>
+<div class="viewcode-block" id="Registry.search"><a class="viewcode-back" href="../../../api/core.html#torchdrug.core.Registry.search">[docs]</a>    <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">search</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
         <span class="sd">"""</span>
 <span class="sd">        Search an object with the given name. The name doesn't need to be canonical.</span>
@@ -414,15 +414,12 @@
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">keys</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
             <span class="n">keys</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"`</span><span class="si">%s</span><span class="s2">`"</span> <span class="o">%</span> <span class="n">key</span> <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">keys</span><span class="p">]</span>
             <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="s2">"Ambiguous key `</span><span class="si">%s</span><span class="s2">`. Found </span><span class="si">%s</span><span class="s2">"</span> <span class="o">%</span> <span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="s2">", "</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">keys</span><span class="p">)))</span>
-        <span class="k">return</span> <span class="n">value</span></div>
+        <span class="k">return</span> <span class="n">value</span></div></div>
 
 
 <span class="k">class</span> <span class="nc">_Configurable</span><span class="p">(</span><span class="nb">type</span><span class="p">):</span>
 
     <span class="k">def</span> <span class="nf">config_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">"""</span>
-<span class="sd">        Return the configuration dict of this instance.</span>
-<span class="sd">        """</span>
         <span class="bp">cls</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">"_registry_key"</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">)</span>
         <span class="n">config</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"class"</span><span class="p">:</span> <span class="bp">cls</span><span class="p">}</span>
 
@@ -434,9 +431,6 @@
 
     <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">load_config_dict</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">config</span><span class="p">):</span>
-        <span class="sd">"""</span>
-<span class="sd">        Construct an instance from the configuration dict.</span>
-<span class="sd">        """</span>
         <span class="k">if</span> <span class="bp">cls</span> <span class="o">==</span> <span class="n">_Configurable</span><span class="p">:</span>
             <span class="n">real_cls</span> <span class="o">=</span> <span class="n">Registry</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">config</span><span class="p">[</span><span class="s2">"class"</span><span class="p">])</span>
             <span class="n">custom_load_func</span> <span class="o">=</span> <span class="n">real_cls</span><span class="o">.</span><span class="n">load_config_dict</span><span class="o">.</span><span class="vm">__func__</span> <span class="o">!=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">load_config_dict</span><span class="o">.</span><span class="vm">__func__</span>

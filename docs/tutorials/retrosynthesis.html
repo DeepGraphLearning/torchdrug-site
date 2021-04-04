@@ -135,7 +135,7 @@
 <li class="toctree-l1 has-children"><a class="reference internal" href="../benchmark/index.html">Benchmark</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label for="toctree-checkbox-1"><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../benchmark/property_prediction.html">Molecule Property Prediction</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../benchmark/pretrain.html">Pretrained Molecular Representations</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../benchmark/generation.html">Graph Generation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../benchmark/generation.html">Molecule Generation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../benchmark/retrosynthesis.html">Retrosynthesis</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../benchmark/reasoning.html">Knowledge Graph Reasoning</a></li>
 </ul>
@@ -214,7 +214,7 @@ completion.</p>
 </div>
 <p>Then we visualize some samples from the dataset. For the reaction dataset, we can
 split reactant and product graphs into individual molecules using
-<code class="xref py py-meth docutils literal notranslate"><span class="pre">connected_components()</span></code>.
+<a class="reference internal" href="../api/data.html#torchdrug.data.Graph.connected_components" title="torchdrug.data.Graph.connected_components"><code class="xref py py-meth docutils literal notranslate"><span class="pre">connected_components()</span></code></a>.
 Note <a class="reference external" href="https://aspace.repository.cam.ac.uk/bitstream/handle/1810/244727/lowethesis.pdf">USPTO50k</a> ignores all non-target products, so there is only one product on
 the right hand side.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">torchdrug.utils</span> <span class="kn">import</span> <span class="n">plot</span>

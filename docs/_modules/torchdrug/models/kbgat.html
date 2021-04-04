@@ -4,7 +4,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1"/><link rel="index" title="Index" href="../../../genindex.html" /><link rel="search" title="Search" href="../../../search.html" />
 
     <meta name="generator" content="sphinx-3.1.2, furo 2020.12.09.beta21"/>
-        <title>torchdrug.datasets.citeseer - TorchDrug 0.1.0 documentation</title>
+        <title>torchdrug.models.kbgat - TorchDrug 0.1.0 documentation</title>
       <link rel="stylesheet" href="../../../_static/styles/furo.css?digest=a3f371badb8538d75df213ccffb17a4f6e8f3ac5">
     <link rel="stylesheet" href="../../../_static/pygments.css">
     <link media="(prefers-color-scheme: dark)" rel="stylesheet" href="../../../_static/pygments_dark.css">
@@ -184,41 +184,70 @@
         <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
           <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
         </label>
-        <h1>Source code for torchdrug.datasets.citeseer</h1><div class="highlight"><pre>
-<span></span><span class="kn">import</span> <span class="nn">os</span>
+        <h1>Source code for torchdrug.models.kbgat</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">from</span> <span class="nn">torch</span> <span class="kn">import</span> <span class="n">nn</span>
 
-<span class="kn">from</span> <span class="nn">torchdrug</span> <span class="kn">import</span> <span class="n">data</span><span class="p">,</span> <span class="n">utils</span>
+<span class="kn">from</span> <span class="nn">torchdrug</span> <span class="kn">import</span> <span class="n">core</span><span class="p">,</span> <span class="n">models</span>
+<span class="kn">from</span> <span class="nn">torchdrug.layers</span> <span class="kn">import</span> <span class="n">functional</span>
 <span class="kn">from</span> <span class="nn">torchdrug.core</span> <span class="kn">import</span> <span class="n">Registry</span> <span class="k">as</span> <span class="n">R</span>
+<span class="kn">from</span> <span class="nn">torchdrug.utils</span> <span class="kn">import</span> <span class="n">doc</span>
 
 
-<div class="viewcode-block" id="CiteSeer"><a class="viewcode-back" href="../../../api/datasets.html#torchdrug.datasets.CiteSeer">[docs]</a><span class="nd">@R</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="s2">"datasets.CiteSeer"</span><span class="p">)</span>
-<span class="k">class</span> <span class="nc">CiteSeer</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">NodeClassificationDataset</span><span class="p">):</span>
+<div class="viewcode-block" id="KnowledgeBaseGraphAttentionNetwork"><a class="viewcode-back" href="../../../api/models.html#torchdrug.models.KnowledgeBaseGraphAttentionNetwork">[docs]</a><span class="nd">@R</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="s2">"models.KBGAT"</span><span class="p">)</span>
+<span class="nd">@doc</span><span class="o">.</span><span class="n">copy_args</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">GraphAttentionNetwork</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">KnowledgeBaseGraphAttentionNetwork</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">GraphAttentionNetwork</span><span class="p">,</span> <span class="n">core</span><span class="o">.</span><span class="n">Configurable</span><span class="p">):</span>
     <span class="sd">"""</span>
-<span class="sd">    A citation network of scientific publications with binary word features.</span>
+<span class="sd">    Knowledge Base Graph Attention Network proposed in</span>
+<span class="sd">    `Learning Attention-based Embeddings for Relation Prediction in Knowledge Graphs`_.</span>
 
-<span class="sd">    Statistics:</span>
-<span class="sd">        - #Node: 2,708</span>
-<span class="sd">        - #Edge: 5,429</span>
-<span class="sd">        - #Class: 7</span>
+<span class="sd">    .. _Learning Attention-based Embeddings for Relation Prediction in Knowledge Graphs:</span>
+<span class="sd">        https://arxiv.org/pdf/1906.01195.pdf</span>
 
 <span class="sd">    Parameters:</span>
-<span class="sd">        path (str): path to store the dataset</span>
-<span class="sd">        verbose (int, optional): output verbose level</span>
+<span class="sd">        num_entity (int): number of entities</span>
+<span class="sd">        num_relation (int): number of relations</span>
+<span class="sd">        embedding_dim (int): dimension of embeddings</span>
+<span class="sd">        hidden_dims (list of int): hidden dimensions</span>
+<span class="sd">        max_score (float, optional): maximal score for triplets</span>
+<span class="sd">        **kwargs</span>
 <span class="sd">    """</span>
 
-    <span class="n">url</span> <span class="o">=</span> <span class="s2">"https://linqs-data.soe.ucsc.edu/public/lbc/citeseer.tgz"</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">num_entity</span><span class="p">,</span> <span class="n">num_relation</span><span class="p">,</span> <span class="n">embedding_dim</span><span class="p">,</span> <span class="n">hidden_dims</span><span class="p">,</span> <span class="n">max_score</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">KnowledgeBaseGraphAttentionNetwork</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">embedding_dim</span><span class="p">,</span> <span class="n">hidden_dims</span><span class="p">,</span> <span class="n">embedding_dim</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">num_entity</span> <span class="o">=</span> <span class="n">num_entity</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">num_relation</span> <span class="o">=</span> <span class="n">num_relation</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">max_score</span> <span class="o">=</span> <span class="n">max_score</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
-        <span class="n">path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">expanduser</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
-            <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">path</span> <span class="o">=</span> <span class="n">path</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">linear</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">output_dim</span><span class="p">,</span> <span class="n">embedding_dim</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">output_dim</span> <span class="o">=</span> <span class="n">embedding_dim</span>
 
-        <span class="n">zip_file</span> <span class="o">=</span> <span class="n">utils</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">url</span><span class="p">,</span> <span class="n">path</span><span class="p">)</span>
-        <span class="n">node_file</span> <span class="o">=</span> <span class="n">utils</span><span class="o">.</span><span class="n">extract</span><span class="p">(</span><span class="n">zip_file</span><span class="p">,</span> <span class="s2">"citeseer/citeseer.content"</span><span class="p">)</span>
-        <span class="n">edge_file</span> <span class="o">=</span> <span class="n">utils</span><span class="o">.</span><span class="n">extract</span><span class="p">(</span><span class="n">zip_file</span><span class="p">,</span> <span class="s2">"citeseer/citeseer.cites"</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">entity</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Parameter</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">num_entity</span><span class="p">,</span> <span class="n">embedding_dim</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">relation</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Parameter</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">num_relation</span><span class="p">,</span> <span class="n">embedding_dim</span><span class="p">))</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">load_tsv</span><span class="p">(</span><span class="n">node_file</span><span class="p">,</span> <span class="n">edge_file</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="n">verbose</span><span class="p">)</span></div>
+        <span class="n">nn</span><span class="o">.</span><span class="n">init</span><span class="o">.</span><span class="n">uniform_</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">entity</span><span class="p">,</span> <span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">max_score</span> <span class="o">/</span> <span class="n">embedding_dim</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_score</span> <span class="o">/</span> <span class="n">embedding_dim</span><span class="p">)</span>
+        <span class="n">nn</span><span class="o">.</span><span class="n">init</span><span class="o">.</span><span class="n">uniform_</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">relation</span><span class="p">,</span> <span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">max_score</span> <span class="o">/</span> <span class="n">embedding_dim</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_score</span> <span class="o">/</span> <span class="n">embedding_dim</span><span class="p">)</span>
+
+<div class="viewcode-block" id="KnowledgeBaseGraphAttentionNetwork.forward"><a class="viewcode-back" href="../../../api/models.html#torchdrug.models.KnowledgeBaseGraphAttentionNetwork.forward">[docs]</a>    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">graph</span><span class="p">,</span> <span class="n">h_index</span><span class="p">,</span> <span class="n">t_index</span><span class="p">,</span> <span class="n">r_index</span><span class="p">,</span> <span class="n">all_loss</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">metric</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">"""</span>
+<span class="sd">        Compute the score for triplets.</span>
+
+<span class="sd">        Parameters:</span>
+<span class="sd">            graph (Tensor): fact graph</span>
+<span class="sd">            h_index (Tensor): indexes of head entities</span>
+<span class="sd">            t_index (Tensor): indexes of tail entities</span>
+<span class="sd">            r_index (Tensor): indexes of relations</span>
+<span class="sd">            all_loss (Tensor, optional): if specified, add loss to this tensor</span>
+<span class="sd">            metric (dict, optional): if specified, output metrics to this dict</span>
+<span class="sd">        """</span>
+        <span class="k">with</span> <span class="n">graph</span><span class="o">.</span><span class="n">edge</span><span class="p">():</span>
+            <span class="n">graph</span><span class="o">.</span><span class="n">edge_feature</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">relation</span><span class="p">[</span><span class="n">graph</span><span class="o">.</span><span class="n">edge_list</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">]]</span><span class="o">.</span><span class="n">detach</span><span class="p">()</span>
+
+        <span class="n">output</span> <span class="o">=</span> <span class="nb">super</span><span class="p">(</span><span class="n">KnowledgeBaseGraphAttentionNetwork</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">entity</span><span class="p">,</span> <span class="n">all_loss</span><span class="p">,</span> <span class="n">metric</span><span class="p">)</span>
+        <span class="n">entity</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">linear</span><span class="p">(</span><span class="n">output</span><span class="p">[</span><span class="s2">"node_feature"</span><span class="p">])</span>
+        <span class="n">score</span> <span class="o">=</span> <span class="n">functional</span><span class="o">.</span><span class="n">transe_score</span><span class="p">(</span><span class="n">entity</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">relation</span><span class="p">,</span> <span class="n">h_index</span><span class="p">,</span> <span class="n">t_index</span><span class="p">,</span> <span class="n">r_index</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_score</span> <span class="o">-</span> <span class="n">score</span></div></div>
+
 </pre></div>
       </article>
       <footer>

@@ -181,3 +181,9 @@ Knowledge Graph Reasoning
 
    :func:`rotate_score <torchdrug.layers.functional.rotate_score>`,
    :class:`RotatE <torchdrug.models.RotatE>`
+
+7. `Learning Attention-based Embeddings for Relation Prediction in Knowledge Graphs <KBGAT_>`_
+
+   Deepak Nathani, Jatin Chauhan, Charu Sharma, Manohar Kaul. ACL 2019.
+
+   :class:`KnowledgeBaseGraphAttentionNetwork <torchdrug.models.KnowledgeBaseGraphAttentionNetwork>`

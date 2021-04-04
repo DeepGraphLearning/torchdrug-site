@@ -135,7 +135,7 @@
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../../benchmark/index.html">Benchmark</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label for="toctree-checkbox-1"><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../../benchmark/property_prediction.html">Molecule Property Prediction</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../benchmark/pretrain.html">Pretrained Molecular Representations</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../benchmark/generation.html">Graph Generation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../benchmark/generation.html">Molecule Generation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../benchmark/retrosynthesis.html">Retrosynthesis</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../benchmark/reasoning.html">Knowledge Graph Reasoning</a></li>
 </ul>
@@ -226,8 +226,10 @@
 <span class="sd">        task (str or list of str, optional): property optimization task(s). Available tasks are ``plogp`` and ``qed``.</span>
 <span class="sd">        num_node_sample (int, optional): number of node samples per graph. -1 for all samples.</span>
 <span class="sd">        num_edge_sample (int, optional): number of edge samples per graph. -1 for all samples.</span>
-<span class="sd">        max_edge_unroll (int, optional): max node id difference for</span>
-<span class="sd">        max_node (int, optional): max number of node</span>
+<span class="sd">        max_edge_unroll (int, optional): max node id difference.</span>
+<span class="sd">            If not provided, use the statistics from the training set.</span>
+<span class="sd">        max_node (int, optional): max number of node.</span>
+<span class="sd">            If not provided, use the statistics from the training set.</span>
 <span class="sd">        criterion (str, list or dict, optional): training criterion(s). For dict, the keys are criterions and the values</span>
 <span class="sd">            are the corresponding weights. Available criterions are ``nll`` and ``ppo``.</span>
 <span class="sd">        agent_update_interval (int, optional): update agent every n batch</span>
@@ -264,11 +266,11 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">best_results</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">list</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">batch_id</span> <span class="o">=</span> <span class="mi">0</span>
 
-    <span class="k">def</span> <span class="nf">preprocess</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">train_set</span><span class="p">,</span> <span class="n">valid_set</span><span class="p">,</span> <span class="n">test_set</span><span class="p">):</span>
+<div class="viewcode-block" id="AutoregressiveGeneration.preprocess"><a class="viewcode-back" href="../../../api/tasks.html#torchdrug.tasks.AutoregressiveGeneration.preprocess">[docs]</a>    <span class="k">def</span> <span class="nf">preprocess</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">train_set</span><span class="p">,</span> <span class="n">valid_set</span><span class="p">,</span> <span class="n">test_set</span><span class="p">):</span>
         <span class="sd">"""</span>
 <span class="sd">        Add atom id mapping and random BFS order to the training set.</span>
 
-<span class="sd">        Compute max_edge_unroll and max_node on the training set if not provided.</span>
+<span class="sd">        Compute ``max_edge_unroll`` and ``max_node`` on the training set if not provided.</span>
 <span class="sd">        """</span>
         <span class="n">remap_atom_type</span> <span class="o">=</span> <span class="n">transforms</span><span class="o">.</span><span class="n">RemapAtomType</span><span class="p">(</span><span class="n">train_set</span><span class="o">.</span><span class="n">atom_types</span><span class="p">)</span>
         <span class="n">train_set</span><span class="o">.</span><span class="n">transform</span> <span class="o">=</span> <span class="n">transforms</span><span class="o">.</span><span class="n">Compose</span><span class="p">([</span>
@@ -294,7 +296,7 @@
             <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">"max node = </span><span class="si">%d</span><span class="s2">, max edge unroll = </span><span class="si">%d</span><span class="s2">"</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">max_node</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_edge_unroll</span><span class="p">))</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">register_buffer</span><span class="p">(</span><span class="s2">"node_baseline"</span><span class="p">,</span> <span class="n">torch</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">max_node</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">register_buffer</span><span class="p">(</span><span class="s2">"edge_baseline"</span><span class="p">,</span> <span class="n">torch</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">max_node</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">register_buffer</span><span class="p">(</span><span class="s2">"edge_baseline"</span><span class="p">,</span> <span class="n">torch</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">max_node</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span></div>
 
     <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">batch</span><span class="p">):</span>
         <span class="sd">""""""</span>
@@ -326,9 +328,6 @@
 
         <span class="c1"># generation takes less time when early_stop=True</span>
         <span class="n">graph</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">generate</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">batch</span><span class="p">[</span><span class="s2">"graph"</span><span class="p">]),</span> <span class="n">off_policy</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">early_stop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-        <span class="c1">#print(graph.num_nodes)</span>
-        <span class="c1">#print(graph.is_valid)</span>
-        <span class="c1">#print(graph.is_valid_rdkit)</span>
 
         <span class="k">if</span> <span class="n">graph</span><span class="o">.</span><span class="n">num_nodes</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Generation results collapse to singleton molecules"</span><span class="p">)</span>
@@ -778,9 +777,6 @@
         <span class="k">return</span> <span class="n">lengths</span></div>
 
 
-
-
-<span class="c1"># TODO: update doc string. @Chence</span>
 <div class="viewcode-block" id="GCPNGeneration"><a class="viewcode-back" href="../../../api/tasks.html#torchdrug.tasks.GCPNGeneration">[docs]</a><span class="nd">@R</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="s2">"tasks.GCPNGeneration"</span><span class="p">)</span>
 <span class="k">class</span> <span class="nc">GCPNGeneration</span><span class="p">(</span><span class="n">tasks</span><span class="o">.</span><span class="n">Task</span><span class="p">,</span> <span class="n">core</span><span class="o">.</span><span class="n">Configurable</span><span class="p">):</span>
     <span class="sd">"""</span>
@@ -793,8 +789,10 @@
 <span class="sd">        model (nn.Module): graph representation model</span>
 <span class="sd">        atom_types (list or set): set of all possible atom types</span>
 <span class="sd">        task (str or list of str, optional): property optimization task(s)</span>
-<span class="sd">        max_edge_unroll (int, optional): max node id difference</span>
-<span class="sd">        max_node (int, optional): max number of node</span>
+<span class="sd">        max_edge_unroll (int, optional): max node id difference.</span>
+<span class="sd">            If not provided, use the statistics from the training set.</span>
+<span class="sd">        max_node (int, optional): max number of node.</span>
+<span class="sd">            If not provided, use the statistics from the training set.</span>
 <span class="sd">        criterion (str, list or dict, optional): training criterion(s). For dict, the keys are criterions and the values</span>
 <span class="sd">            are the corresponding weights. Available criterions are ``nll`` and ``ppo``.</span>
 <span class="sd">        agent_update_interval (int, optional): update the agent every n batch</span>
@@ -849,21 +847,17 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">agent_mlp_edge</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mlp_edge</span><span class="p">)</span>
 
 
-    <span class="k">def</span> <span class="nf">preprocess</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">train_set</span><span class="p">,</span> <span class="n">valid_set</span><span class="p">,</span> <span class="n">test_set</span><span class="p">):</span>
+<div class="viewcode-block" id="GCPNGeneration.preprocess"><a class="viewcode-back" href="../../../api/tasks.html#torchdrug.tasks.GCPNGeneration.preprocess">[docs]</a>    <span class="k">def</span> <span class="nf">preprocess</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">train_set</span><span class="p">,</span> <span class="n">valid_set</span><span class="p">,</span> <span class="n">test_set</span><span class="p">):</span>
         <span class="sd">"""</span>
 <span class="sd">        Add atom id mapping and random BFS order to the training set.</span>
 
-<span class="sd">        Compute max_edge_unroll and max_node on the training set if not provided.</span>
+<span class="sd">        Compute ``max_edge_unroll`` and ``max_node`` on the training set if not provided.</span>
 <span class="sd">        """</span>
         <span class="n">remap_atom_type</span> <span class="o">=</span> <span class="n">transforms</span><span class="o">.</span><span class="n">RemapAtomType</span><span class="p">(</span><span class="n">train_set</span><span class="o">.</span><span class="n">atom_types</span><span class="p">)</span>
         <span class="n">train_set</span><span class="o">.</span><span class="n">transform</span> <span class="o">=</span> <span class="n">transforms</span><span class="o">.</span><span class="n">Compose</span><span class="p">([</span>
             <span class="n">train_set</span><span class="o">.</span><span class="n">transform</span><span class="p">,</span>
             <span class="n">transforms</span><span class="o">.</span><span class="n">RandomBFSOrder</span><span class="p">(),</span>
         <span class="p">])</span>
-
-        
-        <span class="c1">#self.register_buffer("id2atom", remap_atom_type.id2atom)</span>
-        <span class="c1">#self.register_buffer("atom2id", remap_atom_type.atom2id)</span>
         
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_edge_unroll</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_node</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">max_edge_unroll</span> <span class="o">=</span> <span class="mi">0</span>
@@ -879,25 +873,7 @@
 
             <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">"max node = </span><span class="si">%d</span><span class="s2">, max edge unroll = </span><span class="si">%d</span><span class="s2">"</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">max_node</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_edge_unroll</span><span class="p">))</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">register_buffer</span><span class="p">(</span><span class="s2">"moving_baseline"</span><span class="p">,</span> <span class="n">torch</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">max_node</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
-
-        <span class="sd">'''</span>
-<span class="sd">        self.new_atom_embeddings = nn.Parameter(torch.zeros(self.id2atom.size(0), self.model.output_dim))</span>
-<span class="sd">        nn.init.normal_(self.new_atom_embeddings, mean=0, std=0.1)</span>
-
-<span class="sd">        self.inp_dim_stop = self.model.output_dim</span>
-<span class="sd">        self.mlp_stop = layers.MultiLayerPerceptron(self.inp_dim_stop, [self.hidden_dim_mlp, 2])</span>
-
-<span class="sd">        self.inp_dim_node1 = self.model.output_dim</span>
-<span class="sd">        self.mlp_node1 = layers.MultiLayerPerceptron(self.inp_dim_node1, [self.hidden_dim_mlp, 1])</span>
-<span class="sd">        </span>
-<span class="sd">        self.inp_dim_node2 = 2 * self.model.output_dim</span>
-<span class="sd">        self.mlp_node2 = layers.MultiLayerPerceptron(self.inp_dim_node2, [self.hidden_dim_mlp, 1])</span>
-
-<span class="sd">        self.inp_dim_edge = 2 * self.model.output_dim</span>
-<span class="sd">        self.mlp_edge = layers.MultiLayerPerceptron(self.inp_dim_edge, [self.hidden_dim_mlp, self.model.num_relation])</span>
-<span class="sd">        '''</span>
-
+        <span class="bp">self</span><span class="o">.</span><span class="n">register_buffer</span><span class="p">(</span><span class="s2">"moving_baseline"</span><span class="p">,</span> <span class="n">torch</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">max_node</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span></div>
 
     <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">batch</span><span class="p">):</span>
         <span class="sd">""""""</span>
@@ -920,7 +896,6 @@
 
     <span class="k">def</span> <span class="nf">predict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">graph</span><span class="p">,</span> <span class="n">label_dict</span><span class="p">,</span> <span class="n">use_agent</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="c1"># step1: get node/graph embeddings</span>
-        <span class="c1">#graph = batch["graph"]</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">use_agent</span><span class="p">:</span>
             <span class="n">output</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">graph</span><span class="o">.</span><span class="n">node_feature</span><span class="o">.</span><span class="n">float</span><span class="p">())</span>
         <span class="k">else</span><span class="p">:</span>
@@ -1000,8 +975,6 @@
         <span class="p">}</span>
         <span class="k">return</span> <span class="n">stop_logits</span><span class="p">,</span> <span class="n">node1_logits</span><span class="p">,</span> <span class="n">node2_logits</span><span class="p">,</span> <span class="n">edge_logits</span><span class="p">,</span> <span class="n">index_dict</span>
 
-
-    
     <span class="k">def</span> <span class="nf">reinforce_forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">batch</span><span class="p">):</span>
         <span class="n">all_loss</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">float32</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">device</span><span class="p">)</span>
         <span class="n">metric</span> <span class="o">=</span> <span class="p">{}</span>
@@ -1115,8 +1088,6 @@
         <span class="n">metric</span><span class="p">[</span><span class="s2">"PPO objective"</span><span class="p">]</span> <span class="o">=</span> <span class="n">objective</span>
         <span class="n">all_loss</span> <span class="o">+=</span> <span class="p">(</span><span class="o">-</span><span class="n">objective</span><span class="p">)</span>
 
-
-
         <span class="bp">self</span><span class="o">.</span><span class="n">bn_train</span><span class="p">(</span><span class="n">is_training</span><span class="p">)</span>
 
         <span class="k">return</span> <span class="n">all_loss</span><span class="p">,</span> <span class="n">metric</span>
@@ -1167,8 +1138,6 @@
 
         <span class="n">metric</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="n">pred</span><span class="p">,</span> <span class="n">target</span><span class="p">))</span>
 
-
-
         <span class="k">return</span> <span class="n">all_loss</span><span class="p">,</span> <span class="n">metric</span>
 
     <span class="k">def</span> <span class="nf">evaluate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pred</span><span class="p">,</span> <span class="n">target</span><span class="p">):</span>
@@ -1212,10 +1181,6 @@
         <span class="n">probs</span><span class="p">[</span><span class="n">index_extend</span><span class="p">]</span> <span class="o">=</span> <span class="n">prob_</span><span class="p">[</span><span class="n">graph</span><span class="o">.</span><span class="n">num_node</span><span class="p">:]</span>
         <span class="n">probs</span> <span class="o">=</span> <span class="n">probs</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">graph</span><span class="o">.</span><span class="n">num_nodes</span><span class="p">),</span> <span class="n">max_size</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">torch</span><span class="o">.</span><span class="n">distributions</span><span class="o">.</span><span class="n">Categorical</span><span class="p">(</span><span class="n">probs</span><span class="p">),</span> <span class="n">probs</span> <span class="c1"># (n_graph, max_size)</span>
-
-
-
-        
 
     <span class="nd">@torch</span><span class="o">.</span><span class="n">no_grad</span><span class="p">()</span>
     <span class="k">def</span> <span class="nf">_sample_action</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">graph</span><span class="p">,</span> <span class="n">off_policy</span><span class="p">):</span>
@@ -1411,7 +1376,6 @@
     <span class="nd">@torch</span><span class="o">.</span><span class="n">no_grad</span><span class="p">()</span>
     <span class="k">def</span> <span class="nf">_apply_action</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">graph</span><span class="p">,</span> <span class="n">off_policy</span><span class="p">,</span> <span class="n">max_resample</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">min_node</span><span class="o">=</span><span class="mi">5</span><span class="p">):</span>
         <span class="c1"># action (num_graph, 4)</span>
-        <span class="c1">#assert len(graph) == stop_action.size(0)</span>
 
         <span class="c1"># stopped graph is removed, initialize is_valid as False</span>
         <span class="n">is_valid</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">graph</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">bool</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">device</span><span class="p">)</span>
@@ -1428,18 +1392,12 @@
             <span class="k">else</span><span class="p">:</span>
                 <span class="n">tmp_stop_action</span><span class="p">,</span> <span class="n">tmp_node1_action</span><span class="p">,</span> <span class="n">tmp_node2_action</span><span class="p">,</span> <span class="n">tmp_edge_action</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_sample_action</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">off_policy</span><span class="p">)</span>
 
-            <span class="c1">#print('resample step %d' % i)</span>
-            <span class="c1">#print(tmp_stop_action)</span>
-            <span class="c1">#print(tmp_node1_action)</span>
-            <span class="c1">#print(tmp_node2_action)</span>
-            <span class="c1">#print(tmp_edge_action)</span>
-
             <span class="n">stop_action</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span> <span class="o">=</span> <span class="n">tmp_stop_action</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span>
             <span class="n">node1_action</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span> <span class="o">=</span> <span class="n">tmp_node1_action</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span>
             <span class="n">node2_action</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span> <span class="o">=</span> <span class="n">tmp_node2_action</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span>
             <span class="n">edge_action</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span> <span class="o">=</span> <span class="n">tmp_edge_action</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span>
-            <span class="c1">#</span>
-            <span class="n">stop_action</span><span class="p">[</span><span class="n">graph</span><span class="o">.</span><span class="n">num_nodes</span><span class="o">&lt;=</span><span class="mi">5</span><span class="p">]</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">graph</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">long</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">device</span><span class="p">)[</span><span class="n">graph</span><span class="o">.</span><span class="n">num_nodes</span><span class="o">&lt;=</span><span class="mi">5</span><span class="p">]</span>
+
+            <span class="n">stop_action</span><span class="p">[</span><span class="n">graph</span><span class="o">.</span><span class="n">num_nodes</span> <span class="o">&lt;=</span> <span class="mi">5</span><span class="p">]</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">graph</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">long</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">device</span><span class="p">)[</span><span class="n">graph</span><span class="o">.</span><span class="n">num_nodes</span> <span class="o">&lt;=</span> <span class="mi">5</span><span class="p">]</span>
             <span class="c1"># tmp add new nodes</span>
             <span class="n">has_new_node</span> <span class="o">=</span> <span class="p">(</span><span class="n">node2_action</span> <span class="o">&gt;=</span> <span class="n">graph</span><span class="o">.</span><span class="n">num_nodes</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">stop_action</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>
             <span class="n">new_atom_id</span> <span class="o">=</span> <span class="p">(</span><span class="n">node2_action</span> <span class="o">-</span> <span class="n">graph</span><span class="o">.</span><span class="n">num_nodes</span><span class="p">)[</span><span class="n">has_new_node</span><span class="p">]</span>
@@ -1505,8 +1463,6 @@
             <span class="k">if</span> <span class="n">meta_dict</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">==</span> <span class="s2">"edge"</span><span class="p">:</span>
                 <span class="n">shape</span> <span class="o">=</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">new_edge_list</span><span class="p">)</span> <span class="o">*</span> <span class="mi">2</span><span class="p">,</span> <span class="o">*</span><span class="n">v</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
                 <span class="n">new_data</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">shape</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">v</span><span class="o">.</span><span class="n">dtype</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">device</span><span class="p">)</span>
-                <span class="c1"># if k == 'stereo_atoms':</span>
-                <span class="c1">#     new_data = -1 * torch.ones(shape, dtype=v.dtype, device=self.device)</span>
                 <span class="n">data_dict</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">functional</span><span class="o">.</span><span class="n">_extend</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">graph</span><span class="o">.</span><span class="n">num_edges</span><span class="p">,</span> <span class="n">new_data</span><span class="p">,</span> <span class="n">has_new_edge</span> <span class="o">*</span> <span class="mi">2</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
 
         <span class="n">new_graph</span> <span class="o">=</span> <span class="nb">type</span><span class="p">(</span><span class="n">graph</span><span class="p">)(</span><span class="n">edge_list</span><span class="p">,</span> <span class="n">atom_type</span><span class="o">=</span><span class="n">atom_type</span><span class="p">,</span> <span class="n">bond_type</span><span class="o">=</span><span class="n">bond_type</span><span class="p">,</span> <span class="n">num_nodes</span><span class="o">=</span><span class="n">num_nodes</span><span class="p">,</span>
@@ -1521,7 +1477,6 @@
 
     <span class="k">def</span> <span class="nf">_update_molecule_feature</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">graphs</span><span class="p">):</span>
         <span class="c1"># This function is very slow</span>
-        <span class="c1">#graphs = graphs.ion_to_molecule()</span>
         <span class="n">mols</span> <span class="o">=</span> <span class="n">graphs</span><span class="o">.</span><span class="n">to_molecule</span><span class="p">(</span><span class="n">ignore_error</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
         <span class="n">valid</span> <span class="o">=</span> <span class="p">[</span><span class="n">mol</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">for</span> <span class="n">mol</span> <span class="ow">in</span> <span class="n">mols</span><span class="p">]</span>
         <span class="n">valid</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">valid</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="n">graphs</span><span class="o">.</span><span class="n">device</span><span class="p">)</span>
@@ -1569,46 +1524,22 @@
             <span class="n">best_results</span> <span class="o">=</span> <span class="n">best_results</span><span class="p">[:</span><span class="bp">self</span><span class="o">.</span><span class="n">top_k</span><span class="p">]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">best_results</span><span class="p">[</span><span class="n">task</span><span class="p">]</span> <span class="o">=</span> <span class="n">best_results</span>
 
-
     <span class="nd">@torch</span><span class="o">.</span><span class="n">no_grad</span><span class="p">()</span>
-    <span class="k">def</span> <span class="nf">generate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">num_sample</span><span class="p">,</span> <span class="n">max_resample</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">off_policy</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">max_step</span><span class="o">=</span><span class="mi">30</span> <span class="o">*</span> <span class="mi">2</span><span class="p">,</span> <span class="n">min_step</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">early_stop</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">start_sm</span><span class="o">=</span><span class="s1">'C'</span><span class="p">):</span>
-        <span class="n">num_relation</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">num_relation</span>
+    <span class="k">def</span> <span class="nf">generate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">num_sample</span><span class="p">,</span> <span class="n">max_resample</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">off_policy</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">max_step</span><span class="o">=</span><span class="mi">30</span> <span class="o">*</span> <span class="mi">2</span><span class="p">,</span> <span class="n">initial_smiles</span><span class="o">=</span><span class="s2">"C"</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
         <span class="n">is_training</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">training</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">eval</span><span class="p">()</span>
 
-        <span class="sd">'''</span>
-<span class="sd">        edge_list = torch.zeros(0, 3, dtype=torch.long, device=self.device)</span>
-<span class="sd">        num_nodes = torch.ones(num_sample, dtype=torch.long, device=self.device)</span>
-<span class="sd">        num_edges = torch.zeros_like(num_nodes)</span>
-<span class="sd">        atom_type = 6 * torch.ones(num_sample, dtype=torch.long, device=self.device) # starting from C</span>
-<span class="sd">        #atom_type = self.atom2id[atom_type]</span>
-<span class="sd">        graph = data.PackedMolecule(edge_list, atom_type, edge_list[:, -1], num_nodes, num_edges,</span>
-<span class="sd">                                    num_relation=num_relation)</span>
+        <span class="n">graph</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">Molecule</span><span class="o">.</span><span class="n">from_smiles</span><span class="p">(</span><span class="n">initial_smiles</span><span class="p">,</span> <span class="n">kekulize</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">node_feature</span><span class="o">=</span><span class="s2">"symbol"</span><span class="p">)</span><span class="o">.</span><span class="n">repeat</span><span class="p">(</span><span class="n">num_sample</span><span class="p">)</span>
 
-<span class="sd">        graph, feature_valid = self._update_molecule_feature(graph)</span>
-<span class="sd">        graph = graph[feature_valid]</span>
-<span class="sd">        #completed = torch.zeros(num_sample, dtype=torch.bool, device=self.device)</span>
-<span class="sd">        '''</span>
-
-        <span class="n">graph</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">Molecule</span><span class="o">.</span><span class="n">from_smiles</span><span class="p">(</span><span class="n">start_sm</span><span class="p">,</span> <span class="n">kekulize</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">node_feature</span><span class="o">=</span><span class="s2">"symbol"</span><span class="p">)</span><span class="o">.</span><span class="n">repeat</span><span class="p">(</span><span class="n">num_sample</span><span class="p">)</span>
-
-        <span class="c1">#assert num_sample == 1</span>
-        <span class="c1">#manipulate node feature</span>
-        <span class="c1">#graph.node_feature[0] = torch.tensor([0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0,</span>
-        <span class="c1">#0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0]).float()</span>
-        <span class="c1">#print(graph.node_feature)</span>
-
-        <span class="c1">#TODO: workaround</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">device</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="s1">'cuda'</span><span class="p">:</span>
+        <span class="c1"># TODO: workaround</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">device</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="s2">"cuda"</span><span class="p">:</span>
             <span class="n">graph</span> <span class="o">=</span> <span class="n">graph</span><span class="o">.</span><span class="n">cuda</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">device</span><span class="p">)</span>
-
 
         <span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">max_step</span><span class="p">):</span>
-            <span class="c1">#logger.warning("action step: %d" % i)</span>
             <span class="n">new_graph</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_apply_action</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">off_policy</span><span class="p">,</span> <span class="n">max_resample</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="n">max_step</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span>
-                <span class="c1">#last step, collect all graph that is valid</span>
+                <span class="c1"># last step, collect all graph that is valid</span>
                 <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">new_graph</span><span class="p">[(</span><span class="n">new_graph</span><span class="o">.</span><span class="n">num_nodes</span> <span class="o">&lt;=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">max_node</span><span class="p">))])</span>            
             <span class="k">else</span><span class="p">:</span>
                 <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">new_graph</span><span class="p">[</span><span class="n">new_graph</span><span class="o">.</span><span class="n">is_stopped</span> <span class="o">|</span> <span class="p">(</span><span class="n">new_graph</span><span class="o">.</span><span class="n">num_nodes</span> <span class="o">==</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">max_node</span><span class="p">))])</span>
@@ -1617,9 +1548,11 @@
                 <span class="n">graph</span> <span class="o">=</span> <span class="n">new_graph</span><span class="p">[</span><span class="n">is_continue</span><span class="p">]</span>
                 <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">graph</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
                     <span class="k">break</span>
-        <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cat</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">result</span>        
 
+        <span class="bp">self</span><span class="o">.</span><span class="n">train</span><span class="p">(</span><span class="n">is_training</span><span class="p">)</span>
+
+        <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cat</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">result</span>
 
     <span class="k">def</span> <span class="nf">_append</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">num_xs</span><span class="p">,</span> <span class="nb">input</span><span class="p">,</span> <span class="n">mask</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">mask</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
@@ -1635,25 +1568,12 @@
         <span class="n">new_data</span><span class="p">[</span><span class="o">~</span><span class="n">index</span><span class="p">]</span> <span class="o">=</span> <span class="nb">input</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span>
         <span class="k">return</span> <span class="n">new_data</span><span class="p">,</span> <span class="n">new_num_xs</span>
 
-
-
-
-
-
-
-
-
-
-
-
-<span class="c1"># ***************************************</span>
-
     <span class="nd">@torch</span><span class="o">.</span><span class="n">no_grad</span><span class="p">()</span>
     <span class="k">def</span> <span class="nf">all_stop</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">graph</span><span class="p">):</span>
         <span class="k">if</span> <span class="p">(</span><span class="n">graph</span><span class="o">.</span><span class="n">num_nodes</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">any</span><span class="p">():</span>
             <span class="n">graph</span> <span class="o">=</span> <span class="n">graph</span><span class="p">[</span><span class="n">graph</span><span class="o">.</span><span class="n">num_nodes</span> <span class="o">&gt;=</span> <span class="mi">2</span><span class="p">]</span>
-            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">"Graphs with less than 2 nodes can't be used for stop prediction learning. Dropped"</span><span class="p">)</span>        
-        <span class="c1">#return graph, label1, label2, label3, label4</span>
+            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">"Graphs with less than 2 nodes can't be used for stop prediction learning. Dropped"</span><span class="p">)</span>
+
         <span class="n">label1</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">graph</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">long</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">device</span><span class="p">)</span>
         <span class="n">label2</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">label1</span><span class="p">)</span>
         <span class="n">label3</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">label1</span><span class="p">)</span>        
@@ -1722,9 +1642,7 @@
         <span class="n">node_in_extend</span> <span class="o">=</span> <span class="n">new_graph</span><span class="o">.</span><span class="n">num_nodes</span> <span class="o">+</span> <span class="n">new_node_atomid</span>
         <span class="n">node_in_final</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">is_new_node_edge</span> <span class="o">==</span> <span class="mi">0</span><span class="p">,</span> <span class="n">node_in</span><span class="p">,</span> <span class="n">node_in_extend</span><span class="p">)</span>        
 
-        <span class="c1">#return graph, label1, label2, label3, label4</span>
-        <span class="k">return</span> <span class="n">new_graph</span><span class="p">,</span> <span class="n">node_out</span><span class="p">,</span> <span class="n">node_in_final</span><span class="p">,</span> <span class="n">target</span><span class="p">,</span> <span class="n">torch</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">node_out</span><span class="o">.</span><span class="n">size</span><span class="p">(),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">long</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="n">graph</span><span class="o">.</span><span class="n">device</span><span class="p">)</span>
-
+        <span class="k">return</span> <span class="n">new_graph</span><span class="p">,</span> <span class="n">node_out</span><span class="p">,</span> <span class="n">node_in_final</span><span class="p">,</span> <span class="n">target</span><span class="p">,</span> <span class="n">torch</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">node_out</span><span class="p">)</span>
 
     <span class="nd">@torch</span><span class="o">.</span><span class="n">no_grad</span><span class="p">()</span>
     <span class="k">def</span> <span class="nf">_all_prefix_slice</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">num_xs</span><span class="p">,</span> <span class="n">lengths</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
@@ -1785,7 +1703,6 @@
         <span class="n">lengths</span> <span class="o">=</span> <span class="n">lengths</span><span class="p">[(</span><span class="n">num_edge_unrolls</span> <span class="o">&lt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_edge_unroll</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">num_edge_unrolls</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)]</span>
 
         <span class="k">return</span> <span class="n">lengths</span>
-
 
     <span class="k">def</span> <span class="nf">_cat</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">graphs</span><span class="p">):</span>
         <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">graph</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">graphs</span><span class="p">):</span>

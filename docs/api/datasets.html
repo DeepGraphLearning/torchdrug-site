@@ -135,7 +135,7 @@
 <li class="toctree-l1 has-children"><a class="reference internal" href="../benchmark/index.html">Benchmark</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label for="toctree-checkbox-1"><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../benchmark/property_prediction.html">Molecule Property Prediction</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../benchmark/pretrain.html">Pretrained Molecular Representations</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../benchmark/generation.html">Graph Generation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../benchmark/generation.html">Molecule Generation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../benchmark/retrosynthesis.html">Retrosynthesis</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../benchmark/reasoning.html">Knowledge Graph Reasoning</a></li>
 </ul>
@@ -997,13 +997,13 @@ By default, aromatic bonds are stored.</p></li>
 </dd></dl>
 </div>
 </div>
-<div class="section" id="social-network-datasets">
-<h2>Social Network Datasets<a class="headerlink" href="#social-network-datasets" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="citeseer">
-<h3>CiteSeer<a class="headerlink" href="#citeseer" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="citation-network-datasets">
+<h2>Citation Network Datasets<a class="headerlink" href="#citation-network-datasets" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="cora">
+<h3>Cora<a class="headerlink" href="#cora" title="Permalink to this headline">¶</a></h3>
 <dl class="py class">
-<dt id="torchdrug.datasets.CiteSeer">
-<em class="property">class </em><code class="sig-name descname">CiteSeer</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">path</span></em>, <em class="sig-param"><span class="n">verbose</span><span class="o">=</span><span class="default_value">1</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/datasets/citeseer.html#CiteSeer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.datasets.CiteSeer" title="Permalink to this definition">¶</a></dt>
+<dt id="torchdrug.datasets.Cora">
+<em class="property">class </em><code class="sig-name descname">Cora</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">path</span></em>, <em class="sig-param"><span class="n">verbose</span><span class="o">=</span><span class="default_value">1</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/datasets/cora.html#Cora"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.datasets.Cora" title="Permalink to this definition">¶</a></dt>
 <dd><p>A citation network of scientific publications with binary word features.</p>
 <dl class="simple">
 <dt>Statistics:</dt><dd><ul class="simple">
@@ -1023,11 +1023,11 @@ By default, aromatic bonds are stored.</p></li>
 </dl>
 </dd></dl>
 </div>
-<div class="section" id="cora">
-<h3>Cora<a class="headerlink" href="#cora" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="citeseer">
+<h3>CiteSeer<a class="headerlink" href="#citeseer" title="Permalink to this headline">¶</a></h3>
 <dl class="py class">
-<dt id="torchdrug.datasets.Cora">
-<em class="property">class </em><code class="sig-name descname">Cora</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">path</span></em>, <em class="sig-param"><span class="n">verbose</span><span class="o">=</span><span class="default_value">1</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/datasets/cora.html#Cora"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.datasets.Cora" title="Permalink to this definition">¶</a></dt>
+<dt id="torchdrug.datasets.CiteSeer">
+<em class="property">class </em><code class="sig-name descname">CiteSeer</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">path</span></em>, <em class="sig-param"><span class="n">verbose</span><span class="o">=</span><span class="default_value">1</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/datasets/citeseer.html#CiteSeer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.datasets.CiteSeer" title="Permalink to this definition">¶</a></dt>
 <dd><p>A citation network of scientific publications with binary word features.</p>
 <dl class="simple">
 <dt>Statistics:</dt><dd><ul class="simple">
@@ -1138,9 +1138,9 @@ By default, aromatic bonds are stored.</p></li>
 <li><a class="reference internal" href="#uspto50k">USPTO50k</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#social-network-datasets">Social Network Datasets</a><ul>
-<li><a class="reference internal" href="#citeseer">CiteSeer</a></li>
+<li><a class="reference internal" href="#citation-network-datasets">Citation Network Datasets</a><ul>
 <li><a class="reference internal" href="#cora">Cora</a></li>
+<li><a class="reference internal" href="#citeseer">CiteSeer</a></li>
 </ul>
 </li>
 </ul>

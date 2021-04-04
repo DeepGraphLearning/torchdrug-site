@@ -257,7 +257,7 @@ Let's then generate some small molecules from the pretrained GraphAF model.
     from collections import defaultdict
 
     solver.load("path_to_dump/graphgeneration/graphaf_zinc250k_10epoch.pkl")
-    results = task.generate(32)
+    results = task.generate(num_sample=32)
     print(results.to_smiles())
 
 The results are as follows:

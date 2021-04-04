@@ -135,7 +135,7 @@
 <li class="toctree-l1 has-children"><a class="reference internal" href="../benchmark/index.html">Benchmark</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label for="toctree-checkbox-1"><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../benchmark/property_prediction.html">Molecule Property Prediction</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../benchmark/pretrain.html">Pretrained Molecular Representations</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../benchmark/generation.html">Graph Generation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../benchmark/generation.html">Molecule Generation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../benchmark/retrosynthesis.html">Retrosynthesis</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../benchmark/reasoning.html">Knowledge Graph Reasoning</a></li>
 </ul>
@@ -213,6 +213,25 @@
 </ul>
 </dd>
 </dl>
+<dl class="py method">
+<dt id="torchdrug.layers.GaussianSmearing.forward">
+<code class="sig-name descname">forward</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">x</span></em>, <em class="sig-param"><span class="n">y</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/common.html#GaussianSmearing.forward"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.layers.GaussianSmearing.forward" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute smeared gaussian features between data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<em>Tensor</em>) – data of shape <span class="math notranslate nohighlight">\((..., d)\)</span></p></li>
+<li><p><strong>y</strong> (<em>Tensor</em>) – data of shape <span class="math notranslate nohighlight">\((..., d)\)</span></p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>features of shape <span class="math notranslate nohighlight">\((..., num\_kernel)\)</span></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>Tensor</p>
+</dd>
+</dl>
+</dd></dl>
 </dd></dl>
 </div>
 <div class="section" id="multilayerperceptron">
@@ -322,6 +341,91 @@ overwritten by any layer outputs.</p>
 <em class="property">class </em><code class="sig-name descname">MessagePassingBase</code><a class="reference internal" href="../_modules/torchdrug/layers/conv.html#MessagePassingBase"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.layers.MessagePassingBase" title="Permalink to this definition">¶</a></dt>
 <dd><p>Base module for message passing.</p>
 <p>Any custom message passing module should be derived from this class.</p>
+<dl class="py method">
+<dt id="torchdrug.layers.MessagePassingBase.aggregate">
+<code class="sig-name descname">aggregate</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">graph</span></em>, <em class="sig-param"><span class="n">message</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/conv.html#MessagePassingBase.aggregate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.layers.MessagePassingBase.aggregate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Aggregate edge messages to nodes.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>graph</strong> (<a class="reference internal" href="data.html#torchdrug.data.Graph" title="torchdrug.data.Graph"><em>Graph</em></a>) – graph</p></li>
+<li><p><strong>message</strong> (<em>Tensor</em>) – edge messages of shape <span class="math notranslate nohighlight">\((|E|, ...)\)</span></p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>node updates of shape <span class="math notranslate nohighlight">\((|V|, ...)\)</span></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>Tensor</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt id="torchdrug.layers.MessagePassingBase.combine">
+<code class="sig-name descname">combine</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">input</span></em>, <em class="sig-param"><span class="n">update</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/conv.html#MessagePassingBase.combine"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.layers.MessagePassingBase.combine" title="Permalink to this definition">¶</a></dt>
+<dd><p>Combine node input and node update.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input</strong> (<em>Tensor</em>) – node representations of shape <span class="math notranslate nohighlight">\((|V|, ...)\)</span></p></li>
+<li><p><strong>update</strong> (<em>Tensor</em>) – node updates of shape <span class="math notranslate nohighlight">\((|V|, ...)\)</span></p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt id="torchdrug.layers.MessagePassingBase.forward">
+<code class="sig-name descname">forward</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">graph</span></em>, <em class="sig-param"><span class="n">input</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/conv.html#MessagePassingBase.forward"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.layers.MessagePassingBase.forward" title="Permalink to this definition">¶</a></dt>
+<dd><p>Perform message passing over the graph.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>graph</strong> (<a class="reference internal" href="data.html#torchdrug.data.Graph" title="torchdrug.data.Graph"><em>Graph</em></a>) – graph</p></li>
+<li><p><strong>input</strong> (<em>Tensor</em>) – node representations of shape <span class="math notranslate nohighlight">\((|V|, ...)\)</span></p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt id="torchdrug.layers.MessagePassingBase.message">
+<code class="sig-name descname">message</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">graph</span></em>, <em class="sig-param"><span class="n">input</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/conv.html#MessagePassingBase.message"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.layers.MessagePassingBase.message" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute edge messages for the graph.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>graph</strong> (<a class="reference internal" href="data.html#torchdrug.data.Graph" title="torchdrug.data.Graph"><em>Graph</em></a>) – graph</p></li>
+<li><p><strong>input</strong> (<em>Tensor</em>) – node representations of shape <span class="math notranslate nohighlight">\((|V|, ...)\)</span></p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>edge messages of shape <span class="math notranslate nohighlight">\((|E|, ...)\)</span></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>Tensor</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt id="torchdrug.layers.MessagePassingBase.message_and_aggregate">
+<code class="sig-name descname">message_and_aggregate</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">graph</span></em>, <em class="sig-param"><span class="n">input</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/conv.html#MessagePassingBase.message_and_aggregate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.layers.MessagePassingBase.message_and_aggregate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fused computation of message and aggregation over the graph.
+This may provide better time or memory complexity than separate calls of
+<a class="reference internal" href="#torchdrug.layers.MessagePassingBase.message" title="torchdrug.layers.MessagePassingBase.message"><code class="xref py py-meth docutils literal notranslate"><span class="pre">message</span></code></a> and <a class="reference internal" href="#torchdrug.layers.MessagePassingBase.aggregate" title="torchdrug.layers.MessagePassingBase.aggregate"><code class="xref py py-meth docutils literal notranslate"><span class="pre">aggregate</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>graph</strong> (<a class="reference internal" href="data.html#torchdrug.data.Graph" title="torchdrug.data.Graph"><em>Graph</em></a>) – graph</p></li>
+<li><p><strong>input</strong> (<em>Tensor</em>) – node representations of shape <span class="math notranslate nohighlight">\((|V|, ...)\)</span></p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>node updates of shape <span class="math notranslate nohighlight">\((|V|, ...)\)</span></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>Tensor</p>
+</dd>
+</dl>
+</dd></dl>
 </dd></dl>
 <div class="section" id="chebyshevconv">
 <h3>ChebyshevConv<a class="headerlink" href="#chebyshevconv" title="Permalink to this headline">¶</a></h3>
@@ -344,6 +448,91 @@ This also corresponds to the radius of the receptive field.</p></li>
 </ul>
 </dd>
 </dl>
+<dl class="py method">
+<dt id="torchdrug.layers.ChebyshevConv.aggregate">
+<code class="sig-name descname">aggregate</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">graph</span></em>, <em class="sig-param"><span class="n">message</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/conv.html#ChebyshevConv.aggregate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.layers.ChebyshevConv.aggregate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Aggregate edge messages to nodes.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>graph</strong> (<a class="reference internal" href="data.html#torchdrug.data.Graph" title="torchdrug.data.Graph"><em>Graph</em></a>) – graph</p></li>
+<li><p><strong>message</strong> (<em>Tensor</em>) – edge messages of shape <span class="math notranslate nohighlight">\((|E|, ...)\)</span></p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>node updates of shape <span class="math notranslate nohighlight">\((|V|, ...)\)</span></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>Tensor</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt id="torchdrug.layers.ChebyshevConv.combine">
+<code class="sig-name descname">combine</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">input</span></em>, <em class="sig-param"><span class="n">update</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/conv.html#ChebyshevConv.combine"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.layers.ChebyshevConv.combine" title="Permalink to this definition">¶</a></dt>
+<dd><p>Combine node input and node update.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input</strong> (<em>Tensor</em>) – node representations of shape <span class="math notranslate nohighlight">\((|V|, ...)\)</span></p></li>
+<li><p><strong>update</strong> (<em>Tensor</em>) – node updates of shape <span class="math notranslate nohighlight">\((|V|, ...)\)</span></p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt id="torchdrug.layers.ChebyshevConv.forward">
+<code class="sig-name descname">forward</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">graph</span></em>, <em class="sig-param"><span class="n">input</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/conv.html#ChebyshevConv.forward"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.layers.ChebyshevConv.forward" title="Permalink to this definition">¶</a></dt>
+<dd><p>Perform message passing over the graph.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>graph</strong> (<a class="reference internal" href="data.html#torchdrug.data.Graph" title="torchdrug.data.Graph"><em>Graph</em></a>) – graph</p></li>
+<li><p><strong>input</strong> (<em>Tensor</em>) – node representations of shape <span class="math notranslate nohighlight">\((|V|, ...)\)</span></p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt id="torchdrug.layers.ChebyshevConv.message">
+<code class="sig-name descname">message</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">graph</span></em>, <em class="sig-param"><span class="n">input</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/conv.html#ChebyshevConv.message"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.layers.ChebyshevConv.message" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute edge messages for the graph.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>graph</strong> (<a class="reference internal" href="data.html#torchdrug.data.Graph" title="torchdrug.data.Graph"><em>Graph</em></a>) – graph</p></li>
+<li><p><strong>input</strong> (<em>Tensor</em>) – node representations of shape <span class="math notranslate nohighlight">\((|V|, ...)\)</span></p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>edge messages of shape <span class="math notranslate nohighlight">\((|E|, ...)\)</span></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>Tensor</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt id="torchdrug.layers.ChebyshevConv.message_and_aggregate">
+<code class="sig-name descname">message_and_aggregate</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">graph</span></em>, <em class="sig-param"><span class="n">input</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/conv.html#ChebyshevConv.message_and_aggregate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.layers.ChebyshevConv.message_and_aggregate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fused computation of message and aggregation over the graph.
+This may provide better time or memory complexity than separate calls of
+<a class="reference internal" href="#torchdrug.layers.MessagePassingBase.message" title="torchdrug.layers.MessagePassingBase.message"><code class="xref py py-meth docutils literal notranslate"><span class="pre">message</span></code></a> and <a class="reference internal" href="#torchdrug.layers.MessagePassingBase.aggregate" title="torchdrug.layers.MessagePassingBase.aggregate"><code class="xref py py-meth docutils literal notranslate"><span class="pre">aggregate</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>graph</strong> (<a class="reference internal" href="data.html#torchdrug.data.Graph" title="torchdrug.data.Graph"><em>Graph</em></a>) – graph</p></li>
+<li><p><strong>input</strong> (<em>Tensor</em>) – node representations of shape <span class="math notranslate nohighlight">\((|V|, ...)\)</span></p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>node updates of shape <span class="math notranslate nohighlight">\((|V|, ...)\)</span></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>Tensor</p>
+</dd>
+</dl>
+</dd></dl>
 </dd></dl>
 </div>
 <div class="section" id="continuousfilterconv">
@@ -367,6 +556,78 @@ This also corresponds to the radius of the receptive field.</p></li>
 </ul>
 </dd>
 </dl>
+<dl class="py method">
+<dt id="torchdrug.layers.ContinuousFilterConv.aggregate">
+<code class="sig-name descname">aggregate</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">graph</span></em>, <em class="sig-param"><span class="n">message</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/conv.html#ContinuousFilterConv.aggregate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.layers.ContinuousFilterConv.aggregate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Aggregate edge messages to nodes.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>graph</strong> (<a class="reference internal" href="data.html#torchdrug.data.Graph" title="torchdrug.data.Graph"><em>Graph</em></a>) – graph</p></li>
+<li><p><strong>message</strong> (<em>Tensor</em>) – edge messages of shape <span class="math notranslate nohighlight">\((|E|, ...)\)</span></p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>node updates of shape <span class="math notranslate nohighlight">\((|V|, ...)\)</span></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>Tensor</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt id="torchdrug.layers.ContinuousFilterConv.combine">
+<code class="sig-name descname">combine</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">input</span></em>, <em class="sig-param"><span class="n">update</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/conv.html#ContinuousFilterConv.combine"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.layers.ContinuousFilterConv.combine" title="Permalink to this definition">¶</a></dt>
+<dd><p>Combine node input and node update.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input</strong> (<em>Tensor</em>) – node representations of shape <span class="math notranslate nohighlight">\((|V|, ...)\)</span></p></li>
+<li><p><strong>update</strong> (<em>Tensor</em>) – node updates of shape <span class="math notranslate nohighlight">\((|V|, ...)\)</span></p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt id="torchdrug.layers.ContinuousFilterConv.message">
+<code class="sig-name descname">message</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">graph</span></em>, <em class="sig-param"><span class="n">input</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/conv.html#ContinuousFilterConv.message"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.layers.ContinuousFilterConv.message" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute edge messages for the graph.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>graph</strong> (<a class="reference internal" href="data.html#torchdrug.data.Graph" title="torchdrug.data.Graph"><em>Graph</em></a>) – graph</p></li>
+<li><p><strong>input</strong> (<em>Tensor</em>) – node representations of shape <span class="math notranslate nohighlight">\((|V|, ...)\)</span></p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>edge messages of shape <span class="math notranslate nohighlight">\((|E|, ...)\)</span></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>Tensor</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt id="torchdrug.layers.ContinuousFilterConv.message_and_aggregate">
+<code class="sig-name descname">message_and_aggregate</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">graph</span></em>, <em class="sig-param"><span class="n">input</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/conv.html#ContinuousFilterConv.message_and_aggregate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.layers.ContinuousFilterConv.message_and_aggregate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fused computation of message and aggregation over the graph.
+This may provide better time or memory complexity than separate calls of
+<a class="reference internal" href="#torchdrug.layers.MessagePassingBase.message" title="torchdrug.layers.MessagePassingBase.message"><code class="xref py py-meth docutils literal notranslate"><span class="pre">message</span></code></a> and <a class="reference internal" href="#torchdrug.layers.MessagePassingBase.aggregate" title="torchdrug.layers.MessagePassingBase.aggregate"><code class="xref py py-meth docutils literal notranslate"><span class="pre">aggregate</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>graph</strong> (<a class="reference internal" href="data.html#torchdrug.data.Graph" title="torchdrug.data.Graph"><em>Graph</em></a>) – graph</p></li>
+<li><p><strong>input</strong> (<em>Tensor</em>) – node representations of shape <span class="math notranslate nohighlight">\((|V|, ...)\)</span></p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>node updates of shape <span class="math notranslate nohighlight">\((|V|, ...)\)</span></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>Tensor</p>
+</dd>
+</dl>
+</dd></dl>
 </dd></dl>
 </div>
 <div class="section" id="graphattentionconv">
@@ -388,6 +649,57 @@ This also corresponds to the radius of the receptive field.</p></li>
 </ul>
 </dd>
 </dl>
+<dl class="py method">
+<dt id="torchdrug.layers.GraphAttentionConv.aggregate">
+<code class="sig-name descname">aggregate</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">graph</span></em>, <em class="sig-param"><span class="n">message</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/conv.html#GraphAttentionConv.aggregate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.layers.GraphAttentionConv.aggregate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Aggregate edge messages to nodes.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>graph</strong> (<a class="reference internal" href="data.html#torchdrug.data.Graph" title="torchdrug.data.Graph"><em>Graph</em></a>) – graph</p></li>
+<li><p><strong>message</strong> (<em>Tensor</em>) – edge messages of shape <span class="math notranslate nohighlight">\((|E|, ...)\)</span></p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>node updates of shape <span class="math notranslate nohighlight">\((|V|, ...)\)</span></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>Tensor</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt id="torchdrug.layers.GraphAttentionConv.combine">
+<code class="sig-name descname">combine</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">input</span></em>, <em class="sig-param"><span class="n">update</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/conv.html#GraphAttentionConv.combine"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.layers.GraphAttentionConv.combine" title="Permalink to this definition">¶</a></dt>
+<dd><p>Combine node input and node update.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input</strong> (<em>Tensor</em>) – node representations of shape <span class="math notranslate nohighlight">\((|V|, ...)\)</span></p></li>
+<li><p><strong>update</strong> (<em>Tensor</em>) – node updates of shape <span class="math notranslate nohighlight">\((|V|, ...)\)</span></p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt id="torchdrug.layers.GraphAttentionConv.message">
+<code class="sig-name descname">message</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">graph</span></em>, <em class="sig-param"><span class="n">input</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/conv.html#GraphAttentionConv.message"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.layers.GraphAttentionConv.message" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute edge messages for the graph.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>graph</strong> (<a class="reference internal" href="data.html#torchdrug.data.Graph" title="torchdrug.data.Graph"><em>Graph</em></a>) – graph</p></li>
+<li><p><strong>input</strong> (<em>Tensor</em>) – node representations of shape <span class="math notranslate nohighlight">\((|V|, ...)\)</span></p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>edge messages of shape <span class="math notranslate nohighlight">\((|E|, ...)\)</span></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>Tensor</p>
+</dd>
+</dl>
+</dd></dl>
 </dd></dl>
 </div>
 <div class="section" id="graphconv">
@@ -407,6 +719,78 @@ This also corresponds to the radius of the receptive field.</p></li>
 </ul>
 </dd>
 </dl>
+<dl class="py method">
+<dt id="torchdrug.layers.GraphConv.aggregate">
+<code class="sig-name descname">aggregate</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">graph</span></em>, <em class="sig-param"><span class="n">message</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/conv.html#GraphConv.aggregate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.layers.GraphConv.aggregate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Aggregate edge messages to nodes.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>graph</strong> (<a class="reference internal" href="data.html#torchdrug.data.Graph" title="torchdrug.data.Graph"><em>Graph</em></a>) – graph</p></li>
+<li><p><strong>message</strong> (<em>Tensor</em>) – edge messages of shape <span class="math notranslate nohighlight">\((|E|, ...)\)</span></p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>node updates of shape <span class="math notranslate nohighlight">\((|V|, ...)\)</span></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>Tensor</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt id="torchdrug.layers.GraphConv.combine">
+<code class="sig-name descname">combine</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">input</span></em>, <em class="sig-param"><span class="n">update</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/conv.html#GraphConv.combine"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.layers.GraphConv.combine" title="Permalink to this definition">¶</a></dt>
+<dd><p>Combine node input and node update.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input</strong> (<em>Tensor</em>) – node representations of shape <span class="math notranslate nohighlight">\((|V|, ...)\)</span></p></li>
+<li><p><strong>update</strong> (<em>Tensor</em>) – node updates of shape <span class="math notranslate nohighlight">\((|V|, ...)\)</span></p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt id="torchdrug.layers.GraphConv.message">
+<code class="sig-name descname">message</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">graph</span></em>, <em class="sig-param"><span class="n">input</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/conv.html#GraphConv.message"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.layers.GraphConv.message" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute edge messages for the graph.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>graph</strong> (<a class="reference internal" href="data.html#torchdrug.data.Graph" title="torchdrug.data.Graph"><em>Graph</em></a>) – graph</p></li>
+<li><p><strong>input</strong> (<em>Tensor</em>) – node representations of shape <span class="math notranslate nohighlight">\((|V|, ...)\)</span></p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>edge messages of shape <span class="math notranslate nohighlight">\((|E|, ...)\)</span></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>Tensor</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt id="torchdrug.layers.GraphConv.message_and_aggregate">
+<code class="sig-name descname">message_and_aggregate</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">graph</span></em>, <em class="sig-param"><span class="n">input</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/conv.html#GraphConv.message_and_aggregate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.layers.GraphConv.message_and_aggregate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fused computation of message and aggregation over the graph.
+This may provide better time or memory complexity than separate calls of
+<a class="reference internal" href="#torchdrug.layers.MessagePassingBase.message" title="torchdrug.layers.MessagePassingBase.message"><code class="xref py py-meth docutils literal notranslate"><span class="pre">message</span></code></a> and <a class="reference internal" href="#torchdrug.layers.MessagePassingBase.aggregate" title="torchdrug.layers.MessagePassingBase.aggregate"><code class="xref py py-meth docutils literal notranslate"><span class="pre">aggregate</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>graph</strong> (<a class="reference internal" href="data.html#torchdrug.data.Graph" title="torchdrug.data.Graph"><em>Graph</em></a>) – graph</p></li>
+<li><p><strong>input</strong> (<em>Tensor</em>) – node representations of shape <span class="math notranslate nohighlight">\((|V|, ...)\)</span></p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>node updates of shape <span class="math notranslate nohighlight">\((|V|, ...)\)</span></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>Tensor</p>
+</dd>
+</dl>
+</dd></dl>
 </dd></dl>
 </div>
 <div class="section" id="graphisomorphismconv">
@@ -429,6 +813,78 @@ This also corresponds to the radius of the receptive field.</p></li>
 </ul>
 </dd>
 </dl>
+<dl class="py method">
+<dt id="torchdrug.layers.GraphIsomorphismConv.aggregate">
+<code class="sig-name descname">aggregate</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">graph</span></em>, <em class="sig-param"><span class="n">message</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/conv.html#GraphIsomorphismConv.aggregate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.layers.GraphIsomorphismConv.aggregate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Aggregate edge messages to nodes.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>graph</strong> (<a class="reference internal" href="data.html#torchdrug.data.Graph" title="torchdrug.data.Graph"><em>Graph</em></a>) – graph</p></li>
+<li><p><strong>message</strong> (<em>Tensor</em>) – edge messages of shape <span class="math notranslate nohighlight">\((|E|, ...)\)</span></p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>node updates of shape <span class="math notranslate nohighlight">\((|V|, ...)\)</span></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>Tensor</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt id="torchdrug.layers.GraphIsomorphismConv.combine">
+<code class="sig-name descname">combine</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">input</span></em>, <em class="sig-param"><span class="n">update</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/conv.html#GraphIsomorphismConv.combine"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.layers.GraphIsomorphismConv.combine" title="Permalink to this definition">¶</a></dt>
+<dd><p>Combine node input and node update.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input</strong> (<em>Tensor</em>) – node representations of shape <span class="math notranslate nohighlight">\((|V|, ...)\)</span></p></li>
+<li><p><strong>update</strong> (<em>Tensor</em>) – node updates of shape <span class="math notranslate nohighlight">\((|V|, ...)\)</span></p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt id="torchdrug.layers.GraphIsomorphismConv.message">
+<code class="sig-name descname">message</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">graph</span></em>, <em class="sig-param"><span class="n">input</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/conv.html#GraphIsomorphismConv.message"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.layers.GraphIsomorphismConv.message" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute edge messages for the graph.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>graph</strong> (<a class="reference internal" href="data.html#torchdrug.data.Graph" title="torchdrug.data.Graph"><em>Graph</em></a>) – graph</p></li>
+<li><p><strong>input</strong> (<em>Tensor</em>) – node representations of shape <span class="math notranslate nohighlight">\((|V|, ...)\)</span></p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>edge messages of shape <span class="math notranslate nohighlight">\((|E|, ...)\)</span></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>Tensor</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt id="torchdrug.layers.GraphIsomorphismConv.message_and_aggregate">
+<code class="sig-name descname">message_and_aggregate</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">graph</span></em>, <em class="sig-param"><span class="n">input</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/conv.html#GraphIsomorphismConv.message_and_aggregate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.layers.GraphIsomorphismConv.message_and_aggregate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fused computation of message and aggregation over the graph.
+This may provide better time or memory complexity than separate calls of
+<a class="reference internal" href="#torchdrug.layers.MessagePassingBase.message" title="torchdrug.layers.MessagePassingBase.message"><code class="xref py py-meth docutils literal notranslate"><span class="pre">message</span></code></a> and <a class="reference internal" href="#torchdrug.layers.MessagePassingBase.aggregate" title="torchdrug.layers.MessagePassingBase.aggregate"><code class="xref py py-meth docutils literal notranslate"><span class="pre">aggregate</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>graph</strong> (<a class="reference internal" href="data.html#torchdrug.data.Graph" title="torchdrug.data.Graph"><em>Graph</em></a>) – graph</p></li>
+<li><p><strong>input</strong> (<em>Tensor</em>) – node representations of shape <span class="math notranslate nohighlight">\((|V|, ...)\)</span></p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>node updates of shape <span class="math notranslate nohighlight">\((|V|, ...)\)</span></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>Tensor</p>
+</dd>
+</dl>
+</dd></dl>
 </dd></dl>
 </div>
 <div class="section" id="messagepassing">
@@ -449,6 +905,57 @@ This also corresponds to the radius of the receptive field.</p></li>
 </ul>
 </dd>
 </dl>
+<dl class="py method">
+<dt id="torchdrug.layers.MessagePassing.aggregate">
+<code class="sig-name descname">aggregate</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">graph</span></em>, <em class="sig-param"><span class="n">message</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/conv.html#MessagePassing.aggregate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.layers.MessagePassing.aggregate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Aggregate edge messages to nodes.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>graph</strong> (<a class="reference internal" href="data.html#torchdrug.data.Graph" title="torchdrug.data.Graph"><em>Graph</em></a>) – graph</p></li>
+<li><p><strong>message</strong> (<em>Tensor</em>) – edge messages of shape <span class="math notranslate nohighlight">\((|E|, ...)\)</span></p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>node updates of shape <span class="math notranslate nohighlight">\((|V|, ...)\)</span></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>Tensor</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt id="torchdrug.layers.MessagePassing.combine">
+<code class="sig-name descname">combine</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">input</span></em>, <em class="sig-param"><span class="n">update</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/conv.html#MessagePassing.combine"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.layers.MessagePassing.combine" title="Permalink to this definition">¶</a></dt>
+<dd><p>Combine node input and node update.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input</strong> (<em>Tensor</em>) – node representations of shape <span class="math notranslate nohighlight">\((|V|, ...)\)</span></p></li>
+<li><p><strong>update</strong> (<em>Tensor</em>) – node updates of shape <span class="math notranslate nohighlight">\((|V|, ...)\)</span></p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt id="torchdrug.layers.MessagePassing.message">
+<code class="sig-name descname">message</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">graph</span></em>, <em class="sig-param"><span class="n">input</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/conv.html#MessagePassing.message"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.layers.MessagePassing.message" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute edge messages for the graph.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>graph</strong> (<a class="reference internal" href="data.html#torchdrug.data.Graph" title="torchdrug.data.Graph"><em>Graph</em></a>) – graph</p></li>
+<li><p><strong>input</strong> (<em>Tensor</em>) – node representations of shape <span class="math notranslate nohighlight">\((|V|, ...)\)</span></p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>edge messages of shape <span class="math notranslate nohighlight">\((|E|, ...)\)</span></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>Tensor</p>
+</dd>
+</dl>
+</dd></dl>
 </dd></dl>
 </div>
 <div class="section" id="neuralfingerprintconv">
@@ -469,6 +976,78 @@ This also corresponds to the radius of the receptive field.</p></li>
 </ul>
 </dd>
 </dl>
+<dl class="py method">
+<dt id="torchdrug.layers.NeuralFingerprintConv.aggregate">
+<code class="sig-name descname">aggregate</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">graph</span></em>, <em class="sig-param"><span class="n">message</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/conv.html#NeuralFingerprintConv.aggregate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.layers.NeuralFingerprintConv.aggregate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Aggregate edge messages to nodes.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>graph</strong> (<a class="reference internal" href="data.html#torchdrug.data.Graph" title="torchdrug.data.Graph"><em>Graph</em></a>) – graph</p></li>
+<li><p><strong>message</strong> (<em>Tensor</em>) – edge messages of shape <span class="math notranslate nohighlight">\((|E|, ...)\)</span></p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>node updates of shape <span class="math notranslate nohighlight">\((|V|, ...)\)</span></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>Tensor</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt id="torchdrug.layers.NeuralFingerprintConv.combine">
+<code class="sig-name descname">combine</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">input</span></em>, <em class="sig-param"><span class="n">update</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/conv.html#NeuralFingerprintConv.combine"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.layers.NeuralFingerprintConv.combine" title="Permalink to this definition">¶</a></dt>
+<dd><p>Combine node input and node update.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input</strong> (<em>Tensor</em>) – node representations of shape <span class="math notranslate nohighlight">\((|V|, ...)\)</span></p></li>
+<li><p><strong>update</strong> (<em>Tensor</em>) – node updates of shape <span class="math notranslate nohighlight">\((|V|, ...)\)</span></p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt id="torchdrug.layers.NeuralFingerprintConv.message">
+<code class="sig-name descname">message</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">graph</span></em>, <em class="sig-param"><span class="n">input</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/conv.html#NeuralFingerprintConv.message"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.layers.NeuralFingerprintConv.message" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute edge messages for the graph.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>graph</strong> (<a class="reference internal" href="data.html#torchdrug.data.Graph" title="torchdrug.data.Graph"><em>Graph</em></a>) – graph</p></li>
+<li><p><strong>input</strong> (<em>Tensor</em>) – node representations of shape <span class="math notranslate nohighlight">\((|V|, ...)\)</span></p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>edge messages of shape <span class="math notranslate nohighlight">\((|E|, ...)\)</span></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>Tensor</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt id="torchdrug.layers.NeuralFingerprintConv.message_and_aggregate">
+<code class="sig-name descname">message_and_aggregate</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">graph</span></em>, <em class="sig-param"><span class="n">input</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/conv.html#NeuralFingerprintConv.message_and_aggregate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.layers.NeuralFingerprintConv.message_and_aggregate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fused computation of message and aggregation over the graph.
+This may provide better time or memory complexity than separate calls of
+<a class="reference internal" href="#torchdrug.layers.MessagePassingBase.message" title="torchdrug.layers.MessagePassingBase.message"><code class="xref py py-meth docutils literal notranslate"><span class="pre">message</span></code></a> and <a class="reference internal" href="#torchdrug.layers.MessagePassingBase.aggregate" title="torchdrug.layers.MessagePassingBase.aggregate"><code class="xref py py-meth docutils literal notranslate"><span class="pre">aggregate</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>graph</strong> (<a class="reference internal" href="data.html#torchdrug.data.Graph" title="torchdrug.data.Graph"><em>Graph</em></a>) – graph</p></li>
+<li><p><strong>input</strong> (<em>Tensor</em>) – node representations of shape <span class="math notranslate nohighlight">\((|V|, ...)\)</span></p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>node updates of shape <span class="math notranslate nohighlight">\((|V|, ...)\)</span></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>Tensor</p>
+</dd>
+</dl>
+</dd></dl>
 </dd></dl>
 </div>
 <div class="section" id="relationalgraphconv">
@@ -489,6 +1068,78 @@ This also corresponds to the radius of the receptive field.</p></li>
 </ul>
 </dd>
 </dl>
+<dl class="py method">
+<dt id="torchdrug.layers.RelationalGraphConv.aggregate">
+<code class="sig-name descname">aggregate</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">graph</span></em>, <em class="sig-param"><span class="n">message</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/conv.html#RelationalGraphConv.aggregate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.layers.RelationalGraphConv.aggregate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Aggregate edge messages to nodes.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>graph</strong> (<a class="reference internal" href="data.html#torchdrug.data.Graph" title="torchdrug.data.Graph"><em>Graph</em></a>) – graph</p></li>
+<li><p><strong>message</strong> (<em>Tensor</em>) – edge messages of shape <span class="math notranslate nohighlight">\((|E|, ...)\)</span></p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>node updates of shape <span class="math notranslate nohighlight">\((|V|, ...)\)</span></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>Tensor</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt id="torchdrug.layers.RelationalGraphConv.combine">
+<code class="sig-name descname">combine</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">input</span></em>, <em class="sig-param"><span class="n">update</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/conv.html#RelationalGraphConv.combine"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.layers.RelationalGraphConv.combine" title="Permalink to this definition">¶</a></dt>
+<dd><p>Combine node input and node update.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input</strong> (<em>Tensor</em>) – node representations of shape <span class="math notranslate nohighlight">\((|V|, ...)\)</span></p></li>
+<li><p><strong>update</strong> (<em>Tensor</em>) – node updates of shape <span class="math notranslate nohighlight">\((|V|, ...)\)</span></p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt id="torchdrug.layers.RelationalGraphConv.message">
+<code class="sig-name descname">message</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">graph</span></em>, <em class="sig-param"><span class="n">input</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/conv.html#RelationalGraphConv.message"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.layers.RelationalGraphConv.message" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute edge messages for the graph.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>graph</strong> (<a class="reference internal" href="data.html#torchdrug.data.Graph" title="torchdrug.data.Graph"><em>Graph</em></a>) – graph</p></li>
+<li><p><strong>input</strong> (<em>Tensor</em>) – node representations of shape <span class="math notranslate nohighlight">\((|V|, ...)\)</span></p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>edge messages of shape <span class="math notranslate nohighlight">\((|E|, ...)\)</span></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>Tensor</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt id="torchdrug.layers.RelationalGraphConv.message_and_aggregate">
+<code class="sig-name descname">message_and_aggregate</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">graph</span></em>, <em class="sig-param"><span class="n">input</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/conv.html#RelationalGraphConv.message_and_aggregate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.layers.RelationalGraphConv.message_and_aggregate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fused computation of message and aggregation over the graph.
+This may provide better time or memory complexity than separate calls of
+<a class="reference internal" href="#torchdrug.layers.MessagePassingBase.message" title="torchdrug.layers.MessagePassingBase.message"><code class="xref py py-meth docutils literal notranslate"><span class="pre">message</span></code></a> and <a class="reference internal" href="#torchdrug.layers.MessagePassingBase.aggregate" title="torchdrug.layers.MessagePassingBase.aggregate"><code class="xref py py-meth docutils literal notranslate"><span class="pre">aggregate</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>graph</strong> (<a class="reference internal" href="data.html#torchdrug.data.Graph" title="torchdrug.data.Graph"><em>Graph</em></a>) – graph</p></li>
+<li><p><strong>input</strong> (<em>Tensor</em>) – node representations of shape <span class="math notranslate nohighlight">\((|V|, ...)\)</span></p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>node updates of shape <span class="math notranslate nohighlight">\((|V|, ...)\)</span></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>Tensor</p>
+</dd>
+</dl>
+</dd></dl>
 </dd></dl>
 </div>
 </div>
@@ -500,6 +1151,25 @@ This also corresponds to the radius of the receptive field.</p></li>
 <dt id="torchdrug.layers.MeanReadout">
 <em class="property">class </em><code class="sig-name descname">MeanReadout</code><a class="reference internal" href="../_modules/torchdrug/layers/readout.html#MeanReadout"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.layers.MeanReadout" title="Permalink to this definition">¶</a></dt>
 <dd><p>Mean readout operator over graphs with variadic sizes.</p>
+<dl class="py method">
+<dt id="torchdrug.layers.MeanReadout.forward">
+<code class="sig-name descname">forward</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">graph</span></em>, <em class="sig-param"><span class="n">input</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/readout.html#MeanReadout.forward"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.layers.MeanReadout.forward" title="Permalink to this definition">¶</a></dt>
+<dd><p>Perform readout over the graph(s).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>graph</strong> (<a class="reference internal" href="data.html#torchdrug.data.Graph" title="torchdrug.data.Graph"><em>Graph</em></a>) – graph(s)</p></li>
+<li><p><strong>input</strong> (<em>Tensor</em>) – node representations</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>graph representations</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>Tensor</p>
+</dd>
+</dl>
+</dd></dl>
 </dd></dl>
 </div>
 <div class="section" id="sumreadout">
@@ -508,6 +1178,25 @@ This also corresponds to the radius of the receptive field.</p></li>
 <dt id="torchdrug.layers.SumReadout">
 <em class="property">class </em><code class="sig-name descname">SumReadout</code><a class="reference internal" href="../_modules/torchdrug/layers/readout.html#SumReadout"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.layers.SumReadout" title="Permalink to this definition">¶</a></dt>
 <dd><p>Sum readout operator over graphs with variadic sizes.</p>
+<dl class="py method">
+<dt id="torchdrug.layers.SumReadout.forward">
+<code class="sig-name descname">forward</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">graph</span></em>, <em class="sig-param"><span class="n">input</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/readout.html#SumReadout.forward"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.layers.SumReadout.forward" title="Permalink to this definition">¶</a></dt>
+<dd><p>Perform readout over the graph(s).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>graph</strong> (<a class="reference internal" href="data.html#torchdrug.data.Graph" title="torchdrug.data.Graph"><em>Graph</em></a>) – graph(s)</p></li>
+<li><p><strong>input</strong> (<em>Tensor</em>) – node representations</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>graph representations</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>Tensor</p>
+</dd>
+</dl>
+</dd></dl>
 </dd></dl>
 </div>
 <div class="section" id="maxreadout">
@@ -516,6 +1205,25 @@ This also corresponds to the radius of the receptive field.</p></li>
 <dt id="torchdrug.layers.MaxReadout">
 <em class="property">class </em><code class="sig-name descname">MaxReadout</code><a class="reference internal" href="../_modules/torchdrug/layers/readout.html#MaxReadout"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.layers.MaxReadout" title="Permalink to this definition">¶</a></dt>
 <dd><p>Max readout operator over graphs with variadic sizes.</p>
+<dl class="py method">
+<dt id="torchdrug.layers.MaxReadout.forward">
+<code class="sig-name descname">forward</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">graph</span></em>, <em class="sig-param"><span class="n">input</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/readout.html#MaxReadout.forward"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.layers.MaxReadout.forward" title="Permalink to this definition">¶</a></dt>
+<dd><p>Perform readout over the graph(s).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>graph</strong> (<a class="reference internal" href="data.html#torchdrug.data.Graph" title="torchdrug.data.Graph"><em>Graph</em></a>) – graph(s)</p></li>
+<li><p><strong>input</strong> (<em>Tensor</em>) – node representations</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>graph representations</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>Tensor</p>
+</dd>
+</dl>
+</dd></dl>
 </dd></dl>
 </div>
 <div class="section" id="softmax">
@@ -524,6 +1232,25 @@ This also corresponds to the radius of the receptive field.</p></li>
 <dt id="torchdrug.layers.Softmax">
 <em class="property">class </em><code class="sig-name descname">Softmax</code><a class="reference internal" href="../_modules/torchdrug/layers/readout.html#Softmax"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.layers.Softmax" title="Permalink to this definition">¶</a></dt>
 <dd><p>Softmax operator over graphs with variadic sizes.</p>
+<dl class="py method">
+<dt id="torchdrug.layers.Softmax.forward">
+<code class="sig-name descname">forward</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">graph</span></em>, <em class="sig-param"><span class="n">input</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/readout.html#Softmax.forward"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.layers.Softmax.forward" title="Permalink to this definition">¶</a></dt>
+<dd><p>Perform softmax over the graph(s).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>graph</strong> (<a class="reference internal" href="data.html#torchdrug.data.Graph" title="torchdrug.data.Graph"><em>Graph</em></a>) – graph(s)</p></li>
+<li><p><strong>input</strong> (<em>Tensor</em>) – node logits</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>node probabilities</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>Tensor</p>
+</dd>
+</dl>
+</dd></dl>
 </dd></dl>
 </div>
 <div class="section" id="set2set">

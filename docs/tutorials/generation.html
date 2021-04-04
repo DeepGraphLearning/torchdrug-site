@@ -135,7 +135,7 @@
 <li class="toctree-l1 has-children"><a class="reference internal" href="../benchmark/index.html">Benchmark</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label for="toctree-checkbox-1"><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../benchmark/property_prediction.html">Molecule Property Prediction</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../benchmark/pretrain.html">Pretrained Molecular Representations</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../benchmark/generation.html">Graph Generation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../benchmark/generation.html">Molecule Generation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../benchmark/retrosynthesis.html">Retrosynthesis</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../benchmark/reasoning.html">Knowledge Graph Reasoning</a></li>
 </ul>
@@ -399,7 +399,7 @@ Let’s then generate some small molecules from the pretrained GraphAF model.</p
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">defaultdict</span>
 
 <span class="n">solver</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">"path_to_dump/graphgeneration/graphaf_zinc250k_10epoch.pkl"</span><span class="p">)</span>
-<span class="n">results</span> <span class="o">=</span> <span class="n">task</span><span class="o">.</span><span class="n">generate</span><span class="p">(</span><span class="mi">32</span><span class="p">)</span>
+<span class="n">results</span> <span class="o">=</span> <span class="n">task</span><span class="o">.</span><span class="n">generate</span><span class="p">(</span><span class="n">num_sample</span><span class="o">=</span><span class="mi">32</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">to_smiles</span><span class="p">())</span>
 </pre></div>
 </div>

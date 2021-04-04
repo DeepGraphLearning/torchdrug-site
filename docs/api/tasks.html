@@ -135,7 +135,7 @@
 <li class="toctree-l1 has-children"><a class="reference internal" href="../benchmark/index.html">Benchmark</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label for="toctree-checkbox-1"><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../benchmark/property_prediction.html">Molecule Property Prediction</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../benchmark/pretrain.html">Pretrained Molecular Representations</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../benchmark/generation.html">Graph Generation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../benchmark/generation.html">Molecule Generation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../benchmark/retrosynthesis.html">Retrosynthesis</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../benchmark/reasoning.html">Knowledge Graph Reasoning</a></li>
 </ul>
@@ -274,8 +274,10 @@ To do so, instantiate the node model and the edge model with two
 <li><p><strong>task</strong> (<em>str</em><em> or </em><em>list of str</em><em>, </em><em>optional</em>) – property optimization task(s). Available tasks are <code class="docutils literal notranslate"><span class="pre">plogp</span></code> and <code class="docutils literal notranslate"><span class="pre">qed</span></code>.</p></li>
 <li><p><strong>num_node_sample</strong> (<em>int</em><em>, </em><em>optional</em>) – number of node samples per graph. -1 for all samples.</p></li>
 <li><p><strong>num_edge_sample</strong> (<em>int</em><em>, </em><em>optional</em>) – number of edge samples per graph. -1 for all samples.</p></li>
-<li><p><strong>max_edge_unroll</strong> (<em>int</em><em>, </em><em>optional</em>) – max node id difference for</p></li>
-<li><p><strong>max_node</strong> (<em>int</em><em>, </em><em>optional</em>) – max number of node</p></li>
+<li><p><strong>max_edge_unroll</strong> (<em>int</em><em>, </em><em>optional</em>) – max node id difference.
+If not provided, use the statistics from the training set.</p></li>
+<li><p><strong>max_node</strong> (<em>int</em><em>, </em><em>optional</em>) – max number of node.
+If not provided, use the statistics from the training set.</p></li>
 <li><p><strong>criterion</strong> (<em>str</em><em>, </em><em>list</em><em> or </em><em>dict</em><em>, </em><em>optional</em>) – training criterion(s). For dict, the keys are criterions and the values
 are the corresponding weights. Available criterions are <code class="docutils literal notranslate"><span class="pre">nll</span></code> and <code class="docutils literal notranslate"><span class="pre">ppo</span></code>.</p></li>
 <li><p><strong>agent_update_interval</strong> (<em>int</em><em>, </em><em>optional</em>) – update agent every n batch</p></li>
@@ -286,6 +288,12 @@ while lower temperature encourages larger maximal reward.</p></li>
 </ul>
 </dd>
 </dl>
+<dl class="py method">
+<dt id="torchdrug.tasks.AutoregressiveGeneration.preprocess">
+<code class="sig-name descname">preprocess</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">train_set</span></em>, <em class="sig-param"><span class="n">valid_set</span></em>, <em class="sig-param"><span class="n">test_set</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/tasks/generation.html#AutoregressiveGeneration.preprocess"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.tasks.AutoregressiveGeneration.preprocess" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add atom id mapping and random BFS order to the training set.</p>
+<p>Compute <code class="docutils literal notranslate"><span class="pre">max_edge_unroll</span></code> and <code class="docutils literal notranslate"><span class="pre">max_node</span></code> on the training set if not provided.</p>
+</dd></dl>
 </dd></dl>
 </div>
 <div class="section" id="gcpngeneration">
@@ -300,8 +308,10 @@ while lower temperature encourages larger maximal reward.</p></li>
 <li><p><strong>model</strong> (<em>nn.Module</em>) – graph representation model</p></li>
 <li><p><strong>atom_types</strong> (<em>list</em><em> or </em><em>set</em>) – set of all possible atom types</p></li>
 <li><p><strong>task</strong> (<em>str</em><em> or </em><em>list of str</em><em>, </em><em>optional</em>) – property optimization task(s)</p></li>
-<li><p><strong>max_edge_unroll</strong> (<em>int</em><em>, </em><em>optional</em>) – max node id difference</p></li>
-<li><p><strong>max_node</strong> (<em>int</em><em>, </em><em>optional</em>) – max number of node</p></li>
+<li><p><strong>max_edge_unroll</strong> (<em>int</em><em>, </em><em>optional</em>) – max node id difference.
+If not provided, use the statistics from the training set.</p></li>
+<li><p><strong>max_node</strong> (<em>int</em><em>, </em><em>optional</em>) – max number of node.
+If not provided, use the statistics from the training set.</p></li>
 <li><p><strong>criterion</strong> (<em>str</em><em>, </em><em>list</em><em> or </em><em>dict</em><em>, </em><em>optional</em>) – training criterion(s). For dict, the keys are criterions and the values
 are the corresponding weights. Available criterions are <code class="docutils literal notranslate"><span class="pre">nll</span></code> and <code class="docutils literal notranslate"><span class="pre">ppo</span></code>.</p></li>
 <li><p><strong>agent_update_interval</strong> (<em>int</em><em>, </em><em>optional</em>) – update the agent every n batch</p></li>
@@ -312,6 +322,12 @@ while lower temperature encourages larger maximal reward.</p></li>
 </ul>
 </dd>
 </dl>
+<dl class="py method">
+<dt id="torchdrug.tasks.GCPNGeneration.preprocess">
+<code class="sig-name descname">preprocess</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">train_set</span></em>, <em class="sig-param"><span class="n">valid_set</span></em>, <em class="sig-param"><span class="n">test_set</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/tasks/generation.html#GCPNGeneration.preprocess"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.tasks.GCPNGeneration.preprocess" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add atom id mapping and random BFS order to the training set.</p>
+<p>Compute <code class="docutils literal notranslate"><span class="pre">max_edge_unroll</span></code> and <code class="docutils literal notranslate"><span class="pre">max_node</span></code> on the training set if not provided.</p>
+</dd></dl>
 </dd></dl>
 </div>
 </div>
@@ -337,6 +353,30 @@ bond: original bond feature</p></li>
 </ul>
 </dd>
 </dl>
+<dl class="py method">
+<dt id="torchdrug.tasks.CenterIdentification.predict_synthon">
+<code class="sig-name descname">predict_synthon</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">batch</span></em>, <em class="sig-param"><span class="n">k</span><span class="o">=</span><span class="default_value">1</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/tasks/retrosynthesis.html#CenterIdentification.predict_synthon"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.tasks.CenterIdentification.predict_synthon" title="Permalink to this definition">¶</a></dt>
+<dd><p>Predict top-k synthons from target molecules.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>batch</strong> (<em>dict</em>) – batch of target molecules</p></li>
+<li><p><strong>k</strong> (<em>int</em><em>, </em><em>optional</em>) – return top-k results</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>top k records.</dt><dd><p>Each record is a batch dict of keys <code class="docutils literal notranslate"><span class="pre">synthon</span></code>, <code class="docutils literal notranslate"><span class="pre">num_synthon</span></code>, <code class="docutils literal notranslate"><span class="pre">reaction_center</span></code>,
+<code class="docutils literal notranslate"><span class="pre">log_likelihood</span></code> and <code class="docutils literal notranslate"><span class="pre">reaction</span></code>.</p>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>list of dict</p>
+</dd>
+</dl>
+</dd></dl>
 </dd></dl>
 </div>
 <div class="section" id="synthoncompletion">
@@ -365,7 +405,36 @@ atom: original atom feature</p></li>
 <dl class="py class">
 <dt id="torchdrug.tasks.Retrosynthesis">
 <em class="property">class </em><code class="sig-name descname">Retrosynthesis</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">center_identification</span></em>, <em class="sig-param"><span class="n">synthon_completion</span></em>, <em class="sig-param"><span class="n">center_topk</span><span class="o">=</span><span class="default_value">2</span></em>, <em class="sig-param"><span class="n">num_synthon_beam</span><span class="o">=</span><span class="default_value">10</span></em>, <em class="sig-param"><span class="n">max_prediction</span><span class="o">=</span><span class="default_value">20</span></em>, <em class="sig-param"><span class="n">metric</span><span class="o">=</span><span class="default_value">'top-1', 'top-3', 'top-5', 'top-10'</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/tasks/retrosynthesis.html#Retrosynthesis"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.tasks.Retrosynthesis" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><dl class="py method">
+<dt id="torchdrug.tasks.Retrosynthesis.load_state_dict">
+<code class="sig-name descname">load_state_dict</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">state_dict</span></em>, <em class="sig-param"><span class="n">strict</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/tasks/retrosynthesis.html#Retrosynthesis.load_state_dict"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.tasks.Retrosynthesis.load_state_dict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Copies parameters and buffers from <code class="xref py py-attr docutils literal notranslate"><span class="pre">state_dict</span></code> into
+this module and its descendants. If <code class="xref py py-attr docutils literal notranslate"><span class="pre">strict</span></code> is <code class="docutils literal notranslate"><span class="pre">True</span></code>, then
+the keys of <code class="xref py py-attr docutils literal notranslate"><span class="pre">state_dict</span></code> must exactly match the keys returned
+by this module’s <code class="xref py py-meth docutils literal notranslate"><span class="pre">state_dict()</span></code> function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>state_dict</strong> (<em>dict</em>) – a dict containing parameters and
+persistent buffers.</p></li>
+<li><p><strong>strict</strong> (<em>bool</em><em>, </em><em>optional</em>) – whether to strictly enforce that the keys
+in <code class="xref py py-attr docutils literal notranslate"><span class="pre">state_dict</span></code> match the keys returned by this module’s
+<code class="xref py py-meth docutils literal notranslate"><span class="pre">state_dict()</span></code> function. Default: <code class="docutils literal notranslate"><span class="pre">True</span></code></p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>missing_keys</strong> is a list of str containing the missing keys</p></li>
+<li><p><strong>unexpected_keys</strong> is a list of str containing the unexpected keys</p></li>
+</ul>
+</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">NamedTuple</span></code> with <code class="docutils literal notranslate"><span class="pre">missing_keys</span></code> and <code class="docutils literal notranslate"><span class="pre">unexpected_keys</span></code> fields</p>
+</dd>
+</dl>
+</dd></dl>
+</dd></dl>
 </div>
 </div>
 <div class="section" id="property-prediction-tasks">
@@ -391,6 +460,11 @@ Available metrics are <code class="docutils literal notranslate"><span class="pr
 </ul>
 </dd>
 </dl>
+<dl class="py method">
+<dt id="torchdrug.tasks.PropertyPrediction.preprocess">
+<code class="sig-name descname">preprocess</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">train_set</span></em>, <em class="sig-param"><span class="n">valid_set</span></em>, <em class="sig-param"><span class="n">test_set</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/tasks/property_prediction.html#PropertyPrediction.preprocess"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.tasks.PropertyPrediction.preprocess" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute the mean and derivation for each task on the training set.</p>
+</dd></dl>
 </dd></dl>
 </div>
 </div>

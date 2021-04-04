@@ -135,7 +135,7 @@
 <li class="toctree-l1 has-children"><a class="reference internal" href="../benchmark/index.html">Benchmark</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label for="toctree-checkbox-1"><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../benchmark/property_prediction.html">Molecule Property Prediction</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../benchmark/pretrain.html">Pretrained Molecular Representations</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../benchmark/generation.html">Graph Generation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../benchmark/generation.html">Molecule Generation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../benchmark/retrosynthesis.html">Retrosynthesis</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../benchmark/reasoning.html">Knowledge Graph Reasoning</a></li>
 </ul>
@@ -204,6 +204,23 @@
 </ul>
 </dd>
 </dl>
+<dl class="py method">
+<dt id="torchdrug.models.TransE.forward">
+<code class="sig-name descname">forward</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">graph</span></em>, <em class="sig-param"><span class="n">h_index</span></em>, <em class="sig-param"><span class="n">t_index</span></em>, <em class="sig-param"><span class="n">r_index</span></em>, <em class="sig-param"><span class="n">all_loss</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">metric</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/models/embedding.html#TransE.forward"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.models.TransE.forward" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute the score for each triplet.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>graph</strong> (<em>Tensor</em>) – fact graph</p></li>
+<li><p><strong>h_index</strong> (<em>Tensor</em>) – indexes of head entities</p></li>
+<li><p><strong>t_index</strong> (<em>Tensor</em>) – indexes of tail entities</p></li>
+<li><p><strong>r_index</strong> (<em>Tensor</em>) – indexes of relations</p></li>
+<li><p><strong>all_loss</strong> (<em>Tensor</em><em>, </em><em>optional</em>) – if specified, add loss to this tensor</p></li>
+<li><p><strong>metric</strong> (<em>dict</em><em>, </em><em>optional</em>) – if specified, output metrics to this dict</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
 </dd></dl>
 </div>
 <div class="section" id="distmult">
@@ -222,6 +239,23 @@
 </ul>
 </dd>
 </dl>
+<dl class="py method">
+<dt id="torchdrug.models.DistMult.forward">
+<code class="sig-name descname">forward</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">graph</span></em>, <em class="sig-param"><span class="n">h_index</span></em>, <em class="sig-param"><span class="n">t_index</span></em>, <em class="sig-param"><span class="n">r_index</span></em>, <em class="sig-param"><span class="n">all_loss</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">metric</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/models/embedding.html#DistMult.forward"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.models.DistMult.forward" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute the score for each triplet.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>graph</strong> (<em>Tensor</em>) – fact graph</p></li>
+<li><p><strong>h_index</strong> (<em>Tensor</em>) – indexes of head entities</p></li>
+<li><p><strong>t_index</strong> (<em>Tensor</em>) – indexes of tail entities</p></li>
+<li><p><strong>r_index</strong> (<em>Tensor</em>) – indexes of relations</p></li>
+<li><p><strong>all_loss</strong> (<em>Tensor</em><em>, </em><em>optional</em>) – if specified, add loss to this tensor</p></li>
+<li><p><strong>metric</strong> (<em>dict</em><em>, </em><em>optional</em>) – if specified, output metrics to this dict</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
 </dd></dl>
 </div>
 <div class="section" id="complex">
@@ -240,6 +274,23 @@
 </ul>
 </dd>
 </dl>
+<dl class="py method">
+<dt id="torchdrug.models.ComplEx.forward">
+<code class="sig-name descname">forward</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">graph</span></em>, <em class="sig-param"><span class="n">h_index</span></em>, <em class="sig-param"><span class="n">t_index</span></em>, <em class="sig-param"><span class="n">r_index</span></em>, <em class="sig-param"><span class="n">all_loss</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">metric</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/models/embedding.html#ComplEx.forward"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.models.ComplEx.forward" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute the score for triplets.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>graph</strong> (<em>Tensor</em>) – fact graph</p></li>
+<li><p><strong>h_index</strong> (<em>Tensor</em>) – indexes of head entities</p></li>
+<li><p><strong>t_index</strong> (<em>Tensor</em>) – indexes of tail entities</p></li>
+<li><p><strong>r_index</strong> (<em>Tensor</em>) – indexes of relations</p></li>
+<li><p><strong>all_loss</strong> (<em>Tensor</em><em>, </em><em>optional</em>) – if specified, add loss to this tensor</p></li>
+<li><p><strong>metric</strong> (<em>dict</em><em>, </em><em>optional</em>) – if specified, output metrics to this dict</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
 </dd></dl>
 </div>
 <div class="section" id="simple">
@@ -258,6 +309,23 @@
 </ul>
 </dd>
 </dl>
+<dl class="py method">
+<dt id="torchdrug.models.SimplE.forward">
+<code class="sig-name descname">forward</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">graph</span></em>, <em class="sig-param"><span class="n">h_index</span></em>, <em class="sig-param"><span class="n">t_index</span></em>, <em class="sig-param"><span class="n">r_index</span></em>, <em class="sig-param"><span class="n">all_loss</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">metric</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/models/embedding.html#SimplE.forward"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.models.SimplE.forward" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute the score for each triplet.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>graph</strong> (<em>Tensor</em>) – fact graph</p></li>
+<li><p><strong>h_index</strong> (<em>Tensor</em>) – indexes of head entities</p></li>
+<li><p><strong>t_index</strong> (<em>Tensor</em>) – indexes of tail entities</p></li>
+<li><p><strong>r_index</strong> (<em>Tensor</em>) – indexes of relations</p></li>
+<li><p><strong>all_loss</strong> (<em>Tensor</em><em>, </em><em>optional</em>) – if specified, add loss to this tensor</p></li>
+<li><p><strong>metric</strong> (<em>dict</em><em>, </em><em>optional</em>) – if specified, output metrics to this dict</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
 </dd></dl>
 </div>
 <div class="section" id="rotate">
@@ -276,6 +344,23 @@
 </ul>
 </dd>
 </dl>
+<dl class="py method">
+<dt id="torchdrug.models.RotatE.forward">
+<code class="sig-name descname">forward</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">graph</span></em>, <em class="sig-param"><span class="n">h_index</span></em>, <em class="sig-param"><span class="n">t_index</span></em>, <em class="sig-param"><span class="n">r_index</span></em>, <em class="sig-param"><span class="n">all_loss</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">metric</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/models/embedding.html#RotatE.forward"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.models.RotatE.forward" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute the score for each triplet.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>graph</strong> (<em>Tensor</em>) – fact graph</p></li>
+<li><p><strong>h_index</strong> (<em>Tensor</em>) – indexes of head entities</p></li>
+<li><p><strong>t_index</strong> (<em>Tensor</em>) – indexes of tail entities</p></li>
+<li><p><strong>r_index</strong> (<em>Tensor</em>) – indexes of relations</p></li>
+<li><p><strong>all_loss</strong> (<em>Tensor</em><em>, </em><em>optional</em>) – if specified, add loss to this tensor</p></li>
+<li><p><strong>metric</strong> (<em>dict</em><em>, </em><em>optional</em>) – if specified, output metrics to this dict</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
 </dd></dl>
 </div>
 <div class="section" id="neurallp">
@@ -295,11 +380,78 @@
 </ul>
 </dd>
 </dl>
+<dl class="py method">
+<dt id="torchdrug.models.NeuralLogicProgramming.forward">
+<code class="sig-name descname">forward</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">graph</span></em>, <em class="sig-param"><span class="n">h_index</span></em>, <em class="sig-param"><span class="n">t_index</span></em>, <em class="sig-param"><span class="n">r_index</span></em>, <em class="sig-param"><span class="n">all_loss</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">metric</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/models/neurallp.html#NeuralLogicProgramming.forward"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.models.NeuralLogicProgramming.forward" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute the score for triplets.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>graph</strong> (<em>Tensor</em>) – fact graph</p></li>
+<li><p><strong>h_index</strong> (<em>Tensor</em>) – indexes of head entities</p></li>
+<li><p><strong>t_index</strong> (<em>Tensor</em>) – indexes of tail entities</p></li>
+<li><p><strong>r_index</strong> (<em>Tensor</em>) – indexes of relations</p></li>
+<li><p><strong>all_loss</strong> (<em>Tensor</em><em>, </em><em>optional</em>) – if specified, add loss to this tensor</p></li>
+<li><p><strong>metric</strong> (<em>dict</em><em>, </em><em>optional</em>) – if specified, output metrics to this dict</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
 </dd></dl>
 <dl class="py attribute">
 <dt id="torchdrug.models.NeuralLP">
 <code class="sig-name descname">NeuralLP</code><a class="headerlink" href="#torchdrug.models.NeuralLP" title="Permalink to this definition">¶</a></dt>
 <dd><p>alias of <code class="xref py py-class docutils literal notranslate"><span class="pre">torchdrug.models.neurallp.NeuralLogicProgramming</span></code></p>
+</dd></dl>
+</div>
+<div class="section" id="kbgat">
+<h3>KBGAT<a class="headerlink" href="#kbgat" title="Permalink to this headline">¶</a></h3>
+<dl class="py class">
+<dt id="torchdrug.models.KnowledgeBaseGraphAttentionNetwork">
+<em class="property">class </em><code class="sig-name descname">KnowledgeBaseGraphAttentionNetwork</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">num_entity</span></em>, <em class="sig-param"><span class="n">num_relation</span></em>, <em class="sig-param"><span class="n">embedding_dim</span></em>, <em class="sig-param"><span class="n">hidden_dims</span></em>, <em class="sig-param"><span class="n">max_score</span><span class="o">=</span><span class="default_value">12</span></em>, <em class="sig-param"><span class="n">edge_input_dim</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">num_head</span><span class="o">=</span><span class="default_value">1</span></em>, <em class="sig-param"><span class="n">negative_slope</span><span class="o">=</span><span class="default_value">0.2</span></em>, <em class="sig-param"><span class="n">short_cut</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">batch_norm</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">activation</span><span class="o">=</span><span class="default_value">'relu'</span></em>, <em class="sig-param"><span class="n">concat_hidden</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">readout</span><span class="o">=</span><span class="default_value">'sum'</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/models/kbgat.html#KnowledgeBaseGraphAttentionNetwork"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.models.KnowledgeBaseGraphAttentionNetwork" title="Permalink to this definition">¶</a></dt>
+<dd><p>Knowledge Base Graph Attention Network proposed in
+<a class="reference external" href="https://arxiv.org/pdf/1906.01195.pdf">Learning Attention-based Embeddings for Relation Prediction in Knowledge Graphs</a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>num_entity</strong> (<em>int</em>) – number of entities</p></li>
+<li><p><strong>num_relation</strong> (<em>int</em>) – number of relations</p></li>
+<li><p><strong>embedding_dim</strong> (<em>int</em>) – dimension of embeddings</p></li>
+<li><p><strong>hidden_dims</strong> (<em>list of int</em>) – hidden dimensions</p></li>
+<li><p><strong>max_score</strong> (<em>float</em><em>, </em><em>optional</em>) – maximal score for triplets</p></li>
+<li><p><strong>edge_input_dim</strong> (<em>int</em><em>, </em><em>optional</em>) – dimension of edge features</p></li>
+<li><p><strong>num_head</strong> (<em>int</em><em>, </em><em>optional</em>) – number of attention heads</p></li>
+<li><p><strong>negative_slope</strong> (<em>float</em><em>, </em><em>optional</em>) – negative slope of leaky relu activation</p></li>
+<li><p><strong>short_cut</strong> (<em>bool</em><em>, </em><em>optional</em>) – use short cut or not</p></li>
+<li><p><strong>batch_norm</strong> (<em>bool</em><em>, </em><em>optional</em>) – apply batch normalization or not</p></li>
+<li><p><strong>activation</strong> (<em>str</em><em> or </em><em>function</em><em>, </em><em>optional</em>) – activation function</p></li>
+<li><p><strong>concat_hidden</strong> (<em>bool</em><em>, </em><em>optional</em>) – concat hidden representations from all layers as output</p></li>
+<li><p><strong>readout</strong> (<em>str</em><em>, </em><em>optional</em>) – readout function. Available functions are <code class="docutils literal notranslate"><span class="pre">sum</span></code> and <code class="docutils literal notranslate"><span class="pre">mean</span></code>.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt id="torchdrug.models.KnowledgeBaseGraphAttentionNetwork.forward">
+<code class="sig-name descname">forward</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">graph</span></em>, <em class="sig-param"><span class="n">h_index</span></em>, <em class="sig-param"><span class="n">t_index</span></em>, <em class="sig-param"><span class="n">r_index</span></em>, <em class="sig-param"><span class="n">all_loss</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">metric</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/models/kbgat.html#KnowledgeBaseGraphAttentionNetwork.forward"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.models.KnowledgeBaseGraphAttentionNetwork.forward" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute the score for triplets.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>graph</strong> (<em>Tensor</em>) – fact graph</p></li>
+<li><p><strong>h_index</strong> (<em>Tensor</em>) – indexes of head entities</p></li>
+<li><p><strong>t_index</strong> (<em>Tensor</em>) – indexes of tail entities</p></li>
+<li><p><strong>r_index</strong> (<em>Tensor</em>) – indexes of relations</p></li>
+<li><p><strong>all_loss</strong> (<em>Tensor</em><em>, </em><em>optional</em>) – if specified, add loss to this tensor</p></li>
+<li><p><strong>metric</strong> (<em>dict</em><em>, </em><em>optional</em>) – if specified, output metrics to this dict</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+</dd></dl>
+<dl class="py attribute">
+<dt id="torchdrug.models.KBGAT">
+<code class="sig-name descname">KBGAT</code><a class="headerlink" href="#torchdrug.models.KBGAT" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <code class="xref py py-class docutils literal notranslate"><span class="pre">torchdrug.models.kbgat.KnowledgeBaseGraphAttentionNetwork</span></code></p>
 </dd></dl>
 </div>
 </div>
@@ -327,6 +479,27 @@
 </ul>
 </dd>
 </dl>
+<dl class="py method">
+<dt id="torchdrug.models.ChebyshevConvolutionalNetwork.forward">
+<code class="sig-name descname">forward</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">graph</span></em>, <em class="sig-param"><span class="n">input</span></em>, <em class="sig-param"><span class="n">all_loss</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">metric</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/models/chebnet.html#ChebyshevConvolutionalNetwork.forward"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.models.ChebyshevConvolutionalNetwork.forward" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute the node representations and the graph representation(s).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>graph</strong> (<a class="reference internal" href="data.html#torchdrug.data.Graph" title="torchdrug.data.Graph"><em>Graph</em></a>) – <span class="math notranslate nohighlight">\(n\)</span> graph(s)</p></li>
+<li><p><strong>input</strong> (<em>Tensor</em>) – input node representations</p></li>
+<li><p><strong>all_loss</strong> (<em>Tensor</em><em>, </em><em>optional</em>) – if specified, add loss to this tensor</p></li>
+<li><p><strong>metric</strong> (<em>dict</em><em>, </em><em>optional</em>) – if specified, output metrics to this dict</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>node representations of shape <span class="math notranslate nohighlight">\((|V|, d)\)</span>, graph representations of shape <span class="math notranslate nohighlight">\((n, d)\)</span></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>dict with <code class="docutils literal notranslate"><span class="pre">node_feature</span></code> and <code class="docutils literal notranslate"><span class="pre">graph_feature</span></code> fields</p>
+</dd>
+</dl>
+</dd></dl>
 </dd></dl>
 <dl class="py attribute">
 <dt id="torchdrug.models.ChebNet">
@@ -354,6 +527,27 @@
 </ul>
 </dd>
 </dl>
+<dl class="py method">
+<dt id="torchdrug.models.GraphConvolutionalNetwork.forward">
+<code class="sig-name descname">forward</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">graph</span></em>, <em class="sig-param"><span class="n">input</span></em>, <em class="sig-param"><span class="n">all_loss</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">metric</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/models/gcn.html#GraphConvolutionalNetwork.forward"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.models.GraphConvolutionalNetwork.forward" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute the node representations and the graph representation(s).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>graph</strong> (<a class="reference internal" href="data.html#torchdrug.data.Graph" title="torchdrug.data.Graph"><em>Graph</em></a>) – <span class="math notranslate nohighlight">\(n\)</span> graph(s)</p></li>
+<li><p><strong>input</strong> (<em>Tensor</em>) – input node representations</p></li>
+<li><p><strong>all_loss</strong> (<em>Tensor</em><em>, </em><em>optional</em>) – if specified, add loss to this tensor</p></li>
+<li><p><strong>metric</strong> (<em>dict</em><em>, </em><em>optional</em>) – if specified, output metrics to this dict</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>node representations of shape <span class="math notranslate nohighlight">\((|V|, d)\)</span>, graph representations of shape <span class="math notranslate nohighlight">\((n, d)\)</span></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>dict with <code class="docutils literal notranslate"><span class="pre">node_feature</span></code> and <code class="docutils literal notranslate"><span class="pre">graph_feature</span></code> fields</p>
+</dd>
+</dl>
+</dd></dl>
 </dd></dl>
 <dl class="py attribute">
 <dt id="torchdrug.models.GCN">
@@ -383,6 +577,27 @@
 </ul>
 </dd>
 </dl>
+<dl class="py method">
+<dt id="torchdrug.models.GraphAttentionNetwork.forward">
+<code class="sig-name descname">forward</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">graph</span></em>, <em class="sig-param"><span class="n">input</span></em>, <em class="sig-param"><span class="n">all_loss</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">metric</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/models/gat.html#GraphAttentionNetwork.forward"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.models.GraphAttentionNetwork.forward" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute the node representations and the graph representation(s).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>graph</strong> (<a class="reference internal" href="data.html#torchdrug.data.Graph" title="torchdrug.data.Graph"><em>Graph</em></a>) – <span class="math notranslate nohighlight">\(n\)</span> graph(s)</p></li>
+<li><p><strong>input</strong> (<em>Tensor</em>) – input node representations</p></li>
+<li><p><strong>all_loss</strong> (<em>Tensor</em><em>, </em><em>optional</em>) – if specified, add loss to this tensor</p></li>
+<li><p><strong>metric</strong> (<em>dict</em><em>, </em><em>optional</em>) – if specified, output metrics to this dict</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>node representations of shape <span class="math notranslate nohighlight">\((|V|, d)\)</span>, graph representations of shape <span class="math notranslate nohighlight">\((n, d)\)</span></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>dict with <code class="docutils literal notranslate"><span class="pre">node_feature</span></code> and <code class="docutils literal notranslate"><span class="pre">graph_feature</span></code> fields</p>
+</dd>
+</dl>
+</dd></dl>
 </dd></dl>
 <dl class="py attribute">
 <dt id="torchdrug.models.GAT">
@@ -413,6 +628,27 @@
 </ul>
 </dd>
 </dl>
+<dl class="py method">
+<dt id="torchdrug.models.GraphIsomorphismNetwork.forward">
+<code class="sig-name descname">forward</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">graph</span></em>, <em class="sig-param"><span class="n">input</span></em>, <em class="sig-param"><span class="n">all_loss</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">metric</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/models/gin.html#GraphIsomorphismNetwork.forward"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.models.GraphIsomorphismNetwork.forward" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute the node representations and the graph representation(s).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>graph</strong> (<a class="reference internal" href="data.html#torchdrug.data.Graph" title="torchdrug.data.Graph"><em>Graph</em></a>) – <span class="math notranslate nohighlight">\(n\)</span> graph(s)</p></li>
+<li><p><strong>input</strong> (<em>Tensor</em>) – input node representations</p></li>
+<li><p><strong>all_loss</strong> (<em>Tensor</em><em>, </em><em>optional</em>) – if specified, add loss to this tensor</p></li>
+<li><p><strong>metric</strong> (<em>dict</em><em>, </em><em>optional</em>) – if specified, output metrics to this dict</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>node representations of shape <span class="math notranslate nohighlight">\((|V|, d)\)</span>, graph representations of shape <span class="math notranslate nohighlight">\((n, d)\)</span></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>dict with <code class="docutils literal notranslate"><span class="pre">node_feature</span></code> and <code class="docutils literal notranslate"><span class="pre">graph_feature</span></code> fields</p>
+</dd>
+</dl>
+</dd></dl>
 </dd></dl>
 <dl class="py attribute">
 <dt id="torchdrug.models.GIN">
@@ -444,6 +680,27 @@
 </ul>
 </dd>
 </dl>
+<dl class="py method">
+<dt id="torchdrug.models.MessagePassingNeuralNetwork.forward">
+<code class="sig-name descname">forward</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">graph</span></em>, <em class="sig-param"><span class="n">input</span></em>, <em class="sig-param"><span class="n">all_loss</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">metric</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/models/mpnn.html#MessagePassingNeuralNetwork.forward"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.models.MessagePassingNeuralNetwork.forward" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute the node representations and the graph representation(s).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>graph</strong> (<a class="reference internal" href="data.html#torchdrug.data.Graph" title="torchdrug.data.Graph"><em>Graph</em></a>) – <span class="math notranslate nohighlight">\(n\)</span> graph(s)</p></li>
+<li><p><strong>input</strong> (<em>Tensor</em>) – input node representations</p></li>
+<li><p><strong>all_loss</strong> (<em>Tensor</em><em>, </em><em>optional</em>) – if specified, add loss to this tensor</p></li>
+<li><p><strong>metric</strong> (<em>dict</em><em>, </em><em>optional</em>) – if specified, output metrics to this dict</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>node representations of shape <span class="math notranslate nohighlight">\((|V|, d)\)</span>, graph representations of shape <span class="math notranslate nohighlight">\((n, d)\)</span></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>dict with <code class="docutils literal notranslate"><span class="pre">node_feature</span></code> and <code class="docutils literal notranslate"><span class="pre">graph_feature</span></code> fields</p>
+</dd>
+</dl>
+</dd></dl>
 </dd></dl>
 <dl class="py attribute">
 <dt id="torchdrug.models.MPNN">
@@ -472,6 +729,27 @@
 </ul>
 </dd>
 </dl>
+<dl class="py method">
+<dt id="torchdrug.models.NeuralFingerprint.forward">
+<code class="sig-name descname">forward</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">graph</span></em>, <em class="sig-param"><span class="n">input</span></em>, <em class="sig-param"><span class="n">all_loss</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">metric</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/models/neuralfp.html#NeuralFingerprint.forward"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.models.NeuralFingerprint.forward" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute the node representations and the graph representation(s).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>graph</strong> (<a class="reference internal" href="data.html#torchdrug.data.Graph" title="torchdrug.data.Graph"><em>Graph</em></a>) – <span class="math notranslate nohighlight">\(n\)</span> graph(s)</p></li>
+<li><p><strong>input</strong> (<em>Tensor</em>) – input node representations</p></li>
+<li><p><strong>all_loss</strong> (<em>Tensor</em><em>, </em><em>optional</em>) – if specified, add loss to this tensor</p></li>
+<li><p><strong>metric</strong> (<em>dict</em><em>, </em><em>optional</em>) – if specified, output metrics to this dict</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>node representations of shape <span class="math notranslate nohighlight">\((|V|, d)\)</span>, graph representations of shape <span class="math notranslate nohighlight">\((n, d)\)</span></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>dict with <code class="docutils literal notranslate"><span class="pre">node_feature</span></code> and <code class="docutils literal notranslate"><span class="pre">graph_feature</span></code> fields</p>
+</dd>
+</dl>
+</dd></dl>
 </dd></dl>
 <dl class="py attribute">
 <dt id="torchdrug.models.NFP">
@@ -500,6 +778,28 @@
 </ul>
 </dd>
 </dl>
+<dl class="py method">
+<dt id="torchdrug.models.RelationalGraphConvolutionalNetwork.forward">
+<code class="sig-name descname">forward</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">graph</span></em>, <em class="sig-param"><span class="n">input</span></em>, <em class="sig-param"><span class="n">all_loss</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">metric</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/models/gcn.html#RelationalGraphConvolutionalNetwork.forward"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.models.RelationalGraphConvolutionalNetwork.forward" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute the node representations and the graph representation(s).</p>
+<p>Require the graph(s) to have the same number of relations as this module.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>graph</strong> (<a class="reference internal" href="data.html#torchdrug.data.Graph" title="torchdrug.data.Graph"><em>Graph</em></a>) – <span class="math notranslate nohighlight">\(n\)</span> graph(s)</p></li>
+<li><p><strong>input</strong> (<em>Tensor</em>) – input node representations</p></li>
+<li><p><strong>all_loss</strong> (<em>Tensor</em><em>, </em><em>optional</em>) – if specified, add loss to this tensor</p></li>
+<li><p><strong>metric</strong> (<em>dict</em><em>, </em><em>optional</em>) – if specified, output metrics to this dict</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>node representations of shape <span class="math notranslate nohighlight">\((|V|, d)\)</span>, graph representations of shape <span class="math notranslate nohighlight">\((n, d)\)</span></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>dict with <code class="docutils literal notranslate"><span class="pre">node_feature</span></code> and <code class="docutils literal notranslate"><span class="pre">graph_feature</span></code> fields</p>
+</dd>
+</dl>
+</dd></dl>
 </dd></dl>
 <dl class="py attribute">
 <dt id="torchdrug.models.RGCN">
@@ -528,6 +828,28 @@
 </ul>
 </dd>
 </dl>
+<dl class="py method">
+<dt id="torchdrug.models.SchNet.forward">
+<code class="sig-name descname">forward</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">graph</span></em>, <em class="sig-param"><span class="n">input</span></em>, <em class="sig-param"><span class="n">all_loss</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">metric</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/models/schnet.html#SchNet.forward"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.models.SchNet.forward" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute the node representations and the graph representation(s).</p>
+<p>Require the graph(s) to have node attribute <code class="docutils literal notranslate"><span class="pre">node_position</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>graph</strong> (<a class="reference internal" href="data.html#torchdrug.data.Graph" title="torchdrug.data.Graph"><em>Graph</em></a>) – <span class="math notranslate nohighlight">\(n\)</span> graph(s)</p></li>
+<li><p><strong>input</strong> (<em>Tensor</em>) – input node representations</p></li>
+<li><p><strong>all_loss</strong> (<em>Tensor</em><em>, </em><em>optional</em>) – if specified, add loss to this tensor</p></li>
+<li><p><strong>metric</strong> (<em>dict</em><em>, </em><em>optional</em>) – if specified, output metrics to this dict</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>node representations of shape <span class="math notranslate nohighlight">\((|V|, d)\)</span>, graph representations of shape <span class="math notranslate nohighlight">\((n, d)\)</span></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>dict with <code class="docutils literal notranslate"><span class="pre">node_feature</span></code> and <code class="docutils literal notranslate"><span class="pre">graph_feature</span></code> fields</p>
+</dd>
+</dl>
+</dd></dl>
 </dd></dl>
 </div>
 </div>
@@ -551,6 +873,39 @@
 </ul>
 </dd>
 </dl>
+<dl class="py method">
+<dt id="torchdrug.models.GraphAutoregressiveFlow.forward">
+<code class="sig-name descname">forward</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">graph</span></em>, <em class="sig-param"><span class="n">input</span></em>, <em class="sig-param"><span class="n">edge</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">all_loss</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">metric</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/models/flow.html#GraphAutoregressiveFlow.forward"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.models.GraphAutoregressiveFlow.forward" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute the log-likelihood for the input given the graph(s).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>graph</strong> (<a class="reference internal" href="data.html#torchdrug.data.Graph" title="torchdrug.data.Graph"><em>Graph</em></a>) – <span class="math notranslate nohighlight">\(n\)</span> graph(s)</p></li>
+<li><p><strong>input</strong> (<em>Tensor</em>) – discrete data of shape <span class="math notranslate nohighlight">\((n,)\)</span></p></li>
+<li><p><strong>edge</strong> (<em>Tensor</em><em>, </em><em>optional</em>) – edge list of shape <span class="math notranslate nohighlight">\((n, 2)\)</span>.
+If specified, additionally condition on the edge for each input.</p></li>
+<li><p><strong>all_loss</strong> (<em>Tensor</em><em>, </em><em>optional</em>) – if specified, add loss to this tensor</p></li>
+<li><p><strong>metric</strong> (<em>dict</em><em>, </em><em>optional</em>) – if specified, output metrics to this dict</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt id="torchdrug.models.GraphAutoregressiveFlow.sample">
+<code class="sig-name descname">sample</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">graph</span></em>, <em class="sig-param"><span class="n">edge</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">all_loss</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">metric</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/models/flow.html#GraphAutoregressiveFlow.sample"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.models.GraphAutoregressiveFlow.sample" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sample discrete data based on the given graph(s).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>graph</strong> (<a class="reference internal" href="data.html#torchdrug.data.Graph" title="torchdrug.data.Graph"><em>Graph</em></a>) – <span class="math notranslate nohighlight">\(n\)</span> graph(s)</p></li>
+<li><p><strong>edge</strong> (<em>Tensor</em><em>, </em><em>optional</em>) – edge list of shape <span class="math notranslate nohighlight">\((n, 2)\)</span>.
+If specified, additionally condition on the edge for each input.</p></li>
+<li><p><strong>all_loss</strong> (<em>Tensor</em><em>, </em><em>optional</em>) – if specified, add loss to this tensor</p></li>
+<li><p><strong>metric</strong> (<em>dict</em><em>, </em><em>optional</em>) – if specified, output metrics to this dict</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
 </dd></dl>
 <dl class="py attribute">
 <dt id="torchdrug.models.GraphAF">
@@ -582,6 +937,28 @@ and a transfer loss is applied between the two encoders.</p></li>
 </ul>
 </dd>
 </dl>
+<dl class="py method">
+<dt id="torchdrug.models.InfoGraph.forward">
+<code class="sig-name descname">forward</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">graph</span></em>, <em class="sig-param"><span class="n">input</span></em>, <em class="sig-param"><span class="n">all_loss</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">metric</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/models/infograph.html#InfoGraph.forward"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.models.InfoGraph.forward" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute the node representations and the graph representation(s).
+Add the mutual information between graph and nodes to the loss.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>graph</strong> (<a class="reference internal" href="data.html#torchdrug.data.Graph" title="torchdrug.data.Graph"><em>Graph</em></a>) – <span class="math notranslate nohighlight">\(n\)</span> graph(s)</p></li>
+<li><p><strong>input</strong> (<em>Tensor</em>) – input node representations</p></li>
+<li><p><strong>all_loss</strong> (<em>Tensor</em><em>, </em><em>optional</em>) – if specified, add loss to this tensor</p></li>
+<li><p><strong>metric</strong> (<em>dict</em><em>, </em><em>optional</em>) – if specified, output metrics to this dict</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>node representations of shape <span class="math notranslate nohighlight">\((|V|, d)\)</span>, graph representations of shape <span class="math notranslate nohighlight">\((n, d)\)</span></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>dict with <code class="docutils literal notranslate"><span class="pre">node_feature</span></code> and <code class="docutils literal notranslate"><span class="pre">graph_feature</span></code> fields</p>
+</dd>
+</dl>
+</dd></dl>
 </dd></dl>
 </div>
 </div>
@@ -649,6 +1026,7 @@ and a transfer loss is applied between the two encoders.</p></li>
 <li><a class="reference internal" href="#simple">SimplE</a></li>
 <li><a class="reference internal" href="#rotate">RotatE</a></li>
 <li><a class="reference internal" href="#neurallp">NeuralLP</a></li>
+<li><a class="reference internal" href="#kbgat">KBGAT</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#graph-neural-networks">Graph Neural Networks</a><ul>

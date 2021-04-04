@@ -135,7 +135,7 @@
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../../benchmark/index.html">Benchmark</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label for="toctree-checkbox-1"><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../../benchmark/property_prediction.html">Molecule Property Prediction</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../benchmark/pretrain.html">Pretrained Molecular Representations</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../benchmark/generation.html">Graph Generation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../benchmark/generation.html">Molecule Generation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../benchmark/retrosynthesis.html">Retrosynthesis</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../benchmark/reasoning.html">Knowledge Graph Reasoning</a></li>
 </ul>
@@ -211,13 +211,13 @@
 <span class="sd">    Each sample contains a molecule graph, and any number of prediction targets.</span>
 <span class="sd">    """</span>
 
-    <span class="nd">@doc</span><span class="o">.</span><span class="n">copy_args</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">Molecule</span><span class="o">.</span><span class="n">from_molecule</span><span class="p">)</span>
+<div class="viewcode-block" id="MoleculeDataset.load_smiles"><a class="viewcode-back" href="../../../api/data.html#torchdrug.data.MoleculeDataset.load_smiles">[docs]</a>    <span class="nd">@doc</span><span class="o">.</span><span class="n">copy_args</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">Molecule</span><span class="o">.</span><span class="n">from_molecule</span><span class="p">)</span>
     <span class="k">def</span> <span class="nf">load_smiles</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">smiles_list</span><span class="p">,</span> <span class="n">targets</span><span class="p">,</span> <span class="n">transform</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">lazy</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="sd">"""</span>
 <span class="sd">        Load the dataset from SMILES and targets.</span>
 
 <span class="sd">        Parameters:</span>
-<span class="sd">            smiles_list (list of str): SMILES string</span>
+<span class="sd">            smiles_list (list of str): SMILES strings</span>
 <span class="sd">            targets (dict of list): prediction targets</span>
 <span class="sd">            transform (Callable, optional): data transformation function</span>
 <span class="sd">            lazy (bool, optional): if lazy mode is used, the molecules are processed on-the-fly.</span>
@@ -252,9 +252,9 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">smiles_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">smiles</span><span class="p">)</span>
             <span class="k">for</span> <span class="n">field</span> <span class="ow">in</span> <span class="n">targets</span><span class="p">:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">targets</span><span class="p">[</span><span class="n">field</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">targets</span><span class="p">[</span><span class="n">field</span><span class="p">][</span><span class="n">i</span><span class="p">])</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">targets</span><span class="p">[</span><span class="n">field</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">targets</span><span class="p">[</span><span class="n">field</span><span class="p">][</span><span class="n">i</span><span class="p">])</span></div>
 
-    <span class="nd">@doc</span><span class="o">.</span><span class="n">copy_args</span><span class="p">(</span><span class="n">load_smiles</span><span class="p">)</span>
+<div class="viewcode-block" id="MoleculeDataset.load_csv"><a class="viewcode-back" href="../../../api/data.html#torchdrug.data.MoleculeDataset.load_csv">[docs]</a>    <span class="nd">@doc</span><span class="o">.</span><span class="n">copy_args</span><span class="p">(</span><span class="n">load_smiles</span><span class="p">)</span>
     <span class="k">def</span> <span class="nf">load_csv</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">csv_file</span><span class="p">,</span> <span class="n">smiles_field</span><span class="o">=</span><span class="s2">"smiles"</span><span class="p">,</span> <span class="n">target_fields</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="sd">"""</span>
 <span class="sd">        Load the dataset from a csv file.</span>
@@ -292,7 +292,7 @@
                             <span class="n">value</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">nan</span>
                         <span class="n">targets</span><span class="p">[</span><span class="n">field</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">load_smiles</span><span class="p">(</span><span class="n">smiles</span><span class="p">,</span> <span class="n">targets</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="n">verbose</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">load_smiles</span><span class="p">(</span><span class="n">smiles</span><span class="p">,</span> <span class="n">targets</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="n">verbose</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
 
     <span class="k">def</span> <span class="nf">_standarize_index</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="n">count</span><span class="p">):</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="nb">slice</span><span class="p">):</span>
@@ -381,7 +381,18 @@
 <span class="sd">    Each sample contains two molecule graphs, and any number of prediction targets.</span>
 <span class="sd">    """</span>
 
+<div class="viewcode-block" id="ReactionDataset.load_smiles"><a class="viewcode-back" href="../../../api/data.html#torchdrug.data.ReactionDataset.load_smiles">[docs]</a>    <span class="nd">@doc</span><span class="o">.</span><span class="n">copy_args</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">Molecule</span><span class="o">.</span><span class="n">from_molecule</span><span class="p">)</span>
     <span class="k">def</span> <span class="nf">load_smiles</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">smiles_list</span><span class="p">,</span> <span class="n">targets</span><span class="p">,</span> <span class="n">transform</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">"""</span>
+<span class="sd">        Load the dataset from SMILES and targets.</span>
+
+<span class="sd">        Parameters:</span>
+<span class="sd">            smiles_list (list of str): SMILES strings</span>
+<span class="sd">            targets (dict of list): prediction targets</span>
+<span class="sd">            transform (Callable, optional): data transformation function</span>
+<span class="sd">            verbose (int, optional): output verbose level</span>
+<span class="sd">            **kwargs</span>
+<span class="sd">        """</span>
         <span class="n">num_sample</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">smiles_list</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">field</span><span class="p">,</span> <span class="n">target_list</span> <span class="ow">in</span> <span class="n">targets</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
             <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">target_list</span><span class="p">)</span> <span class="o">!=</span> <span class="n">num_sample</span><span class="p">:</span>
@@ -407,7 +418,7 @@
                 <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">mols</span><span class="p">)</span>
                 <span class="k">for</span> <span class="n">field</span> <span class="ow">in</span> <span class="n">targets</span><span class="p">:</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">targets</span><span class="p">[</span><span class="n">field</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">targets</span><span class="p">[</span><span class="n">field</span><span class="p">][</span><span class="n">i</span><span class="p">])</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">transform</span> <span class="o">=</span> <span class="n">transform</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">transform</span> <span class="o">=</span> <span class="n">transform</span></div>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">node_feature_dim</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -452,8 +463,13 @@
 
 
 <div class="viewcode-block" id="NodeClassificationDataset"><a class="viewcode-back" href="../../../api/data.html#torchdrug.data.NodeClassificationDataset">[docs]</a><span class="k">class</span> <span class="nc">NodeClassificationDataset</span><span class="p">(</span><span class="n">torch_data</span><span class="o">.</span><span class="n">Dataset</span><span class="p">,</span> <span class="n">core</span><span class="o">.</span><span class="n">Configurable</span><span class="p">):</span>
+    <span class="sd">"""</span>
+<span class="sd">    Node classification dataset.</span>
 
-    <span class="k">def</span> <span class="nf">load_tsv</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">node_file</span><span class="p">,</span> <span class="n">edge_file</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+<span class="sd">    The whole dataset contains one graph, where each node has its own node feature and label.</span>
+<span class="sd">    """</span>
+
+<div class="viewcode-block" id="NodeClassificationDataset.load_tsv"><a class="viewcode-back" href="../../../api/data.html#torchdrug.data.NodeClassificationDataset.load_tsv">[docs]</a>    <span class="k">def</span> <span class="nf">load_tsv</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">node_file</span><span class="p">,</span> <span class="n">edge_file</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
         <span class="sd">"""</span>
 <span class="sd">        Load the edge list from a tsv file.</span>
 
@@ -500,7 +516,7 @@
                 <span class="n">edge_list</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">h</span><span class="p">,</span> <span class="n">t</span><span class="p">))</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">load_edge</span><span class="p">(</span><span class="n">edge_list</span><span class="p">,</span> <span class="n">node_feature</span><span class="p">,</span> <span class="n">node_label</span><span class="p">,</span> <span class="n">inv_node_vocab</span><span class="o">=</span><span class="n">inv_node_vocab</span><span class="p">,</span>
-                       <span class="n">inv_label_vocab</span><span class="o">=</span><span class="n">inv_label_vocab</span><span class="p">)</span>
+                       <span class="n">inv_label_vocab</span><span class="o">=</span><span class="n">inv_label_vocab</span><span class="p">)</span></div>
 
     <span class="k">def</span> <span class="nf">load_edge</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">edge_list</span><span class="p">,</span> <span class="n">node_feature</span><span class="p">,</span> <span class="n">node_label</span><span class="p">,</span> <span class="n">node_vocab</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">inv_node_vocab</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">label_vocab</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                   <span class="n">inv_label_vocab</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
@@ -540,10 +556,12 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">num_node</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">"""Number of nodes."""</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">graph</span><span class="o">.</span><span class="n">num_node</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">num_edge</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">"""Number of edges."""</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">graph</span><span class="o">.</span><span class="n">num_edge</span>
 
     <span class="nd">@property</span>
@@ -567,8 +585,13 @@
 
 
 <div class="viewcode-block" id="KnowledgeGraphDataset"><a class="viewcode-back" href="../../../api/data.html#torchdrug.data.KnowledgeGraphDataset">[docs]</a><span class="k">class</span> <span class="nc">KnowledgeGraphDataset</span><span class="p">(</span><span class="n">torch_data</span><span class="o">.</span><span class="n">Dataset</span><span class="p">,</span> <span class="n">core</span><span class="o">.</span><span class="n">Configurable</span><span class="p">):</span>
+    <span class="sd">"""</span>
+<span class="sd">    Knowledge graph dataset.</span>
 
-    <span class="k">def</span> <span class="nf">load_tsv</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tsv_file</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+<span class="sd">    The whole dataset contains one knowledge graph.</span>
+<span class="sd">    """</span>
+
+<div class="viewcode-block" id="KnowledgeGraphDataset.load_tsv"><a class="viewcode-back" href="../../../api/data.html#torchdrug.data.KnowledgeGraphDataset.load_tsv">[docs]</a>    <span class="k">def</span> <span class="nf">load_tsv</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tsv_file</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
         <span class="sd">"""</span>
 <span class="sd">        Load the dataset from a tsv file.</span>
 
@@ -597,9 +620,9 @@
                 <span class="n">t</span> <span class="o">=</span> <span class="n">inv_entity_vocab</span><span class="p">[</span><span class="n">t_token</span><span class="p">]</span>
                 <span class="n">triplets</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">h</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">r</span><span class="p">))</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">load_triplet</span><span class="p">(</span><span class="n">triplets</span><span class="p">,</span> <span class="n">inv_entity_vocab</span><span class="o">=</span><span class="n">inv_entity_vocab</span><span class="p">,</span> <span class="n">inv_relation_vocab</span><span class="o">=</span><span class="n">inv_relation_vocab</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">load_triplet</span><span class="p">(</span><span class="n">triplets</span><span class="p">,</span> <span class="n">inv_entity_vocab</span><span class="o">=</span><span class="n">inv_entity_vocab</span><span class="p">,</span> <span class="n">inv_relation_vocab</span><span class="o">=</span><span class="n">inv_relation_vocab</span><span class="p">)</span></div>
 
-    <span class="k">def</span> <span class="nf">load_tsvs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tsv_files</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+<div class="viewcode-block" id="KnowledgeGraphDataset.load_tsvs"><a class="viewcode-back" href="../../../api/data.html#torchdrug.data.KnowledgeGraphDataset.load_tsvs">[docs]</a>    <span class="k">def</span> <span class="nf">load_tsvs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tsv_files</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
         <span class="sd">"""</span>
 <span class="sd">        Load the dataset from multiple tsv files.</span>
 
@@ -635,10 +658,21 @@
             <span class="n">num_samples</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">num_sample</span><span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">load_triplet</span><span class="p">(</span><span class="n">triplets</span><span class="p">,</span> <span class="n">inv_entity_vocab</span><span class="o">=</span><span class="n">inv_entity_vocab</span><span class="p">,</span> <span class="n">inv_relation_vocab</span><span class="o">=</span><span class="n">inv_relation_vocab</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">num_samples</span> <span class="o">=</span> <span class="n">num_samples</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">num_samples</span> <span class="o">=</span> <span class="n">num_samples</span></div>
 
-    <span class="k">def</span> <span class="nf">load_triplet</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">triplets</span><span class="p">,</span> <span class="n">entity_vocab</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">relation_vocab</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">inv_entity_vocab</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+<div class="viewcode-block" id="KnowledgeGraphDataset.load_triplet"><a class="viewcode-back" href="../../../api/data.html#torchdrug.data.KnowledgeGraphDataset.load_triplet">[docs]</a>    <span class="k">def</span> <span class="nf">load_triplet</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">triplets</span><span class="p">,</span> <span class="n">entity_vocab</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">relation_vocab</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">inv_entity_vocab</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                      <span class="n">inv_relation_vocab</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">"""</span>
+<span class="sd">        Load the dataset from triplets.</span>
+<span class="sd">        The mapping between indexes and tokens is specified through either vocabularies or inverse vocabularies.</span>
+
+<span class="sd">        Parameters:</span>
+<span class="sd">            triplets (array_like): triplets of shape :math:`(n, 3)`</span>
+<span class="sd">            entity_vocab (dict of str, optional): maps entity indexes to tokens</span>
+<span class="sd">            relation_vocab (dict of str, optional): maps relation indexes to tokens</span>
+<span class="sd">            inv_entity_vocab (dict of str, optional): maps tokens to entity indexes</span>
+<span class="sd">            inv_relation_vocab (dict of str, optional): maps tokens to relation indexes</span>
+<span class="sd">        """</span>
         <span class="n">entity_vocab</span><span class="p">,</span> <span class="n">inv_entity_vocab</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_standarize_vocab</span><span class="p">(</span><span class="n">entity_vocab</span><span class="p">,</span> <span class="n">inv_entity_vocab</span><span class="p">)</span>
         <span class="n">relation_vocab</span><span class="p">,</span> <span class="n">inv_relation_vocab</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_standarize_vocab</span><span class="p">(</span><span class="n">relation_vocab</span><span class="p">,</span> <span class="n">inv_relation_vocab</span><span class="p">)</span>
 
@@ -646,7 +680,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">entity_vocab</span> <span class="o">=</span> <span class="n">entity_vocab</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">relation_vocab</span> <span class="o">=</span> <span class="n">relation_vocab</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">inv_entity_vocab</span> <span class="o">=</span> <span class="n">inv_entity_vocab</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">inv_relation_vocab</span> <span class="o">=</span> <span class="n">inv_relation_vocab</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">inv_relation_vocab</span> <span class="o">=</span> <span class="n">inv_relation_vocab</span></div>
 
     <span class="k">def</span> <span class="nf">_standarize_vocab</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">vocab</span><span class="p">,</span> <span class="n">inverse_vocab</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">vocab</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
@@ -664,14 +698,17 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">num_entity</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">"""Number of entities."""</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">graph</span><span class="o">.</span><span class="n">num_node</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">num_triplet</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">"""Number of triplets."""</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">graph</span><span class="o">.</span><span class="n">num_edge</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">num_relation</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">"""Number of relations."""</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">graph</span><span class="o">.</span><span class="n">num_relation</span>
 
     <span class="k">def</span> <span class="fm">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>

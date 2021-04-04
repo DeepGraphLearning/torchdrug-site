@@ -135,7 +135,7 @@
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../../benchmark/index.html">Benchmark</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label for="toctree-checkbox-1"><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../../benchmark/property_prediction.html">Molecule Property Prediction</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../benchmark/pretrain.html">Pretrained Molecular Representations</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../benchmark/generation.html">Graph Generation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../benchmark/generation.html">Molecule Generation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../benchmark/retrosynthesis.html">Retrosynthesis</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../benchmark/reasoning.html">Knowledge Graph Reasoning</a></li>
 </ul>
@@ -205,16 +205,48 @@
 <span class="sd">    """</span>
     <span class="n">gradient_checkpoint</span> <span class="o">=</span> <span class="kc">False</span>
 
-    <span class="k">def</span> <span class="nf">message</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">graph</span><span class="p">,</span> <span class="nb">input</span><span class="p">):</span>
-        <span class="k">raise</span> <span class="ne">NotImplementedError</span>
+<div class="viewcode-block" id="MessagePassingBase.message"><a class="viewcode-back" href="../../../api/layers.html#torchdrug.layers.MessagePassingBase.message">[docs]</a>    <span class="k">def</span> <span class="nf">message</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">graph</span><span class="p">,</span> <span class="nb">input</span><span class="p">):</span>
+        <span class="sd">"""</span>
+<span class="sd">        Compute edge messages for the graph.</span>
 
-    <span class="k">def</span> <span class="nf">aggregate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">graph</span><span class="p">,</span> <span class="n">message</span><span class="p">):</span>
-        <span class="k">raise</span> <span class="ne">NotImplementedError</span>
+<span class="sd">        Parameters:</span>
+<span class="sd">            graph (Graph): graph</span>
+<span class="sd">            input (Tensor): node representations of shape :math:`(|V|, ...)`</span>
 
-    <span class="k">def</span> <span class="nf">message_and_aggregate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">graph</span><span class="p">,</span> <span class="nb">input</span><span class="p">):</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            Tensor: edge messages of shape :math:`(|E|, ...)`</span>
+<span class="sd">        """</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span></div>
+
+<div class="viewcode-block" id="MessagePassingBase.aggregate"><a class="viewcode-back" href="../../../api/layers.html#torchdrug.layers.MessagePassingBase.aggregate">[docs]</a>    <span class="k">def</span> <span class="nf">aggregate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">graph</span><span class="p">,</span> <span class="n">message</span><span class="p">):</span>
+        <span class="sd">"""</span>
+<span class="sd">        Aggregate edge messages to nodes.</span>
+
+<span class="sd">        Parameters:</span>
+<span class="sd">            graph (Graph): graph</span>
+<span class="sd">            message (Tensor): edge messages of shape :math:`(|E|, ...)`</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Tensor: node updates of shape :math:`(|V|, ...)`</span>
+<span class="sd">        """</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span></div>
+
+<div class="viewcode-block" id="MessagePassingBase.message_and_aggregate"><a class="viewcode-back" href="../../../api/layers.html#torchdrug.layers.MessagePassingBase.message_and_aggregate">[docs]</a>    <span class="k">def</span> <span class="nf">message_and_aggregate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">graph</span><span class="p">,</span> <span class="nb">input</span><span class="p">):</span>
+        <span class="sd">"""</span>
+<span class="sd">        Fused computation of message and aggregation over the graph.</span>
+<span class="sd">        This may provide better time or memory complexity than separate calls of</span>
+<span class="sd">        :meth:`message &lt;MessagePassingBase.message&gt;` and :meth:`aggregate &lt;MessagePassingBase.aggregate&gt;`.</span>
+
+<span class="sd">        Parameters:</span>
+<span class="sd">            graph (Graph): graph</span>
+<span class="sd">            input (Tensor): node representations of shape :math:`(|V|, ...)`</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Tensor: node updates of shape :math:`(|V|, ...)`</span>
+<span class="sd">        """</span>
         <span class="n">message</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">message</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="nb">input</span><span class="p">)</span>
         <span class="n">update</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">aggregate</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">message</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">update</span>
+        <span class="k">return</span> <span class="n">update</span></div>
 
     <span class="k">def</span> <span class="nf">_message_and_aggregate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">tensors</span><span class="p">):</span>
         <span class="n">graph</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">Graph</span><span class="o">.</span><span class="n">from_tensors</span><span class="p">(</span><span class="n">tensors</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
@@ -222,23 +254,30 @@
         <span class="n">update</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">message_and_aggregate</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="nb">input</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">update</span>
 
-    <span class="k">def</span> <span class="nf">combine</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">input</span><span class="p">,</span> <span class="n">update</span><span class="p">):</span>
-        <span class="k">raise</span> <span class="ne">NotImplementedError</span>
+<div class="viewcode-block" id="MessagePassingBase.combine"><a class="viewcode-back" href="../../../api/layers.html#torchdrug.layers.MessagePassingBase.combine">[docs]</a>    <span class="k">def</span> <span class="nf">combine</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">input</span><span class="p">,</span> <span class="n">update</span><span class="p">):</span>
+        <span class="sd">"""</span>
+<span class="sd">        Combine node input and node update.</span>
 
-    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">graph</span><span class="p">,</span> <span class="nb">input</span><span class="p">):</span>
+<span class="sd">        Parameters:</span>
+<span class="sd">            input (Tensor): node representations of shape :math:`(|V|, ...)`</span>
+<span class="sd">            update (Tensor): node updates of shape :math:`(|V|, ...)`</span>
+<span class="sd">        """</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span></div>
+
+<div class="viewcode-block" id="MessagePassingBase.forward"><a class="viewcode-back" href="../../../api/layers.html#torchdrug.layers.MessagePassingBase.forward">[docs]</a>    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">graph</span><span class="p">,</span> <span class="nb">input</span><span class="p">):</span>
         <span class="sd">"""</span>
 <span class="sd">        Perform message passing over the graph.</span>
 
 <span class="sd">        Parameters:</span>
 <span class="sd">            graph (Graph): graph</span>
-<span class="sd">            input (Tensor): input node representations</span>
+<span class="sd">            input (Tensor): node representations of shape :math:`(|V|, ...)`</span>
 <span class="sd">        """</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">gradient_checkpoint</span><span class="p">:</span>
             <span class="n">update</span> <span class="o">=</span> <span class="n">checkpoint</span><span class="o">.</span><span class="n">checkpoint</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_message_and_aggregate</span><span class="p">,</span> <span class="o">*</span><span class="n">graph</span><span class="o">.</span><span class="n">to_tensors</span><span class="p">(),</span> <span class="nb">input</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">update</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">message_and_aggregate</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="nb">input</span><span class="p">)</span>
         <span class="n">output</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">combine</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="n">update</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">output</span></div>
+        <span class="k">return</span> <span class="n">output</span></div></div>
 
 
 <div class="viewcode-block" id="GraphConv"><a class="viewcode-back" href="../../../api/layers.html#torchdrug.layers.GraphConv">[docs]</a><span class="k">class</span> <span class="nc">GraphConv</span><span class="p">(</span><span class="n">MessagePassingBase</span><span class="p">):</span>
@@ -277,7 +316,7 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">edge_linear</span> <span class="o">=</span> <span class="kc">None</span>
 
-    <span class="k">def</span> <span class="nf">message</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">graph</span><span class="p">,</span> <span class="nb">input</span><span class="p">):</span>
+<div class="viewcode-block" id="GraphConv.message"><a class="viewcode-back" href="../../../api/layers.html#torchdrug.layers.GraphConv.message">[docs]</a>    <span class="k">def</span> <span class="nf">message</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">graph</span><span class="p">,</span> <span class="nb">input</span><span class="p">):</span>
         <span class="c1"># add self loop</span>
         <span class="n">node_in</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">cat</span><span class="p">([</span><span class="n">graph</span><span class="o">.</span><span class="n">edge_list</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">torch</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">graph</span><span class="o">.</span><span class="n">num_node</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="n">graph</span><span class="o">.</span><span class="n">device</span><span class="p">)])</span>
         <span class="n">degree_in</span> <span class="o">=</span> <span class="n">graph</span><span class="o">.</span><span class="n">degree_in</span><span class="o">.</span><span class="n">unsqueeze</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
@@ -287,9 +326,9 @@
             <span class="n">edge_input</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">cat</span><span class="p">([</span><span class="n">edge_input</span><span class="p">,</span> <span class="n">torch</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">graph</span><span class="o">.</span><span class="n">num_node</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">input_dim</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="n">graph</span><span class="o">.</span><span class="n">device</span><span class="p">)])</span>
             <span class="n">message</span> <span class="o">+=</span> <span class="n">edge_input</span>
         <span class="n">message</span> <span class="o">/=</span> <span class="n">degree_in</span><span class="p">[</span><span class="n">node_in</span><span class="p">]</span><span class="o">.</span><span class="n">sqrt</span><span class="p">()</span>
-        <span class="k">return</span> <span class="n">message</span>
+        <span class="k">return</span> <span class="n">message</span></div>
 
-    <span class="k">def</span> <span class="nf">aggregate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">graph</span><span class="p">,</span> <span class="n">message</span><span class="p">):</span>
+<div class="viewcode-block" id="GraphConv.aggregate"><a class="viewcode-back" href="../../../api/layers.html#torchdrug.layers.GraphConv.aggregate">[docs]</a>    <span class="k">def</span> <span class="nf">aggregate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">graph</span><span class="p">,</span> <span class="n">message</span><span class="p">):</span>
         <span class="c1"># add self loop</span>
         <span class="n">node_out</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">cat</span><span class="p">([</span><span class="n">graph</span><span class="o">.</span><span class="n">edge_list</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">torch</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">graph</span><span class="o">.</span><span class="n">num_node</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="n">graph</span><span class="o">.</span><span class="n">device</span><span class="p">)])</span>
         <span class="n">edge_weight</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">cat</span><span class="p">([</span><span class="n">graph</span><span class="o">.</span><span class="n">edge_weight</span><span class="p">,</span> <span class="n">torch</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">graph</span><span class="o">.</span><span class="n">num_node</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="n">graph</span><span class="o">.</span><span class="n">device</span><span class="p">)])</span>
@@ -297,9 +336,9 @@
         <span class="n">degree_out</span> <span class="o">=</span> <span class="n">graph</span><span class="o">.</span><span class="n">degree_out</span><span class="o">.</span><span class="n">unsqueeze</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
         <span class="n">update</span> <span class="o">=</span> <span class="n">scatter_add</span><span class="p">(</span><span class="n">message</span> <span class="o">*</span> <span class="n">edge_weight</span><span class="p">,</span> <span class="n">node_out</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">dim_size</span><span class="o">=</span><span class="n">graph</span><span class="o">.</span><span class="n">num_node</span><span class="p">)</span>
         <span class="n">update</span> <span class="o">=</span> <span class="n">update</span> <span class="o">/</span> <span class="n">degree_out</span><span class="o">.</span><span class="n">sqrt</span><span class="p">()</span>
-        <span class="k">return</span> <span class="n">update</span>
+        <span class="k">return</span> <span class="n">update</span></div>
 
-    <span class="k">def</span> <span class="nf">message_and_aggregate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">graph</span><span class="p">,</span> <span class="nb">input</span><span class="p">):</span>
+<div class="viewcode-block" id="GraphConv.message_and_aggregate"><a class="viewcode-back" href="../../../api/layers.html#torchdrug.layers.GraphConv.message_and_aggregate">[docs]</a>    <span class="k">def</span> <span class="nf">message_and_aggregate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">graph</span><span class="p">,</span> <span class="nb">input</span><span class="p">):</span>
         <span class="c1"># torch.spmm doesn't support gradient for sparse tensor</span>
         <span class="k">if</span> <span class="n">graph</span><span class="o">.</span><span class="n">requires_grad</span><span class="p">:</span>
             <span class="k">return</span> <span class="nb">super</span><span class="p">(</span><span class="n">GraphConv</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">message_and_aggregate</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="nb">input</span><span class="p">)</span>
@@ -324,15 +363,15 @@
                 <span class="n">edge_update</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">edge_linear</span><span class="p">(</span><span class="n">edge_update</span><span class="p">)</span>
             <span class="n">update</span> <span class="o">+=</span> <span class="n">edge_update</span>
 
-        <span class="k">return</span> <span class="n">update</span>
+        <span class="k">return</span> <span class="n">update</span></div>
 
-    <span class="k">def</span> <span class="nf">combine</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">input</span><span class="p">,</span> <span class="n">update</span><span class="p">):</span>
+<div class="viewcode-block" id="GraphConv.combine"><a class="viewcode-back" href="../../../api/layers.html#torchdrug.layers.GraphConv.combine">[docs]</a>    <span class="k">def</span> <span class="nf">combine</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">input</span><span class="p">,</span> <span class="n">update</span><span class="p">):</span>
         <span class="n">output</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">linear</span><span class="p">(</span><span class="n">update</span><span class="p">)</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">batch_norm</span><span class="p">:</span>
             <span class="n">output</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">batch_norm</span><span class="p">(</span><span class="n">output</span><span class="p">)</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">activation</span><span class="p">:</span>
             <span class="n">output</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">activation</span><span class="p">(</span><span class="n">output</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">output</span></div>
+        <span class="k">return</span> <span class="n">output</span></div></div>
 
 
 <div class="viewcode-block" id="GraphAttentionConv"><a class="viewcode-back" href="../../../api/layers.html#torchdrug.layers.GraphAttentionConv">[docs]</a><span class="k">class</span> <span class="nc">GraphAttentionConv</span><span class="p">(</span><span class="n">MessagePassingBase</span><span class="p">):</span>
@@ -384,7 +423,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">query</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Parameter</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">num_head</span><span class="p">,</span> <span class="n">output_dim</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">//</span> <span class="n">num_head</span><span class="p">))</span>
         <span class="n">nn</span><span class="o">.</span><span class="n">init</span><span class="o">.</span><span class="n">kaiming_uniform_</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">,</span> <span class="n">negative_slope</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">"fan_in"</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">message</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">graph</span><span class="p">,</span> <span class="nb">input</span><span class="p">):</span>
+<div class="viewcode-block" id="GraphAttentionConv.message"><a class="viewcode-back" href="../../../api/layers.html#torchdrug.layers.GraphAttentionConv.message">[docs]</a>    <span class="k">def</span> <span class="nf">message</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">graph</span><span class="p">,</span> <span class="nb">input</span><span class="p">):</span>
         <span class="c1"># add self loop</span>
         <span class="n">node_in</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">cat</span><span class="p">([</span><span class="n">graph</span><span class="o">.</span><span class="n">edge_list</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">torch</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">graph</span><span class="o">.</span><span class="n">num_node</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="n">graph</span><span class="o">.</span><span class="n">device</span><span class="p">)])</span>
         <span class="n">node_out</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">cat</span><span class="p">([</span><span class="n">graph</span><span class="o">.</span><span class="n">edge_list</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">torch</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">graph</span><span class="o">.</span><span class="n">num_node</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="n">graph</span><span class="o">.</span><span class="n">device</span><span class="p">)])</span>
@@ -414,21 +453,21 @@
         <span class="n">value</span> <span class="o">=</span> <span class="n">hidden</span><span class="p">[</span><span class="n">node_in</span><span class="p">]</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_head</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">//</span> <span class="mi">2</span><span class="p">)</span>
         <span class="n">attention</span> <span class="o">=</span> <span class="n">attention</span><span class="o">.</span><span class="n">unsqueeze</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">expand_as</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
         <span class="n">message</span> <span class="o">=</span> <span class="p">(</span><span class="n">attention</span> <span class="o">*</span> <span class="n">value</span><span class="p">)</span><span class="o">.</span><span class="n">flatten</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">message</span>
+        <span class="k">return</span> <span class="n">message</span></div>
 
-    <span class="k">def</span> <span class="nf">aggregate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">graph</span><span class="p">,</span> <span class="n">message</span><span class="p">):</span>
+<div class="viewcode-block" id="GraphAttentionConv.aggregate"><a class="viewcode-back" href="../../../api/layers.html#torchdrug.layers.GraphAttentionConv.aggregate">[docs]</a>    <span class="k">def</span> <span class="nf">aggregate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">graph</span><span class="p">,</span> <span class="n">message</span><span class="p">):</span>
         <span class="c1"># add self loop</span>
         <span class="n">node_out</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">cat</span><span class="p">([</span><span class="n">graph</span><span class="o">.</span><span class="n">edge_list</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">torch</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">graph</span><span class="o">.</span><span class="n">num_node</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="n">graph</span><span class="o">.</span><span class="n">device</span><span class="p">)])</span>
         <span class="n">update</span> <span class="o">=</span> <span class="n">scatter_mean</span><span class="p">(</span><span class="n">message</span><span class="p">,</span> <span class="n">node_out</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">dim_size</span><span class="o">=</span><span class="n">graph</span><span class="o">.</span><span class="n">num_node</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">update</span>
+        <span class="k">return</span> <span class="n">update</span></div>
 
-    <span class="k">def</span> <span class="nf">combine</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">input</span><span class="p">,</span> <span class="n">update</span><span class="p">):</span>
+<div class="viewcode-block" id="GraphAttentionConv.combine"><a class="viewcode-back" href="../../../api/layers.html#torchdrug.layers.GraphAttentionConv.combine">[docs]</a>    <span class="k">def</span> <span class="nf">combine</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">input</span><span class="p">,</span> <span class="n">update</span><span class="p">):</span>
         <span class="n">output</span> <span class="o">=</span> <span class="n">update</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">batch_norm</span><span class="p">:</span>
             <span class="n">output</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">batch_norm</span><span class="p">(</span><span class="n">output</span><span class="p">)</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">activation</span><span class="p">:</span>
             <span class="n">output</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">activation</span><span class="p">(</span><span class="n">output</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">output</span></div>
+        <span class="k">return</span> <span class="n">output</span></div></div>
 
 
 <div class="viewcode-block" id="GraphIsomorphismConv"><a class="viewcode-back" href="../../../api/layers.html#torchdrug.layers.GraphIsomorphismConv">[docs]</a><span class="k">class</span> <span class="nc">GraphIsomorphismConv</span><span class="p">(</span><span class="n">MessagePassingBase</span><span class="p">):</span>
@@ -478,20 +517,20 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">edge_linear</span> <span class="o">=</span> <span class="kc">None</span>
 
-    <span class="k">def</span> <span class="nf">message</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">graph</span><span class="p">,</span> <span class="nb">input</span><span class="p">):</span>
+<div class="viewcode-block" id="GraphIsomorphismConv.message"><a class="viewcode-back" href="../../../api/layers.html#torchdrug.layers.GraphIsomorphismConv.message">[docs]</a>    <span class="k">def</span> <span class="nf">message</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">graph</span><span class="p">,</span> <span class="nb">input</span><span class="p">):</span>
         <span class="n">node_in</span> <span class="o">=</span> <span class="n">graph</span><span class="o">.</span><span class="n">edge_list</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span>
         <span class="n">message</span> <span class="o">=</span> <span class="nb">input</span><span class="p">[</span><span class="n">node_in</span><span class="p">]</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">edge_linear</span><span class="p">:</span>
             <span class="n">message</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">edge_linear</span><span class="p">(</span><span class="n">graph</span><span class="o">.</span><span class="n">edge_feature</span><span class="o">.</span><span class="n">float</span><span class="p">())</span>
-        <span class="k">return</span> <span class="n">message</span>
+        <span class="k">return</span> <span class="n">message</span></div>
 
-    <span class="k">def</span> <span class="nf">aggregate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">graph</span><span class="p">,</span> <span class="n">message</span><span class="p">):</span>
+<div class="viewcode-block" id="GraphIsomorphismConv.aggregate"><a class="viewcode-back" href="../../../api/layers.html#torchdrug.layers.GraphIsomorphismConv.aggregate">[docs]</a>    <span class="k">def</span> <span class="nf">aggregate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">graph</span><span class="p">,</span> <span class="n">message</span><span class="p">):</span>
         <span class="n">node_out</span> <span class="o">=</span> <span class="n">graph</span><span class="o">.</span><span class="n">edge_list</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span>
         <span class="n">edge_weight</span> <span class="o">=</span> <span class="n">graph</span><span class="o">.</span><span class="n">edge_weight</span><span class="o">.</span><span class="n">unsqueeze</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
         <span class="n">update</span> <span class="o">=</span> <span class="n">scatter_add</span><span class="p">(</span><span class="n">message</span> <span class="o">*</span> <span class="n">edge_weight</span><span class="p">,</span> <span class="n">node_out</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">dim_size</span><span class="o">=</span><span class="n">graph</span><span class="o">.</span><span class="n">num_node</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">update</span>
+        <span class="k">return</span> <span class="n">update</span></div>
 
-    <span class="k">def</span> <span class="nf">message_and_aggregate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">graph</span><span class="p">,</span> <span class="nb">input</span><span class="p">):</span>
+<div class="viewcode-block" id="GraphIsomorphismConv.message_and_aggregate"><a class="viewcode-back" href="../../../api/layers.html#torchdrug.layers.GraphIsomorphismConv.message_and_aggregate">[docs]</a>    <span class="k">def</span> <span class="nf">message_and_aggregate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">graph</span><span class="p">,</span> <span class="nb">input</span><span class="p">):</span>
         <span class="c1"># torch.spmm doesn't support gradient for sparse tensor</span>
         <span class="k">if</span> <span class="n">graph</span><span class="o">.</span><span class="n">requires_grad</span><span class="p">:</span>
             <span class="k">return</span> <span class="nb">super</span><span class="p">(</span><span class="n">GraphIsomorphismConv</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">message_and_aggregate</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="nb">input</span><span class="p">)</span>
@@ -509,15 +548,15 @@
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">edge_linear</span><span class="o">.</span><span class="n">in_features</span> <span class="o">&lt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">edge_linear</span><span class="o">.</span><span class="n">out_features</span><span class="p">:</span>
                 <span class="n">edge_update</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">edge_linear</span><span class="p">(</span><span class="n">edge_update</span><span class="p">)</span>
             <span class="n">update</span> <span class="o">+=</span> <span class="n">edge_update</span>
-        <span class="k">return</span> <span class="n">update</span>
+        <span class="k">return</span> <span class="n">update</span></div>
 
-    <span class="k">def</span> <span class="nf">combine</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">input</span><span class="p">,</span> <span class="n">update</span><span class="p">):</span>
+<div class="viewcode-block" id="GraphIsomorphismConv.combine"><a class="viewcode-back" href="../../../api/layers.html#torchdrug.layers.GraphIsomorphismConv.combine">[docs]</a>    <span class="k">def</span> <span class="nf">combine</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">input</span><span class="p">,</span> <span class="n">update</span><span class="p">):</span>
         <span class="n">output</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mlp</span><span class="p">((</span><span class="mi">1</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">eps</span><span class="p">)</span> <span class="o">*</span> <span class="nb">input</span> <span class="o">+</span> <span class="n">update</span><span class="p">)</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">batch_norm</span><span class="p">:</span>
             <span class="n">output</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">batch_norm</span><span class="p">(</span><span class="n">output</span><span class="p">)</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">activation</span><span class="p">:</span>
             <span class="n">output</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">activation</span><span class="p">(</span><span class="n">output</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">output</span></div>
+        <span class="k">return</span> <span class="n">output</span></div></div>
 
 
 <div class="viewcode-block" id="RelationalGraphConv"><a class="viewcode-back" href="../../../api/layers.html#torchdrug.layers.RelationalGraphConv">[docs]</a><span class="k">class</span> <span class="nc">RelationalGraphConv</span><span class="p">(</span><span class="n">MessagePassingBase</span><span class="p">):</span>
@@ -560,23 +599,23 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">edge_linear</span> <span class="o">=</span> <span class="kc">None</span>
 
-    <span class="k">def</span> <span class="nf">message</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">graph</span><span class="p">,</span> <span class="nb">input</span><span class="p">):</span>
+<div class="viewcode-block" id="RelationalGraphConv.message"><a class="viewcode-back" href="../../../api/layers.html#torchdrug.layers.RelationalGraphConv.message">[docs]</a>    <span class="k">def</span> <span class="nf">message</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">graph</span><span class="p">,</span> <span class="nb">input</span><span class="p">):</span>
         <span class="n">node_in</span> <span class="o">=</span> <span class="n">graph</span><span class="o">.</span><span class="n">edge_list</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span>
         <span class="n">message</span> <span class="o">=</span> <span class="nb">input</span><span class="p">[</span><span class="n">node_in</span><span class="p">]</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">edge_linear</span><span class="p">:</span>
             <span class="n">message</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">edge_linear</span><span class="p">(</span><span class="n">graph</span><span class="o">.</span><span class="n">edge_feature</span><span class="o">.</span><span class="n">float</span><span class="p">())</span>
-        <span class="k">return</span> <span class="n">message</span>
+        <span class="k">return</span> <span class="n">message</span></div>
     
-    <span class="k">def</span> <span class="nf">aggregate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">graph</span><span class="p">,</span> <span class="n">message</span><span class="p">):</span>
+<div class="viewcode-block" id="RelationalGraphConv.aggregate"><a class="viewcode-back" href="../../../api/layers.html#torchdrug.layers.RelationalGraphConv.aggregate">[docs]</a>    <span class="k">def</span> <span class="nf">aggregate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">graph</span><span class="p">,</span> <span class="n">message</span><span class="p">):</span>
         <span class="k">assert</span> <span class="n">graph</span><span class="o">.</span><span class="n">num_relation</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_relation</span>
 
         <span class="n">node_out</span> <span class="o">=</span> <span class="n">graph</span><span class="o">.</span><span class="n">edge_list</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_relation</span> <span class="o">+</span> <span class="n">graph</span><span class="o">.</span><span class="n">edge_list</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">]</span>
         <span class="n">edge_weight</span> <span class="o">=</span> <span class="n">graph</span><span class="o">.</span><span class="n">edge_weight</span><span class="o">.</span><span class="n">unsqueeze</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
         <span class="n">update</span> <span class="o">=</span> <span class="n">scatter_add</span><span class="p">(</span><span class="n">message</span> <span class="o">*</span> <span class="n">edge_weight</span><span class="p">,</span> <span class="n">node_out</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">dim_size</span><span class="o">=</span><span class="n">graph</span><span class="o">.</span><span class="n">num_node</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_relation</span><span class="p">)</span> <span class="o">/</span> \
                  <span class="p">(</span><span class="n">scatter_add</span><span class="p">(</span><span class="n">edge_weight</span><span class="p">,</span> <span class="n">node_out</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">dim_size</span><span class="o">=</span><span class="n">graph</span><span class="o">.</span><span class="n">num_node</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_relation</span><span class="p">)</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">eps</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">update</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="n">graph</span><span class="o">.</span><span class="n">num_node</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_relation</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">input_dim</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">update</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="n">graph</span><span class="o">.</span><span class="n">num_node</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_relation</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">input_dim</span><span class="p">)</span></div>
 
-    <span class="k">def</span> <span class="nf">message_and_aggregate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">graph</span><span class="p">,</span> <span class="nb">input</span><span class="p">):</span>
+<div class="viewcode-block" id="RelationalGraphConv.message_and_aggregate"><a class="viewcode-back" href="../../../api/layers.html#torchdrug.layers.RelationalGraphConv.message_and_aggregate">[docs]</a>    <span class="k">def</span> <span class="nf">message_and_aggregate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">graph</span><span class="p">,</span> <span class="nb">input</span><span class="p">):</span>
         <span class="c1"># torch.spmm doesn't support gradient for sparse tensor</span>
         <span class="k">if</span> <span class="n">graph</span><span class="o">.</span><span class="n">requires_grad</span><span class="p">:</span>
             <span class="k">return</span> <span class="nb">super</span><span class="p">(</span><span class="n">RelationalGraphConv</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">message_and_aggregate</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="nb">input</span><span class="p">)</span>
@@ -600,15 +639,15 @@
                 <span class="n">edge_update</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">edge_linear</span><span class="p">(</span><span class="n">edge_update</span><span class="p">)</span>
             <span class="n">update</span> <span class="o">+=</span> <span class="n">edge_update</span>
 
-        <span class="k">return</span> <span class="n">update</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="n">graph</span><span class="o">.</span><span class="n">num_node</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_relation</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">input_dim</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">update</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="n">graph</span><span class="o">.</span><span class="n">num_node</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_relation</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">input_dim</span><span class="p">)</span></div>
 
-    <span class="k">def</span> <span class="nf">combine</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">input</span><span class="p">,</span> <span class="n">update</span><span class="p">):</span>
+<div class="viewcode-block" id="RelationalGraphConv.combine"><a class="viewcode-back" href="../../../api/layers.html#torchdrug.layers.RelationalGraphConv.combine">[docs]</a>    <span class="k">def</span> <span class="nf">combine</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">input</span><span class="p">,</span> <span class="n">update</span><span class="p">):</span>
         <span class="n">output</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">linear</span><span class="p">(</span><span class="n">update</span><span class="p">)</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">self_loop</span><span class="p">(</span><span class="nb">input</span><span class="p">)</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">batch_norm</span><span class="p">:</span>
             <span class="n">output</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">batch_norm</span><span class="p">(</span><span class="n">output</span><span class="p">)</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">activation</span><span class="p">:</span>
             <span class="n">output</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">activation</span><span class="p">(</span><span class="n">output</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">output</span></div>
+        <span class="k">return</span> <span class="n">output</span></div></div>
 
 
 <div class="viewcode-block" id="NeuralFingerprintConv"><a class="viewcode-back" href="../../../api/layers.html#torchdrug.layers.NeuralFingerprintConv">[docs]</a><span class="k">class</span> <span class="nc">NeuralFingerprintConv</span><span class="p">(</span><span class="n">MessagePassingBase</span><span class="p">):</span>
@@ -649,20 +688,20 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">edge_linear</span> <span class="o">=</span> <span class="kc">None</span>
 
-    <span class="k">def</span> <span class="nf">message</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">graph</span><span class="p">,</span> <span class="nb">input</span><span class="p">):</span>
+<div class="viewcode-block" id="NeuralFingerprintConv.message"><a class="viewcode-back" href="../../../api/layers.html#torchdrug.layers.NeuralFingerprintConv.message">[docs]</a>    <span class="k">def</span> <span class="nf">message</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">graph</span><span class="p">,</span> <span class="nb">input</span><span class="p">):</span>
         <span class="n">node_in</span> <span class="o">=</span> <span class="n">graph</span><span class="o">.</span><span class="n">edge_list</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span>
         <span class="n">message</span> <span class="o">=</span> <span class="nb">input</span><span class="p">[</span><span class="n">node_in</span><span class="p">]</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">edge_linear</span><span class="p">:</span>
             <span class="n">message</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">edge_linear</span><span class="p">(</span><span class="n">graph</span><span class="o">.</span><span class="n">edge_feature</span><span class="o">.</span><span class="n">float</span><span class="p">())</span>
-        <span class="k">return</span> <span class="n">message</span>
+        <span class="k">return</span> <span class="n">message</span></div>
 
-    <span class="k">def</span> <span class="nf">aggregate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">graph</span><span class="p">,</span> <span class="n">message</span><span class="p">):</span>
+<div class="viewcode-block" id="NeuralFingerprintConv.aggregate"><a class="viewcode-back" href="../../../api/layers.html#torchdrug.layers.NeuralFingerprintConv.aggregate">[docs]</a>    <span class="k">def</span> <span class="nf">aggregate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">graph</span><span class="p">,</span> <span class="n">message</span><span class="p">):</span>
         <span class="n">node_out</span> <span class="o">=</span> <span class="n">graph</span><span class="o">.</span><span class="n">edge_list</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span>
         <span class="n">edge_weight</span> <span class="o">=</span> <span class="n">graph</span><span class="o">.</span><span class="n">edge_weight</span><span class="o">.</span><span class="n">unsqueeze</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
         <span class="n">update</span> <span class="o">=</span> <span class="n">scatter_add</span><span class="p">(</span><span class="n">message</span> <span class="o">*</span> <span class="n">edge_weight</span><span class="p">,</span> <span class="n">node_out</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">dim_size</span><span class="o">=</span><span class="n">graph</span><span class="o">.</span><span class="n">num_node</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">update</span>
+        <span class="k">return</span> <span class="n">update</span></div>
 
-    <span class="k">def</span> <span class="nf">message_and_aggregate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">graph</span><span class="p">,</span> <span class="nb">input</span><span class="p">):</span>
+<div class="viewcode-block" id="NeuralFingerprintConv.message_and_aggregate"><a class="viewcode-back" href="../../../api/layers.html#torchdrug.layers.NeuralFingerprintConv.message_and_aggregate">[docs]</a>    <span class="k">def</span> <span class="nf">message_and_aggregate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">graph</span><span class="p">,</span> <span class="nb">input</span><span class="p">):</span>
         <span class="c1"># torch.spmm doesn't support gradient for sparse tensor</span>
         <span class="k">if</span> <span class="n">graph</span><span class="o">.</span><span class="n">requires_grad</span><span class="p">:</span>
             <span class="k">return</span> <span class="nb">super</span><span class="p">(</span><span class="n">NeuralFingerprintConv</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">message_and_aggregate</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="nb">input</span><span class="p">)</span>
@@ -680,15 +719,15 @@
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">edge_linear</span><span class="o">.</span><span class="n">in_features</span> <span class="o">&lt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">edge_linear</span><span class="o">.</span><span class="n">out_features</span><span class="p">:</span>
                 <span class="n">edge_update</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">edge_linear</span><span class="p">(</span><span class="n">edge_update</span><span class="p">)</span>
             <span class="n">update</span> <span class="o">+=</span> <span class="n">edge_update</span>
-        <span class="k">return</span> <span class="n">update</span>
+        <span class="k">return</span> <span class="n">update</span></div>
 
-    <span class="k">def</span> <span class="nf">combine</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">input</span><span class="p">,</span> <span class="n">update</span><span class="p">):</span>
+<div class="viewcode-block" id="NeuralFingerprintConv.combine"><a class="viewcode-back" href="../../../api/layers.html#torchdrug.layers.NeuralFingerprintConv.combine">[docs]</a>    <span class="k">def</span> <span class="nf">combine</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">input</span><span class="p">,</span> <span class="n">update</span><span class="p">):</span>
         <span class="n">output</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">linear</span><span class="p">(</span><span class="nb">input</span> <span class="o">+</span> <span class="n">update</span><span class="p">)</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">batch_norm</span><span class="p">:</span>
             <span class="n">output</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">batch_norm</span><span class="p">(</span><span class="n">output</span><span class="p">)</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">activation</span><span class="p">:</span>
             <span class="n">output</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">activation</span><span class="p">(</span><span class="n">output</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">output</span></div>
+        <span class="k">return</span> <span class="n">output</span></div></div>
 
 
 <div class="viewcode-block" id="ContinuousFilterConv"><a class="viewcode-back" href="../../../api/layers.html#torchdrug.layers.ContinuousFilterConv">[docs]</a><span class="k">class</span> <span class="nc">ContinuousFilterConv</span><span class="p">(</span><span class="n">MessagePassingBase</span><span class="p">):</span>
@@ -740,7 +779,7 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">edge_linear</span> <span class="o">=</span> <span class="kc">None</span>
 
-    <span class="k">def</span> <span class="nf">message</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">graph</span><span class="p">,</span> <span class="nb">input</span><span class="p">):</span>
+<div class="viewcode-block" id="ContinuousFilterConv.message"><a class="viewcode-back" href="../../../api/layers.html#torchdrug.layers.ContinuousFilterConv.message">[docs]</a>    <span class="k">def</span> <span class="nf">message</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">graph</span><span class="p">,</span> <span class="nb">input</span><span class="p">):</span>
         <span class="n">node_in</span><span class="p">,</span> <span class="n">node_out</span> <span class="o">=</span> <span class="n">graph</span><span class="o">.</span><span class="n">edge_list</span><span class="o">.</span><span class="n">t</span><span class="p">()[:</span><span class="mi">2</span><span class="p">]</span>
         <span class="n">position</span> <span class="o">=</span> <span class="n">graph</span><span class="o">.</span><span class="n">node_position</span>
         <span class="n">message</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">input_layer</span><span class="p">(</span><span class="nb">input</span><span class="p">)[</span><span class="n">node_in</span><span class="p">]</span>
@@ -748,15 +787,15 @@
             <span class="n">message</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">edge_linear</span><span class="p">(</span><span class="n">graph</span><span class="o">.</span><span class="n">edge_feature</span><span class="o">.</span><span class="n">float</span><span class="p">())</span>
         <span class="n">weight</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rbf_layer</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rbf</span><span class="p">(</span><span class="n">position</span><span class="p">[</span><span class="n">node_in</span><span class="p">],</span> <span class="n">position</span><span class="p">[</span><span class="n">node_out</span><span class="p">]))</span>
         <span class="n">message</span> <span class="o">*=</span> <span class="n">weight</span>
-        <span class="k">return</span> <span class="n">message</span>
+        <span class="k">return</span> <span class="n">message</span></div>
 
-    <span class="k">def</span> <span class="nf">aggregate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">graph</span><span class="p">,</span> <span class="n">message</span><span class="p">):</span>
+<div class="viewcode-block" id="ContinuousFilterConv.aggregate"><a class="viewcode-back" href="../../../api/layers.html#torchdrug.layers.ContinuousFilterConv.aggregate">[docs]</a>    <span class="k">def</span> <span class="nf">aggregate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">graph</span><span class="p">,</span> <span class="n">message</span><span class="p">):</span>
         <span class="n">node_out</span> <span class="o">=</span> <span class="n">graph</span><span class="o">.</span><span class="n">edge_list</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span>
         <span class="n">edge_weight</span> <span class="o">=</span> <span class="n">graph</span><span class="o">.</span><span class="n">edge_weight</span><span class="o">.</span><span class="n">unsqueeze</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
         <span class="n">update</span> <span class="o">=</span> <span class="n">scatter_add</span><span class="p">(</span><span class="n">message</span> <span class="o">*</span> <span class="n">edge_weight</span><span class="p">,</span> <span class="n">node_out</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">dim_size</span><span class="o">=</span><span class="n">graph</span><span class="o">.</span><span class="n">num_node</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">update</span>
+        <span class="k">return</span> <span class="n">update</span></div>
 
-    <span class="k">def</span> <span class="nf">message_and_aggregate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">graph</span><span class="p">,</span> <span class="nb">input</span><span class="p">):</span>
+<div class="viewcode-block" id="ContinuousFilterConv.message_and_aggregate"><a class="viewcode-back" href="../../../api/layers.html#torchdrug.layers.ContinuousFilterConv.message_and_aggregate">[docs]</a>    <span class="k">def</span> <span class="nf">message_and_aggregate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">graph</span><span class="p">,</span> <span class="nb">input</span><span class="p">):</span>
         <span class="c1"># torch.spmm doesn't support gradient for sparse tensor</span>
         <span class="k">if</span> <span class="n">graph</span><span class="o">.</span><span class="n">requires_grad</span><span class="p">:</span>
             <span class="k">return</span> <span class="nb">super</span><span class="p">(</span><span class="n">ContinuousFilterConv</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">message_and_aggregate</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="nb">input</span><span class="p">)</span>
@@ -775,15 +814,15 @@
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">edge_linear</span><span class="o">.</span><span class="n">in_features</span> <span class="o">&lt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">edge_linear</span><span class="o">.</span><span class="n">out_features</span><span class="p">:</span>
                 <span class="n">edge_update</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">edge_linear</span><span class="p">(</span><span class="n">edge_update</span><span class="p">)</span>
             <span class="n">update</span> <span class="o">+=</span> <span class="n">edge_update</span>
-        <span class="k">return</span> <span class="n">update</span>
+        <span class="k">return</span> <span class="n">update</span></div>
 
-    <span class="k">def</span> <span class="nf">combine</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">input</span><span class="p">,</span> <span class="n">update</span><span class="p">):</span>
+<div class="viewcode-block" id="ContinuousFilterConv.combine"><a class="viewcode-back" href="../../../api/layers.html#torchdrug.layers.ContinuousFilterConv.combine">[docs]</a>    <span class="k">def</span> <span class="nf">combine</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">input</span><span class="p">,</span> <span class="n">update</span><span class="p">):</span>
         <span class="n">output</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">output_layer</span><span class="p">(</span><span class="n">update</span><span class="p">)</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">batch_norm</span><span class="p">:</span>
             <span class="n">output</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">batch_norm</span><span class="p">(</span><span class="n">output</span><span class="p">)</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">activation</span><span class="p">:</span>
             <span class="n">output</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">activation</span><span class="p">(</span><span class="n">output</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">output</span></div>
+        <span class="k">return</span> <span class="n">output</span></div></div>
 
 
 <div class="viewcode-block" id="MessagePassing"><a class="viewcode-back" href="../../../api/layers.html#torchdrug.layers.MessagePassing">[docs]</a><span class="k">class</span> <span class="nc">MessagePassing</span><span class="p">(</span><span class="n">MessagePassingBase</span><span class="p">):</span>
@@ -822,28 +861,28 @@
 
         <span class="bp">self</span><span class="o">.</span><span class="n">edge_mlp</span> <span class="o">=</span> <span class="n">layers</span><span class="o">.</span><span class="n">MLP</span><span class="p">(</span><span class="n">edge_input_dim</span><span class="p">,</span> <span class="nb">list</span><span class="p">(</span><span class="n">hidden_dims</span><span class="p">)</span> <span class="o">+</span> <span class="p">[</span><span class="n">input_dim</span> <span class="o">*</span> <span class="n">input_dim</span><span class="p">],</span> <span class="n">activation</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">message</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">graph</span><span class="p">,</span> <span class="nb">input</span><span class="p">):</span>
+<div class="viewcode-block" id="MessagePassing.message"><a class="viewcode-back" href="../../../api/layers.html#torchdrug.layers.MessagePassing.message">[docs]</a>    <span class="k">def</span> <span class="nf">message</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">graph</span><span class="p">,</span> <span class="nb">input</span><span class="p">):</span>
         <span class="n">node_in</span> <span class="o">=</span> <span class="n">graph</span><span class="o">.</span><span class="n">edge_list</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span>
         <span class="n">transform</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">edge_mlp</span><span class="p">(</span><span class="n">graph</span><span class="o">.</span><span class="n">edge_feature</span><span class="o">.</span><span class="n">float</span><span class="p">())</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">input_dim</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">input_dim</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">graph</span><span class="o">.</span><span class="n">num_edge</span><span class="p">:</span>
             <span class="n">message</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s2">"bed, bd -&gt; be"</span><span class="p">,</span> <span class="n">transform</span><span class="p">,</span> <span class="nb">input</span><span class="p">[</span><span class="n">node_in</span><span class="p">])</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">message</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">input_dim</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="n">graph</span><span class="o">.</span><span class="n">device</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">message</span>
+        <span class="k">return</span> <span class="n">message</span></div>
 
-    <span class="k">def</span> <span class="nf">aggregate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">graph</span><span class="p">,</span> <span class="n">message</span><span class="p">):</span>
+<div class="viewcode-block" id="MessagePassing.aggregate"><a class="viewcode-back" href="../../../api/layers.html#torchdrug.layers.MessagePassing.aggregate">[docs]</a>    <span class="k">def</span> <span class="nf">aggregate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">graph</span><span class="p">,</span> <span class="n">message</span><span class="p">):</span>
         <span class="n">node_out</span> <span class="o">=</span> <span class="n">graph</span><span class="o">.</span><span class="n">edge_list</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span>
         <span class="n">edge_weight</span> <span class="o">=</span> <span class="n">graph</span><span class="o">.</span><span class="n">edge_weight</span><span class="o">.</span><span class="n">unsqueeze</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
         <span class="n">update</span> <span class="o">=</span> <span class="n">scatter_add</span><span class="p">(</span><span class="n">message</span> <span class="o">*</span> <span class="n">edge_weight</span><span class="p">,</span> <span class="n">node_out</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">dim_size</span><span class="o">=</span><span class="n">graph</span><span class="o">.</span><span class="n">num_node</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">update</span>
+        <span class="k">return</span> <span class="n">update</span></div>
 
-    <span class="k">def</span> <span class="nf">combine</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">input</span><span class="p">,</span> <span class="n">update</span><span class="p">):</span>
+<div class="viewcode-block" id="MessagePassing.combine"><a class="viewcode-back" href="../../../api/layers.html#torchdrug.layers.MessagePassing.combine">[docs]</a>    <span class="k">def</span> <span class="nf">combine</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">input</span><span class="p">,</span> <span class="n">update</span><span class="p">):</span>
         <span class="n">output</span> <span class="o">=</span> <span class="n">update</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">batch_norm</span><span class="p">:</span>
             <span class="n">output</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">batch_norm</span><span class="p">(</span><span class="n">output</span><span class="p">)</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">activation</span><span class="p">:</span>
             <span class="n">output</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">activation</span><span class="p">(</span><span class="n">output</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">output</span></div>
+        <span class="k">return</span> <span class="n">output</span></div></div>
 
 
 <div class="viewcode-block" id="ChebyshevConv"><a class="viewcode-back" href="../../../api/layers.html#torchdrug.layers.ChebyshevConv">[docs]</a><span class="k">class</span> <span class="nc">ChebyshevConv</span><span class="p">(</span><span class="n">MessagePassingBase</span><span class="p">):</span>
@@ -887,7 +926,7 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">edge_linear</span> <span class="o">=</span> <span class="kc">None</span>
 
-    <span class="k">def</span> <span class="nf">message</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">graph</span><span class="p">,</span> <span class="nb">input</span><span class="p">):</span>
+<div class="viewcode-block" id="ChebyshevConv.message"><a class="viewcode-back" href="../../../api/layers.html#torchdrug.layers.ChebyshevConv.message">[docs]</a>    <span class="k">def</span> <span class="nf">message</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">graph</span><span class="p">,</span> <span class="nb">input</span><span class="p">):</span>
         <span class="n">node_in</span> <span class="o">=</span> <span class="n">graph</span><span class="o">.</span><span class="n">edge_list</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span>
         <span class="n">degree_in</span> <span class="o">=</span> <span class="n">graph</span><span class="o">.</span><span class="n">degree_in</span><span class="o">.</span><span class="n">unsqueeze</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
         <span class="c1"># because self-loop messages have a different scale, they are processed in combine()</span>
@@ -895,18 +934,18 @@
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">edge_linear</span><span class="p">:</span>
             <span class="n">message</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">edge_linear</span><span class="p">(</span><span class="n">graph</span><span class="o">.</span><span class="n">edge_feature</span><span class="o">.</span><span class="n">float</span><span class="p">())</span>
         <span class="n">message</span> <span class="o">/=</span> <span class="n">degree_in</span><span class="p">[</span><span class="n">node_in</span><span class="p">]</span><span class="o">.</span><span class="n">sqrt</span><span class="p">()</span>
-        <span class="k">return</span> <span class="n">message</span>
+        <span class="k">return</span> <span class="n">message</span></div>
 
-    <span class="k">def</span> <span class="nf">aggregate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">graph</span><span class="p">,</span> <span class="n">message</span><span class="p">):</span>
+<div class="viewcode-block" id="ChebyshevConv.aggregate"><a class="viewcode-back" href="../../../api/layers.html#torchdrug.layers.ChebyshevConv.aggregate">[docs]</a>    <span class="k">def</span> <span class="nf">aggregate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">graph</span><span class="p">,</span> <span class="n">message</span><span class="p">):</span>
         <span class="n">node_out</span> <span class="o">=</span> <span class="n">graph</span><span class="o">.</span><span class="n">edge_list</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span>
         <span class="n">edge_weight</span> <span class="o">=</span> <span class="n">graph</span><span class="o">.</span><span class="n">edge_weight</span><span class="o">.</span><span class="n">unsqueeze</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
         <span class="n">degree_out</span> <span class="o">=</span> <span class="n">graph</span><span class="o">.</span><span class="n">degree_out</span><span class="o">.</span><span class="n">unsqueeze</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
         <span class="c1"># because self-loop messages have a different scale, they are processed in combine()</span>
         <span class="n">update</span> <span class="o">=</span> <span class="o">-</span><span class="n">scatter_add</span><span class="p">(</span><span class="n">message</span> <span class="o">*</span> <span class="n">edge_weight</span><span class="p">,</span> <span class="n">node_out</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">dim_size</span><span class="o">=</span><span class="n">graph</span><span class="o">.</span><span class="n">num_node</span><span class="p">)</span>
         <span class="n">update</span> <span class="o">=</span> <span class="n">update</span> <span class="o">/</span> <span class="n">degree_out</span><span class="o">.</span><span class="n">sqrt</span><span class="p">()</span>
-        <span class="k">return</span> <span class="n">update</span>
+        <span class="k">return</span> <span class="n">update</span></div>
 
-    <span class="k">def</span> <span class="nf">message_and_aggregate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">graph</span><span class="p">,</span> <span class="nb">input</span><span class="p">):</span>
+<div class="viewcode-block" id="ChebyshevConv.message_and_aggregate"><a class="viewcode-back" href="../../../api/layers.html#torchdrug.layers.ChebyshevConv.message_and_aggregate">[docs]</a>    <span class="k">def</span> <span class="nf">message_and_aggregate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">graph</span><span class="p">,</span> <span class="nb">input</span><span class="p">):</span>
         <span class="c1"># torch.spmm doesn't support gradient for sparse tensor</span>
         <span class="k">if</span> <span class="n">graph</span><span class="o">.</span><span class="n">requires_grad</span><span class="p">:</span>
             <span class="k">return</span> <span class="nb">super</span><span class="p">(</span><span class="n">ChebyshevConv</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">message_and_aggregate</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="nb">input</span><span class="p">)</span>
@@ -924,9 +963,9 @@
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">edge_linear</span><span class="o">.</span><span class="n">in_features</span> <span class="o">&lt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">edge_linear</span><span class="o">.</span><span class="n">out_features</span><span class="p">:</span>
                 <span class="n">edge_update</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">edge_linear</span><span class="p">(</span><span class="n">edge_update</span><span class="p">)</span>
             <span class="n">update</span> <span class="o">+=</span> <span class="n">edge_update</span>
-        <span class="k">return</span> <span class="n">update</span>
+        <span class="k">return</span> <span class="n">update</span></div>
 
-    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">graph</span><span class="p">,</span> <span class="nb">input</span><span class="p">):</span>
+<div class="viewcode-block" id="ChebyshevConv.forward"><a class="viewcode-back" href="../../../api/layers.html#torchdrug.layers.ChebyshevConv.forward">[docs]</a>    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">graph</span><span class="p">,</span> <span class="nb">input</span><span class="p">):</span>
         <span class="c1"># Chebyshev polynomial bases</span>
         <span class="n">bases</span> <span class="o">=</span> <span class="p">[</span><span class="nb">input</span><span class="p">]</span>
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">k</span><span class="p">):</span>
@@ -941,11 +980,11 @@
             <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">batch_norm</span><span class="p">(</span><span class="n">output</span><span class="p">)</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">activation</span><span class="p">:</span>
             <span class="n">output</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">activation</span><span class="p">(</span><span class="n">output</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">output</span>
-
-    <span class="k">def</span> <span class="nf">combine</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">input</span><span class="p">,</span> <span class="n">update</span><span class="p">):</span>
-        <span class="n">output</span> <span class="o">=</span> <span class="nb">input</span> <span class="o">+</span> <span class="n">update</span>
         <span class="k">return</span> <span class="n">output</span></div>
+
+<div class="viewcode-block" id="ChebyshevConv.combine"><a class="viewcode-back" href="../../../api/layers.html#torchdrug.layers.ChebyshevConv.combine">[docs]</a>    <span class="k">def</span> <span class="nf">combine</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">input</span><span class="p">,</span> <span class="n">update</span><span class="p">):</span>
+        <span class="n">output</span> <span class="o">=</span> <span class="nb">input</span> <span class="o">+</span> <span class="n">update</span>
+        <span class="k">return</span> <span class="n">output</span></div></div>
 </pre></div>
       </article>
       <footer>

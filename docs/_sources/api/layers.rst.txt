@@ -9,22 +9,27 @@ Common Layers
 GaussianSmearing
 ^^^^^^^^^^^^^^^^
 .. autoclass:: GaussianSmearing
+    :members:
 
 MultiLayerPerceptron
 ^^^^^^^^^^^^^^^^^^^^
 .. autoclass:: MultiLayerPerceptron
+    :members:
 
 MutualInformation
 ^^^^^^^^^^^^^^^^^
 .. autoclass:: MutualInformation
+    :members:
 
 PairNorm
 ^^^^^^^^
 .. autoclass:: PairNorm
+    :members:
 
 Sequential
 ^^^^^^^^^^
 .. autoclass:: Sequential
+    :members:
 
 
 Convolution Layers
@@ -33,38 +38,47 @@ Convolution Layers
 .. currentmodule:: torchdrug.layers
 
 .. autoclass:: MessagePassingBase
+    :members:
 
 ChebyshevConv
 ^^^^^^^^^^^^^
 .. autoclass:: ChebyshevConv
+    :members:
 
 ContinuousFilterConv
 ^^^^^^^^^^^^^^^^^^^^
 .. autoclass:: ContinuousFilterConv
+    :members:
 
 GraphAttentionConv
 ^^^^^^^^^^^^^^^^^^
 .. autoclass:: GraphAttentionConv
+    :members:
 
 GraphConv
 ^^^^^^^^^
 .. autoclass:: GraphConv
+    :members:
 
 GraphIsomorphismConv
 ^^^^^^^^^^^^^^^^^^^^
 .. autoclass:: GraphIsomorphismConv
+    :members:
 
 MessagePassing
 ^^^^^^^^^^^^^^
 .. autoclass:: MessagePassing
+    :members:
 
 NeuralFingerprintConv
 ^^^^^^^^^^^^^^^^^^^^^
 .. autoclass:: NeuralFingerprintConv
+    :members:
 
 RelationalGraphConv
 ^^^^^^^^^^^^^^^^^^^
 .. autoclass:: RelationalGraphConv
+    :members:
 
 
 Readout Layers
@@ -73,22 +87,27 @@ Readout Layers
 MeanReadout
 ^^^^^^^^^^^
 .. autoclass:: MeanReadout
+    :members:
 
 SumReadout
 ^^^^^^^^^^
 .. autoclass:: SumReadout
+    :members:
 
 MaxReadout
 ^^^^^^^^^^
 .. autoclass:: MaxReadout
+    :members:
 
 Softmax
 ^^^^^^^
 .. autoclass:: Softmax
+    :members:
 
 Set2Set
 ^^^^^^^
 .. autoclass:: Set2Set
+    :members:
 
 
 Pooling Layers
@@ -97,10 +116,12 @@ Pooling Layers
 DiffPool
 ^^^^^^^^
 .. autoclass:: DiffPool
+    :members:
 
 MinCutPool
 ^^^^^^^^^^
 .. autoclass:: MinCutPool
+    :members:
 
 
 Distribution Layers
