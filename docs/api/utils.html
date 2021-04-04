@@ -472,6 +472,26 @@ Available operators are <code class="docutils literal notranslate"><span class="
 <dd><p>Cache the property once computed.</p>
 </dd></dl>
 </div>
+<div class="section" id="helper-functions">
+<h2>Helper functions<a class="headerlink" href="#helper-functions" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt id="torchdrug.utils.doc.copy_args">
+<code class="sig-name descname">copy_args</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">obj</span></em>, <em class="sig-param"><span class="n">args</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">ignore</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/utils/doc.html#copy_args"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.utils.doc.copy_args" title="Permalink to this definition">¶</a></dt>
+<dd><p>Copy argument documentation from another function to fill the document of <a href="#id1"><span class="problematic" id="id2">**</span></a>kwargs in this function.</p>
+<p>This class should be applied as a decorator.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>obj</strong> (<em>object</em>) – object to copy document from</p></li>
+<li><p><strong>args</strong> (<em>tuple of str</em><em>, </em><em>optional</em>) – arguments to copy.
+By default, it copies all argument documentation from <code class="docutils literal notranslate"><span class="pre">obj</span></code>,
+except those already exist in the current function.</p></li>
+<li><p><strong>ignore</strong> (<em>tuple of str</em><em>, </em><em>optional</em>) – arguments to ignore</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+</div>
 </div>
 
       </article>
@@ -526,6 +546,7 @@ Available operators are <code class="docutils literal notranslate"><span class="
 <li><a class="reference internal" href="#commandline-i-o">Commandline I/O</a></li>
 <li><a class="reference internal" href="#distributed-communication">Distributed Communication</a></li>
 <li><a class="reference internal" href="#decorator">Decorator</a></li>
+<li><a class="reference internal" href="#helper-functions">Helper functions</a></li>
 </ul>
 </li>
 </ul>

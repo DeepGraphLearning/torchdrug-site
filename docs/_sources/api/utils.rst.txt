@@ -73,3 +73,10 @@ Decorator
 .. currentmodule:: torchdrug.utils
 
 .. autofunction:: cached_property
+
+Helper functions
+----------------
+
+.. currentmodule:: torchdrug.utils.doc
+
+.. autofunction:: copy_args
