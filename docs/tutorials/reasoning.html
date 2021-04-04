@@ -4,7 +4,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1"/><link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Notes" href="../notes/index.html" /><link rel="prev" title="Retrosynthesis" href="retrosynthesis.html" />
 
     <meta name="generator" content="sphinx-3.1.2, furo 2020.12.09.beta21"/>
-        <title>Knowledge Graph Reasoning - Drugdiscovery 0.1.0 documentation</title>
+        <title>Knowledge Graph Reasoning - TorchDrug 0.1.0 documentation</title>
       <link rel="stylesheet" href="../_static/styles/furo.css?digest=a3f371badb8538d75df213ccffb17a4f6e8f3ac5">
     <link rel="stylesheet" href="../_static/pygments.css">
     <link media="(prefers-color-scheme: dark)" rel="stylesheet" href="../_static/pygments_dark.css">
@@ -106,7 +106,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="../index.html"><div class="brand">Drugdiscovery 0.1.0 documentation</div></a>
+      <a href="../index.html"><div class="brand">TorchDrug 0.1.0 documentation</div></a>
     </div>
     <div class="header-right">
       <label class="toc-overlay-icon toc-header-icon" for="__toc">
@@ -191,7 +191,7 @@ at predicting missing (h,r,t)-links given existing (h,r,t)-links in a knowledge
 graph. There are two kinds of well-known approaches to knowledge graph reasoning.
 One is knowledge graph embedding and the other one is neural inductive logic
 programming.</p>
-<p>In this tutorial, we provide two examples to illustrate how to use Drugdiscovery
+<p>In this tutorial, we provide two examples to illustrate how to use TorchDrug
 for knowledge graph reasoning.</p>
 <div class="section" id="knowledge-graph-embedding">
 <h2>Knowledge Graph Embedding<a class="headerlink" href="#knowledge-graph-embedding" title="Permalink to this headline">¶</a></h2>
@@ -274,7 +274,7 @@ following code.</p>
 <div class="section" id="id2">
 <h3>Define our Model<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
 <p>Afterwards, we can now define the NeuralLP model with the following codes:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">drugdiscovery.models.neurallp</span> <span class="kn">import</span> <span class="n">NeuralLogicProgramming</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">torchdrug.models.neurallp</span> <span class="kn">import</span> <span class="n">NeuralLogicProgramming</span>
 <span class="n">model</span> <span class="o">=</span> <span class="n">NeuralLogicProgramming</span><span class="p">(</span><span class="n">num_entity</span><span class="o">=</span><span class="n">dataset</span><span class="o">.</span><span class="n">num_entity</span><span class="p">,</span>
                                <span class="n">num_relation</span><span class="o">=</span><span class="n">dataset</span><span class="o">.</span><span class="n">num_relation</span><span class="p">,</span>
                                <span class="n">embedding_dim</span><span class="o">=</span><span class="mi">128</span><span class="p">,</span>

@@ -1,9 +1,9 @@
-Drugdiscovery - A deep learning platform for drug discovery
-===========================================================
+TorchDrug - A deep learning platform for drug discovery
+=======================================================
 
-Drugdiscovery is a graph representation learning toolbox built on top of `PyTorch`_ platform.
+TorchDrug is a graph representation learning toolbox built on top of `PyTorch`_ platform.
 It provides a comprehensive and flexible interface to support rapid protoyping of deep
-learning models for graph structured data. Drugdiscovery covers latest models and benchmarks,
+learning models for graph structured data. TorchDrug covers latest models and benchmarks,
 as well as approachable and extensible building blocks.
 
 .. _PyTorch: https://pytorch.org/

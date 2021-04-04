@@ -4,7 +4,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1"/><link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Papers Implemented" href="../paper.html" /><link rel="prev" title="Graph Neural Network Layers" href="layer.html" />
 
     <meta name="generator" content="sphinx-3.1.2, furo 2020.12.09.beta21"/>
-        <title>Customize Models &amp; Tasks - Drugdiscovery 0.1.0 documentation</title>
+        <title>Customize Models &amp; Tasks - TorchDrug 0.1.0 documentation</title>
       <link rel="stylesheet" href="../_static/styles/furo.css?digest=a3f371badb8538d75df213ccffb17a4f6e8f3ac5">
     <link rel="stylesheet" href="../_static/pygments.css">
     <link media="(prefers-color-scheme: dark)" rel="stylesheet" href="../_static/pygments_dark.css">
@@ -106,7 +106,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="../index.html"><div class="brand">Drugdiscovery 0.1.0 documentation</div></a>
+      <a href="../index.html"><div class="brand">TorchDrug 0.1.0 documentation</div></a>
     </div>
     <div class="header-right">
       <label class="toc-overlay-icon toc-header-icon" for="__toc">
@@ -186,7 +186,7 @@
         </label>
         <div class="section" id="customize-models-tasks">
 <h1>Customize Models &amp; Tasks<a class="headerlink" href="#customize-models-tasks" title="Permalink to this headline">¶</a></h1>
-<p>Drugdiscovery provides many popular model architectures for graph representation
+<p>TorchDrug provides many popular model architectures for graph representation
 learning. However, you may still find yourself in need of some more customized
 architectures.</p>
 <p>Here we illustrate the steps for writing customized models based on the example
@@ -275,7 +275,7 @@ representations.</p>
 <div class="section" id="link-prediction-task">
 <h2>Link Prediction Task<a class="headerlink" href="#link-prediction-task" title="Permalink to this headline">¶</a></h2>
 <p>Here we show how to implement the link prediction task for VGAE.</p>
-<p>Generally, a task in Drugdiscovery contains 4 functions, <code class="docutils literal notranslate"><span class="pre">predict()</span></code>, <code class="docutils literal notranslate"><span class="pre">target()</span></code>,
+<p>Generally, a task in TorchDrug contains 4 functions, <code class="docutils literal notranslate"><span class="pre">predict()</span></code>, <code class="docutils literal notranslate"><span class="pre">target()</span></code>,
 <code class="docutils literal notranslate"><span class="pre">forward</span></code> and <code class="docutils literal notranslate"><span class="pre">evaluate()</span></code>. Such interfaces empower us to seamlessly switch
 between different devices, such as CPUs, GPUs or even the distributed setting.</p>
 <p>Among the above functions, <code class="docutils literal notranslate"><span class="pre">predict()</span></code> and <code class="docutils literal notranslate"><span class="pre">target()</span></code> compute the prediction and

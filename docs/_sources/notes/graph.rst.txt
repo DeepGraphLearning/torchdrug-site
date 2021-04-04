@@ -1,7 +1,7 @@
 Graph Data Structures
 =====================
 
-At the core of Drugdiscovery, we provides several data structures to enable common
+At the core of TorchDrug, we provides several data structures to enable common
 operations in graph representation learning.
 
 Create a Graph
@@ -72,7 +72,7 @@ edge from node :math:`i` to node :math:`j` with edge type :math:`k`.
     adjacency[triplet_list] = 1
     graph = data.Graph.from_dense(adjacency)
 
-For molecule graphs, Drugdiscovery supports creating instances from `SMILES`_ strings.
+For molecule graphs, TorchDrug supports creating instances from `SMILES`_ strings.
 For example, the following code creates a benzene molecule.
 
 .. _SMILES:
@@ -103,7 +103,7 @@ Graph Attributes
 
 A common practice in graph representation learning is to add some graph features as
 the input of neural networks. Typically, there are three types of features, node-level,
-edge-level and graph-level features. In Drugdiscovery, these features are stored as
+edge-level and graph-level features. In TorchDrug, these features are stored as
 node/edge/graph attributes in the data structure, and are automatically processed
 during any graph operation.
 
@@ -139,7 +139,7 @@ Batch Graph
 -----------
 
 Modern deep learning frameworks employs batched operations to accelerate computation.
-In Drugdiscovery, we can easily batch same kind of graphs with **arbitary sizes**. Here
+In TorchDrug, we can easily batch same kind of graphs with **arbitary sizes**. Here
 is an example of creating a batch of 4 graphs.
 
 .. code-block:: python

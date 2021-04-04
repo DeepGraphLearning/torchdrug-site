@@ -4,7 +4,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1"/><link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Customize Models &amp; Tasks" href="model.html" /><link rel="prev" title="Batch Irregular Structures" href="variadic.html" />
 
     <meta name="generator" content="sphinx-3.1.2, furo 2020.12.09.beta21"/>
-        <title>Graph Neural Network Layers - Drugdiscovery 0.1.0 documentation</title>
+        <title>Graph Neural Network Layers - TorchDrug 0.1.0 documentation</title>
       <link rel="stylesheet" href="../_static/styles/furo.css?digest=a3f371badb8538d75df213ccffb17a4f6e8f3ac5">
     <link rel="stylesheet" href="../_static/pygments.css">
     <link media="(prefers-color-scheme: dark)" rel="stylesheet" href="../_static/pygments_dark.css">
@@ -106,7 +106,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="../index.html"><div class="brand">Drugdiscovery 0.1.0 documentation</div></a>
+      <a href="../index.html"><div class="brand">TorchDrug 0.1.0 documentation</div></a>
     </div>
     <div class="header-right">
       <label class="toc-overlay-icon toc-header-icon" for="__toc">
@@ -188,7 +188,7 @@
 <h1>Graph Neural Network Layers<a class="headerlink" href="#graph-neural-network-layers" title="Permalink to this headline">¶</a></h1>
 <p>Modern graph neural networks encode graph structures with message passing layers
 and readout layers. In some cases, graph-to-node broadcast may also be needed. All
-these operations can be easily implemented with Drugdiscovery.</p>
+these operations can be easily implemented with TorchDrug.</p>
 <div class="table-wrapper"><table class="docutils align-default">
 <colgroup>
 <col style="width: 33%"/>
@@ -217,7 +217,7 @@ h_i^{(t+1)} &amp;= Combine^{(t)}(h_i^{(t)}, u_i^{(t+1)})\end{split}\]</div></div
 <p>where <span class="math notranslate nohighlight">\(h_i^{(t)}\)</span> denotes node representations, <span class="math notranslate nohighlight">\(m_{i,j}^{(t)}\)</span> denotes
 messages from node <span class="math notranslate nohighlight">\(j\)</span> to node <span class="math notranslate nohighlight">\(i\)</span> and <span class="math notranslate nohighlight">\(u_i^{(t)}\)</span> is the
 aggregated messages, i.e., updates.</p>
-<p>In Drugdiscovery, these steps are abstracted as three methods, namely
+<p>In TorchDrug, these steps are abstracted as three methods, namely
 <code class="xref py py-meth docutils literal notranslate"><span class="pre">message(graph,</span> <span class="pre">input)</span></code>, <code class="xref py py-meth docutils literal notranslate"><span class="pre">aggregate(graph,</span> <span class="pre">message)</span></code> and
 <code class="xref py py-meth docutils literal notranslate"><span class="pre">combine(input,</span> <span class="pre">update)</span></code>.</p>
 <p>Here we show an example of a custom message passing for <a class="reference external" href="https://en.wikipedia.org/wiki/PageRank">PageRank</a> algorithm.
@@ -266,7 +266,7 @@ representation. Reversely, a broadcast layer sends the graph representation to e
 node in the graph. For a batch of graphs, these operations can be viewed as message
 passing on a bipartite graph – one side are original nodes, and the other side are
 “graph” nodes.</p>
-<p>Drugdiscovery provides effcient primitives to support this kind of message passing.
+<p>TorchDrug provides effcient primitives to support this kind of message passing.
 Specifically, <code class="xref py py-attr docutils literal notranslate"><span class="pre">node2graph</span></code> maps
 node IDs to graph IDs, and <code class="xref py py-attr docutils literal notranslate"><span class="pre">edge2graph</span></code>
 maps edge IDs to graph IDs.</p>

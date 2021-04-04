@@ -3,7 +3,7 @@ Property Prediction
 
 .. include:: ../bibliography.rst
 
-In this tutorial, we will learn how to use Drugdiscovery to train a graph neural
+In this tutorial, we will learn how to use TorchDrug to train a graph neural
 network for molecule property prediction. Property prediction is aimed at predicting
 the chemical properties of a molecule based on its graph structure and features.
 

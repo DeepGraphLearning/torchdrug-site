@@ -9,7 +9,7 @@ graph. There are two kinds of well-known approaches to knowledge graph reasoning
 One is knowledge graph embedding and the other one is neural inductive logic
 programming.
 
-In this tutorial, we provide two examples to illustrate how to use Drugdiscovery
+In this tutorial, we provide two examples to illustrate how to use TorchDrug
 for knowledge graph reasoning.
 
 Knowledge Graph Embedding
@@ -118,7 +118,7 @@ Afterwards, we can now define the NeuralLP model with the following codes:
 
 .. code:: python
 
-    from drugdiscovery.models.neurallp import NeuralLogicProgramming
+    from torchdrug.models.neurallp import NeuralLogicProgramming
     model = NeuralLogicProgramming(num_entity=dataset.num_entity,
                                    num_relation=dataset.num_relation,
                                    embedding_dim=128,

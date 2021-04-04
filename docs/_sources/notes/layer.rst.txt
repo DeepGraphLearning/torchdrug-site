@@ -3,7 +3,7 @@ Graph Neural Network Layers
 
 Modern graph neural networks encode graph structures with message passing layers
 and readout layers. In some cases, graph-to-node broadcast may also be needed. All
-these operations can be easily implemented with Drugdiscovery.
+these operations can be easily implemented with TorchDrug.
 
 +------------------------+-----------------------+-------------------------+
 | |fig. message passing| | |fig. readout|        | |fig. broadcast|        |
@@ -31,7 +31,7 @@ where :math:`h_i^{(t)}` denotes node representations, :math:`m_{i,j}^{(t)}` deno
 messages from node :math:`j` to node :math:`i` and :math:`u_i^{(t)}` is the
 aggregated messages, i.e., updates.
 
-In Drugdiscovery, these steps are abstracted as three methods, namely
+In TorchDrug, these steps are abstracted as three methods, namely
 :meth:`message(graph, input) <>`, :meth:`aggregate(graph, message) <>` and
 :meth:`combine(input, update) <>`.
 
@@ -95,7 +95,7 @@ node in the graph. For a batch of graphs, these operations can be viewed as mess
 passing on a bipartite graph -- one side are original nodes, and the other side are
 "graph" nodes.
 
-Drugdiscovery provides effcient primitives to support this kind of message passing.
+TorchDrug provides effcient primitives to support this kind of message passing.
 Specifically, :attr:`node2graph <torchdrug.data.PackedGraph.node2graph>` maps
 node IDs to graph IDs, and :attr:`edge2graph <torchdrug.data.PackedGraph.edge2graph>`
 maps edge IDs to graph IDs.

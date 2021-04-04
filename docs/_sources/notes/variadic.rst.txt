@@ -6,7 +6,7 @@ makes them hard to batch in tensor frameworks. Many existing implementations use
 padding to convert graphs into dense grid structures, which costs much unnecessary
 computation and memory.
 
-In Drugdiscovery, we develop a more intuitive and efficient solution based on
+In TorchDrug, we develop a more intuitive and efficient solution based on
 variadic functions. The variadic functions can directly operate on sparse irregular
 inputs or outputs.
 
@@ -121,7 +121,7 @@ typical example is autoregressive generation, where we need to generate all
 node/edge prefixes of a graph. When this operation is batched, we need to output
 variadic numbers of graphs for different input graphs.
 
-Here we show how to generate edge prefixes for a batch of graphs in Drugdiscovery.
+Here we show how to generate edge prefixes for a batch of graphs in TorchDrug.
 First, let's prepare a batch of two graphs.
 
 .. code:: python

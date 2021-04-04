@@ -1,7 +1,7 @@
 Customize Models & Tasks
 ========================
 
-Drugdiscovery provides many popular model architectures for graph representation
+TorchDrug provides many popular model architectures for graph representation
 learning. However, you may still find yourself in need of some more customized
 architectures.
 
@@ -104,7 +104,7 @@ Link Prediction Task
 
 Here we show how to implement the link prediction task for VGAE.
 
-Generally, a task in Drugdiscovery contains 4 functions, ``predict()``, ``target()``,
+Generally, a task in TorchDrug contains 4 functions, ``predict()``, ``target()``,
 ``forward`` and ``evaluate()``. Such interfaces empower us to seamlessly switch
 between different devices, such as CPUs, GPUs or even the distributed setting.
 

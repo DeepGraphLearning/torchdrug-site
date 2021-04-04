@@ -4,7 +4,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1"/><link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Batch Irregular Structures" href="variadic.html" /><link rel="prev" title="Notes" href="index.html" />
 
     <meta name="generator" content="sphinx-3.1.2, furo 2020.12.09.beta21"/>
-        <title>Graph Data Structures - Drugdiscovery 0.1.0 documentation</title>
+        <title>Graph Data Structures - TorchDrug 0.1.0 documentation</title>
       <link rel="stylesheet" href="../_static/styles/furo.css?digest=a3f371badb8538d75df213ccffb17a4f6e8f3ac5">
     <link rel="stylesheet" href="../_static/pygments.css">
     <link media="(prefers-color-scheme: dark)" rel="stylesheet" href="../_static/pygments_dark.css">
@@ -106,7 +106,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="../index.html"><div class="brand">Drugdiscovery 0.1.0 documentation</div></a>
+      <a href="../index.html"><div class="brand">TorchDrug 0.1.0 documentation</div></a>
     </div>
     <div class="header-right">
       <label class="toc-overlay-icon toc-header-icon" for="__toc">
@@ -186,7 +186,7 @@
         </label>
         <div class="section" id="graph-data-structures">
 <h1>Graph Data Structures<a class="headerlink" href="#graph-data-structures" title="Permalink to this headline">¶</a></h1>
-<p>At the core of Drugdiscovery, we provides several data structures to enable common
+<p>At the core of TorchDrug, we provides several data structures to enable common
 operations in graph representation learning.</p>
 <div class="section" id="create-a-graph">
 <h2>Create a Graph<a class="headerlink" href="#create-a-graph" title="Permalink to this headline">¶</a></h2>
@@ -235,7 +235,7 @@ edge from node <span class="math notranslate nohighlight">\(i\)</span> to node <
 <span class="n">graph</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">Graph</span><span class="o">.</span><span class="n">from_dense</span><span class="p">(</span><span class="n">adjacency</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>For molecule graphs, Drugdiscovery supports creating instances from <a class="reference external" href="https://en.wikipedia.org/wiki/Simplified_molecular-input_line-entry_system">SMILES</a> strings.
+<p>For molecule graphs, TorchDrug supports creating instances from <a class="reference external" href="https://en.wikipedia.org/wiki/Simplified_molecular-input_line-entry_system">SMILES</a> strings.
 For example, the following code creates a benzene molecule.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">mol</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">Molecule</span><span class="o">.</span><span class="n">from_smiles</span><span class="p">(</span><span class="s2">"C1=CC=CC=C1"</span><span class="p">)</span>
 <span class="n">mol</span><span class="o">.</span><span class="n">visualize</span><span class="p">()</span>
@@ -256,7 +256,7 @@ For example, the following code creates a benzene molecule.</p>
 <h2>Graph Attributes<a class="headerlink" href="#graph-attributes" title="Permalink to this headline">¶</a></h2>
 <p>A common practice in graph representation learning is to add some graph features as
 the input of neural networks. Typically, there are three types of features, node-level,
-edge-level and graph-level features. In Drugdiscovery, these features are stored as
+edge-level and graph-level features. In TorchDrug, these features are stored as
 node/edge/graph attributes in the data structure, and are automatically processed
 during any graph operation.</p>
 <p>Here we specify some features during the construction of the molecule graph.</p>
@@ -285,7 +285,7 @@ the tensor should be either <code class="docutils literal notranslate"><span cla
 <div class="section" id="batch-graph">
 <h2>Batch Graph<a class="headerlink" href="#batch-graph" title="Permalink to this headline">¶</a></h2>
 <p>Modern deep learning frameworks employs batched operations to accelerate computation.
-In Drugdiscovery, we can easily batch same kind of graphs with <strong>arbitary sizes</strong>. Here
+In TorchDrug, we can easily batch same kind of graphs with <strong>arbitary sizes</strong>. Here
 is an example of creating a batch of 4 graphs.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">graphs</span> <span class="o">=</span> <span class="p">[</span><span class="n">graph</span><span class="p">,</span> <span class="n">graph</span><span class="p">,</span> <span class="n">graph</span><span class="p">,</span> <span class="n">graph</span><span class="p">]</span>
 <span class="n">batch</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">Graph</span><span class="o">.</span><span class="n">pack</span><span class="p">(</span><span class="n">graphs</span><span class="p">)</span>
