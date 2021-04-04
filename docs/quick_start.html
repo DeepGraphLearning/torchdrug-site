@@ -201,7 +201,7 @@ framework, while enjoy the GPU acceleration and auto differentiation.</p>
 <span class="n">graph</span><span class="o">.</span><span class="n">visualize</span><span class="p">()</span>
 </pre></div>
 </div>
-<img alt="_images/graph1.png" src="_images/graph1.png"/>
+<a class="reference internal image-reference" href="_images/graph1.png"><img alt="_images/graph1.png" class="align-center" src="_images/graph1.png" style="width: 33%;"/></a>
 </div>
 <div class="section" id="molecules">
 <h3>Molecules<a class="headerlink" href="#molecules" title="Permalink to this headline">¶</a></h3>
@@ -215,7 +215,7 @@ molecule structures using a linear string.</p>
 <span class="nb">print</span><span class="p">(</span><span class="n">mol</span><span class="o">.</span><span class="n">edge_feature</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
 </pre></div>
 </div>
-<img alt="_images/benzene1.png" src="_images/benzene1.png"/>
+<a class="reference internal image-reference" href="_images/benzene1.png"><img alt="_images/benzene1.png" class="align-center" src="_images/benzene1.png" style="width: 33%;"/></a>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>torch.Size<span class="o">([</span><span class="m">6</span>, <span class="m">69</span><span class="o">])</span>
 torch.Size<span class="o">([</span><span class="m">12</span>, <span class="m">19</span><span class="o">])</span>
 </pre></div>
@@ -262,9 +262,8 @@ avoid writing and debugging boilerplate code.</p>
 <p>For this tutorial, we use the <a class="reference external" href="https://arxiv.org/pdf/1703.00564.pdf">ClinTox</a> dataset. This dataset requires to predict
 whether a molecule is toxic in clinical trials, and whether it is approved by FDA.</p>
 <img alt="_images/clintox_by_category.png" src="_images/clintox_by_category.png"/>
-</div>
 <div class="section" id="load-and-prepare-dataset-splits">
-<h2>Load and Prepare Dataset Splits<a class="headerlink" href="#load-and-prepare-dataset-splits" title="Permalink to this headline">¶</a></h2>
+<h3>Load and Prepare Dataset Splits<a class="headerlink" href="#load-and-prepare-dataset-splits" title="Permalink to this headline">¶</a></h3>
 <p>First of all, we load the dataset with TorchDrug. TorchDrug will automatically
 download the dataset into the path you specify.</p>
 <p>We then split the dataset into train, validation and test, with a ratio of 8:1:1.</p>
@@ -279,7 +278,7 @@ download the dataset into the path you specify.</p>
 </div>
 </div>
 <div class="section" id="define-a-graph-neural-network-for-classification">
-<h2>Define a Graph Neural Network for Classification<a class="headerlink" href="#define-a-graph-neural-network-for-classification" title="Permalink to this headline">¶</a></h2>
+<h3>Define a Graph Neural Network for Classification<a class="headerlink" href="#define-a-graph-neural-network-for-classification" title="Permalink to this headline">¶</a></h3>
 <p>We define a graph neural network to encode the molecule graphs. Specifically, we
 use the a <a class="reference external" href="https://arxiv.org/pdf/1810.00826.pdf">Graph Isomorphism Network (GIN)</a> with 4 hidden layers.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">drugdiscovery</span> <span class="kn">import</span> <span class="n">core</span><span class="p">,</span> <span class="n">models</span><span class="p">,</span> <span class="n">tasks</span>
@@ -298,7 +297,7 @@ classification task by the binary cross entropy (BCE) criterion.</p>
 </div>
 </div>
 <div class="section" id="train-the-model">
-<h2>Train the Model<a class="headerlink" href="#train-the-model" title="Permalink to this headline">¶</a></h2>
+<h3>Train the Model<a class="headerlink" href="#train-the-model" title="Permalink to this headline">¶</a></h3>
 <p>We create an optimizer for the parameters in the task, and combine everything into
 <a class="reference internal" href="api/core.html#torchdrug.core.Engine" title="torchdrug.core.Engine"><code class="xref py py-class docutils literal notranslate"><span class="pre">core.Engine</span></code></a>. The engine provides convenient
 routines for training and test.</p>
@@ -321,7 +320,7 @@ the script using <code class="docutils literal notranslate"><span class="pre">py
 </div>
 </div>
 <div class="section" id="test-the-model">
-<h2>Test the Model<a class="headerlink" href="#test-the-model" title="Permalink to this headline">¶</a></h2>
+<h3>Test the Model<a class="headerlink" href="#test-the-model" title="Permalink to this headline">¶</a></h3>
 <p>To test the model on validation set, it only takes one line.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">solver</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="s2">"valid"</span><span class="p">)</span>
 </pre></div>
@@ -334,7 +333,7 @@ prediction for the first 8 samples in the validation set.</p>
 </div>
 </div>
 <div class="section" id="save-and-load">
-<h2>Save and Load<a class="headerlink" href="#save-and-load" title="Permalink to this headline">¶</a></h2>
+<h3>Save and Load<a class="headerlink" href="#save-and-load" title="Permalink to this headline">¶</a></h3>
 <p>Let’s save our trained model. We dump our model into two parts, where
 <code class="docutils literal notranslate"><span class="pre">clintox_gin.json</span></code> contains the hyperparameters, and <code class="docutils literal notranslate"><span class="pre">clintox_gin.pth</span></code> contains
 the trained weights.</p>
@@ -345,6 +344,7 @@ and TorchDrug will automatically parse the model from the hyperparameters.</p>
     <span class="n">solver</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">Configurable</span><span class="o">.</span><span class="n">load_config_dict</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">fin</span><span class="p">))</span>
 <span class="n">solver</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">"clintox_gin.pth"</span><span class="p">)</span>
 </pre></div>
+</div>
 </div>
 </div>
 </div>
@@ -410,12 +410,14 @@ and TorchDrug will automatically parse the model from the hyperparameters.</p>
 <li><a class="reference internal" href="#graph-operations">Graph Operations</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#a-molecule-classifier">A Molecule Classifier</a></li>
+<li><a class="reference internal" href="#a-molecule-classifier">A Molecule Classifier</a><ul>
 <li><a class="reference internal" href="#load-and-prepare-dataset-splits">Load and Prepare Dataset Splits</a></li>
 <li><a class="reference internal" href="#define-a-graph-neural-network-for-classification">Define a Graph Neural Network for Classification</a></li>
 <li><a class="reference internal" href="#train-the-model">Train the Model</a></li>
 <li><a class="reference internal" href="#test-the-model">Test the Model</a></li>
 <li><a class="reference internal" href="#save-and-load">Save and Load</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>

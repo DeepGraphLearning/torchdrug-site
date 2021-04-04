@@ -25,6 +25,8 @@ framework, while enjoy the GPU acceleration and auto differentiation.
     graph.visualize()
 
 .. image:: ../../asset/graph/graph.png
+    :align: center
+    :width: 33%
 
 Molecules
 ^^^^^^^^^
@@ -44,6 +46,8 @@ molecule structures using a linear string.
     print(mol.edge_feature.shape)
 
 .. image:: ../../asset/graph/benzene.png
+    :align: center
+    :width: 33%
 
 .. code:: bash
 
@@ -104,7 +108,7 @@ whether a molecule is toxic in clinical trials, and whether it is approved by FD
 .. image:: ../../asset/dataset/clintox_by_category.png
 
 Load and Prepare Dataset Splits
--------------------------------
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 First of all, we load the dataset with TorchDrug. TorchDrug will automatically
 download the dataset into the path you specify.
@@ -122,7 +126,7 @@ We then split the dataset into train, validation and test, with a ratio of 8:1:1
     train_set, valid_set, test_set = torch.utils.data.random_split(dataset, lengths)
 
 Define a Graph Neural Network for Classification
-------------------------------------------------
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 We define a graph neural network to encode the molecule graphs. Specifically, we
 use the a `Graph Isomorphism Network (GIN) <GIN_>`_ with 4 hidden layers.
@@ -145,7 +149,7 @@ classification task by the binary cross entropy (BCE) criterion.
                                     criterion="bce", metric=("auprc", "auroc"))
 
 Train the Model
----------------
+^^^^^^^^^^^^^^^
 
 We create an optimizer for the parameters in the task, and combine everything into
 :class:`core.Engine <torchdrug.core.Engine>`. The engine provides convenient
@@ -174,7 +178,7 @@ the script using ``python -m torch.distributed.launch --nproc_per_node=4``.
                          batch_size=256, gpus=[0, 1, 2, 3])
 
 Test the Model
---------------
+^^^^^^^^^^^^^^
 
 To test the model on validation set, it only takes one line.
 
@@ -191,7 +195,7 @@ prediction for the first 8 samples in the validation set.
     pred = task.predict(batch)
 
 Save and Load
--------------
+^^^^^^^^^^^^^
 
 Let's save our trained model. We dump our model into two parts, where
 ``clintox_gin.json`` contains the hyperparameters, and ``clintox_gin.pth`` contains
