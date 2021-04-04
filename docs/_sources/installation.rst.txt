@@ -1,7 +1,7 @@
 Installation
 ============
 
-Torchdrug is compatible with Python >= 3.5 and PyTorch >= 1.4.0.
+TorchDrug is compatible with Python >= 3.5 and PyTorch >= 1.4.0.
 
 From Conda
 ----------
@@ -13,7 +13,7 @@ From Conda
 From Source
 -----------
 
-Torchdrug depends on rdkit, which is only available via conda.
+TorchDrug depends on rdkit, which is only available via conda.
 You can install rdkit with the following line.
 
 .. code:: bash
