@@ -42,7 +42,7 @@ image_grid:
     url: /docs/tutorials/reasoning
     image: assets/images/task/reasoning.png
 
-intro_box: "conda install torchdrug"
+intro_box: "conda install -c milagraph -c conda-forge torchdrug"
 intro_image: "assets/images/intro.svg"
 intro_image_absolute: true
 intro_image_hide_on_mobile: true

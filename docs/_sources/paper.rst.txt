@@ -6,6 +6,9 @@ Papers Implemented
 Graph Representation Learning
 -----------------------------
 
+Graph Neural Networks
+^^^^^^^^^^^^^^^^^^^^^
+
 1. `Convolutional Networks on Graphs for Learning Molecular Fingerprints <NFP_>`_
 
    David Duvenaud, Dougal Maclaurin, Jorge Aguilera-Iparraguirre, Rafael Gómez-Bombarelli, Timothy Hirzel, Alán Aspuru-Guzik, Ryan P. Adams. NIPS 2015.
@@ -64,7 +67,7 @@ Graph Representation Learning
    :class:`GraphIsomorphismNetwork <torchdrug.models.GraphIsomorphismNetwork>`
 
 Differentiable Graph Pooling
-----------------------------
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 1. `Hierarchical Graph Representation Learning with Differentiable Pooling <DiffPool_>`_
 
@@ -78,8 +81,21 @@ Differentiable Graph Pooling
 
    :class:`MinCutPool <torchdrug.layers.MinCutPool>`
 
+Normalization Layer
+^^^^^^^^^^^^^^^^^^^
+
+1. `PairNorm: Tackling Oversmoothing in GNNs <PairNorm_>`_
+
+    Lingxiao Zhao, Leman Akoglu. ICLR 2020.
+
+    :class:`PairNorm <torchdrug.layers.PairNorm>`
+
+
+Drug Discovery
+--------------
+
 Pretrain Molecular Representations
-----------------------------------
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 1. `InfoGraph: Unsupervised and Semi-supervised Graph-Level Representation Learning via Mutual Information Maximization <InfoGraph_>`_
 
@@ -96,7 +112,7 @@ Pretrain Molecular Representations
    :class:`ContextPrediction <torchdrug.tasks.ContextPrediction>`
 
 De Novo Molecule Design
------------------------
+^^^^^^^^^^^^^^^^^^^^^^^
 
 1. `Graph Convolutional Policy Network for Goal-Directed Molecular Graph Generation. <GCPN_>`_
   
@@ -112,7 +128,7 @@ De Novo Molecule Design
    :class:`AutoregressiveGeneration <torchdrug.tasks.AutoregressiveGeneration>`
 
 Retrosynthesis
---------------
+^^^^^^^^^^^^^^
 
 1. `A Graph to Graphs Framework for Retrosynthesis Prediction. <G2Gs_>`_
  
@@ -123,7 +139,7 @@ Retrosynthesis
    :class:`Retrosynthesis <torchdrug.tasks.Retrosynthesis>`
 
 Knowledge Graph Reasoning
--------------------------
+^^^^^^^^^^^^^^^^^^^^^^^^^
 
 1. `Translating Embeddings for Modeling Multi-relational Data <TransE_>`_
 

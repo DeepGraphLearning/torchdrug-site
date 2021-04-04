@@ -209,8 +209,8 @@
 <span class="sd">    Area under receiver operating characteristic curve (ROC).</span>
 
 <span class="sd">    Parameters:</span>
-<span class="sd">        pred (Tensor):</span>
-<span class="sd">        target (Tensor): binary</span>
+<span class="sd">        pred (Tensor): predictions of shape :math:`(n,)`</span>
+<span class="sd">        target (Tensor): binary targets of shape :math:`(n,)`</span>
 <span class="sd">    """</span>
     <span class="n">order</span> <span class="o">=</span> <span class="n">pred</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="n">descending</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="n">target</span> <span class="o">=</span> <span class="n">target</span><span class="p">[</span><span class="n">order</span><span class="p">]</span>
@@ -224,6 +224,10 @@
 <span class="k">def</span> <span class="nf">area_under_prc</span><span class="p">(</span><span class="n">pred</span><span class="p">,</span> <span class="n">target</span><span class="p">):</span>
     <span class="sd">"""</span>
 <span class="sd">    Area under precision-recall curve (PRC).</span>
+
+<span class="sd">    Parameters:</span>
+<span class="sd">        pred (Tensor): predictions of shape :math:`(n,)`</span>
+<span class="sd">        target (Tensor): binary targets of shape :math:`(n,)`</span>
 <span class="sd">    """</span>
     <span class="n">order</span> <span class="o">=</span> <span class="n">pred</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="n">descending</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="n">target</span> <span class="o">=</span> <span class="n">target</span><span class="p">[</span><span class="n">order</span><span class="p">]</span>
@@ -236,6 +240,10 @@
 <span class="k">def</span> <span class="nf">r2</span><span class="p">(</span><span class="n">pred</span><span class="p">,</span> <span class="n">target</span><span class="p">):</span>
     <span class="sd">"""</span>
 <span class="sd">    :math:`R^2` regression score.</span>
+
+<span class="sd">    Parameters:</span>
+<span class="sd">        pred (Tensor): predictions of shape :math:`(n,)`</span>
+<span class="sd">        target (Tensor): targets of shape :math:`(n,)`</span>
 <span class="sd">    """</span>
     <span class="n">total</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">var</span><span class="p">(</span><span class="n">target</span><span class="p">,</span> <span class="n">unbiased</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
     <span class="n">residual</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">mse_loss</span><span class="p">(</span><span class="n">pred</span><span class="p">,</span> <span class="n">target</span><span class="p">)</span>

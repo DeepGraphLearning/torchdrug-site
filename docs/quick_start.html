@@ -109,7 +109,7 @@
       <a href="index.html"><div class="brand">TorchDrug 0.1.0 documentation</div></a>
     </div>
     <div class="header-right">
-      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
         <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
       </label>
     </div>
@@ -181,11 +181,165 @@
   <main class="main">
     <div class="content">
       <article role="main">
-        <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+        <label class="toc-overlay-icon toc-content-icon" for="__toc">
           <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
         </label>
         <div class="section" id="quick-start">
 <h1>Quick Start<a class="headerlink" href="#quick-start" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="tensor-based-graphs">
+<h2>Tensor-based Graphs<a class="headerlink" href="#tensor-based-graphs" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="graphs">
+<h3>Graphs<a class="headerlink" href="#graphs" title="Permalink to this headline">¶</a></h3>
+<p>Graphs are the fundamental data structure used in TorchDrug. They can be viewed
+as a generalization of graph processing libraries (e.g., <a class="reference external" href="https://networkx.org/">NetworkX</a>) in a tensor
+framework, while enjoy the GPU acceleration and auto differentiation.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torchdrug</span> <span class="k">as</span> <span class="nn">td</span>
+<span class="kn">from</span> <span class="nn">torchdrug</span> <span class="kn">import</span> <span class="n">data</span>
+
+<span class="n">edge_list</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">0</span><span class="p">]]</span>
+<span class="n">graph</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">Graph</span><span class="p">(</span><span class="n">edge_list</span><span class="p">,</span> <span class="n">num_node</span><span class="o">=</span><span class="mi">6</span><span class="p">)</span>
+<span class="n">graph</span><span class="o">.</span><span class="n">visualize</span><span class="p">()</span>
+</pre></div>
+</div>
+<img alt="_images/graph1.png" src="_images/graph1.png"/>
+</div>
+<div class="section" id="molecules">
+<h3>Molecules<a class="headerlink" href="#molecules" title="Permalink to this headline">¶</a></h3>
+<p>A specfic instance of graphs in drug discovery is a molecule, which may have
+additional chemical constraints and features. For example, we can construct a
+molecule from <a class="reference external" href="https://en.wikipedia.org/wiki/Simplified_molecular-input_line-entry_system">SMILES</a> string. SMILES is a language that describes complex
+molecule structures using a linear string.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">mol</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">Molecule</span><span class="o">.</span><span class="n">from_smiles</span><span class="p">(</span><span class="s2">"C1=CC=CC=C1"</span><span class="p">)</span>
+<span class="n">mol</span><span class="o">.</span><span class="n">visualize</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">mol</span><span class="o">.</span><span class="n">node_feature</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">mol</span><span class="o">.</span><span class="n">edge_feature</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</pre></div>
+</div>
+<img alt="_images/benzene1.png" src="_images/benzene1.png"/>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>torch.Size<span class="o">([</span><span class="m">6</span>, <span class="m">69</span><span class="o">])</span>
+torch.Size<span class="o">([</span><span class="m">12</span>, <span class="m">19</span><span class="o">])</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="graph-operations">
+<h3>Graph Operations<a class="headerlink" href="#graph-operations" title="Permalink to this headline">¶</a></h3>
+<p>A group of arbitrary graphs can also be processed as a batch to maximize the
+utilization of hardware. They can also be transferred between CPUs and GPUs using
+<code class="xref py py-class docutils literal notranslate"><span class="pre">cpu()</span></code> and <code class="xref py py-class docutils literal notranslate"><span class="pre">cuda()</span></code> methods.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">mols</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">PackedMolecule</span><span class="o">.</span><span class="n">from_smiles</span><span class="p">([</span><span class="s2">"CCSCCSP(=S)(OC)OC"</span><span class="p">,</span> <span class="s2">"CCOC(=O)N"</span><span class="p">,</span> <span class="s2">"N(Nc1ccccc1)c2ccccc2"</span><span class="p">,</span> <span class="s2">"NC(=O)c1cccnc1"</span><span class="p">])</span>
+<span class="n">mols</span><span class="o">.</span><span class="n">visualize</span><span class="p">()</span>
+<span class="n">mols</span> <span class="o">=</span> <span class="n">mols</span><span class="o">.</span><span class="n">cuda</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">mols</span><span class="p">)</span>
+</pre></div>
+</div>
+<img alt="_images/mol_batch.png" src="_images/mol_batch.png"/>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>PackedMolecule<span class="o">(</span><span class="nv">batch_size</span><span class="o">=</span><span class="m">4</span>, <span class="nv">num_nodes</span><span class="o">=[</span><span class="m">12</span>, <span class="m">6</span>, <span class="m">14</span>, <span class="m">9</span><span class="o">]</span>, <span class="nv">num_edges</span><span class="o">=[</span><span class="m">22</span>, <span class="m">10</span>, <span class="m">30</span>, <span class="m">18</span><span class="o">]</span>, <span class="nv">device</span><span class="o">=</span><span class="s1">'cuda:0'</span><span class="o">)</span>
+</pre></div>
+</div>
+<p>Just like original PyTorch tensors, graphs support a wide range of indexing
+operations. Typical usages include applying node masking, edge masking or graph
+masking. The following example shows how to select edges that contain at least one
+carbon. For more graph operations, please see the <a class="reference external" href="docs/notes/graph">notes</a>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">node_in</span><span class="p">,</span> <span class="n">node_out</span><span class="p">,</span> <span class="n">bond_type</span> <span class="o">=</span> <span class="n">mols</span><span class="o">.</span><span class="n">edge_list</span><span class="o">.</span><span class="n">t</span><span class="p">()</span>
+<span class="n">edge_mask</span> <span class="o">=</span> <span class="p">(</span><span class="n">mols</span><span class="o">.</span><span class="n">atom_type</span><span class="p">[</span><span class="n">node_in</span><span class="p">]</span> <span class="o">==</span> <span class="n">td</span><span class="o">.</span><span class="n">CARBON</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="n">mols</span><span class="o">.</span><span class="n">atom_type</span><span class="p">[</span><span class="n">node_out</span><span class="p">]</span> <span class="o">==</span> <span class="n">td</span><span class="o">.</span><span class="n">CARBON</span><span class="p">)</span>
+<span class="n">mols</span> <span class="o">=</span> <span class="n">mols</span><span class="o">.</span><span class="n">edge_mask</span><span class="p">(</span><span class="n">edge_mask</span><span class="p">)</span>
+<span class="n">mols</span><span class="o">.</span><span class="n">visualize</span><span class="p">()</span>
+</pre></div>
+</div>
+<img alt="_images/mol_edge_mask.png" src="_images/mol_edge_mask.png"/>
+</div>
+</div>
+<div class="section" id="a-molecule-classifier">
+<h2>A Molecule Classifier<a class="headerlink" href="#a-molecule-classifier" title="Permalink to this headline">¶</a></h2>
+<p>Now we demonstrate how to use TorchDrug to create a molecule classifier.
+Specifically, TorchDrug provides us with a large collection of popular datasets
+and models for drug discovery and graph representation learning. These help us
+avoid writing and debugging boilerplate code.</p>
+<p>For this tutorial, we use the <a class="reference external" href="https://arxiv.org/pdf/1703.00564.pdf">ClinTox</a> dataset. This dataset requires to predict
+whether a molecule is toxic in clinical trials, and whether it is approved by FDA.</p>
+<img alt="_images/clintox_by_category.png" src="_images/clintox_by_category.png"/>
+</div>
+<div class="section" id="load-and-prepare-dataset-splits">
+<h2>Load and Prepare Dataset Splits<a class="headerlink" href="#load-and-prepare-dataset-splits" title="Permalink to this headline">¶</a></h2>
+<p>First of all, we load the dataset with TorchDrug. TorchDrug will automatically
+download the dataset into the path you specify.</p>
+<p>We then split the dataset into train, validation and test, with a ratio of 8:1:1.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">from</span> <span class="nn">torchdrug</span> <span class="kn">import</span> <span class="n">datasets</span>
+
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">ClinTox</span><span class="p">(</span><span class="s2">"~/molecule-datasets/"</span><span class="p">)</span>
+<span class="n">lengths</span> <span class="o">=</span> <span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="mf">0.8</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">dataset</span><span class="p">)),</span> <span class="nb">int</span><span class="p">(</span><span class="mf">0.1</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">dataset</span><span class="p">))]</span>
+<span class="n">lengths</span> <span class="o">+=</span> <span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">dataset</span><span class="p">)</span> <span class="o">-</span> <span class="nb">sum</span><span class="p">(</span><span class="n">lengths</span><span class="p">)]</span>
+<span class="n">train_set</span><span class="p">,</span> <span class="n">valid_set</span><span class="p">,</span> <span class="n">test_set</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">random_split</span><span class="p">(</span><span class="n">dataset</span><span class="p">,</span> <span class="n">lengths</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="define-a-graph-neural-network-for-classification">
+<h2>Define a Graph Neural Network for Classification<a class="headerlink" href="#define-a-graph-neural-network-for-classification" title="Permalink to this headline">¶</a></h2>
+<p>We define a graph neural network to encode the molecule graphs. Specifically, we
+use the a <a class="reference external" href="https://arxiv.org/pdf/1810.00826.pdf">Graph Isomorphism Network (GIN)</a> with 4 hidden layers.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">drugdiscovery</span> <span class="kn">import</span> <span class="n">core</span><span class="p">,</span> <span class="n">models</span><span class="p">,</span> <span class="n">tasks</span>
+
+<span class="n">model</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">GIN</span><span class="p">(</span><span class="n">input_dim</span><span class="o">=</span><span class="n">dataset</span><span class="o">.</span><span class="n">node_feature_dim</span><span class="p">,</span> <span class="n">hidden_dims</span><span class="o">=</span><span class="p">[</span><span class="mi">256</span><span class="p">,</span> <span class="mi">256</span><span class="p">,</span> <span class="mi">256</span><span class="p">,</span> <span class="mi">256</span><span class="p">],</span>
+                   <span class="n">short_cut</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">batch_norm</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">concat_hidden</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Note the model is simply a neural network without any training target. To adapt it
+for classification, we wrap it with a property prediction module. We define the
+classification task by the binary cross entropy (BCE) criterion.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">task</span> <span class="o">=</span> <span class="n">tasks</span><span class="o">.</span><span class="n">PropertyPrediction</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">task</span><span class="o">=</span><span class="n">dataset</span><span class="o">.</span><span class="n">tasks</span><span class="p">,</span>
+                                <span class="n">criterion</span><span class="o">=</span><span class="s2">"bce"</span><span class="p">,</span> <span class="n">metric</span><span class="o">=</span><span class="p">(</span><span class="s2">"auprc"</span><span class="p">,</span> <span class="s2">"auroc"</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="train-the-model">
+<h2>Train the Model<a class="headerlink" href="#train-the-model" title="Permalink to this headline">¶</a></h2>
+<p>We create an optimizer for the parameters in the task, and combine everything into
+<a class="reference internal" href="api/core.html#torchdrug.core.Engine" title="torchdrug.core.Engine"><code class="xref py py-class docutils literal notranslate"><span class="pre">core.Engine</span></code></a>. The engine provides convenient
+routines for training and test.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">optimizer</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">optim</span><span class="o">.</span><span class="n">Adam</span><span class="p">(</span><span class="n">task</span><span class="o">.</span><span class="n">parameters</span><span class="p">(),</span> <span class="n">lr</span><span class="o">=</span><span class="mf">1e-3</span><span class="p">)</span>
+<span class="n">solver</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">Engine</span><span class="p">(</span><span class="n">task</span><span class="p">,</span> <span class="n">train_set</span><span class="p">,</span> <span class="n">valid_set</span><span class="p">,</span> <span class="n">test_set</span><span class="p">,</span> <span class="n">optimizer</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">1024</span><span class="p">)</span>
+<span class="n">solver</span><span class="o">.</span><span class="n">train</span><span class="p">(</span><span class="n">num_epoch</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>If we have any GPU, we can specify it in the engine to accelerate training.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">solver</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">Engine</span><span class="p">(</span><span class="n">task</span><span class="p">,</span> <span class="n">train_set</span><span class="p">,</span> <span class="n">valid_set</span><span class="p">,</span> <span class="n">test_set</span><span class="p">,</span> <span class="n">optimizer</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">1024</span><span class="p">,</span> <span class="n">gpus</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>More acceleration can be achieved by multiple GPUs. In this case, we need to launch
+the script using <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">-m</span> <span class="pre">torch.distributed.launch</span> <span class="pre">--nproc_per_node=4</span></code>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">solver</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">Engine</span><span class="p">(</span><span class="n">task</span><span class="p">,</span> <span class="n">train_set</span><span class="p">,</span> <span class="n">valid_set</span><span class="p">,</span> <span class="n">test_set</span><span class="p">,</span> <span class="n">optimizer</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">256</span><span class="p">,</span>
+                     <span class="n">gpus</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="test-the-model">
+<h2>Test the Model<a class="headerlink" href="#test-the-model" title="Permalink to this headline">¶</a></h2>
+<p>To test the model on validation set, it only takes one line.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">solver</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="s2">"valid"</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Alternatively, we can make prediction on arbitrary input batches. The following code shows the
+prediction for the first 8 samples in the validation set.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">batch</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">graph_collate</span><span class="p">(</span><span class="n">valid_set</span><span class="p">[:</span><span class="mi">8</span><span class="p">])</span>
+<span class="n">pred</span> <span class="o">=</span> <span class="n">task</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">batch</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="save-and-load">
+<h2>Save and Load<a class="headerlink" href="#save-and-load" title="Permalink to this headline">¶</a></h2>
+<p>Let’s save our trained model. We dump our model into two parts, where
+<code class="docutils literal notranslate"><span class="pre">clintox_gin.json</span></code> contains the hyperparameters, and <code class="docutils literal notranslate"><span class="pre">clintox_gin.pth</span></code> contains
+the trained weights.</p>
+<p>To load a pretrained model, we don’t bother to define the model again. Use
+<code class="docutils literal notranslate"><span class="pre">core.Configurable.load_config_dict</span></code> and TorchDrug will automatically parse the
+model from the hyperparameters.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">"clintox_gin.json"</span><span class="p">,</span> <span class="s2">"r"</span><span class="p">)</span> <span class="k">as</span> <span class="n">fin</span><span class="p">:</span>
+    <span class="n">solver</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">Configurable</span><span class="o">.</span><span class="n">load_config_dict</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">fin</span><span class="p">))</span>
+<span class="n">solver</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">"clintox_gin.pth"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
 </div>
 
       </article>
@@ -230,8 +384,38 @@
         
       </footer>
     </div>
-    <aside class="toc-drawer no-toc">
+    <aside class="toc-drawer">
       
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            Contents
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Quick Start</a><ul>
+<li><a class="reference internal" href="#tensor-based-graphs">Tensor-based Graphs</a><ul>
+<li><a class="reference internal" href="#graphs">Graphs</a></li>
+<li><a class="reference internal" href="#molecules">Molecules</a></li>
+<li><a class="reference internal" href="#graph-operations">Graph Operations</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#a-molecule-classifier">A Molecule Classifier</a></li>
+<li><a class="reference internal" href="#load-and-prepare-dataset-splits">Load and Prepare Dataset Splits</a></li>
+<li><a class="reference internal" href="#define-a-graph-neural-network-for-classification">Define a Graph Neural Network for Classification</a></li>
+<li><a class="reference internal" href="#train-the-model">Train the Model</a></li>
+<li><a class="reference internal" href="#test-the-model">Test the Model</a></li>
+<li><a class="reference internal" href="#save-and-load">Save and Load</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
       
       
     </aside>

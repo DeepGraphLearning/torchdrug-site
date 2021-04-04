@@ -188,6 +188,8 @@
 <h1>Papers Implemented<a class="headerlink" href="#papers-implemented" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="graph-representation-learning">
 <h2>Graph Representation Learning<a class="headerlink" href="#graph-representation-learning" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="graph-neural-networks">
+<h3>Graph Neural Networks<a class="headerlink" href="#graph-neural-networks" title="Permalink to this headline">¶</a></h3>
 <ol class="arabic">
 <li><p><a class="reference external" href="https://papers.nips.cc/paper/5954-convolutional-networks-on-graphs-for-learning-molecular-fingerprints.pdf">Convolutional Networks on Graphs for Learning Molecular Fingerprints</a></p>
 <p>David Duvenaud, Dougal Maclaurin, Jorge Aguilera-Iparraguirre, Rafael Gómez-Bombarelli, Timothy Hirzel, Alán Aspuru-Guzik, Ryan P. Adams. NIPS 2015.</p>
@@ -233,7 +235,7 @@ Klaus-Robert Müller. NeurIPS 2017.</p>
 </ol>
 </div>
 <div class="section" id="differentiable-graph-pooling">
-<h2>Differentiable Graph Pooling<a class="headerlink" href="#differentiable-graph-pooling" title="Permalink to this headline">¶</a></h2>
+<h3>Differentiable Graph Pooling<a class="headerlink" href="#differentiable-graph-pooling" title="Permalink to this headline">¶</a></h3>
 <ol class="arabic">
 <li><p><a class="reference external" href="https://papers.nips.cc/paper/2018/file/e77dbaf6759253c7c6d0efc5690369c7-Paper.pdf">Hierarchical Graph Representation Learning with Differentiable Pooling</a></p>
 <p>Rex Ying, Jiaxuan You, Christopher Morris, Xiang Ren, William L. Hamilton, Jure Leskovec. NeurIPS 2018.</p>
@@ -245,8 +247,22 @@ Klaus-Robert Müller. NeurIPS 2017.</p>
 </li>
 </ol>
 </div>
+<div class="section" id="normalization-layer">
+<h3>Normalization Layer<a class="headerlink" href="#normalization-layer" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic">
+<li><p><a class="reference external" href="https://openreview.net/pdf?id=rkecl1rtwB">PairNorm: Tackling Oversmoothing in GNNs</a></p>
+<blockquote>
+<div><p>Lingxiao Zhao, Leman Akoglu. ICLR 2020.</p>
+<p><a class="reference internal" href="api/layers.html#torchdrug.layers.PairNorm" title="torchdrug.layers.PairNorm"><code class="xref py py-class docutils literal notranslate"><span class="pre">PairNorm</span></code></a></p>
+</div></blockquote>
+</li>
+</ol>
+</div>
+</div>
+<div class="section" id="drug-discovery">
+<h2>Drug Discovery<a class="headerlink" href="#drug-discovery" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="pretrain-molecular-representations">
-<h2>Pretrain Molecular Representations<a class="headerlink" href="#pretrain-molecular-representations" title="Permalink to this headline">¶</a></h2>
+<h3>Pretrain Molecular Representations<a class="headerlink" href="#pretrain-molecular-representations" title="Permalink to this headline">¶</a></h3>
 <ol class="arabic">
 <li><p><a class="reference external" href="https://openreview.net/pdf?id=r1lfF2NYvH">InfoGraph: Unsupervised and Semi-supervised Graph-Level Representation Learning via Mutual Information Maximization</a></p>
 <p>Fan-Yun Sun, Jordan Hoffman, Vikas Verma, Jian Tang. ICLR 2020.</p>
@@ -261,7 +277,7 @@ Klaus-Robert Müller. NeurIPS 2017.</p>
 </ol>
 </div>
 <div class="section" id="de-novo-molecule-design">
-<h2>De Novo Molecule Design<a class="headerlink" href="#de-novo-molecule-design" title="Permalink to this headline">¶</a></h2>
+<h3>De Novo Molecule Design<a class="headerlink" href="#de-novo-molecule-design" title="Permalink to this headline">¶</a></h3>
 <ol class="arabic">
 <li><p><a class="reference external" href="https://papers.nips.cc/paper/7877-graph-convolutional-policy-network-for-goal-directed-molecular-graph-generation.pdf">Graph Convolutional Policy Network for Goal-Directed Molecular Graph Generation.</a></p>
 <p>Jiaxuan You, Bowen Liu, Rex Ying, Vijay Pande, Jure Leskovec. NeurIPS 2018.</p>
@@ -275,7 +291,7 @@ Klaus-Robert Müller. NeurIPS 2017.</p>
 </ol>
 </div>
 <div class="section" id="retrosynthesis">
-<h2>Retrosynthesis<a class="headerlink" href="#retrosynthesis" title="Permalink to this headline">¶</a></h2>
+<h3>Retrosynthesis<a class="headerlink" href="#retrosynthesis" title="Permalink to this headline">¶</a></h3>
 <ol class="arabic">
 <li><p><a class="reference external" href="https://arxiv.org/pdf/2003.12725.pdf">A Graph to Graphs Framework for Retrosynthesis Prediction.</a></p>
 <p>Chence Shi, Minkai Xu, Hongyu Guo, Ming Zhang, Jian Tang. ICML 2020.</p>
@@ -286,7 +302,7 @@ Klaus-Robert Müller. NeurIPS 2017.</p>
 </ol>
 </div>
 <div class="section" id="knowledge-graph-reasoning">
-<h2>Knowledge Graph Reasoning<a class="headerlink" href="#knowledge-graph-reasoning" title="Permalink to this headline">¶</a></h2>
+<h3>Knowledge Graph Reasoning<a class="headerlink" href="#knowledge-graph-reasoning" title="Permalink to this headline">¶</a></h3>
 <ol class="arabic">
 <li><p><a class="reference external" href="http://papers.nips.cc/paper/5071-translating-embeddings-for-modeling-multi-relational-data.pdf">Translating Embeddings for Modeling Multi-relational Data</a></p>
 <p>Antoine Bordes, Nicolas Usunier, Alberto García-Durán. NIPS 2013.</p>
@@ -318,6 +334,7 @@ Klaus-Robert Müller. NeurIPS 2017.</p>
 <a class="reference internal" href="api/models.html#torchdrug.models.RotatE" title="torchdrug.models.RotatE"><code class="xref py py-class docutils literal notranslate"><span class="pre">RotatE</span></code></a></p>
 </li>
 </ol>
+</div>
 </div>
 </div>
 
@@ -376,12 +393,19 @@ Klaus-Robert Müller. NeurIPS 2017.</p>
           <div class="toc-tree">
             <ul>
 <li><a class="reference internal" href="#">Papers Implemented</a><ul>
-<li><a class="reference internal" href="#graph-representation-learning">Graph Representation Learning</a></li>
+<li><a class="reference internal" href="#graph-representation-learning">Graph Representation Learning</a><ul>
+<li><a class="reference internal" href="#graph-neural-networks">Graph Neural Networks</a></li>
 <li><a class="reference internal" href="#differentiable-graph-pooling">Differentiable Graph Pooling</a></li>
+<li><a class="reference internal" href="#normalization-layer">Normalization Layer</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#drug-discovery">Drug Discovery</a><ul>
 <li><a class="reference internal" href="#pretrain-molecular-representations">Pretrain Molecular Representations</a></li>
 <li><a class="reference internal" href="#de-novo-molecule-design">De Novo Molecule Design</a></li>
 <li><a class="reference internal" href="#retrosynthesis">Retrosynthesis</a></li>
 <li><a class="reference internal" href="#knowledge-graph-reasoning">Knowledge Graph Reasoning</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>

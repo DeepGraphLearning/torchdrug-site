@@ -11,7 +11,7 @@
 .. _WN18: http://papers.nips.cc/paper/5071-translating-embeddings-for-modeling-multi-relational-data.pdf
 .. _WN18RR: https://www.aaai.org/ocs/index.php/AAAI/AAAI18/paper/download/17366/15884
 
-.. Molecule property prediction
+.. Graph representation learning
 .. _NFP: https://papers.nips.cc/paper/5954-convolutional-networks-on-graphs-for-learning-molecular-fingerprints.pdf
 .. _GCN: https://arxiv.org/pdf/1609.02907.pdf
 .. _GAT: https://arxiv.org/pdf/1710.10903.pdf
@@ -25,7 +25,10 @@
 .. _DiffPool: https://papers.nips.cc/paper/2018/file/e77dbaf6759253c7c6d0efc5690369c7-Paper.pdf
 .. _MinCutPool: http://proceedings.mlr.press/v119/bianchi20a/bianchi20a.pdf
 
-.. Molecule property prediction with pre-training
+.. Normalization Layers
+.. _PairNorm: https://openreview.net/pdf?id=rkecl1rtwB
+
+.. Pretrained molecular representations
 .. _Edge Prediction: https://arxiv.org/abs/1706.02216
 .. _Deep Graph Infomax: https://arxiv.org/abs/1809.10341
 .. _InfoGraph: https://openreview.net/pdf?id=r1lfF2NYvH

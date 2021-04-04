@@ -84,7 +84,7 @@ print(mols)
 
 <div class="container col-md-8">
   <div class="row justify-content-center">
-    <img alt="Batched molecules" src="assets/images/graph/batch.png" style="max-width:100%">
+    <img alt="Batched molecules" src="assets/images/graph/mol_batch.png" style="max-width:100%">
   </div>
 </div>
 
@@ -105,7 +105,7 @@ mols.visualize()
 
 <div class="container col-md-8">
   <div class="row justify-content-center">
-    <img alt="Result of edge mask" src="assets/images/graph/edge_mask.png" style="max-width:100%">
+    <img alt="Result of edge mask" src="assets/images/graph/mol_edge_mask.png" style="max-width:100%">
   </div>
 </div>
 
@@ -122,7 +122,7 @@ in clinical trials, and whether it is approved by FDA.
 
 <div class="container col-md-8">
   <div class="row justify-content-center">
-    <img alt="Clintox dataset" src="assets/images/graph/clintox.png" style="max-width:100%">
+    <img alt="Clintox dataset" src="assets/images/graph/clintox_by_category.png" style="max-width:100%">
   </div>
 </div>
 
@@ -147,8 +147,10 @@ train_set, valid_set, test_set = torch.utils.data.random_split(dataset, lengths)
 ## Define a Graph Neural Network for Classification
 {:.no_toc}
 
-We define a graph neural network to encode the molecule graphs. Specifically, we use the a Graph Isomorphism Network
-(GIN) with 4 hidden layers.
+We define a graph neural network to encode the molecule graphs. Specifically, we use the a
+[Graph Isomorphism Network (GIN)] with 4 hidden layers.
+
+[Graph Isomorphism Network (GIN)]: https://arxiv.org/pdf/1810.00826.pdf
 
 ```python
 from drugdiscovery import core, models, tasks

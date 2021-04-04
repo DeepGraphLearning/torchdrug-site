@@ -197,8 +197,8 @@
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>pred</strong> (<em>Tensor</em>) – </p></li>
-<li><p><strong>target</strong> (<em>Tensor</em>) – binary</p></li>
+<li><p><strong>pred</strong> (<em>Tensor</em>) – predictions of shape <span class="math notranslate nohighlight">\((n,)\)</span></p></li>
+<li><p><strong>target</strong> (<em>Tensor</em>) – binary targets of shape <span class="math notranslate nohighlight">\((n,)\)</span></p></li>
 </ul>
 </dd>
 </dl>
@@ -210,8 +210,8 @@
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>pred</strong> (<em>Tensor</em>) – </p></li>
-<li><p><strong>target</strong> (<em>Tensor</em>) – binary</p></li>
+<li><p><strong>pred</strong> (<em>Tensor</em>) – predictions of shape <span class="math notranslate nohighlight">\((n,)\)</span></p></li>
+<li><p><strong>target</strong> (<em>Tensor</em>) – binary targets of shape <span class="math notranslate nohighlight">\((n,)\)</span></p></li>
 </ul>
 </dd>
 </dl>
@@ -223,11 +223,27 @@
 <dt id="torchdrug.metrics.area_under_prc">
 <code class="sig-name descname">area_under_prc</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">pred</span></em>, <em class="sig-param"><span class="n">target</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/metrics/metric.html#area_under_prc"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.metrics.area_under_prc" title="Permalink to this definition">¶</a></dt>
 <dd><p>Area under precision-recall curve (PRC).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>pred</strong> (<em>Tensor</em>) – predictions of shape <span class="math notranslate nohighlight">\((n,)\)</span></p></li>
+<li><p><strong>target</strong> (<em>Tensor</em>) – binary targets of shape <span class="math notranslate nohighlight">\((n,)\)</span></p></li>
+</ul>
+</dd>
+</dl>
 </dd></dl>
 <dl class="py function">
 <dt id="torchdrug.metrics.AUPRC">
 <code class="sig-name descname">AUPRC</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">pred</span></em>, <em class="sig-param"><span class="n">target</span></em><span class="sig-paren">)</span><a class="headerlink" href="#torchdrug.metrics.AUPRC" title="Permalink to this definition">¶</a></dt>
 <dd><p>Area under precision-recall curve (PRC).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>pred</strong> (<em>Tensor</em>) – predictions of shape <span class="math notranslate nohighlight">\((n,)\)</span></p></li>
+<li><p><strong>target</strong> (<em>Tensor</em>) – binary targets of shape <span class="math notranslate nohighlight">\((n,)\)</span></p></li>
+</ul>
+</dd>
+</dl>
 </dd></dl>
 </div>
 <div class="section" id="r2">
@@ -236,6 +252,14 @@
 <dt id="torchdrug.metrics.r2">
 <code class="sig-name descname">r2</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">pred</span></em>, <em class="sig-param"><span class="n">target</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/metrics/metric.html#r2"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.metrics.r2" title="Permalink to this definition">¶</a></dt>
 <dd><p><span class="math notranslate nohighlight">\(R^2\)</span> regression score.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>pred</strong> (<em>Tensor</em>) – predictions of shape <span class="math notranslate nohighlight">\((n,)\)</span></p></li>
+<li><p><strong>target</strong> (<em>Tensor</em>) – targets of shape <span class="math notranslate nohighlight">\((n,)\)</span></p></li>
+</ul>
+</dd>
+</dl>
 </dd></dl>
 </div>
 <div class="section" id="variadic-accuracy">
