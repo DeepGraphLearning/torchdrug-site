@@ -14,7 +14,7 @@ footer:
 seo:
   meta_og_title: "TorchDrug"
   meta_og_type: "website"
-  meta_og_url: "https://deepgraphlearning.github.io/torchdrug-site"
+  meta_og_url: "https://deepgraphlearning.github.io/torchdrug-site-dev"
   meta_og_image: "https://raw.githubusercontent.com/zerostaticthemes/jekyll-serif-theme/master/screenshots/tn.png"
   meta_og_description: "Powerful and flexible machine learning library for drug discovery"
 
