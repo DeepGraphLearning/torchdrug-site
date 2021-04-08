@@ -267,8 +267,8 @@ node in the graph. For a batch of graphs, these operations can be viewed as mess
 passing on a bipartite graph – one side are original nodes, and the other side are
 “graph” nodes.</p>
 <p>TorchDrug provides effcient primitives to support this kind of message passing.
-Specifically, <code class="xref py py-attr docutils literal notranslate"><span class="pre">node2graph</span></code> maps
-node IDs to graph IDs, and <code class="xref py py-attr docutils literal notranslate"><span class="pre">edge2graph</span></code>
+Specifically, <a class="reference internal" href="../api/data.html#torchdrug.data.PackedGraph.node2graph" title="torchdrug.data.PackedGraph.node2graph"><code class="xref py py-attr docutils literal notranslate"><span class="pre">node2graph</span></code></a> maps
+node IDs to graph IDs, and <a class="reference internal" href="../api/data.html#torchdrug.data.PackedGraph.edge2graph" title="torchdrug.data.PackedGraph.edge2graph"><code class="xref py py-attr docutils literal notranslate"><span class="pre">edge2graph</span></code></a>
 maps edge IDs to graph IDs.</p>
 <p>In this example, we will use the above primitives to compute the variance of node
 representations as a graph representation. First, we readout the mean of node
@@ -286,7 +286,7 @@ the difference. Finally, we readout the mean of the squared difference as the va
         <span class="k">return</span> <span class="n">var</span>
 </pre></div>
 </div>
-<p>Notice that <code class="xref py py-attr docutils literal notranslate"><span class="pre">node2graph</span></code> is used
+<p>Notice that <a class="reference internal" href="../api/data.html#torchdrug.data.PackedGraph.node2graph" title="torchdrug.data.PackedGraph.node2graph"><code class="xref py py-attr docutils literal notranslate"><span class="pre">node2graph</span></code></a> is used
 for both readout and broadcast. When used in a scatter function, it serves as
 readout. When used in a conventional indexing, it is equivalent to broadcast.</p>
 </div>

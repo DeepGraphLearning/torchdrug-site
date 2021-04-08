@@ -185,13 +185,14 @@
           <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
         </label>
         <h1>Source code for torchdrug.utils.decorator</h1><div class="highlight"><pre>
-<div class="viewcode-block" id="cached_property"><a class="viewcode-back" href="../../../api/utils.html#torchdrug.utils.cached_property">[docs]</a><span></span><span class="k">class</span> <span class="nc">cached_property</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<div class="viewcode-block" id="cached_property"><a class="viewcode-back" href="../../../api/utils.html#torchdrug.utils.cached_property">[docs]</a><span></span><span class="k">class</span> <span class="nc">cached_property</span><span class="p">(</span><span class="nb">property</span><span class="p">):</span>
     <span class="sd">"""</span>
 <span class="sd">    Cache the property once computed.</span>
 <span class="sd">    """</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">func</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">func</span> <span class="o">=</span> <span class="n">func</span>
+        <span class="bp">self</span><span class="o">.</span><span class="vm">__doc__</span> <span class="o">=</span> <span class="n">func</span><span class="o">.</span><span class="vm">__doc__</span>
 
     <span class="k">def</span> <span class="fm">__get__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">,</span> <span class="bp">cls</span><span class="p">):</span>
         <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">func</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span>

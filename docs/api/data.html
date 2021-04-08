@@ -232,6 +232,11 @@ By default, it will be inferred from the largest id in <cite>edge_list</cite></p
 <dd><p>alias of <a class="reference internal" href="#torchdrug.data.PackedGraph" title="torchdrug.data.PackedGraph"><code class="xref py py-class docutils literal notranslate"><span class="pre">PackedGraph</span></code></a></p>
 </dd></dl>
 <dl class="py method">
+<dt id="torchdrug.data.Graph.clone">
+<code class="sig-name descname">clone</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/data/graph.html#Graph.clone"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.data.Graph.clone" title="Permalink to this definition">¶</a></dt>
+<dd><p>Clone this graph.</p>
+</dd></dl>
+<dl class="py method">
 <dt id="torchdrug.data.Graph.compact">
 <code class="sig-name descname">compact</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/data/graph.html#Graph.compact"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.data.Graph.compact" title="Permalink to this definition">¶</a></dt>
 <dd><p>Remove isolated nodes and compact node ids.</p>
@@ -255,6 +260,12 @@ By default, it will be inferred from the largest id in <cite>edge_list</cite></p
 </dl>
 </dd></dl>
 <dl class="py method">
+<dt id="torchdrug.data.Graph.copy_">
+<code class="sig-name descname">copy_</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">src</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/data/graph.html#Graph.copy_"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.data.Graph.copy_" title="Permalink to this definition">¶</a></dt>
+<dd><p>Copy data from <code class="docutils literal notranslate"><span class="pre">src</span></code> into <code class="docutils literal notranslate"><span class="pre">self</span></code> and return <code class="docutils literal notranslate"><span class="pre">self</span></code>.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">src</span></code> graph must have the same shape and the same set of attributes as <code class="docutils literal notranslate"><span class="pre">self</span></code>.</p>
+</dd></dl>
+<dl class="py method">
 <dt id="torchdrug.data.Graph.cpu">
 <code class="sig-name descname">cpu</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/data/graph.html#Graph.cpu"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.data.Graph.cpu" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return a copy of this graph in CPU memory.</p>
@@ -265,6 +276,11 @@ By default, it will be inferred from the largest id in <cite>edge_list</cite></p
 <code class="sig-name descname">cuda</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/data/graph.html#Graph.cuda"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.data.Graph.cuda" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return a copy of this graph in CUDA memory.</p>
 <p>This is a non-op if the graph is already on the correct device.</p>
+</dd></dl>
+<dl class="py method">
+<dt id="torchdrug.data.Graph.detach">
+<code class="sig-name descname">detach</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/data/graph.html#Graph.detach"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.data.Graph.detach" title="Permalink to this definition">¶</a></dt>
+<dd><p>Detach this graph.</p>
 </dd></dl>
 <dl class="py method">
 <dt id="torchdrug.data.Graph.edge">
@@ -461,9 +477,27 @@ If not provided, show the figure in window.</p></li>
 </div>
 </dd></dl>
 <dl class="py method">
+<dt id="torchdrug.data.Graph.adjacency">
+<em class="property">property </em><code class="sig-name descname">adjacency</code><a class="headerlink" href="#torchdrug.data.Graph.adjacency" title="Permalink to this definition">¶</a></dt>
+<dd><p>Adjacency matrix of this graph.</p>
+<p>If <code class="xref py py-attr docutils literal notranslate"><span class="pre">num_relation</span></code> is specified, a sparse tensor of shape <span class="math notranslate nohighlight">\((|V|, |V|, num\_relation)\)</span> will be
+returned.
+Otherwise, a sparse tensor of shape <span class="math notranslate nohighlight">\((|V|, |V|)\)</span> will be returned.</p>
+</dd></dl>
+<dl class="py method">
 <dt id="torchdrug.data.Graph.batch_size">
 <em class="property">property </em><code class="sig-name descname">batch_size</code><a class="headerlink" href="#torchdrug.data.Graph.batch_size" title="Permalink to this definition">¶</a></dt>
 <dd><p>Batch size.</p>
+</dd></dl>
+<dl class="py method">
+<dt id="torchdrug.data.Graph.degree_in">
+<em class="property">property </em><code class="sig-name descname">degree_in</code><a class="headerlink" href="#torchdrug.data.Graph.degree_in" title="Permalink to this definition">¶</a></dt>
+<dd><p>In degree of nodes.</p>
+</dd></dl>
+<dl class="py method">
+<dt id="torchdrug.data.Graph.degree_out">
+<em class="property">property </em><code class="sig-name descname">degree_out</code><a class="headerlink" href="#torchdrug.data.Graph.degree_out" title="Permalink to this definition">¶</a></dt>
+<dd><p>Out degree of nodes.</p>
 </dd></dl>
 <dl class="py method">
 <dt id="torchdrug.data.Graph.device">
@@ -521,6 +555,20 @@ Each tuple is (node_in, node_out, bond_type).</p></li>
 <dd><p>alias of <a class="reference internal" href="#torchdrug.data.PackedMolecule" title="torchdrug.data.PackedMolecule"><code class="xref py py-class docutils literal notranslate"><span class="pre">PackedMolecule</span></code></a></p>
 </dd></dl>
 <dl class="py method">
+<dt id="torchdrug.data.Molecule.edge_mask">
+<code class="sig-name descname">edge_mask</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">index</span></em>, <em class="sig-param"><span class="n">compact</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/data/molecule.html#Molecule.edge_mask"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.data.Molecule.edge_mask" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a masked graph based on the specified edges.</p>
+<p>This function can also be used to re-order the edges.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>index</strong> (<em>array_like</em>) – edge index</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Graph</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
 <dt id="torchdrug.data.Molecule.from_molecule">
 <em class="property">classmethod </em><code class="sig-name descname">from_molecule</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">mol</span></em>, <em class="sig-param"><span class="n">node_feature</span><span class="o">=</span><span class="default_value">'default'</span></em>, <em class="sig-param"><span class="n">edge_feature</span><span class="o">=</span><span class="default_value">'default'</span></em>, <em class="sig-param"><span class="n">graph_feature</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">with_hydrogen</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">kekulize</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/data/molecule.html#Molecule.from_molecule"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.data.Molecule.from_molecule" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create a molecule from a RDKit object.</p>
@@ -567,6 +615,29 @@ By default, aromatic bonds are stored.</p></li>
 <code class="sig-name descname">ion_to_molecule</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/data/molecule.html#Molecule.ion_to_molecule"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.data.Molecule.ion_to_molecule" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert ions to molecules by adjusting hydrogens and electrons.</p>
 <p>Note [N+] will not be converted.</p>
+</dd></dl>
+<dl class="py method">
+<dt id="torchdrug.data.Molecule.node_mask">
+<code class="sig-name descname">node_mask</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">index</span></em>, <em class="sig-param"><span class="n">compact</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/data/molecule.html#Molecule.node_mask"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.data.Molecule.node_mask" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a masked graph based on the specified nodes.</p>
+<p>This function can also be used to re-order the nodes.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>index</strong> (<em>array_like</em>) – node index</p></li>
+<li><p><strong>compact</strong> (<em>bool</em><em>, </em><em>optional</em>) – compact node ids or not</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Graph</p>
+</dd>
+</dl>
+<p>Examples:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">graph</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">Graph</span><span class="o">.</span><span class="n">from_dense</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">assert</span> <span class="n">graph</span><span class="o">.</span><span class="n">node_mask</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span><span class="o">.</span><span class="n">adjacency</span><span class="o">.</span><span class="n">shape</span> <span class="o">==</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">assert</span> <span class="n">graph</span><span class="o">.</span><span class="n">node_mask</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="n">compact</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">adjacency</span><span class="o">.</span><span class="n">shape</span> <span class="o">==</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
 </dd></dl>
 <dl class="py method">
 <dt id="torchdrug.data.Molecule.to_molecule">
@@ -630,6 +701,11 @@ If not provided, show the figure in window.</p></li>
 </dl>
 </dd></dl>
 <dl class="py method">
+<dt id="torchdrug.data.Molecule.is_valid">
+<em class="property">property </em><code class="sig-name descname">is_valid</code><a class="headerlink" href="#torchdrug.data.Molecule.is_valid" title="Permalink to this definition">¶</a></dt>
+<dd><p>A coarse implementation of valence check.</p>
+</dd></dl>
+<dl class="py method">
 <dt id="torchdrug.data.Molecule.num_atom">
 <em class="property">property </em><code class="sig-name descname">num_atom</code><a class="headerlink" href="#torchdrug.data.Molecule.num_atom" title="Permalink to this definition">¶</a></dt>
 <dd><p>Number of atoms.</p>
@@ -679,16 +755,26 @@ If provided, nodes in <cite>edge_list</cite> should be absolute index, i.e., the
 <dd><p>alias of <a class="reference internal" href="#torchdrug.data.Graph" title="torchdrug.data.Graph"><code class="xref py py-class docutils literal notranslate"><span class="pre">Graph</span></code></a></p>
 </dd></dl>
 <dl class="py method">
+<dt id="torchdrug.data.PackedGraph.clone">
+<code class="sig-name descname">clone</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/data/graph.html#PackedGraph.clone"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.data.PackedGraph.clone" title="Permalink to this definition">¶</a></dt>
+<dd><p>Clone this packed graph.</p>
+</dd></dl>
+<dl class="py method">
 <dt id="torchdrug.data.PackedGraph.cpu">
 <code class="sig-name descname">cpu</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/data/graph.html#PackedGraph.cpu"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.data.PackedGraph.cpu" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return a copy of this graph in CPU memory.</p>
+<dd><p>Return a copy of this packed graph in CPU memory.</p>
 <p>This is a non-op if the graph is already in CPU memory.</p>
 </dd></dl>
 <dl class="py method">
 <dt id="torchdrug.data.PackedGraph.cuda">
 <code class="sig-name descname">cuda</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/data/graph.html#PackedGraph.cuda"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.data.PackedGraph.cuda" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return a copy of this graph in CUDA memory.</p>
+<dd><p>Return a copy of this packed graph in CUDA memory.</p>
 <p>This is a non-op if the graph is already on the correct device.</p>
+</dd></dl>
+<dl class="py method">
+<dt id="torchdrug.data.PackedGraph.detach">
+<code class="sig-name descname">detach</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/data/graph.html#PackedGraph.detach"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.data.PackedGraph.detach" title="Permalink to this definition">¶</a></dt>
+<dd><p>Detach this packed graph.</p>
 </dd></dl>
 <dl class="py method">
 <dt id="torchdrug.data.PackedGraph.edge_mask">
@@ -857,6 +943,16 @@ If not provided, show the figure in window.</p></li>
 <em class="property">property </em><code class="sig-name descname">batch_size</code><a class="headerlink" href="#torchdrug.data.PackedGraph.batch_size" title="Permalink to this definition">¶</a></dt>
 <dd><p>Batch size.</p>
 </dd></dl>
+<dl class="py method">
+<dt id="torchdrug.data.PackedGraph.edge2graph">
+<em class="property">property </em><code class="sig-name descname">edge2graph</code><a class="headerlink" href="#torchdrug.data.PackedGraph.edge2graph" title="Permalink to this definition">¶</a></dt>
+<dd><p>Edge id to graph id mapping.</p>
+</dd></dl>
+<dl class="py method">
+<dt id="torchdrug.data.PackedGraph.node2graph">
+<em class="property">property </em><code class="sig-name descname">node2graph</code><a class="headerlink" href="#torchdrug.data.PackedGraph.node2graph" title="Permalink to this definition">¶</a></dt>
+<dd><p>Node id to graph id mapping.</p>
+</dd></dl>
 </dd></dl>
 </div>
 <div class="section" id="packedmolecule">
@@ -886,6 +982,19 @@ If provided, nodes in <cite>edge_list</cite> should be absolute index, i.e., the
 <dt id="torchdrug.data.PackedMolecule.unpacked_type">
 <code class="sig-name descname">unpacked_type</code><a class="headerlink" href="#torchdrug.data.PackedMolecule.unpacked_type" title="Permalink to this definition">¶</a></dt>
 <dd><p>alias of <a class="reference internal" href="#torchdrug.data.Molecule" title="torchdrug.data.Molecule"><code class="xref py py-class docutils literal notranslate"><span class="pre">Molecule</span></code></a></p>
+</dd></dl>
+<dl class="py method">
+<dt id="torchdrug.data.PackedMolecule.edge_mask">
+<code class="sig-name descname">edge_mask</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">index</span></em>, <em class="sig-param"><span class="n">compact</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/data/molecule.html#PackedMolecule.edge_mask"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.data.PackedMolecule.edge_mask" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a masked packed graph based on the specified edges.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>index</strong> (<em>array_like</em>) – edge index</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>PackedGraph</p>
+</dd>
+</dl>
 </dd></dl>
 <dl class="py method">
 <dt id="torchdrug.data.PackedMolecule.from_molecule">
@@ -936,6 +1045,24 @@ By default, aromatic bonds are stored.</p></li>
 <p>Note [N+] will not be converted.</p>
 </dd></dl>
 <dl class="py method">
+<dt id="torchdrug.data.PackedMolecule.node_mask">
+<code class="sig-name descname">node_mask</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">index</span></em>, <em class="sig-param"><span class="n">compact</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/data/molecule.html#PackedMolecule.node_mask"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.data.PackedMolecule.node_mask" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a masked packed graph based on the specified nodes.</p>
+<p>Note the compact option is only applied to node ids but not graph ids.
+To generate compact graph ids, use <code class="xref py py-meth docutils literal notranslate"><span class="pre">subbatch()</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>index</strong> (<em>array_like</em>) – node index</p></li>
+<li><p><strong>compact</strong> (<em>bool</em><em>, </em><em>optional</em>) – compact node ids or not</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>PackedGraph</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
 <dt id="torchdrug.data.PackedMolecule.to_molecule">
 <code class="sig-name descname">to_molecule</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">ignore_error</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/data/molecule.html#PackedMolecule.to_molecule"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.data.PackedMolecule.to_molecule" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return a list of RDKit objects.</p>
@@ -983,6 +1110,11 @@ If not provided, show the figure in window.</p></li>
 </ul>
 </dd>
 </dl>
+</dd></dl>
+<dl class="py method">
+<dt id="torchdrug.data.PackedMolecule.is_valid">
+<em class="property">property </em><code class="sig-name descname">is_valid</code><a class="headerlink" href="#torchdrug.data.PackedMolecule.is_valid" title="Permalink to this definition">¶</a></dt>
+<dd><p>A coarse implementation of valence check.</p>
 </dd></dl>
 </dd></dl>
 </div>
@@ -1119,6 +1251,16 @@ By default, aromatic bonds are stored.</p></li>
 </dl>
 </dd></dl>
 <dl class="py method">
+<dt id="torchdrug.data.MoleculeDataset.atom_types">
+<em class="property">property </em><code class="sig-name descname">atom_types</code><a class="headerlink" href="#torchdrug.data.MoleculeDataset.atom_types" title="Permalink to this definition">¶</a></dt>
+<dd><p>All atom types.</p>
+</dd></dl>
+<dl class="py method">
+<dt id="torchdrug.data.MoleculeDataset.bond_types">
+<em class="property">property </em><code class="sig-name descname">bond_types</code><a class="headerlink" href="#torchdrug.data.MoleculeDataset.bond_types" title="Permalink to this definition">¶</a></dt>
+<dd><p>All bond types.</p>
+</dd></dl>
+<dl class="py method">
 <dt id="torchdrug.data.MoleculeDataset.edge_feature_dim">
 <em class="property">property </em><code class="sig-name descname">edge_feature_dim</code><a class="headerlink" href="#torchdrug.data.MoleculeDataset.edge_feature_dim" title="Permalink to this definition">¶</a></dt>
 <dd><p>Dimension of edge features.</p>
@@ -1213,6 +1355,16 @@ By default, aromatic bonds are stored.</p></li>
 </ul>
 </dd>
 </dl>
+</dd></dl>
+<dl class="py method">
+<dt id="torchdrug.data.ReactionDataset.atom_types">
+<em class="property">property </em><code class="sig-name descname">atom_types</code><a class="headerlink" href="#torchdrug.data.ReactionDataset.atom_types" title="Permalink to this definition">¶</a></dt>
+<dd><p>All atom types.</p>
+</dd></dl>
+<dl class="py method">
+<dt id="torchdrug.data.ReactionDataset.bond_types">
+<em class="property">property </em><code class="sig-name descname">bond_types</code><a class="headerlink" href="#torchdrug.data.ReactionDataset.bond_types" title="Permalink to this definition">¶</a></dt>
+<dd><p>All bond types.</p>
 </dd></dl>
 <dl class="py method">
 <dt id="torchdrug.data.ReactionDataset.edge_feature_dim">
