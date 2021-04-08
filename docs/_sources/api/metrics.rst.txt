@@ -12,7 +12,7 @@ AUROC
 .. autofunction:: area_under_roc
 .. function:: AUROC
 
-    ailas of ``torchdrug.metrics.area_under_roc``
+    alias of ``torchdrug.metrics.area_under_roc``
 
 
 AUPRC

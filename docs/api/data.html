@@ -186,8 +186,8 @@
         </label>
         <div class="section" id="torchdrug-data">
 <h1>torchdrug.data<a class="headerlink" href="#torchdrug-data" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="data-structure">
-<h2>Data Structure<a class="headerlink" href="#data-structure" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="data-structures">
+<h2>Data Structures<a class="headerlink" href="#data-structures" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="graph">
 <h3>Graph<a class="headerlink" href="#graph" title="Permalink to this headline">¶</a></h3>
 <dl class="py class">
@@ -908,7 +908,7 @@ Equivalent to <a class="reference internal" href="#torchdrug.data.PackedGraph.gr
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>data</strong> (<em>Tensor</em>) – data to unpack</p></li>
-<li><p><strong>type</strong> (<em>str</em><em>, </em><em>optional</em>) – “auto”, “node”, or “edge”</p></li>
+<li><p><strong>type</strong> (<em>str</em><em>, </em><em>optional</em>) – data type. Can be <code class="docutils literal notranslate"><span class="pre">auto</span></code>, <code class="docutils literal notranslate"><span class="pre">node</span></code>, or <code class="docutils literal notranslate"><span class="pre">edge</span></code>.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
@@ -1468,8 +1468,93 @@ Note the results may be different in length due to rounding.</p></li>
 </dd></dl>
 </div>
 </div>
-<div class="section" id="feature-function">
-<h2>Feature Function<a class="headerlink" href="#feature-function" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="feature-functions">
+<h2>Feature Functions<a class="headerlink" href="#feature-functions" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="atom-features">
+<h3>Atom Features<a class="headerlink" href="#atom-features" title="Permalink to this headline">¶</a></h3>
+<dl class="py function">
+<dt id="torchdrug.data.feature.atom_default">
+<code class="sig-name descname">atom_default</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">atom</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/data/feature.html#atom_default"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.data.feature.atom_default" title="Permalink to this definition">¶</a></dt>
+<dd><p>Default atom feature.</p>
+</dd></dl>
+<dl class="py function">
+<dt id="torchdrug.data.feature.atom_symbol">
+<code class="sig-name descname">atom_symbol</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">atom</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/data/feature.html#atom_symbol"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.data.feature.atom_symbol" title="Permalink to this definition">¶</a></dt>
+<dd><p>Symbol atom feature.</p>
+</dd></dl>
+<dl class="py function">
+<dt id="torchdrug.data.feature.atom_position">
+<code class="sig-name descname">atom_position</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">atom</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/data/feature.html#atom_position"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.data.feature.atom_position" title="Permalink to this definition">¶</a></dt>
+<dd><p>Atom position.
+Return 3D position if available, otherwise 2D position is returned.</p>
+</dd></dl>
+<dl class="py function">
+<dt id="torchdrug.data.feature.atom_property_prediction">
+<code class="sig-name descname">atom_property_prediction</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">atom</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/data/feature.html#atom_property_prediction"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.data.feature.atom_property_prediction" title="Permalink to this definition">¶</a></dt>
+<dd><p>Property prediction atom feature.</p>
+</dd></dl>
+<dl class="py function">
+<dt id="torchdrug.data.feature.atom_explicit_property_prediction">
+<code class="sig-name descname">atom_explicit_property_prediction</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">atom</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/data/feature.html#atom_explicit_property_prediction"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.data.feature.atom_explicit_property_prediction" title="Permalink to this definition">¶</a></dt>
+<dd><p>Explicit property prediction atom feature.</p>
+</dd></dl>
+<dl class="py function">
+<dt id="torchdrug.data.feature.atom_pretrain">
+<code class="sig-name descname">atom_pretrain</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">atom</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/data/feature.html#atom_pretrain"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.data.feature.atom_pretrain" title="Permalink to this definition">¶</a></dt>
+<dd><p>Atom feature for pretraining.</p>
+</dd></dl>
+<dl class="py function">
+<dt id="torchdrug.data.feature.atom_center_identification">
+<code class="sig-name descname">atom_center_identification</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">atom</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/data/feature.html#atom_center_identification"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.data.feature.atom_center_identification" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reaction center identification atom feature.</p>
+</dd></dl>
+<dl class="py function">
+<dt id="torchdrug.data.feature.atom_synthon_completion">
+<code class="sig-name descname">atom_synthon_completion</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">atom</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/data/feature.html#atom_synthon_completion"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.data.feature.atom_synthon_completion" title="Permalink to this definition">¶</a></dt>
+<dd><p>Synthon completion atom feature.</p>
+</dd></dl>
+</div>
+<div class="section" id="bond-features">
+<h3>Bond Features<a class="headerlink" href="#bond-features" title="Permalink to this headline">¶</a></h3>
+<dl class="py function">
+<dt id="torchdrug.data.feature.bond_default">
+<code class="sig-name descname">bond_default</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">bond</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/data/feature.html#bond_default"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.data.feature.bond_default" title="Permalink to this definition">¶</a></dt>
+<dd><p>Default bond feature.</p>
+</dd></dl>
+<dl class="py function">
+<dt id="torchdrug.data.feature.bond_length">
+<code class="sig-name descname">bond_length</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">bond</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/data/feature.html#bond_length"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.data.feature.bond_length" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bond length</p>
+</dd></dl>
+<dl class="py function">
+<dt id="torchdrug.data.feature.bond_property_prediction">
+<code class="sig-name descname">bond_property_prediction</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">bond</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/data/feature.html#bond_property_prediction"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.data.feature.bond_property_prediction" title="Permalink to this definition">¶</a></dt>
+<dd><p>Property prediction bond feature.</p>
+</dd></dl>
+<dl class="py function">
+<dt id="torchdrug.data.feature.bond_pretrain">
+<code class="sig-name descname">bond_pretrain</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">bond</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/data/feature.html#bond_pretrain"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.data.feature.bond_pretrain" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bond feature for pretraining.</p>
+</dd></dl>
+</div>
+<div class="section" id="molecule-features">
+<h3>Molecule Features<a class="headerlink" href="#molecule-features" title="Permalink to this headline">¶</a></h3>
+<dl class="py function">
+<dt id="torchdrug.data.feature.molecule_default">
+<code class="sig-name descname">molecule_default</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">mol</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/data/feature.html#molecule_default"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.data.feature.molecule_default" title="Permalink to this definition">¶</a></dt>
+<dd><p>Default molecule feature.</p>
+</dd></dl>
+<dl class="py function">
+<dt id="torchdrug.data.feature.ExtendedConnectivityFingerprint">
+<code class="sig-name descname">ExtendedConnectivityFingerprint</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">mol</span></em>, <em class="sig-param"><span class="n">radius</span><span class="o">=</span><span class="default_value">2</span></em>, <em class="sig-param"><span class="n">length</span><span class="o">=</span><span class="default_value">1024</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/data/feature.html#ExtendedConnectivityFingerprint"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.data.feature.ExtendedConnectivityFingerprint" title="Permalink to this definition">¶</a></dt>
+<dd><p>Extended Connectivity Fingerprint molecule feature.</p>
+</dd></dl>
+<dl class="py function">
+<dt id="torchdrug.data.feature.ECFP">
+<code class="sig-name descname">ECFP</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#torchdrug.data.feature.ECFP" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <code class="docutils literal notranslate"><span class="pre">torchdrug.data.feature.ExtendedConnectivityFingerprint</span></code></p>
+</dd></dl>
+</div>
 </div>
 </div>
 
@@ -1528,7 +1613,7 @@ Note the results may be different in length due to rounding.</p></li>
           <div class="toc-tree">
             <ul>
 <li><a class="reference internal" href="#">torchdrug.data</a><ul>
-<li><a class="reference internal" href="#data-structure">Data Structure</a><ul>
+<li><a class="reference internal" href="#data-structures">Data Structures</a><ul>
 <li><a class="reference internal" href="#graph">Graph</a></li>
 <li><a class="reference internal" href="#molecule">Molecule</a></li>
 <li><a class="reference internal" href="#packedgraph">PackedGraph</a></li>
@@ -1546,7 +1631,12 @@ Note the results may be different in length due to rounding.</p></li>
 <li><a class="reference internal" href="#dataloader">DataLoader</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#feature-function">Feature Function</a></li>
+<li><a class="reference internal" href="#feature-functions">Feature Functions</a><ul>
+<li><a class="reference internal" href="#atom-features">Atom Features</a></li>
+<li><a class="reference internal" href="#bond-features">Bond Features</a></li>
+<li><a class="reference internal" href="#molecule-features">Molecule Features</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
