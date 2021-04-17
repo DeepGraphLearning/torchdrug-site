@@ -185,7 +185,9 @@
           <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
         </label>
         <h1>Source code for torchdrug.data.feature</h1><div class="highlight"><pre>
-<span></span><span class="kn">from</span> <span class="nn">rdkit</span> <span class="kn">import</span> <span class="n">Chem</span>
+<span></span><span class="kn">import</span> <span class="nn">warnings</span>
+
+<span class="kn">from</span> <span class="nn">rdkit</span> <span class="kn">import</span> <span class="n">Chem</span>
 <span class="kn">from</span> <span class="nn">rdkit.Chem</span> <span class="kn">import</span> <span class="n">AllChem</span>
 
 <span class="kn">from</span> <span class="nn">torchdrug.core</span> <span class="kn">import</span> <span class="n">Registry</span> <span class="k">as</span> <span class="n">R</span>
@@ -219,7 +221,7 @@
     <span class="k">if</span> <span class="n">allow_unknown</span><span class="p">:</span>
         <span class="n">feature</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">vocab</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">index</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s2">"Unknown value `</span><span class="si">%s</span><span class="s2">`"</span> <span class="o">%</span> <span class="n">x</span><span class="p">)</span>
+            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">"Unknown value `</span><span class="si">%s</span><span class="s2">`"</span> <span class="o">%</span> <span class="n">x</span><span class="p">)</span>
         <span class="n">feature</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="n">feature</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">vocab</span><span class="p">)</span>
@@ -233,7 +235,29 @@
 <span class="c1"># TODO: this one is too slow</span>
 <div class="viewcode-block" id="atom_default"><a class="viewcode-back" href="../../../api/data.html#torchdrug.data.feature.atom_default">[docs]</a><span class="nd">@R</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="s2">"features.atom.default"</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">atom_default</span><span class="p">(</span><span class="n">atom</span><span class="p">):</span>
-    <span class="sd">"""Default atom feature."""</span>
+    <span class="sd">"""Default atom feature.</span>
+
+<span class="sd">    Features:</span>
+<span class="sd">        GetSymbol(): one-hot embedding for the atomic symbol</span>
+<span class="sd">        </span>
+<span class="sd">        GetChiralTag(): one-hot embedding for atomic chiral tag </span>
+<span class="sd">        </span>
+<span class="sd">        GetTotalDegree(): one-hot embedding for the degree of the atom in the molecule including Hs</span>
+<span class="sd">        </span>
+<span class="sd">        GetFormalCharge(): one-hot embedding for the number of formal charges in the molecule</span>
+<span class="sd">        </span>
+<span class="sd">        GetTotalNumHs(): one-hot embedding for the total number of Hs (explicit and implicit) on the atom </span>
+<span class="sd">        </span>
+<span class="sd">        GetNumRadicalElectrons(): one-hot embedding for the number of radical electrons on the atom</span>
+<span class="sd">        </span>
+<span class="sd">        GetHybridization(): one-hot embedding for the atom's hybridization</span>
+<span class="sd">        </span>
+<span class="sd">        GetIsAromatic(): whether the atom is aromatic</span>
+<span class="sd">        </span>
+<span class="sd">        IsInRing(): whether the atom is in a ring</span>
+<span class="sd">        </span>
+<span class="sd">        atom_position(): the 3D position of the atom</span>
+<span class="sd">    """</span>
     <span class="k">return</span> <span class="n">onehot</span><span class="p">(</span><span class="n">atom</span><span class="o">.</span><span class="n">GetSymbol</span><span class="p">(),</span> <span class="n">atom_vocab</span><span class="p">,</span> <span class="n">allow_unknown</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="o">+</span> \
            <span class="n">onehot</span><span class="p">(</span><span class="n">atom</span><span class="o">.</span><span class="n">GetChiralTag</span><span class="p">(),</span> <span class="n">chiral_tag_vocab</span><span class="p">)</span> <span class="o">+</span> \
            <span class="n">onehot</span><span class="p">(</span><span class="n">atom</span><span class="o">.</span><span class="n">GetTotalDegree</span><span class="p">(),</span> <span class="n">degree_vocab</span><span class="p">,</span> <span class="n">allow_unknown</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="o">+</span> \
@@ -247,7 +271,21 @@
 
 <div class="viewcode-block" id="atom_center_identification"><a class="viewcode-back" href="../../../api/data.html#torchdrug.data.feature.atom_center_identification">[docs]</a><span class="nd">@R</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="s2">"features.atom.center_identification"</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">atom_center_identification</span><span class="p">(</span><span class="n">atom</span><span class="p">):</span>
-    <span class="sd">"""Reaction center identification atom feature."""</span>
+    <span class="sd">"""Reaction center identification atom feature.</span>
+
+<span class="sd">    Features:</span>
+<span class="sd">        GetSymbol(): one-hot embedding for the atomic symbol</span>
+<span class="sd">        </span>
+<span class="sd">        GetTotalNumHs(): one-hot embedding for the total number of Hs (explicit and implicit) on the atom </span>
+<span class="sd">        </span>
+<span class="sd">        GetTotalDegree(): one-hot embedding for the degree of the atom in the molecule including Hs</span>
+<span class="sd">        </span>
+<span class="sd">        GetTotalValence(): one-hot embedding for the total valence (explicit + implicit) of the atom</span>
+<span class="sd">        </span>
+<span class="sd">        GetIsAromatic(): whether the atom is aromatic</span>
+<span class="sd">        </span>
+<span class="sd">        IsInRing(): whether the atom is in a ring</span>
+<span class="sd">    """</span>
     <span class="k">return</span> <span class="n">onehot</span><span class="p">(</span><span class="n">atom</span><span class="o">.</span><span class="n">GetSymbol</span><span class="p">(),</span> <span class="n">atom_vocab</span><span class="p">,</span> <span class="n">allow_unknown</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="o">+</span> \
            <span class="n">onehot</span><span class="p">(</span><span class="n">atom</span><span class="o">.</span><span class="n">GetTotalNumHs</span><span class="p">(),</span> <span class="n">num_hs_vocab</span><span class="p">)</span> <span class="o">+</span> \
            <span class="n">onehot</span><span class="p">(</span><span class="n">atom</span><span class="o">.</span><span class="n">GetTotalDegree</span><span class="p">(),</span> <span class="n">degree_vocab</span><span class="p">,</span> <span class="n">allow_unknown</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="o">+</span> \
@@ -257,7 +295,21 @@
 
 <div class="viewcode-block" id="atom_synthon_completion"><a class="viewcode-back" href="../../../api/data.html#torchdrug.data.feature.atom_synthon_completion">[docs]</a><span class="nd">@R</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="s2">"features.atom.synthon_completion"</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">atom_synthon_completion</span><span class="p">(</span><span class="n">atom</span><span class="p">):</span>
-    <span class="sd">"""Synthon completion atom feature."""</span>
+    <span class="sd">"""Synthon completion atom feature.</span>
+
+<span class="sd">    Features:</span>
+<span class="sd">        GetSymbol(): one-hot embedding for the atomic symbol</span>
+
+<span class="sd">        GetTotalNumHs(): one-hot embedding for the total number of Hs (explicit and implicit) on the atom </span>
+<span class="sd">        </span>
+<span class="sd">        GetTotalDegree(): one-hot embedding for the degree of the atom in the molecule including Hs</span>
+<span class="sd">        </span>
+<span class="sd">        IsInRing(): whether the atom is in a ring</span>
+<span class="sd">        </span>
+<span class="sd">        IsInRingSize(3, 4, 5, 6): whether the atom is in a ring of a particular size</span>
+<span class="sd">        </span>
+<span class="sd">        IsInRing() and not IsInRingSize(3, 4, 5, 6): whether the atom is in a ring and not in a ring of 3, 4, 5, 6</span>
+<span class="sd">    """</span>
     <span class="k">return</span> <span class="n">onehot</span><span class="p">(</span><span class="n">atom</span><span class="o">.</span><span class="n">GetSymbol</span><span class="p">(),</span> <span class="n">atom_vocab</span><span class="p">,</span> <span class="n">allow_unknown</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="o">+</span> \
            <span class="n">onehot</span><span class="p">(</span><span class="n">atom</span><span class="o">.</span><span class="n">GetTotalNumHs</span><span class="p">(),</span> <span class="n">num_hs_vocab</span><span class="p">)</span> <span class="o">+</span> \
            <span class="n">onehot</span><span class="p">(</span><span class="n">atom</span><span class="o">.</span><span class="n">GetTotalDegree</span><span class="p">(),</span> <span class="n">degree_vocab</span><span class="p">,</span> <span class="n">allow_unknown</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="o">+</span> \
@@ -269,13 +321,29 @@
 
 <div class="viewcode-block" id="atom_symbol"><a class="viewcode-back" href="../../../api/data.html#torchdrug.data.feature.atom_symbol">[docs]</a><span class="nd">@R</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="s2">"features.atom.symbol"</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">atom_symbol</span><span class="p">(</span><span class="n">atom</span><span class="p">):</span>
-    <span class="sd">"""Symbol atom feature."""</span>
+    <span class="sd">"""Symbol atom feature.</span>
+
+<span class="sd">    Features:</span>
+<span class="sd">        GetSymbol(): one-hot embedding for the atomic symbol</span>
+<span class="sd">    """</span>
     <span class="k">return</span> <span class="n">onehot</span><span class="p">(</span><span class="n">atom</span><span class="o">.</span><span class="n">GetSymbol</span><span class="p">(),</span> <span class="n">atom_vocab</span><span class="p">,</span> <span class="n">allow_unknown</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="atom_explicit_property_prediction"><a class="viewcode-back" href="../../../api/data.html#torchdrug.data.feature.atom_explicit_property_prediction">[docs]</a><span class="nd">@R</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="s2">"features.atom.explicit_property_prediction"</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">atom_explicit_property_prediction</span><span class="p">(</span><span class="n">atom</span><span class="p">):</span>
-    <span class="sd">"""Explicit property prediction atom feature."""</span>
+    <span class="sd">"""Explicit property prediction atom feature.</span>
+
+<span class="sd">    Features:</span>
+<span class="sd">        GetSymbol(): one-hot embedding for the atomic symbol</span>
+
+<span class="sd">        GetDegree(): one-hot embedding for the degree of the atom in the molecule</span>
+
+<span class="sd">        GetTotalValence(): one-hot embedding for the total valence (explicit + implicit) of the atom</span>
+<span class="sd">        </span>
+<span class="sd">        GetFormalCharge(): one-hot embedding for the number of formal charges in the molecule</span>
+<span class="sd">        </span>
+<span class="sd">        GetIsAromatic(): whether the atom is aromatic</span>
+<span class="sd">    """</span>
     <span class="k">return</span> <span class="n">onehot</span><span class="p">(</span><span class="n">atom</span><span class="o">.</span><span class="n">GetSymbol</span><span class="p">(),</span> <span class="n">atom_vocab</span><span class="p">,</span> <span class="n">allow_unknown</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="o">+</span> \
            <span class="n">onehot</span><span class="p">(</span><span class="n">atom</span><span class="o">.</span><span class="n">GetDegree</span><span class="p">(),</span> <span class="n">degree_vocab</span><span class="p">,</span> <span class="n">allow_unknown</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="o">+</span> \
            <span class="n">onehot</span><span class="p">(</span><span class="n">atom</span><span class="o">.</span><span class="n">GetTotalValence</span><span class="p">(),</span> <span class="n">total_valence_vocab</span><span class="p">,</span> <span class="n">allow_unknown</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="o">+</span> \
@@ -285,7 +353,21 @@
 
 <div class="viewcode-block" id="atom_property_prediction"><a class="viewcode-back" href="../../../api/data.html#torchdrug.data.feature.atom_property_prediction">[docs]</a><span class="nd">@R</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="s2">"features.atom.property_prediction"</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">atom_property_prediction</span><span class="p">(</span><span class="n">atom</span><span class="p">):</span>
-    <span class="sd">"""Property prediction atom feature."""</span>
+    <span class="sd">"""Property prediction atom feature.</span>
+
+<span class="sd">    Features:</span>
+<span class="sd">        GetSymbol(): one-hot embedding for the atomic symbol</span>
+<span class="sd">        </span>
+<span class="sd">        GetDegree(): one-hot embedding for the degree of the atom in the molecule</span>
+<span class="sd">        </span>
+<span class="sd">        GetTotalNumHs(): one-hot embedding for the total number of Hs (explicit and implicit) on the atom </span>
+<span class="sd">        </span>
+<span class="sd">        GetTotalValence(): one-hot embedding for the total valence (explicit + implicit) of the atom</span>
+<span class="sd">        </span>
+<span class="sd">        GetFormalCharge(): one-hot embedding for the number of formal charges in the molecule</span>
+<span class="sd">        </span>
+<span class="sd">        GetIsAromatic(): whether the atom is aromatic</span>
+<span class="sd">    """</span>
     <span class="k">return</span> <span class="n">onehot</span><span class="p">(</span><span class="n">atom</span><span class="o">.</span><span class="n">GetSymbol</span><span class="p">(),</span> <span class="n">atom_vocab</span><span class="p">,</span> <span class="n">allow_unknown</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="o">+</span> \
            <span class="n">onehot</span><span class="p">(</span><span class="n">atom</span><span class="o">.</span><span class="n">GetDegree</span><span class="p">(),</span> <span class="n">degree_vocab</span><span class="p">,</span> <span class="n">allow_unknown</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="o">+</span> \
            <span class="n">onehot</span><span class="p">(</span><span class="n">atom</span><span class="o">.</span><span class="n">GetTotalNumHs</span><span class="p">(),</span> <span class="n">num_hs_vocab</span><span class="p">,</span> <span class="n">allow_unknown</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="o">+</span> \
@@ -310,14 +392,32 @@
 
 <div class="viewcode-block" id="atom_pretrain"><a class="viewcode-back" href="../../../api/data.html#torchdrug.data.feature.atom_pretrain">[docs]</a><span class="nd">@R</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="s2">"features.atom.pretrain"</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">atom_pretrain</span><span class="p">(</span><span class="n">atom</span><span class="p">):</span>
-    <span class="sd">"""Atom feature for pretraining."""</span>
+    <span class="sd">"""Atom feature for pretraining.</span>
+
+<span class="sd">    Features:</span>
+<span class="sd">        GetSymbol(): one-hot embedding for the atomic symbol</span>
+<span class="sd">        </span>
+<span class="sd">        GetChiralTag(): one-hot embedding for atomic chiral tag</span>
+<span class="sd">    """</span>
     <span class="k">return</span> <span class="n">onehot</span><span class="p">(</span><span class="n">atom</span><span class="o">.</span><span class="n">GetSymbol</span><span class="p">(),</span> <span class="n">atom_vocab</span><span class="p">,</span> <span class="n">allow_unknown</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="o">+</span> \
            <span class="n">onehot</span><span class="p">(</span><span class="n">atom</span><span class="o">.</span><span class="n">GetChiralTag</span><span class="p">(),</span> <span class="n">chiral_tag_vocab</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="bond_default"><a class="viewcode-back" href="../../../api/data.html#torchdrug.data.feature.bond_default">[docs]</a><span class="nd">@R</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="s2">"features.bond.default"</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">bond_default</span><span class="p">(</span><span class="n">bond</span><span class="p">):</span>
-    <span class="sd">"""Default bond feature."""</span>
+    <span class="sd">"""Default bond feature.</span>
+
+<span class="sd">    Features:</span>
+<span class="sd">        GetBondType(): one-hot embedding for the type of the bond</span>
+<span class="sd">        </span>
+<span class="sd">        GetBondDir(): one-hot embedding for the direction of the bond</span>
+<span class="sd">        </span>
+<span class="sd">        GetStereo(): one-hot embedding for the stereo configuration of the bond</span>
+<span class="sd">        </span>
+<span class="sd">        GetIsConjugated(): whether the bond is considered to be conjugated</span>
+<span class="sd">        </span>
+<span class="sd">        bond_length: the length of the bond</span>
+<span class="sd">    """</span>
     <span class="k">return</span> <span class="n">onehot</span><span class="p">(</span><span class="n">bond</span><span class="o">.</span><span class="n">GetBondType</span><span class="p">(),</span> <span class="n">bond_type_vocab</span><span class="p">)</span> <span class="o">+</span> \
            <span class="n">onehot</span><span class="p">(</span><span class="n">bond</span><span class="o">.</span><span class="n">GetBondDir</span><span class="p">(),</span> <span class="n">bond_dir_vocab</span><span class="p">)</span> <span class="o">+</span> \
            <span class="n">onehot</span><span class="p">(</span><span class="n">bond</span><span class="o">.</span><span class="n">GetStereo</span><span class="p">(),</span> <span class="n">bond_stereo_vocab</span><span class="p">)</span> <span class="o">+</span> \
@@ -339,21 +439,39 @@
 
 <div class="viewcode-block" id="bond_property_prediction"><a class="viewcode-back" href="../../../api/data.html#torchdrug.data.feature.bond_property_prediction">[docs]</a><span class="nd">@R</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="s2">"features.bond.property_prediction"</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">bond_property_prediction</span><span class="p">(</span><span class="n">bond</span><span class="p">):</span>
-    <span class="sd">"""Property prediction bond feature."""</span>
+    <span class="sd">"""Property prediction bond feature.</span>
+
+<span class="sd">    Features:</span>
+<span class="sd">        GetBondType(): one-hot embedding for the type of the bond</span>
+<span class="sd">        </span>
+<span class="sd">        GetIsConjugated(): whether the bond is considered to be conjugated</span>
+<span class="sd">        </span>
+<span class="sd">        IsInRing(): whether the bond is in a ring</span>
+<span class="sd">    """</span>
     <span class="k">return</span> <span class="n">onehot</span><span class="p">(</span><span class="n">bond</span><span class="o">.</span><span class="n">GetBondType</span><span class="p">(),</span> <span class="n">bond_type_vocab</span><span class="p">)</span> <span class="o">+</span> \
            <span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">bond</span><span class="o">.</span><span class="n">GetIsConjugated</span><span class="p">()),</span> <span class="n">bond</span><span class="o">.</span><span class="n">IsInRing</span><span class="p">()]</span></div>
 
 
 <div class="viewcode-block" id="bond_pretrain"><a class="viewcode-back" href="../../../api/data.html#torchdrug.data.feature.bond_pretrain">[docs]</a><span class="nd">@R</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="s2">"features.bond.pretrain"</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">bond_pretrain</span><span class="p">(</span><span class="n">bond</span><span class="p">):</span>
-    <span class="sd">"""Bond feature for pretraining."""</span>
+    <span class="sd">"""Bond feature for pretraining.</span>
+
+<span class="sd">    Features:</span>
+<span class="sd">        GetBondType(): one-hot embedding for the type of the bond</span>
+<span class="sd">        </span>
+<span class="sd">        GetBondDir(): one-hot embedding for the direction of the bond</span>
+<span class="sd">    """</span>
     <span class="k">return</span> <span class="n">onehot</span><span class="p">(</span><span class="n">bond</span><span class="o">.</span><span class="n">GetBondType</span><span class="p">(),</span> <span class="n">bond_type_vocab</span><span class="p">)</span> <span class="o">+</span> \
            <span class="n">onehot</span><span class="p">(</span><span class="n">bond</span><span class="o">.</span><span class="n">GetBondDir</span><span class="p">(),</span> <span class="n">bond_dir_vocab</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="ExtendedConnectivityFingerprint"><a class="viewcode-back" href="../../../api/data.html#torchdrug.data.feature.ExtendedConnectivityFingerprint">[docs]</a><span class="nd">@R</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="s2">"features.molecule.ecfp"</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">ExtendedConnectivityFingerprint</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">radius</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">length</span><span class="o">=</span><span class="mi">1024</span><span class="p">):</span>
-    <span class="sd">"""Extended Connectivity Fingerprint molecule feature."""</span>
+    <span class="sd">"""Extended Connectivity Fingerprint molecule feature.</span>
+
+<span class="sd">    Features:</span>
+<span class="sd">        GetMorganFingerprintAsBitVect(): a Morgan fingerprint for a molecule as a bit vector</span>
+<span class="sd">    """</span>
     <span class="n">ecfp</span> <span class="o">=</span> <span class="n">AllChem</span><span class="o">.</span><span class="n">GetMorganFingerprintAsBitVect</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">radius</span><span class="p">,</span> <span class="n">length</span><span class="p">)</span>
     <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="n">ecfp</span><span class="p">)</span></div>
 

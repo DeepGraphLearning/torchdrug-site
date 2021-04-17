@@ -318,8 +318,17 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">lstm</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">LSTM</span><span class="p">(</span><span class="n">input_dim</span> <span class="o">*</span> <span class="mi">2</span><span class="p">,</span> <span class="n">input_dim</span><span class="p">,</span> <span class="n">num_lstm_layer</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">softmax</span> <span class="o">=</span> <span class="n">Softmax</span><span class="p">()</span>
 
-    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">graph</span><span class="p">,</span> <span class="nb">input</span><span class="p">):</span>
-        <span class="sd">""""""</span>
+<div class="viewcode-block" id="Set2Set.forward"><a class="viewcode-back" href="../../../api/layers.html#torchdrug.layers.Set2Set.forward">[docs]</a>    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">graph</span><span class="p">,</span> <span class="nb">input</span><span class="p">):</span>
+        <span class="sd">"""</span>
+<span class="sd">        Perform Set2Set readout over graph(s).</span>
+
+<span class="sd">        Parameters:</span>
+<span class="sd">            graph (Graph): graph(s)</span>
+<span class="sd">            input (Tensor): node representations</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Tensor: graph representations</span>
+<span class="sd">        """</span>
         <span class="n">hx</span> <span class="o">=</span> <span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">lstm</span><span class="o">.</span><span class="n">num_layers</span><span class="p">,</span> <span class="n">graph</span><span class="o">.</span><span class="n">batch_size</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">lstm</span><span class="o">.</span><span class="n">hidden_size</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="nb">input</span><span class="o">.</span><span class="n">device</span><span class="p">),)</span> <span class="o">*</span> <span class="mi">2</span>
         <span class="n">query_star</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">graph</span><span class="o">.</span><span class="n">batch_size</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">output_dim</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="nb">input</span><span class="o">.</span><span class="n">device</span><span class="p">)</span>
 
@@ -331,7 +340,7 @@
             <span class="n">output</span> <span class="o">=</span> <span class="n">scatter_add</span><span class="p">(</span><span class="n">attention</span><span class="o">.</span><span class="n">unsqueeze</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="nb">input</span><span class="p">,</span> <span class="n">graph</span><span class="o">.</span><span class="n">node2graph</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">dim_size</span><span class="o">=</span><span class="n">graph</span><span class="o">.</span><span class="n">batch_size</span><span class="p">)</span>
             <span class="n">query_star</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">cat</span><span class="p">([</span><span class="n">query</span><span class="p">,</span> <span class="n">output</span><span class="p">],</span> <span class="n">dim</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
 
-        <span class="k">return</span> <span class="n">query_star</span></div>
+        <span class="k">return</span> <span class="n">query_star</span></div></div>
 </pre></div>
       </article>
       <footer>

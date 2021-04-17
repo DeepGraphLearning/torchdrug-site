@@ -6,10 +6,6 @@ Pretrained Molecular Representations
 For the property prediction task in drug discovery, due to the high expense,
 pre-training is a special type of problems in drug discovery tasks.
 
-
-Self-Supervised Pre-training
-----------------------------
-
 The self-supervised pre-training belongs to the unsupervised pre-training. It is
 unsupervised because no supervised signal, i.e., the molecular drug property, is
 provided. It is called the self-supervised because it constructs the positive and
@@ -18,7 +14,7 @@ pre-training for molecule property prediction, it explores the structure informa
 of molecular data from different aspects as illustrated below.
 
 Infograph
-^^^^^^^^^
+---------
 
 `InfoGraph`_ (IG) sets the node- and graph- representation from the same graph as
 positive pairs, while those from different graphs as negative pairs.
@@ -55,7 +51,7 @@ the following.
 .. image:: ../../../asset/graph/infograph.png
 
 Attribute Masking
-^^^^^^^^^^^^^^^^^
+-----------------
 
 `Attribute Masking`_ (AM) predicts the atom node type from its neighbors. It can
 be seen as self-supervised by viewing the actual node type as positive, and all

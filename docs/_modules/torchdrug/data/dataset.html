@@ -188,6 +188,7 @@
 <span></span><span class="kn">import</span> <span class="nn">csv</span>
 <span class="kn">import</span> <span class="nn">math</span>
 <span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
 <span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">defaultdict</span>
 
 <span class="kn">from</span> <span class="nn">tqdm</span> <span class="kn">import</span> <span class="n">tqdm</span>
@@ -220,12 +221,15 @@
 <span class="sd">            smiles_list (list of str): SMILES strings</span>
 <span class="sd">            targets (dict of list): prediction targets</span>
 <span class="sd">            transform (Callable, optional): data transformation function</span>
-<span class="sd">            lazy (bool, optional): if lazy mode is used, the molecules are processed on-the-fly.</span>
-<span class="sd">                This may slow down the data loading process, but save a lot of CPU memory.</span>
+<span class="sd">            lazy (bool, optional): if lazy mode is used, the molecules are processed in the dataloader.</span>
+<span class="sd">                This may slow down the data loading process, but save a lot of CPU memory and dataset loading time.</span>
 <span class="sd">            verbose (int, optional): output verbose level</span>
 <span class="sd">            **kwargs</span>
 <span class="sd">        """</span>
         <span class="n">num_sample</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">smiles_list</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">num_sample</span> <span class="o">&gt;</span> <span class="mi">1000000</span><span class="p">:</span>
+            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">"Preprocessing molecules of a large dataset consumes a lot of CPU memory and time. "</span>
+                          <span class="s2">"Use load_smiles(lazy=True) to construct molecules in the dataloader instead."</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">field</span><span class="p">,</span> <span class="n">target_list</span> <span class="ow">in</span> <span class="n">targets</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
             <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">target_list</span><span class="p">)</span> <span class="o">!=</span> <span class="n">num_sample</span><span class="p">:</span>
                 <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Number of target `</span><span class="si">%s</span><span class="s2">` doesn't match with number of molecules. "</span>
@@ -486,7 +490,7 @@
         <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">node_file</span><span class="p">,</span> <span class="s2">"r"</span><span class="p">)</span> <span class="k">as</span> <span class="n">fin</span><span class="p">:</span>
             <span class="n">reader</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">reader</span><span class="p">(</span><span class="n">fin</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s2">"</span><span class="se">\t</span><span class="s2">"</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
-                <span class="n">reader</span> <span class="o">=</span> <span class="n">tqdm</span><span class="p">(</span><span class="n">reader</span><span class="p">,</span> <span class="s2">"Loading </span><span class="si">%s</span><span class="s2">"</span> <span class="o">%</span> <span class="n">node_file</span><span class="p">)</span>
+                <span class="n">reader</span> <span class="o">=</span> <span class="n">tqdm</span><span class="p">(</span><span class="n">reader</span><span class="p">,</span> <span class="s2">"Loading </span><span class="si">%s</span><span class="s2">"</span> <span class="o">%</span> <span class="n">node_file</span><span class="p">,</span> <span class="n">utils</span><span class="o">.</span><span class="n">get_line_count</span><span class="p">(</span><span class="n">node_file</span><span class="p">))</span>
             <span class="k">for</span> <span class="n">tokens</span> <span class="ow">in</span> <span class="n">reader</span><span class="p">:</span>
                 <span class="n">node_token</span> <span class="o">=</span> <span class="n">tokens</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
                 <span class="n">feature_tokens</span> <span class="o">=</span> <span class="n">tokens</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span> <span class="o">-</span><span class="mi">1</span><span class="p">]</span>
@@ -494,7 +498,7 @@
                 <span class="n">inv_node_vocab</span><span class="p">[</span><span class="n">node_token</span><span class="p">]</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">inv_node_vocab</span><span class="p">)</span>
                 <span class="k">if</span> <span class="n">label_token</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">inv_label_vocab</span><span class="p">:</span>
                     <span class="n">inv_label_vocab</span><span class="p">[</span><span class="n">label_token</span><span class="p">]</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">inv_label_vocab</span><span class="p">)</span>
-                <span class="n">feature</span> <span class="o">=</span> <span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">f</span><span class="p">)</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">feature_tokens</span><span class="p">]</span>
+                <span class="n">feature</span> <span class="o">=</span> <span class="p">[</span><span class="n">utils</span><span class="o">.</span><span class="n">literal_eval</span><span class="p">(</span><span class="n">f</span><span class="p">)</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">feature_tokens</span><span class="p">]</span>
                 <span class="n">label</span> <span class="o">=</span> <span class="n">inv_label_vocab</span><span class="p">[</span><span class="n">label_token</span><span class="p">]</span>
                 <span class="n">node_feature</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">feature</span><span class="p">)</span>
                 <span class="n">node_label</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">label</span><span class="p">)</span>
@@ -504,7 +508,7 @@
         <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">edge_file</span><span class="p">,</span> <span class="s2">"r"</span><span class="p">)</span> <span class="k">as</span> <span class="n">fin</span><span class="p">:</span>
             <span class="n">reader</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">reader</span><span class="p">(</span><span class="n">fin</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s2">"</span><span class="se">\t</span><span class="s2">"</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
-                <span class="n">reader</span> <span class="o">=</span> <span class="n">tqdm</span><span class="p">(</span><span class="n">reader</span><span class="p">,</span> <span class="s2">"Loading </span><span class="si">%s</span><span class="s2">"</span> <span class="o">%</span> <span class="n">edge_file</span><span class="p">)</span>
+                <span class="n">reader</span> <span class="o">=</span> <span class="n">tqdm</span><span class="p">(</span><span class="n">reader</span><span class="p">,</span> <span class="s2">"Loading </span><span class="si">%s</span><span class="s2">"</span> <span class="o">%</span> <span class="n">edge_file</span><span class="p">,</span> <span class="n">utils</span><span class="o">.</span><span class="n">get_line_count</span><span class="p">(</span><span class="n">edge_file</span><span class="p">))</span>
             <span class="k">for</span> <span class="n">tokens</span> <span class="ow">in</span> <span class="n">reader</span><span class="p">:</span>
                 <span class="n">h_token</span><span class="p">,</span> <span class="n">t_token</span> <span class="o">=</span> <span class="n">tokens</span>
                 <span class="k">if</span> <span class="n">h_token</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">inv_node_vocab</span><span class="p">:</span>
@@ -639,7 +643,7 @@
             <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">tsv_file</span><span class="p">,</span> <span class="s2">"r"</span><span class="p">)</span> <span class="k">as</span> <span class="n">fin</span><span class="p">:</span>
                 <span class="n">reader</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">reader</span><span class="p">(</span><span class="n">fin</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s2">"</span><span class="se">\t</span><span class="s2">"</span><span class="p">)</span>
                 <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
-                    <span class="n">reader</span> <span class="o">=</span> <span class="n">tqdm</span><span class="p">(</span><span class="n">reader</span><span class="p">,</span> <span class="s2">"Loading </span><span class="si">%s</span><span class="s2">"</span> <span class="o">%</span> <span class="n">tsv_file</span><span class="p">)</span>
+                    <span class="n">reader</span> <span class="o">=</span> <span class="n">tqdm</span><span class="p">(</span><span class="n">reader</span><span class="p">,</span> <span class="s2">"Loading </span><span class="si">%s</span><span class="s2">"</span> <span class="o">%</span> <span class="n">tsv_file</span><span class="p">,</span> <span class="n">utils</span><span class="o">.</span><span class="n">get_line_count</span><span class="p">(</span><span class="n">tsv_file</span><span class="p">))</span>
 
                 <span class="n">num_sample</span> <span class="o">=</span> <span class="mi">0</span>
                 <span class="k">for</span> <span class="n">tokens</span> <span class="ow">in</span> <span class="n">reader</span><span class="p">:</span>

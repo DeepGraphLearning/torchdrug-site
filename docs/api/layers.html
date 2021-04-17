@@ -348,7 +348,7 @@ overwritten by any layer outputs.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>graph</strong> (<a class="reference internal" href="data.html#torchdrug.data.Graph" title="torchdrug.data.Graph"><em>Graph</em></a>) – graph</p></li>
+<li><p><strong>graph</strong> (<a class="reference internal" href="data.html#torchdrug.data.Graph" title="torchdrug.data.Graph"><em>Graph</em></a>) – graph(s)</p></li>
 <li><p><strong>message</strong> (<em>Tensor</em>) – edge messages of shape <span class="math notranslate nohighlight">\((|E|, ...)\)</span></p></li>
 </ul>
 </dd>
@@ -376,11 +376,11 @@ overwritten by any layer outputs.</p>
 <dl class="py method">
 <dt id="torchdrug.layers.MessagePassingBase.forward">
 <code class="sig-name descname">forward</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">graph</span></em>, <em class="sig-param"><span class="n">input</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/conv.html#MessagePassingBase.forward"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.layers.MessagePassingBase.forward" title="Permalink to this definition">¶</a></dt>
-<dd><p>Perform message passing over the graph.</p>
+<dd><p>Perform message passing over the graph(s).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>graph</strong> (<a class="reference internal" href="data.html#torchdrug.data.Graph" title="torchdrug.data.Graph"><em>Graph</em></a>) – graph</p></li>
+<li><p><strong>graph</strong> (<a class="reference internal" href="data.html#torchdrug.data.Graph" title="torchdrug.data.Graph"><em>Graph</em></a>) – graph(s)</p></li>
 <li><p><strong>input</strong> (<em>Tensor</em>) – node representations of shape <span class="math notranslate nohighlight">\((|V|, ...)\)</span></p></li>
 </ul>
 </dd>
@@ -393,7 +393,7 @@ overwritten by any layer outputs.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>graph</strong> (<a class="reference internal" href="data.html#torchdrug.data.Graph" title="torchdrug.data.Graph"><em>Graph</em></a>) – graph</p></li>
+<li><p><strong>graph</strong> (<a class="reference internal" href="data.html#torchdrug.data.Graph" title="torchdrug.data.Graph"><em>Graph</em></a>) – graph(s)</p></li>
 <li><p><strong>input</strong> (<em>Tensor</em>) – node representations of shape <span class="math notranslate nohighlight">\((|V|, ...)\)</span></p></li>
 </ul>
 </dd>
@@ -414,7 +414,7 @@ This may provide better time or memory complexity than separate calls of
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>graph</strong> (<a class="reference internal" href="data.html#torchdrug.data.Graph" title="torchdrug.data.Graph"><em>Graph</em></a>) – graph</p></li>
+<li><p><strong>graph</strong> (<a class="reference internal" href="data.html#torchdrug.data.Graph" title="torchdrug.data.Graph"><em>Graph</em></a>) – graph(s)</p></li>
 <li><p><strong>input</strong> (<em>Tensor</em>) – node representations of shape <span class="math notranslate nohighlight">\((|V|, ...)\)</span></p></li>
 </ul>
 </dd>
@@ -455,7 +455,7 @@ This also corresponds to the radius of the receptive field.</p></li>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>graph</strong> (<a class="reference internal" href="data.html#torchdrug.data.Graph" title="torchdrug.data.Graph"><em>Graph</em></a>) – graph</p></li>
+<li><p><strong>graph</strong> (<a class="reference internal" href="data.html#torchdrug.data.Graph" title="torchdrug.data.Graph"><em>Graph</em></a>) – graph(s)</p></li>
 <li><p><strong>message</strong> (<em>Tensor</em>) – edge messages of shape <span class="math notranslate nohighlight">\((|E|, ...)\)</span></p></li>
 </ul>
 </dd>
@@ -483,11 +483,11 @@ This also corresponds to the radius of the receptive field.</p></li>
 <dl class="py method">
 <dt id="torchdrug.layers.ChebyshevConv.forward">
 <code class="sig-name descname">forward</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">graph</span></em>, <em class="sig-param"><span class="n">input</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/conv.html#ChebyshevConv.forward"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.layers.ChebyshevConv.forward" title="Permalink to this definition">¶</a></dt>
-<dd><p>Perform message passing over the graph.</p>
+<dd><p>Perform message passing over the graph(s).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>graph</strong> (<a class="reference internal" href="data.html#torchdrug.data.Graph" title="torchdrug.data.Graph"><em>Graph</em></a>) – graph</p></li>
+<li><p><strong>graph</strong> (<a class="reference internal" href="data.html#torchdrug.data.Graph" title="torchdrug.data.Graph"><em>Graph</em></a>) – graph(s)</p></li>
 <li><p><strong>input</strong> (<em>Tensor</em>) – node representations of shape <span class="math notranslate nohighlight">\((|V|, ...)\)</span></p></li>
 </ul>
 </dd>
@@ -500,7 +500,7 @@ This also corresponds to the radius of the receptive field.</p></li>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>graph</strong> (<a class="reference internal" href="data.html#torchdrug.data.Graph" title="torchdrug.data.Graph"><em>Graph</em></a>) – graph</p></li>
+<li><p><strong>graph</strong> (<a class="reference internal" href="data.html#torchdrug.data.Graph" title="torchdrug.data.Graph"><em>Graph</em></a>) – graph(s)</p></li>
 <li><p><strong>input</strong> (<em>Tensor</em>) – node representations of shape <span class="math notranslate nohighlight">\((|V|, ...)\)</span></p></li>
 </ul>
 </dd>
@@ -521,7 +521,7 @@ This may provide better time or memory complexity than separate calls of
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>graph</strong> (<a class="reference internal" href="data.html#torchdrug.data.Graph" title="torchdrug.data.Graph"><em>Graph</em></a>) – graph</p></li>
+<li><p><strong>graph</strong> (<a class="reference internal" href="data.html#torchdrug.data.Graph" title="torchdrug.data.Graph"><em>Graph</em></a>) – graph(s)</p></li>
 <li><p><strong>input</strong> (<em>Tensor</em>) – node representations of shape <span class="math notranslate nohighlight">\((|V|, ...)\)</span></p></li>
 </ul>
 </dd>
@@ -563,7 +563,7 @@ This may provide better time or memory complexity than separate calls of
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>graph</strong> (<a class="reference internal" href="data.html#torchdrug.data.Graph" title="torchdrug.data.Graph"><em>Graph</em></a>) – graph</p></li>
+<li><p><strong>graph</strong> (<a class="reference internal" href="data.html#torchdrug.data.Graph" title="torchdrug.data.Graph"><em>Graph</em></a>) – graph(s)</p></li>
 <li><p><strong>message</strong> (<em>Tensor</em>) – edge messages of shape <span class="math notranslate nohighlight">\((|E|, ...)\)</span></p></li>
 </ul>
 </dd>
@@ -595,7 +595,7 @@ This may provide better time or memory complexity than separate calls of
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>graph</strong> (<a class="reference internal" href="data.html#torchdrug.data.Graph" title="torchdrug.data.Graph"><em>Graph</em></a>) – graph</p></li>
+<li><p><strong>graph</strong> (<a class="reference internal" href="data.html#torchdrug.data.Graph" title="torchdrug.data.Graph"><em>Graph</em></a>) – graph(s)</p></li>
 <li><p><strong>input</strong> (<em>Tensor</em>) – node representations of shape <span class="math notranslate nohighlight">\((|V|, ...)\)</span></p></li>
 </ul>
 </dd>
@@ -616,7 +616,7 @@ This may provide better time or memory complexity than separate calls of
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>graph</strong> (<a class="reference internal" href="data.html#torchdrug.data.Graph" title="torchdrug.data.Graph"><em>Graph</em></a>) – graph</p></li>
+<li><p><strong>graph</strong> (<a class="reference internal" href="data.html#torchdrug.data.Graph" title="torchdrug.data.Graph"><em>Graph</em></a>) – graph(s)</p></li>
 <li><p><strong>input</strong> (<em>Tensor</em>) – node representations of shape <span class="math notranslate nohighlight">\((|V|, ...)\)</span></p></li>
 </ul>
 </dd>
@@ -656,7 +656,7 @@ This may provide better time or memory complexity than separate calls of
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>graph</strong> (<a class="reference internal" href="data.html#torchdrug.data.Graph" title="torchdrug.data.Graph"><em>Graph</em></a>) – graph</p></li>
+<li><p><strong>graph</strong> (<a class="reference internal" href="data.html#torchdrug.data.Graph" title="torchdrug.data.Graph"><em>Graph</em></a>) – graph(s)</p></li>
 <li><p><strong>message</strong> (<em>Tensor</em>) – edge messages of shape <span class="math notranslate nohighlight">\((|E|, ...)\)</span></p></li>
 </ul>
 </dd>
@@ -688,7 +688,7 @@ This may provide better time or memory complexity than separate calls of
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>graph</strong> (<a class="reference internal" href="data.html#torchdrug.data.Graph" title="torchdrug.data.Graph"><em>Graph</em></a>) – graph</p></li>
+<li><p><strong>graph</strong> (<a class="reference internal" href="data.html#torchdrug.data.Graph" title="torchdrug.data.Graph"><em>Graph</em></a>) – graph(s)</p></li>
 <li><p><strong>input</strong> (<em>Tensor</em>) – node representations of shape <span class="math notranslate nohighlight">\((|V|, ...)\)</span></p></li>
 </ul>
 </dd>
@@ -726,7 +726,7 @@ This may provide better time or memory complexity than separate calls of
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>graph</strong> (<a class="reference internal" href="data.html#torchdrug.data.Graph" title="torchdrug.data.Graph"><em>Graph</em></a>) – graph</p></li>
+<li><p><strong>graph</strong> (<a class="reference internal" href="data.html#torchdrug.data.Graph" title="torchdrug.data.Graph"><em>Graph</em></a>) – graph(s)</p></li>
 <li><p><strong>message</strong> (<em>Tensor</em>) – edge messages of shape <span class="math notranslate nohighlight">\((|E|, ...)\)</span></p></li>
 </ul>
 </dd>
@@ -758,7 +758,7 @@ This may provide better time or memory complexity than separate calls of
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>graph</strong> (<a class="reference internal" href="data.html#torchdrug.data.Graph" title="torchdrug.data.Graph"><em>Graph</em></a>) – graph</p></li>
+<li><p><strong>graph</strong> (<a class="reference internal" href="data.html#torchdrug.data.Graph" title="torchdrug.data.Graph"><em>Graph</em></a>) – graph(s)</p></li>
 <li><p><strong>input</strong> (<em>Tensor</em>) – node representations of shape <span class="math notranslate nohighlight">\((|V|, ...)\)</span></p></li>
 </ul>
 </dd>
@@ -779,7 +779,7 @@ This may provide better time or memory complexity than separate calls of
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>graph</strong> (<a class="reference internal" href="data.html#torchdrug.data.Graph" title="torchdrug.data.Graph"><em>Graph</em></a>) – graph</p></li>
+<li><p><strong>graph</strong> (<a class="reference internal" href="data.html#torchdrug.data.Graph" title="torchdrug.data.Graph"><em>Graph</em></a>) – graph(s)</p></li>
 <li><p><strong>input</strong> (<em>Tensor</em>) – node representations of shape <span class="math notranslate nohighlight">\((|V|, ...)\)</span></p></li>
 </ul>
 </dd>
@@ -820,7 +820,7 @@ This may provide better time or memory complexity than separate calls of
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>graph</strong> (<a class="reference internal" href="data.html#torchdrug.data.Graph" title="torchdrug.data.Graph"><em>Graph</em></a>) – graph</p></li>
+<li><p><strong>graph</strong> (<a class="reference internal" href="data.html#torchdrug.data.Graph" title="torchdrug.data.Graph"><em>Graph</em></a>) – graph(s)</p></li>
 <li><p><strong>message</strong> (<em>Tensor</em>) – edge messages of shape <span class="math notranslate nohighlight">\((|E|, ...)\)</span></p></li>
 </ul>
 </dd>
@@ -852,7 +852,7 @@ This may provide better time or memory complexity than separate calls of
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>graph</strong> (<a class="reference internal" href="data.html#torchdrug.data.Graph" title="torchdrug.data.Graph"><em>Graph</em></a>) – graph</p></li>
+<li><p><strong>graph</strong> (<a class="reference internal" href="data.html#torchdrug.data.Graph" title="torchdrug.data.Graph"><em>Graph</em></a>) – graph(s)</p></li>
 <li><p><strong>input</strong> (<em>Tensor</em>) – node representations of shape <span class="math notranslate nohighlight">\((|V|, ...)\)</span></p></li>
 </ul>
 </dd>
@@ -873,7 +873,7 @@ This may provide better time or memory complexity than separate calls of
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>graph</strong> (<a class="reference internal" href="data.html#torchdrug.data.Graph" title="torchdrug.data.Graph"><em>Graph</em></a>) – graph</p></li>
+<li><p><strong>graph</strong> (<a class="reference internal" href="data.html#torchdrug.data.Graph" title="torchdrug.data.Graph"><em>Graph</em></a>) – graph(s)</p></li>
 <li><p><strong>input</strong> (<em>Tensor</em>) – node representations of shape <span class="math notranslate nohighlight">\((|V|, ...)\)</span></p></li>
 </ul>
 </dd>
@@ -912,7 +912,7 @@ This may provide better time or memory complexity than separate calls of
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>graph</strong> (<a class="reference internal" href="data.html#torchdrug.data.Graph" title="torchdrug.data.Graph"><em>Graph</em></a>) – graph</p></li>
+<li><p><strong>graph</strong> (<a class="reference internal" href="data.html#torchdrug.data.Graph" title="torchdrug.data.Graph"><em>Graph</em></a>) – graph(s)</p></li>
 <li><p><strong>message</strong> (<em>Tensor</em>) – edge messages of shape <span class="math notranslate nohighlight">\((|E|, ...)\)</span></p></li>
 </ul>
 </dd>
@@ -944,7 +944,7 @@ This may provide better time or memory complexity than separate calls of
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>graph</strong> (<a class="reference internal" href="data.html#torchdrug.data.Graph" title="torchdrug.data.Graph"><em>Graph</em></a>) – graph</p></li>
+<li><p><strong>graph</strong> (<a class="reference internal" href="data.html#torchdrug.data.Graph" title="torchdrug.data.Graph"><em>Graph</em></a>) – graph(s)</p></li>
 <li><p><strong>input</strong> (<em>Tensor</em>) – node representations of shape <span class="math notranslate nohighlight">\((|V|, ...)\)</span></p></li>
 </ul>
 </dd>
@@ -983,7 +983,7 @@ This may provide better time or memory complexity than separate calls of
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>graph</strong> (<a class="reference internal" href="data.html#torchdrug.data.Graph" title="torchdrug.data.Graph"><em>Graph</em></a>) – graph</p></li>
+<li><p><strong>graph</strong> (<a class="reference internal" href="data.html#torchdrug.data.Graph" title="torchdrug.data.Graph"><em>Graph</em></a>) – graph(s)</p></li>
 <li><p><strong>message</strong> (<em>Tensor</em>) – edge messages of shape <span class="math notranslate nohighlight">\((|E|, ...)\)</span></p></li>
 </ul>
 </dd>
@@ -1015,7 +1015,7 @@ This may provide better time or memory complexity than separate calls of
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>graph</strong> (<a class="reference internal" href="data.html#torchdrug.data.Graph" title="torchdrug.data.Graph"><em>Graph</em></a>) – graph</p></li>
+<li><p><strong>graph</strong> (<a class="reference internal" href="data.html#torchdrug.data.Graph" title="torchdrug.data.Graph"><em>Graph</em></a>) – graph(s)</p></li>
 <li><p><strong>input</strong> (<em>Tensor</em>) – node representations of shape <span class="math notranslate nohighlight">\((|V|, ...)\)</span></p></li>
 </ul>
 </dd>
@@ -1036,7 +1036,7 @@ This may provide better time or memory complexity than separate calls of
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>graph</strong> (<a class="reference internal" href="data.html#torchdrug.data.Graph" title="torchdrug.data.Graph"><em>Graph</em></a>) – graph</p></li>
+<li><p><strong>graph</strong> (<a class="reference internal" href="data.html#torchdrug.data.Graph" title="torchdrug.data.Graph"><em>Graph</em></a>) – graph(s)</p></li>
 <li><p><strong>input</strong> (<em>Tensor</em>) – node representations of shape <span class="math notranslate nohighlight">\((|V|, ...)\)</span></p></li>
 </ul>
 </dd>
@@ -1075,7 +1075,7 @@ This may provide better time or memory complexity than separate calls of
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>graph</strong> (<a class="reference internal" href="data.html#torchdrug.data.Graph" title="torchdrug.data.Graph"><em>Graph</em></a>) – graph</p></li>
+<li><p><strong>graph</strong> (<a class="reference internal" href="data.html#torchdrug.data.Graph" title="torchdrug.data.Graph"><em>Graph</em></a>) – graph(s)</p></li>
 <li><p><strong>message</strong> (<em>Tensor</em>) – edge messages of shape <span class="math notranslate nohighlight">\((|E|, ...)\)</span></p></li>
 </ul>
 </dd>
@@ -1107,7 +1107,7 @@ This may provide better time or memory complexity than separate calls of
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>graph</strong> (<a class="reference internal" href="data.html#torchdrug.data.Graph" title="torchdrug.data.Graph"><em>Graph</em></a>) – graph</p></li>
+<li><p><strong>graph</strong> (<a class="reference internal" href="data.html#torchdrug.data.Graph" title="torchdrug.data.Graph"><em>Graph</em></a>) – graph(s)</p></li>
 <li><p><strong>input</strong> (<em>Tensor</em>) – node representations of shape <span class="math notranslate nohighlight">\((|V|, ...)\)</span></p></li>
 </ul>
 </dd>
@@ -1128,7 +1128,7 @@ This may provide better time or memory complexity than separate calls of
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>graph</strong> (<a class="reference internal" href="data.html#torchdrug.data.Graph" title="torchdrug.data.Graph"><em>Graph</em></a>) – graph</p></li>
+<li><p><strong>graph</strong> (<a class="reference internal" href="data.html#torchdrug.data.Graph" title="torchdrug.data.Graph"><em>Graph</em></a>) – graph(s)</p></li>
 <li><p><strong>input</strong> (<em>Tensor</em>) – node representations of shape <span class="math notranslate nohighlight">\((|V|, ...)\)</span></p></li>
 </ul>
 </dd>
@@ -1268,6 +1268,25 @@ This may provide better time or memory complexity than separate calls of
 </ul>
 </dd>
 </dl>
+<dl class="py method">
+<dt id="torchdrug.layers.Set2Set.forward">
+<code class="sig-name descname">forward</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">graph</span></em>, <em class="sig-param"><span class="n">input</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/readout.html#Set2Set.forward"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.layers.Set2Set.forward" title="Permalink to this definition">¶</a></dt>
+<dd><p>Perform Set2Set readout over graph(s).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>graph</strong> (<a class="reference internal" href="data.html#torchdrug.data.Graph" title="torchdrug.data.Graph"><em>Graph</em></a>) – graph(s)</p></li>
+<li><p><strong>input</strong> (<em>Tensor</em>) – node representations</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>graph representations</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>Tensor</p>
+</dd>
+</dl>
+</dd></dl>
 </dd></dl>
 </div>
 </div>
@@ -1292,6 +1311,27 @@ This may provide better time or memory complexity than separate calls of
 </ul>
 </dd>
 </dl>
+<dl class="py method">
+<dt id="torchdrug.layers.DiffPool.forward">
+<code class="sig-name descname">forward</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">graph</span></em>, <em class="sig-param"><span class="n">input</span></em>, <em class="sig-param"><span class="n">all_loss</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">metric</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/pool.html#DiffPool.forward"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.layers.DiffPool.forward" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute the node cluster assignment and pool the nodes.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>graph</strong> (<a class="reference internal" href="data.html#torchdrug.data.Graph" title="torchdrug.data.Graph"><em>Graph</em></a>) – graph(s)</p></li>
+<li><p><strong>input</strong> (<em>Tensor</em>) – input node representations</p></li>
+<li><p><strong>all_loss</strong> (<em>Tensor</em><em>, </em><em>optional</em>) – if specified, add loss to this tensor</p></li>
+<li><p><strong>metric</strong> (<em>dict</em><em>, </em><em>optional</em>) – if specified, output metrics to this dict</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>pooled graph, output node representations, node-to-cluster assignment</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>(<a class="reference internal" href="data.html#torchdrug.data.PackedGraph" title="torchdrug.data.PackedGraph">PackedGraph</a>, Tensor, Tensor)</p>
+</dd>
+</dl>
+</dd></dl>
 </dd></dl>
 </div>
 <div class="section" id="mincutpool">
@@ -1313,6 +1353,27 @@ This may provide better time or memory complexity than separate calls of
 </ul>
 </dd>
 </dl>
+<dl class="py method">
+<dt id="torchdrug.layers.MinCutPool.forward">
+<code class="sig-name descname">forward</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">graph</span></em>, <em class="sig-param"><span class="n">input</span></em>, <em class="sig-param"><span class="n">all_loss</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">metric</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/pool.html#MinCutPool.forward"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.layers.MinCutPool.forward" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute the node cluster assignment and pool the nodes.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>graph</strong> (<a class="reference internal" href="data.html#torchdrug.data.Graph" title="torchdrug.data.Graph"><em>Graph</em></a>) – graph(s)</p></li>
+<li><p><strong>input</strong> (<em>Tensor</em>) – input node representations</p></li>
+<li><p><strong>all_loss</strong> (<em>Tensor</em><em>, </em><em>optional</em>) – if specified, add loss to this tensor</p></li>
+<li><p><strong>metric</strong> (<em>dict</em><em>, </em><em>optional</em>) – if specified, output metrics to this dict</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>pooled graph, output node representations, node-to-cluster assignment</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>(<a class="reference internal" href="data.html#torchdrug.data.PackedGraph" title="torchdrug.data.PackedGraph">PackedGraph</a>, Tensor, Tensor)</p>
+</dd>
+</dl>
+</dd></dl>
 </dd></dl>
 </div>
 </div>

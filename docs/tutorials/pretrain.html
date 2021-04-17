@@ -188,8 +188,6 @@
 <h1>Pretrained Molecular Representations<a class="headerlink" href="#pretrained-molecular-representations" title="Permalink to this headline">¶</a></h1>
 <p>For the property prediction task in drug discovery, due to the high expense,
 pre-training is a special type of problems in drug discovery tasks.</p>
-<div class="section" id="self-supervised-pre-training">
-<h2>Self-Supervised Pre-training<a class="headerlink" href="#self-supervised-pre-training" title="Permalink to this headline">¶</a></h2>
 <p>The self-supervised pre-training belongs to the unsupervised pre-training. It is
 unsupervised because no supervised signal, i.e., the molecular drug property, is
 provided. It is called the self-supervised because it constructs the positive and
@@ -197,7 +195,7 @@ negative views from the data itself. And specifically to the self-supervised
 pre-training for molecule property prediction, it explores the structure information
 of molecular data from different aspects as illustrated below.</p>
 <div class="section" id="id1">
-<h3>Infograph<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<h2>Infograph<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
 <p><a class="reference external" href="https://openreview.net/pdf?id=r1lfF2NYvH">InfoGraph</a> (IG) sets the node- and graph- representation from the same graph as
 positive pairs, while those from different graphs as negative pairs.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">torch</span> <span class="kn">import</span> <span class="n">nn</span>
@@ -229,7 +227,7 @@ the following.</p>
 <img alt="../_images/infograph.png" src="../_images/infograph.png"/>
 </div>
 <div class="section" id="id2">
-<h3>Attribute Masking<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<h2>Attribute Masking<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
 <p><a class="reference external" href="https://arxiv.org/abs/1905.12265">Attribute Masking</a> (AM) predicts the atom node type from its neighbors. It can
 be seen as self-supervised by viewing the actual node type as positive, and all
 the other node types as negative.</p>
@@ -265,7 +263,6 @@ average cross entropy: <span class="m">0</span>.22998
 <p class="admonition-title">See also</p>
 <p><a class="reference internal" href="../api/tasks.html#torchdrug.tasks.EdgePrediction" title="torchdrug.tasks.EdgePrediction"><code class="xref py py-func docutils literal notranslate"><span class="pre">Edge</span> <span class="pre">Prediction</span> <span class="pre">(EP)</span></code></a>
 <a class="reference internal" href="../api/tasks.html#torchdrug.tasks.ContextPrediction" title="torchdrug.tasks.ContextPrediction"><code class="xref py py-func docutils literal notranslate"><span class="pre">Context</span> <span class="pre">Prediction</span> <span class="pre">(CP)</span></code></a></p>
-</div>
 </div>
 </div>
 </div>
@@ -325,11 +322,8 @@ average cross entropy: <span class="m">0</span>.22998
           <div class="toc-tree">
             <ul>
 <li><a class="reference internal" href="#">Pretrained Molecular Representations</a><ul>
-<li><a class="reference internal" href="#self-supervised-pre-training">Self-Supervised Pre-training</a><ul>
 <li><a class="reference internal" href="#id1">Infograph</a></li>
 <li><a class="reference internal" href="#id2">Attribute Masking</a></li>
-</ul>
-</li>
 </ul>
 </li>
 </ul>

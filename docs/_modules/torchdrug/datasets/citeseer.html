@@ -197,9 +197,9 @@
 <span class="sd">    A citation network of scientific publications with binary word features.</span>
 
 <span class="sd">    Statistics:</span>
-<span class="sd">        - #Node: 2,708</span>
-<span class="sd">        - #Edge: 5,429</span>
-<span class="sd">        - #Class: 7</span>
+<span class="sd">        - #Node: 3,327</span>
+<span class="sd">        - #Edge: 8,059</span>
+<span class="sd">        - #Class: 6</span>
 
 <span class="sd">    Parameters:</span>
 <span class="sd">        path (str): path to store the dataset</span>
@@ -207,6 +207,7 @@
 <span class="sd">    """</span>
 
     <span class="n">url</span> <span class="o">=</span> <span class="s2">"https://linqs-data.soe.ucsc.edu/public/lbc/citeseer.tgz"</span>
+    <span class="n">md5</span> <span class="o">=</span> <span class="s2">"c8ded8ed395b31899576bfd1e91e4d6e"</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
         <span class="n">path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">expanduser</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
@@ -214,7 +215,7 @@
             <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">path</span> <span class="o">=</span> <span class="n">path</span>
 
-        <span class="n">zip_file</span> <span class="o">=</span> <span class="n">utils</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">url</span><span class="p">,</span> <span class="n">path</span><span class="p">)</span>
+        <span class="n">zip_file</span> <span class="o">=</span> <span class="n">utils</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">url</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">md5</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">md5</span><span class="p">)</span>
         <span class="n">node_file</span> <span class="o">=</span> <span class="n">utils</span><span class="o">.</span><span class="n">extract</span><span class="p">(</span><span class="n">zip_file</span><span class="p">,</span> <span class="s2">"citeseer/citeseer.content"</span><span class="p">)</span>
         <span class="n">edge_file</span> <span class="o">=</span> <span class="n">utils</span><span class="o">.</span><span class="n">extract</span><span class="p">(</span><span class="n">zip_file</span><span class="p">,</span> <span class="s2">"citeseer/citeseer.cites"</span><span class="p">)</span>
 

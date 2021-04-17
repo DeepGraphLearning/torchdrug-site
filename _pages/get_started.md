@@ -4,7 +4,7 @@ layout: page
 permalink: /get_started
 ---
 
-TorchDrug is a PyTorch-based machine learning toolbox designed for several purposes.
+TorchDrug is a [PyTorch]-based machine learning toolbox designed for several purposes.
 
 - Easy implementation of graph operations in a PyTorchic style with GPU support
 - Being friendly to practioners with minimal knowledge about drug discovery
@@ -12,6 +12,7 @@ TorchDrug is a PyTorch-based machine learning toolbox designed for several purpo
 
 Before we start, make sure you are familiar with PyTorch. Check out the [official tutorial of PyTorch].
 
+[PyTorch]: https://pytorch.org/
 [official tutorial of PyTorch]: https://pytorch.org/tutorials/beginner/deep_learning_60min_blitz.html
 
 - TOC
@@ -23,7 +24,7 @@ Before we start, make sure you are familiar with PyTorch. Check out the [officia
 {:.no_toc}
 
 Graphs are the fundamental data structure used in TorchDrug. They can be viewed as a generalization of graph processing
-libraries (e.g., [NetworkX]) in a tensor framework, while enjoy the GPU acceleration and auto differentiation.
+libraries (e.g., [NetworkX]) in a tensor framework, while enjoy GPU acceleration and auto differentiation.
 
 [NetworkX]: https://networkx.org/
 

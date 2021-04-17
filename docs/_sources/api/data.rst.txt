@@ -94,3 +94,35 @@ Molecule Features
 .. function:: ECFP
 
     alias of ``torchdrug.data.feature.ExtendedConnectivityFingerprint``
+
+Element Constants
+-----------------
+
+Element constants are provided for convenient manipulating of atom types. The atomic
+numbers can be accessed by uppercased element names at the root of the package. For
+example, we can get the carbon scaffold of a molecule with the following code.
+
+.. code:: python
+
+    import torchdrug as td
+    from torchdrug import data
+
+    smiles = "CC1=C(C=C(C=C1[N+](=O)[O-])[N+](=O)[O-])[N+](=O)[O-]"
+    mol = data.Molecule.from_smiles(smiles)
+    scaffold = mol.subgraph(mol.atom_type == td.CARBON)
+    mol.visualize()
+    scaffold.visualize()
+
+.. image:: ../../../asset/graph/tnt.png
+    :width: 33%
+.. image:: ../../../asset/graph/tnt_carbon_scaffold.png
+    :width: 33%
+
+There are also 2 constant arrays that map atomic numbers to element names.
+``td.ATOM_NAME[i]`` returns the full name, while ``td.ATOM_SYMBOL[i]`` returns the
+abbreviated chemical symbol for atomic number ``i``.
+
+For a full list of elements, please refer to `the perodic table`_.
+
+.. _the perodic table:
+    https://en.wikipedia.org/wiki/Periodic_table

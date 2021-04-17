@@ -133,7 +133,7 @@ use the a `Graph Isomorphism Network (GIN) <GIN_>`_ with 4 hidden layers.
 
 .. code:: python
 
-    from drugdiscovery import core, models, tasks
+    from torchdrug import core, models, tasks
 
     model = models.GIN(input_dim=dataset.node_feature_dim,
                        hidden_dims=[256, 256, 256, 256],

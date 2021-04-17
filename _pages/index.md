@@ -15,7 +15,7 @@ grid:
         Build and train machine learning models for drug discovery with minimal domain knowledge.
     - title: Datasets and Building Blocks
       excerpt: >
-        Empower fast iteration of ideas by a large collection of datasets and building blocks.
+        Empower fast iteration of ideas by a large collection of common datasets and building blocks.
     - title: Comprehensive Benchmarks
       excerpt: >
         Benchmarks provide a systematic comparison of deep learning architectures for drug discovery.

@@ -207,7 +207,7 @@
 <span class="sd">        https://arxiv.org/abs/1706.02216</span>
 
 <span class="sd">    Parameters:</span>
-<span class="sd">        model (nn.Module): base graph neural network model</span>
+<span class="sd">        model (nn.Module): node representation model</span>
 <span class="sd">    """</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model</span><span class="p">):</span>
@@ -276,9 +276,9 @@
 <span class="sd">        https://arxiv.org/abs/1905.12265</span>
 
 <span class="sd">    Parameters:</span>
-<span class="sd">        model (nn.Module): base graph neural network model</span>
-<span class="sd">        atom_attribute_model (nn.Module): atom (attribute) prediction model</span>
-<span class="sd">        mask_rate (float): the rate randomly masked node attributes</span>
+<span class="sd">        model (nn.Module): node representation model</span>
+<span class="sd">        mask_rate (float, optional): rate of masked nodes</span>
+<span class="sd">        num_mlp_layer (int, optional): number of MLP layers</span>
 <span class="sd">    """</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">mask_rate</span><span class="o">=</span><span class="mf">0.15</span><span class="p">,</span> <span class="n">num_mlp_layer</span><span class="o">=</span><span class="mi">2</span><span class="p">):</span>
@@ -343,14 +343,19 @@
 <span class="sd">    .. _Strategies for Pre-training Graph Neural Networks:</span>
 <span class="sd">        https://arxiv.org/abs/1905.12265</span>
 
+<span class="sd">    For a given center node, the subgraph is defined as a k-hop neighborhood (inclusive) around the selected node.</span>
+<span class="sd">    The context graph is defined as the surrounding graph structure between r1- (exclusive) and r2-hop (inclusive)</span>
+<span class="sd">    from the center node. Nodes between k- and r1-hop are picked as anchor nodes for the context representation.</span>
+
 <span class="sd">    Parameters:</span>
-<span class="sd">        model (nn.Module): base graph neural network model</span>
-<span class="sd">        context_model (nn.Module, optional): graph representation model for context prediction</span>
-<span class="sd">        k (int, optional): radius for the K-hop neighborhood</span>
-<span class="sd">        r1 (int, optional): radius for the l1-hop neighborhood, context graph is the subgraph between l1- and l2-hop from the center node.</span>
-<span class="sd">        r2 (int, optional): radius for the l2-hop neighborhood, context graph is the subgraph between l1- and l2-hop from the center node.</span>
-<span class="sd">        readout (nn.Module, optional): graph aggregation function for the context prediction model</span>
-<span class="sd">        num_negative (int, optional): number of negative substructures per positive substructure</span>
+<span class="sd">        model (nn.Module): node representation model for subgraphs.</span>
+<span class="sd">        context_model (nn.Module, optional): node representation model for context graphs.</span>
+<span class="sd">            By default, use the same architecture as ``model`` without parameter sharing.</span>
+<span class="sd">        k (int, optional): radius for subgraphs</span>
+<span class="sd">        r1 (int, optional): inner radius for context graphs</span>
+<span class="sd">        r2 (int, optional): outer radius for context graphs</span>
+<span class="sd">        readout (nn.Module, optional): readout function over context anchor nodes</span>
+<span class="sd">        num_negative (int, optional): number of negative samples per positive sample</span>
 <span class="sd">    """</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">context_model</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">r1</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">r2</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span> <span class="n">readout</span><span class="o">=</span><span class="s2">"mean"</span><span class="p">,</span> <span class="n">num_negative</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>

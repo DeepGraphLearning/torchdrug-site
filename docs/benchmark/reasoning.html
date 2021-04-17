@@ -187,6 +187,8 @@
         <div class="section" id="knowledge-graph-reasoning">
 <h1>Knowledge Graph Reasoning<a class="headerlink" href="#knowledge-graph-reasoning" title="Permalink to this headline">¶</a></h1>
 <p>This page contains benchmarks of knowledge graph reasoning methods.</p>
+<p>During evaluation, for each triplet (h,r,t) in the test set, we construct two query-answer pairs, which are (h,r,?) with t and (?,r,t) with h. Given a query, we let each compared method compute a score for each entity in the vocabulary. Then we compute the rank of the correct answer to be the number of entities which has greater or equal scores than the correct answer. Note that there can be cases where a query has multiple answers, e.g., (h,r,?) with t0, t1, t2. When computing the rank for each of the answer (e.g., t0), we filter out all the other correct answers (e.g., t1 and t2) in the ranking list, and this setting is widely used in the literature.</p>
+<p>Given the ranks computed from all the queries, we report the Mean Rank (MR), Mean Reciprocal Rank (MRR) and Hit@k (HIT@1, HIT@3, and HIT@10).</p>
 <div class="section" id="id1">
 <h2>FB15k<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
 <div class="table-wrapper"><table class="docutils align-default">

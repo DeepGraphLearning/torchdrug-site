@@ -126,6 +126,11 @@ ZINC2m
 .. autoclass:: ZINC2m
     :members:
 
+MOSES
+^^^^^
+.. autoclass:: MOSES
+    :members:
+
 
 Retrosynthesis Datasets
 -----------------------
@@ -147,4 +152,9 @@ Cora
 CiteSeer
 ^^^^^^^^
 .. autoclass:: CiteSeer
+    :members:
+
+PubMed
+^^^^^^
+.. autoclass:: PubMed
     :members:

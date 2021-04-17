@@ -210,7 +210,7 @@
 <span class="sd">        Compute edge messages for the graph.</span>
 
 <span class="sd">        Parameters:</span>
-<span class="sd">            graph (Graph): graph</span>
+<span class="sd">            graph (Graph): graph(s)</span>
 <span class="sd">            input (Tensor): node representations of shape :math:`(|V|, ...)`</span>
 
 <span class="sd">        Returns:</span>
@@ -223,7 +223,7 @@
 <span class="sd">        Aggregate edge messages to nodes.</span>
 
 <span class="sd">        Parameters:</span>
-<span class="sd">            graph (Graph): graph</span>
+<span class="sd">            graph (Graph): graph(s)</span>
 <span class="sd">            message (Tensor): edge messages of shape :math:`(|E|, ...)`</span>
 
 <span class="sd">        Returns:</span>
@@ -238,7 +238,7 @@
 <span class="sd">        :meth:`message &lt;MessagePassingBase.message&gt;` and :meth:`aggregate &lt;MessagePassingBase.aggregate&gt;`.</span>
 
 <span class="sd">        Parameters:</span>
-<span class="sd">            graph (Graph): graph</span>
+<span class="sd">            graph (Graph): graph(s)</span>
 <span class="sd">            input (Tensor): node representations of shape :math:`(|V|, ...)`</span>
 
 <span class="sd">        Returns:</span>
@@ -266,10 +266,10 @@
 
 <div class="viewcode-block" id="MessagePassingBase.forward"><a class="viewcode-back" href="../../../api/layers.html#torchdrug.layers.MessagePassingBase.forward">[docs]</a>    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">graph</span><span class="p">,</span> <span class="nb">input</span><span class="p">):</span>
         <span class="sd">"""</span>
-<span class="sd">        Perform message passing over the graph.</span>
+<span class="sd">        Perform message passing over the graph(s).</span>
 
 <span class="sd">        Parameters:</span>
-<span class="sd">            graph (Graph): graph</span>
+<span class="sd">            graph (Graph): graph(s)</span>
 <span class="sd">            input (Tensor): node representations of shape :math:`(|V|, ...)`</span>
 <span class="sd">        """</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">gradient_checkpoint</span><span class="p">:</span>

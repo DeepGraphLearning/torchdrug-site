@@ -196,7 +196,7 @@
 <dd><p>Edge prediction task proposed in <a class="reference external" href="https://arxiv.org/abs/1706.02216">Inductive Representation Learning on Large Graphs</a>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>model</strong> (<em>nn.Module</em>) – base graph neural network model</p>
+<dd class="field-odd"><p><strong>model</strong> (<em>nn.Module</em>) – node representation model</p>
 </dd>
 </dl>
 </dd></dl>
@@ -210,9 +210,9 @@
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>model</strong> (<em>nn.Module</em>) – base graph neural network model</p></li>
-<li><p><strong>atom_attribute_model</strong> (<em>nn.Module</em>) – atom (attribute) prediction model</p></li>
-<li><p><strong>mask_rate</strong> (<em>float</em>) – the rate randomly masked node attributes</p></li>
+<li><p><strong>model</strong> (<em>nn.Module</em>) – node representation model</p></li>
+<li><p><strong>mask_rate</strong> (<em>float</em><em>, </em><em>optional</em>) – rate of masked nodes</p></li>
+<li><p><strong>num_mlp_layer</strong> (<em>int</em><em>, </em><em>optional</em>) – number of MLP layers</p></li>
 </ul>
 </dd>
 </dl>
@@ -224,16 +224,20 @@
 <dt id="torchdrug.tasks.ContextPrediction">
 <em class="property">class </em><code class="sig-name descname">ContextPrediction</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">model</span></em>, <em class="sig-param"><span class="n">context_model</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">k</span><span class="o">=</span><span class="default_value">5</span></em>, <em class="sig-param"><span class="n">r1</span><span class="o">=</span><span class="default_value">4</span></em>, <em class="sig-param"><span class="n">r2</span><span class="o">=</span><span class="default_value">7</span></em>, <em class="sig-param"><span class="n">readout</span><span class="o">=</span><span class="default_value">'mean'</span></em>, <em class="sig-param"><span class="n">num_negative</span><span class="o">=</span><span class="default_value">1</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/tasks/pretrain.html#ContextPrediction"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.tasks.ContextPrediction" title="Permalink to this definition">¶</a></dt>
 <dd><p>Context prediction task proposed in <a class="reference external" href="https://arxiv.org/abs/1905.12265">Strategies for Pre-training Graph Neural Networks</a>.</p>
+<p>For a given center node, the subgraph is defined as a k-hop neighborhood (inclusive) around the selected node.
+The context graph is defined as the surrounding graph structure between r1- (exclusive) and r2-hop (inclusive)
+from the center node. Nodes between k- and r1-hop are picked as anchor nodes for the context representation.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>model</strong> (<em>nn.Module</em>) – base graph neural network model</p></li>
-<li><p><strong>context_model</strong> (<em>nn.Module</em><em>, </em><em>optional</em>) – graph representation model for context prediction</p></li>
-<li><p><strong>k</strong> (<em>int</em><em>, </em><em>optional</em>) – radius for the K-hop neighborhood</p></li>
-<li><p><strong>r1</strong> (<em>int</em><em>, </em><em>optional</em>) – radius for the l1-hop neighborhood, context graph is the subgraph between l1- and l2-hop from the center node.</p></li>
-<li><p><strong>r2</strong> (<em>int</em><em>, </em><em>optional</em>) – radius for the l2-hop neighborhood, context graph is the subgraph between l1- and l2-hop from the center node.</p></li>
-<li><p><strong>readout</strong> (<em>nn.Module</em><em>, </em><em>optional</em>) – graph aggregation function for the context prediction model</p></li>
-<li><p><strong>num_negative</strong> (<em>int</em><em>, </em><em>optional</em>) – number of negative substructures per positive substructure</p></li>
+<li><p><strong>model</strong> (<em>nn.Module</em>) – node representation model for subgraphs.</p></li>
+<li><p><strong>context_model</strong> (<em>nn.Module</em><em>, </em><em>optional</em>) – node representation model for context graphs.
+By default, use the same architecture as <code class="docutils literal notranslate"><span class="pre">model</span></code> without parameter sharing.</p></li>
+<li><p><strong>k</strong> (<em>int</em><em>, </em><em>optional</em>) – radius for subgraphs</p></li>
+<li><p><strong>r1</strong> (<em>int</em><em>, </em><em>optional</em>) – inner radius for context graphs</p></li>
+<li><p><strong>r2</strong> (<em>int</em><em>, </em><em>optional</em>) – outer radius for context graphs</p></li>
+<li><p><strong>readout</strong> (<em>nn.Module</em><em>, </em><em>optional</em>) – readout function over context anchor nodes</p></li>
+<li><p><strong>num_negative</strong> (<em>int</em><em>, </em><em>optional</em>) – number of negative samples per positive sample</p></li>
 </ul>
 </dd>
 </dl>
