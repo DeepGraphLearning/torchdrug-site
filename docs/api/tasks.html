@@ -186,6 +186,37 @@
         </label>
         <div class="section" id="torchdrug-tasks">
 <h1>torchdrug.tasks<a class="headerlink" href="#torchdrug-tasks" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="property-prediction-tasks">
+<h2>Property Prediction Tasks<a class="headerlink" href="#property-prediction-tasks" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="propertyprediction">
+<h3>PropertyPrediction<a class="headerlink" href="#propertyprediction" title="Permalink to this headline">¶</a></h3>
+<dl class="py class">
+<dt id="torchdrug.tasks.PropertyPrediction">
+<em class="property">class </em><code class="sig-name descname">PropertyPrediction</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">model</span></em>, <em class="sig-param"><span class="n">task</span><span class="o">=</span><span class="default_value">()</span></em>, <em class="sig-param"><span class="n">criterion</span><span class="o">=</span><span class="default_value">'mse'</span></em>, <em class="sig-param"><span class="n">metric</span><span class="o">=</span><span class="default_value">'mae', 'rmse'</span></em>, <em class="sig-param"><span class="n">verbose</span><span class="o">=</span><span class="default_value">0</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/tasks/property_prediction.html#PropertyPrediction"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.tasks.PropertyPrediction" title="Permalink to this definition">¶</a></dt>
+<dd><p>Graph / molecule property prediction task.</p>
+<p>This class is also compatible with semi-supervised learning.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>model</strong> (<em>nn.Module</em>) – graph representation model</p></li>
+<li><p><strong>task</strong> (<em>str</em><em>, </em><em>list</em><em> or </em><em>dict</em><em>, </em><em>optional</em>) – training task(s).
+For dict, the keys are tasks and the values are the corresponding weights.</p></li>
+<li><p><strong>criterion</strong> (<em>str</em><em>, </em><em>list</em><em> or </em><em>dict</em><em>, </em><em>optional</em>) – training criterion(s). For dict, the keys are criterions and the values
+are the corresponding weights. Available criterions are <code class="docutils literal notranslate"><span class="pre">mse</span></code> and <code class="docutils literal notranslate"><span class="pre">bce</span></code>.</p></li>
+<li><p><strong>metric</strong> (<em>str</em><em> or </em><em>list of str</em><em>, </em><em>optional</em>) – metric(s).
+Available metrics are <code class="docutils literal notranslate"><span class="pre">mae</span></code>, <code class="docutils literal notranslate"><span class="pre">rmse</span></code>, <code class="docutils literal notranslate"><span class="pre">auprc</span></code> and <code class="docutils literal notranslate"><span class="pre">auroc</span></code>.</p></li>
+<li><p><strong>verbose</strong> (<em>int</em><em>, </em><em>optional</em>) – output verbose level</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt id="torchdrug.tasks.PropertyPrediction.preprocess">
+<code class="sig-name descname">preprocess</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">train_set</span></em>, <em class="sig-param"><span class="n">valid_set</span></em>, <em class="sig-param"><span class="n">test_set</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/tasks/property_prediction.html#PropertyPrediction.preprocess"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.tasks.PropertyPrediction.preprocess" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute the mean and derivation for each task on the training set.</p>
+</dd></dl>
+</dd></dl>
+</div>
+</div>
 <div class="section" id="pre-trained-molecular-representation-tasks">
 <h2>Pre-trained Molecular Representation Tasks<a class="headerlink" href="#pre-trained-molecular-representation-tasks" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="edgeprediction">
@@ -441,34 +472,30 @@ in <code class="xref py py-attr docutils literal notranslate"><span class="pre">
 </dd></dl>
 </div>
 </div>
-<div class="section" id="property-prediction-tasks">
-<h2>Property Prediction Tasks<a class="headerlink" href="#property-prediction-tasks" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="propertyprediction">
-<h3>PropertyPrediction<a class="headerlink" href="#propertyprediction" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="knowledge-graph-reasoning-tasks">
+<h2>Knowledge Graph Reasoning Tasks<a class="headerlink" href="#knowledge-graph-reasoning-tasks" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="knowledgegraphembedding">
+<h3>KnowledgeGraphEmbedding<a class="headerlink" href="#knowledgegraphembedding" title="Permalink to this headline">¶</a></h3>
 <dl class="py class">
-<dt id="torchdrug.tasks.PropertyPrediction">
-<em class="property">class </em><code class="sig-name descname">PropertyPrediction</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">model</span></em>, <em class="sig-param"><span class="n">task</span><span class="o">=</span><span class="default_value">()</span></em>, <em class="sig-param"><span class="n">criterion</span><span class="o">=</span><span class="default_value">'mse'</span></em>, <em class="sig-param"><span class="n">metric</span><span class="o">=</span><span class="default_value">'mae', 'rmse'</span></em>, <em class="sig-param"><span class="n">verbose</span><span class="o">=</span><span class="default_value">0</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/tasks/property_prediction.html#PropertyPrediction"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.tasks.PropertyPrediction" title="Permalink to this definition">¶</a></dt>
-<dd><p>Graph / molecule property prediction task.</p>
-<p>This class is also compatible with semi-supervised learning.</p>
+<dt id="torchdrug.tasks.KnowledgeGraphEmbedding">
+<em class="property">class </em><code class="sig-name descname">KnowledgeGraphEmbedding</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">model</span></em>, <em class="sig-param"><span class="n">criterion</span><span class="o">=</span><span class="default_value">'bce'</span></em>, <em class="sig-param"><span class="n">metric</span><span class="o">=</span><span class="default_value">'mr', 'mrr', 'hits@1', 'hits@3', 'hits@10'</span></em>, <em class="sig-param"><span class="n">num_negative</span><span class="o">=</span><span class="default_value">128</span></em>, <em class="sig-param"><span class="n">margin</span><span class="o">=</span><span class="default_value">6</span></em>, <em class="sig-param"><span class="n">adversarial_temperature</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">filtered_ranking</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">fact_ratio</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">sample_weight</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/tasks/reasoning.html#KnowledgeGraphEmbedding"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.tasks.KnowledgeGraphEmbedding" title="Permalink to this definition">¶</a></dt>
+<dd><p>Knowledge graph embedding task.</p>
+<p>This class provides routines for the family of knowledge graph embedding models.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>model</strong> (<em>nn.Module</em>) – graph representation model</p></li>
-<li><p><strong>task</strong> (<em>str</em><em>, </em><em>list</em><em> or </em><em>dict</em><em>, </em><em>optional</em>) – training task(s).
-For dict, the keys are tasks and the values are the corresponding weights.</p></li>
+<li><p><strong>model</strong> (<em>nn.Module</em>) – knowledge graph embedding model</p></li>
 <li><p><strong>criterion</strong> (<em>str</em><em>, </em><em>list</em><em> or </em><em>dict</em><em>, </em><em>optional</em>) – training criterion(s). For dict, the keys are criterions and the values
-are the corresponding weights. Available criterions are <code class="docutils literal notranslate"><span class="pre">mse</span></code> and <code class="docutils literal notranslate"><span class="pre">bce</span></code>.</p></li>
-<li><p><strong>metric</strong> (<em>str</em><em> or </em><em>list of str</em><em>, </em><em>optional</em>) – metric(s).
-Available metrics are <code class="docutils literal notranslate"><span class="pre">mae</span></code>, <code class="docutils literal notranslate"><span class="pre">rmse</span></code>, <code class="docutils literal notranslate"><span class="pre">auprc</span></code> and <code class="docutils literal notranslate"><span class="pre">auroc</span></code>.</p></li>
-<li><p><strong>verbose</strong> (<em>int</em><em>, </em><em>optional</em>) – output verbose level</p></li>
+are the corresponding weights. Available criterions are <code class="docutils literal notranslate"><span class="pre">bce</span></code>, <code class="docutils literal notranslate"><span class="pre">ce</span></code> and <code class="docutils literal notranslate"><span class="pre">ranking</span></code>.</p></li>
+<li><p><strong>metric</strong> (<em>str</em><em> or </em><em>list of str</em><em>, </em><em>optional</em>) – metric(s). Available metrics are <code class="docutils literal notranslate"><span class="pre">mr</span></code>, <code class="docutils literal notranslate"><span class="pre">mrr</span></code> and <code class="docutils literal notranslate"><span class="pre">hits@K</span></code>.</p></li>
+<li><p><strong>num_negative</strong> (<em>int</em><em>, </em><em>optional</em>) – number of negative samples per positive sample</p></li>
+<li><p><strong>margin</strong> (<em>float</em><em>, </em><em>optional</em>) – margin in ranking criterion</p></li>
+<li><p><strong>adversarial_temperature</strong> (<em>float</em><em>, </em><em>optional</em>) – temperature for self-adversarial negative sampling.
+Set 0 to disable self-adversarial negative sampling.</p></li>
+<li><p><strong>filtered_ranking</strong> (<em>bool</em><em>, </em><em>optional</em>) – use filtered or unfiltered ranking for evaluation</p></li>
 </ul>
 </dd>
 </dl>
-<dl class="py method">
-<dt id="torchdrug.tasks.PropertyPrediction.preprocess">
-<code class="sig-name descname">preprocess</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">train_set</span></em>, <em class="sig-param"><span class="n">valid_set</span></em>, <em class="sig-param"><span class="n">test_set</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/tasks/property_prediction.html#PropertyPrediction.preprocess"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.tasks.PropertyPrediction.preprocess" title="Permalink to this definition">¶</a></dt>
-<dd><p>Compute the mean and derivation for each task on the training set.</p>
-</dd></dl>
 </dd></dl>
 </div>
 </div>
@@ -529,6 +556,10 @@ Available metrics are <code class="docutils literal notranslate"><span class="pr
           <div class="toc-tree">
             <ul>
 <li><a class="reference internal" href="#">torchdrug.tasks</a><ul>
+<li><a class="reference internal" href="#property-prediction-tasks">Property Prediction Tasks</a><ul>
+<li><a class="reference internal" href="#propertyprediction">PropertyPrediction</a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#pre-trained-molecular-representation-tasks">Pre-trained Molecular Representation Tasks</a><ul>
 <li><a class="reference internal" href="#edgeprediction">EdgePrediction</a></li>
 <li><a class="reference internal" href="#attributemasking">AttributeMasking</a></li>
@@ -547,8 +578,8 @@ Available metrics are <code class="docutils literal notranslate"><span class="pr
 <li><a class="reference internal" href="#retrosynthesis">Retrosynthesis</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#property-prediction-tasks">Property Prediction Tasks</a><ul>
-<li><a class="reference internal" href="#propertyprediction">PropertyPrediction</a></li>
+<li><a class="reference internal" href="#knowledge-graph-reasoning-tasks">Knowledge Graph Reasoning Tasks</a><ul>
+<li><a class="reference internal" href="#knowledgegraphembedding">KnowledgeGraphEmbedding</a></li>
 </ul>
 </li>
 </ul>

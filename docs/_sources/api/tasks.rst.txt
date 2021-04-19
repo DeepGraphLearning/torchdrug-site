@@ -4,6 +4,15 @@ torchdrug.tasks
 .. currentmodule:: torchdrug.tasks
 
 
+Property Prediction Tasks
+-------------------------
+
+PropertyPrediction
+^^^^^^^^^^^^^^^^^^
+.. autoclass:: PropertyPrediction
+    :members:
+
+
 Pre-trained Molecular Representation Tasks
 ------------------------------------------
 
@@ -61,10 +70,10 @@ Retrosynthesis
     :members:
 
 
-Property Prediction Tasks
--------------------------
+Knowledge Graph Reasoning Tasks
+-------------------------------
 
-PropertyPrediction
-^^^^^^^^^^^^^^^^^^
-.. autoclass:: PropertyPrediction
+KnowledgeGraphEmbedding
+^^^^^^^^^^^^^^^^^^^^^^^
+.. autoclass:: KnowledgeGraphEmbedding
     :members:

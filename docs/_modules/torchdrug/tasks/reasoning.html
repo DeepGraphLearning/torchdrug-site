@@ -1,0 +1,423 @@
+<!doctype html>
+<html class="no-js">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/><link rel="index" title="Index" href="../../../genindex.html" /><link rel="search" title="Search" href="../../../search.html" />
+
+    <meta name="generator" content="sphinx-3.1.2, furo 2020.12.09.beta21"/>
+        <title>torchdrug.tasks.reasoning - TorchDrug 0.1.0 documentation</title>
+      <link rel="stylesheet" href="../../../_static/styles/furo.css?digest=a3f371badb8538d75df213ccffb17a4f6e8f3ac5">
+    <link rel="stylesheet" href="../../../_static/pygments.css">
+    <link media="(prefers-color-scheme: dark)" rel="stylesheet" href="../../../_static/pygments_dark.css">
+    
+
+
+<style>
+  :root {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  --font-stack: Helvetica, Arial, sans-serif, -apple-system;
+  --font-stack--monospace: Courier, monospace;
+  --color-brand-primary: #E5261F;
+  --color-brand-content: #E5261F;
+  --admonition-font-size: 1rem;
+  --admonition-title-font-size: 1rem;
+  --font-size--small--2: var(--font-size--small);
+  
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+  }
+
+  /* For allowing end-user-specific overrides */
+  .override-light {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  --font-stack: Helvetica, Arial, sans-serif, -apple-system;
+  --font-stack--monospace: Courier, monospace;
+  --color-brand-primary: #E5261F;
+  --color-brand-content: #E5261F;
+  --admonition-font-size: 1rem;
+  --admonition-title-font-size: 1rem;
+  --font-size--small--2: var(--font-size--small);
+  
+  }
+  .override-dark {
+    --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+  }
+</style><link id="pygments_dark_css" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css" href="../../../_static/pygments_dark.css" />
+    <link rel="stylesheet" href="../../../_static/styles/furo-extensions.css?digest=26485485040e7aaf717c13fd0188a5ad2c2deb60">
+    <script id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+    <script defer src="../../../_static/jquery.js"></script>
+    <script defer src="../../../_static/underscore.js"></script>
+    <script defer src="../../../_static/doctools.js"></script>
+    <script defer src="../../../_static/language_data.js"></script>
+    <script defer async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script defer src="../../../_static/scripts/main.js?digest=e931d09b2a40c1bb82b542effe772014573baf67"></script></head>
+  <body dir="">
+    
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+      stroke-width="1.5" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+      <path stroke="none" d="M0 0h24v24H0z"/>
+      <line x1="4" y1="6" x2="20" y2="6" />
+      <line x1="10" y1="12" x2="20" y2="12" />
+      <line x1="6" y1="18" x2="20" y2="18" />
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+      stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+      class="feather feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+      stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+      class="feather feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation"></label>
+<label class="overlay toc-overlay" for="__toc"></label>
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../../../index.html"><div class="brand">TorchDrug 0.1.0 documentation</div></a>
+    </div>
+    <div class="header-right">
+      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand centered" href="../../../index.html">
+  
+  <div class="sidebar-logo-container">
+    <img class="sidebar-logo" src="../../../_static/logo.svg" alt="Logo"/>
+  </div>
+  
+  
+</a><form class="sidebar-search-container" method="get" action="../../../search.html">
+  <input class="sidebar-search" placeholder="Search" name="q">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form><div class="sidebar-scroll"><div class="sidebar-tree">
+  <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../quick_start.html">Quick Start</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../benchmark/index.html">Benchmark</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label for="toctree-checkbox-1"><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../benchmark/property_prediction.html">Molecule Property Prediction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../benchmark/pretrain.html">Pretrained Molecular Representations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../benchmark/generation.html">Molecule Generation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../benchmark/retrosynthesis.html">Retrosynthesis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../benchmark/reasoning.html">Knowledge Graph Reasoning</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../tutorials/index.html">Tutorials</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label for="toctree-checkbox-2"><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../tutorials/property_prediction.html">Property Prediction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../tutorials/pretrain.html">Pretrained Molecular Representations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../tutorials/generation.html">Molecule Generation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../tutorials/retrosynthesis.html">Retrosynthesis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../tutorials/reasoning.html">Knowledge Graph Reasoning</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../notes/index.html">Notes</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label for="toctree-checkbox-3"><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../notes/graph.html">Graph Data Structures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../notes/variadic.html">Batch Irregular Structures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../notes/layer.html">Graph Neural Network Layers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../notes/model.html">Customize Models &amp; Tasks</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../paper.html">Papers Implemented</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Package Reference</span></p>
+<ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../api/index.html">Documentation</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label for="toctree-checkbox-4"><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../api/core.html">torchdrug.core</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api/data.html">torchdrug.data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api/datasets.html">torchdrug.datasets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api/metrics.html">torchdrug.metrics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api/layers.html">torchdrug.layers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api/models.html">torchdrug.models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api/tasks.html">torchdrug.tasks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api/utils.html">torchdrug.utils</a></li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+      </div>
+      
+    </div>
+  </aside>
+  <main class="main">
+    <div class="content">
+      <article role="main">
+        <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+          <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+        </label>
+        <h1>Source code for torchdrug.tasks.reasoning</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">from</span> <span class="nn">torch</span> <span class="kn">import</span> <span class="n">nn</span>
+<span class="kn">from</span> <span class="nn">torch.nn</span> <span class="kn">import</span> <span class="n">functional</span> <span class="k">as</span> <span class="n">F</span>
+<span class="kn">from</span> <span class="nn">torch.utils</span> <span class="kn">import</span> <span class="n">data</span> <span class="k">as</span> <span class="n">torch_data</span>
+
+<span class="kn">from</span> <span class="nn">torchdrug</span> <span class="kn">import</span> <span class="n">core</span><span class="p">,</span> <span class="n">tasks</span>
+<span class="kn">from</span> <span class="nn">torchdrug.core</span> <span class="kn">import</span> <span class="n">Registry</span> <span class="k">as</span> <span class="n">R</span>
+
+
+<div class="viewcode-block" id="KnowledgeGraphEmbedding"><a class="viewcode-back" href="../../../api/tasks.html#torchdrug.tasks.KnowledgeGraphEmbedding">[docs]</a><span class="nd">@R</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="s2">"tasks.KnowledgeGraphEmbedding"</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">KnowledgeGraphEmbedding</span><span class="p">(</span><span class="n">tasks</span><span class="o">.</span><span class="n">Task</span><span class="p">,</span> <span class="n">core</span><span class="o">.</span><span class="n">Configurable</span><span class="p">):</span>
+    <span class="sd">"""</span>
+<span class="sd">    Knowledge graph embedding task.</span>
+
+<span class="sd">    This class provides routines for the family of knowledge graph embedding models.</span>
+
+<span class="sd">    Parameters:</span>
+<span class="sd">        model (nn.Module): knowledge graph embedding model</span>
+<span class="sd">        criterion (str, list or dict, optional): training criterion(s). For dict, the keys are criterions and the values</span>
+<span class="sd">            are the corresponding weights. Available criterions are ``bce``, ``ce`` and ``ranking``.</span>
+<span class="sd">        metric (str or list of str, optional): metric(s). Available metrics are ``mr``, ``mrr`` and ``hits@K``.</span>
+<span class="sd">        num_negative (int, optional): number of negative samples per positive sample</span>
+<span class="sd">        margin (float, optional): margin in ranking criterion</span>
+<span class="sd">        adversarial_temperature (float, optional): temperature for self-adversarial negative sampling.</span>
+<span class="sd">            Set 0 to disable self-adversarial negative sampling.</span>
+<span class="sd">        filtered_ranking (bool, optional): use filtered or unfiltered ranking for evaluation</span>
+<span class="sd">    """</span>
+    <span class="n">_option_members</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"criterion"</span><span class="p">,</span> <span class="s2">"metric"</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">criterion</span><span class="o">=</span><span class="s2">"bce"</span><span class="p">,</span> <span class="n">metric</span><span class="o">=</span><span class="p">(</span><span class="s2">"mr"</span><span class="p">,</span> <span class="s2">"mrr"</span><span class="p">,</span> <span class="s2">"hits@1"</span><span class="p">,</span> <span class="s2">"hits@3"</span><span class="p">,</span> <span class="s2">"hits@10"</span><span class="p">),</span>
+                 <span class="n">num_negative</span><span class="o">=</span><span class="mi">128</span><span class="p">,</span> <span class="n">margin</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">adversarial_temperature</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">filtered_ranking</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                 <span class="n">fact_ratio</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">sample_weight</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">KnowledgeGraphEmbedding</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="n">model</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">criterion</span> <span class="o">=</span> <span class="n">criterion</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">metric</span> <span class="o">=</span> <span class="n">metric</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">num_negative</span> <span class="o">=</span> <span class="n">num_negative</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">margin</span> <span class="o">=</span> <span class="n">margin</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">adversarial_temperature</span> <span class="o">=</span> <span class="n">adversarial_temperature</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">filtered_ranking</span> <span class="o">=</span> <span class="n">filtered_ranking</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fact_ratio</span> <span class="o">=</span> <span class="n">fact_ratio</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sample_weight</span> <span class="o">=</span> <span class="n">sample_weight</span>
+
+    <span class="k">def</span> <span class="nf">preprocess</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">train_set</span><span class="p">,</span> <span class="n">valid_set</span><span class="p">,</span> <span class="n">test_set</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">train_set</span><span class="p">,</span> <span class="n">torch_data</span><span class="o">.</span><span class="n">Subset</span><span class="p">):</span>
+            <span class="n">dataset</span> <span class="o">=</span> <span class="n">train_set</span><span class="o">.</span><span class="n">dataset</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">dataset</span> <span class="o">=</span> <span class="n">train_set</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">num_entity</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">num_entity</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">num_relation</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">num_relation</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">register_buffer</span><span class="p">(</span><span class="s2">"graph"</span><span class="p">,</span> <span class="n">dataset</span><span class="o">.</span><span class="n">graph</span><span class="p">)</span>
+        <span class="n">indices</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">train_set</span><span class="o">.</span><span class="n">indices</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">fact_ratio</span><span class="p">:</span>
+            <span class="n">length</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">indices</span><span class="p">)</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">fact_ratio</span><span class="p">)</span>
+            <span class="n">perm</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">randperm</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">indices</span><span class="p">))</span>
+            <span class="n">train_set</span> <span class="o">=</span> <span class="n">torch_data</span><span class="o">.</span><span class="n">Subset</span><span class="p">(</span><span class="n">train_set</span><span class="p">,</span> <span class="n">indices</span><span class="p">[</span><span class="n">perm</span><span class="p">[</span><span class="n">length</span><span class="p">:]])</span>
+            <span class="n">indices</span> <span class="o">=</span> <span class="n">indices</span><span class="p">[</span><span class="n">perm</span><span class="p">[:</span><span class="n">length</span><span class="p">]]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">register_buffer</span><span class="p">(</span><span class="s2">"fact_graph"</span><span class="p">,</span> <span class="n">dataset</span><span class="o">.</span><span class="n">graph</span><span class="o">.</span><span class="n">edge_mask</span><span class="p">(</span><span class="n">indices</span><span class="p">))</span>
+
+        <span class="n">degree_hr</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">num_entity</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_relation</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">long</span><span class="p">)</span>
+        <span class="n">degree_tr</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">num_entity</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_relation</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">long</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">h</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">train_set</span><span class="p">:</span>
+            <span class="n">degree_hr</span><span class="p">[</span><span class="n">h</span><span class="p">,</span> <span class="n">r</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="n">degree_tr</span><span class="p">[</span><span class="n">t</span><span class="p">,</span> <span class="n">r</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">register_buffer</span><span class="p">(</span><span class="s2">"degree_hr"</span><span class="p">,</span> <span class="n">degree_hr</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">register_buffer</span><span class="p">(</span><span class="s2">"degree_tr"</span><span class="p">,</span> <span class="n">degree_tr</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">train_set</span><span class="p">,</span> <span class="n">valid_set</span><span class="p">,</span> <span class="n">test_set</span>
+
+    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">batch</span><span class="p">,</span> <span class="n">all_loss</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">metric</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">""""""</span>
+        <span class="n">all_loss</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">float32</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">device</span><span class="p">)</span>
+        <span class="n">metric</span> <span class="o">=</span> <span class="p">{}</span>
+
+        <span class="n">pred</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">batch</span><span class="p">,</span> <span class="n">all_loss</span><span class="p">,</span> <span class="n">metric</span><span class="p">)</span>
+        <span class="n">pos_h_index</span><span class="p">,</span> <span class="n">pos_t_index</span><span class="p">,</span> <span class="n">pos_r_index</span> <span class="o">=</span> <span class="n">batch</span><span class="o">.</span><span class="n">t</span><span class="p">()</span>
+
+        <span class="k">for</span> <span class="n">criterion</span><span class="p">,</span> <span class="n">weight</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">criterion</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">criterion</span> <span class="o">==</span> <span class="s2">"bce"</span><span class="p">:</span>
+                <span class="n">target</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">pred</span><span class="p">)</span>
+                <span class="n">target</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+                <span class="n">loss</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">binary_cross_entropy_with_logits</span><span class="p">(</span><span class="n">pred</span><span class="p">,</span> <span class="n">target</span><span class="p">,</span> <span class="n">reduction</span><span class="o">=</span><span class="s2">"none"</span><span class="p">)</span>
+
+                <span class="n">neg_weight</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">ones_like</span><span class="p">(</span><span class="n">pred</span><span class="p">)</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">adversarial_temperature</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="k">with</span> <span class="n">torch</span><span class="o">.</span><span class="n">no_grad</span><span class="p">():</span>
+                        <span class="n">neg_weight</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">:]</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">softmax</span><span class="p">(</span><span class="n">pred</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">:]</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">adversarial_temperature</span><span class="p">,</span> <span class="n">dim</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">neg_weight</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">:]</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_negative</span>
+                <span class="n">loss</span> <span class="o">=</span> <span class="p">(</span><span class="n">loss</span> <span class="o">*</span> <span class="n">neg_weight</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">dim</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="n">neg_weight</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">dim</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="n">criterion</span> <span class="o">==</span> <span class="s2">"ce"</span><span class="p">:</span>
+                <span class="n">target</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">pred</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">long</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">device</span><span class="p">)</span>
+                <span class="n">loss</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">cross_entropy</span><span class="p">(</span><span class="n">pred</span><span class="p">,</span> <span class="n">target</span><span class="p">,</span> <span class="n">reduction</span><span class="o">=</span><span class="s2">"none"</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="n">criterion</span> <span class="o">==</span> <span class="s2">"ranking"</span><span class="p">:</span>
+                <span class="n">positive</span> <span class="o">=</span> <span class="n">pred</span><span class="p">[:,</span> <span class="p">:</span><span class="mi">1</span><span class="p">]</span>
+                <span class="n">negative</span> <span class="o">=</span> <span class="n">pred</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">:]</span>
+                <span class="n">target</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">ones_like</span><span class="p">(</span><span class="n">negative</span><span class="p">)</span>
+                <span class="n">loss</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">margin_ranking_loss</span><span class="p">(</span><span class="n">positive</span><span class="p">,</span> <span class="n">negative</span><span class="p">,</span> <span class="n">target</span><span class="p">,</span> <span class="n">margin</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">margin</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Unknown criterion `</span><span class="si">%s</span><span class="s2">`"</span> <span class="o">%</span> <span class="n">criterion</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">sample_weight</span><span class="p">:</span>
+                <span class="n">sample_weight</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">degree_hr</span><span class="p">[</span><span class="n">pos_h_index</span><span class="p">,</span> <span class="n">pos_r_index</span><span class="p">]</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">degree_tr</span><span class="p">[</span><span class="n">pos_t_index</span><span class="p">,</span> <span class="n">pos_r_index</span><span class="p">]</span>
+                <span class="n">sample_weight</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="n">sample_weight</span><span class="o">.</span><span class="n">float</span><span class="p">()</span><span class="o">.</span><span class="n">sqrt</span><span class="p">()</span>
+                <span class="n">loss</span> <span class="o">=</span> <span class="p">(</span><span class="n">loss</span> <span class="o">*</span> <span class="n">sample_weight</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">/</span> <span class="n">sample_weight</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">loss</span> <span class="o">=</span> <span class="n">loss</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+
+            <span class="n">name</span> <span class="o">=</span> <span class="n">tasks</span><span class="o">.</span><span class="n">_get_criterion_name</span><span class="p">(</span><span class="n">criterion</span><span class="p">)</span>
+            <span class="n">metric</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">loss</span>
+            <span class="n">all_loss</span> <span class="o">+=</span> <span class="n">loss</span> <span class="o">*</span> <span class="n">weight</span>
+
+        <span class="k">return</span> <span class="n">all_loss</span><span class="p">,</span> <span class="n">metric</span>
+
+    <span class="k">def</span> <span class="nf">predict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">batch</span><span class="p">,</span> <span class="n">all_loss</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">metric</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="n">pos_h_index</span><span class="p">,</span> <span class="n">pos_t_index</span><span class="p">,</span> <span class="n">pos_r_index</span> <span class="o">=</span> <span class="n">batch</span><span class="o">.</span><span class="n">t</span><span class="p">()</span>
+        <span class="n">batch_size</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">batch</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">all_loss</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="c1"># test</span>
+            <span class="n">all_index</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">num_entity</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">device</span><span class="p">)</span>
+            <span class="n">t_preds</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="n">h_preds</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">for</span> <span class="n">neg_index</span> <span class="ow">in</span> <span class="n">all_index</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">num_negative</span><span class="p">):</span>
+                <span class="n">r_index</span> <span class="o">=</span> <span class="n">pos_r_index</span><span class="o">.</span><span class="n">unsqueeze</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">expand</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">neg_index</span><span class="p">))</span>
+                <span class="n">h_index</span><span class="p">,</span> <span class="n">t_index</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">pos_h_index</span><span class="p">,</span> <span class="n">neg_index</span><span class="p">)</span>
+                <span class="n">t_pred</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fact_graph</span><span class="p">,</span> <span class="n">h_index</span><span class="p">,</span> <span class="n">t_index</span><span class="p">,</span> <span class="n">r_index</span><span class="p">)</span>
+                <span class="n">t_preds</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">t_pred</span><span class="p">)</span>
+            <span class="n">t_pred</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">cat</span><span class="p">(</span><span class="n">t_preds</span><span class="p">,</span> <span class="n">dim</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">neg_index</span> <span class="ow">in</span> <span class="n">all_index</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">num_negative</span><span class="p">):</span>
+                <span class="n">r_index</span> <span class="o">=</span> <span class="n">pos_r_index</span><span class="o">.</span><span class="n">unsqueeze</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">expand</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">neg_index</span><span class="p">))</span>
+                <span class="n">t_index</span><span class="p">,</span> <span class="n">h_index</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">pos_t_index</span><span class="p">,</span> <span class="n">neg_index</span><span class="p">)</span>
+                <span class="n">h_pred</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fact_graph</span><span class="p">,</span> <span class="n">h_index</span><span class="p">,</span> <span class="n">t_index</span><span class="p">,</span> <span class="n">r_index</span><span class="p">)</span>
+                <span class="n">h_preds</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">h_pred</span><span class="p">)</span>
+            <span class="n">h_pred</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">cat</span><span class="p">(</span><span class="n">h_preds</span><span class="p">,</span> <span class="n">dim</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+            <span class="n">pred</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">stack</span><span class="p">([</span><span class="n">t_pred</span><span class="p">,</span> <span class="n">h_pred</span><span class="p">],</span> <span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+            <span class="c1"># in case of GPU OOM</span>
+            <span class="n">pred</span> <span class="o">=</span> <span class="n">pred</span><span class="o">.</span><span class="n">cpu</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># train</span>
+            <span class="n">neg_index</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">num_entity</span><span class="p">,</span> <span class="p">(</span><span class="n">batch_size</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_negative</span><span class="p">),</span> <span class="n">device</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">device</span><span class="p">)</span>
+            <span class="n">h_index</span> <span class="o">=</span> <span class="n">pos_h_index</span><span class="o">.</span><span class="n">unsqueeze</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">repeat</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_negative</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+            <span class="n">t_index</span> <span class="o">=</span> <span class="n">pos_t_index</span><span class="o">.</span><span class="n">unsqueeze</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">repeat</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_negative</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+            <span class="n">r_index</span> <span class="o">=</span> <span class="n">pos_r_index</span><span class="o">.</span><span class="n">unsqueeze</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">repeat</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_negative</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+            <span class="n">t_index</span><span class="p">[:</span><span class="n">batch_size</span> <span class="o">//</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">:]</span> <span class="o">=</span> <span class="n">neg_index</span><span class="p">[:</span><span class="n">batch_size</span> <span class="o">//</span> <span class="mi">2</span><span class="p">]</span>
+            <span class="n">h_index</span><span class="p">[</span><span class="n">batch_size</span> <span class="o">//</span> <span class="mi">2</span><span class="p">:,</span> <span class="mi">1</span><span class="p">:]</span> <span class="o">=</span> <span class="n">neg_index</span><span class="p">[</span><span class="n">batch_size</span> <span class="o">//</span> <span class="mi">2</span><span class="p">:]</span>
+            <span class="n">pred</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fact_graph</span><span class="p">,</span> <span class="n">h_index</span><span class="p">,</span> <span class="n">t_index</span><span class="p">,</span> <span class="n">r_index</span><span class="p">,</span> <span class="n">all_loss</span><span class="p">,</span> <span class="n">metric</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">pred</span>
+
+    <span class="k">def</span> <span class="nf">target</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">batch</span><span class="p">):</span>
+        <span class="c1"># test target</span>
+        <span class="n">pos_h_index</span><span class="p">,</span> <span class="n">pos_t_index</span><span class="p">,</span> <span class="n">pos_r_index</span> <span class="o">=</span> <span class="n">batch</span><span class="o">.</span><span class="n">t</span><span class="p">()</span>
+        <span class="n">target</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">stack</span><span class="p">([</span><span class="n">pos_t_index</span><span class="p">,</span> <span class="n">pos_h_index</span><span class="p">],</span> <span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+        <span class="n">hr_index_set</span><span class="p">,</span> <span class="n">hr_inverse</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">pos_h_index</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_relation</span> <span class="o">+</span> <span class="n">pos_r_index</span><span class="p">,</span> <span class="n">return_inverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">tr_index_set</span><span class="p">,</span> <span class="n">tr_inverse</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">pos_t_index</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_relation</span> <span class="o">+</span> <span class="n">pos_r_index</span><span class="p">,</span> <span class="n">return_inverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">hr_index2id</span> <span class="o">=</span> <span class="o">-</span><span class="n">torch</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">num_entity</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_relation</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">long</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">device</span><span class="p">)</span>
+        <span class="n">hr_index2id</span><span class="p">[</span><span class="n">hr_index_set</span><span class="p">]</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">hr_index_set</span><span class="p">),</span> <span class="n">device</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">device</span><span class="p">)</span>
+        <span class="n">tr_index2id</span> <span class="o">=</span> <span class="o">-</span><span class="n">torch</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">num_entity</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_relation</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">long</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">device</span><span class="p">)</span>
+        <span class="n">tr_index2id</span><span class="p">[</span><span class="n">tr_index_set</span><span class="p">]</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">tr_index_set</span><span class="p">),</span> <span class="n">device</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">device</span><span class="p">)</span>
+
+        <span class="n">h_index</span><span class="p">,</span> <span class="n">t_index</span><span class="p">,</span> <span class="n">r_index</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">graph</span><span class="o">.</span><span class="n">edge_list</span><span class="o">.</span><span class="n">t</span><span class="p">()</span>
+        <span class="n">hr_index</span> <span class="o">=</span> <span class="n">h_index</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_relation</span> <span class="o">+</span> <span class="n">r_index</span>
+        <span class="n">tr_index</span> <span class="o">=</span> <span class="n">t_index</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_relation</span> <span class="o">+</span> <span class="n">r_index</span>
+        <span class="n">valid</span> <span class="o">=</span> <span class="n">hr_index2id</span><span class="p">[</span><span class="n">hr_index</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="mi">0</span>
+        <span class="n">hr_index</span> <span class="o">=</span> <span class="n">hr_index</span><span class="p">[</span><span class="n">valid</span><span class="p">]</span>
+        <span class="n">t_index</span> <span class="o">=</span> <span class="n">t_index</span><span class="p">[</span><span class="n">valid</span><span class="p">]</span>
+        <span class="n">t_mask_set</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">hr_index_set</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_entity</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">bool</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">device</span><span class="p">)</span>
+        <span class="n">t_mask_set</span><span class="p">[</span><span class="n">hr_index2id</span><span class="p">[</span><span class="n">hr_index</span><span class="p">],</span> <span class="n">t_index</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">t_mask</span> <span class="o">=</span> <span class="n">t_mask_set</span><span class="p">[</span><span class="n">hr_inverse</span><span class="p">]</span>
+        <span class="n">valid</span> <span class="o">=</span> <span class="n">tr_index2id</span><span class="p">[</span><span class="n">tr_index</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="mi">0</span>
+        <span class="n">tr_index</span> <span class="o">=</span> <span class="n">tr_index</span><span class="p">[</span><span class="n">valid</span><span class="p">]</span>
+        <span class="n">h_index</span> <span class="o">=</span> <span class="n">h_index</span><span class="p">[</span><span class="n">valid</span><span class="p">]</span>
+        <span class="n">h_mask_set</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">tr_index_set</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_entity</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">bool</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">device</span><span class="p">)</span>
+        <span class="n">h_mask_set</span><span class="p">[</span><span class="n">tr_index2id</span><span class="p">[</span><span class="n">tr_index</span><span class="p">],</span> <span class="n">h_index</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">h_mask</span> <span class="o">=</span> <span class="n">h_mask_set</span><span class="p">[</span><span class="n">tr_inverse</span><span class="p">]</span>
+
+        <span class="n">mask</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">stack</span><span class="p">([</span><span class="n">t_mask</span><span class="p">,</span> <span class="n">h_mask</span><span class="p">],</span> <span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="c1"># in case of GPU OOM</span>
+        <span class="k">return</span> <span class="n">mask</span><span class="o">.</span><span class="n">cpu</span><span class="p">(),</span> <span class="n">target</span><span class="o">.</span><span class="n">cpu</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">evaluate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pred</span><span class="p">,</span> <span class="n">target</span><span class="p">):</span>
+        <span class="n">mask</span><span class="p">,</span> <span class="n">target</span> <span class="o">=</span> <span class="n">target</span>
+
+        <span class="n">pos_pred</span> <span class="o">=</span> <span class="n">pred</span><span class="o">.</span><span class="n">gather</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">target</span><span class="o">.</span><span class="n">unsqueeze</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">filtered_ranking</span><span class="p">:</span>
+            <span class="n">ranking</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">pos_pred</span> <span class="o">&lt;=</span> <span class="n">pred</span><span class="p">)</span> <span class="o">&amp;</span> <span class="n">mask</span><span class="p">,</span> <span class="n">dim</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">ranking</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">pos_pred</span> <span class="o">&lt;=</span> <span class="n">pred</span><span class="p">,</span> <span class="n">dim</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
+
+        <span class="n">metric</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">_metric</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">metric</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">_metric</span> <span class="o">==</span> <span class="s2">"mr"</span><span class="p">:</span>
+                <span class="n">score</span> <span class="o">=</span> <span class="n">ranking</span><span class="o">.</span><span class="n">float</span><span class="p">()</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+            <span class="k">elif</span> <span class="n">_metric</span> <span class="o">==</span> <span class="s2">"mrr"</span><span class="p">:</span>
+                <span class="n">score</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="n">ranking</span><span class="o">.</span><span class="n">float</span><span class="p">())</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+            <span class="k">elif</span> <span class="n">_metric</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">"hits@"</span><span class="p">):</span>
+                <span class="n">threshold</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">_metric</span><span class="p">[</span><span class="mi">5</span><span class="p">:])</span>
+                <span class="n">score</span> <span class="o">=</span> <span class="p">(</span><span class="n">ranking</span> <span class="o">&lt;=</span> <span class="n">threshold</span><span class="p">)</span><span class="o">.</span><span class="n">float</span><span class="p">()</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Unknown metric `</span><span class="si">%s</span><span class="s2">`"</span> <span class="o">%</span> <span class="n">_metric</span><span class="p">)</span>
+
+            <span class="n">name</span> <span class="o">=</span> <span class="n">tasks</span><span class="o">.</span><span class="n">_get_metric_name</span><span class="p">(</span><span class="n">_metric</span><span class="p">)</span>
+            <span class="n">metric</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">score</span>
+
+        <span class="k">return</span> <span class="n">metric</span></div>
+</pre></div>
+      </article>
+      <footer>
+        
+        <div class="related-pages">
+          
+          
+        </div>
+
+        <div class="related-information">
+              Copyright &#169; 2021, MilaGraph Group
+            |
+            Built with <a href="https://www.sphinx-doc.org/">Sphinx</a>
+              and
+              <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+              <a href="https://github.com/pradyunsg/furo">Furo theme</a>.
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer no-toc">
+      
+      
+      
+    </aside>
+  </main>
+</div>
+  </body>
+</html>
