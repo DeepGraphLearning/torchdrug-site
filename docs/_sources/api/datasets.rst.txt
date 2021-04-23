@@ -27,6 +27,11 @@ WN18RR
 .. autoclass:: WN18RR
     :members:
 
+Hetionet
+^^^^^^^^
+.. autoclass:: Hetionet
+    :members:
+
 
 Molecule Property Prediction Datasets
 -------------------------------------

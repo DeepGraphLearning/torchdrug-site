@@ -186,8 +186,17 @@
         </label>
         <h1>Source code for torchdrug.datasets.chembl_filtered</h1><div class="highlight"><pre>
 <span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">random</span>
+<span class="kn">import</span> <span class="nn">pickle</span>
+<span class="kn">from</span> <span class="nn">tqdm</span> <span class="kn">import</span> <span class="n">tqdm</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">chain</span>
+<span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">defaultdict</span>
+<span class="kn">from</span> <span class="nn">rdkit</span> <span class="kn">import</span> <span class="n">Chem</span>
+<span class="kn">from</span> <span class="nn">rdkit.Chem</span> <span class="kn">import</span> <span class="n">AllChem</span><span class="p">,</span> <span class="n">Descriptors</span>
+<span class="kn">from</span> <span class="nn">rdkit.Chem.Scaffolds</span> <span class="kn">import</span> <span class="n">MurckoScaffold</span>
 
-<span class="kn">from</span> <span class="nn">torchdrug</span> <span class="kn">import</span> <span class="n">data</span>
+<span class="kn">from</span> <span class="nn">torchdrug</span> <span class="kn">import</span> <span class="n">data</span><span class="p">,</span> <span class="n">datasets</span><span class="p">,</span> <span class="n">utils</span>
 <span class="kn">from</span> <span class="nn">torchdrug.core</span> <span class="kn">import</span> <span class="n">Registry</span> <span class="k">as</span> <span class="n">R</span>
 <span class="kn">from</span> <span class="nn">torchdrug.utils</span> <span class="kn">import</span> <span class="n">doc</span>
 
@@ -197,8 +206,8 @@
 <span class="k">class</span> <span class="nc">ChEMBLFiltered</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">MoleculeDataset</span><span class="p">):</span>
     <span class="sd">"""</span>
 <span class="sd">    Statistics:</span>
-<span class="sd">        - #Molecule:</span>
-<span class="sd">        - #Regression task:</span>
+<span class="sd">        - #Molecule: 430,711</span>
+<span class="sd">        - #Regression task: 1,310</span>
 
 <span class="sd">    Parameters:</span>
 <span class="sd">        path (str): path to store the dataset</span>
@@ -206,19 +215,275 @@
 <span class="sd">        **kwargs</span>
 <span class="sd">    """</span>
 
-    <span class="c1"># TODO: Doc. Download of this dataset is missing</span>
+    <span class="n">url</span> <span class="o">=</span> <span class="s2">"http://snap.stanford.edu/gnn-pretrain/data/chem_dataset.zip"</span>
+    <span class="n">md5</span> <span class="o">=</span> <span class="s2">"e95da4dffa0fdb1d4af2726bdf8c23e0"</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="n">path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">expanduser</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
             <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">path</span> <span class="o">=</span> <span class="n">path</span>
+        <span class="n">zip_file_name</span> <span class="o">=</span> <span class="n">utils</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">url</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">md5</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">md5</span><span class="p">)</span>
+        <span class="n">utils</span><span class="o">.</span><span class="n">extract</span><span class="p">(</span><span class="n">zip_file_name</span><span class="p">)</span>
 
-        <span class="n">file_name</span> <span class="o">=</span> <span class="s2">"</span><span class="si">{}</span><span class="s2">/chembl_filtered.csv"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+        <span class="n">file_name</span> <span class="o">=</span> <span class="n">preprocess</span><span class="p">(</span><span class="s1">'./temp/chem_dataset'</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">'file_name is </span><span class="si">{}</span><span class="s1">'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">file_name</span><span class="p">))</span>
+
         <span class="bp">self</span><span class="o">.</span><span class="n">target_fields</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"target_</span><span class="si">{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1310</span><span class="p">)]</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">load_csv</span><span class="p">(</span><span class="n">file_name</span><span class="p">,</span> <span class="n">smiles_field</span><span class="o">=</span><span class="s2">"smiles"</span><span class="p">,</span> <span class="n">target_fields</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">target_fields</span><span class="p">,</span>
-                      <span class="n">verbose</span><span class="o">=</span><span class="n">verbose</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
+                      <span class="n">verbose</span><span class="o">=</span><span class="n">verbose</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="k">return</span></div>
+
+
+<span class="k">def</span> <span class="nf">split_rdkit_mol_obj</span><span class="p">(</span><span class="n">mol</span><span class="p">):</span>
+    <span class="n">smiles</span> <span class="o">=</span> <span class="n">AllChem</span><span class="o">.</span><span class="n">MolToSmiles</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">isomericSmiles</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">smiles_list</span> <span class="o">=</span> <span class="n">smiles</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">'.'</span><span class="p">)</span>
+    <span class="n">mol_species_list</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">smiles_list</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">check_smiles_validity</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
+            <span class="n">mol_species_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">AllChem</span><span class="o">.</span><span class="n">MolFromSmiles</span><span class="p">(</span><span class="n">s</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">mol_species_list</span>
+
+
+<span class="k">def</span> <span class="nf">check_smiles_validity</span><span class="p">(</span><span class="n">smiles</span><span class="p">):</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">m</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmiles</span><span class="p">(</span><span class="n">smiles</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">m</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">True</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">False</span>
+    <span class="k">except</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">False</span>
+
+
+<span class="k">def</span> <span class="nf">get_largest_mol</span><span class="p">(</span><span class="n">mol_list</span><span class="p">):</span>
+    <span class="n">num_atoms_list</span> <span class="o">=</span> <span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">GetAtoms</span><span class="p">())</span> <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">mol_list</span><span class="p">]</span>
+    <span class="n">largest_mol_idx</span> <span class="o">=</span> <span class="n">num_atoms_list</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="n">num_atoms_list</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">mol_list</span><span class="p">[</span><span class="n">largest_mol_idx</span><span class="p">]</span>
+
+
+<span class="k">def</span> <span class="nf">create_standardized_mol_id</span><span class="p">(</span><span class="n">smiles</span><span class="p">):</span>
+    <span class="sd">"""</span>
+<span class="sd">    :param smiles:</span>
+<span class="sd">    :return: inchi</span>
+<span class="sd">    """</span>
+    <span class="k">if</span> <span class="n">check_smiles_validity</span><span class="p">(</span><span class="n">smiles</span><span class="p">):</span>
+        <span class="c1"># remove stereochemistry</span>
+        <span class="n">smiles</span> <span class="o">=</span> <span class="n">AllChem</span><span class="o">.</span><span class="n">MolToSmiles</span><span class="p">(</span><span class="n">AllChem</span><span class="o">.</span><span class="n">MolFromSmiles</span><span class="p">(</span><span class="n">smiles</span><span class="p">),</span>
+                                     <span class="n">isomericSmiles</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="n">mol</span> <span class="o">=</span> <span class="n">AllChem</span><span class="o">.</span><span class="n">MolFromSmiles</span><span class="p">(</span><span class="n">smiles</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">mol</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span> <span class="c1"># to catch weird issue with O=C1O[al]2oc(=O)c3ccc(cn3)c3ccccc3c3cccc(c3)c3ccccc3c3cc(C(F)(F)F)c(cc3o2)-c2ccccc2-c2cccc(c2)-c2ccccc2-c2cccnc21</span>
+            <span class="k">if</span> <span class="s1">'.'</span> <span class="ow">in</span> <span class="n">smiles</span><span class="p">:</span> <span class="c1"># if multiple species, pick largest molecule</span>
+                <span class="n">mol_species_list</span> <span class="o">=</span> <span class="n">split_rdkit_mol_obj</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>
+                <span class="n">largest_mol</span> <span class="o">=</span> <span class="n">get_largest_mol</span><span class="p">(</span><span class="n">mol_species_list</span><span class="p">)</span>
+                <span class="n">inchi</span> <span class="o">=</span> <span class="n">AllChem</span><span class="o">.</span><span class="n">MolToInchi</span><span class="p">(</span><span class="n">largest_mol</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">inchi</span> <span class="o">=</span> <span class="n">AllChem</span><span class="o">.</span><span class="n">MolToInchi</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">inchi</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span>
+
+
+<span class="k">def</span> <span class="nf">_load_chembl_with_labels_dataset</span><span class="p">(</span><span class="n">root_path</span><span class="p">):</span>
+    <span class="c1"># 1. load folds and labels</span>
+    <span class="n">f</span><span class="o">=</span><span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">root_path</span><span class="p">,</span> <span class="s1">'folds0.pckl'</span><span class="p">),</span> <span class="s1">'rb'</span><span class="p">)</span>
+    <span class="n">folds</span><span class="o">=</span><span class="n">pickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+    <span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+    <span class="n">f</span><span class="o">=</span><span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">root_path</span><span class="p">,</span> <span class="s1">'labelsHard.pckl'</span><span class="p">),</span> <span class="s1">'rb'</span><span class="p">)</span>
+    <span class="n">targetMat</span><span class="o">=</span><span class="n">pickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+    <span class="n">sampleAnnInd</span><span class="o">=</span><span class="n">pickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+    <span class="n">targetAnnInd</span><span class="o">=</span><span class="n">pickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+    <span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+    <span class="n">targetMat</span><span class="o">=</span><span class="n">targetMat</span>
+    <span class="n">targetMat</span><span class="o">=</span><span class="n">targetMat</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span><span class="o">.</span><span class="n">tocsr</span><span class="p">()</span>
+    <span class="n">targetMat</span><span class="o">.</span><span class="n">sort_indices</span><span class="p">()</span>
+    <span class="n">targetAnnInd</span><span class="o">=</span><span class="n">targetAnnInd</span>
+    <span class="n">targetAnnInd</span><span class="o">=</span><span class="n">targetAnnInd</span><span class="o">-</span><span class="n">targetAnnInd</span><span class="o">.</span><span class="n">min</span><span class="p">()</span>
+
+    <span class="n">folds</span><span class="o">=</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">intersect1d</span><span class="p">(</span><span class="n">fold</span><span class="p">,</span> <span class="n">sampleAnnInd</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">values</span><span class="p">)</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span> <span class="k">for</span> <span class="n">fold</span> <span class="ow">in</span> <span class="n">folds</span><span class="p">]</span>
+    <span class="n">targetMatTransposed</span><span class="o">=</span><span class="n">targetMat</span><span class="p">[</span><span class="n">sampleAnnInd</span><span class="p">[</span><span class="nb">list</span><span class="p">(</span><span class="n">chain</span><span class="p">(</span><span class="o">*</span><span class="n">folds</span><span class="p">))]]</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">tocsr</span><span class="p">()</span>
+    <span class="n">targetMatTransposed</span><span class="o">.</span><span class="n">sort_indices</span><span class="p">()</span>
+    <span class="c1"># # num positive examples in each of the 1310 targets</span>
+    <span class="n">trainPosOverall</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">targetMatTransposed</span><span class="p">[</span><span class="n">x</span><span class="p">]</span><span class="o">.</span><span class="n">data</span> <span class="o">&gt;</span> <span class="mf">0.5</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">targetMatTransposed</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])])</span>
+    <span class="c1"># # num negative examples in each of the 1310 targets</span>
+    <span class="n">trainNegOverall</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">targetMatTransposed</span><span class="p">[</span><span class="n">x</span><span class="p">]</span><span class="o">.</span><span class="n">data</span> <span class="o">&lt;</span> <span class="o">-</span><span class="mf">0.5</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">targetMatTransposed</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])])</span>
+    <span class="c1"># dense array containing the labels for the 456331 molecules and 1310 targets</span>
+    <span class="n">denseOutputData</span><span class="o">=</span><span class="n">targetMat</span><span class="o">.</span><span class="n">A</span> <span class="c1"># possible values are {-1, 0, 1}</span>
+
+    <span class="c1"># 2. load structures</span>
+    <span class="n">f</span><span class="o">=</span><span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">root_path</span><span class="p">,</span> <span class="s1">'chembl20LSTM.pckl'</span><span class="p">),</span> <span class="s1">'rb'</span><span class="p">)</span>
+    <span class="n">rdkitArr</span><span class="o">=</span><span class="n">pickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+    <span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+    <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">rdkitArr</span><span class="p">)</span> <span class="o">==</span> <span class="n">denseOutputData</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">rdkitArr</span><span class="p">)</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">folds</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">+</span> <span class="nb">len</span><span class="p">(</span><span class="n">folds</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="o">+</span> <span class="nb">len</span><span class="p">(</span><span class="n">folds</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+
+    <span class="n">preprocessed_rdkitArr</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">'preprocessing'</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">m</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">tqdm</span><span class="p">(</span><span class="n">rdkitArr</span><span class="p">)):</span>
+        <span class="k">if</span> <span class="n">m</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">preprocessed_rdkitArr</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">mol_species_list</span> <span class="o">=</span> <span class="n">split_rdkit_mol_obj</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">mol_species_list</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">preprocessed_rdkitArr</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">largest_mol</span> <span class="o">=</span> <span class="n">get_largest_mol</span><span class="p">(</span><span class="n">mol_species_list</span><span class="p">)</span>
+                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">largest_mol</span><span class="o">.</span><span class="n">GetAtoms</span><span class="p">())</span> <span class="o">&lt;=</span> <span class="mi">2</span><span class="p">:</span>
+                    <span class="n">preprocessed_rdkitArr</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">preprocessed_rdkitArr</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">largest_mol</span><span class="p">)</span>
+
+    <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">preprocessed_rdkitArr</span><span class="p">)</span> <span class="o">==</span> <span class="n">denseOutputData</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="n">smiles_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">AllChem</span><span class="o">.</span><span class="n">MolToSmiles</span><span class="p">(</span><span class="n">m</span><span class="p">)</span> <span class="k">if</span> <span class="n">m</span> <span class="o">!=</span> <span class="kc">None</span> <span class="k">else</span> <span class="kc">None</span> <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">preprocessed_rdkitArr</span><span class="p">]</span>   <span class="c1"># bc some empty mol in the</span>
+
+    <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">preprocessed_rdkitArr</span><span class="p">)</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">smiles_list</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">smiles_list</span><span class="p">,</span> <span class="n">preprocessed_rdkitArr</span><span class="p">,</span> <span class="n">folds</span><span class="p">,</span> <span class="n">denseOutputData</span>
+
+
+<span class="k">def</span> <span class="nf">generate_scaffold</span><span class="p">(</span><span class="n">smiles</span><span class="p">,</span> <span class="n">include_chirality</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="n">mol</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmiles</span><span class="p">(</span><span class="n">smiles</span><span class="p">)</span>
+    <span class="n">scaffold</span> <span class="o">=</span> <span class="n">MurckoScaffold</span><span class="o">.</span><span class="n">MurckoScaffoldSmiles</span><span class="p">(</span><span class="n">mol</span><span class="o">=</span><span class="n">mol</span><span class="p">,</span> <span class="n">includeChirality</span><span class="o">=</span><span class="n">include_chirality</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">scaffold</span>
+
+
+<span class="k">def</span> <span class="nf">DataSplit</span><span class="p">(</span><span class="n">dataset</span><span class="p">):</span>
+    <span class="n">frac_train</span><span class="p">,</span> <span class="n">frac_valid</span><span class="p">,</span> <span class="n">frac_test</span> <span class="o">=</span> <span class="mf">0.8</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.1</span>
+
+    <span class="n">scaffold_list</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">all_scaffolds</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">list</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">smiles</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">dataset</span><span class="o">.</span><span class="n">smiles_list</span><span class="p">):</span>
+        <span class="n">scaffold</span> <span class="o">=</span> <span class="n">MurckoScaffold</span><span class="o">.</span><span class="n">MurckoScaffoldSmiles</span><span class="p">(</span><span class="n">smiles</span><span class="o">=</span><span class="n">smiles</span><span class="p">,</span> <span class="n">includeChirality</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">scaffold_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">scaffold</span><span class="p">)</span>
+        <span class="n">all_scaffolds</span><span class="p">[</span><span class="n">scaffold</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">idx</span><span class="p">)</span>
+
+    <span class="c1"># sort from largest to smallest sets</span>
+    <span class="n">all_scaffolds</span> <span class="o">=</span> <span class="p">{</span><span class="n">key</span><span class="p">:</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">all_scaffolds</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
+    <span class="n">all_scaffold_sets</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="n">scaffold_set</span> <span class="k">for</span> <span class="p">(</span><span class="n">scaffold</span><span class="p">,</span> <span class="n">scaffold_set</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span>
+            <span class="n">all_scaffolds</span><span class="o">.</span><span class="n">items</span><span class="p">(),</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]),</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="p">]</span>
+
+    <span class="c1"># get train, valid test indices</span>
+    <span class="n">train_cutoff</span> <span class="o">=</span> <span class="n">frac_train</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">scaffold_list</span><span class="p">)</span>
+    <span class="n">valid_cutoff</span> <span class="o">=</span> <span class="p">(</span><span class="n">frac_train</span> <span class="o">+</span> <span class="n">frac_valid</span><span class="p">)</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">scaffold_list</span><span class="p">)</span>
+    <span class="n">train_idx</span><span class="p">,</span> <span class="n">valid_idx</span><span class="p">,</span> <span class="n">test_idx</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[],</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">scaffold_set</span> <span class="ow">in</span> <span class="n">all_scaffold_sets</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">train_idx</span><span class="p">)</span> <span class="o">+</span> <span class="nb">len</span><span class="p">(</span><span class="n">scaffold_set</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">train_cutoff</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">train_idx</span><span class="p">)</span> <span class="o">+</span> <span class="nb">len</span><span class="p">(</span><span class="n">valid_idx</span><span class="p">)</span> <span class="o">+</span> <span class="nb">len</span><span class="p">(</span><span class="n">scaffold_set</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">valid_cutoff</span><span class="p">:</span>
+                <span class="n">test_idx</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">scaffold_set</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">valid_idx</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">scaffold_set</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">train_idx</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">scaffold_set</span><span class="p">)</span>
+
+    <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">train_idx</span><span class="p">)</span><span class="o">.</span><span class="n">intersection</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">valid_idx</span><span class="p">)))</span> <span class="o">==</span> <span class="mi">0</span>
+    <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">test_idx</span><span class="p">)</span><span class="o">.</span><span class="n">intersection</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">valid_idx</span><span class="p">)))</span> <span class="o">==</span> <span class="mi">0</span>
+
+    <span class="k">return</span> <span class="n">train_idx</span><span class="p">,</span> <span class="n">valid_idx</span><span class="p">,</span> <span class="n">test_idx</span>
+
+
+<span class="k">def</span> <span class="nf">preprocess</span><span class="p">(</span><span class="n">dir_path</span><span class="p">):</span>
+    <span class="n">config_dataset2dataset</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">'tox21'</span><span class="p">:</span> <span class="n">datasets</span><span class="o">.</span><span class="n">Tox21</span><span class="p">,</span>
+        <span class="s1">'toxcast'</span><span class="p">:</span> <span class="n">datasets</span><span class="o">.</span><span class="n">ToxCast</span><span class="p">,</span>
+        <span class="s1">'clintox'</span><span class="p">:</span> <span class="n">datasets</span><span class="o">.</span><span class="n">ClinTox</span><span class="p">,</span>
+        <span class="s1">'bbbp'</span><span class="p">:</span> <span class="n">datasets</span><span class="o">.</span><span class="n">BBBP</span><span class="p">,</span>
+        <span class="s1">'bace'</span><span class="p">:</span> <span class="n">datasets</span><span class="o">.</span><span class="n">BACE</span><span class="p">,</span>
+        <span class="s1">'sider'</span><span class="p">:</span> <span class="n">datasets</span><span class="o">.</span><span class="n">SIDER</span><span class="p">,</span>
+        <span class="s1">'muv'</span><span class="p">:</span> <span class="n">datasets</span><span class="o">.</span><span class="n">MUV</span><span class="p">,</span>
+        <span class="s1">'hiv'</span><span class="p">:</span> <span class="n">datasets</span><span class="o">.</span><span class="n">HIV</span><span class="p">,</span>
+        <span class="s1">'delaney'</span><span class="p">:</span> <span class="n">datasets</span><span class="o">.</span><span class="n">Delaney</span><span class="p">,</span>
+        <span class="s1">'lipophilicity'</span><span class="p">:</span> <span class="n">datasets</span><span class="o">.</span><span class="n">Lipophilicity</span><span class="p">,</span>
+        <span class="s1">'freesolv'</span><span class="p">:</span> <span class="n">datasets</span><span class="o">.</span><span class="n">FreeSolv</span><span class="p">,</span>
+    <span class="p">}</span>
+
+    <span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">path</span> <span class="o">=</span> <span class="s1">'</span><span class="si">{}</span><span class="s1">/dataset'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">dir_path</span><span class="p">)</span>
+    <span class="n">path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">expanduser</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+    <span class="n">output_file</span> <span class="o">=</span> <span class="s1">'</span><span class="si">{}</span><span class="s1">/chembl_filtered.csv'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">dir_path</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">output_file</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">output_file</span>
+
+    <span class="n">downstream_task_list</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="s1">'bace'</span><span class="p">,</span> <span class="s1">'bbbp'</span><span class="p">,</span> <span class="s1">'clintox'</span><span class="p">,</span> <span class="s1">'delaney'</span><span class="p">,</span> <span class="s1">'freesolv'</span><span class="p">,</span> <span class="s1">'hiv'</span><span class="p">,</span> <span class="s1">'lipophilicity'</span><span class="p">,</span> <span class="s1">'muv'</span><span class="p">,</span> <span class="s1">'sider'</span><span class="p">,</span> <span class="s1">'tox21'</span><span class="p">,</span> <span class="s1">'toxcast'</span><span class="p">]</span>
+
+    <span class="n">downstream_inchi_set</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">downstream_task</span> <span class="ow">in</span> <span class="n">downstream_task_list</span><span class="p">:</span>
+        <span class="n">dataset</span> <span class="o">=</span> <span class="n">config_dataset2dataset</span><span class="p">[</span><span class="n">downstream_task</span><span class="p">](</span><span class="s1">'./datasets'</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">_</span><span class="p">,</span> <span class="n">valid_indices</span><span class="p">,</span> <span class="n">test_indices</span> <span class="o">=</span> <span class="n">DataSplit</span><span class="p">(</span><span class="n">dataset</span><span class="o">=</span><span class="n">dataset</span><span class="p">)</span>
+
+        <span class="n">indices</span> <span class="o">=</span> <span class="n">valid_indices</span> <span class="o">+</span> <span class="n">test_indices</span>
+        <span class="n">smiles_list</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">dataset</span><span class="o">.</span><span class="n">smiles_list</span><span class="p">)</span>
+        <span class="n">downstream_smiles</span> <span class="o">=</span> <span class="n">smiles_list</span><span class="p">[</span><span class="n">indices</span><span class="p">]</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="n">downstream_task</span><span class="p">,</span> <span class="s1">'</span><span class="se">\t</span><span class="s1">'</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">downstream_smiles</span><span class="p">))</span>
+
+        <span class="n">remove_smiles</span> <span class="o">=</span> <span class="n">downstream_smiles</span>
+
+        <span class="n">downstream_inchis</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">smiles</span> <span class="ow">in</span> <span class="n">remove_smiles</span><span class="p">:</span>
+            <span class="n">species_list</span> <span class="o">=</span> <span class="n">smiles</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">'.'</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">species_list</span><span class="p">:</span>
+                <span class="n">inchi</span> <span class="o">=</span> <span class="n">create_standardized_mol_id</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+                <span class="n">downstream_inchis</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">inchi</span><span class="p">)</span>
+        <span class="n">downstream_inchi_set</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">downstream_inchis</span><span class="p">)</span>
+
+    <span class="n">smiles_list</span><span class="p">,</span> <span class="n">rdkit_mol_objs</span><span class="p">,</span> <span class="n">folds</span><span class="p">,</span> <span class="n">labels</span> <span class="o">=</span> <span class="n">_load_chembl_with_labels_dataset</span><span class="p">(</span><span class="s1">'</span><span class="si">{}</span><span class="s1">/chembl_filtered/raw'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">path</span><span class="p">))</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s1">'processing'</span><span class="p">)</span>
+    <span class="n">filtered_smiles_list</span><span class="p">,</span> <span class="n">filtered_label_list</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">rdkit_mol</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">tqdm</span><span class="p">(</span><span class="n">rdkit_mol_objs</span><span class="p">)):</span>
+        <span class="k">if</span> <span class="n">rdkit_mol</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">mw</span> <span class="o">=</span> <span class="n">Descriptors</span><span class="o">.</span><span class="n">MolWt</span><span class="p">(</span><span class="n">rdkit_mol</span><span class="p">)</span>
+            <span class="k">if</span> <span class="mi">50</span> <span class="o">&lt;=</span> <span class="n">mw</span> <span class="o">&lt;=</span> <span class="mi">900</span><span class="p">:</span>
+                <span class="n">inchi</span> <span class="o">=</span> <span class="n">create_standardized_mol_id</span><span class="p">(</span><span class="n">smiles_list</span><span class="p">[</span><span class="n">idx</span><span class="p">])</span>
+                <span class="k">if</span> <span class="n">inchi</span> <span class="o">!=</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">inchi</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">downstream_inchi_set</span><span class="p">:</span>
+                    <span class="n">filtered_smiles_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">smiles_list</span><span class="p">[</span><span class="n">idx</span><span class="p">])</span>
+                    <span class="n">filtered_label_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">labels</span><span class="p">[</span><span class="n">idx</span><span class="p">])</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">'filtered_smiles_list</span><span class="se">\t</span><span class="s1">'</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">filtered_smiles_list</span><span class="p">))</span>
+
+    <span class="n">min_</span><span class="p">,</span> <span class="n">max_</span><span class="p">,</span> <span class="n">valid_count</span> <span class="o">=</span> <span class="mf">1e10</span><span class="p">,</span> <span class="o">-</span><span class="mf">1e10</span><span class="p">,</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">smiles</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">tqdm</span><span class="p">(</span><span class="n">filtered_smiles_list</span><span class="p">)):</span>
+        <span class="n">mol</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmiles</span><span class="p">(</span><span class="n">smiles</span><span class="p">)</span>
+        <span class="n">num</span> <span class="o">=</span> <span class="n">mol</span><span class="o">.</span><span class="n">GetNumAtoms</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">num</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">'invalid? </span><span class="si">{}</span><span class="s1">'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">idx</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">valid_count</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="n">min_</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">min_</span><span class="p">,</span> <span class="n">num</span><span class="p">)</span>
+            <span class="n">max_</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">max_</span><span class="p">,</span> <span class="n">num</span><span class="p">)</span>
+
+    <span class="n">target_fields</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'target_</span><span class="si">{}</span><span class="s1">'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">labels</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])]</span>
+    <span class="n">head</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'smiles'</span><span class="p">]</span> <span class="o">+</span> <span class="n">target_fields</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s1">'saving to </span><span class="si">{}</span><span class="s1">'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">output_file</span><span class="p">))</span>
+
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">output_file</span><span class="p">,</span> <span class="s1">'w'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">','</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">head</span><span class="p">),</span> <span class="n">file</span><span class="o">=</span><span class="n">f</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">smiles</span><span class="p">,</span> <span class="n">label_list</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">filtered_smiles_list</span><span class="p">,</span> <span class="n">filtered_label_list</span><span class="p">):</span>
+            <span class="n">line</span> <span class="o">=</span> <span class="n">smiles</span>
+            <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">label_list</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">x</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                    <span class="n">line</span> <span class="o">=</span> <span class="s1">'</span><span class="si">{}</span><span class="s1">,1'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+                <span class="k">elif</span> <span class="n">x</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+                    <span class="n">line</span> <span class="o">=</span> <span class="s1">'</span><span class="si">{}</span><span class="s1">,0'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+                <span class="k">elif</span> <span class="n">x</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="n">line</span> <span class="o">=</span> <span class="s1">'</span><span class="si">{}</span><span class="s1">,'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">'label </span><span class="si">{}</span><span class="s1"> is invalid'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">line</span><span class="p">,</span> <span class="n">file</span><span class="o">=</span><span class="n">f</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">output_file</span>
 </pre></div>
       </article>
       <footer>
