@@ -35,7 +35,7 @@ image_grid:
   - title: De Novo Molecule Design & Optimization
     url: /docs/tutorials/generation
     image: assets/images/task/generation.png
-  - title: Retrosynthesis
+  - title: Reaction Prediction & Retrosynthesis
     url: /docs/tutorials/retrosynthesis
     image: assets/images/task/retrosynthesis.png
   - title: Biomedical Knowledge Graph Reasoning

@@ -224,11 +224,21 @@ This is convenient for building models from configuration files.</p>
 <h2>Engine<a class="headerlink" href="#engine" title="Permalink to this headline">¶</a></h2>
 <dl class="py class">
 <dt id="torchdrug.core.Engine">
-<em class="property">class </em><code class="sig-name descname">Engine</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">task</span></em>, <em class="sig-param"><span class="n">train_set</span></em>, <em class="sig-param"><span class="n">valid_set</span></em>, <em class="sig-param"><span class="n">test_set</span></em>, <em class="sig-param"><span class="n">optimizer</span></em>, <em class="sig-param"><span class="n">scheduler</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">gpus</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">batch_size</span><span class="o">=</span><span class="default_value">1</span></em>, <em class="sig-param"><span class="n">num_worker</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">log_interval</span><span class="o">=</span><span class="default_value">100</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/core/engine.html#Engine"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.core.Engine" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-name descname">Engine</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">task</span></em>, <em class="sig-param"><span class="n">train_set</span></em>, <em class="sig-param"><span class="n">valid_set</span></em>, <em class="sig-param"><span class="n">test_set</span></em>, <em class="sig-param"><span class="n">optimizer</span></em>, <em class="sig-param"><span class="n">scheduler</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">gpus</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">batch_size</span><span class="o">=</span><span class="default_value">1</span></em>, <em class="sig-param"><span class="n">gradient_interval</span><span class="o">=</span><span class="default_value">1</span></em>, <em class="sig-param"><span class="n">num_worker</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">log_interval</span><span class="o">=</span><span class="default_value">100</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/core/engine.html#Engine"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.core.Engine" title="Permalink to this definition">¶</a></dt>
 <dd><p>General class that handles everything about training and test of a task.</p>
 <p>This class can perform synchronous distributed parallel training over multiple CPUs or GPUs.
-To invoke with multiple GPUs,</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python -m torch.distributed.launch --nproc_per_node<span class="o">={</span>number_of_gpus<span class="o">}</span> <span class="o">{</span>your_script.py<span class="o">}</span>
+To invoke parallel training, launch with one of the following commands.</p>
+<ol class="arabic simple">
+<li><p>Single-node multi-process case.</p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python -m torch.distributed.launch --nproc_per_node<span class="o">={</span>number_of_gpus<span class="o">}</span> <span class="o">{</span>your_script.py<span class="o">}</span> <span class="o">{</span>your_arguments...<span class="o">}</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="2">
+<li><p>Multi-node multi-process case.</p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python -m torch.distributed.launch --nnodes<span class="o">={</span>number_of_nodes<span class="o">}</span> --node_rank<span class="o">={</span>rank_of_this_node<span class="o">}</span>
+--nproc_per_node<span class="o">={</span>number_of_gpus<span class="o">}</span> <span class="o">{</span>your_script.py<span class="o">}</span> <span class="o">{</span>your_arguments...<span class="o">}</span>
 </pre></div>
 </div>
 <p>If <code class="xref py py-meth docutils literal notranslate"><span class="pre">preprocess()</span></code> is defined by the task, it will be applied to <code class="docutils literal notranslate"><span class="pre">train_set</span></code>, <code class="docutils literal notranslate"><span class="pre">valid_set</span></code> and <code class="docutils literal notranslate"><span class="pre">test_set</span></code>.</p>
@@ -241,10 +251,13 @@ To invoke with multiple GPUs,</p>
 <li><p><strong>test_set</strong> (<em>data.Dataset</em>) – test set</p></li>
 <li><p><strong>optimizer</strong> (<em>optim.Optimizer</em>) – optimizer</p></li>
 <li><p><strong>scheduler</strong> (<em>lr_scheduler._LRScheduler</em><em>, </em><em>optional</em>) – scheduler</p></li>
-<li><p><strong>gpus</strong> (<em>list of int</em><em>, </em><em>optional</em>) – GPU ids. By default, CPUs will be used.</p></li>
-<li><p><strong>batch_size</strong> (<em>int</em><em>, </em><em>optional</em>) – batch size</p></li>
+<li><p><strong>gpus</strong> (<em>list of int</em><em>, </em><em>optional</em>) – GPU ids. By default, CPUs will be used.
+For multi-node multi-process case, repeat the GPU ids for each node.</p></li>
+<li><p><strong>batch_size</strong> (<em>int</em><em>, </em><em>optional</em>) – batch size of a single CPU / GPU</p></li>
+<li><p><strong>gradient_interval</strong> (<em>int</em><em>, </em><em>optional</em>) – perform a gradient update every n batches.
+This creates an equivalent batch size of <code class="docutils literal notranslate"><span class="pre">batch_size</span> <span class="pre">*</span> <span class="pre">gradient_interval</span></code> for optimization.</p></li>
 <li><p><strong>num_worker</strong> (<em>int</em><em>, </em><em>optional</em>) – number of CPU workers per GPU</p></li>
-<li><p><strong>log_interval</strong> (<em>int</em><em>, </em><em>optional</em>) – log every n batches</p></li>
+<li><p><strong>log_interval</strong> (<em>int</em><em>, </em><em>optional</em>) – log every n gradient updates</p></li>
 </ul>
 </dd>
 </dl>

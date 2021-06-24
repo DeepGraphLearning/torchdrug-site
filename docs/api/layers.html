@@ -238,14 +238,16 @@
 <h3>MultiLayerPerceptron<a class="headerlink" href="#multilayerperceptron" title="Permalink to this headline">¶</a></h3>
 <dl class="py class">
 <dt id="torchdrug.layers.MultiLayerPerceptron">
-<em class="property">class </em><code class="sig-name descname">MultiLayerPerceptron</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">input_dim</span></em>, <em class="sig-param"><span class="n">hidden_dims</span></em>, <em class="sig-param"><span class="n">activation</span><span class="o">=</span><span class="default_value">'relu'</span></em>, <em class="sig-param"><span class="n">dropout</span><span class="o">=</span><span class="default_value">0</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/common.html#MultiLayerPerceptron"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.layers.MultiLayerPerceptron" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-name descname">MultiLayerPerceptron</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">input_dim</span></em>, <em class="sig-param"><span class="n">hidden_dims</span></em>, <em class="sig-param"><span class="n">short_cut</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">batch_norm</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">activation</span><span class="o">=</span><span class="default_value">'relu'</span></em>, <em class="sig-param"><span class="n">dropout</span><span class="o">=</span><span class="default_value">0</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/common.html#MultiLayerPerceptron"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.layers.MultiLayerPerceptron" title="Permalink to this definition">¶</a></dt>
 <dd><p>Multi-layer Perceptron.</p>
-<p>Note there is no activation or dropout in the last layer.</p>
+<p>Note there is no batch normalization, activation or dropout in the last layer.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>input_dim</strong> (<em>int</em>) – input dimension</p></li>
 <li><p><strong>hidden_dim</strong> (<em>list of int</em>) – hidden dimensions</p></li>
+<li><p><strong>short_cut</strong> (<em>bool</em><em>, </em><em>optional</em>) – use short cut or not</p></li>
+<li><p><strong>batch_norm</strong> (<em>bool</em><em>, </em><em>optional</em>) – apply batch normalization or not</p></li>
 <li><p><strong>activation</strong> (<em>str</em><em> or </em><em>function</em><em>, </em><em>optional</em>) – activation function</p></li>
 <li><p><strong>dropout</strong> (<em>float</em><em>, </em><em>optional</em>) – dropout rate</p></li>
 </ul>
@@ -1452,6 +1454,57 @@ relation (Tensor): relation embeddings of shape <span class="math notranslate no
 h_index (LongTensor): index of head entities
 t_index (LongTensor): index of tail entities
 r_index (LongTensor): index of relations</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py function">
+<dt id="torchdrug.layers.functional.generalized_rspmm">
+<code class="sig-name descname">generalized_rspmm</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">sparse</span></em>, <em class="sig-param"><span class="n">relation</span></em>, <em class="sig-param"><span class="n">input</span></em>, <em class="sig-param"><span class="n">sum</span><span class="o">=</span><span class="default_value">'add'</span></em>, <em class="sig-param"><span class="n">mul</span><span class="o">=</span><span class="default_value">'mul'</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/functional/spmm.html#generalized_rspmm"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.layers.functional.generalized_rspmm" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generalized relational sparse-dense matrix multiplication.</p>
+<p>This function computes the matrix multiplication of a sparse matrix, a dense relation matrix and
+a dense input matrix. The output dense matrix satisfies</p>
+<div class="math-wrapper"><div class="math notranslate nohighlight">
+\[output_{i,l} = \bigoplus_{j,k: sparse_{i,j,k} \neq 0} sparse_{i, j, k} * (relation_{k,l} \otimes input_{j,l})\]</div></div>
+<p>where <span class="math notranslate nohighlight">\(\oplus\)</span> and <span class="math notranslate nohighlight">\(\otimes\)</span> are the summation and the multiplication operators respectively.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Gradient w.r.t. the sparse matrix is only computed for non-zero entries of the sparse matrix.
+This behaves differently from dense-dense matrix multiplication with zero entries.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>sparse</strong> (<em>SparseTensor</em>) – 3D sparse tensor</p></li>
+<li><p><strong>relation</strong> (<em>Tensor</em>) – 2D dense tensor</p></li>
+<li><p><strong>input</strong> (<em>Tensor</em>) – 2D dense tensor</p></li>
+<li><p><strong>sum</strong> (<em>str</em><em>, </em><em>optional</em>) – generalized summation operator. Available operators are <code class="docutils literal notranslate"><span class="pre">add</span></code>, <code class="docutils literal notranslate"><span class="pre">min</span></code> and <code class="docutils literal notranslate"><span class="pre">max</span></code>.</p></li>
+<li><p><strong>mul</strong> (<em>str</em><em>, </em><em>optional</em>) – generalized multiplication operator. Available operators are <code class="docutils literal notranslate"><span class="pre">add</span></code> and <code class="docutils literal notranslate"><span class="pre">mul</span></code>.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py function">
+<dt id="torchdrug.layers.functional.generalized_spmm">
+<code class="sig-name descname">generalized_spmm</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">sparse</span></em>, <em class="sig-param"><span class="n">input</span></em>, <em class="sig-param"><span class="n">sum</span><span class="o">=</span><span class="default_value">'add'</span></em>, <em class="sig-param"><span class="n">mul</span><span class="o">=</span><span class="default_value">'mul'</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/functional/spmm.html#generalized_spmm"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.layers.functional.generalized_spmm" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generalized sparse-dense matrix multiplication.</p>
+<p>This function computes the matrix multiplication of a sparse matrix and a dense input matrix.
+The output dense matrix satisfies</p>
+<div class="math-wrapper"><div class="math notranslate nohighlight">
+\[output_{i,k} = \bigoplus_{j: sparse_{i,j} \neq 0} sparse_{i,j} \otimes input_{j,k}\]</div></div>
+<p>where <span class="math notranslate nohighlight">\(\oplus\)</span> and <span class="math notranslate nohighlight">\(\otimes\)</span> are the summation and the multiplication operators respectively.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Gradient w.r.t. the sparse matrix is only computed for non-zero entries of the sparse matrix.
+This behaves differently from dense-dense matrix multiplication with zero entries.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>sparse</strong> (<em>SparseTensor</em>) – 2D sparse tensor</p></li>
+<li><p><strong>input</strong> (<em>Tensor</em>) – 2D dense tensor</p></li>
+<li><p><strong>sum</strong> (<em>str</em><em>, </em><em>optional</em>) – generalized summation operator. Available operators are <code class="docutils literal notranslate"><span class="pre">add</span></code>, <code class="docutils literal notranslate"><span class="pre">min</span></code> and <code class="docutils literal notranslate"><span class="pre">max</span></code>.</p></li>
+<li><p><strong>mul</strong> (<em>str</em><em>, </em><em>optional</em>) – generalized multiplication operator. Available operators are <code class="docutils literal notranslate"><span class="pre">add</span></code> and <code class="docutils literal notranslate"><span class="pre">mul</span></code>.</p></li>
+</ul>
 </dd>
 </dl>
 </dd></dl>

@@ -303,7 +303,11 @@
 
     <span class="k">def</span> <span class="nf">_standarize_edge_list</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">edge_list</span><span class="p">,</span> <span class="n">num_relation</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">edge_list</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">edge_list</span><span class="p">):</span>
-            <span class="n">edge_list</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">as_tensor</span><span class="p">(</span><span class="n">edge_list</span><span class="p">)</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">edge_list</span><span class="p">,</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">):</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="n">edge_list</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">LongTensor</span><span class="p">(</span><span class="n">edge_list</span><span class="p">)</span>
+                <span class="k">except</span> <span class="ne">TypeError</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">"Can't convert `edge_list` to torch.long"</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">num_element</span> <span class="o">=</span> <span class="mi">2</span> <span class="k">if</span> <span class="n">num_relation</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="mi">3</span>
             <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">edge_list</span><span class="p">,</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">):</span>
@@ -311,10 +315,8 @@
             <span class="k">else</span><span class="p">:</span>
                 <span class="n">device</span> <span class="o">=</span> <span class="s2">"cpu"</span>
             <span class="n">edge_list</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">num_element</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">long</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="n">device</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">edge_list</span><span class="o">.</span><span class="n">dtype</span> <span class="o">!=</span> <span class="n">torch</span><span class="o">.</span><span class="n">long</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Can't convert edge_list to torch.long"</span><span class="p">)</span>
         <span class="k">if</span> <span class="p">(</span><span class="n">edge_list</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">any</span><span class="p">():</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"edge_list should only contain non-negative indexes"</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"`edge_list` should only contain non-negative indexes"</span><span class="p">)</span>
         <span class="n">num_edge</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">edge_list</span><span class="p">),</span> <span class="n">device</span><span class="o">=</span><span class="n">edge_list</span><span class="o">.</span><span class="n">device</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">edge_list</span><span class="p">,</span> <span class="n">num_edge</span>
 
@@ -386,9 +388,9 @@
 <span class="sd">        For zero entries in the adjacency matrix, their edge features will be ignored.</span>
 
 <span class="sd">        Parameters:</span>
-<span class="sd">            adjacency (array_like): adjacency matrix of shape :math:`(|V|, |V|)`</span>
+<span class="sd">            adjacency (array_like): adjacency matrix of shape :math:`(|V|, |V|)` or :math:`(|V|, |V|, |R|)`</span>
 <span class="sd">            node_feature (array_like): node features of shape :math:`(|V|, ...)`</span>
-<span class="sd">            edge_feature (array_like): edge features of shape :math:`(|V|, |V|, ...)`</span>
+<span class="sd">            edge_feature (array_like): edge features of shape :math:`(|V|, |V|, ...)` or :math:`(|V|, |V|, |R|, ...)`</span>
 <span class="sd">        """</span>
         <span class="n">adjacency</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">as_tensor</span><span class="p">(</span><span class="n">adjacency</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">adjacency</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="n">adjacency</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span>
