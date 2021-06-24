@@ -1464,7 +1464,7 @@ r_index (LongTensor): index of relations</p>
 <p>This function computes the matrix multiplication of a sparse matrix, a dense relation matrix and
 a dense input matrix. The output dense matrix satisfies</p>
 <div class="math-wrapper"><div class="math notranslate nohighlight">
-\[output_{i,l} = \bigoplus_{j,k: sparse_{i,j,k} \neq 0} sparse_{i, j, k} * (relation_{k,l} \otimes input_{j,l})\]</div></div>
+\[output_{i,l} = \bigoplus_{j,k: sparse_{i,j,k} \neq 0} sparse_{i, j, k} \times (relation_{k,l} \otimes input_{j,l})\]</div></div>
 <p>where <span class="math notranslate nohighlight">\(\oplus\)</span> and <span class="math notranslate nohighlight">\(\otimes\)</span> are the summation and the multiplication operators respectively.</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
