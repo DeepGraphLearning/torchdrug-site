@@ -1247,6 +1247,19 @@
 
 <div class="viewcode-block" id="Retrosynthesis"><a class="viewcode-back" href="../../../api/tasks.html#torchdrug.tasks.Retrosynthesis">[docs]</a><span class="nd">@R</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="s2">"tasks.Retrosynthesis"</span><span class="p">)</span>
 <span class="k">class</span> <span class="nc">Retrosynthesis</span><span class="p">(</span><span class="n">tasks</span><span class="o">.</span><span class="n">Task</span><span class="p">,</span> <span class="n">core</span><span class="o">.</span><span class="n">Configurable</span><span class="p">):</span>
+    <span class="sd">"""</span>
+<span class="sd">    Retrosynthesis task.</span>
+
+<span class="sd">    This class wraps pretrained center identification and synthon completion modeules into a pipeline.</span>
+
+<span class="sd">    Parameters:</span>
+<span class="sd">        center_identification (CenterIdentification): sub task of center identification</span>
+<span class="sd">        synthon_completion (SynthonCompletion): sub task of synthon completion</span>
+<span class="sd">        center_topk (int, optional): number of reaction centers to predict for each product</span>
+<span class="sd">        num_synthon_beam (int, optional): size of beam search for each synthon</span>
+<span class="sd">        max_prediction (int, optional): max number of final predictions for each product</span>
+<span class="sd">        metric (str or list of str, optional): metric(s). Available metrics are ``top-K``.</span>
+<span class="sd">    """</span>
 
     <span class="n">_option_members</span> <span class="o">=</span> <span class="nb">set</span><span class="p">([</span><span class="s2">"metric"</span><span class="p">])</span>
 

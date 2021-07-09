@@ -440,7 +440,21 @@ atom: original atom feature</p></li>
 <dl class="py class">
 <dt id="torchdrug.tasks.Retrosynthesis">
 <em class="property">class </em><code class="sig-name descname">Retrosynthesis</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">center_identification</span></em>, <em class="sig-param"><span class="n">synthon_completion</span></em>, <em class="sig-param"><span class="n">center_topk</span><span class="o">=</span><span class="default_value">2</span></em>, <em class="sig-param"><span class="n">num_synthon_beam</span><span class="o">=</span><span class="default_value">10</span></em>, <em class="sig-param"><span class="n">max_prediction</span><span class="o">=</span><span class="default_value">20</span></em>, <em class="sig-param"><span class="n">metric</span><span class="o">=</span><span class="default_value">'top-1', 'top-3', 'top-5', 'top-10'</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/tasks/retrosynthesis.html#Retrosynthesis"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.tasks.Retrosynthesis" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="py method">
+<dd><p>Retrosynthesis task.</p>
+<p>This class wraps pretrained center identification and synthon completion modeules into a pipeline.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>center_identification</strong> (<a class="reference internal" href="#torchdrug.tasks.CenterIdentification" title="torchdrug.tasks.CenterIdentification"><em>CenterIdentification</em></a>) – sub task of center identification</p></li>
+<li><p><strong>synthon_completion</strong> (<a class="reference internal" href="#torchdrug.tasks.SynthonCompletion" title="torchdrug.tasks.SynthonCompletion"><em>SynthonCompletion</em></a>) – sub task of synthon completion</p></li>
+<li><p><strong>center_topk</strong> (<em>int</em><em>, </em><em>optional</em>) – number of reaction centers to predict for each product</p></li>
+<li><p><strong>num_synthon_beam</strong> (<em>int</em><em>, </em><em>optional</em>) – size of beam search for each synthon</p></li>
+<li><p><strong>max_prediction</strong> (<em>int</em><em>, </em><em>optional</em>) – max number of final predictions for each product</p></li>
+<li><p><strong>metric</strong> (<em>str</em><em> or </em><em>list of str</em><em>, </em><em>optional</em>) – metric(s). Available metrics are <code class="docutils literal notranslate"><span class="pre">top-K</span></code>.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
 <dt id="torchdrug.tasks.Retrosynthesis.load_state_dict">
 <code class="sig-name descname">load_state_dict</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">state_dict</span></em>, <em class="sig-param"><span class="n">strict</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/tasks/retrosynthesis.html#Retrosynthesis.load_state_dict"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.tasks.Retrosynthesis.load_state_dict" title="Permalink to this definition">¶</a></dt>
 <dd><p>Copies parameters and buffers from <code class="xref py py-attr docutils literal notranslate"><span class="pre">state_dict</span></code> into
