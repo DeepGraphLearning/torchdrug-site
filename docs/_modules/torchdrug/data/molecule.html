@@ -563,6 +563,11 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_check_no_stereo</span><span class="p">()</span>
         <span class="k">return</span> <span class="nb">super</span><span class="p">(</span><span class="n">Molecule</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">edge_mask</span><span class="p">(</span><span class="n">index</span><span class="p">)</span></div>
 
+<div class="viewcode-block" id="Molecule.undirected"><a class="viewcode-back" href="../../../api/data.html#torchdrug.data.Molecule.undirected">[docs]</a>    <span class="k">def</span> <span class="nf">undirected</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">add_inverse</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">add_inverse</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Bonds are undirected relations, but `add_inverse` is specified"</span><span class="p">)</span>
+        <span class="k">return</span> <span class="nb">super</span><span class="p">(</span><span class="n">Molecule</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">undirected</span><span class="p">(</span><span class="n">add_inverse</span><span class="p">)</span></div>
+
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">num_atom</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">"""Number of atoms."""</span>
@@ -984,6 +989,11 @@
 <div class="viewcode-block" id="PackedMolecule.edge_mask"><a class="viewcode-back" href="../../../api/data.html#torchdrug.data.PackedMolecule.edge_mask">[docs]</a>    <span class="k">def</span> <span class="nf">edge_mask</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_check_no_stereo</span><span class="p">()</span>
         <span class="k">return</span> <span class="nb">super</span><span class="p">(</span><span class="n">PackedMolecule</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">edge_mask</span><span class="p">(</span><span class="n">index</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="PackedMolecule.undirected"><a class="viewcode-back" href="../../../api/data.html#torchdrug.data.PackedMolecule.undirected">[docs]</a>    <span class="k">def</span> <span class="nf">undirected</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">add_inverse</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">add_inverse</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Bonds are undirected relations, but `add_inverse` is specified"</span><span class="p">)</span>
+        <span class="k">return</span> <span class="nb">super</span><span class="p">(</span><span class="n">PackedMolecule</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">undirected</span><span class="p">(</span><span class="n">add_inverse</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="PackedMolecule.visualize"><a class="viewcode-back" href="../../../api/data.html#torchdrug.data.PackedMolecule.visualize">[docs]</a>    <span class="k">def</span> <span class="nf">visualize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">titles</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">save_file</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">figure_size</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">num_row</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">num_col</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">atom_map</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">"""</span>

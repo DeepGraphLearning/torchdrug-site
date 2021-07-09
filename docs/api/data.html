@@ -283,6 +283,17 @@ By default, it will be inferred from the largest id in <cite>edge_list</cite></p
 <dd><p>Detach this graph.</p>
 </dd></dl>
 <dl class="py method">
+<dt id="torchdrug.data.Graph.directed">
+<code class="sig-name descname">directed</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">order</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/data/graph.html#Graph.directed"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.data.Graph.directed" title="Permalink to this definition">¶</a></dt>
+<dd><p>Mask the edges to create a directed graph.
+Edges that go from a node index to a larger or equal node index will be kept.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>order</strong> (<em>Tensor</em><em>, </em><em>optional</em>) – topological order of the nodes</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
 <dt id="torchdrug.data.Graph.edge">
 <code class="sig-name descname">edge</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/data/graph.html#Graph.edge"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.data.Graph.edge" title="Permalink to this definition">¶</a></dt>
 <dd><p>Context manager for edge attributes.</p>
@@ -417,7 +428,7 @@ For zero entries in the adjacency matrix, their edge features will be ignored.</
 <dd><p>Repeat this graph.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>count</strong> (<em>int</em>) – number of times</p>
+<dd class="field-odd"><p><strong>count</strong> (<em>int</em>) – number of repetitions</p>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p>PackedGraph</p>
@@ -454,6 +465,18 @@ Equivalent to <a class="reference internal" href="#torchdrug.data.Graph.node_mas
 <p class="admonition-title">See also</p>
 <p><a class="reference internal" href="#torchdrug.data.Graph.node_mask" title="torchdrug.data.Graph.node_mask"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Graph.node_mask()</span></code></a></p>
 </div>
+</dd></dl>
+<dl class="py method">
+<dt id="torchdrug.data.Graph.undirected">
+<code class="sig-name descname">undirected</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">add_inverse</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/data/graph.html#Graph.undirected"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.data.Graph.undirected" title="Permalink to this definition">¶</a></dt>
+<dd><p>Flip all the edges to create an undirected graph.</p>
+<p>For knowledge graphs, the flipped edges can either have the original relation or an inverse relation.
+The inverse relation for relation <span class="math notranslate nohighlight">\(r\)</span> is defined as <span class="math notranslate nohighlight">\(|R| + r\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>add_inverse</strong> (<em>bool</em><em>, </em><em>optional</em>) – whether to use inverse relations for flipped edges</p>
+</dd>
+</dl>
 </dd></dl>
 <dl class="py method">
 <dt id="torchdrug.data.Graph.visualize">
@@ -684,6 +707,18 @@ Otherwise, raise an exception.</p>
 </dl>
 </dd></dl>
 <dl class="py method">
+<dt id="torchdrug.data.Molecule.undirected">
+<code class="sig-name descname">undirected</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">add_inverse</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/data/molecule.html#Molecule.undirected"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.data.Molecule.undirected" title="Permalink to this definition">¶</a></dt>
+<dd><p>Flip all the edges to create an undirected graph.</p>
+<p>For knowledge graphs, the flipped edges can either have the original relation or an inverse relation.
+The inverse relation for relation <span class="math notranslate nohighlight">\(r\)</span> is defined as <span class="math notranslate nohighlight">\(|R| + r\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>add_inverse</strong> (<em>bool</em><em>, </em><em>optional</em>) – whether to use inverse relations for flipped edges</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
 <dt id="torchdrug.data.Molecule.visualize">
 <code class="sig-name descname">visualize</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">title</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">save_file</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">figure_size</span><span class="o">=</span><span class="default_value">3, 3</span></em>, <em class="sig-param"><span class="n">ax</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">atom_map</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/data/molecule.html#Molecule.visualize"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.data.Molecule.visualize" title="Permalink to this definition">¶</a></dt>
 <dd><p>Visualize this molecule with matplotlib.</p>
@@ -862,10 +897,23 @@ To generate compact graph ids, use <a class="reference internal" href="#torchdru
 <dl class="py method">
 <dt id="torchdrug.data.PackedGraph.repeat">
 <code class="sig-name descname">repeat</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">count</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/data/graph.html#PackedGraph.repeat"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.data.PackedGraph.repeat" title="Permalink to this definition">¶</a></dt>
-<dd><p>Repeat this packed graph.</p>
+<dd><p>Repeat this packed graph. This function behaves similarly to <a class="reference external" href="https://pytorch.org/docs/stable/generated/torch.Tensor.repeat.html">torch.Tensor.repeat</a>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>count</strong> (<em>int</em>) – number of times</p>
+<dd class="field-odd"><p><strong>count</strong> (<em>int</em>) – number of repetitions</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>PackedGraph</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt id="torchdrug.data.PackedGraph.repeat_interleave">
+<code class="sig-name descname">repeat_interleave</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">repeats</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/data/graph.html#PackedGraph.repeat_interleave"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.data.PackedGraph.repeat_interleave" title="Permalink to this definition">¶</a></dt>
+<dd><p>Repeat this packed graph. This function behaves similarly to <a class="reference external" href="https://pytorch.org/docs/stable/generated/torch.repeat_interleave.html">torch.repeat_interleave</a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>repeats</strong> (<em>Tensor</em>) – number of repetitions for each graph</p>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p>PackedGraph</p>
@@ -879,7 +927,7 @@ To generate compact graph ids, use <a class="reference internal" href="#torchdru
 Equivalent to <a class="reference internal" href="#torchdrug.data.PackedGraph.graph_mask" title="torchdrug.data.PackedGraph.graph_mask"><code class="xref py py-meth docutils literal notranslate"><span class="pre">graph_mask(index,</span> <span class="pre">compact=True)</span></code></a>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>index</strong> (<em>array_like</em>) – node index</p>
+<dd class="field-odd"><p><strong>index</strong> (<em>array_like</em>) – graph index</p>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p>PackedGraph</p>
@@ -889,6 +937,18 @@ Equivalent to <a class="reference internal" href="#torchdrug.data.PackedGraph.gr
 <p class="admonition-title">See also</p>
 <p><a class="reference internal" href="#torchdrug.data.PackedGraph.graph_mask" title="torchdrug.data.PackedGraph.graph_mask"><code class="xref py py-meth docutils literal notranslate"><span class="pre">PackedGraph.graph_mask()</span></code></a></p>
 </div>
+</dd></dl>
+<dl class="py method">
+<dt id="torchdrug.data.PackedGraph.undirected">
+<code class="sig-name descname">undirected</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">add_inverse</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/data/graph.html#PackedGraph.undirected"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.data.PackedGraph.undirected" title="Permalink to this definition">¶</a></dt>
+<dd><p>Flip all the edges to create undirected graphs.</p>
+<p>For knowledge graphs, the flipped edges can either have the original relation or an inverse relation.
+The inverse relation for relation <span class="math notranslate nohighlight">\(r\)</span> is defined as <span class="math notranslate nohighlight">\(|R| + r\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>add_inverse</strong> (<em>bool</em><em>, </em><em>optional</em>) – whether to use inverse relations for flipped edges</p>
+</dd>
+</dl>
 </dd></dl>
 <dl class="py method">
 <dt id="torchdrug.data.PackedGraph.unpack">
@@ -1090,6 +1150,18 @@ Otherwise, raise an exception.</p>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p>list of str</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt id="torchdrug.data.PackedMolecule.undirected">
+<code class="sig-name descname">undirected</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">add_inverse</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/data/molecule.html#PackedMolecule.undirected"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.data.PackedMolecule.undirected" title="Permalink to this definition">¶</a></dt>
+<dd><p>Flip all the edges to create undirected graphs.</p>
+<p>For knowledge graphs, the flipped edges can either have the original relation or an inverse relation.
+The inverse relation for relation <span class="math notranslate nohighlight">\(r\)</span> is defined as <span class="math notranslate nohighlight">\(|R| + r\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>add_inverse</strong> (<em>bool</em><em>, </em><em>optional</em>) – whether to use inverse relations for flipped edges</p>
 </dd>
 </dl>
 </dd></dl>

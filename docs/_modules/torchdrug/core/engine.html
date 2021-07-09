@@ -186,6 +186,8 @@
         </label>
         <h1>Source code for torchdrug.core.engine</h1><div class="highlight"><pre>
 <span></span><span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">import</span> <span class="nn">os.path</span>
+<span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">islice</span>
 
 <span class="kn">import</span> <span class="nn">torch</span>
 <span class="kn">from</span> <span class="nn">torch</span> <span class="kn">import</span> <span class="n">distributed</span> <span class="k">as</span> <span class="n">dist</span>
@@ -290,15 +292,20 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">optimizer</span> <span class="o">=</span> <span class="n">optimizer</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">scheduler</span> <span class="o">=</span> <span class="n">scheduler</span>
 
-<div class="viewcode-block" id="Engine.train"><a class="viewcode-back" href="../../../api/core.html#torchdrug.core.Engine.train">[docs]</a>    <span class="k">def</span> <span class="nf">train</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">num_epoch</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+<div class="viewcode-block" id="Engine.train"><a class="viewcode-back" href="../../../api/core.html#torchdrug.core.Engine.train">[docs]</a>    <span class="k">def</span> <span class="nf">train</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">num_epoch</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">batch_per_epoch</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">"""</span>
 <span class="sd">        Train the model.</span>
 
+<span class="sd">        If ``batch_per_epoch`` is specified, randomly draw a subset of the training set for each epoch.</span>
+<span class="sd">        Otherwise, the whole training set is used for each epoch.</span>
+
 <span class="sd">        Parameters:</span>
 <span class="sd">            num_epoch (int, optional): number of epochs</span>
+<span class="sd">            batch_per_epoch (int, optional): number of batches per epoch</span>
 <span class="sd">        """</span>
         <span class="n">sampler</span> <span class="o">=</span> <span class="n">torch_data</span><span class="o">.</span><span class="n">DistributedSampler</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">train_set</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">world_size</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">rank</span><span class="p">)</span>
         <span class="n">dataloader</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">DataLoader</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">train_set</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">batch_size</span><span class="p">,</span> <span class="n">sampler</span><span class="o">=</span><span class="n">sampler</span><span class="p">,</span> <span class="n">num_workers</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">num_worker</span><span class="p">)</span>
+        <span class="n">batch_per_epoch</span> <span class="o">=</span> <span class="n">batch_per_epoch</span> <span class="ow">or</span> <span class="nb">len</span><span class="p">(</span><span class="n">dataloader</span><span class="p">)</span>
         <span class="n">model</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">world_size</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">device</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="s2">"cuda"</span><span class="p">:</span>
@@ -306,18 +313,17 @@
                                                             <span class="n">find_unused_parameters</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="n">model</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">parallel</span><span class="o">.</span><span class="n">DistributedDataParallel</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">find_unused_parameters</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-
         <span class="n">model</span><span class="o">.</span><span class="n">train</span><span class="p">()</span>
+
         <span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">meter</span><span class="p">(</span><span class="n">num_epoch</span><span class="p">):</span>
-            <span class="k">if</span> <span class="n">sampler</span><span class="p">:</span>
-                <span class="n">sampler</span><span class="o">.</span><span class="n">set_epoch</span><span class="p">(</span><span class="n">epoch</span><span class="p">)</span>
+            <span class="n">sampler</span><span class="o">.</span><span class="n">set_epoch</span><span class="p">(</span><span class="n">epoch</span><span class="p">)</span>
 
             <span class="n">metrics</span> <span class="o">=</span> <span class="p">[]</span>
             <span class="n">start_id</span> <span class="o">=</span> <span class="mi">0</span>
             <span class="c1"># the last gradient update may contain less than gradient_interval batches</span>
-            <span class="n">gradient_interval</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">dataloader</span><span class="p">)</span> <span class="o">-</span> <span class="n">start_id</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">gradient_interval</span><span class="p">)</span>
+            <span class="n">gradient_interval</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">batch_per_epoch</span> <span class="o">-</span> <span class="n">start_id</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">gradient_interval</span><span class="p">)</span>
 
-            <span class="k">for</span> <span class="n">batch_id</span><span class="p">,</span> <span class="n">batch</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">dataloader</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">batch_id</span><span class="p">,</span> <span class="n">batch</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">islice</span><span class="p">(</span><span class="n">dataloader</span><span class="p">,</span> <span class="n">batch_per_epoch</span><span class="p">)):</span>
                 <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">device</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="s2">"cuda"</span><span class="p">:</span>
                     <span class="n">batch</span> <span class="o">=</span> <span class="n">utils</span><span class="o">.</span><span class="n">cuda</span><span class="p">(</span><span class="n">batch</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">device</span><span class="p">)</span>
 
@@ -340,7 +346,7 @@
 
                     <span class="n">metrics</span> <span class="o">=</span> <span class="p">[]</span>
                     <span class="n">start_id</span> <span class="o">=</span> <span class="n">batch_id</span> <span class="o">+</span> <span class="mi">1</span>
-                    <span class="n">gradient_interval</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">dataloader</span><span class="p">)</span> <span class="o">-</span> <span class="n">start_id</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">gradient_interval</span><span class="p">)</span>
+                    <span class="n">gradient_interval</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">batch_per_epoch</span> <span class="o">-</span> <span class="n">start_id</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">gradient_interval</span><span class="p">)</span>
 
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">scheduler</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">scheduler</span><span class="o">.</span><span class="n">step</span><span class="p">()</span></div>
@@ -393,7 +399,9 @@
 <span class="sd">            checkpoint (file-like): checkpoint file</span>
 <span class="sd">            load_optimizer (bool, optional): load optimizer state or not</span>
 <span class="sd">        """</span>
-        <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">"Load checkpoint from </span><span class="si">%s</span><span class="s2">"</span> <span class="o">%</span> <span class="n">checkpoint</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">comm</span><span class="o">.</span><span class="n">get_rank</span><span class="p">()</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">"Load checkpoint from </span><span class="si">%s</span><span class="s2">"</span> <span class="o">%</span> <span class="n">checkpoint</span><span class="p">)</span>
+        <span class="n">checkpoint</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">expanduser</span><span class="p">(</span><span class="n">checkpoint</span><span class="p">)</span>
         <span class="n">state</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">checkpoint</span><span class="p">,</span> <span class="n">map_location</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">device</span><span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">load_state_dict</span><span class="p">(</span><span class="n">state</span><span class="p">[</span><span class="s2">"model"</span><span class="p">])</span>
@@ -414,6 +422,9 @@
 <span class="sd">        Parameters:</span>
 <span class="sd">            checkpoint (file-like): checkpoint file</span>
 <span class="sd">        """</span>
+        <span class="k">if</span> <span class="n">comm</span><span class="o">.</span><span class="n">get_rank</span><span class="p">()</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">"Save checkpoint to </span><span class="si">%s</span><span class="s2">"</span> <span class="o">%</span> <span class="n">checkpoint</span><span class="p">)</span>
+        <span class="n">checkpoint</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">expanduser</span><span class="p">(</span><span class="n">checkpoint</span><span class="p">)</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">rank</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
             <span class="n">state</span> <span class="o">=</span> <span class="p">{</span>
                 <span class="s2">"model"</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">state_dict</span><span class="p">(),</span>

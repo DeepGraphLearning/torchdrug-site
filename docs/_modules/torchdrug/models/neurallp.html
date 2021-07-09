@@ -185,84 +185,14 @@
           <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
         </label>
         <h1>Source code for torchdrug.models.neurallp</h1><div class="highlight"><pre>
-<span></span><span class="kn">import</span> <span class="nn">inspect</span>
-
-<span class="kn">from</span> <span class="nn">decorator</span> <span class="kn">import</span> <span class="n">decorator</span>
-
-<span class="kn">import</span> <span class="nn">torch</span>
+<span></span><span class="kn">import</span> <span class="nn">torch</span>
 <span class="kn">from</span> <span class="nn">torch</span> <span class="kn">import</span> <span class="n">nn</span>
 <span class="kn">from</span> <span class="nn">torch.nn</span> <span class="kn">import</span> <span class="n">functional</span> <span class="k">as</span> <span class="n">F</span>
 <span class="kn">from</span> <span class="nn">torch_scatter</span> <span class="kn">import</span> <span class="n">scatter_add</span>
 
-<span class="kn">from</span> <span class="nn">torchdrug</span> <span class="kn">import</span> <span class="n">core</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">utils</span>
+<span class="kn">from</span> <span class="nn">torchdrug</span> <span class="kn">import</span> <span class="n">core</span><span class="p">,</span> <span class="n">utils</span>
 <span class="kn">from</span> <span class="nn">torchdrug.layers</span> <span class="kn">import</span> <span class="n">functional</span>
 <span class="kn">from</span> <span class="nn">torchdrug.core</span> <span class="kn">import</span> <span class="n">Registry</span> <span class="k">as</span> <span class="n">R</span>
-
-
-<span class="k">def</span> <span class="nf">cached</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-
-    <span class="nd">@decorator</span>
-    <span class="k">def</span> <span class="nf">wrapper</span><span class="p">(</span><span class="n">forward</span><span class="p">,</span> <span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-
-        <span class="k">def</span> <span class="nf">equal</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
-            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">nn</span><span class="o">.</span><span class="n">Parameter</span><span class="p">):</span>
-                <span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">data</span>
-            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">nn</span><span class="o">.</span><span class="n">Parameter</span><span class="p">):</span>
-                <span class="n">y</span> <span class="o">=</span> <span class="n">y</span><span class="o">.</span><span class="n">data</span>
-            <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">type</span><span class="p">(</span><span class="n">y</span><span class="p">):</span>
-                <span class="k">return</span> <span class="kc">False</span>
-            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">):</span>
-                <span class="k">return</span> <span class="n">x</span><span class="o">.</span><span class="n">shape</span> <span class="o">==</span> <span class="n">y</span><span class="o">.</span><span class="n">shape</span> <span class="ow">and</span> <span class="p">(</span><span class="n">x</span> <span class="o">==</span> <span class="n">y</span><span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
-            <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">data</span><span class="o">.</span><span class="n">Graph</span><span class="p">):</span>
-                <span class="k">if</span> <span class="n">x</span><span class="o">.</span><span class="n">num_node</span> <span class="o">!=</span> <span class="n">y</span><span class="o">.</span><span class="n">num_node</span> <span class="ow">or</span> <span class="n">x</span><span class="o">.</span><span class="n">num_edge</span> <span class="o">!=</span> <span class="n">y</span><span class="o">.</span><span class="n">num_edge</span> <span class="ow">or</span> <span class="n">x</span><span class="o">.</span><span class="n">num_relation</span> <span class="o">!=</span> <span class="n">y</span><span class="o">.</span><span class="n">num_relation</span><span class="p">:</span>
-                    <span class="k">return</span> <span class="kc">False</span>
-                <span class="n">edge_feature</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="s2">"edge_feature"</span><span class="p">,</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="n">x</span><span class="o">.</span><span class="n">device</span><span class="p">))</span>
-                <span class="n">y_edge_feature</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="s2">"edge_feature"</span><span class="p">,</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="n">y</span><span class="o">.</span><span class="n">device</span><span class="p">))</span>
-                <span class="k">if</span> <span class="n">edge_feature</span><span class="o">.</span><span class="n">shape</span> <span class="o">!=</span> <span class="n">y_edge_feature</span><span class="o">.</span><span class="n">shape</span><span class="p">:</span>
-                    <span class="k">return</span> <span class="kc">False</span>
-                <span class="k">return</span> <span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">edge_list</span> <span class="o">==</span> <span class="n">y</span><span class="o">.</span><span class="n">edge_list</span><span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">()</span> <span class="ow">and</span> <span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">edge_weight</span> <span class="o">==</span> <span class="n">y</span><span class="o">.</span><span class="n">edge_weight</span><span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">()</span> \
-                       <span class="ow">and</span> <span class="p">(</span><span class="n">edge_feature</span> <span class="o">==</span> <span class="n">y_edge_feature</span><span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="k">return</span> <span class="n">x</span> <span class="o">==</span> <span class="n">y</span>
-
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">training</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-
-        <span class="n">func</span> <span class="o">=</span> <span class="n">inspect</span><span class="o">.</span><span class="n">signature</span><span class="p">(</span><span class="n">forward</span><span class="p">)</span>
-        <span class="n">func</span> <span class="o">=</span> <span class="n">func</span><span class="o">.</span><span class="n">bind</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-        <span class="n">func</span><span class="o">.</span><span class="n">apply_defaults</span><span class="p">()</span>
-        <span class="n">arguments</span> <span class="o">=</span> <span class="n">func</span><span class="o">.</span><span class="n">arguments</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
-        <span class="n">arguments</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="nb">next</span><span class="p">(</span><span class="nb">iter</span><span class="p">(</span><span class="n">arguments</span><span class="o">.</span><span class="n">keys</span><span class="p">())))</span>
-
-        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">"_forward_cache"</span><span class="p">):</span>
-            <span class="n">hit</span> <span class="o">=</span> <span class="kc">True</span>
-            <span class="n">message</span> <span class="o">=</span> <span class="p">[]</span>
-            <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">arguments</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-                <span class="k">if</span> <span class="ow">not</span> <span class="n">equal</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_forward_cache</span><span class="p">[</span><span class="n">k</span><span class="p">],</span> <span class="n">v</span><span class="p">):</span>
-                    <span class="n">hit</span> <span class="o">=</span> <span class="kc">False</span>
-                    <span class="n">message</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">"</span><span class="si">%s</span><span class="s2">: miss"</span> <span class="o">%</span> <span class="n">k</span><span class="p">)</span>
-                    <span class="k">break</span>
-                <span class="n">message</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">"</span><span class="si">%s</span><span class="s2">: hit"</span> <span class="o">%</span> <span class="n">k</span><span class="p">)</span>
-            <span class="k">if</span> <span class="n">debug</span><span class="p">:</span>
-                <span class="nb">print</span><span class="p">(</span><span class="s2">"[cache] </span><span class="si">%s</span><span class="s2">"</span> <span class="o">%</span> <span class="s2">", "</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">message</span><span class="p">))</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">hit</span> <span class="o">=</span> <span class="kc">False</span>
-            <span class="k">if</span> <span class="n">debug</span><span class="p">:</span>
-                <span class="nb">print</span><span class="p">(</span><span class="s2">"[cache] cold start"</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">hit</span><span class="p">:</span>
-            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_forward_cache</span><span class="p">[</span><span class="s2">"result"</span><span class="p">]</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_forward_cache</span> <span class="o">=</span> <span class="p">{}</span>
-
-        <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">arguments</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">data</span><span class="o">.</span><span class="n">Graph</span><span class="p">):</span>
-                <span class="n">v</span> <span class="o">=</span> <span class="n">v</span><span class="o">.</span><span class="n">detach</span><span class="p">()</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_forward_cache</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">v</span>
-        <span class="n">result</span> <span class="o">=</span> <span class="n">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_forward_cache</span><span class="p">[</span><span class="s2">"result"</span><span class="p">]</span> <span class="o">=</span> <span class="n">result</span>
-        <span class="k">return</span> <span class="n">result</span>
-
-    <span class="k">return</span> <span class="n">wrapper</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
 
 
 <div class="viewcode-block" id="NeuralLogicProgramming"><a class="viewcode-back" href="../../../api/models.html#torchdrug.models.NeuralLogicProgramming">[docs]</a><span class="nd">@R</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="s2">"models.NeuralLP"</span><span class="p">)</span>
@@ -285,6 +215,7 @@
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">num_entity</span><span class="p">,</span> <span class="n">num_relation</span><span class="p">,</span> <span class="n">hidden_dim</span><span class="p">,</span> <span class="n">num_step</span><span class="p">,</span> <span class="n">num_lstm_layer</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">NeuralLogicProgramming</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+
         <span class="n">num_relation</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">num_relation</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">num_entity</span> <span class="o">=</span> <span class="n">num_entity</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">num_relation</span> <span class="o">=</span> <span class="n">num_relation</span>
@@ -296,21 +227,16 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">weight_linear</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">hidden_dim</span><span class="p">,</span> <span class="n">num_relation</span> <span class="o">*</span> <span class="mi">2</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">linear</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">add_reverse_edges</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">graph</span><span class="p">):</span>
-        <span class="n">edge_list</span> <span class="o">=</span> <span class="n">graph</span><span class="o">.</span><span class="n">edge_list</span><span class="p">[:,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">]]</span>
-        <span class="n">edge_list</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">]</span> <span class="o">+=</span> <span class="n">graph</span><span class="o">.</span><span class="n">num_relation</span>
-        <span class="n">edge_list</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">cat</span><span class="p">((</span><span class="n">graph</span><span class="o">.</span><span class="n">edge_list</span><span class="p">,</span> <span class="n">edge_list</span><span class="p">))</span>
-        <span class="n">edge_weight</span> <span class="o">=</span> <span class="n">graph</span><span class="o">.</span><span class="n">edge_weight</span><span class="o">.</span><span class="n">repeat</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-        <span class="k">return</span> <span class="nb">type</span><span class="p">(</span><span class="n">graph</span><span class="p">)(</span><span class="n">edge_list</span><span class="p">,</span> <span class="n">edge_weight</span><span class="p">,</span> <span class="n">num_node</span><span class="o">=</span><span class="n">graph</span><span class="o">.</span><span class="n">num_node</span><span class="p">,</span> <span class="n">num_relation</span><span class="o">=</span><span class="n">graph</span><span class="o">.</span><span class="n">num_relation</span> <span class="o">*</span> <span class="mi">2</span><span class="p">)</span>
-
     <span class="k">def</span> <span class="nf">negative_sample_to_tail</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">h_index</span><span class="p">,</span> <span class="n">t_index</span><span class="p">,</span> <span class="n">r_index</span><span class="p">):</span>
+        <span class="c1"># convert p(h | t, r) to p(t' | h', r')</span>
+        <span class="c1"># h' = t, r' = r^{-1}, t' = h</span>
         <span class="n">is_t_neg</span> <span class="o">=</span> <span class="p">(</span><span class="n">h_index</span> <span class="o">==</span> <span class="n">h_index</span><span class="p">[:,</span> <span class="p">[</span><span class="mi">0</span><span class="p">]])</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">dim</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">keepdim</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
         <span class="n">new_h_index</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">is_t_neg</span><span class="p">,</span> <span class="n">h_index</span><span class="p">,</span> <span class="n">t_index</span><span class="p">)</span>
         <span class="n">new_t_index</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">is_t_neg</span><span class="p">,</span> <span class="n">t_index</span><span class="p">,</span> <span class="n">h_index</span><span class="p">)</span>
         <span class="n">new_r_index</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">is_t_neg</span><span class="p">,</span> <span class="n">r_index</span><span class="p">,</span> <span class="n">r_index</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_relation</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">new_h_index</span><span class="p">,</span> <span class="n">new_t_index</span><span class="p">,</span> <span class="n">new_r_index</span>
 
-    <span class="nd">@cached</span>
+    <span class="nd">@utils</span><span class="o">.</span><span class="n">cached</span>
     <span class="k">def</span> <span class="nf">get_t_output</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">graph</span><span class="p">,</span> <span class="n">h_index</span><span class="p">,</span> <span class="n">r_index</span><span class="p">):</span>
         <span class="n">end_index</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">ones_like</span><span class="p">(</span><span class="n">r_index</span><span class="p">)</span> <span class="o">*</span> <span class="n">graph</span><span class="o">.</span><span class="n">num_relation</span>
         <span class="n">q_index</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">stack</span><span class="p">([</span><span class="n">r_index</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">num_step</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="p">[</span><span class="n">end_index</span><span class="p">],</span> <span class="n">dim</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
@@ -361,7 +287,7 @@
 <span class="sd">            metric (dict, optional): if specified, output metrics to this dict</span>
 <span class="sd">        """</span>
         <span class="k">assert</span> <span class="n">graph</span><span class="o">.</span><span class="n">num_relation</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_relation</span>
-        <span class="n">graph</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">add_reverse_edges</span><span class="p">(</span><span class="n">graph</span><span class="p">)</span>
+        <span class="n">graph</span> <span class="o">=</span> <span class="n">graph</span><span class="o">.</span><span class="n">undirected</span><span class="p">(</span><span class="n">add_inverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
         <span class="n">h_index</span><span class="p">,</span> <span class="n">t_index</span><span class="p">,</span> <span class="n">r_index</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">negative_sample_to_tail</span><span class="p">(</span><span class="n">h_index</span><span class="p">,</span> <span class="n">t_index</span><span class="p">,</span> <span class="n">r_index</span><span class="p">)</span>
         <span class="n">hr_index</span> <span class="o">=</span> <span class="n">h_index</span> <span class="o">*</span> <span class="n">graph</span><span class="o">.</span><span class="n">num_relation</span> <span class="o">+</span> <span class="n">r_index</span>

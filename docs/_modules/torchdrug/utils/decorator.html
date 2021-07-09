@@ -185,7 +185,17 @@
           <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
         </label>
         <h1>Source code for torchdrug.utils.decorator</h1><div class="highlight"><pre>
-<div class="viewcode-block" id="cached_property"><a class="viewcode-back" href="../../../api/utils.html#torchdrug.utils.cached_property">[docs]</a><span></span><span class="k">class</span> <span class="nc">cached_property</span><span class="p">(</span><span class="nb">property</span><span class="p">):</span>
+<span></span><span class="kn">import</span> <span class="nn">inspect</span>
+
+<span class="kn">from</span> <span class="nn">decorator</span> <span class="kn">import</span> <span class="n">decorator</span>
+
+<span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">from</span> <span class="nn">torch</span> <span class="kn">import</span> <span class="n">nn</span>
+
+<span class="kn">from</span> <span class="nn">torchdrug</span> <span class="kn">import</span> <span class="n">data</span>
+
+
+<div class="viewcode-block" id="cached_property"><a class="viewcode-back" href="../../../api/utils.html#torchdrug.utils.cached_property">[docs]</a><span class="k">class</span> <span class="nc">cached_property</span><span class="p">(</span><span class="nb">property</span><span class="p">):</span>
     <span class="sd">"""</span>
 <span class="sd">    Cache the property once computed.</span>
 <span class="sd">    """</span>
@@ -198,6 +208,75 @@
         <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">func</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span>
         <span class="n">obj</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">func</span><span class="o">.</span><span class="vm">__name__</span><span class="p">]</span> <span class="o">=</span> <span class="n">result</span>
         <span class="k">return</span> <span class="n">result</span></div>
+
+
+<span class="k">def</span> <span class="nf">cached</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="sd">"""</span>
+<span class="sd">    Cache the result of last function call.</span>
+<span class="sd">    """</span>
+
+    <span class="nd">@decorator</span>
+    <span class="k">def</span> <span class="nf">wrapper</span><span class="p">(</span><span class="n">forward</span><span class="p">,</span> <span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+
+        <span class="k">def</span> <span class="nf">equal</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">nn</span><span class="o">.</span><span class="n">Parameter</span><span class="p">):</span>
+                <span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">data</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">nn</span><span class="o">.</span><span class="n">Parameter</span><span class="p">):</span>
+                <span class="n">y</span> <span class="o">=</span> <span class="n">y</span><span class="o">.</span><span class="n">data</span>
+            <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">type</span><span class="p">(</span><span class="n">y</span><span class="p">):</span>
+                <span class="k">return</span> <span class="kc">False</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">):</span>
+                <span class="k">return</span> <span class="n">x</span><span class="o">.</span><span class="n">shape</span> <span class="o">==</span> <span class="n">y</span><span class="o">.</span><span class="n">shape</span> <span class="ow">and</span> <span class="p">(</span><span class="n">x</span> <span class="o">==</span> <span class="n">y</span><span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
+            <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">data</span><span class="o">.</span><span class="n">Graph</span><span class="p">):</span>
+                <span class="k">if</span> <span class="n">x</span><span class="o">.</span><span class="n">num_node</span> <span class="o">!=</span> <span class="n">y</span><span class="o">.</span><span class="n">num_node</span> <span class="ow">or</span> <span class="n">x</span><span class="o">.</span><span class="n">num_edge</span> <span class="o">!=</span> <span class="n">y</span><span class="o">.</span><span class="n">num_edge</span> <span class="ow">or</span> <span class="n">x</span><span class="o">.</span><span class="n">num_relation</span> <span class="o">!=</span> <span class="n">y</span><span class="o">.</span><span class="n">num_relation</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="kc">False</span>
+                <span class="n">edge_feature</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="s2">"edge_feature"</span><span class="p">,</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="n">x</span><span class="o">.</span><span class="n">device</span><span class="p">))</span>
+                <span class="n">y_edge_feature</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="s2">"edge_feature"</span><span class="p">,</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="n">y</span><span class="o">.</span><span class="n">device</span><span class="p">))</span>
+                <span class="k">if</span> <span class="n">edge_feature</span><span class="o">.</span><span class="n">shape</span> <span class="o">!=</span> <span class="n">y_edge_feature</span><span class="o">.</span><span class="n">shape</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="kc">False</span>
+                <span class="k">return</span> <span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">edge_list</span> <span class="o">==</span> <span class="n">y</span><span class="o">.</span><span class="n">edge_list</span><span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">()</span> <span class="ow">and</span> <span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">edge_weight</span> <span class="o">==</span> <span class="n">y</span><span class="o">.</span><span class="n">edge_weight</span><span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">()</span> \
+                       <span class="ow">and</span> <span class="p">(</span><span class="n">edge_feature</span> <span class="o">==</span> <span class="n">y_edge_feature</span><span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">x</span> <span class="o">==</span> <span class="n">y</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">training</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+        <span class="n">func</span> <span class="o">=</span> <span class="n">inspect</span><span class="o">.</span><span class="n">signature</span><span class="p">(</span><span class="n">forward</span><span class="p">)</span>
+        <span class="n">func</span> <span class="o">=</span> <span class="n">func</span><span class="o">.</span><span class="n">bind</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="n">func</span><span class="o">.</span><span class="n">apply_defaults</span><span class="p">()</span>
+        <span class="n">arguments</span> <span class="o">=</span> <span class="n">func</span><span class="o">.</span><span class="n">arguments</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="n">arguments</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="nb">next</span><span class="p">(</span><span class="nb">iter</span><span class="p">(</span><span class="n">arguments</span><span class="o">.</span><span class="n">keys</span><span class="p">())))</span>
+
+        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">"_forward_cache"</span><span class="p">):</span>
+            <span class="n">hit</span> <span class="o">=</span> <span class="kc">True</span>
+            <span class="n">message</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">arguments</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="n">equal</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_forward_cache</span><span class="p">[</span><span class="n">k</span><span class="p">],</span> <span class="n">v</span><span class="p">):</span>
+                    <span class="n">hit</span> <span class="o">=</span> <span class="kc">False</span>
+                    <span class="n">message</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">"</span><span class="si">%s</span><span class="s2">: miss"</span> <span class="o">%</span> <span class="n">k</span><span class="p">)</span>
+                    <span class="k">break</span>
+                <span class="n">message</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">"</span><span class="si">%s</span><span class="s2">: hit"</span> <span class="o">%</span> <span class="n">k</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">debug</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">"[cache] </span><span class="si">%s</span><span class="s2">"</span> <span class="o">%</span> <span class="s2">", "</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">message</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">hit</span> <span class="o">=</span> <span class="kc">False</span>
+            <span class="k">if</span> <span class="n">debug</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">"[cache] cold start"</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">hit</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_forward_cache</span><span class="p">[</span><span class="s2">"result"</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_forward_cache</span> <span class="o">=</span> <span class="p">{}</span>
+
+        <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">arguments</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">data</span><span class="o">.</span><span class="n">Graph</span><span class="p">):</span>
+                <span class="n">v</span> <span class="o">=</span> <span class="n">v</span><span class="o">.</span><span class="n">detach</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_forward_cache</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">v</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_forward_cache</span><span class="p">[</span><span class="s2">"result"</span><span class="p">]</span> <span class="o">=</span> <span class="n">result</span>
+        <span class="k">return</span> <span class="n">result</span>
+
+    <span class="k">return</span> <span class="n">wrapper</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
 </pre></div>
       </article>
       <footer>

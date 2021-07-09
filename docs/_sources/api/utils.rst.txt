@@ -3,6 +3,16 @@ torchdrug.utils
 
 .. currentmodule:: torchdrug.utils
 
+Visualization
+-------------
+
+.. currentmodule:: torchdrug.utils.plot
+
+.. autofunction:: reaction
+
+.. autofunction:: highlight
+
+.. autofunction:: echarts
 
 Auxiliary Torch Functions
 -------------------------
@@ -20,6 +30,27 @@ Auxiliary Torch Functions
 .. autofunction:: cat
 
 .. autofunction:: sparse_coo_tensor
+
+Distributed Communication
+-------------------------
+
+.. currentmodule:: torchdrug.utils.comm
+
+.. autofunction:: init_process_group
+
+.. autofunction:: get_cpu_count
+
+.. autofunction:: get_group
+
+.. autofunction:: get_rank
+
+.. autofunction:: get_world_size
+
+.. autofunction:: reduce
+
+.. autofunction:: stack
+
+.. autofunction:: cat
 
 File Processing
 ---------------
@@ -45,27 +76,6 @@ Commandline I/O
 
 .. automodule:: torchdrug.utils.pretty
     :members:
-
-Distributed Communication
--------------------------
-
-.. currentmodule:: torchdrug.utils.comm
-
-.. autofunction:: init_process_group
-
-.. autofunction:: get_cpu_count
-
-.. autofunction:: get_group
-
-.. autofunction:: get_rank
-
-.. autofunction:: get_world_size
-
-.. autofunction:: reduce
-
-.. autofunction:: stack
-
-.. autofunction:: cat
 
 Decorator
 ---------

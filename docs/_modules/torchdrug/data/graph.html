@@ -414,15 +414,16 @@
 <span class="sd">            (PackedGraph, Tensor): connected components, number of connected components per graph</span>
 <span class="sd">        """</span>
         <span class="n">node_in</span><span class="p">,</span> <span class="n">node_out</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">edge_list</span><span class="o">.</span><span class="n">t</span><span class="p">()[:</span><span class="mi">2</span><span class="p">]</span>
-        <span class="n">node_in</span><span class="p">,</span> <span class="n">node_out</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">cat</span><span class="p">([</span><span class="n">node_in</span><span class="p">,</span> <span class="n">node_out</span><span class="p">]),</span> <span class="n">torch</span><span class="o">.</span><span class="n">cat</span><span class="p">([</span><span class="n">node_out</span><span class="p">,</span> <span class="n">node_in</span><span class="p">])</span>
+        <span class="nb">range</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">num_node</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">device</span><span class="p">)</span>
+        <span class="n">node_in</span><span class="p">,</span> <span class="n">node_out</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">cat</span><span class="p">([</span><span class="n">node_in</span><span class="p">,</span> <span class="n">node_out</span><span class="p">,</span> <span class="nb">range</span><span class="p">]),</span> <span class="n">torch</span><span class="o">.</span><span class="n">cat</span><span class="p">([</span><span class="n">node_out</span><span class="p">,</span> <span class="n">node_in</span><span class="p">,</span> <span class="nb">range</span><span class="p">])</span>
 
-        <span class="c1"># find strongly connected component</span>
+        <span class="c1"># find connected component</span>
         <span class="c1"># O(d|E|), d is the diameter of the graph</span>
         <span class="n">min_neighbor</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">num_node</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">device</span><span class="p">)</span>
         <span class="n">last</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">min_neighbor</span><span class="p">)</span>
         <span class="k">while</span> <span class="ow">not</span> <span class="n">torch</span><span class="o">.</span><span class="n">equal</span><span class="p">(</span><span class="n">min_neighbor</span><span class="p">,</span> <span class="n">last</span><span class="p">):</span>
             <span class="n">last</span> <span class="o">=</span> <span class="n">min_neighbor</span>
-            <span class="n">min_neighbor</span> <span class="o">=</span> <span class="n">scatter_min</span><span class="p">(</span><span class="n">min_neighbor</span><span class="p">[</span><span class="n">node_out</span><span class="p">],</span> <span class="n">node_in</span><span class="p">,</span> <span class="n">out</span><span class="o">=</span><span class="n">last</span><span class="p">,</span> <span class="n">dim_size</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">num_node</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">min_neighbor</span> <span class="o">=</span> <span class="n">scatter_min</span><span class="p">(</span><span class="n">min_neighbor</span><span class="p">[</span><span class="n">node_out</span><span class="p">],</span> <span class="n">node_in</span><span class="p">,</span> <span class="n">dim_size</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">num_node</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
         <span class="n">anchor</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">min_neighbor</span><span class="p">)</span>
         <span class="n">num_cc</span> <span class="o">=</span> <span class="n">scatter_add</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">ones_like</span><span class="p">(</span><span class="n">anchor</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">node2graph</span><span class="p">[</span><span class="n">anchor</span><span class="p">])</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">min_neighbor</span><span class="p">),</span> <span class="n">num_cc</span></div>
@@ -515,7 +516,7 @@
 <span class="sd">        Repeat this graph.</span>
 
 <span class="sd">        Parameters:</span>
-<span class="sd">            count (int): number of times</span>
+<span class="sd">            count (int): number of repetitions</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            PackedGraph</span>
@@ -525,6 +526,7 @@
         <span class="n">num_nodes</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">num_node</span><span class="p">]</span> <span class="o">*</span> <span class="n">count</span>
         <span class="n">num_edges</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">num_edge</span><span class="p">]</span> <span class="o">*</span> <span class="n">count</span>
         <span class="n">num_relation</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_relation</span>
+
         <span class="n">data_dict</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">data_dict</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">meta_dict</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">==</span> <span class="s2">"graph"</span><span class="p">:</span>
@@ -745,6 +747,46 @@
         <span class="k">return</span> <span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)(</span><span class="n">edge_list</span><span class="p">,</span> <span class="n">edge_weight</span><span class="o">=</span><span class="n">edge_weight</span><span class="p">,</span> <span class="n">num_node</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">num_node</span><span class="p">,</span> <span class="n">num_relation</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">num_relation</span><span class="p">,</span>
                           <span class="n">meta_dict</span><span class="o">=</span><span class="n">meta_dict</span><span class="p">,</span> <span class="o">**</span><span class="n">data_dict</span><span class="p">)</span></div>
 
+<div class="viewcode-block" id="Graph.directed"><a class="viewcode-back" href="../../../api/data.html#torchdrug.data.Graph.directed">[docs]</a>    <span class="k">def</span> <span class="nf">directed</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">"""</span>
+<span class="sd">        Mask the edges to create a directed graph.</span>
+<span class="sd">        Edges that go from a node index to a larger or equal node index will be kept.</span>
+
+<span class="sd">        Parameters:</span>
+<span class="sd">            order (Tensor, optional): topological order of the nodes</span>
+<span class="sd">        """</span>
+        <span class="n">node_in</span><span class="p">,</span> <span class="n">node_out</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">edge_list</span><span class="o">.</span><span class="n">t</span><span class="p">()[:</span><span class="mi">2</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">order</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">edge_index</span> <span class="o">=</span> <span class="n">order</span><span class="p">[</span><span class="n">node_in</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">order</span><span class="p">[</span><span class="n">node_out</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">edge_index</span> <span class="o">=</span> <span class="n">node_in</span> <span class="o">&lt;=</span> <span class="n">node_out</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">edge_mask</span><span class="p">(</span><span class="n">edge_index</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Graph.undirected"><a class="viewcode-back" href="../../../api/data.html#torchdrug.data.Graph.undirected">[docs]</a>    <span class="k">def</span> <span class="nf">undirected</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">add_inverse</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="sd">"""</span>
+<span class="sd">        Flip all the edges to create an undirected graph.</span>
+
+<span class="sd">        For knowledge graphs, the flipped edges can either have the original relation or an inverse relation.</span>
+<span class="sd">        The inverse relation for relation :math:`r` is defined as :math:`|R| + r`.</span>
+
+<span class="sd">        Parameters:</span>
+<span class="sd">            add_inverse (bool, optional): whether to use inverse relations for flipped edges</span>
+<span class="sd">        """</span>
+        <span class="n">edge_list</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">edge_list</span><span class="o">.</span><span class="n">clone</span><span class="p">()</span>
+        <span class="n">edge_list</span><span class="p">[:,</span> <span class="p">:</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">edge_list</span><span class="p">[:,</span> <span class="p">:</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">flip</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">num_relation</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_relation</span>
+        <span class="k">if</span> <span class="n">num_relation</span> <span class="ow">and</span> <span class="n">add_inverse</span><span class="p">:</span>
+            <span class="n">edge_list</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">]</span> <span class="o">+=</span> <span class="n">num_relation</span>
+            <span class="n">num_relation</span> <span class="o">=</span> <span class="n">num_relation</span> <span class="o">*</span> <span class="mi">2</span>
+        <span class="n">edge_list</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">stack</span><span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">edge_list</span><span class="p">,</span> <span class="n">edge_list</span><span class="p">],</span> <span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">flatten</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+        <span class="n">index</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">num_edge</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">device</span><span class="p">)</span><span class="o">.</span><span class="n">unsqueeze</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">expand</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
+        <span class="n">data_dict</span><span class="p">,</span> <span class="n">meta_dict</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data_mask</span><span class="p">(</span><span class="n">edge_index</span><span class="o">=</span><span class="n">index</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)(</span><span class="n">edge_list</span><span class="p">,</span> <span class="n">edge_weight</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">edge_weight</span><span class="p">[</span><span class="n">index</span><span class="p">],</span> <span class="n">num_node</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">num_node</span><span class="p">,</span>
+                          <span class="n">num_relation</span><span class="o">=</span><span class="n">num_relation</span><span class="p">,</span> <span class="n">meta_dict</span><span class="o">=</span><span class="n">meta_dict</span><span class="p">,</span> <span class="o">**</span><span class="n">data_dict</span><span class="p">)</span></div>
+
     <span class="nd">@utils</span><span class="o">.</span><span class="n">cached_property</span>
     <span class="k">def</span> <span class="nf">adjacency</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">"""</span>
@@ -809,7 +851,15 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">edge_weight</span><span class="o">.</span><span class="n">requires_grad</span>
 
     <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">grad</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">edge_weight</span><span class="o">.</span><span class="n">grad</span>
+
+    <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">data</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span> <span class="nf">requires_grad_</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">edge_weight</span><span class="o">.</span><span class="n">requires_grad_</span><span class="p">()</span>
         <span class="k">return</span> <span class="bp">self</span>
 
     <span class="k">def</span> <span class="nf">size</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
@@ -1118,10 +1168,13 @@
 
 <div class="viewcode-block" id="PackedGraph.repeat"><a class="viewcode-back" href="../../../api/data.html#torchdrug.data.PackedGraph.repeat">[docs]</a>    <span class="k">def</span> <span class="nf">repeat</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">count</span><span class="p">):</span>
         <span class="sd">"""</span>
-<span class="sd">        Repeat this packed graph.</span>
+<span class="sd">        Repeat this packed graph. This function behaves similarly to `torch.Tensor.repeat`_.</span>
+
+<span class="sd">        .. _torch.Tensor.repeat:</span>
+<span class="sd">            https://pytorch.org/docs/stable/generated/torch.Tensor.repeat.html</span>
 
 <span class="sd">        Parameters:</span>
-<span class="sd">            count (int): number of times</span>
+<span class="sd">            count (int): number of repetitions</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            PackedGraph</span>
@@ -1142,6 +1195,63 @@
                           <span class="n">num_nodes</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">num_nodes</span><span class="o">.</span><span class="n">repeat</span><span class="p">(</span><span class="n">count</span><span class="p">),</span> <span class="n">num_edges</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">num_edges</span><span class="o">.</span><span class="n">repeat</span><span class="p">(</span><span class="n">count</span><span class="p">),</span>
                           <span class="n">num_relation</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">num_relation</span><span class="p">,</span> <span class="n">offsets</span><span class="o">=</span><span class="n">offsets</span><span class="p">,</span>
                           <span class="n">meta_dict</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">meta_dict</span><span class="p">,</span> <span class="o">**</span><span class="n">data_dict</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="PackedGraph.repeat_interleave"><a class="viewcode-back" href="../../../api/data.html#torchdrug.data.PackedGraph.repeat_interleave">[docs]</a>    <span class="k">def</span> <span class="nf">repeat_interleave</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">repeats</span><span class="p">):</span>
+        <span class="sd">"""</span>
+<span class="sd">        Repeat this packed graph. This function behaves similarly to `torch.repeat_interleave`_.</span>
+
+<span class="sd">        .. _torch.repeat_interleave:</span>
+<span class="sd">            https://pytorch.org/docs/stable/generated/torch.repeat_interleave.html</span>
+
+<span class="sd">        Parameters:</span>
+<span class="sd">            repeats (Tensor): number of repetitions for each graph</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            PackedGraph</span>
+<span class="sd">        """</span>
+        <span class="n">repeats</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">as_tensor</span><span class="p">(</span><span class="n">repeats</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">long</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">device</span><span class="p">)</span>
+        <span class="n">num_nodes</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_nodes</span><span class="o">.</span><span class="n">repeat_interleave</span><span class="p">(</span><span class="n">repeats</span><span class="p">)</span>
+        <span class="n">num_edges</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_edges</span><span class="o">.</span><span class="n">repeat_interleave</span><span class="p">(</span><span class="n">repeats</span><span class="p">)</span>
+        <span class="n">num_cum_nodes</span> <span class="o">=</span> <span class="n">num_nodes</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+        <span class="n">num_cum_edges</span> <span class="o">=</span> <span class="n">num_edges</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+        <span class="n">num_node</span> <span class="o">=</span> <span class="n">num_nodes</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+        <span class="n">num_edge</span> <span class="o">=</span> <span class="n">num_edges</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+        <span class="n">batch_size</span> <span class="o">=</span> <span class="n">repeats</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+
+        <span class="c1"># special case 1: graphs[i] may have no node or no edge</span>
+        <span class="c1"># special case 2: repeats[i] may be 0</span>
+        <span class="n">cum_repeats_shifted</span> <span class="o">=</span> <span class="n">repeats</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">-</span> <span class="n">repeats</span>
+        <span class="n">graph_mask</span> <span class="o">=</span> <span class="n">cum_repeats_shifted</span> <span class="o">&lt;</span> <span class="n">batch_size</span>
+        <span class="n">cum_repeats_shifted</span> <span class="o">=</span> <span class="n">cum_repeats_shifted</span><span class="p">[</span><span class="n">graph_mask</span><span class="p">]</span>
+        <span class="n">index</span> <span class="o">=</span> <span class="n">num_cum_nodes</span> <span class="o">-</span> <span class="n">num_nodes</span>
+        <span class="n">index</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">cat</span><span class="p">([</span><span class="n">index</span><span class="p">,</span> <span class="n">index</span><span class="p">[</span><span class="n">cum_repeats_shifted</span><span class="p">]])</span>
+        <span class="n">value</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">cat</span><span class="p">([</span><span class="o">-</span><span class="n">num_nodes</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_nodes</span><span class="p">[</span><span class="n">graph_mask</span><span class="p">]])</span>
+        <span class="n">mask</span> <span class="o">=</span> <span class="n">index</span> <span class="o">&lt;</span> <span class="n">num_node</span>
+        <span class="n">node_index</span> <span class="o">=</span> <span class="n">scatter_add</span><span class="p">(</span><span class="n">value</span><span class="p">[</span><span class="n">mask</span><span class="p">],</span> <span class="n">index</span><span class="p">[</span><span class="n">mask</span><span class="p">],</span> <span class="n">dim_size</span><span class="o">=</span><span class="n">num_node</span><span class="p">)</span>
+        <span class="n">node_index</span> <span class="o">=</span> <span class="p">(</span><span class="n">node_index</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
+        <span class="n">index</span> <span class="o">=</span> <span class="n">num_cum_edges</span> <span class="o">-</span> <span class="n">num_edges</span>
+        <span class="n">index</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">cat</span><span class="p">([</span><span class="n">index</span><span class="p">,</span> <span class="n">index</span><span class="p">[</span><span class="n">cum_repeats_shifted</span><span class="p">]])</span>
+        <span class="n">value</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">cat</span><span class="p">([</span><span class="o">-</span><span class="n">num_edges</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_edges</span><span class="p">[</span><span class="n">graph_mask</span><span class="p">]])</span>
+        <span class="n">mask</span> <span class="o">=</span> <span class="n">index</span> <span class="o">&lt;</span> <span class="n">num_edge</span>
+        <span class="n">edge_index</span> <span class="o">=</span> <span class="n">scatter_add</span><span class="p">(</span><span class="n">value</span><span class="p">[</span><span class="n">mask</span><span class="p">],</span> <span class="n">index</span><span class="p">[</span><span class="n">mask</span><span class="p">],</span> <span class="n">dim_size</span><span class="o">=</span><span class="n">num_edge</span><span class="p">)</span>
+        <span class="n">edge_index</span> <span class="o">=</span> <span class="p">(</span><span class="n">edge_index</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
+        <span class="n">graph_index</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">repeat_interleave</span><span class="p">(</span><span class="n">repeats</span><span class="p">)</span>
+
+        <span class="n">index</span> <span class="o">=</span> <span class="n">num_cum_edges</span> <span class="o">-</span> <span class="n">num_edges</span>
+        <span class="n">index</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">cat</span><span class="p">([</span><span class="n">index</span><span class="p">,</span> <span class="n">index</span><span class="p">[</span><span class="n">cum_repeats_shifted</span><span class="p">]])</span>
+        <span class="n">value</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">cat</span><span class="p">([</span><span class="n">num_nodes</span><span class="p">,</span> <span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">num_nodes</span><span class="p">[</span><span class="n">graph_mask</span><span class="p">]])</span>
+        <span class="n">mask</span> <span class="o">=</span> <span class="n">index</span> <span class="o">&lt;</span> <span class="n">num_edge</span>
+        <span class="n">pack_offsets</span> <span class="o">=</span> <span class="n">scatter_add</span><span class="p">(</span><span class="n">value</span><span class="p">[</span><span class="n">mask</span><span class="p">],</span> <span class="n">index</span><span class="p">[</span><span class="n">mask</span><span class="p">],</span> <span class="n">dim_size</span><span class="o">=</span><span class="n">num_edge</span><span class="p">)</span>
+        <span class="n">pack_offsets</span> <span class="o">=</span> <span class="n">pack_offsets</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+        <span class="n">edge_list</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">edge_list</span><span class="p">[</span><span class="n">edge_index</span><span class="p">]</span>
+        <span class="n">edge_list</span><span class="p">[:,</span> <span class="p">:</span><span class="mi">2</span><span class="p">]</span> <span class="o">+=</span> <span class="n">pack_offsets</span><span class="o">.</span><span class="n">unsqueeze</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">offsets</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_offsets</span><span class="p">[</span><span class="n">edge_index</span><span class="p">]</span> <span class="o">+</span> <span class="n">pack_offsets</span>
+
+        <span class="n">data_dict</span><span class="p">,</span> <span class="n">meta_dict</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data_mask</span><span class="p">(</span><span class="n">node_index</span><span class="p">,</span> <span class="n">edge_index</span><span class="p">,</span> <span class="n">graph_index</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)(</span><span class="n">edge_list</span><span class="p">,</span> <span class="n">edge_weight</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">edge_weight</span><span class="p">[</span><span class="n">edge_index</span><span class="p">],</span>
+                          <span class="n">num_nodes</span><span class="o">=</span><span class="n">num_nodes</span><span class="p">,</span> <span class="n">num_edges</span><span class="o">=</span><span class="n">num_edges</span><span class="p">,</span> <span class="n">num_relation</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">num_relation</span><span class="p">,</span> <span class="n">offsets</span><span class="o">=</span><span class="n">offsets</span><span class="p">,</span>
+                          <span class="n">meta_dict</span><span class="o">=</span><span class="n">meta_dict</span><span class="p">,</span> <span class="o">**</span><span class="n">data_dict</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="PackedGraph.get_item"><a class="viewcode-back" href="../../../api/data.html#torchdrug.data.PackedGraph.get_item">[docs]</a>    <span class="k">def</span> <span class="nf">get_item</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
         <span class="sd">"""</span>
@@ -1396,7 +1506,7 @@
 <span class="sd">        Equivalent to :meth:`graph_mask(index, compact=True) &lt;graph_mask&gt;`.</span>
 
 <span class="sd">        Parameters:</span>
-<span class="sd">            index (array_like): node index</span>
+<span class="sd">            index (array_like): graph index</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            PackedGraph</span>
@@ -1405,6 +1515,32 @@
 <span class="sd">            :meth:`PackedGraph.graph_mask`</span>
 <span class="sd">        """</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">graph_mask</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="n">compact</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="PackedGraph.undirected"><a class="viewcode-back" href="../../../api/data.html#torchdrug.data.PackedGraph.undirected">[docs]</a>    <span class="k">def</span> <span class="nf">undirected</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">add_inverse</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="sd">"""</span>
+<span class="sd">        Flip all the edges to create undirected graphs.</span>
+
+<span class="sd">        For knowledge graphs, the flipped edges can either have the original relation or an inverse relation.</span>
+<span class="sd">        The inverse relation for relation :math:`r` is defined as :math:`|R| + r`.</span>
+
+<span class="sd">        Parameters:</span>
+<span class="sd">            add_inverse (bool, optional): whether to use inverse relations for flipped edges</span>
+<span class="sd">        """</span>
+        <span class="n">edge_list</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">edge_list</span><span class="o">.</span><span class="n">clone</span><span class="p">()</span>
+        <span class="n">edge_list</span><span class="p">[:,</span> <span class="p">:</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">edge_list</span><span class="p">[:,</span> <span class="p">:</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">flip</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">num_relation</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_relation</span>
+        <span class="k">if</span> <span class="n">num_relation</span> <span class="ow">and</span> <span class="n">add_inverse</span><span class="p">:</span>
+            <span class="n">edge_list</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">]</span> <span class="o">+=</span> <span class="n">num_relation</span>
+            <span class="n">num_relation</span> <span class="o">=</span> <span class="n">num_relation</span> <span class="o">*</span> <span class="mi">2</span>
+        <span class="n">edge_list</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">stack</span><span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">edge_list</span><span class="p">,</span> <span class="n">edge_list</span><span class="p">],</span> <span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">flatten</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="n">offsets</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_offsets</span><span class="o">.</span><span class="n">unsqueeze</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">expand</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
+
+        <span class="n">index</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">num_edge</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">device</span><span class="p">)</span><span class="o">.</span><span class="n">unsqueeze</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">expand</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
+        <span class="n">data_dict</span><span class="p">,</span> <span class="n">meta_dict</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data_mask</span><span class="p">(</span><span class="n">edge_index</span><span class="o">=</span><span class="n">index</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)(</span><span class="n">edge_list</span><span class="p">,</span> <span class="n">edge_weight</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">edge_weight</span><span class="p">[</span><span class="n">index</span><span class="p">],</span> <span class="n">num_nodes</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">num_nodes</span><span class="p">,</span>
+                          <span class="n">num_edges</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">num_edges</span> <span class="o">*</span> <span class="mi">2</span><span class="p">,</span> <span class="n">num_relation</span><span class="o">=</span><span class="n">num_relation</span><span class="p">,</span> <span class="n">offsets</span><span class="o">=</span><span class="n">offsets</span><span class="p">,</span>
+                          <span class="n">meta_dict</span><span class="o">=</span><span class="n">meta_dict</span><span class="p">,</span> <span class="o">**</span><span class="n">data_dict</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="PackedGraph.detach"><a class="viewcode-back" href="../../../api/data.html#torchdrug.data.PackedGraph.detach">[docs]</a>    <span class="k">def</span> <span class="nf">detach</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">"""</span>

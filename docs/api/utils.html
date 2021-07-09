@@ -186,171 +186,74 @@
         </label>
         <div class="section" id="torchdrug-utils">
 <h1>torchdrug.utils<a class="headerlink" href="#torchdrug-utils" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="visualization">
+<h2>Visualization<a class="headerlink" href="#visualization" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt id="torchdrug.utils.plot.reaction">
+<code class="sig-name descname">reaction</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">reactants</span></em>, <em class="sig-param"><span class="n">products</span></em>, <em class="sig-param"><span class="n">save_file</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">figure_size</span><span class="o">=</span><span class="default_value">3, 3</span></em>, <em class="sig-param"><span class="n">atom_map</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/utils/plot.html#reaction"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.utils.plot.reaction" title="Permalink to this definition">¶</a></dt>
+<dd><p>Visualize a chemical reaction.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>reactants</strong> (<em>list of data.Molecule</em>) – list of reactants</p></li>
+<li><p><strong>products</strong> (<em>list of data.Molecule</em>) – list of products</p></li>
+<li><p><strong>save_file</strong> (<em>str</em><em>, </em><em>optional</em>) – save_file (str, optional): <code class="docutils literal notranslate"><span class="pre">png</span></code> file to save visualization.
+If not provided, show the figure in window.</p></li>
+<li><p><strong>figure_size</strong> (<em>tuple of int</em><em>, </em><em>optional</em>) – width and height of the figure</p></li>
+<li><p><strong>atom_map</strong> (<em>bool</em><em>, </em><em>optional</em>) – visualize atom mapping or not</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py function">
+<dt id="torchdrug.utils.plot.highlight">
+<code class="sig-name descname">highlight</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">molecule</span></em>, <em class="sig-param"><span class="n">atoms</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">bonds</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">atom_colors</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">bond_colors</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">save_file</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">figure_size</span><span class="o">=</span><span class="default_value">3, 3</span></em>, <em class="sig-param"><span class="n">atom_map</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/utils/plot.html#highlight"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.utils.plot.highlight" title="Permalink to this definition">¶</a></dt>
+<dd><p>Visualize a molecule with highlighted atoms or bonds.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>molecule</strong> (<a class="reference internal" href="data.html#torchdrug.data.Molecule" title="torchdrug.data.Molecule"><em>data.Molecule</em></a>) – molecule to visualize</p></li>
+<li><p><strong>atoms</strong> (<em>list of int</em>) – indexes of atoms to highlight</p></li>
+<li><p><strong>bonds</strong> (<em>list of int</em>) – indexes of bonds to highlight</p></li>
+<li><p><strong>atom_colors</strong> (<em>tuple</em><em> or </em><em>dict</em>) – highlight color for atoms.
+Can be a tuple of 3 float between 0 and 1, or a dict that maps each index to a different color.</p></li>
+<li><p><strong>bond_colors</strong> (<em>tuple</em><em> or </em><em>dict</em>) – highlight color for bonds.
+Can be a tuple of 3 float between 0 and 1, or a dict that maps each index to a different color.</p></li>
+<li><p><strong>save_file</strong> (<em>str</em><em>, </em><em>optional</em>) – save_file (str, optional): <code class="docutils literal notranslate"><span class="pre">png</span></code> file to save visualization.
+If not provided, show the figure in window.</p></li>
+<li><p><strong>figure_size</strong> (<em>tuple of int</em><em>, </em><em>optional</em>) – width and height of the figure</p></li>
+<li><p><strong>atom_map</strong> (<em>bool</em><em>, </em><em>optional</em>) – visualize atom mapping or not</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py function">
+<dt id="torchdrug.utils.plot.echarts">
+<code class="sig-name descname">echarts</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">graph</span></em>, <em class="sig-param"><span class="n">title</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">node_colors</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">edge_colors</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">node_labels</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">relation_labels</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">node_types</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">type_labels</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">dynamic_size</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">dynamic_width</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">save_file</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/utils/plot.html#echarts"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.utils.plot.echarts" title="Permalink to this definition">¶</a></dt>
+<dd><p>Visualize a graph in ECharts.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>graph</strong> (<a class="reference internal" href="data.html#torchdrug.data.Graph" title="torchdrug.data.Graph"><em>data.Graph</em></a>) – graph to visualize</p></li>
+<li><p><strong>title</strong> (<em>str</em><em>, </em><em>optional</em>) – title of the graph</p></li>
+<li><p><strong>node_colors</strong> (<em>dict</em><em>, </em><em>optional</em>) – specify colors for some nodes.
+Each color is either a tuple of 3 integers between 0 and 255, or a hex color code.</p></li>
+<li><p><strong>edge_colors</strong> (<em>dict</em><em>, </em><em>optional</em>) – specify colors for some edges.
+Each color is either a tuple of 3 integers between 0 and 255, or a hex color code.</p></li>
+<li><p><strong>node_labels</strong> (<em>list of str</em><em>, </em><em>optional</em>) – labels for each node</p></li>
+<li><p><strong>relation_labels</strong> (<em>list of str</em><em>, </em><em>optional</em>) – labels for each relation</p></li>
+<li><p><strong>node_types</strong> (<em>list of int</em><em>, </em><em>optional</em>) – type for each node</p></li>
+<li><p><strong>type_labels</strong> (<em>list of str</em><em>, </em><em>optional</em>) – labels for each node type</p></li>
+<li><p><strong>dynamic_size</strong> (<em>bool</em><em>, </em><em>optional</em>) – if true, set the size of nodes based on the logarithm of degrees</p></li>
+<li><p><strong>dynamic_width</strong> (<em>bool</em><em>, </em><em>optional</em>) – if true, set the width of edges based on the edge weights</p></li>
+<li><p><strong>save_file</strong> (<em>str</em><em>, </em><em>optional</em>) – <code class="docutils literal notranslate"><span class="pre">html</span></code> file to save visualization, accompanied by a <code class="docutils literal notranslate"><span class="pre">json</span></code> file</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+</div>
 <div class="section" id="auxiliary-torch-functions">
 <h2>Auxiliary Torch Functions<a class="headerlink" href="#auxiliary-torch-functions" title="Permalink to this headline">¶</a></h2>
-<dl class="py function">
-<dt id="torchdrug.utils.load_extension">
-<code class="sig-name descname">load_extension</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span></em>, <em class="sig-param"><span class="n">sources</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/utils/torch.html#load_extension"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.utils.load_extension" title="Permalink to this definition">¶</a></dt>
-<dd><p>Load a PyTorch C++ extension just-in-time (JIT).</p>
-<p>This function performs lazy evaluation and is multi-process-safe.</p>
-<p>See <a class="reference external" href="https://pytorch.org/docs/stable/cpp_extension.html#torch.utils.cpp_extension.load">torch.utils.cpp_extension.load</a> for more details.</p>
-</dd></dl>
-<dl class="py function">
-<dt id="torchdrug.utils.cpu">
-<code class="sig-name descname">cpu</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">obj</span></em>, <em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/utils/torch.html#cpu"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.utils.cpu" title="Permalink to this definition">¶</a></dt>
-<dd><p>Transfer any nested conatiner of tensors to CPU.</p>
-</dd></dl>
-<dl class="py function">
-<dt id="torchdrug.utils.cuda">
-<code class="sig-name descname">cuda</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">obj</span></em>, <em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/utils/torch.html#cuda"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.utils.cuda" title="Permalink to this definition">¶</a></dt>
-<dd><p>Transfer any nested conatiner of tensors to CUDA.</p>
-</dd></dl>
-<dl class="py function">
-<dt id="torchdrug.utils.detach">
-<code class="sig-name descname">detach</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">obj</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/utils/torch.html#detach"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.utils.detach" title="Permalink to this definition">¶</a></dt>
-<dd><p>Detach tensors in any nested conatiner.</p>
-</dd></dl>
-<dl class="py function">
-<dt id="torchdrug.utils.clone">
-<code class="sig-name descname">clone</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">obj</span></em>, <em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/utils/torch.html#clone"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.utils.clone" title="Permalink to this definition">¶</a></dt>
-<dd><p>Clone tensors in any nested conatiner.</p>
-</dd></dl>
-<dl class="py function">
-<dt id="torchdrug.utils.cat">
-<code class="sig-name descname">cat</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">objs</span></em>, <em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/utils/torch.html#cat"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.utils.cat" title="Permalink to this definition">¶</a></dt>
-<dd><p>Concatenate a list of nested containers with the same structure.</p>
-</dd></dl>
-<dl class="py function">
-<dt id="torchdrug.utils.sparse_coo_tensor">
-<code class="sig-name descname">sparse_coo_tensor</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">indices</span></em>, <em class="sig-param"><span class="n">values</span></em>, <em class="sig-param"><span class="n">size</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/utils/torch.html#sparse_coo_tensor"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.utils.sparse_coo_tensor" title="Permalink to this definition">¶</a></dt>
-<dd><p>Construct a sparse COO tensor without index check. Much faster than <a class="reference external" href="https://pytorch.org/docs/stable/generated/torch.sparse_coo_tensor.html">torch.sparse_coo_tensor</a>.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>indices</strong> (<em>Tensor</em>) – 2D indices of shape (2, n)</p></li>
-<li><p><strong>values</strong> (<em>Tensor</em>) – values of shape (n,)</p></li>
-<li><p><strong>size</strong> (<em>list</em>) – size of the tensor</p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-</div>
-<div class="section" id="file-processing">
-<h2>File Processing<a class="headerlink" href="#file-processing" title="Permalink to this headline">¶</a></h2>
-<dl class="py function">
-<dt id="torchdrug.utils.download">
-<code class="sig-name descname">download</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">url</span></em>, <em class="sig-param"><span class="n">path</span></em>, <em class="sig-param"><span class="n">save_file</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">md5</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/utils/file.html#download"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.utils.download" title="Permalink to this definition">¶</a></dt>
-<dd><p>Download a file from the specified url.
-Skip the downloading step if there exists a file satisfying the given MD5.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>url</strong> (<em>str</em>) – URL to download</p></li>
-<li><p><strong>path</strong> (<em>str</em>) – path to store the downloaded file</p></li>
-<li><p><strong>save_file</strong> (<em>str</em><em>, </em><em>optional</em>) – name of save file. If not specified, infer the file name from the URL.</p></li>
-<li><p><strong>md5</strong> (<em>str</em><em>, </em><em>optional</em>) – MD5 of the file</p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-<dl class="py function">
-<dt id="torchdrug.utils.extract">
-<code class="sig-name descname">extract</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">zip_file</span></em>, <em class="sig-param"><span class="n">member</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/utils/file.html#extract"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.utils.extract" title="Permalink to this definition">¶</a></dt>
-<dd><p>Extract files from a zip file. Currently, <code class="docutils literal notranslate"><span class="pre">zip</span></code>, <code class="docutils literal notranslate"><span class="pre">gz</span></code>, <code class="docutils literal notranslate"><span class="pre">tar.gz</span></code>, <code class="docutils literal notranslate"><span class="pre">tar</span></code> file types are supported.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>member</strong> (<em>str</em><em>, </em><em>optional</em>) – extract a specific member from the zip file.
-If not specified, extract all members.</p>
-</dd>
-</dl>
-</dd></dl>
-<dl class="py function">
-<dt id="torchdrug.utils.compute_md5">
-<code class="sig-name descname">compute_md5</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">file_name</span></em>, <em class="sig-param"><span class="n">chunk_size</span><span class="o">=</span><span class="default_value">65536</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/utils/file.html#compute_md5"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.utils.compute_md5" title="Permalink to this definition">¶</a></dt>
-<dd><p>Compute MD5 of the file.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>file_name</strong> (<em>str</em>) – file name</p></li>
-<li><p><strong>chunk_size</strong> (<em>int</em><em>, </em><em>optional</em>) – chunk size for reading large files</p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-<dl class="py function">
-<dt id="torchdrug.utils.get_line_count">
-<code class="sig-name descname">get_line_count</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">file_name</span></em>, <em class="sig-param"><span class="n">chunk_size</span><span class="o">=</span><span class="default_value">8388608</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/utils/file.html#get_line_count"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.utils.get_line_count" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get the number of lines in a file.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>file_name</strong> (<em>str</em>) – file name</p></li>
-<li><p><strong>chunk_size</strong> (<em>int</em><em>, </em><em>optional</em>) – chunk size for reading large files</p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-</div>
-<div class="section" id="commandline-i-o">
-<h2>Commandline I/O<a class="headerlink" href="#commandline-i-o" title="Permalink to this headline">¶</a></h2>
-<dl class="py function">
-<dt id="torchdrug.utils.input_choice">
-<code class="sig-name descname">input_choice</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">prompt</span></em>, <em class="sig-param"><span class="n">choice</span><span class="o">=</span><span class="default_value">'y', 'n'</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/utils/io.html#input_choice"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.utils.input_choice" title="Permalink to this definition">¶</a></dt>
-<dd><p>Print a prompt on the command line and wait for a choice.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>prompt</strong> (<em>str</em>) – prompt string</p></li>
-<li><p><strong>choice</strong> (<em>tuple of str</em><em>, </em><em>optional</em>) – candidate choices</p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-<dl class="py function">
-<dt id="torchdrug.utils.literal_eval">
-<code class="sig-name descname">literal_eval</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">string</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/utils/io.html#literal_eval"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.utils.literal_eval" title="Permalink to this definition">¶</a></dt>
-<dd><p>Evaluate an expression into a Python literal structure.</p>
-</dd></dl>
-<dl class="py function">
-<dt id="torchdrug.utils.no_rdkit_log">
-<code class="sig-name descname">no_rdkit_log</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/utils/io.html#no_rdkit_log"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.utils.no_rdkit_log" title="Permalink to this definition">¶</a></dt>
-<dd><p>Context manager to suppress all rdkit loggings.</p>
-</dd></dl>
-<dl class="py function">
-<dt id="torchdrug.utils.capture_rdkit_log">
-<code class="sig-name descname">capture_rdkit_log</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/utils/io.html#capture_rdkit_log"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.utils.capture_rdkit_log" title="Permalink to this definition">¶</a></dt>
-<dd><p>Context manager to capture all rdkit loggings.</p>
-<p>Examples:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">with</span> <span class="n">utils</span><span class="o">.</span><span class="n">capture_rdkit_log</span><span class="p">()</span> <span class="k">as</span> <span class="n">log</span><span class="p">:</span>
-<span class="gp">&gt;&gt;&gt; </span>    <span class="o">...</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">log</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
-</pre></div>
-</div>
-</dd></dl>
-<span class="target" id="module-torchdrug.utils.pretty"></span><dl class="py function">
-<dt id="torchdrug.utils.pretty.long_array">
-<code class="sig-name descname">long_array</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">array</span></em>, <em class="sig-param"><span class="n">truncation</span><span class="o">=</span><span class="default_value">10</span></em>, <em class="sig-param"><span class="n">display</span><span class="o">=</span><span class="default_value">3</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/utils/pretty.html#long_array"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.utils.pretty.long_array" title="Permalink to this definition">¶</a></dt>
-<dd><p>Format an array as a string.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>array</strong> (<em>array_like</em>) – array-like data</p></li>
-<li><p><strong>truncation</strong> (<em>int</em><em>, </em><em>optional</em>) – truncate array if its length exceeds this threshold</p></li>
-<li><p><strong>display</strong> (<em>int</em><em>, </em><em>optional</em>) – number of elements to display at the beginning and the end in truncated mode</p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-<dl class="py function">
-<dt id="torchdrug.utils.pretty.time">
-<code class="sig-name descname">time</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">seconds</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/utils/pretty.html#time"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.utils.pretty.time" title="Permalink to this definition">¶</a></dt>
-<dd><p>Format time as a string.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>seconds</strong> (<em>float</em>) – time in seconds</p>
-</dd>
-</dl>
-</dd></dl>
 </div>
 <div class="section" id="distributed-communication">
 <h2>Distributed Communication<a class="headerlink" href="#distributed-communication" title="Permalink to this headline">¶</a></h2>
@@ -464,6 +367,36 @@ Available operators are <code class="docutils literal notranslate"><span class="
 </div>
 </dd></dl>
 </div>
+<div class="section" id="file-processing">
+<h2>File Processing<a class="headerlink" href="#file-processing" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-torchdrug.utils.pretty">
+<span id="commandline-i-o"></span><h2>Commandline I/O<a class="headerlink" href="#module-torchdrug.utils.pretty" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt id="torchdrug.utils.pretty.long_array">
+<code class="sig-name descname">long_array</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">array</span></em>, <em class="sig-param"><span class="n">truncation</span><span class="o">=</span><span class="default_value">10</span></em>, <em class="sig-param"><span class="n">display</span><span class="o">=</span><span class="default_value">3</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/utils/pretty.html#long_array"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.utils.pretty.long_array" title="Permalink to this definition">¶</a></dt>
+<dd><p>Format an array as a string.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>array</strong> (<em>array_like</em>) – array-like data</p></li>
+<li><p><strong>truncation</strong> (<em>int</em><em>, </em><em>optional</em>) – truncate array if its length exceeds this threshold</p></li>
+<li><p><strong>display</strong> (<em>int</em><em>, </em><em>optional</em>) – number of elements to display at the beginning and the end in truncated mode</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py function">
+<dt id="torchdrug.utils.pretty.time">
+<code class="sig-name descname">time</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">seconds</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/utils/pretty.html#time"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.utils.pretty.time" title="Permalink to this definition">¶</a></dt>
+<dd><p>Format time as a string.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>seconds</strong> (<em>float</em>) – time in seconds</p>
+</dd>
+</dl>
+</dd></dl>
+</div>
 <div class="section" id="decorator">
 <h2>Decorator<a class="headerlink" href="#decorator" title="Permalink to this headline">¶</a></h2>
 <dl class="py function">
@@ -541,10 +474,11 @@ except those already exist in the current function.</p></li>
           <div class="toc-tree">
             <ul>
 <li><a class="reference internal" href="#">torchdrug.utils</a><ul>
+<li><a class="reference internal" href="#visualization">Visualization</a></li>
 <li><a class="reference internal" href="#auxiliary-torch-functions">Auxiliary Torch Functions</a></li>
-<li><a class="reference internal" href="#file-processing">File Processing</a></li>
-<li><a class="reference internal" href="#commandline-i-o">Commandline I/O</a></li>
 <li><a class="reference internal" href="#distributed-communication">Distributed Communication</a></li>
+<li><a class="reference internal" href="#file-processing">File Processing</a></li>
+<li><a class="reference internal" href="#module-torchdrug.utils.pretty">Commandline I/O</a></li>
 <li><a class="reference internal" href="#decorator">Decorator</a></li>
 <li><a class="reference internal" href="#helper-functions">Helper functions</a></li>
 </ul>
