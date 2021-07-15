@@ -99,14 +99,19 @@ MaxReadout
 .. autoclass:: MaxReadout
     :members:
 
+Set2Set
+^^^^^^^
+.. autoclass:: Set2Set
+    :members:
+
 Softmax
 ^^^^^^^
 .. autoclass:: Softmax
     :members:
 
-Set2Set
+Sort
 ^^^^^^^
-.. autoclass:: Set2Set
+.. autoclass:: Sort
     :members:
 
 
@@ -124,10 +129,45 @@ MinCutPool
     :members:
 
 
+Sampler Layers
+-------------------
+
+EdgeSampler
+^^^^^^^^^^
+.. autoclass:: EdgeSampler
+    :members:
+
+NeighborSampler
+^^^^^^^^^^
+.. autoclass:: NeighborSampler
+    :members:
+
+NodeSampler
+^^^^^^^^^^
+.. autoclass:: NodeSampler
+    :members:
+
+RandomWalkSampler
+^^^^^^^^^^
+.. autoclass:: RandomWalkSampler
+    :members:
+
+
 Distribution Layers
 -------------------
 
-.. automodule:: torchdrug.layers.distribution
+IndependentGaussian
+^^^^^^^^^^
+.. autoclass:: IndependentGaussian
+    :members:
+
+
+Flow Layers
+-------------------
+
+ConditionalFlow
+^^^^^^^^^^
+.. autoclass:: ConditionalFlow
     :members:
 
 

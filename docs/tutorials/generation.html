@@ -1,13 +1,15 @@
 <!doctype html>
 <html class="no-js">
   <head><meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width,initial-scale=1"/><link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Retrosynthesis" href="retrosynthesis.html" /><link rel="prev" title="Pretrained Molecular Representations" href="pretrain.html" />
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Retrosynthesis" href="retrosynthesis.html" /><link rel="prev" title="Pretrained Molecular Representations" href="pretrain.html" />
 
-    <meta name="generator" content="sphinx-3.1.2, furo 2020.12.09.beta21"/>
+    <meta name="generator" content="sphinx-4.0.2, furo 2021.07.05.beta38"/>
         <title>Molecule Generation - TorchDrug 0.1.0 documentation</title>
-      <link rel="stylesheet" href="../_static/styles/furo.css?digest=a3f371badb8538d75df213ccffb17a4f6e8f3ac5">
-    <link rel="stylesheet" href="../_static/pygments.css">
-    <link media="(prefers-color-scheme: dark)" rel="stylesheet" href="../_static/pygments_dark.css">
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css" />
     
 
 
@@ -50,15 +52,7 @@
   --color-code-foreground: #d0d0d0;
   
   }
-</style><link id="pygments_dark_css" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css" href="../_static/pygments_dark.css" />
-    <link rel="stylesheet" href="../_static/styles/furo-extensions.css?digest=26485485040e7aaf717c13fd0188a5ad2c2deb60">
-    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-    <script defer src="../_static/jquery.js"></script>
-    <script defer src="../_static/underscore.js"></script>
-    <script defer src="../_static/doctools.js"></script>
-    <script defer src="../_static/language_data.js"></script>
-    <script defer async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script defer src="../_static/scripts/main.js?digest=e931d09b2a40c1bb82b542effe772014573baf67"></script></head>
+</style><link media="(prefers-color-scheme: dark)" rel="stylesheet" href="../_static/pygments_dark.css"></head>
   <body dir="">
     
 <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
@@ -98,6 +92,7 @@
 <label class="overlay toc-overlay" for="__toc"></label>
 
 
+
 <div class="page">
   <header class="mobile-header">
     <div class="header-left">
@@ -125,7 +120,7 @@
   
   
 </a><form class="sidebar-search-container" method="get" action="../search.html">
-  <input class="sidebar-search" placeholder="Search" name="q">
+  <input class="sidebar-search" placeholder=Search name="q">
   <input type="hidden" name="check_keywords" value="yes">
   <input type="hidden" name="area" value="default">
 </form><div class="sidebar-scroll"><div class="sidebar-tree">
@@ -184,7 +179,7 @@
         <label class="toc-overlay-icon toc-content-icon" for="__toc">
           <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
         </label>
-        <div class="section" id="molecule-generation">
+        <section id="molecule-generation">
 <h1>Molecule Generation<a class="headerlink" href="#molecule-generation" title="Permalink to this headline">¶</a></h1>
 <p>Molecular graph generation is a fundamental problem for drug discovery and has
 been attracting growing attention. The problem is challenging since it requires
@@ -195,7 +190,7 @@ their chemical properties in the meantime.</p>
 the pretrained checkpoint, we finetune both models with reinforcement learning to
 optimize two properties (i.e., QED and penalized logP score) of generated
 molecules.</p>
-<div class="section" id="prepare-the-pretraining-dataset">
+<section id="prepare-the-pretraining-dataset">
 <h2>Prepare the Pretraining Dataset<a class="headerlink" href="#prepare-the-pretraining-dataset" title="Permalink to this headline">¶</a></h2>
 <p>We use <a class="reference external" href="https://pubs.acs.org/doi/pdfplus/10.1021/ci3001277">ZINC250k</a> dataset for pretraining. The dataset contains 250,000 drug-like
 molecules with a maximum atom number of 38. It has 9 atom types and 3 edge types.</p>
@@ -212,8 +207,8 @@ You are encouraged to dump the preprocessed dataset to save the time for future 
 <span class="c1">#     dataset = pickle.load(fin)</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="define-the-model-gcpn">
+</section>
+<section id="define-the-model-gcpn">
 <h2>Define the Model: GCPN<a class="headerlink" href="#define-the-model-gcpn" title="Permalink to this headline">¶</a></h2>
 <p>The model consists of two parts, a graph representation model and a graph generative
 module. We define a Relational Graph Convolutional Networks (<a class="reference external" href="https://arxiv.org/abs/1703.06103.pdf">RGCN</a>) as our
@@ -229,8 +224,8 @@ for GCPN.</p>
                             <span class="n">max_node</span><span class="o">=</span><span class="mi">38</span><span class="p">,</span> <span class="n">criterion</span><span class="o">=</span><span class="s2">"nll"</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="pretraining-and-generation-gcpn">
+</section>
+<section id="pretraining-and-generation-gcpn">
 <h2>Pretraining and Generation: GCPN<a class="headerlink" href="#pretraining-and-generation-gcpn" title="Permalink to this headline">¶</a></h2>
 <p>Now we can train our model. We setup an optimizer for our model, and put
 everything together into an Engine instance.
@@ -275,8 +270,8 @@ CC<span class="o">(</span>CC<span class="o">(=</span>O<span class="o">)</span><s
 </div>
 <p>Let’s visualize some generated molecules.</p>
 <img alt="../_images/zinc250k_gcpn_pretrain_generated.png" src="../_images/zinc250k_gcpn_pretrain_generated.png"/>
-</div>
-<div class="section" id="goal-directed-molecule-generation-with-reinforcement-learning-gcpn">
+</section>
+<section id="goal-directed-molecule-generation-with-reinforcement-learning-gcpn">
 <h2>Goal-Directed Molecule Generation with Reinforcement Learning: GCPN<a class="headerlink" href="#goal-directed-molecule-generation-with-reinforcement-learning-gcpn" title="Permalink to this headline">¶</a></h2>
 <p>For drug discovery, we need to optimize the chemical properties of generated
 molecules. In this part, we introduce how to fine-tune the graph generative model
@@ -346,8 +341,8 @@ codes for finetuning in the following segment.</p>
 </div>
 <p>Let’s visualize some molecules with large QED scores (&gt; 0.945).</p>
 <img alt="../_images/zinc250k_gcpn_qed_generated.png" src="../_images/zinc250k_gcpn_qed_generated.png"/>
-</div>
-<div class="section" id="define-the-model-graphaf">
+</section>
+<section id="define-the-model-graphaf">
 <h2>Define the Model: GraphAF<a class="headerlink" href="#define-the-model-graphaf" title="Permalink to this headline">¶</a></h2>
 <p>The model consists of two parts, a graph representation model and a graph generative
 module. We define a Relational Graph Convolutional Networks (<a class="reference external" href="https://arxiv.org/abs/1703.06103.pdf">RGCN</a>) as our
@@ -379,8 +374,8 @@ distributions.</p>
                                       <span class="n">criterion</span><span class="o">=</span><span class="s2">"nll"</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="pretraining-and-generation-graphaf">
+</section>
+<section id="pretraining-and-generation-graphaf">
 <h2>Pretraining and Generation: GraphAF<a class="headerlink" href="#pretraining-and-generation-graphaf" title="Permalink to this headline">¶</a></h2>
 <p>Now we can train our model. We setup an optimizer for our model, and put everything
 together into an Engine instance. Here we train the model for 10 epochs, and then
@@ -412,8 +407,8 @@ CCC<span class="o">(</span>C<span class="o">)(</span>NC<span class="o">(</span>C
 ...
 </pre></div>
 </div>
-</div>
-<div class="section" id="finetuning-graphaf">
+</section>
+<section id="finetuning-graphaf">
 <h2>Finetuning: GraphAF<a class="headerlink" href="#finetuning-graphaf" title="Permalink to this headline">¶</a></h2>
 <p>For Penalized logP optimization, the code is as follows:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torch</span>
@@ -487,8 +482,8 @@ CCC<span class="o">(</span>C<span class="o">)(</span>NC<span class="o">(</span>C
 ...
 </pre></div>
 </div>
-</div>
-</div>
+</section>
+</section>
 
       </article>
       <footer>
@@ -563,6 +558,10 @@ CCC<span class="o">(</span>C<span class="o">)(</span>NC<span class="o">(</span>C
       
     </aside>
   </main>
-</div>
-  </body>
+</div><script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/scripts/main.js"></script>
+    </body>
 </html>

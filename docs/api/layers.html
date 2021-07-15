@@ -1,13 +1,15 @@
 <!doctype html>
 <html class="no-js">
   <head><meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width,initial-scale=1"/><link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="torchdrug.models" href="models.html" /><link rel="prev" title="torchdrug.metrics" href="metrics.html" />
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="torchdrug.models" href="models.html" /><link rel="prev" title="torchdrug.metrics" href="metrics.html" />
 
-    <meta name="generator" content="sphinx-3.1.2, furo 2020.12.09.beta21"/>
+    <meta name="generator" content="sphinx-4.0.2, furo 2021.07.05.beta38"/>
         <title>torchdrug.layers - TorchDrug 0.1.0 documentation</title>
-      <link rel="stylesheet" href="../_static/styles/furo.css?digest=a3f371badb8538d75df213ccffb17a4f6e8f3ac5">
-    <link rel="stylesheet" href="../_static/pygments.css">
-    <link media="(prefers-color-scheme: dark)" rel="stylesheet" href="../_static/pygments_dark.css">
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css" />
     
 
 
@@ -50,15 +52,7 @@
   --color-code-foreground: #d0d0d0;
   
   }
-</style><link id="pygments_dark_css" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css" href="../_static/pygments_dark.css" />
-    <link rel="stylesheet" href="../_static/styles/furo-extensions.css?digest=26485485040e7aaf717c13fd0188a5ad2c2deb60">
-    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-    <script defer src="../_static/jquery.js"></script>
-    <script defer src="../_static/underscore.js"></script>
-    <script defer src="../_static/doctools.js"></script>
-    <script defer src="../_static/language_data.js"></script>
-    <script defer async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script defer src="../_static/scripts/main.js?digest=e931d09b2a40c1bb82b542effe772014573baf67"></script></head>
+</style><link media="(prefers-color-scheme: dark)" rel="stylesheet" href="../_static/pygments_dark.css"></head>
   <body dir="">
     
 <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
@@ -98,6 +92,7 @@
 <label class="overlay toc-overlay" for="__toc"></label>
 
 
+
 <div class="page">
   <header class="mobile-header">
     <div class="header-left">
@@ -125,7 +120,7 @@
   
   
 </a><form class="sidebar-search-container" method="get" action="../search.html">
-  <input class="sidebar-search" placeholder="Search" name="q">
+  <input class="sidebar-search" placeholder=Search name="q">
   <input type="hidden" name="check_keywords" value="yes">
   <input type="hidden" name="area" value="default">
 </form><div class="sidebar-scroll"><div class="sidebar-tree">
@@ -184,15 +179,15 @@
         <label class="toc-overlay-icon toc-content-icon" for="__toc">
           <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
         </label>
-        <div class="section" id="torchdrug-layers">
+        <section id="torchdrug-layers">
 <h1>torchdrug.layers<a class="headerlink" href="#torchdrug-layers" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="common-layers">
+<section id="common-layers">
 <h2>Common Layers<a class="headerlink" href="#common-layers" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="gaussiansmearing">
+<section id="gaussiansmearing">
 <h3>GaussianSmearing<a class="headerlink" href="#gaussiansmearing" title="Permalink to this headline">¶</a></h3>
 <dl class="py class">
-<dt id="torchdrug.layers.GaussianSmearing">
-<em class="property">class </em><code class="sig-name descname">GaussianSmearing</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">start</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">stop</span><span class="o">=</span><span class="default_value">5</span></em>, <em class="sig-param"><span class="n">num_kernel</span><span class="o">=</span><span class="default_value">100</span></em>, <em class="sig-param"><span class="n">centered</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">learnable</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/common.html#GaussianSmearing"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.layers.GaussianSmearing" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchdrug.layers.GaussianSmearing">
+<em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">GaussianSmearing</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">start</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stop</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_kernel</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">centered</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">learnable</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/common.html#GaussianSmearing"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.layers.GaussianSmearing" title="Permalink to this definition">¶</a></dt>
 <dd><p>Gaussian smearing from
 <a class="reference external" href="https://arxiv.org/pdf/1706.08566.pdf">SchNet: A continuous-filter convolutional neural network for modeling quantum interactions</a>.</p>
 <p>There are two modes for Gaussian smearing.</p>
@@ -214,8 +209,8 @@
 </dd>
 </dl>
 <dl class="py method">
-<dt id="torchdrug.layers.GaussianSmearing.forward">
-<code class="sig-name descname">forward</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">x</span></em>, <em class="sig-param"><span class="n">y</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/common.html#GaussianSmearing.forward"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.layers.GaussianSmearing.forward" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchdrug.layers.GaussianSmearing.forward">
+<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/common.html#GaussianSmearing.forward"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.layers.GaussianSmearing.forward" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compute smeared gaussian features between data.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -233,12 +228,12 @@
 </dl>
 </dd></dl>
 </dd></dl>
-</div>
-<div class="section" id="multilayerperceptron">
+</section>
+<section id="multilayerperceptron">
 <h3>MultiLayerPerceptron<a class="headerlink" href="#multilayerperceptron" title="Permalink to this headline">¶</a></h3>
 <dl class="py class">
-<dt id="torchdrug.layers.MultiLayerPerceptron">
-<em class="property">class </em><code class="sig-name descname">MultiLayerPerceptron</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">input_dim</span></em>, <em class="sig-param"><span class="n">hidden_dims</span></em>, <em class="sig-param"><span class="n">short_cut</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">batch_norm</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">activation</span><span class="o">=</span><span class="default_value">'relu'</span></em>, <em class="sig-param"><span class="n">dropout</span><span class="o">=</span><span class="default_value">0</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/common.html#MultiLayerPerceptron"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.layers.MultiLayerPerceptron" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchdrug.layers.MultiLayerPerceptron">
+<em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">MultiLayerPerceptron</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_dim</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hidden_dims</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">short_cut</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_norm</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">activation</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'relu'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dropout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/common.html#MultiLayerPerceptron"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.layers.MultiLayerPerceptron" title="Permalink to this definition">¶</a></dt>
 <dd><p>Multi-layer Perceptron.</p>
 <p>Note there is no batch normalization, activation or dropout in the last layer.</p>
 <dl class="field-list simple">
@@ -254,12 +249,12 @@
 </dd>
 </dl>
 </dd></dl>
-</div>
-<div class="section" id="mutualinformation">
+</section>
+<section id="mutualinformation">
 <h3>MutualInformation<a class="headerlink" href="#mutualinformation" title="Permalink to this headline">¶</a></h3>
 <dl class="py class">
-<dt id="torchdrug.layers.MutualInformation">
-<em class="property">class </em><code class="sig-name descname">MutualInformation</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">input_dim</span></em>, <em class="sig-param"><span class="n">num_mlp_layer</span><span class="o">=</span><span class="default_value">2</span></em>, <em class="sig-param"><span class="n">activation</span><span class="o">=</span><span class="default_value">'relu'</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/common.html#MutualInformation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.layers.MutualInformation" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchdrug.layers.MutualInformation">
+<em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">MutualInformation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_dim</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_mlp_layer</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">activation</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'relu'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/common.html#MutualInformation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.layers.MutualInformation" title="Permalink to this definition">¶</a></dt>
 <dd><p>Mutual information estimator from
 <a class="reference external" href="https://arxiv.org/pdf/1808.06670.pdf">Learning deep representations by mutual information estimation and maximization</a>.</p>
 <dl class="field-list simple">
@@ -272,12 +267,12 @@
 </dd>
 </dl>
 </dd></dl>
-</div>
-<div class="section" id="pairnorm">
+</section>
+<section id="pairnorm">
 <h3>PairNorm<a class="headerlink" href="#pairnorm" title="Permalink to this headline">¶</a></h3>
 <dl class="py class">
-<dt id="torchdrug.layers.PairNorm">
-<em class="property">class </em><code class="sig-name descname">PairNorm</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">scale_individual</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/common.html#PairNorm"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.layers.PairNorm" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchdrug.layers.PairNorm">
+<em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">PairNorm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">scale_individual</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/common.html#PairNorm"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.layers.PairNorm" title="Permalink to this definition">¶</a></dt>
 <dd><p>Pair normalization layer proposed in <a class="reference external" href="https://openreview.net/pdf?id=rkecl1rtwB">PairNorm: Tackling Oversmoothing in GNNs</a>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -285,12 +280,12 @@
 </dd>
 </dl>
 </dd></dl>
-</div>
-<div class="section" id="sequential">
+</section>
+<section id="sequential">
 <h3>Sequential<a class="headerlink" href="#sequential" title="Permalink to this headline">¶</a></h3>
 <dl class="py class">
-<dt id="torchdrug.layers.Sequential">
-<em class="property">class </em><code class="sig-name descname">Sequential</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="n">global_args</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">allow_unused</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/common.html#Sequential"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.layers.Sequential" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchdrug.layers.Sequential">
+<em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">Sequential</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">global_args</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">allow_unused</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/common.html#Sequential"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.layers.Sequential" title="Permalink to this definition">¶</a></dt>
 <dd><p>Improved sequential container.
 Modules will be called in the order they are passed to the constructor.</p>
 <p>Compared to the vanilla nn.Sequential, this layer additionally supports the following features.</p>
@@ -334,18 +329,18 @@ overwritten by any layer outputs.</p>
 </pre></div>
 </div>
 </dd></dl>
-</div>
-</div>
-<div class="section" id="convolution-layers">
+</section>
+</section>
+<section id="convolution-layers">
 <h2>Convolution Layers<a class="headerlink" href="#convolution-layers" title="Permalink to this headline">¶</a></h2>
 <dl class="py class">
-<dt id="torchdrug.layers.MessagePassingBase">
-<em class="property">class </em><code class="sig-name descname">MessagePassingBase</code><a class="reference internal" href="../_modules/torchdrug/layers/conv.html#MessagePassingBase"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.layers.MessagePassingBase" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchdrug.layers.MessagePassingBase">
+<em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">MessagePassingBase</span></span><a class="reference internal" href="../_modules/torchdrug/layers/conv.html#MessagePassingBase"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.layers.MessagePassingBase" title="Permalink to this definition">¶</a></dt>
 <dd><p>Base module for message passing.</p>
 <p>Any custom message passing module should be derived from this class.</p>
 <dl class="py method">
-<dt id="torchdrug.layers.MessagePassingBase.aggregate">
-<code class="sig-name descname">aggregate</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">graph</span></em>, <em class="sig-param"><span class="n">message</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/conv.html#MessagePassingBase.aggregate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.layers.MessagePassingBase.aggregate" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchdrug.layers.MessagePassingBase.aggregate">
+<span class="sig-name descname"><span class="pre">aggregate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">message</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/conv.html#MessagePassingBase.aggregate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.layers.MessagePassingBase.aggregate" title="Permalink to this definition">¶</a></dt>
 <dd><p>Aggregate edge messages to nodes.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -363,8 +358,8 @@ overwritten by any layer outputs.</p>
 </dl>
 </dd></dl>
 <dl class="py method">
-<dt id="torchdrug.layers.MessagePassingBase.combine">
-<code class="sig-name descname">combine</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">input</span></em>, <em class="sig-param"><span class="n">update</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/conv.html#MessagePassingBase.combine"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.layers.MessagePassingBase.combine" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchdrug.layers.MessagePassingBase.combine">
+<span class="sig-name descname"><span class="pre">combine</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">update</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/conv.html#MessagePassingBase.combine"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.layers.MessagePassingBase.combine" title="Permalink to this definition">¶</a></dt>
 <dd><p>Combine node input and node update.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -376,8 +371,8 @@ overwritten by any layer outputs.</p>
 </dl>
 </dd></dl>
 <dl class="py method">
-<dt id="torchdrug.layers.MessagePassingBase.forward">
-<code class="sig-name descname">forward</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">graph</span></em>, <em class="sig-param"><span class="n">input</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/conv.html#MessagePassingBase.forward"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.layers.MessagePassingBase.forward" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchdrug.layers.MessagePassingBase.forward">
+<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">input</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/conv.html#MessagePassingBase.forward"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.layers.MessagePassingBase.forward" title="Permalink to this definition">¶</a></dt>
 <dd><p>Perform message passing over the graph(s).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -389,8 +384,8 @@ overwritten by any layer outputs.</p>
 </dl>
 </dd></dl>
 <dl class="py method">
-<dt id="torchdrug.layers.MessagePassingBase.message">
-<code class="sig-name descname">message</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">graph</span></em>, <em class="sig-param"><span class="n">input</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/conv.html#MessagePassingBase.message"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.layers.MessagePassingBase.message" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchdrug.layers.MessagePassingBase.message">
+<span class="sig-name descname"><span class="pre">message</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">input</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/conv.html#MessagePassingBase.message"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.layers.MessagePassingBase.message" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compute edge messages for the graph.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -408,8 +403,8 @@ overwritten by any layer outputs.</p>
 </dl>
 </dd></dl>
 <dl class="py method">
-<dt id="torchdrug.layers.MessagePassingBase.message_and_aggregate">
-<code class="sig-name descname">message_and_aggregate</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">graph</span></em>, <em class="sig-param"><span class="n">input</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/conv.html#MessagePassingBase.message_and_aggregate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.layers.MessagePassingBase.message_and_aggregate" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchdrug.layers.MessagePassingBase.message_and_aggregate">
+<span class="sig-name descname"><span class="pre">message_and_aggregate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">input</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/conv.html#MessagePassingBase.message_and_aggregate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.layers.MessagePassingBase.message_and_aggregate" title="Permalink to this definition">¶</a></dt>
 <dd><p>Fused computation of message and aggregation over the graph.
 This may provide better time or memory complexity than separate calls of
 <a class="reference internal" href="#torchdrug.layers.MessagePassingBase.message" title="torchdrug.layers.MessagePassingBase.message"><code class="xref py py-meth docutils literal notranslate"><span class="pre">message</span></code></a> and <a class="reference internal" href="#torchdrug.layers.MessagePassingBase.aggregate" title="torchdrug.layers.MessagePassingBase.aggregate"><code class="xref py py-meth docutils literal notranslate"><span class="pre">aggregate</span></code></a>.</p>
@@ -429,11 +424,11 @@ This may provide better time or memory complexity than separate calls of
 </dl>
 </dd></dl>
 </dd></dl>
-<div class="section" id="chebyshevconv">
+<section id="chebyshevconv">
 <h3>ChebyshevConv<a class="headerlink" href="#chebyshevconv" title="Permalink to this headline">¶</a></h3>
 <dl class="py class">
-<dt id="torchdrug.layers.ChebyshevConv">
-<em class="property">class </em><code class="sig-name descname">ChebyshevConv</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">input_dim</span></em>, <em class="sig-param"><span class="n">output_dim</span></em>, <em class="sig-param"><span class="n">edge_input_dim</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">k</span><span class="o">=</span><span class="default_value">1</span></em>, <em class="sig-param"><span class="n">batch_norm</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">activation</span><span class="o">=</span><span class="default_value">'relu'</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/conv.html#ChebyshevConv"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.layers.ChebyshevConv" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchdrug.layers.ChebyshevConv">
+<em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">ChebyshevConv</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_dim</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_dim</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">edge_input_dim</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_norm</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">activation</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'relu'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/conv.html#ChebyshevConv"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.layers.ChebyshevConv" title="Permalink to this definition">¶</a></dt>
 <dd><p>Chebyshev spectral graph convolution operator from
 <a class="reference external" href="https://arxiv.org/pdf/1606.09375.pdf">Convolutional Neural Networks on Graphs with Fast Localized Spectral Filtering</a>.</p>
 <dl class="field-list simple">
@@ -451,8 +446,8 @@ This also corresponds to the radius of the receptive field.</p></li>
 </dd>
 </dl>
 <dl class="py method">
-<dt id="torchdrug.layers.ChebyshevConv.aggregate">
-<code class="sig-name descname">aggregate</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">graph</span></em>, <em class="sig-param"><span class="n">message</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/conv.html#ChebyshevConv.aggregate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.layers.ChebyshevConv.aggregate" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchdrug.layers.ChebyshevConv.aggregate">
+<span class="sig-name descname"><span class="pre">aggregate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">message</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/conv.html#ChebyshevConv.aggregate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.layers.ChebyshevConv.aggregate" title="Permalink to this definition">¶</a></dt>
 <dd><p>Aggregate edge messages to nodes.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -470,8 +465,8 @@ This also corresponds to the radius of the receptive field.</p></li>
 </dl>
 </dd></dl>
 <dl class="py method">
-<dt id="torchdrug.layers.ChebyshevConv.combine">
-<code class="sig-name descname">combine</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">input</span></em>, <em class="sig-param"><span class="n">update</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/conv.html#ChebyshevConv.combine"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.layers.ChebyshevConv.combine" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchdrug.layers.ChebyshevConv.combine">
+<span class="sig-name descname"><span class="pre">combine</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">update</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/conv.html#ChebyshevConv.combine"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.layers.ChebyshevConv.combine" title="Permalink to this definition">¶</a></dt>
 <dd><p>Combine node input and node update.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -483,8 +478,8 @@ This also corresponds to the radius of the receptive field.</p></li>
 </dl>
 </dd></dl>
 <dl class="py method">
-<dt id="torchdrug.layers.ChebyshevConv.forward">
-<code class="sig-name descname">forward</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">graph</span></em>, <em class="sig-param"><span class="n">input</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/conv.html#ChebyshevConv.forward"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.layers.ChebyshevConv.forward" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchdrug.layers.ChebyshevConv.forward">
+<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">input</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/conv.html#ChebyshevConv.forward"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.layers.ChebyshevConv.forward" title="Permalink to this definition">¶</a></dt>
 <dd><p>Perform message passing over the graph(s).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -496,8 +491,8 @@ This also corresponds to the radius of the receptive field.</p></li>
 </dl>
 </dd></dl>
 <dl class="py method">
-<dt id="torchdrug.layers.ChebyshevConv.message">
-<code class="sig-name descname">message</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">graph</span></em>, <em class="sig-param"><span class="n">input</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/conv.html#ChebyshevConv.message"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.layers.ChebyshevConv.message" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchdrug.layers.ChebyshevConv.message">
+<span class="sig-name descname"><span class="pre">message</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">input</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/conv.html#ChebyshevConv.message"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.layers.ChebyshevConv.message" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compute edge messages for the graph.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -515,8 +510,8 @@ This also corresponds to the radius of the receptive field.</p></li>
 </dl>
 </dd></dl>
 <dl class="py method">
-<dt id="torchdrug.layers.ChebyshevConv.message_and_aggregate">
-<code class="sig-name descname">message_and_aggregate</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">graph</span></em>, <em class="sig-param"><span class="n">input</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/conv.html#ChebyshevConv.message_and_aggregate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.layers.ChebyshevConv.message_and_aggregate" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchdrug.layers.ChebyshevConv.message_and_aggregate">
+<span class="sig-name descname"><span class="pre">message_and_aggregate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">input</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/conv.html#ChebyshevConv.message_and_aggregate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.layers.ChebyshevConv.message_and_aggregate" title="Permalink to this definition">¶</a></dt>
 <dd><p>Fused computation of message and aggregation over the graph.
 This may provide better time or memory complexity than separate calls of
 <a class="reference internal" href="#torchdrug.layers.MessagePassingBase.message" title="torchdrug.layers.MessagePassingBase.message"><code class="xref py py-meth docutils literal notranslate"><span class="pre">message</span></code></a> and <a class="reference internal" href="#torchdrug.layers.MessagePassingBase.aggregate" title="torchdrug.layers.MessagePassingBase.aggregate"><code class="xref py py-meth docutils literal notranslate"><span class="pre">aggregate</span></code></a>.</p>
@@ -536,12 +531,12 @@ This may provide better time or memory complexity than separate calls of
 </dl>
 </dd></dl>
 </dd></dl>
-</div>
-<div class="section" id="continuousfilterconv">
+</section>
+<section id="continuousfilterconv">
 <h3>ContinuousFilterConv<a class="headerlink" href="#continuousfilterconv" title="Permalink to this headline">¶</a></h3>
 <dl class="py class">
-<dt id="torchdrug.layers.ContinuousFilterConv">
-<em class="property">class </em><code class="sig-name descname">ContinuousFilterConv</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">input_dim</span></em>, <em class="sig-param"><span class="n">output_dim</span></em>, <em class="sig-param"><span class="n">edge_input_dim</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">hidden_dim</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">cutoff</span><span class="o">=</span><span class="default_value">5</span></em>, <em class="sig-param"><span class="n">num_gaussian</span><span class="o">=</span><span class="default_value">100</span></em>, <em class="sig-param"><span class="n">batch_norm</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">activation</span><span class="o">=</span><span class="default_value">'shifted_softplus'</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/conv.html#ContinuousFilterConv"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.layers.ContinuousFilterConv" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchdrug.layers.ContinuousFilterConv">
+<em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">ContinuousFilterConv</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_dim</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_dim</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">edge_input_dim</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hidden_dim</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cutoff</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_gaussian</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_norm</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">activation</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'shifted_softplus'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/conv.html#ContinuousFilterConv"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.layers.ContinuousFilterConv" title="Permalink to this definition">¶</a></dt>
 <dd><p>Continuous filter operator from
 <a class="reference external" href="https://arxiv.org/pdf/1706.08566.pdf">SchNet: A continuous-filter convolutional neural network for modeling quantum interactions</a>.</p>
 <dl class="field-list simple">
@@ -559,8 +554,8 @@ This may provide better time or memory complexity than separate calls of
 </dd>
 </dl>
 <dl class="py method">
-<dt id="torchdrug.layers.ContinuousFilterConv.aggregate">
-<code class="sig-name descname">aggregate</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">graph</span></em>, <em class="sig-param"><span class="n">message</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/conv.html#ContinuousFilterConv.aggregate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.layers.ContinuousFilterConv.aggregate" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchdrug.layers.ContinuousFilterConv.aggregate">
+<span class="sig-name descname"><span class="pre">aggregate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">message</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/conv.html#ContinuousFilterConv.aggregate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.layers.ContinuousFilterConv.aggregate" title="Permalink to this definition">¶</a></dt>
 <dd><p>Aggregate edge messages to nodes.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -578,8 +573,8 @@ This may provide better time or memory complexity than separate calls of
 </dl>
 </dd></dl>
 <dl class="py method">
-<dt id="torchdrug.layers.ContinuousFilterConv.combine">
-<code class="sig-name descname">combine</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">input</span></em>, <em class="sig-param"><span class="n">update</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/conv.html#ContinuousFilterConv.combine"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.layers.ContinuousFilterConv.combine" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchdrug.layers.ContinuousFilterConv.combine">
+<span class="sig-name descname"><span class="pre">combine</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">update</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/conv.html#ContinuousFilterConv.combine"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.layers.ContinuousFilterConv.combine" title="Permalink to this definition">¶</a></dt>
 <dd><p>Combine node input and node update.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -591,8 +586,8 @@ This may provide better time or memory complexity than separate calls of
 </dl>
 </dd></dl>
 <dl class="py method">
-<dt id="torchdrug.layers.ContinuousFilterConv.message">
-<code class="sig-name descname">message</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">graph</span></em>, <em class="sig-param"><span class="n">input</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/conv.html#ContinuousFilterConv.message"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.layers.ContinuousFilterConv.message" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchdrug.layers.ContinuousFilterConv.message">
+<span class="sig-name descname"><span class="pre">message</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">input</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/conv.html#ContinuousFilterConv.message"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.layers.ContinuousFilterConv.message" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compute edge messages for the graph.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -610,8 +605,8 @@ This may provide better time or memory complexity than separate calls of
 </dl>
 </dd></dl>
 <dl class="py method">
-<dt id="torchdrug.layers.ContinuousFilterConv.message_and_aggregate">
-<code class="sig-name descname">message_and_aggregate</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">graph</span></em>, <em class="sig-param"><span class="n">input</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/conv.html#ContinuousFilterConv.message_and_aggregate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.layers.ContinuousFilterConv.message_and_aggregate" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchdrug.layers.ContinuousFilterConv.message_and_aggregate">
+<span class="sig-name descname"><span class="pre">message_and_aggregate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">input</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/conv.html#ContinuousFilterConv.message_and_aggregate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.layers.ContinuousFilterConv.message_and_aggregate" title="Permalink to this definition">¶</a></dt>
 <dd><p>Fused computation of message and aggregation over the graph.
 This may provide better time or memory complexity than separate calls of
 <a class="reference internal" href="#torchdrug.layers.MessagePassingBase.message" title="torchdrug.layers.MessagePassingBase.message"><code class="xref py py-meth docutils literal notranslate"><span class="pre">message</span></code></a> and <a class="reference internal" href="#torchdrug.layers.MessagePassingBase.aggregate" title="torchdrug.layers.MessagePassingBase.aggregate"><code class="xref py py-meth docutils literal notranslate"><span class="pre">aggregate</span></code></a>.</p>
@@ -631,12 +626,12 @@ This may provide better time or memory complexity than separate calls of
 </dl>
 </dd></dl>
 </dd></dl>
-</div>
-<div class="section" id="graphattentionconv">
+</section>
+<section id="graphattentionconv">
 <h3>GraphAttentionConv<a class="headerlink" href="#graphattentionconv" title="Permalink to this headline">¶</a></h3>
 <dl class="py class">
-<dt id="torchdrug.layers.GraphAttentionConv">
-<em class="property">class </em><code class="sig-name descname">GraphAttentionConv</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">input_dim</span></em>, <em class="sig-param"><span class="n">output_dim</span></em>, <em class="sig-param"><span class="n">edge_input_dim</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">num_head</span><span class="o">=</span><span class="default_value">1</span></em>, <em class="sig-param"><span class="n">negative_slope</span><span class="o">=</span><span class="default_value">0.2</span></em>, <em class="sig-param"><span class="n">concat</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">batch_norm</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">activation</span><span class="o">=</span><span class="default_value">'relu'</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/conv.html#GraphAttentionConv"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.layers.GraphAttentionConv" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchdrug.layers.GraphAttentionConv">
+<em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">GraphAttentionConv</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_dim</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_dim</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">edge_input_dim</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_head</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">negative_slope</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">concat</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_norm</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">activation</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'relu'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/conv.html#GraphAttentionConv"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.layers.GraphAttentionConv" title="Permalink to this definition">¶</a></dt>
 <dd><p>Graph attentional convolution operator from <a class="reference external" href="https://arxiv.org/pdf/1710.10903.pdf">Graph Attention Networks</a>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -652,8 +647,8 @@ This may provide better time or memory complexity than separate calls of
 </dd>
 </dl>
 <dl class="py method">
-<dt id="torchdrug.layers.GraphAttentionConv.aggregate">
-<code class="sig-name descname">aggregate</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">graph</span></em>, <em class="sig-param"><span class="n">message</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/conv.html#GraphAttentionConv.aggregate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.layers.GraphAttentionConv.aggregate" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchdrug.layers.GraphAttentionConv.aggregate">
+<span class="sig-name descname"><span class="pre">aggregate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">message</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/conv.html#GraphAttentionConv.aggregate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.layers.GraphAttentionConv.aggregate" title="Permalink to this definition">¶</a></dt>
 <dd><p>Aggregate edge messages to nodes.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -671,8 +666,8 @@ This may provide better time or memory complexity than separate calls of
 </dl>
 </dd></dl>
 <dl class="py method">
-<dt id="torchdrug.layers.GraphAttentionConv.combine">
-<code class="sig-name descname">combine</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">input</span></em>, <em class="sig-param"><span class="n">update</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/conv.html#GraphAttentionConv.combine"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.layers.GraphAttentionConv.combine" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchdrug.layers.GraphAttentionConv.combine">
+<span class="sig-name descname"><span class="pre">combine</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">update</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/conv.html#GraphAttentionConv.combine"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.layers.GraphAttentionConv.combine" title="Permalink to this definition">¶</a></dt>
 <dd><p>Combine node input and node update.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -684,8 +679,8 @@ This may provide better time or memory complexity than separate calls of
 </dl>
 </dd></dl>
 <dl class="py method">
-<dt id="torchdrug.layers.GraphAttentionConv.message">
-<code class="sig-name descname">message</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">graph</span></em>, <em class="sig-param"><span class="n">input</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/conv.html#GraphAttentionConv.message"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.layers.GraphAttentionConv.message" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchdrug.layers.GraphAttentionConv.message">
+<span class="sig-name descname"><span class="pre">message</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">input</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/conv.html#GraphAttentionConv.message"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.layers.GraphAttentionConv.message" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compute edge messages for the graph.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -703,12 +698,12 @@ This may provide better time or memory complexity than separate calls of
 </dl>
 </dd></dl>
 </dd></dl>
-</div>
-<div class="section" id="graphconv">
+</section>
+<section id="graphconv">
 <h3>GraphConv<a class="headerlink" href="#graphconv" title="Permalink to this headline">¶</a></h3>
 <dl class="py class">
-<dt id="torchdrug.layers.GraphConv">
-<em class="property">class </em><code class="sig-name descname">GraphConv</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">input_dim</span></em>, <em class="sig-param"><span class="n">output_dim</span></em>, <em class="sig-param"><span class="n">edge_input_dim</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">batch_norm</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">activation</span><span class="o">=</span><span class="default_value">'relu'</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/conv.html#GraphConv"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.layers.GraphConv" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchdrug.layers.GraphConv">
+<em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">GraphConv</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_dim</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_dim</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">edge_input_dim</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_norm</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">activation</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'relu'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/conv.html#GraphConv"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.layers.GraphConv" title="Permalink to this definition">¶</a></dt>
 <dd><p>Graph convolution operator from <a class="reference external" href="https://arxiv.org/pdf/1609.02907.pdf">Semi-Supervised Classification with Graph Convolutional Networks</a>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -722,8 +717,8 @@ This may provide better time or memory complexity than separate calls of
 </dd>
 </dl>
 <dl class="py method">
-<dt id="torchdrug.layers.GraphConv.aggregate">
-<code class="sig-name descname">aggregate</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">graph</span></em>, <em class="sig-param"><span class="n">message</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/conv.html#GraphConv.aggregate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.layers.GraphConv.aggregate" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchdrug.layers.GraphConv.aggregate">
+<span class="sig-name descname"><span class="pre">aggregate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">message</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/conv.html#GraphConv.aggregate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.layers.GraphConv.aggregate" title="Permalink to this definition">¶</a></dt>
 <dd><p>Aggregate edge messages to nodes.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -741,8 +736,8 @@ This may provide better time or memory complexity than separate calls of
 </dl>
 </dd></dl>
 <dl class="py method">
-<dt id="torchdrug.layers.GraphConv.combine">
-<code class="sig-name descname">combine</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">input</span></em>, <em class="sig-param"><span class="n">update</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/conv.html#GraphConv.combine"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.layers.GraphConv.combine" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchdrug.layers.GraphConv.combine">
+<span class="sig-name descname"><span class="pre">combine</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">update</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/conv.html#GraphConv.combine"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.layers.GraphConv.combine" title="Permalink to this definition">¶</a></dt>
 <dd><p>Combine node input and node update.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -754,8 +749,8 @@ This may provide better time or memory complexity than separate calls of
 </dl>
 </dd></dl>
 <dl class="py method">
-<dt id="torchdrug.layers.GraphConv.message">
-<code class="sig-name descname">message</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">graph</span></em>, <em class="sig-param"><span class="n">input</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/conv.html#GraphConv.message"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.layers.GraphConv.message" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchdrug.layers.GraphConv.message">
+<span class="sig-name descname"><span class="pre">message</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">input</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/conv.html#GraphConv.message"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.layers.GraphConv.message" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compute edge messages for the graph.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -773,8 +768,8 @@ This may provide better time or memory complexity than separate calls of
 </dl>
 </dd></dl>
 <dl class="py method">
-<dt id="torchdrug.layers.GraphConv.message_and_aggregate">
-<code class="sig-name descname">message_and_aggregate</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">graph</span></em>, <em class="sig-param"><span class="n">input</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/conv.html#GraphConv.message_and_aggregate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.layers.GraphConv.message_and_aggregate" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchdrug.layers.GraphConv.message_and_aggregate">
+<span class="sig-name descname"><span class="pre">message_and_aggregate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">input</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/conv.html#GraphConv.message_and_aggregate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.layers.GraphConv.message_and_aggregate" title="Permalink to this definition">¶</a></dt>
 <dd><p>Fused computation of message and aggregation over the graph.
 This may provide better time or memory complexity than separate calls of
 <a class="reference internal" href="#torchdrug.layers.MessagePassingBase.message" title="torchdrug.layers.MessagePassingBase.message"><code class="xref py py-meth docutils literal notranslate"><span class="pre">message</span></code></a> and <a class="reference internal" href="#torchdrug.layers.MessagePassingBase.aggregate" title="torchdrug.layers.MessagePassingBase.aggregate"><code class="xref py py-meth docutils literal notranslate"><span class="pre">aggregate</span></code></a>.</p>
@@ -794,12 +789,12 @@ This may provide better time or memory complexity than separate calls of
 </dl>
 </dd></dl>
 </dd></dl>
-</div>
-<div class="section" id="graphisomorphismconv">
+</section>
+<section id="graphisomorphismconv">
 <h3>GraphIsomorphismConv<a class="headerlink" href="#graphisomorphismconv" title="Permalink to this headline">¶</a></h3>
 <dl class="py class">
-<dt id="torchdrug.layers.GraphIsomorphismConv">
-<em class="property">class </em><code class="sig-name descname">GraphIsomorphismConv</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">input_dim</span></em>, <em class="sig-param"><span class="n">output_dim</span></em>, <em class="sig-param"><span class="n">edge_input_dim</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">hidden_dims</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">eps</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">learn_eps</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">batch_norm</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">activation</span><span class="o">=</span><span class="default_value">'relu'</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/conv.html#GraphIsomorphismConv"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.layers.GraphIsomorphismConv" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchdrug.layers.GraphIsomorphismConv">
+<em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">GraphIsomorphismConv</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_dim</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_dim</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">edge_input_dim</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hidden_dims</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eps</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">learn_eps</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_norm</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">activation</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'relu'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/conv.html#GraphIsomorphismConv"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.layers.GraphIsomorphismConv" title="Permalink to this definition">¶</a></dt>
 <dd><p>Graph isomorphism convolution operator from <a class="reference external" href="https://arxiv.org/pdf/1810.00826.pdf">How Powerful are Graph Neural Networks?</a></p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -816,8 +811,8 @@ This may provide better time or memory complexity than separate calls of
 </dd>
 </dl>
 <dl class="py method">
-<dt id="torchdrug.layers.GraphIsomorphismConv.aggregate">
-<code class="sig-name descname">aggregate</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">graph</span></em>, <em class="sig-param"><span class="n">message</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/conv.html#GraphIsomorphismConv.aggregate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.layers.GraphIsomorphismConv.aggregate" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchdrug.layers.GraphIsomorphismConv.aggregate">
+<span class="sig-name descname"><span class="pre">aggregate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">message</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/conv.html#GraphIsomorphismConv.aggregate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.layers.GraphIsomorphismConv.aggregate" title="Permalink to this definition">¶</a></dt>
 <dd><p>Aggregate edge messages to nodes.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -835,8 +830,8 @@ This may provide better time or memory complexity than separate calls of
 </dl>
 </dd></dl>
 <dl class="py method">
-<dt id="torchdrug.layers.GraphIsomorphismConv.combine">
-<code class="sig-name descname">combine</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">input</span></em>, <em class="sig-param"><span class="n">update</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/conv.html#GraphIsomorphismConv.combine"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.layers.GraphIsomorphismConv.combine" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchdrug.layers.GraphIsomorphismConv.combine">
+<span class="sig-name descname"><span class="pre">combine</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">update</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/conv.html#GraphIsomorphismConv.combine"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.layers.GraphIsomorphismConv.combine" title="Permalink to this definition">¶</a></dt>
 <dd><p>Combine node input and node update.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -848,8 +843,8 @@ This may provide better time or memory complexity than separate calls of
 </dl>
 </dd></dl>
 <dl class="py method">
-<dt id="torchdrug.layers.GraphIsomorphismConv.message">
-<code class="sig-name descname">message</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">graph</span></em>, <em class="sig-param"><span class="n">input</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/conv.html#GraphIsomorphismConv.message"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.layers.GraphIsomorphismConv.message" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchdrug.layers.GraphIsomorphismConv.message">
+<span class="sig-name descname"><span class="pre">message</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">input</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/conv.html#GraphIsomorphismConv.message"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.layers.GraphIsomorphismConv.message" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compute edge messages for the graph.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -867,8 +862,8 @@ This may provide better time or memory complexity than separate calls of
 </dl>
 </dd></dl>
 <dl class="py method">
-<dt id="torchdrug.layers.GraphIsomorphismConv.message_and_aggregate">
-<code class="sig-name descname">message_and_aggregate</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">graph</span></em>, <em class="sig-param"><span class="n">input</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/conv.html#GraphIsomorphismConv.message_and_aggregate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.layers.GraphIsomorphismConv.message_and_aggregate" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchdrug.layers.GraphIsomorphismConv.message_and_aggregate">
+<span class="sig-name descname"><span class="pre">message_and_aggregate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">input</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/conv.html#GraphIsomorphismConv.message_and_aggregate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.layers.GraphIsomorphismConv.message_and_aggregate" title="Permalink to this definition">¶</a></dt>
 <dd><p>Fused computation of message and aggregation over the graph.
 This may provide better time or memory complexity than separate calls of
 <a class="reference internal" href="#torchdrug.layers.MessagePassingBase.message" title="torchdrug.layers.MessagePassingBase.message"><code class="xref py py-meth docutils literal notranslate"><span class="pre">message</span></code></a> and <a class="reference internal" href="#torchdrug.layers.MessagePassingBase.aggregate" title="torchdrug.layers.MessagePassingBase.aggregate"><code class="xref py py-meth docutils literal notranslate"><span class="pre">aggregate</span></code></a>.</p>
@@ -888,12 +883,12 @@ This may provide better time or memory complexity than separate calls of
 </dl>
 </dd></dl>
 </dd></dl>
-</div>
-<div class="section" id="messagepassing">
+</section>
+<section id="messagepassing">
 <h3>MessagePassing<a class="headerlink" href="#messagepassing" title="Permalink to this headline">¶</a></h3>
 <dl class="py class">
-<dt id="torchdrug.layers.MessagePassing">
-<em class="property">class </em><code class="sig-name descname">MessagePassing</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">input_dim</span></em>, <em class="sig-param"><span class="n">edge_input_dim</span></em>, <em class="sig-param"><span class="n">hidden_dims</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">batch_norm</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">activation</span><span class="o">=</span><span class="default_value">'relu'</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/conv.html#MessagePassing"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.layers.MessagePassing" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchdrug.layers.MessagePassing">
+<em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">MessagePassing</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_dim</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">edge_input_dim</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hidden_dims</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_norm</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">activation</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'relu'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/conv.html#MessagePassing"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.layers.MessagePassing" title="Permalink to this definition">¶</a></dt>
 <dd><p>Message passing operator from <a class="reference external" href="https://arxiv.org/pdf/1704.01212.pdf">Neural Message Passing for Quantum Chemistry</a>.</p>
 <p>This implements the edge network variant in the original paper.</p>
 <dl class="field-list simple">
@@ -908,8 +903,8 @@ This may provide better time or memory complexity than separate calls of
 </dd>
 </dl>
 <dl class="py method">
-<dt id="torchdrug.layers.MessagePassing.aggregate">
-<code class="sig-name descname">aggregate</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">graph</span></em>, <em class="sig-param"><span class="n">message</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/conv.html#MessagePassing.aggregate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.layers.MessagePassing.aggregate" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchdrug.layers.MessagePassing.aggregate">
+<span class="sig-name descname"><span class="pre">aggregate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">message</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/conv.html#MessagePassing.aggregate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.layers.MessagePassing.aggregate" title="Permalink to this definition">¶</a></dt>
 <dd><p>Aggregate edge messages to nodes.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -927,8 +922,8 @@ This may provide better time or memory complexity than separate calls of
 </dl>
 </dd></dl>
 <dl class="py method">
-<dt id="torchdrug.layers.MessagePassing.combine">
-<code class="sig-name descname">combine</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">input</span></em>, <em class="sig-param"><span class="n">update</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/conv.html#MessagePassing.combine"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.layers.MessagePassing.combine" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchdrug.layers.MessagePassing.combine">
+<span class="sig-name descname"><span class="pre">combine</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">update</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/conv.html#MessagePassing.combine"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.layers.MessagePassing.combine" title="Permalink to this definition">¶</a></dt>
 <dd><p>Combine node input and node update.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -940,8 +935,8 @@ This may provide better time or memory complexity than separate calls of
 </dl>
 </dd></dl>
 <dl class="py method">
-<dt id="torchdrug.layers.MessagePassing.message">
-<code class="sig-name descname">message</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">graph</span></em>, <em class="sig-param"><span class="n">input</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/conv.html#MessagePassing.message"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.layers.MessagePassing.message" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchdrug.layers.MessagePassing.message">
+<span class="sig-name descname"><span class="pre">message</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">input</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/conv.html#MessagePassing.message"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.layers.MessagePassing.message" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compute edge messages for the graph.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -959,12 +954,12 @@ This may provide better time or memory complexity than separate calls of
 </dl>
 </dd></dl>
 </dd></dl>
-</div>
-<div class="section" id="neuralfingerprintconv">
+</section>
+<section id="neuralfingerprintconv">
 <h3>NeuralFingerprintConv<a class="headerlink" href="#neuralfingerprintconv" title="Permalink to this headline">¶</a></h3>
 <dl class="py class">
-<dt id="torchdrug.layers.NeuralFingerprintConv">
-<em class="property">class </em><code class="sig-name descname">NeuralFingerprintConv</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">input_dim</span></em>, <em class="sig-param"><span class="n">output_dim</span></em>, <em class="sig-param"><span class="n">edge_input_dim</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">batch_norm</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">activation</span><span class="o">=</span><span class="default_value">'relu'</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/conv.html#NeuralFingerprintConv"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.layers.NeuralFingerprintConv" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchdrug.layers.NeuralFingerprintConv">
+<em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">NeuralFingerprintConv</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_dim</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_dim</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">edge_input_dim</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_norm</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">activation</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'relu'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/conv.html#NeuralFingerprintConv"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.layers.NeuralFingerprintConv" title="Permalink to this definition">¶</a></dt>
 <dd><p>Graph neural network operator from <a class="reference external" href="https://arxiv.org/pdf/1509.09292.pdf">Convolutional Networks on Graphs for Learning Molecular Fingerprints</a>.</p>
 <p>Note this operator doesn’t include the sparsifying step of the original paper.</p>
 <dl class="field-list simple">
@@ -979,8 +974,8 @@ This may provide better time or memory complexity than separate calls of
 </dd>
 </dl>
 <dl class="py method">
-<dt id="torchdrug.layers.NeuralFingerprintConv.aggregate">
-<code class="sig-name descname">aggregate</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">graph</span></em>, <em class="sig-param"><span class="n">message</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/conv.html#NeuralFingerprintConv.aggregate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.layers.NeuralFingerprintConv.aggregate" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchdrug.layers.NeuralFingerprintConv.aggregate">
+<span class="sig-name descname"><span class="pre">aggregate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">message</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/conv.html#NeuralFingerprintConv.aggregate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.layers.NeuralFingerprintConv.aggregate" title="Permalink to this definition">¶</a></dt>
 <dd><p>Aggregate edge messages to nodes.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -998,8 +993,8 @@ This may provide better time or memory complexity than separate calls of
 </dl>
 </dd></dl>
 <dl class="py method">
-<dt id="torchdrug.layers.NeuralFingerprintConv.combine">
-<code class="sig-name descname">combine</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">input</span></em>, <em class="sig-param"><span class="n">update</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/conv.html#NeuralFingerprintConv.combine"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.layers.NeuralFingerprintConv.combine" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchdrug.layers.NeuralFingerprintConv.combine">
+<span class="sig-name descname"><span class="pre">combine</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">update</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/conv.html#NeuralFingerprintConv.combine"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.layers.NeuralFingerprintConv.combine" title="Permalink to this definition">¶</a></dt>
 <dd><p>Combine node input and node update.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -1011,8 +1006,8 @@ This may provide better time or memory complexity than separate calls of
 </dl>
 </dd></dl>
 <dl class="py method">
-<dt id="torchdrug.layers.NeuralFingerprintConv.message">
-<code class="sig-name descname">message</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">graph</span></em>, <em class="sig-param"><span class="n">input</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/conv.html#NeuralFingerprintConv.message"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.layers.NeuralFingerprintConv.message" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchdrug.layers.NeuralFingerprintConv.message">
+<span class="sig-name descname"><span class="pre">message</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">input</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/conv.html#NeuralFingerprintConv.message"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.layers.NeuralFingerprintConv.message" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compute edge messages for the graph.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -1030,8 +1025,8 @@ This may provide better time or memory complexity than separate calls of
 </dl>
 </dd></dl>
 <dl class="py method">
-<dt id="torchdrug.layers.NeuralFingerprintConv.message_and_aggregate">
-<code class="sig-name descname">message_and_aggregate</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">graph</span></em>, <em class="sig-param"><span class="n">input</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/conv.html#NeuralFingerprintConv.message_and_aggregate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.layers.NeuralFingerprintConv.message_and_aggregate" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchdrug.layers.NeuralFingerprintConv.message_and_aggregate">
+<span class="sig-name descname"><span class="pre">message_and_aggregate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">input</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/conv.html#NeuralFingerprintConv.message_and_aggregate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.layers.NeuralFingerprintConv.message_and_aggregate" title="Permalink to this definition">¶</a></dt>
 <dd><p>Fused computation of message and aggregation over the graph.
 This may provide better time or memory complexity than separate calls of
 <a class="reference internal" href="#torchdrug.layers.MessagePassingBase.message" title="torchdrug.layers.MessagePassingBase.message"><code class="xref py py-meth docutils literal notranslate"><span class="pre">message</span></code></a> and <a class="reference internal" href="#torchdrug.layers.MessagePassingBase.aggregate" title="torchdrug.layers.MessagePassingBase.aggregate"><code class="xref py py-meth docutils literal notranslate"><span class="pre">aggregate</span></code></a>.</p>
@@ -1051,12 +1046,12 @@ This may provide better time or memory complexity than separate calls of
 </dl>
 </dd></dl>
 </dd></dl>
-</div>
-<div class="section" id="relationalgraphconv">
+</section>
+<section id="relationalgraphconv">
 <h3>RelationalGraphConv<a class="headerlink" href="#relationalgraphconv" title="Permalink to this headline">¶</a></h3>
 <dl class="py class">
-<dt id="torchdrug.layers.RelationalGraphConv">
-<em class="property">class </em><code class="sig-name descname">RelationalGraphConv</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">input_dim</span></em>, <em class="sig-param"><span class="n">output_dim</span></em>, <em class="sig-param"><span class="n">num_relation</span></em>, <em class="sig-param"><span class="n">edge_input_dim</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">batch_norm</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">activation</span><span class="o">=</span><span class="default_value">'relu'</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/conv.html#RelationalGraphConv"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.layers.RelationalGraphConv" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchdrug.layers.RelationalGraphConv">
+<em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">RelationalGraphConv</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_dim</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_dim</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_relation</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">edge_input_dim</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_norm</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">activation</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'relu'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/conv.html#RelationalGraphConv"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.layers.RelationalGraphConv" title="Permalink to this definition">¶</a></dt>
 <dd><p>Relational graph convolution operator from <a class="reference external" href="https://arxiv.org/pdf/1703.06103.pdf">Modeling Relational Data with Graph Convolutional Networks</a>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -1071,8 +1066,8 @@ This may provide better time or memory complexity than separate calls of
 </dd>
 </dl>
 <dl class="py method">
-<dt id="torchdrug.layers.RelationalGraphConv.aggregate">
-<code class="sig-name descname">aggregate</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">graph</span></em>, <em class="sig-param"><span class="n">message</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/conv.html#RelationalGraphConv.aggregate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.layers.RelationalGraphConv.aggregate" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchdrug.layers.RelationalGraphConv.aggregate">
+<span class="sig-name descname"><span class="pre">aggregate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">message</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/conv.html#RelationalGraphConv.aggregate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.layers.RelationalGraphConv.aggregate" title="Permalink to this definition">¶</a></dt>
 <dd><p>Aggregate edge messages to nodes.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -1090,8 +1085,8 @@ This may provide better time or memory complexity than separate calls of
 </dl>
 </dd></dl>
 <dl class="py method">
-<dt id="torchdrug.layers.RelationalGraphConv.combine">
-<code class="sig-name descname">combine</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">input</span></em>, <em class="sig-param"><span class="n">update</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/conv.html#RelationalGraphConv.combine"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.layers.RelationalGraphConv.combine" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchdrug.layers.RelationalGraphConv.combine">
+<span class="sig-name descname"><span class="pre">combine</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">update</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/conv.html#RelationalGraphConv.combine"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.layers.RelationalGraphConv.combine" title="Permalink to this definition">¶</a></dt>
 <dd><p>Combine node input and node update.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -1103,8 +1098,8 @@ This may provide better time or memory complexity than separate calls of
 </dl>
 </dd></dl>
 <dl class="py method">
-<dt id="torchdrug.layers.RelationalGraphConv.message">
-<code class="sig-name descname">message</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">graph</span></em>, <em class="sig-param"><span class="n">input</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/conv.html#RelationalGraphConv.message"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.layers.RelationalGraphConv.message" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchdrug.layers.RelationalGraphConv.message">
+<span class="sig-name descname"><span class="pre">message</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">input</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/conv.html#RelationalGraphConv.message"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.layers.RelationalGraphConv.message" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compute edge messages for the graph.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -1122,8 +1117,8 @@ This may provide better time or memory complexity than separate calls of
 </dl>
 </dd></dl>
 <dl class="py method">
-<dt id="torchdrug.layers.RelationalGraphConv.message_and_aggregate">
-<code class="sig-name descname">message_and_aggregate</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">graph</span></em>, <em class="sig-param"><span class="n">input</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/conv.html#RelationalGraphConv.message_and_aggregate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.layers.RelationalGraphConv.message_and_aggregate" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchdrug.layers.RelationalGraphConv.message_and_aggregate">
+<span class="sig-name descname"><span class="pre">message_and_aggregate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">input</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/conv.html#RelationalGraphConv.message_and_aggregate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.layers.RelationalGraphConv.message_and_aggregate" title="Permalink to this definition">¶</a></dt>
 <dd><p>Fused computation of message and aggregation over the graph.
 This may provide better time or memory complexity than separate calls of
 <a class="reference internal" href="#torchdrug.layers.MessagePassingBase.message" title="torchdrug.layers.MessagePassingBase.message"><code class="xref py py-meth docutils literal notranslate"><span class="pre">message</span></code></a> and <a class="reference internal" href="#torchdrug.layers.MessagePassingBase.aggregate" title="torchdrug.layers.MessagePassingBase.aggregate"><code class="xref py py-meth docutils literal notranslate"><span class="pre">aggregate</span></code></a>.</p>
@@ -1143,19 +1138,19 @@ This may provide better time or memory complexity than separate calls of
 </dl>
 </dd></dl>
 </dd></dl>
-</div>
-</div>
-<div class="section" id="readout-layers">
+</section>
+</section>
+<section id="readout-layers">
 <h2>Readout Layers<a class="headerlink" href="#readout-layers" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="meanreadout">
+<section id="meanreadout">
 <h3>MeanReadout<a class="headerlink" href="#meanreadout" title="Permalink to this headline">¶</a></h3>
 <dl class="py class">
-<dt id="torchdrug.layers.MeanReadout">
-<em class="property">class </em><code class="sig-name descname">MeanReadout</code><a class="reference internal" href="../_modules/torchdrug/layers/readout.html#MeanReadout"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.layers.MeanReadout" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchdrug.layers.MeanReadout">
+<em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">MeanReadout</span></span><a class="reference internal" href="../_modules/torchdrug/layers/readout.html#MeanReadout"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.layers.MeanReadout" title="Permalink to this definition">¶</a></dt>
 <dd><p>Mean readout operator over graphs with variadic sizes.</p>
 <dl class="py method">
-<dt id="torchdrug.layers.MeanReadout.forward">
-<code class="sig-name descname">forward</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">graph</span></em>, <em class="sig-param"><span class="n">input</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/readout.html#MeanReadout.forward"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.layers.MeanReadout.forward" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchdrug.layers.MeanReadout.forward">
+<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">input</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/readout.html#MeanReadout.forward"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.layers.MeanReadout.forward" title="Permalink to this definition">¶</a></dt>
 <dd><p>Perform readout over the graph(s).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -1173,16 +1168,16 @@ This may provide better time or memory complexity than separate calls of
 </dl>
 </dd></dl>
 </dd></dl>
-</div>
-<div class="section" id="sumreadout">
+</section>
+<section id="sumreadout">
 <h3>SumReadout<a class="headerlink" href="#sumreadout" title="Permalink to this headline">¶</a></h3>
 <dl class="py class">
-<dt id="torchdrug.layers.SumReadout">
-<em class="property">class </em><code class="sig-name descname">SumReadout</code><a class="reference internal" href="../_modules/torchdrug/layers/readout.html#SumReadout"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.layers.SumReadout" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchdrug.layers.SumReadout">
+<em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">SumReadout</span></span><a class="reference internal" href="../_modules/torchdrug/layers/readout.html#SumReadout"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.layers.SumReadout" title="Permalink to this definition">¶</a></dt>
 <dd><p>Sum readout operator over graphs with variadic sizes.</p>
 <dl class="py method">
-<dt id="torchdrug.layers.SumReadout.forward">
-<code class="sig-name descname">forward</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">graph</span></em>, <em class="sig-param"><span class="n">input</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/readout.html#SumReadout.forward"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.layers.SumReadout.forward" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchdrug.layers.SumReadout.forward">
+<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">input</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/readout.html#SumReadout.forward"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.layers.SumReadout.forward" title="Permalink to this definition">¶</a></dt>
 <dd><p>Perform readout over the graph(s).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -1200,16 +1195,16 @@ This may provide better time or memory complexity than separate calls of
 </dl>
 </dd></dl>
 </dd></dl>
-</div>
-<div class="section" id="maxreadout">
+</section>
+<section id="maxreadout">
 <h3>MaxReadout<a class="headerlink" href="#maxreadout" title="Permalink to this headline">¶</a></h3>
 <dl class="py class">
-<dt id="torchdrug.layers.MaxReadout">
-<em class="property">class </em><code class="sig-name descname">MaxReadout</code><a class="reference internal" href="../_modules/torchdrug/layers/readout.html#MaxReadout"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.layers.MaxReadout" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchdrug.layers.MaxReadout">
+<em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">MaxReadout</span></span><a class="reference internal" href="../_modules/torchdrug/layers/readout.html#MaxReadout"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.layers.MaxReadout" title="Permalink to this definition">¶</a></dt>
 <dd><p>Max readout operator over graphs with variadic sizes.</p>
 <dl class="py method">
-<dt id="torchdrug.layers.MaxReadout.forward">
-<code class="sig-name descname">forward</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">graph</span></em>, <em class="sig-param"><span class="n">input</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/readout.html#MaxReadout.forward"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.layers.MaxReadout.forward" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchdrug.layers.MaxReadout.forward">
+<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">input</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/readout.html#MaxReadout.forward"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.layers.MaxReadout.forward" title="Permalink to this definition">¶</a></dt>
 <dd><p>Perform readout over the graph(s).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -1227,39 +1222,12 @@ This may provide better time or memory complexity than separate calls of
 </dl>
 </dd></dl>
 </dd></dl>
-</div>
-<div class="section" id="softmax">
-<h3>Softmax<a class="headerlink" href="#softmax" title="Permalink to this headline">¶</a></h3>
-<dl class="py class">
-<dt id="torchdrug.layers.Softmax">
-<em class="property">class </em><code class="sig-name descname">Softmax</code><a class="reference internal" href="../_modules/torchdrug/layers/readout.html#Softmax"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.layers.Softmax" title="Permalink to this definition">¶</a></dt>
-<dd><p>Softmax operator over graphs with variadic sizes.</p>
-<dl class="py method">
-<dt id="torchdrug.layers.Softmax.forward">
-<code class="sig-name descname">forward</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">graph</span></em>, <em class="sig-param"><span class="n">input</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/readout.html#Softmax.forward"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.layers.Softmax.forward" title="Permalink to this definition">¶</a></dt>
-<dd><p>Perform softmax over the graph(s).</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>graph</strong> (<a class="reference internal" href="data.html#torchdrug.data.Graph" title="torchdrug.data.Graph"><em>Graph</em></a>) – graph(s)</p></li>
-<li><p><strong>input</strong> (<em>Tensor</em>) – node logits</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>node probabilities</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>Tensor</p>
-</dd>
-</dl>
-</dd></dl>
-</dd></dl>
-</div>
-<div class="section" id="set2set">
+</section>
+<section id="set2set">
 <h3>Set2Set<a class="headerlink" href="#set2set" title="Permalink to this headline">¶</a></h3>
 <dl class="py class">
-<dt id="torchdrug.layers.Set2Set">
-<em class="property">class </em><code class="sig-name descname">Set2Set</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">input_dim</span></em>, <em class="sig-param"><span class="n">num_step</span><span class="o">=</span><span class="default_value">3</span></em>, <em class="sig-param"><span class="n">num_lstm_layer</span><span class="o">=</span><span class="default_value">1</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/readout.html#Set2Set"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.layers.Set2Set" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchdrug.layers.Set2Set">
+<em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">Set2Set</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_dim</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_step</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_lstm_layer</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/readout.html#Set2Set"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.layers.Set2Set" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set2Set operator from <cite>Order Matters: Sequence to sequence for sets</cite>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -1271,8 +1239,8 @@ This may provide better time or memory complexity than separate calls of
 </dd>
 </dl>
 <dl class="py method">
-<dt id="torchdrug.layers.Set2Set.forward">
-<code class="sig-name descname">forward</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">graph</span></em>, <em class="sig-param"><span class="n">input</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/readout.html#Set2Set.forward"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.layers.Set2Set.forward" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchdrug.layers.Set2Set.forward">
+<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">input</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/readout.html#Set2Set.forward"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.layers.Set2Set.forward" title="Permalink to this definition">¶</a></dt>
 <dd><p>Perform Set2Set readout over graph(s).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -1290,15 +1258,74 @@ This may provide better time or memory complexity than separate calls of
 </dl>
 </dd></dl>
 </dd></dl>
-</div>
-</div>
-<div class="section" id="pooling-layers">
+</section>
+<section id="softmax">
+<h3>Softmax<a class="headerlink" href="#softmax" title="Permalink to this headline">¶</a></h3>
+<dl class="py class">
+<dt class="sig sig-object py" id="torchdrug.layers.Softmax">
+<em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">Softmax</span></span><a class="reference internal" href="../_modules/torchdrug/layers/readout.html#Softmax"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.layers.Softmax" title="Permalink to this definition">¶</a></dt>
+<dd><p>Softmax operator over graphs with variadic sizes.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="torchdrug.layers.Softmax.forward">
+<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">input</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/readout.html#Softmax.forward"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.layers.Softmax.forward" title="Permalink to this definition">¶</a></dt>
+<dd><p>Perform softmax over the graph(s).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>graph</strong> (<a class="reference internal" href="data.html#torchdrug.data.Graph" title="torchdrug.data.Graph"><em>Graph</em></a>) – graph(s)</p></li>
+<li><p><strong>input</strong> (<em>Tensor</em>) – node logits</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>node probabilities</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>Tensor</p>
+</dd>
+</dl>
+</dd></dl>
+</dd></dl>
+</section>
+<section id="sort">
+<h3>Sort<a class="headerlink" href="#sort" title="Permalink to this headline">¶</a></h3>
+<dl class="py class">
+<dt class="sig sig-object py" id="torchdrug.layers.Sort">
+<em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">Sort</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">descending</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/readout.html#Sort"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.layers.Sort" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sort operator over graphs with variadic sizes.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>descending</strong> (<em>bool</em><em>, </em><em>optional</em>) – use descending sort order or not</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="torchdrug.layers.Sort.forward">
+<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">input</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/readout.html#Sort.forward"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.layers.Sort.forward" title="Permalink to this definition">¶</a></dt>
+<dd><p>Perform sort over graph(s).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>graph</strong> (<a class="reference internal" href="data.html#torchdrug.data.Graph" title="torchdrug.data.Graph"><em>Graph</em></a>) – graph(s)</p></li>
+<li><p><strong>input</strong> (<em>Tensor</em>) – node values</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>sorted values, sorted indices</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>(Tensor, LongTensor)</p>
+</dd>
+</dl>
+</dd></dl>
+</dd></dl>
+</section>
+</section>
+<section id="pooling-layers">
 <h2>Pooling Layers<a class="headerlink" href="#pooling-layers" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="diffpool">
+<section id="diffpool">
 <h3>DiffPool<a class="headerlink" href="#diffpool" title="Permalink to this headline">¶</a></h3>
 <dl class="py class">
-<dt id="torchdrug.layers.DiffPool">
-<em class="property">class </em><code class="sig-name descname">DiffPool</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">input_dim</span></em>, <em class="sig-param"><span class="n">output_node</span></em>, <em class="sig-param"><span class="n">feature_layer</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">pool_layer</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">loss_weight</span><span class="o">=</span><span class="default_value">1</span></em>, <em class="sig-param"><span class="n">zero_diagonal</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">sparse</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/pool.html#DiffPool"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.layers.DiffPool" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchdrug.layers.DiffPool">
+<em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">DiffPool</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_dim</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_node</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">feature_layer</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pool_layer</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">loss_weight</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">zero_diagonal</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sparse</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/pool.html#DiffPool"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.layers.DiffPool" title="Permalink to this definition">¶</a></dt>
 <dd><p>Differentiable pooling operator from <a class="reference external" href="https://papers.nips.cc/paper/7729-hierarchical-graph-representation-learning-with-differentiable-pooling.pdf">Hierarchical Graph Representation Learning with Differentiable Pooling</a></p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -1314,8 +1341,8 @@ This may provide better time or memory complexity than separate calls of
 </dd>
 </dl>
 <dl class="py method">
-<dt id="torchdrug.layers.DiffPool.forward">
-<code class="sig-name descname">forward</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">graph</span></em>, <em class="sig-param"><span class="n">input</span></em>, <em class="sig-param"><span class="n">all_loss</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">metric</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/pool.html#DiffPool.forward"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.layers.DiffPool.forward" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchdrug.layers.DiffPool.forward">
+<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">input</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">all_loss</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metric</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/pool.html#DiffPool.forward"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.layers.DiffPool.forward" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compute the node cluster assignment and pool the nodes.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -1335,12 +1362,12 @@ This may provide better time or memory complexity than separate calls of
 </dl>
 </dd></dl>
 </dd></dl>
-</div>
-<div class="section" id="mincutpool">
+</section>
+<section id="mincutpool">
 <h3>MinCutPool<a class="headerlink" href="#mincutpool" title="Permalink to this headline">¶</a></h3>
 <dl class="py class">
-<dt id="torchdrug.layers.MinCutPool">
-<em class="property">class </em><code class="sig-name descname">MinCutPool</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">input_dim</span></em>, <em class="sig-param"><span class="n">output_node</span></em>, <em class="sig-param"><span class="n">feature_layer</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">pool_layer</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">loss_weight</span><span class="o">=</span><span class="default_value">1</span></em>, <em class="sig-param"><span class="n">zero_diagonal</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">sparse</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/pool.html#MinCutPool"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.layers.MinCutPool" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchdrug.layers.MinCutPool">
+<em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">MinCutPool</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_dim</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_node</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">feature_layer</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pool_layer</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">loss_weight</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">zero_diagonal</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sparse</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/pool.html#MinCutPool"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.layers.MinCutPool" title="Permalink to this definition">¶</a></dt>
 <dd><p>Min cut pooling operator from <a class="reference external" href="http://proceedings.mlr.press/v119/bianchi20a/bianchi20a.pdf">Spectral Clustering with Graph Neural Networks for Graph Pooling</a></p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -1356,8 +1383,8 @@ This may provide better time or memory complexity than separate calls of
 </dd>
 </dl>
 <dl class="py method">
-<dt id="torchdrug.layers.MinCutPool.forward">
-<code class="sig-name descname">forward</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">graph</span></em>, <em class="sig-param"><span class="n">input</span></em>, <em class="sig-param"><span class="n">all_loss</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">metric</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/pool.html#MinCutPool.forward"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.layers.MinCutPool.forward" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchdrug.layers.MinCutPool.forward">
+<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">input</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">all_loss</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metric</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/pool.html#MinCutPool.forward"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.layers.MinCutPool.forward" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compute the node cluster assignment and pool the nodes.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -1377,50 +1404,145 @@ This may provide better time or memory complexity than separate calls of
 </dl>
 </dd></dl>
 </dd></dl>
-</div>
-</div>
-<div class="section" id="module-torchdrug.layers.distribution">
-<span id="distribution-layers"></span><h2>Distribution Layers<a class="headerlink" href="#module-torchdrug.layers.distribution" title="Permalink to this headline">¶</a></h2>
+</section>
+</section>
+<section id="sampler-layers">
+<h2>Sampler Layers<a class="headerlink" href="#sampler-layers" title="Permalink to this headline">¶</a></h2>
+<section id="edgesampler">
+<h3>EdgeSampler<a class="headerlink" href="#edgesampler" title="Permalink to this headline">¶</a></h3>
 <dl class="py class">
-<dt id="torchdrug.layers.distribution.IndependentGaussian">
-<em class="property">class </em><code class="sig-name descname">IndependentGaussian</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">mu</span></em>, <em class="sig-param"><span class="n">sigma2</span></em>, <em class="sig-param"><span class="n">learnable</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/distribution.html#IndependentGaussian"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.layers.distribution.IndependentGaussian" title="Permalink to this definition">¶</a></dt>
-<dd><p>Independent Gaussian distribution.</p>
+<dt class="sig sig-object py" id="torchdrug.layers.EdgeSampler">
+<em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">EdgeSampler</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">budget</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ratio</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/sampler.html#EdgeSampler"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.layers.EdgeSampler" title="Permalink to this definition">¶</a></dt>
+<dd><p>Edge sampler from <a href="#id1"><span class="problematic" id="id2">`GraphSAINT: Graph Sampling Based Inductive Learning Method`_</span></a>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>mu</strong> (<em>Tensor</em>) – mean of shape <span class="math notranslate nohighlight">\((N,)\)</span></p></li>
-<li><p><strong>sigma2</strong> (<em>Tensor</em>) – variance of shape <span class="math notranslate nohighlight">\((N,)\)</span></p></li>
-<li><p><strong>learnable</strong> (<em>bool</em><em>, </em><em>optional</em>) – learnable parameters or not</p></li>
+<li><p><strong>budget</strong> (<em>int</em><em>, </em><em>optional</em>) – number of node to keep</p></li>
+<li><p><strong>ratio</strong> (<em>int</em><em>, </em><em>optional</em>) – ratio of node to keep</p></li>
 </ul>
 </dd>
 </dl>
 <dl class="py method">
-<dt id="torchdrug.layers.distribution.IndependentGaussian.forward">
-<code class="sig-name descname">forward</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">input</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/distribution.html#IndependentGaussian.forward"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.layers.distribution.IndependentGaussian.forward" title="Permalink to this definition">¶</a></dt>
-<dd><p>Compute the likelihood of input data.</p>
+<dt class="sig sig-object py" id="torchdrug.layers.EdgeSampler.forward">
+<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/sampler.html#EdgeSampler.forward"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.layers.EdgeSampler.forward" title="Permalink to this definition">¶</a></dt>
+<dd><p>Defines the computation performed at every call.</p>
+<p>Should be overridden by all subclasses.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Although the recipe for forward pass needs to be defined within
+this function, one should call the <code class="xref py py-class docutils literal notranslate"><span class="pre">Module</span></code> instance afterwards
+instead of this since the former takes care of running the
+registered hooks while the latter silently ignores them.</p>
+</div>
+</dd></dl>
+</dd></dl>
+</section>
+<section id="neighborsampler">
+<h3>NeighborSampler<a class="headerlink" href="#neighborsampler" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="nodesampler">
+<h3>NodeSampler<a class="headerlink" href="#nodesampler" title="Permalink to this headline">¶</a></h3>
+<dl class="py class">
+<dt class="sig sig-object py" id="torchdrug.layers.NodeSampler">
+<em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">NodeSampler</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">budget</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ratio</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/sampler.html#NodeSampler"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.layers.NodeSampler" title="Permalink to this definition">¶</a></dt>
+<dd><p>Node sampler from <a href="#id3"><span class="problematic" id="id4">`GraphSAINT: Graph Sampling Based Inductive Learning Method`_</span></a>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>input</strong> (<em>Tensor</em>) – input data of shape <span class="math notranslate nohighlight">\((..., N)\)</span></p>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>budget</strong> (<em>int</em><em>, </em><em>optional</em>) – number of node to keep</p></li>
+<li><p><strong>ratio</strong> (<em>int</em><em>, </em><em>optional</em>) – ratio of node to keep</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="torchdrug.layers.NodeSampler.forward">
+<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/sampler.html#NodeSampler.forward"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.layers.NodeSampler.forward" title="Permalink to this definition">¶</a></dt>
+<dd><p>Defines the computation performed at every call.</p>
+<p>Should be overridden by all subclasses.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Although the recipe for forward pass needs to be defined within
+this function, one should call the <code class="xref py py-class docutils literal notranslate"><span class="pre">Module</span></code> instance afterwards
+instead of this since the former takes care of running the
+registered hooks while the latter silently ignores them.</p>
+</div>
+</dd></dl>
+</dd></dl>
+</section>
+<section id="randomwalksampler">
+<h3>RandomWalkSampler<a class="headerlink" href="#randomwalksampler" title="Permalink to this headline">¶</a></h3>
+</section>
+</section>
+<section id="distribution-layers">
+<h2>Distribution Layers<a class="headerlink" href="#distribution-layers" title="Permalink to this headline">¶</a></h2>
+<section id="independentgaussian">
+<h3>IndependentGaussian<a class="headerlink" href="#independentgaussian" title="Permalink to this headline">¶</a></h3>
+</section>
+</section>
+<section id="flow-layers">
+<h2>Flow Layers<a class="headerlink" href="#flow-layers" title="Permalink to this headline">¶</a></h2>
+<section id="conditionalflow">
+<h3>ConditionalFlow<a class="headerlink" href="#conditionalflow" title="Permalink to this headline">¶</a></h3>
+<dl class="py class">
+<dt class="sig sig-object py" id="torchdrug.layers.ConditionalFlow">
+<em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">ConditionalFlow</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_dim</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">condition_dim</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hidden_dims</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">activation</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'relu'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/flow.html#ConditionalFlow"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.layers.ConditionalFlow" title="Permalink to this definition">¶</a></dt>
+<dd><p>Conditional flow transformation from <a class="reference external" href="https://arxiv.org/pdf/1705.07057.pdf">Masked Autoregressive Flow for Density Estimation</a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input_dim</strong> (<em>int</em>) – input &amp; output dimension</p></li>
+<li><p><strong>condition_dim</strong> (<em>int</em>) – condition dimension</p></li>
+<li><p><strong>hidden_dims</strong> (<em>list of int</em><em>, </em><em>optional</em>) – hidden dimensions</p></li>
+<li><p><strong>activation</strong> (<em>str</em><em> or </em><em>function</em><em>, </em><em>optional</em>) – activation function</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="torchdrug.layers.ConditionalFlow.forward">
+<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">condition</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/flow.html#ConditionalFlow.forward"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.layers.ConditionalFlow.forward" title="Permalink to this definition">¶</a></dt>
+<dd><p>Transform data into latent representations.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input</strong> (<em>Tensor</em>) – input representations</p></li>
+<li><p><strong>condition</strong> (<em>Tensor</em>) – conditional representations</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>latent representations, log-likelihood of the transformation</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>(Tensor, Tensor)</p>
 </dd>
 </dl>
 </dd></dl>
 <dl class="py method">
-<dt id="torchdrug.layers.distribution.IndependentGaussian.sample">
-<code class="sig-name descname">sample</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">size</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/distribution.html#IndependentGaussian.sample"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.layers.distribution.IndependentGaussian.sample" title="Permalink to this definition">¶</a></dt>
-<dd><p>Draw samples from the distribution.</p>
+<dt class="sig sig-object py" id="torchdrug.layers.ConditionalFlow.reverse">
+<span class="sig-name descname"><span class="pre">reverse</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">latent</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">condition</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/flow.html#ConditionalFlow.reverse"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.layers.ConditionalFlow.reverse" title="Permalink to this definition">¶</a></dt>
+<dd><p>Transform latent representations into data.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>size</strong> (<em>tuple of int</em>) – shape of the samples</p>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>latent</strong> (<em>Tensor</em>) – latent representations</p></li>
+<li><p><strong>condition</strong> (<em>Tensor</em>) – conditional representations</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>input representations, log-likelihood of the transformation</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>(Tensor, Tensor)</p>
 </dd>
 </dl>
 </dd></dl>
 </dd></dl>
-</div>
-<div class="section" id="module-torchdrug.layers.functional">
+</section>
+</section>
+<section id="module-torchdrug.layers.functional">
 <span id="functional-layers"></span><h2>Functional Layers<a class="headerlink" href="#module-torchdrug.layers.functional" title="Permalink to this headline">¶</a></h2>
 <dl class="py function">
-<dt id="torchdrug.layers.functional.as_mask">
-<code class="sig-name descname">as_mask</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">indexes</span></em>, <em class="sig-param"><span class="n">length</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/functional/functional.html#as_mask"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.layers.functional.as_mask" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchdrug.layers.functional.as_mask">
+<span class="sig-name descname"><span class="pre">as_mask</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">indexes</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">length</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/functional/functional.html#as_mask"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.layers.functional.as_mask" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert indexes into a binary mask.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -1432,8 +1554,8 @@ This may provide better time or memory complexity than separate calls of
 </dl>
 </dd></dl>
 <dl class="py function">
-<dt id="torchdrug.layers.functional.complex_score">
-<code class="sig-name descname">complex_score</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">entity</span></em>, <em class="sig-param"><span class="n">relation</span></em>, <em class="sig-param"><span class="n">h_index</span></em>, <em class="sig-param"><span class="n">t_index</span></em>, <em class="sig-param"><span class="n">r_index</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/functional/embedding.html#complex_score"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.layers.functional.complex_score" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchdrug.layers.functional.complex_score">
+<span class="sig-name descname"><span class="pre">complex_score</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">entity</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">relation</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">h_index</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t_index</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">r_index</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/functional/embedding.html#complex_score"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.layers.functional.complex_score" title="Permalink to this definition">¶</a></dt>
 <dd><p>ComplEx score function from <a class="reference external" href="http://proceedings.mlr.press/v48/trouillon16.pdf">Complex Embeddings for Simple Link Prediction</a>.</p>
 <dl class="simple">
 <dt>Parameter:</dt><dd><p>entity (Tensor): entity embeddings of shape <span class="math notranslate nohighlight">\((|V|, 2d)\)</span>
@@ -1445,8 +1567,8 @@ r_index (LongTensor): index of relations</p>
 </dl>
 </dd></dl>
 <dl class="py function">
-<dt id="torchdrug.layers.functional.distmult_score">
-<code class="sig-name descname">distmult_score</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">entity</span></em>, <em class="sig-param"><span class="n">relation</span></em>, <em class="sig-param"><span class="n">h_index</span></em>, <em class="sig-param"><span class="n">t_index</span></em>, <em class="sig-param"><span class="n">r_index</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/functional/embedding.html#distmult_score"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.layers.functional.distmult_score" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchdrug.layers.functional.distmult_score">
+<span class="sig-name descname"><span class="pre">distmult_score</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">entity</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">relation</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">h_index</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t_index</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">r_index</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/functional/embedding.html#distmult_score"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.layers.functional.distmult_score" title="Permalink to this definition">¶</a></dt>
 <dd><p>DistMult score function from <a class="reference external" href="https://arxiv.org/pdf/1412.6575.pdf">Embedding Entities and Relations for Learning and Inference in Knowledge Bases</a>.</p>
 <dl class="simple">
 <dt>Parameter:</dt><dd><p>entity (Tensor): entity embeddings of shape <span class="math notranslate nohighlight">\((|V|, d)\)</span>
@@ -1458,8 +1580,8 @@ r_index (LongTensor): index of relations</p>
 </dl>
 </dd></dl>
 <dl class="py function">
-<dt id="torchdrug.layers.functional.generalized_rspmm">
-<code class="sig-name descname">generalized_rspmm</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">sparse</span></em>, <em class="sig-param"><span class="n">relation</span></em>, <em class="sig-param"><span class="n">input</span></em>, <em class="sig-param"><span class="n">sum</span><span class="o">=</span><span class="default_value">'add'</span></em>, <em class="sig-param"><span class="n">mul</span><span class="o">=</span><span class="default_value">'mul'</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/functional/spmm.html#generalized_rspmm"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.layers.functional.generalized_rspmm" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchdrug.layers.functional.generalized_rspmm">
+<span class="sig-name descname"><span class="pre">generalized_rspmm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sparse</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">relation</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">input</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sum</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'add'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mul</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'mul'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/functional/spmm.html#generalized_rspmm"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.layers.functional.generalized_rspmm" title="Permalink to this definition">¶</a></dt>
 <dd><p>Generalized relational sparse-dense matrix multiplication.</p>
 <p>This function computes the matrix multiplication of a sparse matrix, a dense relation matrix and
 a dense input matrix. The output dense matrix satisfies</p>
@@ -1484,8 +1606,8 @@ This behaves differently from dense-dense matrix multiplication with zero entrie
 </dl>
 </dd></dl>
 <dl class="py function">
-<dt id="torchdrug.layers.functional.generalized_spmm">
-<code class="sig-name descname">generalized_spmm</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">sparse</span></em>, <em class="sig-param"><span class="n">input</span></em>, <em class="sig-param"><span class="n">sum</span><span class="o">=</span><span class="default_value">'add'</span></em>, <em class="sig-param"><span class="n">mul</span><span class="o">=</span><span class="default_value">'mul'</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/functional/spmm.html#generalized_spmm"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.layers.functional.generalized_spmm" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchdrug.layers.functional.generalized_spmm">
+<span class="sig-name descname"><span class="pre">generalized_spmm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sparse</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">input</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sum</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'add'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mul</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'mul'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/functional/spmm.html#generalized_spmm"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.layers.functional.generalized_spmm" title="Permalink to this definition">¶</a></dt>
 <dd><p>Generalized sparse-dense matrix multiplication.</p>
 <p>This function computes the matrix multiplication of a sparse matrix and a dense input matrix.
 The output dense matrix satisfies</p>
@@ -1509,8 +1631,8 @@ This behaves differently from dense-dense matrix multiplication with zero entrie
 </dl>
 </dd></dl>
 <dl class="py function">
-<dt id="torchdrug.layers.functional.masked_mean">
-<code class="sig-name descname">masked_mean</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">input</span></em>, <em class="sig-param"><span class="n">mask</span></em>, <em class="sig-param"><span class="n">dim</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">keepdim</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/functional/functional.html#masked_mean"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.layers.functional.masked_mean" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchdrug.layers.functional.masked_mean">
+<span class="sig-name descname"><span class="pre">masked_mean</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mask</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dim</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">keepdim</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/functional/functional.html#masked_mean"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.layers.functional.masked_mean" title="Permalink to this definition">¶</a></dt>
 <dd><p>Masked mean of a tensor.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -1524,8 +1646,8 @@ This behaves differently from dense-dense matrix multiplication with zero entrie
 </dl>
 </dd></dl>
 <dl class="py function">
-<dt id="torchdrug.layers.functional.mean_with_nan">
-<code class="sig-name descname">mean_with_nan</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">input</span></em>, <em class="sig-param"><span class="n">dim</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">keepdim</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/functional/functional.html#mean_with_nan"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.layers.functional.mean_with_nan" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchdrug.layers.functional.mean_with_nan">
+<span class="sig-name descname"><span class="pre">mean_with_nan</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dim</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">keepdim</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/functional/functional.html#mean_with_nan"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.layers.functional.mean_with_nan" title="Permalink to this definition">¶</a></dt>
 <dd><p>Mean of a tensor. Ignore all nan values.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -1538,8 +1660,8 @@ This behaves differently from dense-dense matrix multiplication with zero entrie
 </dl>
 </dd></dl>
 <dl class="py function">
-<dt id="torchdrug.layers.functional.multi_slice_mask">
-<code class="sig-name descname">multi_slice_mask</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">starts</span></em>, <em class="sig-param"><span class="n">ends</span></em>, <em class="sig-param"><span class="n">length</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/functional/functional.html#multi_slice_mask"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.layers.functional.multi_slice_mask" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchdrug.layers.functional.multi_slice_mask">
+<span class="sig-name descname"><span class="pre">multi_slice_mask</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">starts</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ends</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">length</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/functional/functional.html#multi_slice_mask"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.layers.functional.multi_slice_mask" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compute the union of multiple slices into a binary mask.</p>
 <p>Example:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mask</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">multi_slice_mask</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">]),</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">6</span><span class="p">]),</span> <span class="mi">6</span><span class="p">)</span>
@@ -1557,8 +1679,8 @@ This behaves differently from dense-dense matrix multiplication with zero entrie
 </dl>
 </dd></dl>
 <dl class="py function">
-<dt id="torchdrug.layers.functional.multinomial">
-<code class="sig-name descname">multinomial</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">input</span></em>, <em class="sig-param"><span class="n">num_samples</span></em>, <em class="sig-param"><span class="n">replacement</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/functional/functional.html#multinomial"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.layers.functional.multinomial" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchdrug.layers.functional.multinomial">
+<span class="sig-name descname"><span class="pre">multinomial</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_samples</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">replacement</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/functional/functional.html#multinomial"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.layers.functional.multinomial" title="Permalink to this definition">¶</a></dt>
 <dd><p>Fast multinomial sampling. This is the default implementation in PyTorch v1.6.0+.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -1571,8 +1693,8 @@ This behaves differently from dense-dense matrix multiplication with zero entrie
 </dl>
 </dd></dl>
 <dl class="py function">
-<dt id="torchdrug.layers.functional.one_hot">
-<code class="sig-name descname">one_hot</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">index</span></em>, <em class="sig-param"><span class="n">size</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/functional/functional.html#one_hot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.layers.functional.one_hot" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchdrug.layers.functional.one_hot">
+<span class="sig-name descname"><span class="pre">one_hot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">index</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">size</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/functional/functional.html#one_hot"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.layers.functional.one_hot" title="Permalink to this definition">¶</a></dt>
 <dd><p>Expand indexes into one-hot vectors.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -1584,8 +1706,8 @@ This behaves differently from dense-dense matrix multiplication with zero entrie
 </dl>
 </dd></dl>
 <dl class="py function">
-<dt id="torchdrug.layers.functional.rotate_score">
-<code class="sig-name descname">rotate_score</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">entity</span></em>, <em class="sig-param"><span class="n">relation</span></em>, <em class="sig-param"><span class="n">h_index</span></em>, <em class="sig-param"><span class="n">t_index</span></em>, <em class="sig-param"><span class="n">r_index</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/functional/embedding.html#rotate_score"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.layers.functional.rotate_score" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchdrug.layers.functional.rotate_score">
+<span class="sig-name descname"><span class="pre">rotate_score</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">entity</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">relation</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">h_index</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t_index</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">r_index</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/functional/embedding.html#rotate_score"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.layers.functional.rotate_score" title="Permalink to this definition">¶</a></dt>
 <dd><p>RotatE score function from <a class="reference external" href="https://arxiv.org/pdf/1902.10197.pdf">RotatE: Knowledge Graph Embedding by Relational Rotation in Complex Space</a>.</p>
 <dl class="simple">
 <dt>Parameter:</dt><dd><p>entity (Tensor): entity embeddings of shape <span class="math notranslate nohighlight">\((|V|, 2d)\)</span>
@@ -1597,8 +1719,8 @@ r_index (LongTensor): index of relations</p>
 </dl>
 </dd></dl>
 <dl class="py function">
-<dt id="torchdrug.layers.functional.shifted_softplus">
-<code class="sig-name descname">shifted_softplus</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">input</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/functional/functional.html#shifted_softplus"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.layers.functional.shifted_softplus" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchdrug.layers.functional.shifted_softplus">
+<span class="sig-name descname"><span class="pre">shifted_softplus</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/functional/functional.html#shifted_softplus"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.layers.functional.shifted_softplus" title="Permalink to this definition">¶</a></dt>
 <dd><p>Shifted softplus function.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -1607,8 +1729,8 @@ r_index (LongTensor): index of relations</p>
 </dl>
 </dd></dl>
 <dl class="py function">
-<dt id="torchdrug.layers.functional.simple_score">
-<code class="sig-name descname">simple_score</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">entity</span></em>, <em class="sig-param"><span class="n">relation</span></em>, <em class="sig-param"><span class="n">h_index</span></em>, <em class="sig-param"><span class="n">t_index</span></em>, <em class="sig-param"><span class="n">r_index</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/functional/embedding.html#simple_score"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.layers.functional.simple_score" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchdrug.layers.functional.simple_score">
+<span class="sig-name descname"><span class="pre">simple_score</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">entity</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">relation</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">h_index</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t_index</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">r_index</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/functional/embedding.html#simple_score"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.layers.functional.simple_score" title="Permalink to this definition">¶</a></dt>
 <dd><p>SimplE score function from <a class="reference external" href="https://papers.nips.cc/paper/2018/file/b2ab001909a8a6f04b51920306046ce5-Paper.pdf">SimplE Embedding for Link Prediction in Knowledge Graphs</a>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -1623,8 +1745,8 @@ r_index (LongTensor): index of relations</p>
 </dl>
 </dd></dl>
 <dl class="py function">
-<dt id="torchdrug.layers.functional.transe_score">
-<code class="sig-name descname">transe_score</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">entity</span></em>, <em class="sig-param"><span class="n">relation</span></em>, <em class="sig-param"><span class="n">h_index</span></em>, <em class="sig-param"><span class="n">t_index</span></em>, <em class="sig-param"><span class="n">r_index</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/functional/embedding.html#transe_score"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.layers.functional.transe_score" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchdrug.layers.functional.transe_score">
+<span class="sig-name descname"><span class="pre">transe_score</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">entity</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">relation</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">h_index</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t_index</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">r_index</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/functional/embedding.html#transe_score"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.layers.functional.transe_score" title="Permalink to this definition">¶</a></dt>
 <dd><p>TransE score function from <a class="reference external" href="https://proceedings.neurips.cc/paper/2013/file/1cecc7a77928ca8133fa24680a88d2f9-Paper.pdf">Translating Embeddings for Modeling Multi-relational Data</a>.</p>
 <dl class="simple">
 <dt>Parameter:</dt><dd><p>entity (Tensor): entity embeddings of shape <span class="math notranslate nohighlight">\((|V|, d)\)</span>
@@ -1636,8 +1758,8 @@ r_index (LongTensor): index of relations</p>
 </dl>
 </dd></dl>
 <dl class="py function">
-<dt id="torchdrug.layers.functional.variadic_cross_entropy">
-<code class="sig-name descname">variadic_cross_entropy</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">input</span></em>, <em class="sig-param"><span class="n">target</span></em>, <em class="sig-param"><span class="n">size</span></em>, <em class="sig-param"><span class="n">reduction</span><span class="o">=</span><span class="default_value">'mean'</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/functional/functional.html#variadic_cross_entropy"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.layers.functional.variadic_cross_entropy" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchdrug.layers.functional.variadic_cross_entropy">
+<span class="sig-name descname"><span class="pre">variadic_cross_entropy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">size</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reduction</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'mean'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/functional/functional.html#variadic_cross_entropy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.layers.functional.variadic_cross_entropy" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compute cross entropy loss over categories with variadic sizes.</p>
 <p>Suppose there are <span class="math notranslate nohighlight">\(N\)</span> samples, and the numbers of categories in all samples are summed to <span class="math notranslate nohighlight">\(B\)</span>.</p>
 <dl class="field-list simple">
@@ -1653,8 +1775,8 @@ Available reductions are <code class="docutils literal notranslate"><span class=
 </dl>
 </dd></dl>
 <dl class="py function">
-<dt id="torchdrug.layers.functional.variadic_log_softmax">
-<code class="sig-name descname">variadic_log_softmax</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">input</span></em>, <em class="sig-param"><span class="n">size</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/functional/functional.html#variadic_log_softmax"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.layers.functional.variadic_log_softmax" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchdrug.layers.functional.variadic_log_softmax">
+<span class="sig-name descname"><span class="pre">variadic_log_softmax</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">size</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/functional/functional.html#variadic_log_softmax"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.layers.functional.variadic_log_softmax" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compute log softmax over categories with variadic sizes.</p>
 <p>Suppose there are <span class="math notranslate nohighlight">\(N\)</span> samples, and the numbers of categories in all samples are summed to <span class="math notranslate nohighlight">\(B\)</span>.</p>
 <dl class="field-list simple">
@@ -1667,8 +1789,8 @@ Available reductions are <code class="docutils literal notranslate"><span class=
 </dl>
 </dd></dl>
 <dl class="py function">
-<dt id="torchdrug.layers.functional.variadic_max">
-<code class="sig-name descname">variadic_max</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">input</span></em>, <em class="sig-param"><span class="n">size</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/functional/functional.html#variadic_max"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.layers.functional.variadic_max" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchdrug.layers.functional.variadic_max">
+<span class="sig-name descname"><span class="pre">variadic_max</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">size</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/functional/functional.html#variadic_max"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.layers.functional.variadic_max" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compute max over sets with variadic sizes.</p>
 <p>Suppose there are <span class="math notranslate nohighlight">\(N\)</span> sets, and the sizes of all sets are summed to <span class="math notranslate nohighlight">\(B\)</span>.</p>
 <dl class="field-list simple">
@@ -1685,8 +1807,8 @@ Available reductions are <code class="docutils literal notranslate"><span class=
 </dl>
 </dd></dl>
 <dl class="py function">
-<dt id="torchdrug.layers.functional.variadic_mean">
-<code class="sig-name descname">variadic_mean</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">input</span></em>, <em class="sig-param"><span class="n">size</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/functional/functional.html#variadic_mean"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.layers.functional.variadic_mean" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchdrug.layers.functional.variadic_mean">
+<span class="sig-name descname"><span class="pre">variadic_mean</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">size</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/functional/functional.html#variadic_mean"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.layers.functional.variadic_mean" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compute mean over sets with variadic sizes.</p>
 <p>Suppose there are <span class="math notranslate nohighlight">\(N\)</span> sets, and the sizes of all sets are summed to <span class="math notranslate nohighlight">\(B\)</span>.</p>
 <dl class="field-list simple">
@@ -1703,8 +1825,8 @@ Available reductions are <code class="docutils literal notranslate"><span class=
 </dl>
 </dd></dl>
 <dl class="py function">
-<dt id="torchdrug.layers.functional.variadic_sum">
-<code class="sig-name descname">variadic_sum</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">input</span></em>, <em class="sig-param"><span class="n">size</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/functional/functional.html#variadic_sum"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.layers.functional.variadic_sum" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchdrug.layers.functional.variadic_sum">
+<span class="sig-name descname"><span class="pre">variadic_sum</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">size</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/functional/functional.html#variadic_sum"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.layers.functional.variadic_sum" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compute sum over sets with variadic sizes.</p>
 <p>Suppose there are <span class="math notranslate nohighlight">\(N\)</span> sets, and the sizes of all sets are summed to <span class="math notranslate nohighlight">\(B\)</span>.</p>
 <dl class="field-list simple">
@@ -1721,8 +1843,8 @@ Available reductions are <code class="docutils literal notranslate"><span class=
 </dl>
 </dd></dl>
 <dl class="py function">
-<dt id="torchdrug.layers.functional.variadic_topk">
-<code class="sig-name descname">variadic_topk</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">input</span></em>, <em class="sig-param"><span class="n">size</span></em>, <em class="sig-param"><span class="n">k</span></em>, <em class="sig-param"><span class="n">largest</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/functional/functional.html#variadic_topk"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.layers.functional.variadic_topk" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchdrug.layers.functional.variadic_topk">
+<span class="sig-name descname"><span class="pre">variadic_topk</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">size</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">largest</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/functional/functional.html#variadic_topk"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.layers.functional.variadic_topk" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compute the <span class="math notranslate nohighlight">\(k\)</span> largest elements over sets with variadic sizes.</p>
 <p>Suppose there are <span class="math notranslate nohighlight">\(N\)</span> sets, and the sizes of all sets are summed to <span class="math notranslate nohighlight">\(B\)</span>.</p>
 <p>If any set has less than than <span class="math notranslate nohighlight">\(k\)</span> elements, the size-th largest element will be
@@ -1742,8 +1864,8 @@ repeated to pad the output to <span class="math notranslate nohighlight">\(k\)</
 </dd>
 </dl>
 </dd></dl>
-</div>
-</div>
+</section>
+</section>
 
       </article>
       <footer>
@@ -1823,8 +1945,9 @@ repeated to pad the output to <span class="math notranslate nohighlight">\(k\)</
 <li><a class="reference internal" href="#meanreadout">MeanReadout</a></li>
 <li><a class="reference internal" href="#sumreadout">SumReadout</a></li>
 <li><a class="reference internal" href="#maxreadout">MaxReadout</a></li>
-<li><a class="reference internal" href="#softmax">Softmax</a></li>
 <li><a class="reference internal" href="#set2set">Set2Set</a></li>
+<li><a class="reference internal" href="#softmax">Softmax</a></li>
+<li><a class="reference internal" href="#sort">Sort</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#pooling-layers">Pooling Layers</a><ul>
@@ -1832,7 +1955,21 @@ repeated to pad the output to <span class="math notranslate nohighlight">\(k\)</
 <li><a class="reference internal" href="#mincutpool">MinCutPool</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#module-torchdrug.layers.distribution">Distribution Layers</a></li>
+<li><a class="reference internal" href="#sampler-layers">Sampler Layers</a><ul>
+<li><a class="reference internal" href="#edgesampler">EdgeSampler</a></li>
+<li><a class="reference internal" href="#neighborsampler">NeighborSampler</a></li>
+<li><a class="reference internal" href="#nodesampler">NodeSampler</a></li>
+<li><a class="reference internal" href="#randomwalksampler">RandomWalkSampler</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#distribution-layers">Distribution Layers</a><ul>
+<li><a class="reference internal" href="#independentgaussian">IndependentGaussian</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#flow-layers">Flow Layers</a><ul>
+<li><a class="reference internal" href="#conditionalflow">ConditionalFlow</a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#module-torchdrug.layers.functional">Functional Layers</a></li>
 </ul>
 </li>
@@ -1845,6 +1982,11 @@ repeated to pad the output to <span class="math notranslate nohighlight">\(k\)</
       
     </aside>
   </main>
-</div>
-  </body>
+</div><script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/scripts/main.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    </body>
 </html>
