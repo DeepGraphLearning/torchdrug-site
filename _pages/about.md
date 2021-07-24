@@ -81,11 +81,25 @@ with the vision of creating an easy access to drug discovery techniques for ever
 machine learning practitioners to apply fundamental algorithms to drug discovery applications, with minimal efforts
 on domain knowledge and trivial details.
 
-# Team
+For an introduction to drug discovery techniques, please refer to the [AAAI 2021 tutorial] on artificial intelligence for drug discovery.
 
 [MilaGraph]: https://github.com/DeepGraphLearning
+[AAAI 2021 tutorial]: https://deepgraphlearning.github.io/DrugTutorial_AAAI2021
+
+# Team
 
 {% include team.html id="team" %}
+
+## Related Publications
+
+- Chence Shi\*, Shitong Luo\*, Minkai Xu, Jian Tang. [Learning Gradient Fields for Molecular Conformation Generation](https://arxiv.org/pdf/2105.03902.pdf). ICML 2021.
+- Minkai Xu, Wujie Wang, Shitong Luo, Chence Shi, Yoshua Bengio, Rafael Gomez-Bombarelli, Jian Tang. [An End-to-End Framework for Molecular Conformation Generation via Bilevel Programming](https://arxiv.org/pdf/2105.07246.pdf). ICML 2021.
+- Meng Qu\*, Junkun Chen\*, Louis-Pascal Xhonneux, Yoshua Bengio, Jian Tang. [RNNLogic: Learnig Logic Rules for Reasoning on Knowledge Graphs](https://arxiv.org/pdf/2010.04029.pdf). ICLR 2021.
+- Minkai Xu\*, Shitong Luo\*, Yoshua Bengio, Jian Peng, Jian Tang. [Learning Neural Generative Dynamics for Molecular Conformation Generation](https://arxiv.org/pdf/2102.10240.pdf). ICLR 2021.
+- Chence Shi, Minkai Xu, Hongyu Guo, Ming Zhang, Jian Tang. [A Graph to Graphs Framework for Retrosynthesis Prediction](https://arxiv.org/pdf/2003.12725.pdf). ICML 2020.
+- Fan-Yun Sun, Jordan Hoffmann, Vikas Verma, Jian Tang. [InfoGraph: Unsupervised and Semi-supervised Graph-Level Representation Learning via Mutual Information Maximization](https://arxiv.org/pdf/1908.01000.pdf). ICLR 2020.
+- Chence Shi\*, Minkai Xu\*, Zhaocheng Zhu, Weinan Zhang, Ming Zhang, Jian Tang. [GraphAF: A Flow-based Autoregressive Model for Molecular Graph Generation](https://arxiv.org/pdf/2001.09382.pdf). ICLR 2020.
+- Zhiqing Sun, Zhi-Hong Deng, Jian-Yun Nie, Jian Tang. [RotatE: Knowledge Graph Embedding by Relational Rotation in Complex Space](https://arxiv.org/pdf/1902.10197.pdf). ICLR 2019.
 
 # Steering Committee
 
