@@ -34,16 +34,16 @@
 
 .team-summary-large {
   background-color: $white-offset;
-  padding: 30px;
-  border-radius: 3px;
+  padding: 20px;
+  border-radius: 10px;
   .team-image {
-    height: 90px;
-    width: 90px;
-    margin-right: 20px;
+    height: 110px;
+    width: 110px;
+    margin-right: 16px;
     border-radius: 50%;
     overflow: hidden;
     img {
-      width: 90px;
+      width: 110px;
     }
   }
 }
