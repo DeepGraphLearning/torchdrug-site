@@ -1,13 +1,15 @@
 <!doctype html>
 <html class="no-js">
   <head><meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width,initial-scale=1"/><link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="torchdrug.data" href="data.html" /><link rel="prev" title="Documentation" href="index.html" />
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="torchdrug.data" href="data.html" /><link rel="prev" title="Documentation" href="index.html" />
 
-    <meta name="generator" content="sphinx-3.1.2, furo 2020.12.09.beta21"/>
+    <meta name="generator" content="sphinx-4.0.2, furo 2021.07.05.beta38"/>
         <title>torchdrug.core - TorchDrug 0.1.0 documentation</title>
-      <link rel="stylesheet" href="../_static/styles/furo.css?digest=a3f371badb8538d75df213ccffb17a4f6e8f3ac5">
-    <link rel="stylesheet" href="../_static/pygments.css">
-    <link media="(prefers-color-scheme: dark)" rel="stylesheet" href="../_static/pygments_dark.css">
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css" />
     
 
 
@@ -50,15 +52,7 @@
   --color-code-foreground: #d0d0d0;
   
   }
-</style><link id="pygments_dark_css" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css" href="../_static/pygments_dark.css" />
-    <link rel="stylesheet" href="../_static/styles/furo-extensions.css?digest=26485485040e7aaf717c13fd0188a5ad2c2deb60">
-    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-    <script defer src="../_static/jquery.js"></script>
-    <script defer src="../_static/underscore.js"></script>
-    <script defer src="../_static/doctools.js"></script>
-    <script defer src="../_static/language_data.js"></script>
-    <script defer async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script defer src="../_static/scripts/main.js?digest=e931d09b2a40c1bb82b542effe772014573baf67"></script></head>
+</style><link media="(prefers-color-scheme: dark)" rel="stylesheet" href="../_static/pygments_dark.css"></head>
   <body dir="">
     
 <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
@@ -98,6 +92,7 @@
 <label class="overlay toc-overlay" for="__toc"></label>
 
 
+
 <div class="page">
   <header class="mobile-header">
     <div class="header-left">
@@ -125,7 +120,7 @@
   
   
 </a><form class="sidebar-search-container" method="get" action="../search.html">
-  <input class="sidebar-search" placeholder="Search" name="q">
+  <input class="sidebar-search" placeholder=Search name="q">
   <input type="hidden" name="check_keywords" value="yes">
   <input type="hidden" name="area" value="default">
 </form><div class="sidebar-scroll"><div class="sidebar-tree">
@@ -184,13 +179,13 @@
         <label class="toc-overlay-icon toc-content-icon" for="__toc">
           <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
         </label>
-        <div class="section" id="torchdrug-core">
+        <section id="torchdrug-core">
 <h1>torchdrug.core<a class="headerlink" href="#torchdrug-core" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="configurable">
+<section id="configurable">
 <h2>Configurable<a class="headerlink" href="#configurable" title="Permalink to this headline">¶</a></h2>
 <dl class="py class">
-<dt id="torchdrug.core.Configurable">
-<em class="property">class </em><code class="sig-name descname">Configurable</code><a class="reference internal" href="../_modules/torchdrug/core/core.html#Configurable"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.core.Configurable" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchdrug.core.Configurable">
+<em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">Configurable</span></span><a class="reference internal" href="../_modules/torchdrug/core/core.html#Configurable"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.core.Configurable" title="Permalink to this definition">¶</a></dt>
 <dd><p>Class for load/save configuration.
 It will automatically record every argument passed to <code class="docutils literal notranslate"><span class="pre">__init__</span></code> function.</p>
 <p>This class is inspired by <code class="xref py py-meth docutils literal notranslate"><span class="pre">state_dict()</span></code> in PyTorch, but designed for hyperparameters.</p>
@@ -219,12 +214,12 @@ This is convenient for building models from configuration files.</p>
 </pre></div>
 </div>
 </dd></dl>
-</div>
-<div class="section" id="engine">
+</section>
+<section id="engine">
 <h2>Engine<a class="headerlink" href="#engine" title="Permalink to this headline">¶</a></h2>
 <dl class="py class">
-<dt id="torchdrug.core.Engine">
-<em class="property">class </em><code class="sig-name descname">Engine</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">task</span></em>, <em class="sig-param"><span class="n">train_set</span></em>, <em class="sig-param"><span class="n">valid_set</span></em>, <em class="sig-param"><span class="n">test_set</span></em>, <em class="sig-param"><span class="n">optimizer</span></em>, <em class="sig-param"><span class="n">scheduler</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">gpus</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">batch_size</span><span class="o">=</span><span class="default_value">1</span></em>, <em class="sig-param"><span class="n">gradient_interval</span><span class="o">=</span><span class="default_value">1</span></em>, <em class="sig-param"><span class="n">num_worker</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">log_interval</span><span class="o">=</span><span class="default_value">100</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/core/engine.html#Engine"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.core.Engine" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchdrug.core.Engine">
+<em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">Engine</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">task</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">train_set</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">valid_set</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_set</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">optimizer</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scheduler</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gpus</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gradient_interval</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_worker</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">log_interval</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/core/engine.html#Engine"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.core.Engine" title="Permalink to this definition">¶</a></dt>
 <dd><p>General class that handles everything about training and test of a task.</p>
 <p>This class can perform synchronous distributed parallel training over multiple CPUs or GPUs.
 To invoke parallel training, launch with one of the following commands.</p>
@@ -262,8 +257,8 @@ This creates an equivalent batch size of <code class="docutils literal notransla
 </dd>
 </dl>
 <dl class="py method">
-<dt id="torchdrug.core.Engine.evaluate">
-<code class="sig-name descname">evaluate</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">split</span></em>, <em class="sig-param"><span class="n">log</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/core/engine.html#Engine.evaluate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.core.Engine.evaluate" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchdrug.core.Engine.evaluate">
+<span class="sig-name descname"><span class="pre">evaluate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">split</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">log</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/core/engine.html#Engine.evaluate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.core.Engine.evaluate" title="Permalink to this definition">¶</a></dt>
 <dd><p>Evaluate the model.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -278,8 +273,8 @@ This creates an equivalent batch size of <code class="docutils literal notransla
 </dl>
 </dd></dl>
 <dl class="py method">
-<dt id="torchdrug.core.Engine.load">
-<code class="sig-name descname">load</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">checkpoint</span></em>, <em class="sig-param"><span class="n">load_optimizer</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/core/engine.html#Engine.load"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.core.Engine.load" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchdrug.core.Engine.load">
+<span class="sig-name descname"><span class="pre">load</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">checkpoint</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">load_optimizer</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/core/engine.html#Engine.load"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.core.Engine.load" title="Permalink to this definition">¶</a></dt>
 <dd><p>Load a checkpoint from file.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -291,13 +286,13 @@ This creates an equivalent batch size of <code class="docutils literal notransla
 </dl>
 </dd></dl>
 <dl class="py method">
-<dt id="torchdrug.core.Engine.load_config_dict">
-<em class="property">classmethod </em><code class="sig-name descname">load_config_dict</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">config</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/core/engine.html#Engine.load_config_dict"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.core.Engine.load_config_dict" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchdrug.core.Engine.load_config_dict">
+<em class="property"><span class="pre">classmethod</span> </em><span class="sig-name descname"><span class="pre">load_config_dict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">config</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/core/engine.html#Engine.load_config_dict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.core.Engine.load_config_dict" title="Permalink to this definition">¶</a></dt>
 <dd><p>Construct an instance from the configuration dict.</p>
 </dd></dl>
 <dl class="py method">
-<dt id="torchdrug.core.Engine.save">
-<code class="sig-name descname">save</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">checkpoint</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/core/engine.html#Engine.save"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.core.Engine.save" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchdrug.core.Engine.save">
+<span class="sig-name descname"><span class="pre">save</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">checkpoint</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/core/engine.html#Engine.save"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.core.Engine.save" title="Permalink to this definition">¶</a></dt>
 <dd><p>Save checkpoint to file.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -306,8 +301,8 @@ This creates an equivalent batch size of <code class="docutils literal notransla
 </dl>
 </dd></dl>
 <dl class="py method">
-<dt id="torchdrug.core.Engine.train">
-<code class="sig-name descname">train</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">num_epoch</span><span class="o">=</span><span class="default_value">1</span></em>, <em class="sig-param"><span class="n">batch_per_epoch</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/core/engine.html#Engine.train"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.core.Engine.train" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchdrug.core.Engine.train">
+<span class="sig-name descname"><span class="pre">train</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">num_epoch</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_per_epoch</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/core/engine.html#Engine.train"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.core.Engine.train" title="Permalink to this definition">¶</a></dt>
 <dd><p>Train the model.</p>
 <p>If <code class="docutils literal notranslate"><span class="pre">batch_per_epoch</span></code> is specified, randomly draw a subset of the training set for each epoch.
 Otherwise, the whole training set is used for each epoch.</p>
@@ -320,18 +315,18 @@ Otherwise, the whole training set is used for each epoch.</p>
 </dd>
 </dl>
 </dd></dl>
-<dl class="py method">
-<dt id="torchdrug.core.Engine.epoch">
-<em class="property">property </em><code class="sig-name descname">epoch</code><a class="headerlink" href="#torchdrug.core.Engine.epoch" title="Permalink to this definition">¶</a></dt>
+<dl class="py property">
+<dt class="sig sig-object py" id="torchdrug.core.Engine.epoch">
+<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">epoch</span></span><a class="headerlink" href="#torchdrug.core.Engine.epoch" title="Permalink to this definition">¶</a></dt>
 <dd><p>Current epoch.</p>
 </dd></dl>
 </dd></dl>
-</div>
-<div class="section" id="meter">
+</section>
+<section id="meter">
 <h2>Meter<a class="headerlink" href="#meter" title="Permalink to this headline">¶</a></h2>
 <dl class="py class">
-<dt id="torchdrug.core.Meter">
-<em class="property">class </em><code class="sig-name descname">Meter</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">log_interval</span><span class="o">=</span><span class="default_value">100</span></em>, <em class="sig-param"><span class="n">silent</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/core/meter.html#Meter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.core.Meter" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchdrug.core.Meter">
+<em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">Meter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">log_interval</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">silent</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/core/meter.html#Meter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.core.Meter" title="Permalink to this definition">¶</a></dt>
 <dd><p>Meter for recording metrics and training progress.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -342,8 +337,8 @@ Otherwise, the whole training set is used for each epoch.</p>
 </dd>
 </dl>
 <dl class="py method">
-<dt id="torchdrug.core.Meter.log">
-<code class="sig-name descname">log</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">record</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/core/meter.html#Meter.log"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.core.Meter.log" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchdrug.core.Meter.log">
+<span class="sig-name descname"><span class="pre">log</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">record</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/core/meter.html#Meter.log"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.core.Meter.log" title="Permalink to this definition">¶</a></dt>
 <dd><p>Log a meter record.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -352,8 +347,8 @@ Otherwise, the whole training set is used for each epoch.</p>
 </dl>
 </dd></dl>
 <dl class="py method">
-<dt id="torchdrug.core.Meter.step">
-<code class="sig-name descname">step</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/core/meter.html#Meter.step"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.core.Meter.step" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchdrug.core.Meter.step">
+<span class="sig-name descname"><span class="pre">step</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/core/meter.html#Meter.step"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.core.Meter.step" title="Permalink to this definition">¶</a></dt>
 <dd><p>Step an epoch for this meter.</p>
 <p>Instead of manually invoking <a class="reference internal" href="#torchdrug.core.Meter.step" title="torchdrug.core.Meter.step"><code class="xref py py-meth docutils literal notranslate"><span class="pre">step()</span></code></a>, it is suggested to use the following line</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="n">meter</span><span class="p">(</span><span class="n">num_epoch</span><span class="p">):</span>
@@ -362,8 +357,8 @@ Otherwise, the whole training set is used for each epoch.</p>
 </div>
 </dd></dl>
 <dl class="py method">
-<dt id="torchdrug.core.Meter.update">
-<code class="sig-name descname">update</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">record</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/core/meter.html#Meter.update"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.core.Meter.update" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchdrug.core.Meter.update">
+<span class="sig-name descname"><span class="pre">update</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">record</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/core/meter.html#Meter.update"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.core.Meter.update" title="Permalink to this definition">¶</a></dt>
 <dd><p>Update with a meter record.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -372,12 +367,12 @@ Otherwise, the whole training set is used for each epoch.</p>
 </dl>
 </dd></dl>
 </dd></dl>
-</div>
-<div class="section" id="registry">
+</section>
+<section id="registry">
 <h2>Registry<a class="headerlink" href="#registry" title="Permalink to this headline">¶</a></h2>
 <dl class="py class">
-<dt id="torchdrug.core.Registry">
-<em class="property">class </em><code class="sig-name descname">Registry</code><a class="reference internal" href="../_modules/torchdrug/core/core.html#Registry"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.core.Registry" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchdrug.core.Registry">
+<em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">Registry</span></span><a class="reference internal" href="../_modules/torchdrug/core/core.html#Registry"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.core.Registry" title="Permalink to this definition">¶</a></dt>
 <dd><p>Registry class for managing all call-by-name access to objects.</p>
 <p>Typical scenarios:</p>
 <ol class="arabic simple">
@@ -397,28 +392,28 @@ Otherwise, the whole training set is used for each epoch.</p>
 </pre></div>
 </div>
 <dl class="py method">
-<dt id="torchdrug.core.Registry.get">
-<em class="property">classmethod </em><code class="sig-name descname">get</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/core/core.html#Registry.get"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.core.Registry.get" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchdrug.core.Registry.get">
+<em class="property"><span class="pre">classmethod</span> </em><span class="sig-name descname"><span class="pre">get</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/core/core.html#Registry.get"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.core.Registry.get" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get an object with a canonical name. Hierachical names are separated by <code class="docutils literal notranslate"><span class="pre">.</span></code>.</p>
 </dd></dl>
 <dl class="py method">
-<dt id="torchdrug.core.Registry.register">
-<em class="property">classmethod </em><code class="sig-name descname">register</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/core/core.html#Registry.register"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.core.Registry.register" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchdrug.core.Registry.register">
+<em class="property"><span class="pre">classmethod</span> </em><span class="sig-name descname"><span class="pre">register</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/core/core.html#Registry.register"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.core.Registry.register" title="Permalink to this definition">¶</a></dt>
 <dd><p>Register an object with a canonical name. Hierarchical names are separated by <code class="docutils literal notranslate"><span class="pre">.</span></code>.</p>
 </dd></dl>
 <dl class="py method">
-<dt id="torchdrug.core.Registry.search">
-<em class="property">classmethod </em><code class="sig-name descname">search</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/core/core.html#Registry.search"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.core.Registry.search" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchdrug.core.Registry.search">
+<em class="property"><span class="pre">classmethod</span> </em><span class="sig-name descname"><span class="pre">search</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/core/core.html#Registry.search"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.core.Registry.search" title="Permalink to this definition">¶</a></dt>
 <dd><p>Search an object with the given name. The name doesn’t need to be canonical.</p>
 <p>For example, we can search <code class="docutils literal notranslate"><span class="pre">GCN</span></code> and get the object of <code class="docutils literal notranslate"><span class="pre">models.GCN</span></code>.</p>
 </dd></dl>
 </dd></dl>
-</div>
-<div class="section" id="meta-container">
+</section>
+<section id="meta-container">
 <h2>Meta Container<a class="headerlink" href="#meta-container" title="Permalink to this headline">¶</a></h2>
 <dl class="py class">
-<dt id="torchdrug.core._MetaContainer">
-<em class="property">class </em><code class="sig-name descname">_MetaContainer</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">meta_dict</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/core/core.html#_MetaContainer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.core._MetaContainer" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchdrug.core._MetaContainer">
+<em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">_MetaContainer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">meta_dict</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/core/core.html#_MetaContainer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.core._MetaContainer" title="Permalink to this definition">¶</a></dt>
 <dd><p>Meta container that maintains meta types about members.</p>
 <p>The meta type of each member is tracked when a member is assigned.
 We use a context manager to define the meta types for a bunch of assignment.</p>
@@ -449,13 +444,13 @@ For example, <code class="docutils literal notranslate"><span class="pre">instan
 <p>This may make code hard to maintain. Use with caution.</p>
 </div>
 <dl class="py method">
-<dt id="torchdrug.core._MetaContainer.context">
-<code class="sig-name descname">context</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">type</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/core/core.html#_MetaContainer.context"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.core._MetaContainer.context" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchdrug.core._MetaContainer.context">
+<span class="sig-name descname"><span class="pre">context</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">type</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/core/core.html#_MetaContainer.context"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.core._MetaContainer.context" title="Permalink to this definition">¶</a></dt>
 <dd><p>Context manager for assigning members with a specific meta type.</p>
 </dd></dl>
 <dl class="py method">
-<dt id="torchdrug.core._MetaContainer.data_by_meta">
-<code class="sig-name descname">data_by_meta</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">include</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">exclude</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/core/core.html#_MetaContainer.data_by_meta"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.core._MetaContainer.data_by_meta" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchdrug.core._MetaContainer.data_by_meta">
+<span class="sig-name descname"><span class="pre">data_by_meta</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">include</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">exclude</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/core/core.html#_MetaContainer.data_by_meta"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.core._MetaContainer.data_by_meta" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return members based on the specific meta types.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -472,14 +467,14 @@ For example, <code class="docutils literal notranslate"><span class="pre">instan
 </dd>
 </dl>
 </dd></dl>
-<dl class="py method">
-<dt id="torchdrug.core._MetaContainer.data_dict">
-<em class="property">property </em><code class="sig-name descname">data_dict</code><a class="headerlink" href="#torchdrug.core._MetaContainer.data_dict" title="Permalink to this definition">¶</a></dt>
+<dl class="py property">
+<dt class="sig sig-object py" id="torchdrug.core._MetaContainer.data_dict">
+<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">data_dict</span></span><a class="headerlink" href="#torchdrug.core._MetaContainer.data_dict" title="Permalink to this definition">¶</a></dt>
 <dd><p>A dict that maps tracked names to members.</p>
 </dd></dl>
 </dd></dl>
-</div>
-</div>
+</section>
+</section>
 
       </article>
       <footer>
@@ -552,6 +547,10 @@ For example, <code class="docutils literal notranslate"><span class="pre">instan
       
     </aside>
   </main>
-</div>
-  </body>
+</div><script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/scripts/main.js"></script>
+    </body>
 </html>

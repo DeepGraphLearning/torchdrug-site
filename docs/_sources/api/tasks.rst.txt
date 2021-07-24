@@ -73,7 +73,7 @@ Retrosynthesis
 Knowledge Graph Reasoning Tasks
 -------------------------------
 
-KnowledgeGraphEmbedding
+KnowledgeGraphCompletion
 ^^^^^^^^^^^^^^^^^^^^^^^
-.. autoclass:: KnowledgeGraphEmbedding
+.. autoclass:: KnowledgeGraphCompletion
     :members:

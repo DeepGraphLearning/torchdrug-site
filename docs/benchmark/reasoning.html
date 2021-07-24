@@ -1,13 +1,15 @@
 <!doctype html>
 <html class="no-js">
   <head><meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width,initial-scale=1"/><link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Tutorials" href="../tutorials/index.html" /><link rel="prev" title="Retrosynthesis" href="retrosynthesis.html" />
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Tutorials" href="../tutorials/index.html" /><link rel="prev" title="Retrosynthesis" href="retrosynthesis.html" />
 
-    <meta name="generator" content="sphinx-3.1.2, furo 2020.12.09.beta21"/>
+    <meta name="generator" content="sphinx-4.0.2, furo 2021.07.05.beta38"/>
         <title>Knowledge Graph Reasoning - TorchDrug 0.1.0 documentation</title>
-      <link rel="stylesheet" href="../_static/styles/furo.css?digest=a3f371badb8538d75df213ccffb17a4f6e8f3ac5">
-    <link rel="stylesheet" href="../_static/pygments.css">
-    <link media="(prefers-color-scheme: dark)" rel="stylesheet" href="../_static/pygments_dark.css">
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css" />
     
 
 
@@ -50,15 +52,7 @@
   --color-code-foreground: #d0d0d0;
   
   }
-</style><link id="pygments_dark_css" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css" href="../_static/pygments_dark.css" />
-    <link rel="stylesheet" href="../_static/styles/furo-extensions.css?digest=26485485040e7aaf717c13fd0188a5ad2c2deb60">
-    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-    <script defer src="../_static/jquery.js"></script>
-    <script defer src="../_static/underscore.js"></script>
-    <script defer src="../_static/doctools.js"></script>
-    <script defer src="../_static/language_data.js"></script>
-    <script defer async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script defer src="../_static/scripts/main.js?digest=e931d09b2a40c1bb82b542effe772014573baf67"></script></head>
+</style><link media="(prefers-color-scheme: dark)" rel="stylesheet" href="../_static/pygments_dark.css"></head>
   <body dir="">
     
 <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
@@ -98,6 +92,7 @@
 <label class="overlay toc-overlay" for="__toc"></label>
 
 
+
 <div class="page">
   <header class="mobile-header">
     <div class="header-left">
@@ -125,7 +120,7 @@
   
   
 </a><form class="sidebar-search-container" method="get" action="../search.html">
-  <input class="sidebar-search" placeholder="Search" name="q">
+  <input class="sidebar-search" placeholder=Search name="q">
   <input type="hidden" name="check_keywords" value="yes">
   <input type="hidden" name="area" value="default">
 </form><div class="sidebar-scroll"><div class="sidebar-tree">
@@ -184,12 +179,12 @@
         <label class="toc-overlay-icon toc-content-icon" for="__toc">
           <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
         </label>
-        <div class="section" id="knowledge-graph-reasoning">
+        <section id="knowledge-graph-reasoning">
 <h1>Knowledge Graph Reasoning<a class="headerlink" href="#knowledge-graph-reasoning" title="Permalink to this headline">¶</a></h1>
 <p>This page contains benchmarks of knowledge graph reasoning methods.</p>
 <p>During evaluation, for each triplet (h,r,t) in the test set, we construct two query-answer pairs, which are (h,r,?) with t and (?,r,t) with h. Given a query, we let each compared method compute a score for each entity in the vocabulary. Then we compute the rank of the correct answer to be the number of entities which has greater or equal scores than the correct answer. Note that there can be cases where a query has multiple answers, e.g., (h,r,?) with t0, t1, t2. When computing the rank for each of the answer (e.g., t0), we filter out all the other correct answers (e.g., t1 and t2) in the ranking list, and this setting is widely used in the literature.</p>
 <p>Given the ranks computed from all the queries, we report the Mean Rank (MR), Mean Reciprocal Rank (MRR) and Hit@k (HIT@1, HIT@3, and HIT@10).</p>
-<div class="section" id="id1">
+<section id="id1">
 <h2>FB15k<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
 <div class="table-wrapper"><table class="docutils align-default">
 <colgroup>
@@ -261,8 +256,8 @@
 </tr>
 </tbody>
 </table></div>
-</div>
-<div class="section" id="id2">
+</section>
+<section id="id2">
 <h2>FB15k-237<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
 <div class="table-wrapper"><table class="docutils align-default">
 <colgroup>
@@ -334,8 +329,8 @@
 </tr>
 </tbody>
 </table></div>
-</div>
-<div class="section" id="id3">
+</section>
+<section id="id3">
 <h2>WN18<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
 <div class="table-wrapper"><table class="docutils align-default">
 <colgroup>
@@ -407,8 +402,8 @@
 </tr>
 </tbody>
 </table></div>
-</div>
-<div class="section" id="id4">
+</section>
+<section id="id4">
 <h2>WN18RR<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
 <div class="table-wrapper"><table class="docutils align-default">
 <colgroup>
@@ -480,8 +475,8 @@
 </tr>
 </tbody>
 </table></div>
-</div>
-<div class="section" id="hetionet">
+</section>
+<section id="hetionet">
 <h2>Hetionet<a class="headerlink" href="#hetionet" title="Permalink to this headline">¶</a></h2>
 <div class="table-wrapper"><table class="docutils align-default">
 <colgroup>
@@ -553,8 +548,8 @@
 </tr>
 </tbody>
 </table></div>
-</div>
-</div>
+</section>
+</section>
 
       </article>
       <footer>
@@ -627,6 +622,10 @@
       
     </aside>
   </main>
-</div>
-  </body>
+</div><script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/scripts/main.js"></script>
+    </body>
 </html>

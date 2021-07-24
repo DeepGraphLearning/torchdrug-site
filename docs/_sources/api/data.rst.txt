@@ -50,6 +50,11 @@ ReactionDataset
 .. autoclass:: ReactionDataset
     :members:
 
+SemiSupervised
+^^^^^^^^^^^^^^^
+.. autoclass:: ReactionDataset
+    :members:
+
 Data Processing
 ---------------
 
@@ -58,7 +63,10 @@ DataLoader
 .. autoclass:: DataLoader
     :members:
 
+Dataset Split Methods
+^^^^^^^^^^
 .. autofunction:: graph_collate
+.. autofunction:: key_split
 .. autofunction:: ordered_scaffold_split
 .. autofunction:: scaffold_split
 .. autofunction:: semisupervised
