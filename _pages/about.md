@@ -1,7 +1,7 @@
 ---
 title: About
 layout: page
-permalink: /about
+permalink: /about 
 
 team:
   - name: Zhaocheng Zhu
@@ -106,6 +106,12 @@ machine learning practitioners to apply fundamental algorithms to drug discovery
 on domain knowledge and trivial details.
 
 [MilaGraph]: https://github.com/DeepGraphLearning
+
+# Principle Investigator
+  - name: Jian Tang
+    url: https://jian-tang.com/
+    title: Mila - Quebec AI Institute
+    image: assets/images/team/jian_tang.jpg
 
 # Team
 
