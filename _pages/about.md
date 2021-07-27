@@ -4,7 +4,7 @@ layout: page
 permalink: /about 
 
 investigator:
- - name: Jian Tang
+  - name: Jian Tang
     url: https://jian-tang.com/
     title: Mila - Quebec AI Institute
     image: assets/images/team/jian_tang.jpg
