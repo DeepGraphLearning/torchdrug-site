@@ -58,10 +58,6 @@ team:
     url: https://www.runchengliu.com/
     title: Tsinghua University
     image: assets/images/team/runcheng_liu.jpg
-  - name: Jian Tang
-    url: https://jian-tang.com/
-    title: Mila - Quebec AI Institute
-    image: assets/images/team/jian_tang.jpg
 
 committee:
   - name: Yoshua Bengio
