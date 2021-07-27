@@ -3,6 +3,12 @@ title: About
 layout: page
 permalink: /about 
 
+investigator:
+ - name: Jian Tang
+    url: https://jian-tang.com/
+    title: Mila - Quebec AI Institute
+    image: assets/images/team/jian_tang.jpg
+    
 team:
   - name: Zhaocheng Zhu
     url: https://kiddozhu.github.io/
@@ -108,10 +114,7 @@ on domain knowledge and trivial details.
 [MilaGraph]: https://github.com/DeepGraphLearning
 
 # Principle Investigator
-  - name: Jian Tang
-    url: https://jian-tang.com/
-    title: Mila - Quebec AI Institute
-    image: assets/images/team/jian_tang.jpg
+{% include team.html id="investigator" %}
 
 # Team
 
