@@ -109,7 +109,7 @@ on domain knowledge and trivial details.
 
 [MilaGraph]: https://github.com/DeepGraphLearning
 
-# Principle Investigator
+# Principal Investigator
 {% include team.html id="investigator" %}
 
 # Team
