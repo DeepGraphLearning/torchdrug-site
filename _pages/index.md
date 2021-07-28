@@ -5,7 +5,7 @@ title:
 landing:
   title: A powerful and flexible machine learning platform for drug discovery
   excerpt: > 
-    TorchDrug is a machine learning platform specifically designed for drug discovery on top of Pytorch. The core machine learning techniques incude graph machine learnining (graph neural networks, geometric deep learning, and knowledg graphs), deep generative models and reinforement learning.  It provides a comprehensive and flexible interface to support rapid protoyping of machine learning models for drug discovery.
+    TorchDrug is a machine learning platform designed for drug discovery, covering techniques from graph machine learning (graph neural networks, geometric deep learning & knowledge graphs), deep generative models to reinforcement learning. It provides a comprehensive and flexible interface to support rapid prototyping of drug discovery models in PyTorch.
 
 grid:
   items:
