@@ -236,8 +236,8 @@ solver.load("clintox_gin.pth")
 # Hierarchical Interface
 
 TorchDrug is designed to cater all kinds of development. It has a hierarchical interface, which ranges from
-low-level graph operations to high-level models and tasks. We can easily customize modules at any level with
-minimal efforts by utilizing building blocks from a lower level.
+low-level data structures and operations, mid-level layers and models, to high-level tasks.
+We can easily customize modules at any level with minimal efforts by utilizing building blocks from a lower level.
 
 <div class="container col-md-8">
   <div class="row justify-content-center">
