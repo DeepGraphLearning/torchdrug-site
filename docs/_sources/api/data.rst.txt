@@ -51,8 +51,8 @@ ReactionDataset
     :members:
 
 SemiSupervised
-^^^^^^^^^^^^^^^
-.. autoclass:: ReactionDataset
+^^^^^^^^^^^^^^
+.. autoclass:: SemiSupervised
     :members:
 
 Data Processing
@@ -64,11 +64,15 @@ DataLoader
     :members:
 
 Dataset Split Methods
-^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^
 .. autofunction:: graph_collate
+
 .. autofunction:: key_split
+
 .. autofunction:: ordered_scaffold_split
+
 .. autofunction:: scaffold_split
+
 .. autofunction:: semisupervised
 
 
@@ -80,25 +84,37 @@ Feature Functions
 Atom Features
 ^^^^^^^^^^^^^
 .. autofunction:: atom_default
+
 .. autofunction:: atom_symbol
+
 .. autofunction:: atom_position
+
 .. autofunction:: atom_property_prediction
+
 .. autofunction:: atom_explicit_property_prediction
+
 .. autofunction:: atom_pretrain
+
 .. autofunction:: atom_center_identification
+
 .. autofunction:: atom_synthon_completion
 
 Bond Features
 ^^^^^^^^^^^^^
 .. autofunction:: bond_default
+
 .. autofunction:: bond_length
+
 .. autofunction:: bond_property_prediction
+
 .. autofunction:: bond_pretrain
 
 Molecule Features
 ^^^^^^^^^^^^^^^^^
 .. autofunction:: molecule_default
+
 .. autofunction:: ExtendedConnectivityFingerprint
+
 .. function:: ECFP
 
     alias of ``torchdrug.data.feature.ExtendedConnectivityFingerprint``

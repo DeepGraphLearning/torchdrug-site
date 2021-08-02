@@ -81,8 +81,17 @@ Differentiable Graph Pooling
 
    :class:`MinCutPool <torchdrug.layers.MinCutPool>`
 
-Normalization Layer
-^^^^^^^^^^^^^^^^^^^
+Readout Layers
+^^^^^^^^^^^^^^
+
+1. `Order Matters: Sequence to sequence for sets <Set2Set_>`_
+
+    Oriol Vinyals, Samy Bengio, Manjunath Kudlur
+
+    :class:`Set2Set <torchdrug.layers.Set2Set>`
+
+Normalization Layers
+^^^^^^^^^^^^^^^^^^^^
 
 1. `PairNorm: Tackling Oversmoothing in GNNs <PairNorm_>`_
 
@@ -103,7 +112,7 @@ Pretrain Molecular Representations
 
    :class:`InfoGraph <torchdrug.models.InfoGraph>`
 
-2. `Strategies for Pre-training Graph Neural Networks <Attribute Masking_>`_
+2. `Strategies for Pre-training Graph Neural Networks <AttrMasking_>`_
 
    Weihua Hu, Bowen Liu, Joseph Gomes, Marinka Zitnik, Percy Liang, Vijay Pande, Jure Leskovec. ICLR 2020.
 

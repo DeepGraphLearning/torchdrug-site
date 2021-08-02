@@ -74,6 +74,6 @@ Knowledge Graph Reasoning Tasks
 -------------------------------
 
 KnowledgeGraphCompletion
-^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^
 .. autoclass:: KnowledgeGraphCompletion
     :members:

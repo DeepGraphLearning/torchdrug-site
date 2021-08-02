@@ -49,11 +49,12 @@ or GPUs. With a line of code, the library allows you to seamlessly switch betwee
 or even distributed settings.
 
 ```python
-...
-# CPU
+# Single CPU / Multiple CPUs / Distributed CPUs
 solver = core.Engine(task, train_set, valid_set, test_set, optimizer)
 # Single GPU
 solver = core.Engine(task, train_set, valid_set, test_set, optimizer, gpus=[0])
-# Multiple GPU
+# Multiple GPUs
 solver = core.Engine(task, train_set, valid_set, test_set, optimizer, gpus=[0, 1, 2, 3])
+# Distributed GPUs
+solver = core.Engine(task, train_set, valid_set, test_set, optimizer, gpus=[0, 1, 2, 3, 0, 1, 2, 3])
 ```

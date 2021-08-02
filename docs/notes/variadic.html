@@ -1,15 +1,13 @@
 <!doctype html>
 <html class="no-js">
   <head><meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width,initial-scale=1"/>
-    <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
-<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Graph Neural Network Layers" href="layer.html" /><link rel="prev" title="Graph Data Structures" href="graph.html" />
+    <meta name="viewport" content="width=device-width,initial-scale=1"/><link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Graph Neural Network Layers" href="layer.html" /><link rel="prev" title="Graph Data Structures" href="graph.html" />
 
-    <meta name="generator" content="sphinx-4.0.2, furo 2021.07.05.beta38"/>
+    <meta name="generator" content="sphinx-3.1.2, furo 2020.12.09.beta21"/>
         <title>Batch Irregular Structures - TorchDrug 0.1.0 documentation</title>
-      <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css" />
+      <link rel="stylesheet" href="../_static/styles/furo.css?digest=a3f371badb8538d75df213ccffb17a4f6e8f3ac5">
+    <link rel="stylesheet" href="../_static/pygments.css">
+    <link media="(prefers-color-scheme: dark)" rel="stylesheet" href="../_static/pygments_dark.css">
     
 
 
@@ -52,7 +50,15 @@
   --color-code-foreground: #d0d0d0;
   
   }
-</style><link media="(prefers-color-scheme: dark)" rel="stylesheet" href="../_static/pygments_dark.css"></head>
+</style><link id="pygments_dark_css" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css" href="../_static/pygments_dark.css" />
+    <link rel="stylesheet" href="../_static/styles/furo-extensions.css?digest=26485485040e7aaf717c13fd0188a5ad2c2deb60">
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script defer src="../_static/jquery.js"></script>
+    <script defer src="../_static/underscore.js"></script>
+    <script defer src="../_static/doctools.js"></script>
+    <script defer src="../_static/language_data.js"></script>
+    <script defer async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script defer src="../_static/scripts/main.js?digest=e931d09b2a40c1bb82b542effe772014573baf67"></script></head>
   <body dir="">
     
 <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
@@ -92,7 +98,6 @@
 <label class="overlay toc-overlay" for="__toc"></label>
 
 
-
 <div class="page">
   <header class="mobile-header">
     <div class="header-left">
@@ -120,7 +125,7 @@
   
   
 </a><form class="sidebar-search-container" method="get" action="../search.html">
-  <input class="sidebar-search" placeholder=Search name="q">
+  <input class="sidebar-search" placeholder="Search" name="q">
   <input type="hidden" name="check_keywords" value="yes">
   <input type="hidden" name="area" value="default">
 </form><div class="sidebar-scroll"><div class="sidebar-tree">
@@ -158,6 +163,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../api/core.html">torchdrug.core</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../api/data.html">torchdrug.data</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../api/datasets.html">torchdrug.datasets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/transforms.html">torchdrug.transforms</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../api/metrics.html">torchdrug.metrics</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../api/layers.html">torchdrug.layers</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../api/models.html">torchdrug.models</a></li>
@@ -179,7 +185,7 @@
         <label class="toc-overlay-icon toc-content-icon" for="__toc">
           <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
         </label>
-        <section id="batch-irregular-structures">
+        <div class="section" id="batch-irregular-structures">
 <h1>Batch Irregular Structures<a class="headerlink" href="#batch-irregular-structures" title="Permalink to this headline">¶</a></h1>
 <p>Unlike images, text and audio, graphs usually have irregular structures, which
 makes them hard to batch in tensor frameworks. Many existing implementations use
@@ -188,7 +194,7 @@ computation and memory.</p>
 <p>In TorchDrug, we develop a more intuitive and efficient solution based on
 variadic functions. The variadic functions can directly operate on sparse irregular
 inputs or outputs.</p>
-<section id="variadic-input">
+<div class="section" id="variadic-input">
 <h2>Variadic Input<a class="headerlink" href="#variadic-input" title="Permalink to this headline">¶</a></h2>
 <p>Here we show how to apply functions to variadic inputs.</p>
 <p>Generally, a batch of <span class="math notranslate nohighlight">\(n\)</span> variadic tensors can be represented by a value
@@ -272,8 +278,8 @@ to get our ground truth.</p>
 <a class="reference internal" href="../api/layers.html#torchdrug.layers.functional.variadic_cross_entropy" title="torchdrug.layers.functional.variadic_cross_entropy"><code class="xref py py-func docutils literal notranslate"><span class="pre">variadic_cross_entropy</span></code></a>,
 <a class="reference internal" href="../api/metrics.html#torchdrug.metrics.variadic_accuracy" title="torchdrug.metrics.variadic_accuracy"><code class="xref py py-func docutils literal notranslate"><span class="pre">variadic_accuracy</span></code></a></p>
 </div>
-</section>
-<section id="variadic-output">
+</div>
+<div class="section" id="variadic-output">
 <h2>Variadic Output<a class="headerlink" href="#variadic-output" title="Permalink to this headline">¶</a></h2>
 <p>In some cases, we also need to write functions that produce variadic outputs. A
 typical example is autoregressive generation, where we need to generate all
@@ -337,8 +343,8 @@ prefix lengths.</p>
 </div>
 <p>The output batch is</p>
 <img alt="../_images/autoregressive_output.png" src="../_images/autoregressive_output.png"/>
-</section>
-</section>
+</div>
+</div>
 
       </article>
       <footer>
@@ -408,11 +414,6 @@ prefix lengths.</p>
       
     </aside>
   </main>
-</div><script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/doctools.js"></script>
-    <script src="../_static/scripts/main.js"></script>
-    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    </body>
+</div>
+  </body>
 </html>

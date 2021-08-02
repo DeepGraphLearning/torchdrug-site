@@ -1,15 +1,13 @@
 <!doctype html>
 <html class="no-js">
   <head><meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width,initial-scale=1"/>
-    <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
-<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Batch Irregular Structures" href="variadic.html" /><link rel="prev" title="Notes" href="index.html" />
+    <meta name="viewport" content="width=device-width,initial-scale=1"/><link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Batch Irregular Structures" href="variadic.html" /><link rel="prev" title="Notes" href="index.html" />
 
-    <meta name="generator" content="sphinx-4.0.2, furo 2021.07.05.beta38"/>
+    <meta name="generator" content="sphinx-3.1.2, furo 2020.12.09.beta21"/>
         <title>Graph Data Structures - TorchDrug 0.1.0 documentation</title>
-      <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css" />
+      <link rel="stylesheet" href="../_static/styles/furo.css?digest=a3f371badb8538d75df213ccffb17a4f6e8f3ac5">
+    <link rel="stylesheet" href="../_static/pygments.css">
+    <link media="(prefers-color-scheme: dark)" rel="stylesheet" href="../_static/pygments_dark.css">
     
 
 
@@ -52,7 +50,15 @@
   --color-code-foreground: #d0d0d0;
   
   }
-</style><link media="(prefers-color-scheme: dark)" rel="stylesheet" href="../_static/pygments_dark.css"></head>
+</style><link id="pygments_dark_css" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css" href="../_static/pygments_dark.css" />
+    <link rel="stylesheet" href="../_static/styles/furo-extensions.css?digest=26485485040e7aaf717c13fd0188a5ad2c2deb60">
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script defer src="../_static/jquery.js"></script>
+    <script defer src="../_static/underscore.js"></script>
+    <script defer src="../_static/doctools.js"></script>
+    <script defer src="../_static/language_data.js"></script>
+    <script defer async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script defer src="../_static/scripts/main.js?digest=e931d09b2a40c1bb82b542effe772014573baf67"></script></head>
   <body dir="">
     
 <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
@@ -92,7 +98,6 @@
 <label class="overlay toc-overlay" for="__toc"></label>
 
 
-
 <div class="page">
   <header class="mobile-header">
     <div class="header-left">
@@ -120,7 +125,7 @@
   
   
 </a><form class="sidebar-search-container" method="get" action="../search.html">
-  <input class="sidebar-search" placeholder=Search name="q">
+  <input class="sidebar-search" placeholder="Search" name="q">
   <input type="hidden" name="check_keywords" value="yes">
   <input type="hidden" name="area" value="default">
 </form><div class="sidebar-scroll"><div class="sidebar-tree">
@@ -158,6 +163,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../api/core.html">torchdrug.core</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../api/data.html">torchdrug.data</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../api/datasets.html">torchdrug.datasets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/transforms.html">torchdrug.transforms</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../api/metrics.html">torchdrug.metrics</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../api/layers.html">torchdrug.layers</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../api/models.html">torchdrug.models</a></li>
@@ -179,11 +185,11 @@
         <label class="toc-overlay-icon toc-content-icon" for="__toc">
           <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
         </label>
-        <section id="graph-data-structures">
+        <div class="section" id="graph-data-structures">
 <h1>Graph Data Structures<a class="headerlink" href="#graph-data-structures" title="Permalink to this headline">¶</a></h1>
 <p>At the core of TorchDrug, we provides several data structures to enable common
 operations in graph representation learning.</p>
-<section id="create-a-graph">
+<div class="section" id="create-a-graph">
 <h2>Create a Graph<a class="headerlink" href="#create-a-graph" title="Permalink to this headline">¶</a></h2>
 <p>To begin with, let’s create a graph.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torch</span>
@@ -246,8 +252,8 @@ For example, the following code creates a benzene molecule.</p>
 <span class="nb">print</span><span class="p">(</span><span class="n">graph</span><span class="o">.</span><span class="n">device</span><span class="p">)</span>
 </pre></div>
 </div>
-</section>
-<section id="graph-attributes">
+</div>
+<div class="section" id="graph-attributes">
 <h2>Graph Attributes<a class="headerlink" href="#graph-attributes" title="Permalink to this headline">¶</a></h2>
 <p>A common practice in graph representation learning is to add some graph features as
 the input of neural networks. Typically, there are three types of features, node-level,
@@ -276,8 +282,8 @@ respectively.</p>
 <p>Note in order to support batching and masking, attributes should always have the same
 length as their corresponding components. This means the size of the first dimension of
 the tensor should be either <code class="docutils literal notranslate"><span class="pre">num_node</span></code>, <code class="docutils literal notranslate"><span class="pre">num_edge</span></code> or <code class="docutils literal notranslate"><span class="pre">1</span></code>.</p>
-</section>
-<section id="batch-graph">
+</div>
+<div class="section" id="batch-graph">
 <h2>Batch Graph<a class="headerlink" href="#batch-graph" title="Permalink to this headline">¶</a></h2>
 <p>Modern deep learning frameworks employs batched operations to accelerate computation.
 In TorchDrug, we can easily batch same kind of graphs with <strong>arbitary sizes</strong>. Here
@@ -311,8 +317,8 @@ batch is</p>
 graph and a batch. In other words, we only need to implement single graph operations,
 and they can be directly applied as batched operations. This reduces the pain of
 writing batched operations.</p>
-</section>
-<section id="subgraph-and-masking">
+</div>
+<div class="section" id="subgraph-and-masking">
 <h2>Subgraph and Masking<a class="headerlink" href="#subgraph-and-masking" title="Permalink to this headline">¶</a></h2>
 <p>The graph data structure also provides a bunch of slicing operations to create subgraphs
 or masked graphs in a sparse manner. Some typical operations include</p>
@@ -356,8 +362,8 @@ the index of a single graph into the index in a batch.</p>
 </pre></div>
 </div>
 <a class="reference internal image-reference" href="../_images/subbatch.png"><img alt="../_images/subbatch.png" class="align-center" src="../_images/subbatch.png" style="width: 66%;"/></a>
-</section>
-</section>
+</div>
+</div>
 
       </article>
       <footer>
@@ -429,11 +435,6 @@ the index of a single graph into the index in a batch.</p>
       
     </aside>
   </main>
-</div><script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/doctools.js"></script>
-    <script src="../_static/scripts/main.js"></script>
-    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    </body>
+</div>
+  </body>
 </html>

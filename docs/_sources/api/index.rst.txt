@@ -6,6 +6,7 @@ Documentation
     core
     data
     datasets
+    transforms
     metrics
     layers
     models

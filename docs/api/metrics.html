@@ -1,15 +1,13 @@
 <!doctype html>
 <html class="no-js">
   <head><meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width,initial-scale=1"/>
-    <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
-<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="torchdrug.layers" href="layers.html" /><link rel="prev" title="torchdrug.datasets" href="datasets.html" />
+    <meta name="viewport" content="width=device-width,initial-scale=1"/><link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="torchdrug.layers" href="layers.html" /><link rel="prev" title="torchdrug.transforms" href="transforms.html" />
 
-    <meta name="generator" content="sphinx-4.0.2, furo 2021.07.05.beta38"/>
+    <meta name="generator" content="sphinx-3.1.2, furo 2020.12.09.beta21"/>
         <title>torchdrug.metrics - TorchDrug 0.1.0 documentation</title>
-      <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css" />
+      <link rel="stylesheet" href="../_static/styles/furo.css?digest=a3f371badb8538d75df213ccffb17a4f6e8f3ac5">
+    <link rel="stylesheet" href="../_static/pygments.css">
+    <link media="(prefers-color-scheme: dark)" rel="stylesheet" href="../_static/pygments_dark.css">
     
 
 
@@ -52,7 +50,15 @@
   --color-code-foreground: #d0d0d0;
   
   }
-</style><link media="(prefers-color-scheme: dark)" rel="stylesheet" href="../_static/pygments_dark.css"></head>
+</style><link id="pygments_dark_css" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css" href="../_static/pygments_dark.css" />
+    <link rel="stylesheet" href="../_static/styles/furo-extensions.css?digest=26485485040e7aaf717c13fd0188a5ad2c2deb60">
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script defer src="../_static/jquery.js"></script>
+    <script defer src="../_static/underscore.js"></script>
+    <script defer src="../_static/doctools.js"></script>
+    <script defer src="../_static/language_data.js"></script>
+    <script defer async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script defer src="../_static/scripts/main.js?digest=e931d09b2a40c1bb82b542effe772014573baf67"></script></head>
   <body dir="">
     
 <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
@@ -92,7 +98,6 @@
 <label class="overlay toc-overlay" for="__toc"></label>
 
 
-
 <div class="page">
   <header class="mobile-header">
     <div class="header-left">
@@ -120,7 +125,7 @@
   
   
 </a><form class="sidebar-search-container" method="get" action="../search.html">
-  <input class="sidebar-search" placeholder=Search name="q">
+  <input class="sidebar-search" placeholder="Search" name="q">
   <input type="hidden" name="check_keywords" value="yes">
   <input type="hidden" name="area" value="default">
 </form><div class="sidebar-scroll"><div class="sidebar-tree">
@@ -158,6 +163,7 @@
 <li class="toctree-l2"><a class="reference internal" href="core.html">torchdrug.core</a></li>
 <li class="toctree-l2"><a class="reference internal" href="data.html">torchdrug.data</a></li>
 <li class="toctree-l2"><a class="reference internal" href="datasets.html">torchdrug.datasets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="transforms.html">torchdrug.transforms</a></li>
 <li class="toctree-l2 current current-page"><a class="current reference internal" href="#">torchdrug.metrics</a></li>
 <li class="toctree-l2"><a class="reference internal" href="layers.html">torchdrug.layers</a></li>
 <li class="toctree-l2"><a class="reference internal" href="models.html">torchdrug.models</a></li>
@@ -179,15 +185,15 @@
         <label class="toc-overlay-icon toc-content-icon" for="__toc">
           <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
         </label>
-        <section id="torchdrug-metrics">
+        <div class="section" id="torchdrug-metrics">
 <h1>torchdrug.metrics<a class="headerlink" href="#torchdrug-metrics" title="Permalink to this headline">¶</a></h1>
-<section id="basic-metrics">
+<div class="section" id="basic-metrics">
 <h2>Basic Metrics<a class="headerlink" href="#basic-metrics" title="Permalink to this headline">¶</a></h2>
-<section id="auroc">
+<div class="section" id="auroc">
 <h3>AUROC<a class="headerlink" href="#auroc" title="Permalink to this headline">¶</a></h3>
 <dl class="py function">
-<dt class="sig sig-object py" id="torchdrug.metrics.area_under_roc">
-<span class="sig-name descname"><span class="pre">area_under_roc</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pred</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/metrics/metric.html#area_under_roc"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.metrics.area_under_roc" title="Permalink to this definition">¶</a></dt>
+<dt id="torchdrug.metrics.area_under_roc">
+<code class="sig-name descname">area_under_roc</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">pred</span></em>, <em class="sig-param"><span class="n">target</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/metrics/metric.html#area_under_roc"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.metrics.area_under_roc" title="Permalink to this definition">¶</a></dt>
 <dd><p>Area under receiver operating characteristic curve (ROC).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -199,16 +205,16 @@
 </dl>
 </dd></dl>
 <dl class="py function">
-<dt class="sig sig-object py" id="torchdrug.metrics.AUROC">
-<span class="sig-name descname"><span class="pre">AUROC</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#torchdrug.metrics.AUROC" title="Permalink to this definition">¶</a></dt>
+<dt id="torchdrug.metrics.AUROC">
+<code class="sig-name descname">AUROC</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#torchdrug.metrics.AUROC" title="Permalink to this definition">¶</a></dt>
 <dd><p>alias of <code class="docutils literal notranslate"><span class="pre">torchdrug.metrics.area_under_roc</span></code></p>
 </dd></dl>
-</section>
-<section id="auprc">
+</div>
+<div class="section" id="auprc">
 <h3>AUPRC<a class="headerlink" href="#auprc" title="Permalink to this headline">¶</a></h3>
 <dl class="py function">
-<dt class="sig sig-object py" id="torchdrug.metrics.area_under_prc">
-<span class="sig-name descname"><span class="pre">area_under_prc</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pred</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/metrics/metric.html#area_under_prc"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.metrics.area_under_prc" title="Permalink to this definition">¶</a></dt>
+<dt id="torchdrug.metrics.area_under_prc">
+<code class="sig-name descname">area_under_prc</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">pred</span></em>, <em class="sig-param"><span class="n">target</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/metrics/metric.html#area_under_prc"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.metrics.area_under_prc" title="Permalink to this definition">¶</a></dt>
 <dd><p>Area under precision-recall curve (PRC).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -220,16 +226,16 @@
 </dl>
 </dd></dl>
 <dl class="py function">
-<dt class="sig sig-object py" id="torchdrug.metrics.AUPRC">
-<span class="sig-name descname"><span class="pre">AUPRC</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#torchdrug.metrics.AUPRC" title="Permalink to this definition">¶</a></dt>
+<dt id="torchdrug.metrics.AUPRC">
+<code class="sig-name descname">AUPRC</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#torchdrug.metrics.AUPRC" title="Permalink to this definition">¶</a></dt>
 <dd><p>alias of <code class="docutils literal notranslate"><span class="pre">torchdrug.metrics.area_under_prc</span></code></p>
 </dd></dl>
-</section>
-<section id="r2">
+</div>
+<div class="section" id="r2">
 <h3>R2<a class="headerlink" href="#r2" title="Permalink to this headline">¶</a></h3>
 <dl class="py function">
-<dt class="sig sig-object py" id="torchdrug.metrics.r2">
-<span class="sig-name descname"><span class="pre">r2</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pred</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/metrics/metric.html#r2"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.metrics.r2" title="Permalink to this definition">¶</a></dt>
+<dt id="torchdrug.metrics.r2">
+<code class="sig-name descname">r2</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">pred</span></em>, <em class="sig-param"><span class="n">target</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/metrics/metric.html#r2"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.metrics.r2" title="Permalink to this definition">¶</a></dt>
 <dd><p><span class="math notranslate nohighlight">\(R^2\)</span> regression score.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -240,12 +246,12 @@
 </dd>
 </dl>
 </dd></dl>
-</section>
-<section id="variadic-accuracy">
+</div>
+<div class="section" id="variadic-accuracy">
 <h3>Variadic Accuracy<a class="headerlink" href="#variadic-accuracy" title="Permalink to this headline">¶</a></h3>
 <dl class="py function">
-<dt class="sig sig-object py" id="torchdrug.metrics.variadic_accuracy">
-<span class="sig-name descname"><span class="pre">variadic_accuracy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">size</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/metrics/metric.html#variadic_accuracy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.metrics.variadic_accuracy" title="Permalink to this definition">¶</a></dt>
+<dt id="torchdrug.metrics.variadic_accuracy">
+<code class="sig-name descname">variadic_accuracy</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">input</span></em>, <em class="sig-param"><span class="n">target</span></em>, <em class="sig-param"><span class="n">size</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/metrics/metric.html#variadic_accuracy"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.metrics.variadic_accuracy" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compute classification accuracy over variadic sizes of categories.</p>
 <p>Suppose there are <span class="math notranslate nohighlight">\(N\)</span> samples, and the number of categories in all samples is summed to :math`B`.</p>
 <dl class="field-list simple">
@@ -258,77 +264,77 @@
 </dd>
 </dl>
 </dd></dl>
-</section>
-</section>
-<section id="chemical-metrics">
+</div>
+</div>
+<div class="section" id="chemical-metrics">
 <h2>Chemical Metrics<a class="headerlink" href="#chemical-metrics" title="Permalink to this headline">¶</a></h2>
-<section id="sa">
+<div class="section" id="sa">
 <h3>SA<a class="headerlink" href="#sa" title="Permalink to this headline">¶</a></h3>
 <dl class="py function">
-<dt class="sig sig-object py" id="torchdrug.metrics.SA">
-<span class="sig-name descname"><span class="pre">SA</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pred</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/metrics/metric.html#SA"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.metrics.SA" title="Permalink to this definition">¶</a></dt>
+<dt id="torchdrug.metrics.SA">
+<code class="sig-name descname">SA</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">pred</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/metrics/metric.html#SA"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.metrics.SA" title="Permalink to this definition">¶</a></dt>
 <dd><p>Synthetic accesibility score.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>pred</strong> (<a class="reference internal" href="data.html#torchdrug.data.PackedMolecule" title="torchdrug.data.PackedMolecule"><em>data.PackedMolecule</em></a>) – molecules to evaluate</p>
+<dd class="field-odd"><p><strong>pred</strong> (<a class="reference internal" href="data.html#torchdrug.data.PackedMolecule" title="torchdrug.data.PackedMolecule"><em>PackedMolecule</em></a>) – molecules to evaluate</p>
 </dd>
 </dl>
 </dd></dl>
-</section>
-<section id="qed">
+</div>
+<div class="section" id="qed">
 <h3>QED<a class="headerlink" href="#qed" title="Permalink to this headline">¶</a></h3>
 <dl class="py function">
-<dt class="sig sig-object py" id="torchdrug.metrics.QED">
-<span class="sig-name descname"><span class="pre">QED</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pred</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/metrics/metric.html#QED"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.metrics.QED" title="Permalink to this definition">¶</a></dt>
+<dt id="torchdrug.metrics.QED">
+<code class="sig-name descname">QED</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">pred</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/metrics/metric.html#QED"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.metrics.QED" title="Permalink to this definition">¶</a></dt>
 <dd><p>Quantitative estimation of drug-likeness.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>pred</strong> (<a class="reference internal" href="data.html#torchdrug.data.PackedMolecule" title="torchdrug.data.PackedMolecule"><em>data.PackedMolecule</em></a>) – molecules to evaluate</p>
+<dd class="field-odd"><p><strong>pred</strong> (<a class="reference internal" href="data.html#torchdrug.data.PackedMolecule" title="torchdrug.data.PackedMolecule"><em>PackedMolecule</em></a>) – molecules to evaluate</p>
 </dd>
 </dl>
 </dd></dl>
-</section>
-<section id="chemical-validity">
+</div>
+<div class="section" id="chemical-validity">
 <h3>Chemical Validity<a class="headerlink" href="#chemical-validity" title="Permalink to this headline">¶</a></h3>
 <dl class="py function">
-<dt class="sig sig-object py" id="torchdrug.metrics.chemical_validity">
-<span class="sig-name descname"><span class="pre">chemical_validity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pred</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/metrics/metric.html#chemical_validity"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.metrics.chemical_validity" title="Permalink to this definition">¶</a></dt>
+<dt id="torchdrug.metrics.chemical_validity">
+<code class="sig-name descname">chemical_validity</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">pred</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/metrics/metric.html#chemical_validity"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.metrics.chemical_validity" title="Permalink to this definition">¶</a></dt>
 <dd><p>Chemical validity of molecules.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>pred</strong> (<a class="reference internal" href="data.html#torchdrug.data.PackedMolecule" title="torchdrug.data.PackedMolecule"><em>data.PackedMolecule</em></a>) – molecules to evaluate</p>
+<dd class="field-odd"><p><strong>pred</strong> (<a class="reference internal" href="data.html#torchdrug.data.PackedMolecule" title="torchdrug.data.PackedMolecule"><em>PackedMolecule</em></a>) – molecules to evaluate</p>
 </dd>
 </dl>
 </dd></dl>
-</section>
-<section id="logp">
+</div>
+<div class="section" id="logp">
 <h3>LogP<a class="headerlink" href="#logp" title="Permalink to this headline">¶</a></h3>
 <dl class="py function">
-<dt class="sig sig-object py" id="torchdrug.metrics.logP">
-<span class="sig-name descname"><span class="pre">logP</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pred</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/metrics/metric.html#logP"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.metrics.logP" title="Permalink to this definition">¶</a></dt>
+<dt id="torchdrug.metrics.logP">
+<code class="sig-name descname">logP</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">pred</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/metrics/metric.html#logP"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.metrics.logP" title="Permalink to this definition">¶</a></dt>
 <dd><p>Logarithm of partition coefficient between octanol and water for a compound.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>pred</strong> (<a class="reference internal" href="data.html#torchdrug.data.PackedMolecule" title="torchdrug.data.PackedMolecule"><em>data.PackedMolecule</em></a>) – molecules to evaluate</p>
+<dd class="field-odd"><p><strong>pred</strong> (<a class="reference internal" href="data.html#torchdrug.data.PackedMolecule" title="torchdrug.data.PackedMolecule"><em>PackedMolecule</em></a>) – molecules to evaluate</p>
 </dd>
 </dl>
 </dd></dl>
-</section>
-<section id="penalized-logp">
+</div>
+<div class="section" id="penalized-logp">
 <h3>Penalized LogP<a class="headerlink" href="#penalized-logp" title="Permalink to this headline">¶</a></h3>
 <dl class="py function">
-<dt class="sig sig-object py" id="torchdrug.metrics.penalized_logP">
-<span class="sig-name descname"><span class="pre">penalized_logP</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pred</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/metrics/metric.html#penalized_logP"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.metrics.penalized_logP" title="Permalink to this definition">¶</a></dt>
+<dt id="torchdrug.metrics.penalized_logP">
+<code class="sig-name descname">penalized_logP</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">pred</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/metrics/metric.html#penalized_logP"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.metrics.penalized_logP" title="Permalink to this definition">¶</a></dt>
 <dd><p>Logarithm of partition coefficient, penalized by cycle length and synthetic accessibility.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>pred</strong> (<a class="reference internal" href="data.html#torchdrug.data.PackedMolecule" title="torchdrug.data.PackedMolecule"><em>data.PackedMolecule</em></a>) – molecules to evaluate</p>
+<dd class="field-odd"><p><strong>pred</strong> (<a class="reference internal" href="data.html#torchdrug.data.PackedMolecule" title="torchdrug.data.PackedMolecule"><em>PackedMolecule</em></a>) – molecules to evaluate</p>
 </dd>
 </dl>
 </dd></dl>
-</section>
-</section>
-</section>
+</div>
+</div>
+</div>
 
       </article>
       <footer>
@@ -343,14 +349,14 @@
               </div>
               <svg><use href="#svg-arrow-right"></use></svg>
             </a>
-          <a class="prev-page" href="datasets.html">
+          <a class="prev-page" href="transforms.html">
               <svg><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
                 </div>
                 
-                <div class="title">torchdrug.datasets</div>
+                <div class="title">torchdrug.transforms</div>
                 
               </div>
             </a>
@@ -411,11 +417,6 @@
       
     </aside>
   </main>
-</div><script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/doctools.js"></script>
-    <script src="../_static/scripts/main.js"></script>
-    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    </body>
+</div>
+  </body>
 </html>

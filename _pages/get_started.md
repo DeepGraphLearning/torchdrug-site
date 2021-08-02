@@ -112,7 +112,7 @@ mols.visualize()
 
 # A Molecule Classifier
 
-Now we demonstrate how to use TorchDrug to create a molecule classifier. Specifically, TorchDrug provides
+Now we demonstrate how to create a molecule classifier with TorchDrug. Specifically, TorchDrug provides
 us with a large collection of popular datasets and models for drug discovery and graph representation learning.
 These help us avoid writing and debugging boilerplate code.
 
@@ -254,4 +254,4 @@ Currently, there are 4 levels in the hierarchy.
 
 For more details about the interface, please refer to the [document].
 
-[document]: /docs/api/
+[document]: {{ "/docs/api/" | relative_url }}

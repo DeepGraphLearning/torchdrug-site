@@ -3,7 +3,6 @@ torchdrug.datasets
 
 .. currentmodule:: torchdrug.datasets
 
-
 Knowledge Graph Datasets
 ------------------------
 

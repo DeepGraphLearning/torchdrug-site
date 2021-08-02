@@ -1,15 +1,13 @@
 <!doctype html>
 <html class="no-js">
   <head><meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width,initial-scale=1"/>
-    <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
-<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Molecule Generation" href="generation.html" /><link rel="prev" title="Molecule Property Prediction" href="property_prediction.html" />
+    <meta name="viewport" content="width=device-width,initial-scale=1"/><link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Molecule Generation" href="generation.html" /><link rel="prev" title="Molecule Property Prediction" href="property_prediction.html" />
 
-    <meta name="generator" content="sphinx-4.0.2, furo 2021.07.05.beta38"/>
+    <meta name="generator" content="sphinx-3.1.2, furo 2020.12.09.beta21"/>
         <title>Pretrained Molecular Representations - TorchDrug 0.1.0 documentation</title>
-      <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css" />
+      <link rel="stylesheet" href="../_static/styles/furo.css?digest=a3f371badb8538d75df213ccffb17a4f6e8f3ac5">
+    <link rel="stylesheet" href="../_static/pygments.css">
+    <link media="(prefers-color-scheme: dark)" rel="stylesheet" href="../_static/pygments_dark.css">
     
 
 
@@ -52,7 +50,15 @@
   --color-code-foreground: #d0d0d0;
   
   }
-</style><link media="(prefers-color-scheme: dark)" rel="stylesheet" href="../_static/pygments_dark.css"></head>
+</style><link id="pygments_dark_css" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css" href="../_static/pygments_dark.css" />
+    <link rel="stylesheet" href="../_static/styles/furo-extensions.css?digest=26485485040e7aaf717c13fd0188a5ad2c2deb60">
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script defer src="../_static/jquery.js"></script>
+    <script defer src="../_static/underscore.js"></script>
+    <script defer src="../_static/doctools.js"></script>
+    <script defer src="../_static/language_data.js"></script>
+    <script defer async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script defer src="../_static/scripts/main.js?digest=e931d09b2a40c1bb82b542effe772014573baf67"></script></head>
   <body dir="">
     
 <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
@@ -92,7 +98,6 @@
 <label class="overlay toc-overlay" for="__toc"></label>
 
 
-
 <div class="page">
   <header class="mobile-header">
     <div class="header-left">
@@ -104,7 +109,7 @@
       <a href="../index.html"><div class="brand">TorchDrug 0.1.0 documentation</div></a>
     </div>
     <div class="header-right">
-      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
         <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
       </label>
     </div>
@@ -120,7 +125,7 @@
   
   
 </a><form class="sidebar-search-container" method="get" action="../search.html">
-  <input class="sidebar-search" placeholder=Search name="q">
+  <input class="sidebar-search" placeholder="Search" name="q">
   <input type="hidden" name="check_keywords" value="yes">
   <input type="hidden" name="area" value="default">
 </form><div class="sidebar-scroll"><div class="sidebar-tree">
@@ -158,6 +163,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../api/core.html">torchdrug.core</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../api/data.html">torchdrug.data</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../api/datasets.html">torchdrug.datasets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/transforms.html">torchdrug.transforms</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../api/metrics.html">torchdrug.metrics</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../api/layers.html">torchdrug.layers</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../api/models.html">torchdrug.models</a></li>
@@ -176,10 +182,10 @@
   <main class="main">
     <div class="content">
       <article role="main">
-        <label class="toc-overlay-icon toc-content-icon" for="__toc">
+        <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
           <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
         </label>
-        <section id="pretrained-molecular-representations">
+        <div class="section" id="pretrained-molecular-representations">
 <h1>Pretrained Molecular Representations<a class="headerlink" href="#pretrained-molecular-representations" title="Permalink to this headline">¶</a></h1>
 <p>This page contains benchmarks of property prediction models with pre-training.</p>
 <p>We have two main methods for the pre-training.</p>
@@ -199,45 +205,35 @@
 <p>For the downstream tasks, we consider the scaffold splitting for molecule data.
 The split for train/validation/test sets is 80%:10%:10%. For each pre-training
 method and downstream dataset, we evaluate with 10 random splits and report the
-mean of the performance.</p>
-<section id="self-supervised-pre-training">
-<h2>Self-Supervised Pre-training<a class="headerlink" href="#self-supervised-pre-training" title="Permalink to this headline">¶</a></h2>
-<ul class="simple">
-<li><p>Random, baseline with random initialization</p></li>
-<li><p><a class="reference internal" href="../api/tasks.html#torchdrug.tasks.EdgePrediction" title="torchdrug.tasks.EdgePrediction"><code class="xref py py-func docutils literal notranslate"><span class="pre">Edge</span> <span class="pre">Prediction</span> <span class="pre">(EP)</span></code></a></p></li>
-<li><p><a class="reference internal" href="../api/models.html#torchdrug.models.InfoGraph" title="torchdrug.models.InfoGraph"><code class="xref py py-func docutils literal notranslate"><span class="pre">InfoGraph</span> <span class="pre">(IG)</span></code></a></p></li>
-<li><p><a class="reference internal" href="../api/tasks.html#torchdrug.tasks.AttributeMasking" title="torchdrug.tasks.AttributeMasking"><code class="xref py py-func docutils literal notranslate"><span class="pre">Attribute</span> <span class="pre">Masking</span> <span class="pre">(AM)</span></code></a></p></li>
-<li><p><a class="reference internal" href="../api/tasks.html#torchdrug.tasks.ContextPrediction" title="torchdrug.tasks.ContextPrediction"><code class="xref py py-func docutils literal notranslate"><span class="pre">Context</span> <span class="pre">Prediction</span> <span class="pre">(CP)</span></code></a></p></li>
-</ul>
-<div class="table-wrapper"><table class="colwidths-given docutils align-default" id="id1">
-<caption><span class="caption-text">Results for Self-Supervised Pre-training</span><a class="headerlink" href="#id1" title="Permalink to this table">¶</a></caption>
+mean and the derivation of AUROC metric.</p>
+<div class="table-wrapper"><table class="docutils align-default">
 <colgroup>
 <col style="width: 14%"/>
 <col style="width: 10%"/>
 <col style="width: 10%"/>
+<col style="width: 11%"/>
+<col style="width: 10%"/>
+<col style="width: 11%"/>
 <col style="width: 10%"/>
 <col style="width: 10%"/>
 <col style="width: 10%"/>
-<col style="width: 10%"/>
-<col style="width: 10%"/>
-<col style="width: 10%"/>
-<col style="width: 10%"/>
+<col style="width: 5%"/>
 </colgroup>
 <thead>
-<tr class="row-odd"><th class="head"><p>Method</p></th>
-<th class="head"><p>BBBP</p></th>
-<th class="head"><p>Tox21</p></th>
-<th class="head"><p>ToxCast</p></th>
-<th class="head"><p>Sider</p></th>
-<th class="head"><p>ClinTox</p></th>
-<th class="head"><p>MUV</p></th>
-<th class="head"><p>HIV</p></th>
-<th class="head"><p>Bace</p></th>
-<th class="head"><p>Avg</p></th>
+<tr class="row-odd"><th class="head"></th>
+<th class="head"><p><a class="reference external" href="https://arxiv.org/pdf/1703.00564.pdf">BBBP</a></p></th>
+<th class="head"><p><a class="reference external" href="https://arxiv.org/pdf/1703.00564.pdf">Tox21</a></p></th>
+<th class="head"><p><a class="reference external" href="https://arxiv.org/pdf/1703.00564.pdf">ToxCast</a></p></th>
+<th class="head"><p><a class="reference external" href="https://arxiv.org/pdf/1703.00564.pdf">SIDER</a></p></th>
+<th class="head"><p><a class="reference external" href="https://arxiv.org/pdf/1703.00564.pdf">ClinTox</a></p></th>
+<th class="head"><p><a class="reference external" href="https://arxiv.org/pdf/1703.00564.pdf">MUV</a></p></th>
+<th class="head"><p><a class="reference external" href="https://arxiv.org/pdf/1703.00564.pdf">HIV</a></p></th>
+<th class="head"><p><a class="reference external" href="https://arxiv.org/pdf/1703.00564.pdf">BACE</a></p></th>
+<th class="head"><p>Avg.</p></th>
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p>Random</p></td>
+<tr class="row-even"><td><p>No Pretrain</p></td>
 <td><p>67.1(2.9)</p></td>
 <td><p>75.0(0.2)</p></td>
 <td><p>60.6(0.7)</p></td>
@@ -248,7 +244,7 @@ mean of the performance.</p>
 <td><p>66.5(9.0)</p></td>
 <td><p>66.2</p></td>
 </tr>
-<tr class="row-odd"><td><p>EP</p></td>
+<tr class="row-odd"><td><p><a class="reference external" href="https://arxiv.org/pdf/1706.02216.pdf">EdgePred</a></p></td>
 <td><p>67.1(2.6)</p></td>
 <td><p>74.6(0.7)</p></td>
 <td><p>69.8(0.5)</p></td>
@@ -259,7 +255,7 @@ mean of the performance.</p>
 <td><p>68.4(3.9)</p></td>
 <td><p>67.7</p></td>
 </tr>
-<tr class="row-even"><td><p>IG</p></td>
+<tr class="row-even"><td><p><a class="reference external" href="https://arxiv.org/pdf/1908.01000.pdf">InfoGraph</a></p></td>
 <td><p>68.9(0.6)</p></td>
 <td><p>76.4(0.4)</p></td>
 <td><p>71.2(0.6)</p></td>
@@ -270,7 +266,7 @@ mean of the performance.</p>
 <td><p>73.7(2.6)</p></td>
 <td><p>70.7</p></td>
 </tr>
-<tr class="row-odd"><td><p>AM</p></td>
+<tr class="row-odd"><td><p><a class="reference external" href="https://arxiv.org/pdf/1905.12265.pdf">AttrMasking</a></p></td>
 <td><p>65.2(0.9)</p></td>
 <td><p>75.8(0.5)</p></td>
 <td><p>70.6(0.6)</p></td>
@@ -281,7 +277,7 @@ mean of the performance.</p>
 <td><p>78.1(0.8)</p></td>
 <td><p>71.6</p></td>
 </tr>
-<tr class="row-even"><td><p>CP</p></td>
+<tr class="row-even"><td><p><a class="reference external" href="https://arxiv.org/pdf/1905.12265.pdf">ContextPred</a></p></td>
 <td><p>71.1(1.8)</p></td>
 <td><p>75.6(0.3)</p></td>
 <td><p>71.1(0.3)</p></td>
@@ -294,8 +290,7 @@ mean of the performance.</p>
 </tr>
 </tbody>
 </table></div>
-</section>
-</section>
+</div>
 
       </article>
       <footer>
@@ -339,35 +334,12 @@ mean of the performance.</p>
         
       </footer>
     </div>
-    <aside class="toc-drawer">
+    <aside class="toc-drawer no-toc">
       
-      
-      <div class="toc-sticky toc-scroll">
-        <div class="toc-title-container">
-          <span class="toc-title">
-            Contents
-          </span>
-        </div>
-        <div class="toc-tree-container">
-          <div class="toc-tree">
-            <ul>
-<li><a class="reference internal" href="#">Pretrained Molecular Representations</a><ul>
-<li><a class="reference internal" href="#self-supervised-pre-training">Self-Supervised Pre-training</a></li>
-</ul>
-</li>
-</ul>
-
-          </div>
-        </div>
-      </div>
       
       
     </aside>
   </main>
-</div><script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/doctools.js"></script>
-    <script src="../_static/scripts/main.js"></script>
-    </body>
+</div>
+  </body>
 </html>

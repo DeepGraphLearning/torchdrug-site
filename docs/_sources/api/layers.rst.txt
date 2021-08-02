@@ -133,46 +133,95 @@ Sampler Layers
 -------------------
 
 EdgeSampler
-^^^^^^^^^^
+^^^^^^^^^^^
 .. autoclass:: EdgeSampler
     :members:
 
-NeighborSampler
-^^^^^^^^^^
-.. autoclass:: NeighborSampler
-    :members:
-
 NodeSampler
-^^^^^^^^^^
+^^^^^^^^^^^
 .. autoclass:: NodeSampler
     :members:
 
-RandomWalkSampler
-^^^^^^^^^^
-.. autoclass:: RandomWalkSampler
+
+Flow Layers
+-----------
+
+ConditionalFlow
+^^^^^^^^^^^^^^^
+.. autoclass:: ConditionalFlow
     :members:
 
 
 Distribution Layers
 -------------------
 
+These layers belong to `torchdrug.layers.distribution`.
+
+.. currentmodule:: torchdrug.layers.distribution
+
 IndependentGaussian
-^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^
 .. autoclass:: IndependentGaussian
-    :members:
-
-
-Flow Layers
--------------------
-
-ConditionalFlow
-^^^^^^^^^^
-.. autoclass:: ConditionalFlow
     :members:
 
 
 Functional Layers
 -----------------
 
-.. automodule:: torchdrug.layers.functional
-    :members:
+These layers belong to `torchdrug.layers.functional`.
+
+.. currentmodule:: torchdrug.layers.functional
+
+Embedding Score Functions
+^^^^^^^^^^^^^^^^^^^^^^^^^
+.. autofunction:: transe_score
+
+.. autofunction:: distmult_score
+
+.. autofunction:: complex_score
+
+.. autofunction:: simple_score
+
+.. autofunction:: rotate_score
+
+Sparse Matrix Multiplication
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.. autofunction:: generalized_spmm
+
+.. autofunction:: generalized_rspmm
+
+Variadic
+^^^^^^^^
+.. autofunction:: variadic_sum
+
+.. autofunction:: variadic_mean
+
+.. autofunction:: variadic_max
+
+.. autofunction:: variadic_cross_entropy
+
+.. autofunction:: variadic_log_softmax
+
+.. autofunction:: variadic_topk
+
+Tensor Reduction
+^^^^^^^^^^^^^^^^
+.. autofunction:: masked_mean
+
+.. autofunction:: mean_with_nan
+
+Tensor Construction
+^^^^^^^^^^^^^^^^^^^
+.. autofunction:: as_mask
+
+.. autofunction:: one_hot
+
+.. autofunction:: multi_slice_mask
+
+Sampling
+^^^^^^^^
+.. autofunction:: multinomial
+
+Activation
+^^^^^^^^^^
+.. autofunction:: shifted_softplus

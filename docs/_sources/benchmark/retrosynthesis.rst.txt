@@ -5,8 +5,10 @@ Retrosynthesis
 
 This page contains benchmarks of retrosynthesis models.
 
-We split the dataset into train/validation/test with ratios of 80%:10%:10%. We
-consider two settings where the reaction class is given or unknown.
+We evaluate models on `USPTO50k`_ dataset. The dataset is split into
+train/validation/test sets with ratios of 80%:10%:10%. We consider two settings
+where the reaction class is given or unknown. For each setting, we report the top-k
+accuracy of the retrosynthesis prediction.
 
 Given Reaction Class
 --------------------

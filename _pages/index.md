@@ -20,7 +20,7 @@ grid:
         Benchmarks provide a systematic comparison of deep learning architectures for drug discovery.
     - title: Scalable Training and Inference
       excerpt: >
-        Seamlessly scale models to multiple CPUs and GPUs, or even distributed settings.
+        Seamlessly scale models to multiple CPUs, multiple GPUs, or even distributed settings.
   btn_label: View all features
   url: features
 

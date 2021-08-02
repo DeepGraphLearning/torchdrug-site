@@ -1,15 +1,13 @@
 <!doctype html>
 <html class="no-js">
   <head><meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width,initial-scale=1"/>
-    <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
-<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Pretrained Molecular Representations" href="pretrain.html" /><link rel="prev" title="Benchmark" href="index.html" />
+    <meta name="viewport" content="width=device-width,initial-scale=1"/><link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Pretrained Molecular Representations" href="pretrain.html" /><link rel="prev" title="Benchmark" href="index.html" />
 
-    <meta name="generator" content="sphinx-4.0.2, furo 2021.07.05.beta38"/>
+    <meta name="generator" content="sphinx-3.1.2, furo 2020.12.09.beta21"/>
         <title>Molecule Property Prediction - TorchDrug 0.1.0 documentation</title>
-      <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css" />
+      <link rel="stylesheet" href="../_static/styles/furo.css?digest=a3f371badb8538d75df213ccffb17a4f6e8f3ac5">
+    <link rel="stylesheet" href="../_static/pygments.css">
+    <link media="(prefers-color-scheme: dark)" rel="stylesheet" href="../_static/pygments_dark.css">
     
 
 
@@ -52,7 +50,15 @@
   --color-code-foreground: #d0d0d0;
   
   }
-</style><link media="(prefers-color-scheme: dark)" rel="stylesheet" href="../_static/pygments_dark.css"></head>
+</style><link id="pygments_dark_css" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css" href="../_static/pygments_dark.css" />
+    <link rel="stylesheet" href="../_static/styles/furo-extensions.css?digest=26485485040e7aaf717c13fd0188a5ad2c2deb60">
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script defer src="../_static/jquery.js"></script>
+    <script defer src="../_static/underscore.js"></script>
+    <script defer src="../_static/doctools.js"></script>
+    <script defer src="../_static/language_data.js"></script>
+    <script defer async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script defer src="../_static/scripts/main.js?digest=e931d09b2a40c1bb82b542effe772014573baf67"></script></head>
   <body dir="">
     
 <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
@@ -92,7 +98,6 @@
 <label class="overlay toc-overlay" for="__toc"></label>
 
 
-
 <div class="page">
   <header class="mobile-header">
     <div class="header-left">
@@ -120,7 +125,7 @@
   
   
 </a><form class="sidebar-search-container" method="get" action="../search.html">
-  <input class="sidebar-search" placeholder=Search name="q">
+  <input class="sidebar-search" placeholder="Search" name="q">
   <input type="hidden" name="check_keywords" value="yes">
   <input type="hidden" name="area" value="default">
 </form><div class="sidebar-scroll"><div class="sidebar-tree">
@@ -158,6 +163,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../api/core.html">torchdrug.core</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../api/data.html">torchdrug.data</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../api/datasets.html">torchdrug.datasets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/transforms.html">torchdrug.transforms</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../api/metrics.html">torchdrug.metrics</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../api/layers.html">torchdrug.layers</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../api/models.html">torchdrug.models</a></li>
@@ -179,172 +185,173 @@
         <label class="toc-overlay-icon toc-content-icon" for="__toc">
           <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
         </label>
-        <section id="molecule-property-prediction">
+        <div class="section" id="molecule-property-prediction">
 <h1>Molecule Property Prediction<a class="headerlink" href="#molecule-property-prediction" title="Permalink to this headline">¶</a></h1>
 <p>This page contains benchmarks of popular property prediction models.</p>
 <p>We consider both vanilla random split and scaffold-based random split for molecule
-data. The split for train/validation/test sets is 80%:10%:10%. For each model, we
+datasets. The split for train/validation/test sets is 80%:10%:10%. For each model, we
 evaluate it with 5 random splits and report the mean and the deviation of the
-performance.</p>
+performance. We report MAE and R2 metrics for regression datasets, AUROC and AURPC
+metrics for binary classification datasets.</p>
 <p>For datasets containing a lot of tasks, only the first 16 tasks are showed here due
 to space limitations.</p>
-<section id="random-split">
+<div class="section" id="random-split">
 <h2>Random Split<a class="headerlink" href="#random-split" title="Permalink to this headline">¶</a></h2>
-<section id="id1">
+<div class="section" id="id1">
 <h3>QM9<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
 <img alt="../_images/qm9_mae.png" src="../_images/qm9_mae.png"/>
 <img alt="../_images/qm9_r2.png" src="../_images/qm9_r2.png"/>
-</section>
-<section id="id2">
+</div>
+<div class="section" id="id2">
 <h3>QM8<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
 <img alt="../_images/qm8_mae.png" src="../_images/qm8_mae.png"/>
 <img alt="../_images/qm8_r2.png" src="../_images/qm8_r2.png"/>
-</section>
-<section id="bace">
-<h3>BACE<a class="headerlink" href="#bace" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="id3">
+<h3>BACE<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
 <img alt="../_images/bace_auroc.png" src="../_images/bace_auroc.png"/>
 <img alt="../_images/bace_auprc.png" src="../_images/bace_auprc.png"/>
-</section>
-<section id="bbbp">
-<h3>BBBP<a class="headerlink" href="#bbbp" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="id4">
+<h3>BBBP<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
 <img alt="../_images/bbbp_auroc.png" src="../_images/bbbp_auroc.png"/>
 <img alt="../_images/bbbp_auprc.png" src="../_images/bbbp_auprc.png"/>
-</section>
-<section id="cep">
+</div>
+<div class="section" id="cep">
 <h3>CEP<a class="headerlink" href="#cep" title="Permalink to this headline">¶</a></h3>
 <img alt="../_images/cep_mae.png" src="../_images/cep_mae.png"/>
 <img alt="../_images/cep_r2.png" src="../_images/cep_r2.png"/>
-</section>
-<section id="hiv">
-<h3>HIV<a class="headerlink" href="#hiv" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="id5">
+<h3>HIV<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
 <img alt="../_images/hiv_auroc.png" src="../_images/hiv_auroc.png"/>
 <img alt="../_images/hiv_auprc.png" src="../_images/hiv_auprc.png"/>
-</section>
-<section id="id3">
-<h3>ClinTox<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="id6">
+<h3>ClinTox<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h3>
 <img alt="../_images/clintox_auroc.png" src="../_images/clintox_auroc.png"/>
 <img alt="../_images/clintox_auprc.png" src="../_images/clintox_auprc.png"/>
-</section>
-<section id="esol">
+</div>
+<div class="section" id="esol">
 <h3>ESOL<a class="headerlink" href="#esol" title="Permalink to this headline">¶</a></h3>
 <img alt="../_images/esol_mae.png" src="../_images/esol_mae.png"/>
 <img alt="../_images/esol_r2.png" src="../_images/esol_r2.png"/>
-</section>
-<section id="freesolv">
+</div>
+<div class="section" id="freesolv">
 <h3>FreeSolv<a class="headerlink" href="#freesolv" title="Permalink to this headline">¶</a></h3>
 <img alt="../_images/freesolv_mae.png" src="../_images/freesolv_mae.png"/>
 <img alt="../_images/freesolv_r2.png" src="../_images/freesolv_r2.png"/>
-</section>
-<section id="lipophilicity">
+</div>
+<div class="section" id="lipophilicity">
 <h3>Lipophilicity<a class="headerlink" href="#lipophilicity" title="Permalink to this headline">¶</a></h3>
 <img alt="../_images/lipophilicity_mae.png" src="../_images/lipophilicity_mae.png"/>
 <img alt="../_images/lipophilicity_r2.png" src="../_images/lipophilicity_r2.png"/>
-</section>
-<section id="sider">
-<h3>SIDER<a class="headerlink" href="#sider" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="id7">
+<h3>SIDER<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h3>
 <img alt="../_images/sider_auroc.png" src="../_images/sider_auroc.png"/>
 <img alt="../_images/sider_auprc.png" src="../_images/sider_auprc.png"/>
-</section>
-<section id="tox21">
-<h3>Tox21<a class="headerlink" href="#tox21" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="id8">
+<h3>Tox21<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h3>
 <img alt="../_images/tox21_auroc.png" src="../_images/tox21_auroc.png"/>
 <img alt="../_images/tox21_auprc.png" src="../_images/tox21_auprc.png"/>
-</section>
-<section id="toxcast">
-<h3>ToxCast<a class="headerlink" href="#toxcast" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="id9">
+<h3>ToxCast<a class="headerlink" href="#id9" title="Permalink to this headline">¶</a></h3>
 <img alt="../_images/toxcast_auroc.png" src="../_images/toxcast_auroc.png"/>
 <img alt="../_images/toxcast_auprc.png" src="../_images/toxcast_auprc.png"/>
-</section>
-<section id="muv">
-<h3>MUV<a class="headerlink" href="#muv" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="id10">
+<h3>MUV<a class="headerlink" href="#id10" title="Permalink to this headline">¶</a></h3>
 <img alt="../_images/muv_auroc.png" src="../_images/muv_auroc.png"/>
 <img alt="../_images/muv_auprc.png" src="../_images/muv_auprc.png"/>
-</section>
-<section id="malaria">
+</div>
+<div class="section" id="malaria">
 <h3>Malaria<a class="headerlink" href="#malaria" title="Permalink to this headline">¶</a></h3>
 <img alt="../_images/malaria_mae.png" src="../_images/malaria_mae.png"/>
 <img alt="../_images/malaria_r2.png" src="../_images/malaria_r2.png"/>
-</section>
-</section>
-<section id="scaffold-split">
+</div>
+</div>
+<div class="section" id="scaffold-split">
 <h2>Scaffold Split<a class="headerlink" href="#scaffold-split" title="Permalink to this headline">¶</a></h2>
-<section id="id4">
-<h3>QM9<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id11">
+<h3>QM9<a class="headerlink" href="#id11" title="Permalink to this headline">¶</a></h3>
 <img alt="../_images/qm9_scaffold_mae.png" src="../_images/qm9_scaffold_mae.png"/>
 <img alt="../_images/qm9_scaffold_r2.png" src="../_images/qm9_scaffold_r2.png"/>
-</section>
-<section id="id5">
-<h3>QM8<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="id12">
+<h3>QM8<a class="headerlink" href="#id12" title="Permalink to this headline">¶</a></h3>
 <img alt="../_images/qm8_scaffold_mae.png" src="../_images/qm8_scaffold_mae.png"/>
 <img alt="../_images/qm8_scaffold_r2.png" src="../_images/qm8_scaffold_r2.png"/>
-</section>
-<section id="id6">
-<h3>BACE<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="id13">
+<h3>BACE<a class="headerlink" href="#id13" title="Permalink to this headline">¶</a></h3>
 <img alt="../_images/bace_scaffold_auroc.png" src="../_images/bace_scaffold_auroc.png"/>
 <img alt="../_images/bace_scaffold_auprc.png" src="../_images/bace_scaffold_auprc.png"/>
-</section>
-<section id="id7">
-<h3>BBBP<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="id14">
+<h3>BBBP<a class="headerlink" href="#id14" title="Permalink to this headline">¶</a></h3>
 <img alt="../_images/bbbp_scaffold_auroc.png" src="../_images/bbbp_scaffold_auroc.png"/>
 <img alt="../_images/bbbp_scaffold_auprc.png" src="../_images/bbbp_scaffold_auprc.png"/>
-</section>
-<section id="id8">
-<h3>CEP<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="id15">
+<h3>CEP<a class="headerlink" href="#id15" title="Permalink to this headline">¶</a></h3>
 <img alt="../_images/cep_scaffold_mae.png" src="../_images/cep_scaffold_mae.png"/>
 <img alt="../_images/cep_scaffold_r2.png" src="../_images/cep_scaffold_r2.png"/>
-</section>
-<section id="id9">
-<h3>HIV<a class="headerlink" href="#id9" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="id16">
+<h3>HIV<a class="headerlink" href="#id16" title="Permalink to this headline">¶</a></h3>
 <img alt="../_images/hiv_scaffold_auroc.png" src="../_images/hiv_scaffold_auroc.png"/>
 <img alt="../_images/hiv_scaffold_auprc.png" src="../_images/hiv_scaffold_auprc.png"/>
-</section>
-<section id="id10">
-<h3>ClinTox<a class="headerlink" href="#id10" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="id17">
+<h3>ClinTox<a class="headerlink" href="#id17" title="Permalink to this headline">¶</a></h3>
 <img alt="../_images/clintox_scaffold_auroc.png" src="../_images/clintox_scaffold_auroc.png"/>
 <img alt="../_images/clintox_scaffold_auprc.png" src="../_images/clintox_scaffold_auprc.png"/>
-</section>
-<section id="id11">
-<h3>ESOL<a class="headerlink" href="#id11" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="id18">
+<h3>ESOL<a class="headerlink" href="#id18" title="Permalink to this headline">¶</a></h3>
 <img alt="../_images/esol_scaffold_mae.png" src="../_images/esol_scaffold_mae.png"/>
 <img alt="../_images/esol_scaffold_r2.png" src="../_images/esol_scaffold_r2.png"/>
-</section>
-<section id="id12">
-<h3>FreeSolv<a class="headerlink" href="#id12" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="id19">
+<h3>FreeSolv<a class="headerlink" href="#id19" title="Permalink to this headline">¶</a></h3>
 <img alt="../_images/freesolv_scaffold_mae.png" src="../_images/freesolv_scaffold_mae.png"/>
 <img alt="../_images/freesolv_scaffold_r2.png" src="../_images/freesolv_scaffold_r2.png"/>
-</section>
-<section id="id13">
-<h3>Lipophilicity<a class="headerlink" href="#id13" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="id20">
+<h3>Lipophilicity<a class="headerlink" href="#id20" title="Permalink to this headline">¶</a></h3>
 <img alt="../_images/lipophilicity_scaffold_mae.png" src="../_images/lipophilicity_scaffold_mae.png"/>
 <img alt="../_images/lipophilicity_scaffold_r2.png" src="../_images/lipophilicity_scaffold_r2.png"/>
-</section>
-<section id="id14">
-<h3>SIDER<a class="headerlink" href="#id14" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="id21">
+<h3>SIDER<a class="headerlink" href="#id21" title="Permalink to this headline">¶</a></h3>
 <img alt="../_images/sider_scaffold_auroc.png" src="../_images/sider_scaffold_auroc.png"/>
 <img alt="../_images/sider_scaffold_auprc.png" src="../_images/sider_scaffold_auprc.png"/>
-</section>
-<section id="id15">
-<h3>Tox21<a class="headerlink" href="#id15" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="id22">
+<h3>Tox21<a class="headerlink" href="#id22" title="Permalink to this headline">¶</a></h3>
 <img alt="../_images/tox21_scaffold_auroc.png" src="../_images/tox21_scaffold_auroc.png"/>
 <img alt="../_images/tox21_scaffold_auprc.png" src="../_images/tox21_scaffold_auprc.png"/>
-</section>
-<section id="id16">
-<h3>ToxCast<a class="headerlink" href="#id16" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="id23">
+<h3>ToxCast<a class="headerlink" href="#id23" title="Permalink to this headline">¶</a></h3>
 <img alt="../_images/toxcast_scaffold_auroc.png" src="../_images/toxcast_scaffold_auroc.png"/>
 <img alt="../_images/toxcast_scaffold_auprc.png" src="../_images/toxcast_scaffold_auprc.png"/>
-</section>
-<section id="id17">
-<h3>MUV<a class="headerlink" href="#id17" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="id24">
+<h3>MUV<a class="headerlink" href="#id24" title="Permalink to this headline">¶</a></h3>
 <img alt="../_images/muv_scaffold_auroc.png" src="../_images/muv_scaffold_auroc.png"/>
 <img alt="../_images/muv_scaffold_auprc.png" src="../_images/muv_scaffold_auprc.png"/>
-</section>
-<section id="id18">
-<h3>Malaria<a class="headerlink" href="#id18" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="id25">
+<h3>Malaria<a class="headerlink" href="#id25" title="Permalink to this headline">¶</a></h3>
 <img alt="../_images/malaria_scaffold_mae.png" src="../_images/malaria_scaffold_mae.png"/>
 <img alt="../_images/malaria_scaffold_r2.png" src="../_images/malaria_scaffold_r2.png"/>
-</section>
-</section>
-</section>
+</div>
+</div>
+</div>
 
       </article>
       <footer>
@@ -404,37 +411,37 @@ to space limitations.</p>
 <li><a class="reference internal" href="#random-split">Random Split</a><ul>
 <li><a class="reference internal" href="#id1">QM9</a></li>
 <li><a class="reference internal" href="#id2">QM8</a></li>
-<li><a class="reference internal" href="#bace">BACE</a></li>
-<li><a class="reference internal" href="#bbbp">BBBP</a></li>
+<li><a class="reference internal" href="#id3">BACE</a></li>
+<li><a class="reference internal" href="#id4">BBBP</a></li>
 <li><a class="reference internal" href="#cep">CEP</a></li>
-<li><a class="reference internal" href="#hiv">HIV</a></li>
-<li><a class="reference internal" href="#id3">ClinTox</a></li>
+<li><a class="reference internal" href="#id5">HIV</a></li>
+<li><a class="reference internal" href="#id6">ClinTox</a></li>
 <li><a class="reference internal" href="#esol">ESOL</a></li>
 <li><a class="reference internal" href="#freesolv">FreeSolv</a></li>
 <li><a class="reference internal" href="#lipophilicity">Lipophilicity</a></li>
-<li><a class="reference internal" href="#sider">SIDER</a></li>
-<li><a class="reference internal" href="#tox21">Tox21</a></li>
-<li><a class="reference internal" href="#toxcast">ToxCast</a></li>
-<li><a class="reference internal" href="#muv">MUV</a></li>
+<li><a class="reference internal" href="#id7">SIDER</a></li>
+<li><a class="reference internal" href="#id8">Tox21</a></li>
+<li><a class="reference internal" href="#id9">ToxCast</a></li>
+<li><a class="reference internal" href="#id10">MUV</a></li>
 <li><a class="reference internal" href="#malaria">Malaria</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#scaffold-split">Scaffold Split</a><ul>
-<li><a class="reference internal" href="#id4">QM9</a></li>
-<li><a class="reference internal" href="#id5">QM8</a></li>
-<li><a class="reference internal" href="#id6">BACE</a></li>
-<li><a class="reference internal" href="#id7">BBBP</a></li>
-<li><a class="reference internal" href="#id8">CEP</a></li>
-<li><a class="reference internal" href="#id9">HIV</a></li>
-<li><a class="reference internal" href="#id10">ClinTox</a></li>
-<li><a class="reference internal" href="#id11">ESOL</a></li>
-<li><a class="reference internal" href="#id12">FreeSolv</a></li>
-<li><a class="reference internal" href="#id13">Lipophilicity</a></li>
-<li><a class="reference internal" href="#id14">SIDER</a></li>
-<li><a class="reference internal" href="#id15">Tox21</a></li>
-<li><a class="reference internal" href="#id16">ToxCast</a></li>
-<li><a class="reference internal" href="#id17">MUV</a></li>
-<li><a class="reference internal" href="#id18">Malaria</a></li>
+<li><a class="reference internal" href="#id11">QM9</a></li>
+<li><a class="reference internal" href="#id12">QM8</a></li>
+<li><a class="reference internal" href="#id13">BACE</a></li>
+<li><a class="reference internal" href="#id14">BBBP</a></li>
+<li><a class="reference internal" href="#id15">CEP</a></li>
+<li><a class="reference internal" href="#id16">HIV</a></li>
+<li><a class="reference internal" href="#id17">ClinTox</a></li>
+<li><a class="reference internal" href="#id18">ESOL</a></li>
+<li><a class="reference internal" href="#id19">FreeSolv</a></li>
+<li><a class="reference internal" href="#id20">Lipophilicity</a></li>
+<li><a class="reference internal" href="#id21">SIDER</a></li>
+<li><a class="reference internal" href="#id22">Tox21</a></li>
+<li><a class="reference internal" href="#id23">ToxCast</a></li>
+<li><a class="reference internal" href="#id24">MUV</a></li>
+<li><a class="reference internal" href="#id25">Malaria</a></li>
 </ul>
 </li>
 </ul>
@@ -448,10 +455,6 @@ to space limitations.</p>
       
     </aside>
   </main>
-</div><script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/doctools.js"></script>
-    <script src="../_static/scripts/main.js"></script>
-    </body>
+</div>
+  </body>
 </html>

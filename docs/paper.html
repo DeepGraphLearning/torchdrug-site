@@ -1,15 +1,13 @@
 <!doctype html>
 <html class="no-js">
   <head><meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width,initial-scale=1"/>
-    <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
-<link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="Documentation" href="api/index.html" /><link rel="prev" title="Customize Models &amp; Tasks" href="notes/model.html" />
+    <meta name="viewport" content="width=device-width,initial-scale=1"/><link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="Documentation" href="api/index.html" /><link rel="prev" title="Customize Models &amp; Tasks" href="notes/model.html" />
 
-    <meta name="generator" content="sphinx-4.0.2, furo 2021.07.05.beta38"/>
+    <meta name="generator" content="sphinx-3.1.2, furo 2020.12.09.beta21"/>
         <title>Papers Implemented - TorchDrug 0.1.0 documentation</title>
-      <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css" />
-    <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css" />
+      <link rel="stylesheet" href="_static/styles/furo.css?digest=a3f371badb8538d75df213ccffb17a4f6e8f3ac5">
+    <link rel="stylesheet" href="_static/pygments.css">
+    <link media="(prefers-color-scheme: dark)" rel="stylesheet" href="_static/pygments_dark.css">
     
 
 
@@ -52,7 +50,15 @@
   --color-code-foreground: #d0d0d0;
   
   }
-</style><link media="(prefers-color-scheme: dark)" rel="stylesheet" href="_static/pygments_dark.css"></head>
+</style><link id="pygments_dark_css" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css" href="_static/pygments_dark.css" />
+    <link rel="stylesheet" href="_static/styles/furo-extensions.css?digest=26485485040e7aaf717c13fd0188a5ad2c2deb60">
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script defer src="_static/jquery.js"></script>
+    <script defer src="_static/underscore.js"></script>
+    <script defer src="_static/doctools.js"></script>
+    <script defer src="_static/language_data.js"></script>
+    <script defer async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script defer src="_static/scripts/main.js?digest=e931d09b2a40c1bb82b542effe772014573baf67"></script></head>
   <body dir="">
     
 <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
@@ -92,7 +98,6 @@
 <label class="overlay toc-overlay" for="__toc"></label>
 
 
-
 <div class="page">
   <header class="mobile-header">
     <div class="header-left">
@@ -120,7 +125,7 @@
   
   
 </a><form class="sidebar-search-container" method="get" action="search.html">
-  <input class="sidebar-search" placeholder=Search name="q">
+  <input class="sidebar-search" placeholder="Search" name="q">
   <input type="hidden" name="check_keywords" value="yes">
   <input type="hidden" name="area" value="default">
 </form><div class="sidebar-scroll"><div class="sidebar-tree">
@@ -158,6 +163,7 @@
 <li class="toctree-l2"><a class="reference internal" href="api/core.html">torchdrug.core</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/data.html">torchdrug.data</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/datasets.html">torchdrug.datasets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/transforms.html">torchdrug.transforms</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/metrics.html">torchdrug.metrics</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/layers.html">torchdrug.layers</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/models.html">torchdrug.models</a></li>
@@ -179,11 +185,11 @@
         <label class="toc-overlay-icon toc-content-icon" for="__toc">
           <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
         </label>
-        <section id="papers-implemented">
+        <div class="section" id="papers-implemented">
 <h1>Papers Implemented<a class="headerlink" href="#papers-implemented" title="Permalink to this headline">¶</a></h1>
-<section id="graph-representation-learning">
+<div class="section" id="graph-representation-learning">
 <h2>Graph Representation Learning<a class="headerlink" href="#graph-representation-learning" title="Permalink to this headline">¶</a></h2>
-<section id="graph-neural-networks">
+<div class="section" id="graph-neural-networks">
 <h3>Graph Neural Networks<a class="headerlink" href="#graph-neural-networks" title="Permalink to this headline">¶</a></h3>
 <ol class="arabic">
 <li><p><a class="reference external" href="https://papers.nips.cc/paper/5954-convolutional-networks-on-graphs-for-learning-molecular-fingerprints.pdf">Convolutional Networks on Graphs for Learning Molecular Fingerprints</a></p>
@@ -228,8 +234,8 @@ Klaus-Robert Müller. NeurIPS 2017.</p>
 <a class="reference internal" href="api/models.html#torchdrug.models.GraphIsomorphismNetwork" title="torchdrug.models.GraphIsomorphismNetwork"><code class="xref py py-class docutils literal notranslate"><span class="pre">GraphIsomorphismNetwork</span></code></a></p>
 </li>
 </ol>
-</section>
-<section id="differentiable-graph-pooling">
+</div>
+<div class="section" id="differentiable-graph-pooling">
 <h3>Differentiable Graph Pooling<a class="headerlink" href="#differentiable-graph-pooling" title="Permalink to this headline">¶</a></h3>
 <ol class="arabic">
 <li><p><a class="reference external" href="https://papers.nips.cc/paper/2018/file/e77dbaf6759253c7c6d0efc5690369c7-Paper.pdf">Hierarchical Graph Representation Learning with Differentiable Pooling</a></p>
@@ -241,35 +247,46 @@ Klaus-Robert Müller. NeurIPS 2017.</p>
 <p><a class="reference internal" href="api/layers.html#torchdrug.layers.MinCutPool" title="torchdrug.layers.MinCutPool"><code class="xref py py-class docutils literal notranslate"><span class="pre">MinCutPool</span></code></a></p>
 </li>
 </ol>
-</section>
-<section id="normalization-layer">
-<h3>Normalization Layer<a class="headerlink" href="#normalization-layer" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="readout-layers">
+<h3>Readout Layers<a class="headerlink" href="#readout-layers" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic">
+<li><p><a class="reference external" href="https://arxiv.org/pdf/1511.06391.pdf">Order Matters: Sequence to sequence for sets</a></p>
+<blockquote>
+<div><p>Oriol Vinyals, Samy Bengio, Manjunath Kudlur</p>
+<p><a class="reference internal" href="api/layers.html#torchdrug.layers.Set2Set" title="torchdrug.layers.Set2Set"><code class="xref py py-class docutils literal notranslate"><span class="pre">Set2Set</span></code></a></p>
+</div></blockquote>
+</li>
+</ol>
+</div>
+<div class="section" id="normalization-layers">
+<h3>Normalization Layers<a class="headerlink" href="#normalization-layers" title="Permalink to this headline">¶</a></h3>
 <ol class="arabic">
 <li><p><a class="reference external" href="https://openreview.net/pdf?id=rkecl1rtwB">PairNorm: Tackling Oversmoothing in GNNs</a></p>
 <p>Lingxiao Zhao, Leman Akoglu. ICLR 2020.</p>
 <p><a class="reference internal" href="api/layers.html#torchdrug.layers.PairNorm" title="torchdrug.layers.PairNorm"><code class="xref py py-class docutils literal notranslate"><span class="pre">PairNorm</span></code></a></p>
 </li>
 </ol>
-</section>
-</section>
-<section id="drug-discovery">
+</div>
+</div>
+<div class="section" id="drug-discovery">
 <h2>Drug Discovery<a class="headerlink" href="#drug-discovery" title="Permalink to this headline">¶</a></h2>
-<section id="pretrain-molecular-representations">
+<div class="section" id="pretrain-molecular-representations">
 <h3>Pretrain Molecular Representations<a class="headerlink" href="#pretrain-molecular-representations" title="Permalink to this headline">¶</a></h3>
 <ol class="arabic">
-<li><p><a class="reference external" href="https://openreview.net/pdf?id=r1lfF2NYvH">InfoGraph: Unsupervised and Semi-supervised Graph-Level Representation Learning via Mutual Information Maximization</a></p>
+<li><p><a class="reference external" href="https://arxiv.org/pdf/1908.01000.pdf">InfoGraph: Unsupervised and Semi-supervised Graph-Level Representation Learning via Mutual Information Maximization</a></p>
 <p>Fan-Yun Sun, Jordan Hoffman, Vikas Verma, Jian Tang. ICLR 2020.</p>
 <p><a class="reference internal" href="api/models.html#torchdrug.models.InfoGraph" title="torchdrug.models.InfoGraph"><code class="xref py py-class docutils literal notranslate"><span class="pre">InfoGraph</span></code></a></p>
 </li>
-<li><p><a class="reference external" href="https://arxiv.org/abs/1905.12265">Strategies for Pre-training Graph Neural Networks</a></p>
+<li><p><a class="reference external" href="https://arxiv.org/pdf/1905.12265.pdf">Strategies for Pre-training Graph Neural Networks</a></p>
 <p>Weihua Hu, Bowen Liu, Joseph Gomes, Marinka Zitnik, Percy Liang, Vijay Pande, Jure Leskovec. ICLR 2020.</p>
 <p><a class="reference internal" href="api/tasks.html#torchdrug.tasks.EdgePrediction" title="torchdrug.tasks.EdgePrediction"><code class="xref py py-class docutils literal notranslate"><span class="pre">EdgePrediction</span></code></a>,
 <a class="reference internal" href="api/tasks.html#torchdrug.tasks.AttributeMasking" title="torchdrug.tasks.AttributeMasking"><code class="xref py py-class docutils literal notranslate"><span class="pre">AttributeMasking</span></code></a>,
 <a class="reference internal" href="api/tasks.html#torchdrug.tasks.ContextPrediction" title="torchdrug.tasks.ContextPrediction"><code class="xref py py-class docutils literal notranslate"><span class="pre">ContextPrediction</span></code></a></p>
 </li>
 </ol>
-</section>
-<section id="de-novo-molecule-design">
+</div>
+<div class="section" id="de-novo-molecule-design">
 <h3>De Novo Molecule Design<a class="headerlink" href="#de-novo-molecule-design" title="Permalink to this headline">¶</a></h3>
 <ol class="arabic">
 <li><p><a class="reference external" href="https://papers.nips.cc/paper/7877-graph-convolutional-policy-network-for-goal-directed-molecular-graph-generation.pdf">Graph Convolutional Policy Network for Goal-Directed Molecular Graph Generation.</a></p>
@@ -282,8 +299,8 @@ Klaus-Robert Müller. NeurIPS 2017.</p>
 <a class="reference internal" href="api/tasks.html#torchdrug.tasks.AutoregressiveGeneration" title="torchdrug.tasks.AutoregressiveGeneration"><code class="xref py py-class docutils literal notranslate"><span class="pre">AutoregressiveGeneration</span></code></a></p>
 </li>
 </ol>
-</section>
-<section id="retrosynthesis">
+</div>
+<div class="section" id="retrosynthesis">
 <h3>Retrosynthesis<a class="headerlink" href="#retrosynthesis" title="Permalink to this headline">¶</a></h3>
 <ol class="arabic">
 <li><p><a class="reference external" href="https://arxiv.org/pdf/2003.12725.pdf">A Graph to Graphs Framework for Retrosynthesis Prediction.</a></p>
@@ -293,8 +310,8 @@ Klaus-Robert Müller. NeurIPS 2017.</p>
 <a class="reference internal" href="api/tasks.html#torchdrug.tasks.Retrosynthesis" title="torchdrug.tasks.Retrosynthesis"><code class="xref py py-class docutils literal notranslate"><span class="pre">Retrosynthesis</span></code></a></p>
 </li>
 </ol>
-</section>
-<section id="knowledge-graph-reasoning">
+</div>
+<div class="section" id="knowledge-graph-reasoning">
 <h3>Knowledge Graph Reasoning<a class="headerlink" href="#knowledge-graph-reasoning" title="Permalink to this headline">¶</a></h3>
 <ol class="arabic">
 <li><p><a class="reference external" href="http://papers.nips.cc/paper/5071-translating-embeddings-for-modeling-multi-relational-data.pdf">Translating Embeddings for Modeling Multi-relational Data</a></p>
@@ -331,9 +348,9 @@ Klaus-Robert Müller. NeurIPS 2017.</p>
 <p><a class="reference internal" href="api/models.html#torchdrug.models.KnowledgeBaseGraphAttentionNetwork" title="torchdrug.models.KnowledgeBaseGraphAttentionNetwork"><code class="xref py py-class docutils literal notranslate"><span class="pre">KnowledgeBaseGraphAttentionNetwork</span></code></a></p>
 </li>
 </ol>
-</section>
-</section>
-</section>
+</div>
+</div>
+</div>
 
       </article>
       <footer>
@@ -393,7 +410,8 @@ Klaus-Robert Müller. NeurIPS 2017.</p>
 <li><a class="reference internal" href="#graph-representation-learning">Graph Representation Learning</a><ul>
 <li><a class="reference internal" href="#graph-neural-networks">Graph Neural Networks</a></li>
 <li><a class="reference internal" href="#differentiable-graph-pooling">Differentiable Graph Pooling</a></li>
-<li><a class="reference internal" href="#normalization-layer">Normalization Layer</a></li>
+<li><a class="reference internal" href="#readout-layers">Readout Layers</a></li>
+<li><a class="reference internal" href="#normalization-layers">Normalization Layers</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#drug-discovery">Drug Discovery</a><ul>
@@ -414,10 +432,6 @@ Klaus-Robert Müller. NeurIPS 2017.</p>
       
     </aside>
   </main>
-</div><script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-    <script src="_static/jquery.js"></script>
-    <script src="_static/underscore.js"></script>
-    <script src="_static/doctools.js"></script>
-    <script src="_static/scripts/main.js"></script>
-    </body>
+</div>
+  </body>
 </html>

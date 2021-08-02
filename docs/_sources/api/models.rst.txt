@@ -90,11 +90,6 @@ NFP
 
 .. autoclass:: NFP
 
-NGramGraph
-^^^
-.. autoclass:: NGramGraph
-    :members:
-
 RGCN
 ^^^^
 .. autoclass:: RelationalGraphConvolutionalNetwork

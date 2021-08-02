@@ -5,9 +5,11 @@ Knowledge Graph Reasoning
 
 This page contains benchmarks of knowledge graph reasoning methods.
 
-During evaluation, for each triplet (h,r,t) in the test set, we construct two query-answer pairs, which are (h,r,?) with t and (?,r,t) with h. Given a query, we let each compared method compute a score for each entity in the vocabulary. Then we compute the rank of the correct answer to be the number of entities which has greater or equal scores than the correct answer. Note that there can be cases where a query has multiple answers, e.g., (h,r,?) with t0, t1, t2. When computing the rank for each of the answer (e.g., t0), we filter out all the other correct answers (e.g., t1 and t2) in the ranking list, and this setting is widely used in the literature.
-
-Given the ranks computed from all the queries, we report the Mean Rank (MR), Mean Reciprocal Rank (MRR) and Hit\@k (HIT\@1, HIT\@3, and HIT\@10).
+We use the filtered ranking protocol for knowledge graph reasoning. For a test
+triplet :math:`\langle h, r, t\rangle`, we rank it against all negative triplets
+:math:`\langle h, r, t'\rangle` or :math:`\langle h', r, t\rangle` that do not appear
+in the knowledge graph. We report the mean rank (MR), mean reciprocal rank (MRR)
+and HITS at K (HITS\@K) over the test set.
 
 FB15k
 ^^^^^
