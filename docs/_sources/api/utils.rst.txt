@@ -27,7 +27,11 @@ Auxiliary Torch Functions
 
 .. autofunction:: clone
 
+.. autofunction:: mean
+
 .. autofunction:: cat
+
+.. autofunction:: stack
 
 .. autofunction:: sparse_coo_tensor
 

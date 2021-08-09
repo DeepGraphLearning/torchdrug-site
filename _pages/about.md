@@ -100,6 +100,10 @@ committee:
     url: https://delafuentelab.seas.upenn.edu/principal-investigator
     title: University of Pennsylvania
     image: assets/images/committee/cesar_de_la_fuente.jpg
+  - name: Payel Das
+    url: https://researcher.watson.ibm.com/researcher/view.php?person=us-daspa
+    image: assets/images/committee/payel_das.jpg
+    title: IBM Research
 ---
 
 TorchDrug was initiated by [MilaGraph] to integrate recent advances in drug discovery and accelerate development,
