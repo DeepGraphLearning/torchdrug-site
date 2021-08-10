@@ -34,14 +34,14 @@ team:
     url: https://mnqu.github.io/
     title: Mila - Quebec AI Institute
     image: assets/images/team/meng_qu.jpg
-  - name: Minghao Xu
-    url: https://chrisallenming.github.io/
-    title: Mila - Quebec AI Institute
-    image: assets/images/team/minghao_xu.jpg
   - name: Louis-Pascal Xhonneux
     url: https://github.com/lpxhonneux
     title: Mila - Quebec AI Institute
     image: assets/images/team/louis-pascal_xhonneux.jpg
+  - name: Minghao Xu
+    url: https://chrisallenming.github.io/
+    title: Shanghai Jiao Tong University
+    image: assets/images/team/minghao_xu.jpg
   - name: Chang Ma
     url: https://github.com/chang-github-00
     title: Peking University
