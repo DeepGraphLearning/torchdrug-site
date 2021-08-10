@@ -12,7 +12,7 @@ main:
   - name: "About"
     url: /about
   - name: "GitHub"
-    url: https://github.com/DeepGraphLearning/drugdiscovery/
+    url: https://github.com/DeepGraphLearning/torchdrug/
 
 footer:
   - name: "Home"
