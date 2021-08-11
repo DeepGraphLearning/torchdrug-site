@@ -5,7 +5,8 @@
 {% endif %}
 
 <div class="strip">
-  <div class="pt-6 pb-6 pb-md-10">
+  <div class="container pb-2 pb-md-10">
+    {% if grid.title %}<div class="pb-2"><h1>{{ grid.title }}</h1></div>{% endif %}
     <div class="row justify-content-start">
       {% for item in grid.items %}
       <div class="col-12 col-md-6 mb-1">

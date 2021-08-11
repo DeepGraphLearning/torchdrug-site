@@ -5,9 +5,10 @@
 {% endif %}
 
 <div class="strip strip-grey">
-  <div class="container pt-2 mb-6">
+  <div class="container pt-4 pb-6">
+    {% if image_grid.title %}<div class="pb-2"><h1>{{ image_grid.title }}</h1></div>{% endif %}
     <div class="row justify-content-center">
-      {% for item in image_grid %}
+      {% for item in image_grid.items %}
       <div class="col-12 col-md-6 col-lg-4 pb-2">
         <div class="feature">
           <div class="feature-image"><img alt="{{ item.title }} logo" src="{{ item.image | relative_url }}" /></div>
