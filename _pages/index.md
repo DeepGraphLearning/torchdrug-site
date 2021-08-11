@@ -40,6 +40,10 @@ image_grid:
   - title: Biomedical Knowledge Graph Reasoning
     url: /docs/tutorials/reasoning
     image: assets/images/task/reasoning.png
+  - title: Protein Representation Learning
+    url: /
+    image: assets/images/task/protein.png
+    excerpt: Stay tuned!
 
 intro_box: "conda install -c milagraph -c conda-forge torchdrug"
 intro_image: "assets/images/intro.svg"
