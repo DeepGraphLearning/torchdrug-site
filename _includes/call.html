@@ -1,5 +1,3 @@
-<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js">new Clipboard(".button");</script>
-
 <div class="call">
   <div class="call-box-top">
     {% if page.intro_box %}
@@ -10,5 +8,9 @@
   <div class="call-box-bottom">
     <button class="button" data-clipboard-text="{{ page.intro_box }}">Copy</button>
   </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js"></script>
+  <script>
+    new ClipboardJS(".button");
+  </script>
   {% endif %}
 </div>
