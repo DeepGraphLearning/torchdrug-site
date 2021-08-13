@@ -154,7 +154,7 @@ We define a graph neural network to encode the molecule graphs. Specifically, we
 [Graph Isomorphism Network (GIN)]: https://arxiv.org/pdf/1810.00826.pdf
 
 ```python
-from drugdiscovery import core, models, tasks
+from torchdrug import core, models, tasks
 
 model = models.GIN(input_dim=dataset.node_feature_dim, hidden_dims=[256, 256, 256, 256],
                    short_cut=True, batch_norm=True, concat_hidden=True)
