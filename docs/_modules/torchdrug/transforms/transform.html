@@ -199,7 +199,6 @@
 <div class="viewcode-block" id="TargetNormalize"><a class="viewcode-back" href="../../../api/transforms.html#torchdrug.transforms.TargetNormalize">[docs]</a><span class="k">class</span> <span class="nc">TargetNormalize</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
     <span class="sd">"""</span>
 <span class="sd">    Normalize the target values in a sample.</span>
-
 <span class="sd">    Parameters:</span>
 <span class="sd">        mean (dict of float): mean of targets</span>
 <span class="sd">        std (dict of float): standard deviation of targets</span>
@@ -221,7 +220,6 @@
 <div class="viewcode-block" id="RemapAtomType"><a class="viewcode-back" href="../../../api/transforms.html#torchdrug.transforms.RemapAtomType">[docs]</a><span class="k">class</span> <span class="nc">RemapAtomType</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
     <span class="sd">"""</span>
 <span class="sd">    Map atom types to their index in a vocabulary. Atom types that don't present in the vocabulary are mapped to -1.</span>
-
 <span class="sd">    Parameters:</span>
 <span class="sd">        atom_types (array_like): vocabulary of atom types</span>
 <span class="sd">    """</span>
@@ -273,7 +271,6 @@
 <div class="viewcode-block" id="Shuffle"><a class="viewcode-back" href="../../../api/transforms.html#torchdrug.transforms.Shuffle">[docs]</a><span class="k">class</span> <span class="nc">Shuffle</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
     <span class="sd">"""</span>
 <span class="sd">    Shuffle the order of nodes and edges in a graph.</span>
-
 <span class="sd">    Parameters:</span>
 <span class="sd">        shuffle_node (bool, optional): shuffle node order or not</span>
 <span class="sd">        shuffle_edge (bool, optional): shuffle edge order or not</span>
@@ -392,7 +389,6 @@
 <div class="viewcode-block" id="VirtualAtom"><a class="viewcode-back" href="../../../api/transforms.html#torchdrug.transforms.VirtualAtom">[docs]</a><span class="k">class</span> <span class="nc">VirtualAtom</span><span class="p">(</span><span class="n">VirtualNode</span><span class="p">):</span>
     <span class="sd">"""</span>
 <span class="sd">    Add a virtual atom and connect it with every atom in the molecule.</span>
-
 <span class="sd">    Parameters:</span>
 <span class="sd">        atom_type (int, optional): type of the virtual atom</span>
 <span class="sd">        bond_type (int, optional): type of the virtual bonds</span>
@@ -409,7 +405,6 @@
 <div class="viewcode-block" id="Compose"><a class="viewcode-back" href="../../../api/transforms.html#torchdrug.transforms.Compose">[docs]</a><span class="k">class</span> <span class="nc">Compose</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
     <span class="sd">"""</span>
 <span class="sd">    Compose a list of transforms into one.</span>
-
 <span class="sd">    Parameters:</span>
 <span class="sd">        transforms (list of callable): list of transforms</span>
 <span class="sd">    """</span>

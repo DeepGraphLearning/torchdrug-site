@@ -190,12 +190,9 @@
 <dl class="py class">
 <dt id="torchdrug.transforms.Compose">
 <em class="property">class </em><code class="sig-name descname">Compose</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">transforms</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/transforms/transform.html#Compose"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.transforms.Compose" title="Permalink to this definition">¶</a></dt>
-<dd><p>Compose a list of transforms into one.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>transforms</strong> (<em>list of callable</em>) – list of transforms</p>
-</dd>
-</dl>
+<dd><p>Compose a list of transforms into one.
+:param transforms: list of transforms
+:type transforms: list of callable</p>
 </dd></dl>
 <div class="section" id="graph-transformations">
 <h2>Graph Transformations<a class="headerlink" href="#graph-transformations" title="Permalink to this headline">¶</a></h2>
@@ -204,15 +201,11 @@
 <dl class="py class">
 <dt id="torchdrug.transforms.TargetNormalize">
 <em class="property">class </em><code class="sig-name descname">TargetNormalize</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">mean</span></em>, <em class="sig-param"><span class="n">std</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/transforms/transform.html#TargetNormalize"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.transforms.TargetNormalize" title="Permalink to this definition">¶</a></dt>
-<dd><p>Normalize the target values in a sample.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>mean</strong> (<em>dict of float</em>) – mean of targets</p></li>
-<li><p><strong>std</strong> (<em>dict of float</em>) – standard deviation of targets</p></li>
-</ul>
-</dd>
-</dl>
+<dd><p>Normalize the target values in a sample.
+:param mean: mean of targets
+:type mean: dict of float
+:param std: standard deviation of targets
+:type std: dict of float</p>
 </dd></dl>
 </div>
 <div class="section" id="randombfsorder">
@@ -228,15 +221,11 @@
 <dl class="py class">
 <dt id="torchdrug.transforms.Shuffle">
 <em class="property">class </em><code class="sig-name descname">Shuffle</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">shuffle_node</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">shuffle_edge</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/transforms/transform.html#Shuffle"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.transforms.Shuffle" title="Permalink to this definition">¶</a></dt>
-<dd><p>Shuffle the order of nodes and edges in a graph.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>shuffle_node</strong> (<em>bool</em><em>, </em><em>optional</em>) – shuffle node order or not</p></li>
-<li><p><strong>shuffle_edge</strong> (<em>bool</em><em>, </em><em>optional</em>) – shuffle edge order or not</p></li>
-</ul>
-</dd>
-</dl>
+<dd><p>Shuffle the order of nodes and edges in a graph.
+:param shuffle_node: shuffle node order or not
+:type shuffle_node: bool, optional
+:param shuffle_edge: shuffle edge order or not
+:type shuffle_edge: bool, optional</p>
 </dd></dl>
 </div>
 <div class="section" id="virtualnode">
@@ -267,12 +256,9 @@ By default, use the maximal relation in the graph plus 1.</p></li>
 <dl class="py class">
 <dt id="torchdrug.transforms.RemapAtomType">
 <em class="property">class </em><code class="sig-name descname">RemapAtomType</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">atom_types</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/transforms/transform.html#RemapAtomType"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.transforms.RemapAtomType" title="Permalink to this definition">¶</a></dt>
-<dd><p>Map atom types to their index in a vocabulary. Atom types that don’t present in the vocabulary are mapped to -1.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>atom_types</strong> (<em>array_like</em>) – vocabulary of atom types</p>
-</dd>
-</dl>
+<dd><p>Map atom types to their index in a vocabulary. Atom types that don’t present in the vocabulary are mapped to -1.
+:param atom_types: vocabulary of atom types
+:type atom_types: array_like</p>
 </dd></dl>
 </div>
 <div class="section" id="virtualatom">
@@ -280,18 +266,16 @@ By default, use the maximal relation in the graph plus 1.</p></li>
 <dl class="py class">
 <dt id="torchdrug.transforms.VirtualAtom">
 <em class="property">class </em><code class="sig-name descname">VirtualAtom</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">atom_type</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">bond_type</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">node_feature</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">edge_feature</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/transforms/transform.html#VirtualAtom"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.transforms.VirtualAtom" title="Permalink to this definition">¶</a></dt>
-<dd><p>Add a virtual atom and connect it with every atom in the molecule.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>atom_type</strong> (<em>int</em><em>, </em><em>optional</em>) – type of the virtual atom</p></li>
-<li><p><strong>bond_type</strong> (<em>int</em><em>, </em><em>optional</em>) – type of the virtual bonds</p></li>
-<li><p><strong>node_feature</strong> (<em>array_like</em><em>, </em><em>optional</em>) – feature of the virtual atom</p></li>
-<li><p><strong>edge_feature</strong> (<em>array_like</em><em>, </em><em>optional</em>) – feature of virtual bonds</p></li>
-<li><p><strong>kwargs</strong> – other attributes of the virtual atoms or virtual bonds</p></li>
-</ul>
-</dd>
-</dl>
+<dd><p>Add a virtual atom and connect it with every atom in the molecule.
+:param atom_type: type of the virtual atom
+:type atom_type: int, optional
+:param bond_type: type of the virtual bonds
+:type bond_type: int, optional
+:param node_feature: feature of the virtual atom
+:type node_feature: array_like, optional
+:param edge_feature: feature of virtual bonds
+:type edge_feature: array_like, optional
+:param kwargs: other attributes of the virtual atoms or virtual bonds</p>
 </dd></dl>
 </div>
 </div>

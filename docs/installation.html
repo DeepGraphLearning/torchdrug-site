@@ -187,7 +187,7 @@
         </label>
         <div class="section" id="installation">
 <h1>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h1>
-<p>TorchDrug is compatible with Python &gt;= 3.5 and PyTorch &gt;= 1.4.0.</p>
+<p>TorchDrug is compatible with Python 3.7/3.8 and PyTorch &gt;= 1.4.0.</p>
 <div class="section" id="from-conda">
 <h2>From Conda<a class="headerlink" href="#from-conda" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda install -c milagraph -c conda-forge torchdrug
@@ -206,6 +206,61 @@ You can install rdkit with the following line.</p>
 pip install -r requirements.txt
 python setup.py install
 </pre></div>
+</div>
+</div>
+<div class="section" id="from-pip-not-recommended">
+<h2>From Pip (Not Recommended)<a class="headerlink" href="#from-pip-not-recommended" title="Permalink to this headline">¶</a></h2>
+<p>This is not a recommended way to install TorchDrug, since we have noticed some
+bugs in RDKit installed via pip.</p>
+<div class="section" id="create-venv">
+<h3>Create venv<a class="headerlink" href="#create-venv" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mkdir ~/.venv
+/usr/bin/python3 -m venv ~/.venv/torchdrug
+<span class="nb">source</span> ~/.venv/torchdrug/bin/activate
+</pre></div>
+</div>
+</div>
+<div class="section" id="install-requirements">
+<h3>Install requirements<a class="headerlink" href="#install-requirements" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Contents in requirements.txt</span>
+torch&gt;<span class="o">=</span><span class="m">1</span>.4.0
+decorator&lt;<span class="m">5</span>,&gt;<span class="o">=</span><span class="m">4</span>.3
+numpy&gt;<span class="o">=</span><span class="m">1</span>.11
+matplotlib
+tqdm
+networkx
+ninja
+jinja2
+rdkit-pypi
+</pre></div>
+</div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip install -r requirements.txt
+</pre></div>
+</div>
+</div>
+<div class="section" id="install-pytorch-scatter">
+<h3>Install PyTorch Scatter<a class="headerlink" href="#install-pytorch-scatter" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># PyTorch 1.9.0</span>
+pip install torch-scatter -f https://pytorch-geometric.com/whl/torch-1.9.0+<span class="si">${</span><span class="nv">CUDA</span><span class="si">}</span>.html
+pip install torch-scatter -f https://pytorch-geometric.com/whl/torch-1.9.0+cpu.html
+</pre></div>
+</div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># PyTorch 1.8.0/1.8.1</span>
+pip install torch-scatter -f https://pytorch-geometric.com/whl/torch-1.8.0+<span class="si">${</span><span class="nv">CUDA</span><span class="si">}</span>.html
+pip install torch-scatter -f https://pytorch-geometric.com/whl/torch-1.8.0+cpu.html
+</pre></div>
+</div>
+<p><strong>Note:</strong> Binaries of older versions are also provided for PyTorch 1.4.0, PyTorch 1.5.0,
+PyTorch 1.6.0 and PyTorch 1.7.0/1.7.1 (following the same procedure).</p>
+<p>See <a class="reference external" href="https://github.com/rusty1s/pytorch_scatter">https://github.com/rusty1s/pytorch_scatter</a> for more details.</p>
+</div>
+<div class="section" id="install-torchdrug">
+<h3>Install TorchDrug<a class="headerlink" href="#install-torchdrug" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git clone https://github.com/DeepGraphLearning/torchdrug
+<span class="nb">cd</span> torchdrug
+python setup.py install
+</pre></div>
+</div>
 </div>
 </div>
 </div>
@@ -267,6 +322,13 @@ python setup.py install
 <li><a class="reference internal" href="#">Installation</a><ul>
 <li><a class="reference internal" href="#from-conda">From Conda</a></li>
 <li><a class="reference internal" href="#from-source">From Source</a></li>
+<li><a class="reference internal" href="#from-pip-not-recommended">From Pip (Not Recommended)</a><ul>
+<li><a class="reference internal" href="#create-venv">Create venv</a></li>
+<li><a class="reference internal" href="#install-requirements">Install requirements</a></li>
+<li><a class="reference internal" href="#install-pytorch-scatter">Install PyTorch Scatter</a></li>
+<li><a class="reference internal" href="#install-torchdrug">Install TorchDrug</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
