@@ -111,7 +111,7 @@ with the vision of creating an easy access to drug discovery techniques for ever
 machine learning practitioners to apply fundamental algorithms to drug discovery applications, with minimal efforts
 on domain knowledge and trivial details.
 
-Contact: torchdrug@gmail.com
+For collaboration, please send an email to torchdrug@gmail.com
 
 [MilaGraph]: https://github.com/DeepGraphLearning
 

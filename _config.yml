@@ -16,7 +16,7 @@ seo:
   meta_og_type: "website"
   meta_og_url: "https://torchdrug.ai"
   meta_og_description: "Powerful and flexible machine learning library for drug discovery"
-
+  
 collections:
   services:
     output: true
