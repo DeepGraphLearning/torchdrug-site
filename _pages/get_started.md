@@ -7,7 +7,7 @@ permalink: /get_started
 TorchDrug is a [PyTorch]-based machine learning toolbox designed for several purposes.
 
 - Easy implementation of graph operations in a PyTorchic style with GPU support
-- Being friendly to practioners with minimal knowledge about drug discovery
+- Being friendly to practitioners with minimal knowledge about drug discovery
 - Rapid prototyping of machine learning research
 
 Before we start, make sure you are familiar with PyTorch. Check out the [official tutorial of PyTorch].
