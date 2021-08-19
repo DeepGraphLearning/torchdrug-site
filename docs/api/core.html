@@ -117,7 +117,7 @@
   <aside class="sidebar-drawer">
     <div class="sidebar-container">
       
-      <div class="sidebar-sticky"><a class="sidebar-brand centered" href="../index.html">
+      <div class="sidebar-sticky"><a class="sidebar-brand centered" href="https://torchdrug.ai">
   
   <div class="sidebar-logo-container">
     <img class="sidebar-logo" src="../_static/logo.svg" alt="Logo"/>
@@ -193,7 +193,7 @@
 <dt id="torchdrug.core.Configurable">
 <em class="property">class </em><code class="sig-name descname">Configurable</code><a class="reference internal" href="../_modules/torchdrug/core/core.html#Configurable"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.core.Configurable" title="Permalink to this definition">¶</a></dt>
 <dd><p>Class for load/save configuration.
-It will automatically record every argument passed to <code class="docutils literal notranslate"><span class="pre">__init__</span></code> function.</p>
+It will automatically record every argument passed to the <code class="docutils literal notranslate"><span class="pre">__init__</span></code> function.</p>
 <p>This class is inspired by <code class="xref py py-meth docutils literal notranslate"><span class="pre">state_dict()</span></code> in PyTorch, but designed for hyperparameters.</p>
 <p>Inherit this class to construct a configurable class.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">class</span> <span class="nc">MyClass</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">,</span> <span class="n">core</span><span class="o">.</span><span class="n">Configurable</span><span class="p">):</span>

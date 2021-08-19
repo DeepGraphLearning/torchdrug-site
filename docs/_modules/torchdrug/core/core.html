@@ -117,7 +117,7 @@
   <aside class="sidebar-drawer">
     <div class="sidebar-container">
       
-      <div class="sidebar-sticky"><a class="sidebar-brand centered" href="../../../index.html">
+      <div class="sidebar-sticky"><a class="sidebar-brand centered" href="https://torchdrug.ai">
   
   <div class="sidebar-logo-container">
     <img class="sidebar-logo" src="../../../_static/logo.svg" alt="Logo"/>
@@ -375,7 +375,6 @@
             <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">keys</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]:</span>
                 <span class="n">entry</span> <span class="o">=</span> <span class="n">entry</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
             <span class="k">if</span> <span class="n">keys</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="ow">in</span> <span class="n">entry</span><span class="p">:</span>
-                <span class="k">return</span> <span class="n">obj</span>
                 <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="s2">"`</span><span class="si">%s</span><span class="s2">` has already been registered by </span><span class="si">%s</span><span class="s2">"</span> <span class="o">%</span> <span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">entry</span><span class="p">[</span><span class="n">keys</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]]))</span>
 
             <span class="n">entry</span><span class="p">[</span><span class="n">keys</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]]</span> <span class="o">=</span> <span class="n">obj</span>
@@ -492,7 +491,7 @@
 <div class="viewcode-block" id="Configurable"><a class="viewcode-back" href="../../../api/core.html#torchdrug.core.Configurable">[docs]</a><span class="k">class</span> <span class="nc">Configurable</span><span class="p">(</span><span class="n">metaclass</span><span class="o">=</span><span class="n">_Configurable</span><span class="p">):</span>
     <span class="sd">"""</span>
 <span class="sd">    Class for load/save configuration.</span>
-<span class="sd">    It will automatically record every argument passed to ``__init__`` function.</span>
+<span class="sd">    It will automatically record every argument passed to the ``__init__`` function.</span>
 
 <span class="sd">    This class is inspired by :meth:`state_dict()` in PyTorch, but designed for hyperparameters.</span>
 
@@ -522,6 +521,29 @@
 <span class="sd">    &gt;&gt;&gt; gcn = Configurable.load_config_dict(config)</span>
 <span class="sd">    """</span>
     <span class="k">pass</span></div>
+
+
+<span class="k">def</span> <span class="nf">make_configurable</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">module</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">ignore_args</span><span class="o">=</span><span class="p">()):</span>
+    <span class="sd">"""</span>
+<span class="sd">    Make a configurable class out of an existing class.</span>
+<span class="sd">    The configurable class will automatically record every argument passed to its ``__init__`` function.</span>
+
+<span class="sd">    Parameters:</span>
+<span class="sd">        cls (type): input class</span>
+<span class="sd">        module (str, optional): bind the output class to this module.</span>
+<span class="sd">            By default, bind to the original module of the input class.</span>
+<span class="sd">        ignore_args (set of str, optional): arguments to ignore in the ``__init__`` function</span>
+<span class="sd">    """</span>
+    <span class="n">ignore_args</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">ignore_args</span><span class="p">)</span>
+    <span class="n">module</span> <span class="o">=</span> <span class="n">module</span> <span class="ow">or</span> <span class="bp">cls</span><span class="o">.</span><span class="vm">__module__</span>
+    <span class="n">Metaclass</span> <span class="o">=</span> <span class="nb">type</span><span class="p">(</span><span class="bp">cls</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">issubclass</span><span class="p">(</span><span class="n">Metaclass</span><span class="p">,</span> <span class="n">_Configurable</span><span class="p">):</span> <span class="c1"># already a configurable class</span>
+        <span class="k">return</span> <span class="bp">cls</span>
+    <span class="k">if</span> <span class="n">Metaclass</span> <span class="o">!=</span> <span class="nb">type</span><span class="p">:</span> <span class="c1"># already have a meta class</span>
+        <span class="n">MetaClass</span> <span class="o">=</span> <span class="nb">type</span><span class="p">(</span><span class="n">_Configurable</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="p">(</span><span class="n">Metaclass</span><span class="p">,</span> <span class="n">_Configurable</span><span class="p">),</span> <span class="p">{})</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">MetaClass</span> <span class="o">=</span> <span class="n">_Configurable</span>
+    <span class="k">return</span> <span class="n">MetaClass</span><span class="p">(</span><span class="bp">cls</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="p">(</span><span class="bp">cls</span><span class="p">,),</span> <span class="p">{</span><span class="s2">"_ignore_args"</span><span class="p">:</span> <span class="n">ignore_args</span><span class="p">,</span> <span class="s2">"__module__"</span><span class="p">:</span> <span class="n">module</span><span class="p">})</span>
 </pre></div>
       </article>
       <footer>

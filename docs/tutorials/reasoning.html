@@ -117,7 +117,7 @@
   <aside class="sidebar-drawer">
     <div class="sidebar-container">
       
-      <div class="sidebar-sticky"><a class="sidebar-brand centered" href="../index.html">
+      <div class="sidebar-sticky"><a class="sidebar-brand centered" href="https://torchdrug.ai">
   
   <div class="sidebar-logo-container">
     <img class="sidebar-logo" src="../_static/logo.svg" alt="Logo"/>
@@ -261,8 +261,8 @@ following code.</p>
 <p>The other kind of popular method is neural inductive logic programming. The idea of neural inductive logic programming is to learn logic rules from training data. Once the logic rules are learned, they can be further used to predict missing links.</p>
 <p>One popular method of neural inductive logic programming is NeuralLP. NeuralLP considers all the chain-like rules (e.g., nationality = born_in + city_of) up to a maximum length. Also, an attention mechanism is used to assign a scalar weight to each logic rule. During training, the attention module is trained, so that we can learn a proper weight for each rule. During testing, the logic rules and their weights are used together to predict missing links.</p>
 <p>Next, we will introduce how to deploy a NeuralLP model for knowledge graph reasoning.</p>
-<div class="section" id="id1">
-<h3>Prepare the Dataset<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id3">
+<h3>Prepare the Dataset<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
 <p>We start with loading the dataset. Similar to the tutorial of knowledge graph embedding, the <a class="reference external" href="https://www.aclweb.org/anthology/W15-4007">FB15k-237</a> dataset is used for illustration. We can load the dataset by running the following commands:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torch</span>
 <span class="kn">from</span> <span class="nn">torchdrug</span> <span class="kn">import</span> <span class="n">core</span><span class="p">,</span> <span class="n">datasets</span><span class="p">,</span> <span class="n">tasks</span><span class="p">,</span> <span class="n">models</span>
@@ -272,8 +272,8 @@ following code.</p>
 </pre></div>
 </div>
 </div>
-<div class="section" id="id2">
-<h3>Define our Model<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id4">
+<h3>Define our Model<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
 <p>Afterwards, we can now define the NeuralLP model with the following codes:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">torchdrug.models.neurallp</span> <span class="kn">import</span> <span class="n">NeuralLogicProgramming</span>
 <span class="n">model</span> <span class="o">=</span> <span class="n">NeuralLogicProgramming</span><span class="p">(</span><span class="n">num_entity</span><span class="o">=</span><span class="n">dataset</span><span class="o">.</span><span class="n">num_entity</span><span class="p">,</span>
@@ -292,8 +292,8 @@ following code.</p>
 </div>
 <p>The difference is that we need to specify the <code class="docutils literal notranslate"><span class="pre">fact_ratio</span></code>, which tells the code how many facts are used to construct the background knowledge graph on which we perform reasoning, and this hyperparameter is typically set to 0.75.</p>
 </div>
-<div class="section" id="id3">
-<h3>Train and Test<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id5">
+<h3>Train and Test<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
 <p>With the model and task we have defined, we can not perform model training and testing. Model training is similar to that of knowledge graph embedding models, where we need to create an optimizer and feed every component into an Engine instance by running the following code:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">optimizer</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">optim</span><span class="o">.</span><span class="n">Adam</span><span class="p">(</span><span class="n">task</span><span class="o">.</span><span class="n">parameters</span><span class="p">(),</span> <span class="n">lr</span><span class="o">=</span><span class="mf">1.0e-2</span><span class="p">)</span>
 <span class="n">solver</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">Engine</span><span class="p">(</span><span class="n">task</span><span class="p">,</span> <span class="n">train_set</span><span class="p">,</span> <span class="n">valid_set</span><span class="p">,</span> <span class="n">test_set</span><span class="p">,</span> <span class="n">optimizer</span><span class="p">,</span>
@@ -372,9 +372,9 @@ following code.</p>
 </ul>
 </li>
 <li><a class="reference internal" href="#neural-inductive-logic-programming">Neural Inductive Logic Programming</a><ul>
-<li><a class="reference internal" href="#id1">Prepare the Dataset</a></li>
-<li><a class="reference internal" href="#id2">Define our Model</a></li>
-<li><a class="reference internal" href="#id3">Train and Test</a></li>
+<li><a class="reference internal" href="#id3">Prepare the Dataset</a></li>
+<li><a class="reference internal" href="#id4">Define our Model</a></li>
+<li><a class="reference internal" href="#id5">Train and Test</a></li>
 </ul>
 </li>
 </ul>

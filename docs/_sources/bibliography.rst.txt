@@ -31,6 +31,11 @@
 .. Differentiable Graph Pooling
 .. _DiffPool: https://papers.nips.cc/paper/2018/file/e77dbaf6759253c7c6d0efc5690369c7-Paper.pdf
 .. _MinCutPool: http://proceedings.mlr.press/v119/bianchi20a/bianchi20a.pdf
+.. Readout Layers
+.. _Set2Set: https://arxiv.org/pdf/1511.06391.pdf
+
+.. Normalization Layers
+.. _PairNorm: https://openreview.net/pdf?id=rkecl1rtwB
 
 .. Readout Layers
 .. _Set2Set: https://arxiv.org/pdf/1511.06391.pdf
@@ -51,7 +56,6 @@
 .. Retrosynthesis
 .. _G2Gs: https://arxiv.org/pdf/2003.12725.pdf
 
-.. Reasoning
 .. _TransE: http://papers.nips.cc/paper/5071-translating-embeddings-for-modeling-multi-relational-data.pdf
 .. _DistMult: https://arxiv.org/pdf/1412.6575.pdf
 .. _ComplEx: http://proceedings.mlr.press/v48/trouillon16.pdf
