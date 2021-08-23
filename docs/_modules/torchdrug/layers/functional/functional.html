@@ -300,9 +300,9 @@
     <span class="c1"># special case 1: size[-1] = 0</span>
     <span class="n">index</span> <span class="o">=</span> <span class="n">cum_size</span><span class="p">[</span><span class="n">cum_size</span> <span class="o">&lt;</span> <span class="n">cum_size</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]]</span>
     <span class="c1"># special case 2: size[i] = size[i+1] = 0</span>
-    <span class="n">index2graph</span> <span class="o">=</span> <span class="n">scatter_add</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">ones_like</span><span class="p">(</span><span class="n">index</span><span class="p">),</span> <span class="n">index</span><span class="p">,</span> <span class="n">dim_size</span><span class="o">=</span><span class="n">cum_size</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
-    <span class="n">index2graph</span> <span class="o">=</span> <span class="n">index2graph</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">index2graph</span>
+    <span class="n">index2sample</span> <span class="o">=</span> <span class="n">scatter_add</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">ones_like</span><span class="p">(</span><span class="n">index</span><span class="p">),</span> <span class="n">index</span><span class="p">,</span> <span class="n">dim_size</span><span class="o">=</span><span class="n">cum_size</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+    <span class="n">index2sample</span> <span class="o">=</span> <span class="n">index2sample</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">index2sample</span>
 
 
 <span class="k">def</span> <span class="nf">_extend</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">size</span><span class="p">,</span> <span class="nb">input</span><span class="p">,</span> <span class="n">input_size</span><span class="p">):</span>
@@ -353,11 +353,11 @@
 <span class="sd">    Returns</span>
 <span class="sd">        Tensor: sum</span>
 <span class="sd">    """</span>
-    <span class="n">index2graph</span> <span class="o">=</span> <span class="n">_size_to_index</span><span class="p">(</span><span class="n">size</span><span class="p">)</span>
-    <span class="n">index2graph</span> <span class="o">=</span> <span class="n">index2graph</span><span class="o">.</span><span class="n">view</span><span class="p">([</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="nb">input</span><span class="o">.</span><span class="n">ndim</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span>
-    <span class="n">index2graph</span> <span class="o">=</span> <span class="n">index2graph</span><span class="o">.</span><span class="n">expand_as</span><span class="p">(</span><span class="nb">input</span><span class="p">)</span>
+    <span class="n">index2sample</span> <span class="o">=</span> <span class="n">_size_to_index</span><span class="p">(</span><span class="n">size</span><span class="p">)</span>
+    <span class="n">index2sample</span> <span class="o">=</span> <span class="n">index2sample</span><span class="o">.</span><span class="n">view</span><span class="p">([</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="nb">input</span><span class="o">.</span><span class="n">ndim</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span>
+    <span class="n">index2sample</span> <span class="o">=</span> <span class="n">index2sample</span><span class="o">.</span><span class="n">expand_as</span><span class="p">(</span><span class="nb">input</span><span class="p">)</span>
 
-    <span class="n">value</span> <span class="o">=</span> <span class="n">scatter_add</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="n">index2graph</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">value</span> <span class="o">=</span> <span class="n">scatter_add</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="n">index2sample</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">value</span></div>
 
 
@@ -374,11 +374,11 @@
 <span class="sd">    Returns</span>
 <span class="sd">        Tensor: mean</span>
 <span class="sd">    """</span>
-    <span class="n">index2graph</span> <span class="o">=</span> <span class="n">_size_to_index</span><span class="p">(</span><span class="n">size</span><span class="p">)</span>
-    <span class="n">index2graph</span> <span class="o">=</span> <span class="n">index2graph</span><span class="o">.</span><span class="n">view</span><span class="p">([</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="nb">input</span><span class="o">.</span><span class="n">ndim</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span>
-    <span class="n">index2graph</span> <span class="o">=</span> <span class="n">index2graph</span><span class="o">.</span><span class="n">expand_as</span><span class="p">(</span><span class="nb">input</span><span class="p">)</span>
+    <span class="n">index2sample</span> <span class="o">=</span> <span class="n">_size_to_index</span><span class="p">(</span><span class="n">size</span><span class="p">)</span>
+    <span class="n">index2sample</span> <span class="o">=</span> <span class="n">index2sample</span><span class="o">.</span><span class="n">view</span><span class="p">([</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="nb">input</span><span class="o">.</span><span class="n">ndim</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span>
+    <span class="n">index2sample</span> <span class="o">=</span> <span class="n">index2sample</span><span class="o">.</span><span class="n">expand_as</span><span class="p">(</span><span class="nb">input</span><span class="p">)</span>
 
-    <span class="n">value</span> <span class="o">=</span> <span class="n">scatter_mean</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="n">index2graph</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">value</span> <span class="o">=</span> <span class="n">scatter_mean</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="n">index2sample</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">value</span></div>
 
 
@@ -395,11 +395,11 @@
 <span class="sd">    Returns</span>
 <span class="sd">        (Tensor, LongTensor): max values and indexes</span>
 <span class="sd">    """</span>
-    <span class="n">index2graph</span> <span class="o">=</span> <span class="n">_size_to_index</span><span class="p">(</span><span class="n">size</span><span class="p">)</span>
-    <span class="n">index2graph</span> <span class="o">=</span> <span class="n">index2graph</span><span class="o">.</span><span class="n">view</span><span class="p">([</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="nb">input</span><span class="o">.</span><span class="n">ndim</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span>
-    <span class="n">index2graph</span> <span class="o">=</span> <span class="n">index2graph</span><span class="o">.</span><span class="n">expand_as</span><span class="p">(</span><span class="nb">input</span><span class="p">)</span>
+    <span class="n">index2sample</span> <span class="o">=</span> <span class="n">_size_to_index</span><span class="p">(</span><span class="n">size</span><span class="p">)</span>
+    <span class="n">index2sample</span> <span class="o">=</span> <span class="n">index2sample</span><span class="o">.</span><span class="n">view</span><span class="p">([</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="nb">input</span><span class="o">.</span><span class="n">ndim</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span>
+    <span class="n">index2sample</span> <span class="o">=</span> <span class="n">index2sample</span><span class="o">.</span><span class="n">expand_as</span><span class="p">(</span><span class="nb">input</span><span class="p">)</span>
 
-    <span class="n">value</span><span class="p">,</span> <span class="n">index</span> <span class="o">=</span> <span class="n">scatter_max</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="n">index2graph</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">value</span><span class="p">,</span> <span class="n">index</span> <span class="o">=</span> <span class="n">scatter_max</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="n">index2sample</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
     <span class="n">index</span> <span class="o">=</span> <span class="n">index</span> <span class="o">-</span> <span class="n">size</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">+</span> <span class="n">size</span>
     <span class="k">return</span> <span class="n">value</span><span class="p">,</span> <span class="n">index</span></div>
 
@@ -412,13 +412,13 @@
 
 <span class="sd">    Parameters:</span>
 <span class="sd">        input (Tensor): input of shape :math:`(B, ...)`</span>
-<span class="sd">        size (LongTensor): size of sets of shape :math:`(N,)`</span>
+<span class="sd">        size (LongTensor): number of categories of shape :math:`(N,)`</span>
 <span class="sd">    """</span>
-    <span class="n">index2graph</span> <span class="o">=</span> <span class="n">_size_to_index</span><span class="p">(</span><span class="n">size</span><span class="p">)</span>
-    <span class="n">index2graph</span> <span class="o">=</span> <span class="n">index2graph</span><span class="o">.</span><span class="n">view</span><span class="p">([</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="nb">input</span><span class="o">.</span><span class="n">ndim</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span>
-    <span class="n">index2graph</span> <span class="o">=</span> <span class="n">index2graph</span><span class="o">.</span><span class="n">expand_as</span><span class="p">(</span><span class="nb">input</span><span class="p">)</span>
+    <span class="n">index2sample</span> <span class="o">=</span> <span class="n">_size_to_index</span><span class="p">(</span><span class="n">size</span><span class="p">)</span>
+    <span class="n">index2sample</span> <span class="o">=</span> <span class="n">index2sample</span><span class="o">.</span><span class="n">view</span><span class="p">([</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="nb">input</span><span class="o">.</span><span class="n">ndim</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span>
+    <span class="n">index2sample</span> <span class="o">=</span> <span class="n">index2sample</span><span class="o">.</span><span class="n">expand_as</span><span class="p">(</span><span class="nb">input</span><span class="p">)</span>
 
-    <span class="n">log_likelihood</span> <span class="o">=</span> <span class="n">scatter_log_softmax</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="n">index2graph</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">log_likelihood</span> <span class="o">=</span> <span class="n">scatter_log_softmax</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="n">index2sample</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">log_likelihood</span></div>
 
 
@@ -435,11 +435,11 @@
 <span class="sd">        reduction (string, optional): reduction to apply to the output.</span>
 <span class="sd">            Available reductions are ``none``, ``sum`` and ``mean``.</span>
 <span class="sd">    """</span>
-    <span class="n">index2graph</span> <span class="o">=</span> <span class="n">_size_to_index</span><span class="p">(</span><span class="n">size</span><span class="p">)</span>
-    <span class="n">index2graph</span> <span class="o">=</span> <span class="n">index2graph</span><span class="o">.</span><span class="n">view</span><span class="p">([</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="nb">input</span><span class="o">.</span><span class="n">ndim</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span>
-    <span class="n">index2graph</span> <span class="o">=</span> <span class="n">index2graph</span><span class="o">.</span><span class="n">expand_as</span><span class="p">(</span><span class="nb">input</span><span class="p">)</span>
+    <span class="n">index2sample</span> <span class="o">=</span> <span class="n">_size_to_index</span><span class="p">(</span><span class="n">size</span><span class="p">)</span>
+    <span class="n">index2sample</span> <span class="o">=</span> <span class="n">index2sample</span><span class="o">.</span><span class="n">view</span><span class="p">([</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="nb">input</span><span class="o">.</span><span class="n">ndim</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span>
+    <span class="n">index2sample</span> <span class="o">=</span> <span class="n">index2sample</span><span class="o">.</span><span class="n">expand_as</span><span class="p">(</span><span class="nb">input</span><span class="p">)</span>
 
-    <span class="n">log_likelihood</span> <span class="o">=</span> <span class="n">scatter_log_softmax</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="n">index2graph</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">log_likelihood</span> <span class="o">=</span> <span class="n">scatter_log_softmax</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="n">index2sample</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
     <span class="n">size</span> <span class="o">=</span> <span class="n">size</span><span class="o">.</span><span class="n">view</span><span class="p">([</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="nb">input</span><span class="o">.</span><span class="n">ndim</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span>
     <span class="k">assert</span> <span class="p">(</span><span class="n">target</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">()</span> <span class="ow">and</span> <span class="p">(</span><span class="n">target</span> <span class="o">&lt;</span> <span class="n">size</span><span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
     <span class="n">target_index</span> <span class="o">=</span> <span class="n">target</span> <span class="o">+</span> <span class="n">size</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">-</span> <span class="n">size</span>
@@ -503,6 +503,53 @@
     <span class="n">index</span> <span class="o">=</span> <span class="n">index</span> <span class="o">-</span> <span class="p">(</span><span class="n">size</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">-</span> <span class="n">size</span><span class="p">)</span><span class="o">.</span><span class="n">view</span><span class="p">([</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="n">index</span><span class="o">.</span><span class="n">ndim</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span>
 
     <span class="k">return</span> <span class="n">value</span><span class="p">,</span> <span class="n">index</span></div>
+
+
+<div class="viewcode-block" id="variadic_sort"><a class="viewcode-back" href="../../../../api/layers.html#torchdrug.layers.functional.variadic_sort">[docs]</a><span class="k">def</span> <span class="nf">variadic_sort</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="n">size</span><span class="p">,</span> <span class="n">descending</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+    <span class="sd">"""</span>
+<span class="sd">    Sort elements in sets with variadic sizes.</span>
+
+<span class="sd">    Suppose there are :math:`N` sets, and the sizes of all sets are summed to :math:`B`.</span>
+
+<span class="sd">    Parameters:</span>
+<span class="sd">        input (Tensor): input of shape :math:`(B, ...)`</span>
+<span class="sd">        size (LongTensor): size of sets of shape :math:`(N,)`</span>
+<span class="sd">        descending (bool, optional): return ascending or descending order</span>
+<span class="sd">    """</span>
+    <span class="n">index2sample</span> <span class="o">=</span> <span class="n">_size_to_index</span><span class="p">(</span><span class="n">size</span><span class="p">)</span>
+    <span class="n">index2sample</span> <span class="o">=</span> <span class="n">index2sample</span><span class="o">.</span><span class="n">view</span><span class="p">([</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="nb">input</span><span class="o">.</span><span class="n">ndim</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span>
+
+    <span class="n">mask</span> <span class="o">=</span> <span class="o">~</span><span class="n">torch</span><span class="o">.</span><span class="n">isinf</span><span class="p">(</span><span class="nb">input</span><span class="p">)</span>
+    <span class="nb">max</span> <span class="o">=</span> <span class="nb">input</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
+    <span class="nb">min</span> <span class="o">=</span> <span class="nb">input</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">()</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
+    <span class="n">safe_input</span> <span class="o">=</span> <span class="nb">input</span><span class="o">.</span><span class="n">clamp</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="nb">min</span> <span class="o">-</span> <span class="nb">max</span><span class="p">,</span> <span class="mi">2</span> <span class="o">*</span> <span class="nb">max</span> <span class="o">-</span> <span class="nb">min</span><span class="p">)</span>
+    <span class="n">offset</span> <span class="o">=</span> <span class="p">(</span><span class="nb">max</span> <span class="o">-</span> <span class="nb">min</span><span class="p">)</span> <span class="o">*</span> <span class="mi">4</span>
+    <span class="k">if</span> <span class="n">descending</span><span class="p">:</span>
+        <span class="n">offset</span> <span class="o">=</span> <span class="o">-</span><span class="n">offset</span>
+    <span class="n">input_ext</span> <span class="o">=</span> <span class="n">safe_input</span> <span class="o">+</span> <span class="n">offset</span> <span class="o">*</span> <span class="n">index2sample</span>
+    <span class="n">index</span> <span class="o">=</span> <span class="n">input_ext</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">descending</span><span class="o">=</span><span class="n">descending</span><span class="p">)</span>
+    <span class="n">value</span> <span class="o">=</span> <span class="nb">input</span><span class="o">.</span><span class="n">gather</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">index</span><span class="p">)</span>
+    <span class="n">index</span> <span class="o">=</span> <span class="n">index</span> <span class="o">-</span> <span class="p">(</span><span class="n">size</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">-</span> <span class="n">size</span><span class="p">)[</span><span class="n">index2sample</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">value</span><span class="p">,</span> <span class="n">index</span></div>
+
+
+<div class="viewcode-block" id="variadic_arange"><a class="viewcode-back" href="../../../../api/layers.html#torchdrug.layers.functional.variadic_arange">[docs]</a><span class="k">def</span> <span class="nf">variadic_arange</span><span class="p">(</span><span class="n">size</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="sd">"""</span>
+<span class="sd">    Return a 1-D tensor that contains integer intervals of variadic sizes.</span>
+<span class="sd">    This is a variadic variant of ``torch.arange(stop).expand(batch_size, -1)``.</span>
+
+<span class="sd">    Suppose there are :math:`N` intervals.</span>
+
+<span class="sd">    Parameters:</span>
+<span class="sd">        size (LongTensor): size of intervals of shape :math:`(N,)`</span>
+<span class="sd">        device (torch.device, optional): device of the tensor</span>
+<span class="sd">    """</span>
+    <span class="n">index2sample</span> <span class="o">=</span> <span class="n">_size_to_index</span><span class="p">(</span><span class="n">size</span><span class="p">)</span>
+    <span class="n">starts</span> <span class="o">=</span> <span class="n">size</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">-</span> <span class="n">size</span>
+
+    <span class="nb">range</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">size</span><span class="o">.</span><span class="n">sum</span><span class="p">(),</span> <span class="n">device</span><span class="o">=</span><span class="n">device</span><span class="p">)</span>
+    <span class="nb">range</span> <span class="o">=</span> <span class="nb">range</span> <span class="o">-</span> <span class="n">starts</span><span class="p">[</span><span class="n">index2sample</span><span class="p">]</span>
+    <span class="k">return</span> <span class="nb">range</span></div>
 
 
 <div class="viewcode-block" id="one_hot"><a class="viewcode-back" href="../../../../api/layers.html#torchdrug.layers.functional.one_hot">[docs]</a><span class="k">def</span> <span class="nf">one_hot</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="n">size</span><span class="p">):</span>
