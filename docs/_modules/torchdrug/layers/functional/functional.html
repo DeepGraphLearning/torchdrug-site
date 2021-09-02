@@ -188,7 +188,7 @@
         <h1>Source code for torchdrug.layers.functional.functional</h1><div class="highlight"><pre>
 <span></span><span class="kn">import</span> <span class="nn">torch</span>
 <span class="kn">from</span> <span class="nn">torch_scatter</span> <span class="kn">import</span> <span class="n">scatter_add</span><span class="p">,</span> <span class="n">scatter_mean</span><span class="p">,</span> <span class="n">scatter_max</span>
-<span class="kn">from</span> <span class="nn">torch_scatter.composite</span> <span class="kn">import</span> <span class="n">scatter_log_softmax</span>
+<span class="kn">from</span> <span class="nn">torch_scatter.composite</span> <span class="kn">import</span> <span class="n">scatter_log_softmax</span><span class="p">,</span> <span class="n">scatter_softmax</span>
 <span class="kn">from</span> <span class="nn">torch.nn</span> <span class="kn">import</span> <span class="n">functional</span> <span class="k">as</span> <span class="n">F</span>
 
 
@@ -422,6 +422,24 @@
     <span class="k">return</span> <span class="n">log_likelihood</span></div>
 
 
+<span class="k">def</span> <span class="nf">variadic_softmax</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="n">size</span><span class="p">):</span>
+    <span class="sd">"""</span>
+<span class="sd">    Compute softmax over categories with variadic sizes.</span>
+
+<span class="sd">    Suppose there are :math:`N` samples, and the numbers of categories in all samples are summed to :math:`B`.</span>
+
+<span class="sd">    Parameters:</span>
+<span class="sd">        input (Tensor): input of shape :math:`(B, ...)`</span>
+<span class="sd">        size (LongTensor): number of categories of shape :math:`(N,)`</span>
+<span class="sd">    """</span>
+    <span class="n">index2sample</span> <span class="o">=</span> <span class="n">_size_to_index</span><span class="p">(</span><span class="n">size</span><span class="p">)</span>
+    <span class="n">index2sample</span> <span class="o">=</span> <span class="n">index2sample</span><span class="o">.</span><span class="n">view</span><span class="p">([</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="nb">input</span><span class="o">.</span><span class="n">ndim</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span>
+    <span class="n">index2sample</span> <span class="o">=</span> <span class="n">index2sample</span><span class="o">.</span><span class="n">expand_as</span><span class="p">(</span><span class="nb">input</span><span class="p">)</span>
+
+    <span class="n">log_likelihood</span> <span class="o">=</span> <span class="n">scatter_softmax</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="n">index2sample</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">log_likelihood</span>
+
+
 <div class="viewcode-block" id="variadic_cross_entropy"><a class="viewcode-back" href="../../../../api/layers.html#torchdrug.layers.functional.variadic_cross_entropy">[docs]</a><span class="k">def</span> <span class="nf">variadic_cross_entropy</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="n">target</span><span class="p">,</span> <span class="n">size</span><span class="p">,</span> <span class="n">reduction</span><span class="o">=</span><span class="s2">"mean"</span><span class="p">):</span>
     <span class="sd">"""</span>
 <span class="sd">    Compute cross entropy loss over categories with variadic sizes.</span>
@@ -505,7 +523,7 @@
     <span class="k">return</span> <span class="n">value</span><span class="p">,</span> <span class="n">index</span></div>
 
 
-<div class="viewcode-block" id="variadic_sort"><a class="viewcode-back" href="../../../../api/layers.html#torchdrug.layers.functional.variadic_sort">[docs]</a><span class="k">def</span> <span class="nf">variadic_sort</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="n">size</span><span class="p">,</span> <span class="n">descending</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<div class="viewcode-block" id="variadic_sort"><a class="viewcode-back" href="../../../../api/layers.html#torchdrug.layers.functional.variadic_sort">[docs]</a><span class="k">def</span> <span class="nf">variadic_sort</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="n">size</span><span class="p">,</span> <span class="n">descending</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
     <span class="sd">"""</span>
 <span class="sd">    Sort elements in sets with variadic sizes.</span>
 
