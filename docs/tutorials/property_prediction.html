@@ -226,7 +226,7 @@ The splits for train/valid/test sets are 80%, 10% and 10% respectively.</p>
 and a task-specific module. We define a Graph Isomorphism Network (GIN) with 4
 hidden layers as our representation model. The two prediction tasks will be jointly
 optimized through multi-task training by the task-specific module.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">torchdrug</span> <span class="kn">import</span> <span class="n">core</span><span class="p">,</span> <span class="n">models</span><span class="p">,</span> <span class="n">tasks</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">torchdrug</span> <span class="kn">import</span> <span class="n">core</span><span class="p">,</span> <span class="n">models</span><span class="p">,</span> <span class="n">tasks</span><span class="p">,</span> <span class="n">utils</span>
 
 <span class="n">model</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">GIN</span><span class="p">(</span><span class="n">input_dim</span><span class="o">=</span><span class="n">dataset</span><span class="o">.</span><span class="n">node_feature_dim</span><span class="p">,</span>
                    <span class="n">hidden_dims</span><span class="o">=</span><span class="p">[</span><span class="mi">256</span><span class="p">,</span> <span class="mi">256</span><span class="p">,</span> <span class="mi">256</span><span class="p">,</span> <span class="mi">256</span><span class="p">],</span>
@@ -258,11 +258,12 @@ auroc <span class="o">[</span>FDA_APPROVED<span class="o">]</span>: <span class=
 </div>
 <p>To have some intuition of the model, we can investigate the predictions from our
 model. The following code selects one sample for each category, and plots the results.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">samples</span> <span class="o">=</span> <span class="p">[]</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">torch.nn</span> <span class="kn">import</span> <span class="n">functional</span> <span class="k">as</span> <span class="n">F</span>
+
+<span class="n">samples</span> <span class="o">=</span> <span class="p">[]</span>
 <span class="n">categories</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
 <span class="k">for</span> <span class="n">sample</span> <span class="ow">in</span> <span class="n">valid_set</span><span class="p">:</span>
-    <span class="n">sample</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">"graph"</span><span class="p">)</span>
-    <span class="n">category</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">sample</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
+    <span class="n">category</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">([</span><span class="n">v</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">sample</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">k</span> <span class="o">!=</span> <span class="s2">"graph"</span><span class="p">])</span>
     <span class="k">if</span> <span class="n">category</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">categories</span><span class="p">:</span>
         <span class="n">categories</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">category</span><span class="p">)</span>
         <span class="n">samples</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">sample</span><span class="p">)</span>

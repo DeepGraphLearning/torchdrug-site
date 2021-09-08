@@ -200,13 +200,13 @@ synthons and each synthon is translated to a reactant.</p>
 their synthesis pathways.</p>
 <p>First, let’s download and load the dataset. This may take a while.</p>
 <p>There are two modes to load the dataset. The reaction mode loads the dataset as
-<cite>(reactant, product)</cite> pairs, which is used for center identification. The synthon
-mode loads the dataset as <cite>(reactant, synthon)</cite> pairs, which is used for synthon
+<code class="docutils literal notranslate"><span class="pre">(reactants,</span> <span class="pre">product)</span></code> pairs, which is used for center identification. The synthon
+mode loads the dataset as <code class="docutils literal notranslate"><span class="pre">(reactant,</span> <span class="pre">synthon)</span></code> pairs, which is used for synthon
 completion.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">torchdrug</span> <span class="kn">import</span> <span class="n">datasets</span>
 
 <span class="n">reaction_dataset</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">USPTO50k</span><span class="p">(</span><span class="s2">"~/molecule-datasets/"</span><span class="p">,</span>
-                                     <span class="n">node_feature</span><span class="o">=</span><span class="s2">"reaction_reaction_identification"</span><span class="p">,</span>
+                                     <span class="n">node_feature</span><span class="o">=</span><span class="s2">"center_identification"</span><span class="p">,</span>
                                      <span class="n">kekulize</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="n">synthon_dataset</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">USPTO50k</span><span class="p">(</span><span class="s2">"~/molecule-dataset/"</span><span class="p">,</span> <span class="n">as_synthon</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                                     <span class="n">node_feature</span><span class="o">=</span><span class="s2">"synthon_completion"</span><span class="p">,</span>

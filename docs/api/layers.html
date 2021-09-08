@@ -1846,6 +1846,21 @@ This is a variadic variant of <code class="docutils literal notranslate"><span c
 </dd>
 </dl>
 </dd></dl>
+<dl class="py function">
+<dt id="torchdrug.layers.functional.variadic_randperm">
+<code class="sig-name descname">variadic_randperm</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">size</span></em>, <em class="sig-param"><span class="n">device</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/functional/functional.html#variadic_randperm"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.layers.functional.variadic_randperm" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return random permutations for sets with variadic sizes.
+The <code class="docutils literal notranslate"><span class="pre">i</span></code>-th permutation contains integers from 0 to <code class="docutils literal notranslate"><span class="pre">size[i]</span> <span class="pre">-</span> <span class="pre">1</span></code>.</p>
+<p>Suppose there are <span class="math notranslate nohighlight">\(N\)</span> sets.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>size</strong> (<em>LongTensor</em>) – size of sets of shape <span class="math notranslate nohighlight">\((N,)\)</span></p></li>
+<li><p><strong>device</strong> (<em>torch.device</em><em>, </em><em>optional</em>) – device of the tensor</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
 </div>
 <div class="section" id="tensor-reduction">
 <h3>Tensor Reduction<a class="headerlink" href="#tensor-reduction" title="Permalink to this headline">¶</a></h3>

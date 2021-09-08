@@ -200,7 +200,8 @@ for knowledge graph reasoning.</p>
 graph embedding method. The basic idea is to learn an embedding vector for each
 entity and relation in a knowledge graph based on existing (h,r,t)-links. Then
 these embeddings are further used to predict missing links.</p>
-<p>Next, we will introduce how to use knowledge graph embedding models for knowledge graph reasoning.</p>
+<p>Next, we will introduce how to use knowledge graph embedding models for knowledge
+graph reasoning.</p>
 <div class="section" id="prepare-the-dataset">
 <h3>Prepare the Dataset<a class="headerlink" href="#prepare-the-dataset" title="Permalink to this headline">¶</a></h3>
 <p>We use the <a class="reference external" href="https://www.aclweb.org/anthology/W15-4007">FB15k-237</a> dataset for illustration. <a class="reference external" href="https://www.aclweb.org/anthology/W15-4007">FB15k-237</a> is constructed from
@@ -258,12 +259,21 @@ following code.</p>
 </div>
 <div class="section" id="neural-inductive-logic-programming">
 <h2>Neural Inductive Logic Programming<a class="headerlink" href="#neural-inductive-logic-programming" title="Permalink to this headline">¶</a></h2>
-<p>The other kind of popular method is neural inductive logic programming. The idea of neural inductive logic programming is to learn logic rules from training data. Once the logic rules are learned, they can be further used to predict missing links.</p>
-<p>One popular method of neural inductive logic programming is NeuralLP. NeuralLP considers all the chain-like rules (e.g., nationality = born_in + city_of) up to a maximum length. Also, an attention mechanism is used to assign a scalar weight to each logic rule. During training, the attention module is trained, so that we can learn a proper weight for each rule. During testing, the logic rules and their weights are used together to predict missing links.</p>
+<p>The other kind of popular method is neural inductive logic programming. The idea
+of neural inductive logic programming is to learn logic rules from training data.
+Once the logic rules are learned, they can be further used to predict missing links.</p>
+<p>One popular method of neural inductive logic programming is NeuralLP. NeuralLP
+considers all the chain-like rules (e.g., nationality = born_in + city_of) up to a
+maximum length. Also, an attention mechanism is used to assign a scalar weight to
+each logic rule. During training, the attention module is trained, so that we can
+learn a proper weight for each rule. During testing, the logic rules and their
+weights are used together to predict missing links.</p>
 <p>Next, we will introduce how to deploy a NeuralLP model for knowledge graph reasoning.</p>
 <div class="section" id="id3">
 <h3>Prepare the Dataset<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
-<p>We start with loading the dataset. Similar to the tutorial of knowledge graph embedding, the <a class="reference external" href="https://www.aclweb.org/anthology/W15-4007">FB15k-237</a> dataset is used for illustration. We can load the dataset by running the following commands:</p>
+<p>We start with loading the dataset. Similar to the tutorial of knowledge graph
+embedding, the <a class="reference external" href="https://www.aclweb.org/anthology/W15-4007">FB15k-237</a> dataset is used for illustration. We can load the
+dataset by running the following commands:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torch</span>
 <span class="kn">from</span> <span class="nn">torchdrug</span> <span class="kn">import</span> <span class="n">core</span><span class="p">,</span> <span class="n">datasets</span><span class="p">,</span> <span class="n">tasks</span><span class="p">,</span> <span class="n">models</span>
 
@@ -283,26 +293,39 @@ following code.</p>
                                <span class="n">num_lstm_layer</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>Here, <code class="docutils literal notranslate"><span class="pre">embedding_dim</span></code> is the dimension of entity and relation embeddings used in NeuralLP. <code class="docutils literal notranslate"><span class="pre">num_step</span></code> is the maximum length of the chain-like rules (i.e., the maximum number of relations in the body of a chain-like rule), which is typically set to 3. <code class="docutils literal notranslate"><span class="pre">num_lstm_layer</span></code> is the number of LSTM layers used in NeuralLP.</p>
-<p>Once we define our model, we are ready to define the task. As training NeuralLP shares similar ideas to training knowledge graph embedding, we also use the following knowledge graph embedding task:</p>
+<p>Here, <code class="docutils literal notranslate"><span class="pre">embedding_dim</span></code> is the dimension of entity and relation embeddings used in
+NeuralLP. <code class="docutils literal notranslate"><span class="pre">num_step</span></code> is the maximum length of the chain-like rules (i.e., the
+maximum number of relations in the body of a chain-like rule), which is typically
+set to 3. <code class="docutils literal notranslate"><span class="pre">num_lstm_layer</span></code> is the number of LSTM layers used in NeuralLP.</p>
+<p>Once we define our model, we are ready to define the task. As training NeuralLP
+shares similar ideas to training knowledge graph embedding, we also use the following
+knowledge graph embedding task:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">task</span> <span class="o">=</span> <span class="n">tasks</span><span class="o">.</span><span class="n">KnowledgeGraphEmbedding</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">fact_ratio</span><span class="o">=</span><span class="mf">0.75</span><span class="p">,</span>
                                      <span class="n">num_negative</span><span class="o">=</span><span class="mi">256</span><span class="p">,</span>
                                      <span class="n">sample_weight</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>The difference is that we need to specify the <code class="docutils literal notranslate"><span class="pre">fact_ratio</span></code>, which tells the code how many facts are used to construct the background knowledge graph on which we perform reasoning, and this hyperparameter is typically set to 0.75.</p>
+<p>The difference is that we need to specify the <code class="docutils literal notranslate"><span class="pre">fact_ratio</span></code>, which tells the code
+how many facts are used to construct the background knowledge graph on which we
+perform reasoning, and this hyperparameter is typically set to 0.75.</p>
 </div>
 <div class="section" id="id5">
 <h3>Train and Test<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
-<p>With the model and task we have defined, we can not perform model training and testing. Model training is similar to that of knowledge graph embedding models, where we need to create an optimizer and feed every component into an Engine instance by running the following code:</p>
+<p>With the model and task we have defined, we can not perform model training and
+testing. Model training is similar to that of knowledge graph embedding models,
+where we need to create an optimizer and feed every component into an Engine instance
+by running the following code:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">optimizer</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">optim</span><span class="o">.</span><span class="n">Adam</span><span class="p">(</span><span class="n">task</span><span class="o">.</span><span class="n">parameters</span><span class="p">(),</span> <span class="n">lr</span><span class="o">=</span><span class="mf">1.0e-2</span><span class="p">)</span>
 <span class="n">solver</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">Engine</span><span class="p">(</span><span class="n">task</span><span class="p">,</span> <span class="n">train_set</span><span class="p">,</span> <span class="n">valid_set</span><span class="p">,</span> <span class="n">test_set</span><span class="p">,</span> <span class="n">optimizer</span><span class="p">,</span>
                      <span class="n">gpus</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">64</span><span class="p">)</span>
 <span class="n">solver</span><span class="o">.</span><span class="n">train</span><span class="p">(</span><span class="n">num_epoch</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>Here, <code class="docutils literal notranslate"><span class="pre">gpus</span></code> specifies the GPUs on which we would like to train the model. We may specify multiple GPUs by using the form as above. For <code class="docutils literal notranslate"><span class="pre">num_epoch</span></code>, we can reduce the value for efficiency purpose.</p>
-<p>After model training, we can further use the following codes to evaluate the model on the validation set:</p>
+<p>Here, <code class="docutils literal notranslate"><span class="pre">gpus</span></code> specifies the GPUs on which we would like to train the model. We may
+specify multiple GPUs by using the form as above. For <code class="docutils literal notranslate"><span class="pre">num_epoch</span></code>, we can reduce
+the value for efficiency purpose.</p>
+<p>After model training, we can further use the following codes to evaluate the model
+on the validation set</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">solver</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="s2">"valid"</span><span class="p">)</span>
 </pre></div>
 </div>

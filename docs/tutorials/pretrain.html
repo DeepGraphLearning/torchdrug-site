@@ -187,17 +187,22 @@
         </label>
         <div class="section" id="pretrained-molecular-representations">
 <h1>Pretrained Molecular Representations<a class="headerlink" href="#pretrained-molecular-representations" title="Permalink to this headline">¶</a></h1>
-<p>For the property prediction task in drug discovery, due to the high expense,
-pre-training is a special type of problems in drug discovery tasks.</p>
-<p>The self-supervised pre-training belongs to the unsupervised pre-training. It is
+<p>In many drug discovery tasks, it is costly in both time and money to collect labeled
+data. As a solution, self-supervised pretraining is introduced to learn molecular
+representations from massive unlabeled data.</p>
+<p>In this tutorial, we will demonstrate how to pretrain a graph neural network on
+molecules, and how to finetune the model on downstream tasks.</p>
+<div class="section" id="self-supervised-pretraining">
+<h2>Self-Supervised Pretraining<a class="headerlink" href="#self-supervised-pretraining" title="Permalink to this headline">¶</a></h2>
+<p>The self-supervised pretraining belongs to the unsupervised pretraining. It is
 unsupervised because no supervised signal, i.e., the molecular drug property, is
 provided. It is called the self-supervised because it constructs the positive and
 negative views from the data itself. And specifically to the self-supervised
 pre-training for molecule property prediction, it explores the structure information
 of molecular data from different aspects as illustrated below.</p>
 <div class="section" id="id3">
-<h2>Infograph<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
-<p><a class="reference external" href="https://arxiv.org/pdf/1908.01000.pdf">InfoGraph</a> (IG) sets the node- and graph- representation from the same graph as
+<h3>Infograph<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<p><a class="reference external" href="https://arxiv.org/pdf/1908.01000.pdf">InfoGraph</a> (IG) sets the node- and graph- representations from the same graph as
 positive pairs, while those from different graphs as negative pairs.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">torch</span> <span class="kn">import</span> <span class="n">nn</span>
 <span class="kn">from</span> <span class="nn">torch.utils</span> <span class="kn">import</span> <span class="n">data</span> <span class="k">as</span> <span class="n">torch_data</span>
@@ -218,6 +223,7 @@ positive pairs, while those from different graphs as negative pairs.</p>
 <span class="n">solver</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">Engine</span><span class="p">(</span><span class="n">task</span><span class="p">,</span> <span class="n">dataset</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="n">optimizer</span><span class="p">,</span> <span class="n">gpus</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">256</span><span class="p">)</span>
 
 <span class="n">solver</span><span class="o">.</span><span class="n">train</span><span class="p">(</span><span class="n">num_epoch</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">solver</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s2">"clintox_gin_infograph.pth"</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>The above is a toy example on <a class="reference external" href="https://arxiv.org/pdf/1703.00564.pdf">ClinTox</a> dataset, and the output is similar to
@@ -228,7 +234,7 @@ the following.</p>
 <img alt="../_images/infograph.png" src="../_images/infograph.png"/>
 </div>
 <div class="section" id="attribute-masking">
-<h2>Attribute Masking<a class="headerlink" href="#attribute-masking" title="Permalink to this headline">¶</a></h2>
+<h3>Attribute Masking<a class="headerlink" href="#attribute-masking" title="Permalink to this headline">¶</a></h3>
 <p><a class="reference internal" href="#attribute-masking">Attribute Masking</a> (AM) predicts the atom node type from its neighbors. It can
 be seen as self-supervised by viewing the actual node type as positive, and all
 the other node types as negative.</p>
@@ -250,6 +256,7 @@ the other node types as negative.</p>
 <span class="n">solver</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">Engine</span><span class="p">(</span><span class="n">task</span><span class="p">,</span> <span class="n">dataset</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="n">optimizer</span><span class="p">,</span> <span class="n">gpus</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">256</span><span class="p">)</span>
 
 <span class="n">solver</span><span class="o">.</span><span class="n">train</span><span class="p">(</span><span class="n">num_epoch</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">solver</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s2">"clintox_gin_attributemasking.pth"</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>The above is a toy example on <a class="reference external" href="https://arxiv.org/pdf/1703.00564.pdf">ClinTox</a> dataset, and the output is similar to
@@ -264,6 +271,54 @@ average cross entropy: <span class="m">0</span>.22998
 <p class="admonition-title">See also</p>
 <p><a class="reference internal" href="../api/tasks.html#torchdrug.tasks.EdgePrediction" title="torchdrug.tasks.EdgePrediction"><code class="xref py py-func docutils literal notranslate"><span class="pre">Edge</span> <span class="pre">Prediction</span> <span class="pre">(EP)</span></code></a>
 <a class="reference internal" href="../api/tasks.html#torchdrug.tasks.ContextPrediction" title="torchdrug.tasks.ContextPrediction"><code class="xref py py-func docutils literal notranslate"><span class="pre">Context</span> <span class="pre">Prediction</span> <span class="pre">(CP)</span></code></a></p>
+</div>
+</div>
+</div>
+<div class="section" id="finetuning-on-labeled-datasets">
+<h2>Finetuning on Labeled Datasets<a class="headerlink" href="#finetuning-on-labeled-datasets" title="Permalink to this headline">¶</a></h2>
+<p>When the GNN pre-training is finished, we can finetune the pre-trained GNN model
+on downstream tasks. Here we use <a class="reference external" href="https://arxiv.org/pdf/1703.00564.pdf">BACE</a> dataset for illustration, which contains
+1,513 molecules with binding affinity results a set of inhibitors of human
+<span class="math notranslate nohighlight">\(\beta\)</span>-secretase 1(BACE-1).</p>
+<p>First, we download the <a class="reference external" href="https://arxiv.org/pdf/1703.00564.pdf">BACE</a> dataset and split it into training, validation and
+test sets. Note that we need to set the node and edge feature in the dataset as
+pretrain in order to make it compatible with the pretrained model.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">dataset</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">BACE</span><span class="p">(</span><span class="s2">"~/molecule-datasets/"</span><span class="p">,</span>
+                        <span class="n">node_feature</span><span class="o">=</span><span class="s2">"pretrain"</span><span class="p">,</span> <span class="n">edge_feature</span><span class="o">=</span><span class="s2">"pretrain"</span><span class="p">)</span>
+<span class="n">lengths</span> <span class="o">=</span> <span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="mf">0.8</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">dataset</span><span class="p">)),</span> <span class="nb">int</span><span class="p">(</span><span class="mf">0.1</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">dataset</span><span class="p">))]</span>
+<span class="n">lengths</span> <span class="o">+=</span> <span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">dataset</span><span class="p">)</span> <span class="o">-</span> <span class="nb">sum</span><span class="p">(</span><span class="n">lengths</span><span class="p">)]</span>
+<span class="n">train_set</span><span class="p">,</span> <span class="n">valid_set</span><span class="p">,</span> <span class="n">test_set</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">ordered_scaffold_split</span><span class="p">(</span><span class="n">dataset</span><span class="p">,</span> <span class="n">lengths</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Then, we define the same model as the pre-training stage and set up the optimizer
+and solver for our downstream task. The only difference here is that we use
+<a class="reference internal" href="../api/tasks.html#torchdrug.tasks.PropertyPrediction" title="torchdrug.tasks.PropertyPrediction"><code class="xref py py-class docutils literal notranslate"><span class="pre">PropertyPrediction</span></code></a> task to support
+supervised learning.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">model</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">GIN</span><span class="p">(</span><span class="n">input_dim</span><span class="o">=</span><span class="n">dataset</span><span class="o">.</span><span class="n">node_feature_dim</span><span class="p">,</span>
+                <span class="n">hidden_dims</span><span class="o">=</span><span class="p">[</span><span class="mi">300</span><span class="p">,</span> <span class="mi">300</span><span class="p">,</span> <span class="mi">300</span><span class="p">,</span> <span class="mi">300</span><span class="p">,</span> <span class="mi">300</span><span class="p">],</span>
+                <span class="n">edge_input_dim</span><span class="o">=</span><span class="n">dataset</span><span class="o">.</span><span class="n">edge_feature_dim</span><span class="p">,</span>
+                <span class="n">batch_norm</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">readout</span><span class="o">=</span><span class="s2">"mean"</span><span class="p">)</span>
+<span class="n">task</span> <span class="o">=</span> <span class="n">tasks</span><span class="o">.</span><span class="n">PropertyPrediction</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">task</span><span class="o">=</span><span class="n">dataset</span><span class="o">.</span><span class="n">tasks</span><span class="p">,</span>
+                                <span class="n">criterion</span><span class="o">=</span><span class="s2">"bce"</span><span class="p">,</span> <span class="n">metric</span><span class="o">=</span><span class="p">(</span><span class="s2">"auprc"</span><span class="p">,</span> <span class="s2">"auroc"</span><span class="p">))</span>
+
+<span class="n">optimizer</span> <span class="o">=</span> <span class="n">optim</span><span class="o">.</span><span class="n">Adam</span><span class="p">(</span><span class="n">task</span><span class="o">.</span><span class="n">parameters</span><span class="p">(),</span> <span class="n">lr</span><span class="o">=</span><span class="mf">1e-3</span><span class="p">)</span>
+<span class="n">solver</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">Engine</span><span class="p">(</span><span class="n">task</span><span class="p">,</span> <span class="n">train_set</span><span class="p">,</span> <span class="n">valid_set</span><span class="p">,</span> <span class="n">test_set</span><span class="p">,</span> <span class="n">optimizer</span><span class="p">,</span>
+                     <span class="n">gpus</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">256</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Now we can load our pretrained model and finetune it on downstream datasets.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">checkpoint</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">"clintox_gin_attributemasking.pth"</span><span class="p">)[</span><span class="s2">"model"</span><span class="p">]</span>
+<span class="n">solver</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">load_state_dict</span><span class="p">(</span><span class="n">checkpoint</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="n">solver</span><span class="o">.</span><span class="n">train</span><span class="p">(</span><span class="n">num_epoch</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">solver</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="s2">"valid"</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Once the model is trained, we evaluate it on the validation set. The result may be
+similar to the following.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>auprc <span class="o">[</span>Class<span class="o">]</span>: <span class="m">0</span>.921956
+auroc <span class="o">[</span>Class<span class="o">]</span>: <span class="m">0</span>.663004
+</pre></div>
 </div>
 </div>
 </div>
@@ -323,8 +378,12 @@ average cross entropy: <span class="m">0</span>.22998
           <div class="toc-tree">
             <ul>
 <li><a class="reference internal" href="#">Pretrained Molecular Representations</a><ul>
+<li><a class="reference internal" href="#self-supervised-pretraining">Self-Supervised Pretraining</a><ul>
 <li><a class="reference internal" href="#id3">Infograph</a></li>
 <li><a class="reference internal" href="#attribute-masking">Attribute Masking</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#finetuning-on-labeled-datasets">Finetuning on Labeled Datasets</a></li>
 </ul>
 </li>
 </ul>

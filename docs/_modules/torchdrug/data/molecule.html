@@ -511,13 +511,15 @@
         <span class="k">if</span> <span class="n">ignore_error</span><span class="p">:</span>
             <span class="k">try</span><span class="p">:</span>
                 <span class="k">with</span> <span class="n">utils</span><span class="o">.</span><span class="n">no_rdkit_log</span><span class="p">():</span>
-                    <span class="n">mol</span><span class="o">.</span><span class="n">UpdatePropertyCache</span><span class="p">()</span>
                     <span class="n">Chem</span><span class="o">.</span><span class="n">AssignStereochemistry</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>
+                    <span class="n">mol</span><span class="o">.</span><span class="n">ClearComputedProps</span><span class="p">()</span>
+                    <span class="n">mol</span><span class="o">.</span><span class="n">UpdatePropertyCache</span><span class="p">()</span>
             <span class="k">except</span><span class="p">:</span>
                 <span class="n">mol</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">mol</span><span class="o">.</span><span class="n">UpdatePropertyCache</span><span class="p">()</span>
             <span class="n">Chem</span><span class="o">.</span><span class="n">AssignStereochemistry</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>
+            <span class="n">mol</span><span class="o">.</span><span class="n">ClearComputedProps</span><span class="p">()</span>
+            <span class="n">mol</span><span class="o">.</span><span class="n">UpdatePropertyCache</span><span class="p">()</span>
 
         <span class="k">return</span> <span class="n">mol</span></div>
 
@@ -844,9 +846,11 @@
                 <span class="n">stereo_atoms</span> <span class="o">+=</span> <span class="p">[</span><span class="n">_atoms</span><span class="p">,</span> <span class="n">_atoms</span><span class="p">]</span>
                 <span class="n">_edge_feature</span> <span class="o">+=</span> <span class="p">[</span><span class="n">feature</span><span class="p">,</span> <span class="n">feature</span><span class="p">]</span>
 
+            <span class="n">feature</span> <span class="o">=</span> <span class="p">[]</span>
             <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">graph_feature</span><span class="p">:</span>
                 <span class="n">func</span> <span class="o">=</span> <span class="n">R</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"features.molecule.</span><span class="si">%s</span><span class="s2">"</span> <span class="o">%</span> <span class="n">name</span><span class="p">)</span>
-                <span class="n">_graph_feature</span> <span class="o">+=</span> <span class="n">func</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>
+                <span class="n">feature</span> <span class="o">+=</span> <span class="n">func</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>
+            <span class="n">_graph_feature</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">feature</span><span class="p">)</span>
 
             <span class="n">num_nodes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">mol</span><span class="o">.</span><span class="n">GetNumAtoms</span><span class="p">())</span>
             <span class="n">num_edges</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">mol</span><span class="o">.</span><span class="n">GetNumBonds</span><span class="p">()</span> <span class="o">*</span> <span class="mi">2</span><span class="p">)</span>

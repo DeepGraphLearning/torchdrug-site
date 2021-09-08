@@ -570,6 +570,22 @@
     <span class="k">return</span> <span class="nb">range</span></div>
 
 
+<div class="viewcode-block" id="variadic_randperm"><a class="viewcode-back" href="../../../../api/layers.html#torchdrug.layers.functional.variadic_randperm">[docs]</a><span class="k">def</span> <span class="nf">variadic_randperm</span><span class="p">(</span><span class="n">size</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="sd">"""</span>
+<span class="sd">    Return random permutations for sets with variadic sizes.</span>
+<span class="sd">    The ``i``-th permutation contains integers from 0 to ``size[i] - 1``.</span>
+
+<span class="sd">    Suppose there are :math:`N` sets.</span>
+
+<span class="sd">    Parameters:</span>
+<span class="sd">        size (LongTensor): size of sets of shape :math:`(N,)`</span>
+<span class="sd">        device (torch.device, optional): device of the tensor</span>
+<span class="sd">    """</span>
+    <span class="n">rand</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">size</span><span class="o">.</span><span class="n">sum</span><span class="p">(),</span> <span class="n">device</span><span class="o">=</span><span class="n">device</span><span class="p">)</span>
+    <span class="n">perm</span> <span class="o">=</span> <span class="n">variadic_sort</span><span class="p">(</span><span class="n">rand</span><span class="p">,</span> <span class="n">size</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">perm</span></div>
+
+
 <div class="viewcode-block" id="one_hot"><a class="viewcode-back" href="../../../../api/layers.html#torchdrug.layers.functional.one_hot">[docs]</a><span class="k">def</span> <span class="nf">one_hot</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="n">size</span><span class="p">):</span>
     <span class="sd">"""</span>
 <span class="sd">    Expand indexes into one-hot vectors.</span>
