@@ -13,18 +13,26 @@ molecules, and how to finetune the model on downstream tasks.
 Self-Supervised Pretraining
 ---------------------------
 
-The self-supervised pretraining belongs to the unsupervised pretraining. It is
-unsupervised because no supervised signal, i.e., the molecular drug property, is
-provided. It is called the self-supervised because it constructs the positive and
-negative views from the data itself. And specifically to the self-supervised
-pre-training for molecule property prediction, it explores the structure information
-of molecular data from different aspects as illustrated below.
+Pretraining is an effective approach to transfer learning in Graph Neural Networks 
+for graph-level property prediction. Here we focus on pretraining GNNs via different
+self-supervised strategies. These methods typically construct unsupervised loss functions 
+based on structural information in molecules. 
+
+For illustrative purpose, we only use the `ClinTox`_ dataset in this tutorial, which is
+much smaller than the standard pretraining datasets. For real applications, we suggest
+using larger datasets like `ZINC2M`_.
 
 Infograph
 ^^^^^^^^^
 
-`InfoGraph`_ (IG) sets the node- and graph- representations from the same graph as
-positive pairs, while those from different graphs as negative pairs.
+`InfoGraph`_ (IG) proposes to maximize the mutual information between the graph-level 
+and node-level representations. It learns the model by distinguishing whether a
+node-graph pair comes from a single graph or two different graphs. The following
+figure illustrates the high-level idea of InfoGraph.
+
+.. image:: ../../../asset/graph/infograph.png
+
+We use GIN as our graph represenation model, and wrap it with InfoGraph.
 
 .. code:: python
 
@@ -49,21 +57,22 @@ positive pairs, while those from different graphs as negative pairs.
     solver.train(num_epoch=100)
     solver.save("clintox_gin_infograph.pth")
 
-The above is a toy example on `ClinTox`_ dataset, and the output is similar to
-the following.
+After training, the mutual information of the representations might be close to
 
 .. code:: bash
 
     average graph-node mutual information: 1.30658
 
-.. image:: ../../../asset/graph/infograph.png
-
 Attribute Masking
 ^^^^^^^^^^^^^^^^^
 
-`Attribute Masking`_ (AM) predicts the atom node type from its neighbors. It can
-be seen as self-supervised by viewing the actual node type as positive, and all
-the other node types as negative.
+The aim of `Attribute Masking`_ (AM) is to capture domain knowledge by learning the
+regularities of the node/edge attributes distributed over graph structure. The high-level
+idea is to predict atom types in molecular graphs from randomly masked node features.
+
+.. image:: ../../../asset/graph/attrmasking.png
+
+Again, we use GIN as our graph representation model.
 
 .. code:: python
 
@@ -87,24 +96,24 @@ the other node types as negative.
     solver.train(num_epoch=100)
     solver.save("clintox_gin_attributemasking.pth")
 
-The above is a toy example on `ClinTox`_ dataset, and the output is similar to
-the following.
+Typically, the training accuracy and cross entropy may look like the following.
 
 .. code:: bash
 
     average accuracy: 0.920366
     average cross entropy: 0.22998
 
-.. image:: ../../../asset/graph/attrmasking.png
-
-We also include other popular self-supervised pre-training methods as below:
+Besides InfoGraph and Attribute Masking, there are some other strategies for
+pretraining GNNs. See the documentation below for more details.
 
 .. seealso::
-    :func:`Edge Prediction (EP) <torchdrug.tasks.EdgePrediction>`
-    :func:`Context Prediction (CP) <torchdrug.tasks.ContextPrediction>`
+    :class:`InfoGraph <torchdrug.models.InfoGraph>`,
+    :class:`AttributeMasking <torchdrug.tasks.AttributeMasking>`,
+    :class:`EdgePrediction <torchdrug.tasks.EdgePrediction>`,
+    :class:`ContextPrediction <torchdrug.tasks.ContextPrediction>`
 
-Finetuning on Labeled Datasets
-------------------------------
+Finetune on Labeled Datasets
+----------------------------
 
 When the GNN pre-training is finished, we can finetune the pre-trained GNN model
 on downstream tasks. Here we use `BACE`_ dataset for illustration, which contains
@@ -146,7 +155,7 @@ Now we can load our pretrained model and finetune it on downstream datasets.
 .. code:: python
 
     checkpoint = torch.load("clintox_gin_attributemasking.pth")["model"]
-    solver.model.load_state_dict(checkpoint, strict=False)
+    task.load_state_dict(checkpoint, strict=False)
 
     solver.train(num_epoch=100)
     solver.evaluate("valid")

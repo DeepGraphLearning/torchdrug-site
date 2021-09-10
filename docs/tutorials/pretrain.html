@@ -194,16 +194,21 @@ representations from massive unlabeled data.</p>
 molecules, and how to finetune the model on downstream tasks.</p>
 <div class="section" id="self-supervised-pretraining">
 <h2>Self-Supervised Pretraining<a class="headerlink" href="#self-supervised-pretraining" title="Permalink to this headline">¶</a></h2>
-<p>The self-supervised pretraining belongs to the unsupervised pretraining. It is
-unsupervised because no supervised signal, i.e., the molecular drug property, is
-provided. It is called the self-supervised because it constructs the positive and
-negative views from the data itself. And specifically to the self-supervised
-pre-training for molecule property prediction, it explores the structure information
-of molecular data from different aspects as illustrated below.</p>
+<p>Pretraining is an effective approach to transfer learning in Graph Neural Networks
+for graph-level property prediction. Here we focus on pretraining GNNs via different
+self-supervised strategies. These methods typically construct unsupervised loss functions
+based on structural information in molecules.</p>
+<p>For illustrative purpose, we only use the <a class="reference external" href="https://arxiv.org/pdf/1703.00564.pdf">ClinTox</a> dataset in this tutorial, which is
+much smaller than the standard pretraining datasets. For real applications, we suggest
+using larger datasets like <a class="reference external" href="https://pubs.acs.org/doi/10.1021/acs.jcim.5b00559">ZINC2M</a>.</p>
 <div class="section" id="id3">
 <h3>Infograph<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
-<p><a class="reference external" href="https://arxiv.org/pdf/1908.01000.pdf">InfoGraph</a> (IG) sets the node- and graph- representations from the same graph as
-positive pairs, while those from different graphs as negative pairs.</p>
+<p><a class="reference external" href="https://arxiv.org/pdf/1908.01000.pdf">InfoGraph</a> (IG) proposes to maximize the mutual information between the graph-level
+and node-level representations. It learns the model by distinguishing whether a
+node-graph pair comes from a single graph or two different graphs. The following
+figure illustrates the high-level idea of InfoGraph.</p>
+<img alt="../_images/infograph.png" src="../_images/infograph.png"/>
+<p>We use GIN as our graph represenation model, and wrap it with InfoGraph.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">torch</span> <span class="kn">import</span> <span class="n">nn</span>
 <span class="kn">from</span> <span class="nn">torch.utils</span> <span class="kn">import</span> <span class="n">data</span> <span class="k">as</span> <span class="n">torch_data</span>
 
@@ -226,18 +231,18 @@ positive pairs, while those from different graphs as negative pairs.</p>
 <span class="n">solver</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s2">"clintox_gin_infograph.pth"</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>The above is a toy example on <a class="reference external" href="https://arxiv.org/pdf/1703.00564.pdf">ClinTox</a> dataset, and the output is similar to
-the following.</p>
+<p>After training, the mutual information of the representations might be close to</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>average graph-node mutual information: <span class="m">1</span>.30658
 </pre></div>
 </div>
-<img alt="../_images/infograph.png" src="../_images/infograph.png"/>
 </div>
 <div class="section" id="attribute-masking">
 <h3>Attribute Masking<a class="headerlink" href="#attribute-masking" title="Permalink to this headline">¶</a></h3>
-<p><a class="reference internal" href="#attribute-masking">Attribute Masking</a> (AM) predicts the atom node type from its neighbors. It can
-be seen as self-supervised by viewing the actual node type as positive, and all
-the other node types as negative.</p>
+<p>The aim of <a class="reference internal" href="#attribute-masking">Attribute Masking</a> (AM) is to capture domain knowledge by learning the
+regularities of the node/edge attributes distributed over graph structure. The high-level
+idea is to predict atom types in molecular graphs from randomly masked node features.</p>
+<img alt="../_images/attrmasking.png" src="../_images/attrmasking.png"/>
+<p>Again, we use GIN as our graph representation model.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">torch</span> <span class="kn">import</span> <span class="n">nn</span><span class="p">,</span> <span class="n">optim</span>
 <span class="kn">from</span> <span class="nn">torch.utils</span> <span class="kn">import</span> <span class="n">data</span> <span class="k">as</span> <span class="n">torch_data</span>
 
@@ -259,23 +264,24 @@ the other node types as negative.</p>
 <span class="n">solver</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s2">"clintox_gin_attributemasking.pth"</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>The above is a toy example on <a class="reference external" href="https://arxiv.org/pdf/1703.00564.pdf">ClinTox</a> dataset, and the output is similar to
-the following.</p>
+<p>Typically, the training accuracy and cross entropy may look like the following.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>average accuracy: <span class="m">0</span>.920366
 average cross entropy: <span class="m">0</span>.22998
 </pre></div>
 </div>
-<img alt="../_images/attrmasking.png" src="../_images/attrmasking.png"/>
-<p>We also include other popular self-supervised pre-training methods as below:</p>
+<p>Besides InfoGraph and Attribute Masking, there are some other strategies for
+pretraining GNNs. See the documentation below for more details.</p>
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
-<p><a class="reference internal" href="../api/tasks.html#torchdrug.tasks.EdgePrediction" title="torchdrug.tasks.EdgePrediction"><code class="xref py py-func docutils literal notranslate"><span class="pre">Edge</span> <span class="pre">Prediction</span> <span class="pre">(EP)</span></code></a>
-<a class="reference internal" href="../api/tasks.html#torchdrug.tasks.ContextPrediction" title="torchdrug.tasks.ContextPrediction"><code class="xref py py-func docutils literal notranslate"><span class="pre">Context</span> <span class="pre">Prediction</span> <span class="pre">(CP)</span></code></a></p>
+<p><a class="reference internal" href="../api/models.html#torchdrug.models.InfoGraph" title="torchdrug.models.InfoGraph"><code class="xref py py-class docutils literal notranslate"><span class="pre">InfoGraph</span></code></a>,
+<a class="reference internal" href="../api/tasks.html#torchdrug.tasks.AttributeMasking" title="torchdrug.tasks.AttributeMasking"><code class="xref py py-class docutils literal notranslate"><span class="pre">AttributeMasking</span></code></a>,
+<a class="reference internal" href="../api/tasks.html#torchdrug.tasks.EdgePrediction" title="torchdrug.tasks.EdgePrediction"><code class="xref py py-class docutils literal notranslate"><span class="pre">EdgePrediction</span></code></a>,
+<a class="reference internal" href="../api/tasks.html#torchdrug.tasks.ContextPrediction" title="torchdrug.tasks.ContextPrediction"><code class="xref py py-class docutils literal notranslate"><span class="pre">ContextPrediction</span></code></a></p>
 </div>
 </div>
 </div>
-<div class="section" id="finetuning-on-labeled-datasets">
-<h2>Finetuning on Labeled Datasets<a class="headerlink" href="#finetuning-on-labeled-datasets" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="finetune-on-labeled-datasets">
+<h2>Finetune on Labeled Datasets<a class="headerlink" href="#finetune-on-labeled-datasets" title="Permalink to this headline">¶</a></h2>
 <p>When the GNN pre-training is finished, we can finetune the pre-trained GNN model
 on downstream tasks. Here we use <a class="reference external" href="https://arxiv.org/pdf/1703.00564.pdf">BACE</a> dataset for illustration, which contains
 1,513 molecules with binding affinity results a set of inhibitors of human
@@ -308,7 +314,7 @@ supervised learning.</p>
 </div>
 <p>Now we can load our pretrained model and finetune it on downstream datasets.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">checkpoint</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">"clintox_gin_attributemasking.pth"</span><span class="p">)[</span><span class="s2">"model"</span><span class="p">]</span>
-<span class="n">solver</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">load_state_dict</span><span class="p">(</span><span class="n">checkpoint</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">task</span><span class="o">.</span><span class="n">load_state_dict</span><span class="p">(</span><span class="n">checkpoint</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 
 <span class="n">solver</span><span class="o">.</span><span class="n">train</span><span class="p">(</span><span class="n">num_epoch</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
 <span class="n">solver</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="s2">"valid"</span><span class="p">)</span>
@@ -383,7 +389,7 @@ auroc <span class="o">[</span>Class<span class="o">]</span>: <span class="m">0</
 <li><a class="reference internal" href="#attribute-masking">Attribute Masking</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#finetuning-on-labeled-datasets">Finetuning on Labeled Datasets</a></li>
+<li><a class="reference internal" href="#finetune-on-labeled-datasets">Finetune on Labeled Datasets</a></li>
 </ul>
 </li>
 </ul>
