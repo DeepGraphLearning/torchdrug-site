@@ -239,18 +239,20 @@ TorchDrug is designed to cater all kinds of development. It has a hierarchical i
 low-level data structures and operations, mid-level layers and models, to high-level tasks.
 We can easily customize modules at any level with minimal efforts by utilizing building blocks from a lower level.
 
-<div class="container col-md-8">
+<div class="container col-md-9">
   <div class="row justify-content-center">
     <img alt="Hierarchy of the library" src="assets/images/library/hierarchy.svg" style="max-width:100%">
   </div>
 </div>
 
-Currently, there are 4 levels in the hierarchy.
+The correspondence between modules and hierarchical interface is
 
-- ``torchdrug.data``: Basic data structures and tensor-based graph operations. e.g. Graph masking
-- ``torchdrug.layers``: Neural network layers and loss layers. e.g. Message Passing Layer
-- ``torchdrug.models``: Representation learning models. e.g. Message Passing Neural Network
-- ``torchdrug.tasks``: Task-specific modules and functions. e.g. Molecule property prediction
+- ``torchdrug.data``: Graph data structures and graph operations. e.g. molecules
+- ``torchdrug.datasets``: Datasets. e.g. QM9
+- ``torchdrug.layers``: Neural network layers and loss layers. e.g. message passing layer
+- ``torchdrug.models``: Representation learning models. e.g. message passing neural network
+- ``torchdrug.tasks``: Task-specific routines. e.g. molecule property prediction
+- ``torchdrug.core``: Engine for training and evaluation.
 
 For more details about the interface, please refer to the [document].
 
