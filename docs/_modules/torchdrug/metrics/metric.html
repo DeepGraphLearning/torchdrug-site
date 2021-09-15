@@ -4,7 +4,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1"/><link rel="index" title="Index" href="../../../genindex.html" /><link rel="search" title="Search" href="../../../search.html" />
 
     <meta name="generator" content="sphinx-3.1.2, furo 2020.12.09.beta21"/>
-        <title>torchdrug.metrics.metric - TorchDrug 0.1.0 documentation</title>
+        <title>torchdrug.metrics.metric - TorchDrug 0.1.1 documentation</title>
       <link rel="stylesheet" href="../../../_static/styles/furo.css?digest=a3f371badb8538d75df213ccffb17a4f6e8f3ac5">
     <link rel="stylesheet" href="../../../_static/pygments.css">
     <link media="(prefers-color-scheme: dark)" rel="stylesheet" href="../../../_static/pygments_dark.css">
@@ -106,7 +106,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="../../../index.html"><div class="brand">TorchDrug 0.1.0 documentation</div></a>
+      <a href="../../../index.html"><div class="brand">TorchDrug 0.1.1 documentation</div></a>
     </div>
     <div class="header-right">
       <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
@@ -199,6 +199,7 @@
 <span class="kn">from</span> <span class="nn">torchdrug</span> <span class="kn">import</span> <span class="n">utils</span>
 <span class="kn">from</span> <span class="nn">torchdrug.layers</span> <span class="kn">import</span> <span class="n">functional</span>
 <span class="kn">from</span> <span class="nn">torchdrug.core</span> <span class="kn">import</span> <span class="n">Registry</span> <span class="k">as</span> <span class="n">R</span>
+<span class="kn">from</span> <span class="nn">torchdrug.metrics.rdkit</span> <span class="kn">import</span> <span class="n">sascorer</span>
 
 
 <div class="viewcode-block" id="area_under_roc"><a class="viewcode-back" href="../../../api/metrics.html#torchdrug.metrics.area_under_roc">[docs]</a><span class="nd">@R</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="s2">"metrics.auroc"</span><span class="p">)</span>
@@ -270,7 +271,7 @@
     <span class="k">return</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">logp</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">float</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="n">pred</span><span class="o">.</span><span class="n">device</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="penalized_logP"><a class="viewcode-back" href="../../../api/metrics.html#torchdrug.metrics.penalized_logP">[docs]</a><span class="nd">@R</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="s2">"metrics.penalized_logp"</span><span class="p">)</span>
+<div class="viewcode-block" id="penalized_logP"><a class="viewcode-back" href="../../../api/metrics.html#torchdrug.metrics.penalized_logP">[docs]</a><span class="nd">@R</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="s2">"metrics.plogp"</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">penalized_logP</span><span class="p">(</span><span class="n">pred</span><span class="p">):</span>
     <span class="sd">"""</span>
 <span class="sd">    Logarithm of partition coefficient, penalized by cycle length and synthetic accessibility.</span>
@@ -278,10 +279,6 @@
 <span class="sd">    Parameters:</span>
 <span class="sd">        pred (PackedMolecule): molecules to evaluate</span>
 <span class="sd">    """</span>
-    <span class="k">if</span> <span class="s2">"sascorer"</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">sys</span><span class="o">.</span><span class="n">modules</span><span class="p">:</span>
-        <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">RDConfig</span><span class="o">.</span><span class="n">RDContribDir</span><span class="p">,</span> <span class="s2">"SA_Score"</span><span class="p">))</span>
-    <span class="kn">import</span> <span class="nn">sascorer</span>
-
     <span class="c1"># statistics from ZINC250k</span>
     <span class="n">logp_mean</span> <span class="o">=</span> <span class="mf">2.4570953396190123</span>
     <span class="n">logp_std</span> <span class="o">=</span> <span class="mf">1.434324401111988</span>

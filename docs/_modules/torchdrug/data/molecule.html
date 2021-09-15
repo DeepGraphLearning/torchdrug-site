@@ -4,7 +4,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1"/><link rel="index" title="Index" href="../../../genindex.html" /><link rel="search" title="Search" href="../../../search.html" />
 
     <meta name="generator" content="sphinx-3.1.2, furo 2020.12.09.beta21"/>
-        <title>torchdrug.data.molecule - TorchDrug 0.1.0 documentation</title>
+        <title>torchdrug.data.molecule - TorchDrug 0.1.1 documentation</title>
       <link rel="stylesheet" href="../../../_static/styles/furo.css?digest=a3f371badb8538d75df213ccffb17a4f6e8f3ac5">
     <link rel="stylesheet" href="../../../_static/pygments.css">
     <link media="(prefers-color-scheme: dark)" rel="stylesheet" href="../../../_static/pygments_dark.css">
@@ -106,7 +106,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="../../../index.html"><div class="brand">TorchDrug 0.1.0 documentation</div></a>
+      <a href="../../../index.html"><div class="brand">TorchDrug 0.1.1 documentation</div></a>
     </div>
     <div class="header-right">
       <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
@@ -511,12 +511,14 @@
         <span class="k">if</span> <span class="n">ignore_error</span><span class="p">:</span>
             <span class="k">try</span><span class="p">:</span>
                 <span class="k">with</span> <span class="n">utils</span><span class="o">.</span><span class="n">no_rdkit_log</span><span class="p">():</span>
+                    <span class="n">mol</span><span class="o">.</span><span class="n">UpdatePropertyCache</span><span class="p">()</span>
                     <span class="n">Chem</span><span class="o">.</span><span class="n">AssignStereochemistry</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>
                     <span class="n">mol</span><span class="o">.</span><span class="n">ClearComputedProps</span><span class="p">()</span>
                     <span class="n">mol</span><span class="o">.</span><span class="n">UpdatePropertyCache</span><span class="p">()</span>
             <span class="k">except</span><span class="p">:</span>
                 <span class="n">mol</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="k">else</span><span class="p">:</span>
+            <span class="n">mol</span><span class="o">.</span><span class="n">UpdatePropertyCache</span><span class="p">()</span>
             <span class="n">Chem</span><span class="o">.</span><span class="n">AssignStereochemistry</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>
             <span class="n">mol</span><span class="o">.</span><span class="n">ClearComputedProps</span><span class="p">()</span>
             <span class="n">mol</span><span class="o">.</span><span class="n">UpdatePropertyCache</span><span class="p">()</span>
@@ -711,7 +713,7 @@
     <span class="k">def</span> <span class="nf">is_valid</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">"""A coarse implementation of valence check."""</span>
         <span class="c1"># TODO: cross-check by any domain expert</span>
-        <span class="n">atom2valence</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="s2">"nan"</span><span class="p">))</span><span class="o">.</span><span class="n">repeat</span><span class="p">(</span><span class="mi">118</span><span class="p">)</span>
+        <span class="n">atom2valence</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="s2">"nan"</span><span class="p">))</span><span class="o">.</span><span class="n">repeat</span><span class="p">(</span><span class="n">constant</span><span class="o">.</span><span class="n">NUM_ATOM</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">atom2valence</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
             <span class="n">atom2valence</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">v</span>
         <span class="n">atom2valence</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">as_tensor</span><span class="p">(</span><span class="n">atom2valence</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">device</span><span class="p">)</span>
@@ -978,11 +980,15 @@
                     <span class="k">with</span> <span class="n">utils</span><span class="o">.</span><span class="n">no_rdkit_log</span><span class="p">():</span>
                         <span class="n">mol</span><span class="o">.</span><span class="n">UpdatePropertyCache</span><span class="p">()</span>
                         <span class="n">Chem</span><span class="o">.</span><span class="n">AssignStereochemistry</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>
+                        <span class="n">mol</span><span class="o">.</span><span class="n">ClearComputedProps</span><span class="p">()</span>
+                        <span class="n">mol</span><span class="o">.</span><span class="n">UpdatePropertyCache</span><span class="p">()</span>
                 <span class="k">except</span><span class="p">:</span>
                     <span class="n">mol</span> <span class="o">=</span> <span class="kc">None</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="n">mol</span><span class="o">.</span><span class="n">UpdatePropertyCache</span><span class="p">()</span>
                 <span class="n">Chem</span><span class="o">.</span><span class="n">AssignStereochemistry</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>
+                <span class="n">mol</span><span class="o">.</span><span class="n">ClearComputedProps</span><span class="p">()</span>
+                <span class="n">mol</span><span class="o">.</span><span class="n">UpdatePropertyCache</span><span class="p">()</span>
             <span class="n">mols</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>
 
         <span class="k">return</span> <span class="n">mols</span></div>

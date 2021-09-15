@@ -4,7 +4,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1"/><link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="Quick Start" href="quick_start.html" /><link rel="prev" title="TorchDrug - A deep learning platform for drug discovery" href="index.html" />
 
     <meta name="generator" content="sphinx-3.1.2, furo 2020.12.09.beta21"/>
-        <title>Installation - TorchDrug 0.1.0 documentation</title>
+        <title>Installation - TorchDrug 0.1.1 documentation</title>
       <link rel="stylesheet" href="_static/styles/furo.css?digest=a3f371badb8538d75df213ccffb17a4f6e8f3ac5">
     <link rel="stylesheet" href="_static/pygments.css">
     <link media="(prefers-color-scheme: dark)" rel="stylesheet" href="_static/pygments_dark.css">
@@ -106,7 +106,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="index.html"><div class="brand">TorchDrug 0.1.0 documentation</div></a>
+      <a href="index.html"><div class="brand">TorchDrug 0.1.1 documentation</div></a>
     </div>
     <div class="header-right">
       <label class="toc-overlay-icon toc-header-icon" for="__toc">
@@ -194,24 +194,8 @@
 </pre></div>
 </div>
 </div>
-<div class="section" id="from-source">
-<h2>From Source<a class="headerlink" href="#from-source" title="Permalink to this headline">¶</a></h2>
-<p>TorchDrug depends on rdkit, which is only available via conda.
-We can install rdkit with the following line.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda install -c conda-forge rdkit
-</pre></div>
-</div>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git clone https://github.com/DeepGraphLearning/torchdrug
-<span class="nb">cd</span> torchdrug
-pip install -r requirements.txt
-python setup.py install
-</pre></div>
-</div>
-</div>
-<div class="section" id="from-pip-not-recommended">
-<h2>From Pip (Not Recommended)<a class="headerlink" href="#from-pip-not-recommended" title="Permalink to this headline">¶</a></h2>
-<p>This is not a recommended way to install TorchDrug, since we have noticed some
-bugs in RDKit installed via pip.</p>
+<div class="section" id="from-pip">
+<h2>From Pip<a class="headerlink" href="#from-pip" title="Permalink to this headline">¶</a></h2>
 <p>First, let’s install PyTorch.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip3 install torch
 </pre></div>
@@ -226,8 +210,17 @@ and CUDA is <code class="docutils literal notranslate"><span class="pre">10.2</s
 <p>Replace the versions in the above url according to your case. If you don’t have GPUs
 or CUDA installed, treat the CUDA version in the url as <code class="docutils literal notranslate"><span class="pre">cpu</span></code>. See
 <a class="reference external" href="https://github.com/rusty1s/pytorch_scatter">https://github.com/rusty1s/pytorch_scatter</a> for more details about installation.</p>
-<p>Finally, install RDKit and TorchDrug via</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip3 install rdkit-pypi torchdrug
+<p>Finally, install TorchDrug via</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip3 install torchdrug
+</pre></div>
+</div>
+</div>
+<div class="section" id="from-source">
+<h2>From Source<a class="headerlink" href="#from-source" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git clone https://github.com/DeepGraphLearning/torchdrug
+<span class="nb">cd</span> torchdrug
+pip install -r requirements.txt
+python setup.py install
 </pre></div>
 </div>
 </div>
@@ -289,8 +282,8 @@ or CUDA installed, treat the CUDA version in the url as <code class="docutils li
             <ul>
 <li><a class="reference internal" href="#">Installation</a><ul>
 <li><a class="reference internal" href="#from-conda">From Conda</a></li>
+<li><a class="reference internal" href="#from-pip">From Pip</a></li>
 <li><a class="reference internal" href="#from-source">From Source</a></li>
-<li><a class="reference internal" href="#from-pip-not-recommended">From Pip (Not Recommended)</a></li>
 </ul>
 </li>
 </ul>

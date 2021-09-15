@@ -4,7 +4,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1"/><link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="prev" title="torchdrug.tasks" href="tasks.html" />
 
     <meta name="generator" content="sphinx-3.1.2, furo 2020.12.09.beta21"/>
-        <title>torchdrug.utils - TorchDrug 0.1.0 documentation</title>
+        <title>torchdrug.utils - TorchDrug 0.1.1 documentation</title>
       <link rel="stylesheet" href="../_static/styles/furo.css?digest=a3f371badb8538d75df213ccffb17a4f6e8f3ac5">
     <link rel="stylesheet" href="../_static/pygments.css">
     <link media="(prefers-color-scheme: dark)" rel="stylesheet" href="../_static/pygments_dark.css">
@@ -106,7 +106,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="../index.html"><div class="brand">TorchDrug 0.1.0 documentation</div></a>
+      <a href="../index.html"><div class="brand">TorchDrug 0.1.1 documentation</div></a>
     </div>
     <div class="header-right">
       <label class="toc-overlay-icon toc-header-icon" for="__toc">
@@ -257,8 +257,9 @@ Each color is either a tuple of 3 integers between 0 and 255, or a hex color cod
 <h2>Auxiliary Torch Functions<a class="headerlink" href="#auxiliary-torch-functions" title="Permalink to this headline">¶</a></h2>
 <dl class="py function">
 <dt id="torchdrug.utils.load_extension">
-<code class="sig-name descname">load_extension</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span></em>, <em class="sig-param"><span class="n">sources</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/utils/torch.html#load_extension"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.utils.load_extension" title="Permalink to this definition">¶</a></dt>
-<dd><p>Load a PyTorch C++ extension just-in-time (JIT).</p>
+<code class="sig-name descname">load_extension</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span></em>, <em class="sig-param"><span class="n">sources</span></em>, <em class="sig-param"><span class="n">extra_cflags</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">extra_cuda_cflags</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/utils/torch.html#load_extension"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.utils.load_extension" title="Permalink to this definition">¶</a></dt>
+<dd><p>Load a PyTorch C++ extension just-in-time (JIT).
+Automatically decide the compilation flags if not specified.</p>
 <p>This function performs lazy evaluation and is multi-process-safe.</p>
 <p>See <a class="reference external" href="https://pytorch.org/docs/stable/cpp_extension.html#torch.utils.cpp_extension.load">torch.utils.cpp_extension.load</a> for more details.</p>
 </dd></dl>
