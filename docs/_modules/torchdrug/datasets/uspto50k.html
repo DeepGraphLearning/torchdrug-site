@@ -267,6 +267,8 @@
         <span class="n">invalid</span> <span class="o">=</span> <span class="mi">0</span>
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">indexes</span><span class="p">:</span>
             <span class="n">reactant</span><span class="p">,</span> <span class="n">product</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+            <span class="n">reactant</span><span class="o">.</span><span class="n">bond_stereo</span><span class="p">[:]</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="n">product</span><span class="o">.</span><span class="n">bond_stereo</span><span class="p">[:]</span> <span class="o">=</span> <span class="mi">0</span>
 
             <span class="n">reactants</span><span class="p">,</span> <span class="n">products</span> <span class="o">=</span> <span class="n">process_fn</span><span class="p">(</span><span class="n">reactant</span><span class="p">,</span> <span class="n">product</span><span class="p">)</span>
             <span class="k">if</span> <span class="ow">not</span> <span class="n">reactants</span><span class="p">:</span>
