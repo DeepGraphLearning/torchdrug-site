@@ -231,8 +231,8 @@ triplet.</p>
 <p>You may consider using a smaller embedding dimension for better efficiency.</p>
 <p>Afterwards, we further need to define our task. For the knowledge graph embedding
 task, we can simply use the following code.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">task</span> <span class="o">=</span> <span class="n">tasks</span><span class="o">.</span><span class="n">KnowledgeGraphEmbedding</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">num_negative</span><span class="o">=</span><span class="mi">256</span><span class="p">,</span>
-                                     <span class="n">adversarial_temperature</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">task</span> <span class="o">=</span> <span class="n">tasks</span><span class="o">.</span><span class="n">KnowledgeGraphCompletion</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">num_negative</span><span class="o">=</span><span class="mi">256</span><span class="p">,</span>
+                                      <span class="n">adversarial_temperature</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Here, <code class="docutils literal notranslate"><span class="pre">num_negative</span></code> is the number of negative examples used for training, and
@@ -301,8 +301,8 @@ set to 3. <code class="docutils literal notranslate"><span class="pre">num_lstm_
 shares similar ideas to training knowledge graph embedding, we also use the following
 knowledge graph embedding task:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">task</span> <span class="o">=</span> <span class="n">tasks</span><span class="o">.</span><span class="n">KnowledgeGraphCompletion</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">fact_ratio</span><span class="o">=</span><span class="mf">0.75</span><span class="p">,</span>
-                                     <span class="n">num_negative</span><span class="o">=</span><span class="mi">256</span><span class="p">,</span>
-                                     <span class="n">sample_weight</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+                                      <span class="n">num_negative</span><span class="o">=</span><span class="mi">256</span><span class="p">,</span>
+                                      <span class="n">sample_weight</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>The difference is that we need to specify the <code class="docutils literal notranslate"><span class="pre">fact_ratio</span></code>, which tells the code
