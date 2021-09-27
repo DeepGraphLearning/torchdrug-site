@@ -209,7 +209,8 @@ node-graph pair comes from a single graph or two different graphs. The following
 figure illustrates the high-level idea of InfoGraph.</p>
 <img alt="../_images/infograph.png" src="../_images/infograph.png"/>
 <p>We use GIN as our graph represenation model, and wrap it with InfoGraph.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">torch</span> <span class="kn">import</span> <span class="n">nn</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">from</span> <span class="nn">torch</span> <span class="kn">import</span> <span class="n">nn</span>
 <span class="kn">from</span> <span class="nn">torch.utils</span> <span class="kn">import</span> <span class="n">data</span> <span class="k">as</span> <span class="n">torch_data</span>
 
 <span class="kn">from</span> <span class="nn">torchdrug</span> <span class="kn">import</span> <span class="n">core</span><span class="p">,</span> <span class="n">datasets</span><span class="p">,</span> <span class="n">tasks</span><span class="p">,</span> <span class="n">models</span>
@@ -243,7 +244,8 @@ regularities of the node/edge attributes distributed over graph structure. The h
 idea is to predict atom types in molecular graphs from randomly masked node features.</p>
 <img alt="../_images/attrmasking.png" src="../_images/attrmasking.png"/>
 <p>Again, we use GIN as our graph representation model.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">torch</span> <span class="kn">import</span> <span class="n">nn</span><span class="p">,</span> <span class="n">optim</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">from</span> <span class="nn">torch</span> <span class="kn">import</span> <span class="n">nn</span><span class="p">,</span> <span class="n">optim</span>
 <span class="kn">from</span> <span class="nn">torch.utils</span> <span class="kn">import</span> <span class="n">data</span> <span class="k">as</span> <span class="n">torch_data</span>
 
 <span class="kn">from</span> <span class="nn">torchdrug</span> <span class="kn">import</span> <span class="n">core</span><span class="p">,</span> <span class="n">datasets</span><span class="p">,</span> <span class="n">tasks</span><span class="p">,</span> <span class="n">models</span>

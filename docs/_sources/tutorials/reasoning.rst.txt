@@ -146,7 +146,7 @@ knowledge graph embedding task:
 
 .. code:: python
 
-    task = tasks.KnowledgeGraphEmbedding(model, fact_ratio=0.75,
+    task = tasks.KnowledgeGraphCompletion(model, fact_ratio=0.75,
                                          num_negative=256,
                                          sample_weight=False)
 

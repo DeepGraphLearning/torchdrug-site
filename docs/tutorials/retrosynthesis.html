@@ -203,7 +203,7 @@ their synthesis pathways.</p>
 <code class="docutils literal notranslate"><span class="pre">(reactants,</span> <span class="pre">product)</span></code> pairs, which is used for center identification. The synthon
 mode loads the dataset as <code class="docutils literal notranslate"><span class="pre">(reactant,</span> <span class="pre">synthon)</span></code> pairs, which is used for synthon
 completion.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">torchdrug</span> <span class="kn">import</span> <span class="n">datasets</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">torchdrug</span> <span class="kn">import</span> <span class="n">data</span><span class="p">,</span> <span class="n">datasets</span><span class="p">,</span> <span class="n">utils</span>
 
 <span class="n">reaction_dataset</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">USPTO50k</span><span class="p">(</span><span class="s2">"~/molecule-datasets/"</span><span class="p">,</span>
                                      <span class="n">node_feature</span><span class="o">=</span><span class="s2">"center_identification"</span><span class="p">,</span>
@@ -242,8 +242,11 @@ the right hand side.</p>
 <a class="reference internal image-reference" href="../_images/uspto50k_synthon_2.png"><img alt="../_images/uspto50k_synthon_2.png" src="../_images/uspto50k_synthon_2.png" style="width: 24%;"/></a>
 <p>To ensure the same split is used by both datasets, we can set the random seed
 before calling <code class="xref py py-meth docutils literal notranslate"><span class="pre">split()</span></code>.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">torch</span><span class="o">.</span><span class="n">manual_seed</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torch</span>
+
+<span class="n">torch</span><span class="o">.</span><span class="n">manual_seed</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 <span class="n">reaction_train</span><span class="p">,</span> <span class="n">reaction_valid</span><span class="p">,</span> <span class="n">reaction_test</span> <span class="o">=</span> <span class="n">reaction_dataset</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+<span class="n">torch</span><span class="o">.</span><span class="n">manual_seed</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 <span class="n">synthon_train</span><span class="p">,</span> <span class="n">synthon_valid</span><span class="p">,</span> <span class="n">synthon_test</span> <span class="o">=</span> <span class="n">synthon_dataset</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -255,9 +258,9 @@ as our representation model, and wrap it for the center identification task. Not
 other graph representation learning models can also be used here.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">torchdrug</span> <span class="kn">import</span> <span class="n">core</span><span class="p">,</span> <span class="n">models</span><span class="p">,</span> <span class="n">tasks</span>
 
-<span class="n">reaction_model</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">RGCN</span><span class="p">(</span><span class="n">input_dim</span><span class="o">=</span><span class="n">dataset</span><span class="o">.</span><span class="n">node_feature_dim</span><span class="p">,</span>
+<span class="n">reaction_model</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">RGCN</span><span class="p">(</span><span class="n">input_dim</span><span class="o">=</span><span class="n">reaction_dataset</span><span class="o">.</span><span class="n">node_feature_dim</span><span class="p">,</span>
                     <span class="n">hidden_dims</span><span class="o">=</span><span class="p">[</span><span class="mi">256</span><span class="p">,</span> <span class="mi">256</span><span class="p">,</span> <span class="mi">256</span><span class="p">,</span> <span class="mi">256</span><span class="p">,</span> <span class="mi">256</span><span class="p">,</span> <span class="mi">256</span><span class="p">],</span>
-                    <span class="n">num_relation</span><span class="o">=</span><span class="n">dataset</span><span class="o">.</span><span class="n">num_bond_type</span><span class="p">,</span>
+                    <span class="n">num_relation</span><span class="o">=</span><span class="n">reaction_dataset</span><span class="o">.</span><span class="n">num_bond_type</span><span class="p">,</span>
                     <span class="n">concat_hidden</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="n">reaction_task</span> <span class="o">=</span> <span class="n">tasks</span><span class="o">.</span><span class="n">CenterIdentification</span><span class="p">(</span><span class="n">reaction_model</span><span class="p">,</span>
                                            <span class="n">feature</span><span class="o">=</span><span class="p">(</span><span class="s2">"graph"</span><span class="p">,</span> <span class="s2">"atom"</span><span class="p">,</span> <span class="s2">"bond"</span><span class="p">))</span>
@@ -269,6 +272,7 @@ other graph representation learning models can also be used here.</p>
                               <span class="n">gpus</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">128</span><span class="p">)</span>
 <span class="n">reaction_solver</span><span class="o">.</span><span class="n">train</span><span class="p">(</span><span class="n">num_epoch</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
 <span class="n">reaction_solver</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="s2">"valid"</span><span class="p">)</span>
+<span class="n">reaction_solver</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s2">"g2gs_reaction_model.pth"</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>The evaluation result on the validation set may look like</p>
@@ -349,18 +353,20 @@ correct predictions.</p>
 <div class="section" id="synthon-completion">
 <h2>Synthon Completion<a class="headerlink" href="#synthon-completion" title="Permalink to this headline">¶</a></h2>
 <p>Similarly, we train a synthon completion model on the synthon dataset.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">synthon_model</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">RGCN</span><span class="p">(</span><span class="n">input_dim</span><span class="o">=</span><span class="n">dataset</span><span class="o">.</span><span class="n">node_feature_dim</span><span class="p">,</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">synthon_model</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">RGCN</span><span class="p">(</span><span class="n">input_dim</span><span class="o">=</span><span class="n">synthon_dataset</span><span class="o">.</span><span class="n">node_feature_dim</span><span class="p">,</span>
                             <span class="n">hidden_dims</span><span class="o">=</span><span class="p">[</span><span class="mi">256</span><span class="p">,</span> <span class="mi">256</span><span class="p">,</span> <span class="mi">256</span><span class="p">,</span> <span class="mi">256</span><span class="p">,</span> <span class="mi">256</span><span class="p">,</span> <span class="mi">256</span><span class="p">],</span>
-                            <span class="n">num_relation</span><span class="o">=</span><span class="n">dataset</span><span class="o">.</span><span class="n">num_bond_type</span><span class="p">,</span>
+                            <span class="n">num_relation</span><span class="o">=</span><span class="n">synthon_dataset</span><span class="o">.</span><span class="n">num_bond_type</span><span class="p">,</span>
                             <span class="n">concat_hidden</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="n">synthon_task</span> <span class="o">=</span> <span class="n">tasks</span><span class="o">.</span><span class="n">SynthonCompletion</span><span class="p">(</span><span class="n">synthon_model</span><span class="p">,</span> <span class="n">feature</span><span class="o">=</span><span class="p">(</span><span class="s2">"graph"</span><span class="p">,))</span>
-
-<span class="n">synthon_optimizer</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">optim</span><span class="o">.</span><span class="n">Adam</span><span class="p">(</span><span class="n">synthon_task</span><span class="o">.</span><span class="n">parameters</span><span class="p">(),</span> <span class="n">lr</span><span class="o">=</span><span class="mf">1e-3</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">synthon_optimizer</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">optim</span><span class="o">.</span><span class="n">Adam</span><span class="p">(</span><span class="n">synthon_task</span><span class="o">.</span><span class="n">parameters</span><span class="p">(),</span> <span class="n">lr</span><span class="o">=</span><span class="mf">1e-3</span><span class="p">)</span>
 <span class="n">synthon_solver</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">Engine</span><span class="p">(</span><span class="n">synthon_task</span><span class="p">,</span> <span class="n">synthon_train</span><span class="p">,</span> <span class="n">synthon_valid</span><span class="p">,</span>
                              <span class="n">synthon_test</span><span class="p">,</span> <span class="n">synthon_optimizer</span><span class="p">,</span>
                              <span class="n">gpus</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">128</span><span class="p">)</span>
 <span class="n">synthon_solver</span><span class="o">.</span><span class="n">train</span><span class="p">(</span><span class="n">num_epoch</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
 <span class="n">synthon_solver</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="s2">"valid"</span><span class="p">)</span>
+<span class="n">synthon_solver</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s2">"g2gs_synthon_model.pth"</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>We may obtain some results like</p>
@@ -418,16 +424,25 @@ We can see that our model can recall ground truth in top-5 predictions for most 
 <h2>Retrosynthesis<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
 <p>Given the trained models, we can combine them into an end2end pipeline for
 retrosynthesis. This is done by wrapping the two sub tasks with a retrosynthesis task.</p>
+<p>Note if you never declare the solvers for <code class="docutils literal notranslate"><span class="pre">reaction_task</span></code> and <code class="docutils literal notranslate"><span class="pre">synthon_task</span></code>,
+you need to manually call their <code class="docutils literal notranslate"><span class="pre">preprocess()</span></code> method before combining them into a
+pipeline.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># reaction_task.preprocess(reaction_train, None, None)</span>
+<span class="c1"># synthon_task.preprocess(synthon_train, None, None)</span>
+<span class="n">task</span> <span class="o">=</span> <span class="n">tasks</span><span class="o">.</span><span class="n">Retrosynthesis</span><span class="p">(</span><span class="n">reaction_task</span><span class="p">,</span> <span class="n">synthon_task</span><span class="p">,</span> <span class="n">center_topk</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+                            <span class="n">num_synthon_beam</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">max_prediction</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
 <p>The pipeline will perform beam search over all possible combinations between the
 predictions from two sub tasks. For demonstration, we use a small beam size and
 only evaluate on a subset of the validation set. Note the results will be better
 if we give more budget to the beam search.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">lengths</span> <span class="o">=</span> <span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">reaction_valid</span><span class="p">)</span> <span class="o">//</span> <span class="mi">10</span><span class="p">,</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">torch.utils</span> <span class="kn">import</span> <span class="n">data</span> <span class="k">as</span> <span class="n">torch_data</span>
+
+<span class="n">lengths</span> <span class="o">=</span> <span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">reaction_valid</span><span class="p">)</span> <span class="o">//</span> <span class="mi">10</span><span class="p">,</span>
            <span class="nb">len</span><span class="p">(</span><span class="n">reaction_valid</span><span class="p">)</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">reaction_valid</span><span class="p">)</span> <span class="o">//</span> <span class="mi">10</span><span class="p">]</span>
 <span class="n">reaction_valid_small</span> <span class="o">=</span> <span class="n">torch_data</span><span class="o">.</span><span class="n">random_split</span><span class="p">(</span><span class="n">reaction_valid</span><span class="p">,</span> <span class="n">lengths</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
 
-<span class="n">task</span> <span class="o">=</span> <span class="n">tasks</span><span class="o">.</span><span class="n">Retrosynthesis</span><span class="p">(</span><span class="n">reaction_task</span><span class="p">,</span> <span class="n">synthon_task</span><span class="p">,</span> <span class="n">center_topk</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">num_beam</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
-                            <span class="n">max_prediction</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
 <span class="n">optimizer</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">optim</span><span class="o">.</span><span class="n">Adam</span><span class="p">(</span><span class="n">task</span><span class="o">.</span><span class="n">parameters</span><span class="p">(),</span> <span class="n">lr</span><span class="o">=</span><span class="mf">1e-3</span><span class="p">)</span>
 <span class="n">solver</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">Engine</span><span class="p">(</span><span class="n">task</span><span class="p">,</span> <span class="n">reaction_train</span><span class="p">,</span> <span class="n">reaction_valid_small</span><span class="p">,</span> <span class="n">reaction_test</span><span class="p">,</span>
                      <span class="n">optimizer</span><span class="p">,</span> <span class="n">gpus</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">32</span><span class="p">)</span>
@@ -435,12 +450,7 @@ if we give more budget to the beam search.</p>
 </div>
 <p>To load parameters two sub tasks, we just load each checkpoint. Note <code class="docutils literal notranslate"><span class="pre">load_optimizer</span></code>
 should be set to <code class="docutils literal notranslate"><span class="pre">False</span></code> to avoid conflicts.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">reaction_solver</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s2">"g2gs_reaction_model.pth"</span><span class="p">)</span>
-<span class="n">synthon_solver</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s2">"g2gs_synthon_model.pth"</span><span class="p">)</span>
-
-<span class="n">reaction_task</span><span class="o">.</span><span class="n">preprocess</span><span class="p">(</span><span class="n">reaction_train</span><span class="p">)</span>
-<span class="n">synthon_task</span><span class="o">.</span><span class="n">preprocess</span><span class="p">(</span><span class="n">synthon_train</span><span class="p">)</span>
-<span class="n">solver</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">"g2gs_reaction_model.pth"</span><span class="p">,</span> <span class="n">load_optimizer</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">solver</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">"g2gs_reaction_model.pth"</span><span class="p">,</span> <span class="n">load_optimizer</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 <span class="n">solver</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">"g2gs_synthon_model.pth"</span><span class="p">,</span> <span class="n">load_optimizer</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 <span class="n">solver</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="s2">"valid"</span><span class="p">)</span>
 </pre></div>
@@ -465,6 +475,7 @@ top-10 accuracy: <span class="m">0</span>.879098
 <span class="n">batch</span> <span class="o">=</span> <span class="n">utils</span><span class="o">.</span><span class="n">cuda</span><span class="p">(</span><span class="n">batch</span><span class="p">)</span>
 <span class="n">predictions</span><span class="p">,</span> <span class="n">num_prediction</span> <span class="o">=</span> <span class="n">task</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">batch</span><span class="p">)</span>
 
+<span class="n">products</span> <span class="o">=</span> <span class="n">batch</span><span class="p">[</span><span class="s2">"graph"</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
 <span class="n">top1_index</span> <span class="o">=</span> <span class="n">num_prediction</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">-</span> <span class="n">num_prediction</span>
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">products</span><span class="p">)):</span>
     <span class="n">reactant</span> <span class="o">=</span> <span class="n">predictions</span><span class="p">[</span><span class="n">top1_index</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span><span class="o">.</span><span class="n">connected_components</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
