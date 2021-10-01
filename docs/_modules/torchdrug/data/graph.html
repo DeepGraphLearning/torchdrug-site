@@ -222,7 +222,7 @@
 <span class="sd">    You may register dynamic attributes for each graph.</span>
 <span class="sd">    The registered attributes will be automatically processed during packing.</span>
 
-<span class="sd">    Examples::</span>
+<span class="sd">    Example::</span>
 
 <span class="sd">        &gt;&gt;&gt; graph = data.Graph(torch.randint(10, (30, 2)))</span>
 <span class="sd">        &gt;&gt;&gt; with graph.node():</span>
@@ -439,7 +439,7 @@
 <span class="sd">        Returns:</span>
 <span class="sd">            PackedGraph</span>
 <span class="sd">        """</span>
-        <span class="n">node2graph</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">as_tensor</span><span class="p">(</span><span class="n">node2graph</span><span class="p">)</span>
+        <span class="n">node2graph</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">as_tensor</span><span class="p">(</span><span class="n">node2graph</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">long</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">device</span><span class="p">)</span>
         <span class="c1"># coalesce arbitrary graph IDs to [0, n)</span>
         <span class="n">_</span><span class="p">,</span> <span class="n">node2graph</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">node2graph</span><span class="p">,</span> <span class="n">return_inverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
         <span class="n">num_graph</span> <span class="o">=</span> <span class="n">node2graph</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">+</span> <span class="mi">1</span>
@@ -1086,7 +1086,7 @@
 <span class="sd">        Parameters:</span>
 <span class="sd">            graph2graph (array_like): ID of the new graph each graph belongs to</span>
 <span class="sd">        """</span>
-        <span class="n">graph2graph</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">as_tensor</span><span class="p">(</span><span class="n">graph2graph</span><span class="p">)</span>
+        <span class="n">graph2graph</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">as_tensor</span><span class="p">(</span><span class="n">graph2graph</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">long</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">device</span><span class="p">)</span>
         <span class="c1"># coalesce arbitrary graph IDs to [0, n)</span>
         <span class="n">_</span><span class="p">,</span> <span class="n">graph2graph</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">graph2graph</span><span class="p">,</span> <span class="n">return_inverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 

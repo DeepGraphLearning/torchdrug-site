@@ -206,7 +206,7 @@ This will return a PackedGraph object with the following block diagonal adjacenc
 <p>where <span class="math notranslate nohighlight">\(A_i\)</span> is the adjacency of <span class="math notranslate nohighlight">\(i\)</span>-th graph.</p>
 <p>You may register dynamic attributes for each graph.
 The registered attributes will be automatically processed during packing.</p>
-<p>Examples:</p>
+<p>Example:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">graph</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">Graph</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="p">(</span><span class="mi">30</span><span class="p">,</span> <span class="mi">2</span><span class="p">)))</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">with</span> <span class="n">graph</span><span class="o">.</span><span class="n">node</span><span class="p">():</span>
 <span class="gp">&gt;&gt;&gt; </span>    <span class="n">graph</span><span class="o">.</span><span class="n">my_node_attr</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
@@ -1193,6 +1193,59 @@ If not provided, show the figure in window.</p></li>
 </dd></dl>
 </dd></dl>
 </div>
+<div class="section" id="dictionary">
+<h3>Dictionary<a class="headerlink" href="#dictionary" title="Permalink to this headline">¶</a></h3>
+<dl class="py class">
+<dt id="torchdrug.data.Dictionary">
+<em class="property">class </em><code class="sig-name descname">Dictionary</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">keys</span></em>, <em class="sig-param"><span class="n">values</span></em>, <em class="sig-param"><span class="n">hash</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/data/dictionary.html#Dictionary"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.data.Dictionary" title="Permalink to this definition">¶</a></dt>
+<dd><p>Dictionary for mapping keys to values.</p>
+<p>This class has the same behavior as the built-in dict, except it operates on tensors and support batching.</p>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">keys</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">values</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">d</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">Dictionary</span><span class="p">(</span><span class="n">keys</span><span class="p">,</span> <span class="n">values</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">assert</span> <span class="p">(</span><span class="n">d</span><span class="p">[[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">]]]</span> <span class="o">==</span> <span class="n">values</span><span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">]])</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">assert</span> <span class="p">(</span><span class="n">d</span><span class="o">.</span><span class="n">has_key</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]])</span> <span class="o">==</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([</span><span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">]))</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>keys</strong> (<em>LongTensor</em>) – keys of shape <span class="math notranslate nohighlight">\((N,)\)</span> or <span class="math notranslate nohighlight">\((N, D)\)</span></p></li>
+<li><p><strong>values</strong> (<em>Tensor</em>) – values of shape <span class="math notranslate nohighlight">\((N, ...)\)</span></p></li>
+<li><p><strong>hash</strong> (<em>PerfectHash</em><em>, </em><em>optional</em>) – hash function for keys</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt id="torchdrug.data.Dictionary.cpu">
+<code class="sig-name descname">cpu</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/data/dictionary.html#Dictionary.cpu"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.data.Dictionary.cpu" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a copy of this dictionary in CPU memory.</p>
+<p>This is a non-op if the dictionary is already in CPU memory.</p>
+</dd></dl>
+<dl class="py method">
+<dt id="torchdrug.data.Dictionary.cuda">
+<code class="sig-name descname">cuda</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/data/dictionary.html#Dictionary.cuda"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.data.Dictionary.cuda" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a copy of this dictionary in CUDA memory.</p>
+<p>This is a non-op if the dictionary is already in CUDA memory.</p>
+</dd></dl>
+<dl class="py method">
+<dt id="torchdrug.data.Dictionary.has_key">
+<code class="sig-name descname">has_key</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">keys</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/data/dictionary.html#Dictionary.has_key"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.data.Dictionary.has_key" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check whether each query exist in the dictionary.</p>
+</dd></dl>
+<dl class="py method">
+<dt id="torchdrug.data.Dictionary.to_dict">
+<code class="sig-name descname">to_dict</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/data/dictionary.html#Dictionary.to_dict"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.data.Dictionary.to_dict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a built-in dict object of this dictionary.</p>
+</dd></dl>
+<dl class="py method">
+<dt id="torchdrug.data.Dictionary.device">
+<em class="property">property </em><code class="sig-name descname">device</code><a class="headerlink" href="#torchdrug.data.Dictionary.device" title="Permalink to this definition">¶</a></dt>
+<dd><p>Device.</p>
+</dd></dl>
+</dd></dl>
+</div>
 </div>
 <div class="section" id="datasets">
 <h2>Datasets<a class="headerlink" href="#datasets" title="Permalink to this headline">¶</a></h2>
@@ -1818,6 +1871,7 @@ abbreviated chemical symbol for atomic number <code class="docutils literal notr
 <li><a class="reference internal" href="#molecule">Molecule</a></li>
 <li><a class="reference internal" href="#packedgraph">PackedGraph</a></li>
 <li><a class="reference internal" href="#packedmolecule">PackedMolecule</a></li>
+<li><a class="reference internal" href="#dictionary">Dictionary</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#datasets">Datasets</a><ul>

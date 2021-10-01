@@ -1333,17 +1333,14 @@ This may provide better time or memory complexity than separate calls of
 <dt id="torchdrug.layers.DiffPool">
 <em class="property">class </em><code class="sig-name descname">DiffPool</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">input_dim</span></em>, <em class="sig-param"><span class="n">output_node</span></em>, <em class="sig-param"><span class="n">feature_layer</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">pool_layer</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">loss_weight</span><span class="o">=</span><span class="default_value">1</span></em>, <em class="sig-param"><span class="n">zero_diagonal</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">sparse</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/pool.html#DiffPool"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.layers.DiffPool" title="Permalink to this definition">¶</a></dt>
 <dd><p>Differentiable pooling operator from <a class="reference external" href="https://papers.nips.cc/paper/7729-hierarchical-graph-representation-learning-with-differentiable-pooling.pdf">Hierarchical Graph Representation Learning with Differentiable Pooling</a></p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>input_dim</strong> (<em>int</em>) – input dimension</p></li>
-<li><p><strong>output_node</strong> (<em>int</em>) – number of nodes after pooling</p></li>
-<li><p><strong>feature_layer</strong> (<em>Module</em><em>, </em><em>optional</em>) – graph convolution layer for embedding</p></li>
-<li><p><strong>pool_layer</strong> (<em>Module</em><em>, </em><em>optional</em>) – graph convolution layer for pooling assignment</p></li>
-<li><p><strong>loss_weight</strong> (<em>float</em><em>, </em><em>optional</em>) – weight of entropy regularization</p></li>
-<li><p><strong>zero_diagonal</strong> (<em>bool</em><em>, </em><em>optional</em>) – remove self loops in the pooled graph or not</p></li>
-<li><p><strong>sparse</strong> (<em>bool</em><em>, </em><em>optional</em>) – use sparse assignment or not</p></li>
-</ul>
+<dl class="simple">
+<dt>Parameter</dt><dd><p>input_dim (int): input dimension
+output_node (int): number of nodes after pooling
+feature_layer (Module, optional): graph convolution layer for embedding
+pool_layer (Module, optional): graph convolution layer for pooling assignment
+loss_weight (float, optional): weight of entropy regularization
+zero_diagonal (bool, optional): remove self loops in the pooled graph or not
+sparse (bool, optional): use sparse assignment or not</p>
 </dd>
 </dl>
 <dl class="py method">
@@ -1833,22 +1830,19 @@ repeated to pad the output to <span class="math notranslate nohighlight">\(k\)</
 </dd></dl>
 <dl class="py function">
 <dt id="torchdrug.layers.functional.variadic_arange">
-<code class="sig-name descname">variadic_arange</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">size</span></em>, <em class="sig-param"><span class="n">device</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/functional/functional.html#variadic_arange"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.layers.functional.variadic_arange" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">variadic_arange</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">size</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/functional/functional.html#variadic_arange"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.layers.functional.variadic_arange" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return a 1-D tensor that contains integer intervals of variadic sizes.
 This is a variadic variant of <code class="docutils literal notranslate"><span class="pre">torch.arange(stop).expand(batch_size,</span> <span class="pre">-1)</span></code>.</p>
 <p>Suppose there are <span class="math notranslate nohighlight">\(N\)</span> intervals.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>size</strong> (<em>LongTensor</em>) – size of intervals of shape <span class="math notranslate nohighlight">\((N,)\)</span></p></li>
-<li><p><strong>device</strong> (<em>torch.device</em><em>, </em><em>optional</em>) – device of the tensor</p></li>
-</ul>
+<dd class="field-odd"><p><strong>size</strong> (<em>LongTensor</em>) – size of intervals of shape <span class="math notranslate nohighlight">\((N,)\)</span></p>
 </dd>
 </dl>
 </dd></dl>
 <dl class="py function">
 <dt id="torchdrug.layers.functional.variadic_randperm">
-<code class="sig-name descname">variadic_randperm</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">size</span></em>, <em class="sig-param"><span class="n">device</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/functional/functional.html#variadic_randperm"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.layers.functional.variadic_randperm" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">variadic_randperm</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">size</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/functional/functional.html#variadic_randperm"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.layers.functional.variadic_randperm" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return random permutations for sets with variadic sizes.
 The <code class="docutils literal notranslate"><span class="pre">i</span></code>-th permutation contains integers from 0 to <code class="docutils literal notranslate"><span class="pre">size[i]</span> <span class="pre">-</span> <span class="pre">1</span></code>.</p>
 <p>Suppose there are <span class="math notranslate nohighlight">\(N\)</span> sets.</p>
@@ -1927,7 +1921,7 @@ The <code class="docutils literal notranslate"><span class="pre">i</span></code>
 <code class="sig-name descname">multi_slice_mask</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">starts</span></em>, <em class="sig-param"><span class="n">ends</span></em>, <em class="sig-param"><span class="n">length</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/functional/functional.html#multi_slice_mask"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.layers.functional.multi_slice_mask" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compute the union of multiple slices into a binary mask.</p>
 <p>Example:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mask</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">multi_slice_mask</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">]),</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">6</span><span class="p">]),</span> <span class="mi">6</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mask</span> <span class="o">=</span> <span class="n">multi_slice_mask</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">]),</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">6</span><span class="p">]),</span> <span class="mi">6</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">assert</span> <span class="p">(</span><span class="n">mask</span> <span class="o">==</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]))</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
 </pre></div>
 </div>

@@ -248,13 +248,40 @@
     <span class="k">return</span> <span class="n">F</span><span class="o">.</span><span class="n">softplus</span><span class="p">(</span><span class="nb">input</span><span class="p">)</span> <span class="o">-</span> <span class="n">F</span><span class="o">.</span><span class="n">softplus</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="nb">input</span><span class="o">.</span><span class="n">device</span><span class="p">))</span></div>
 
 
+<span class="k">def</span> <span class="nf">multi_slice</span><span class="p">(</span><span class="n">starts</span><span class="p">,</span> <span class="n">ends</span><span class="p">):</span>
+    <span class="sd">"""</span>
+<span class="sd">    Compute the union of indexes in multiple slices.</span>
+
+<span class="sd">    Example::</span>
+
+<span class="sd">        &gt;&gt;&gt; mask = multi_slice(torch.tensor([0, 1, 4]), torch.tensor([2, 3, 6]), 6)</span>
+<span class="sd">        &gt;&gt;&gt; assert (mask == torch.tensor([0, 1, 2, 4, 5]).all()</span>
+
+<span class="sd">    Parameters:</span>
+<span class="sd">        starts (LongTensor): start indexes of slices</span>
+<span class="sd">        ends (LongTensor): end indexes of slices</span>
+<span class="sd">    """</span>
+    <span class="n">values</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">cat</span><span class="p">([</span><span class="n">torch</span><span class="o">.</span><span class="n">ones_like</span><span class="p">(</span><span class="n">starts</span><span class="p">),</span> <span class="o">-</span><span class="n">torch</span><span class="o">.</span><span class="n">ones_like</span><span class="p">(</span><span class="n">ends</span><span class="p">)])</span>
+    <span class="n">slices</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">cat</span><span class="p">([</span><span class="n">starts</span><span class="p">,</span> <span class="n">ends</span><span class="p">])</span>
+    <span class="n">slices</span><span class="p">,</span> <span class="n">order</span> <span class="o">=</span> <span class="n">slices</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+    <span class="n">values</span> <span class="o">=</span> <span class="n">values</span><span class="p">[</span><span class="n">order</span><span class="p">]</span>
+    <span class="n">depth</span> <span class="o">=</span> <span class="n">values</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">valid</span> <span class="o">=</span> <span class="p">(</span><span class="n">values</span> <span class="o">==</span> <span class="mi">1</span> <span class="o">&amp;</span> <span class="n">depth</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="n">values</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span> <span class="o">&amp;</span> <span class="n">depth</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">slices</span> <span class="o">=</span> <span class="n">slices</span><span class="p">[</span><span class="n">valid</span><span class="p">]</span>
+
+    <span class="n">starts</span><span class="p">,</span> <span class="n">ends</span> <span class="o">=</span> <span class="n">slices</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">t</span><span class="p">()</span>
+    <span class="n">indexes</span> <span class="o">=</span> <span class="n">variadic_arange</span><span class="p">(</span><span class="n">ends</span> <span class="o">-</span> <span class="n">starts</span><span class="p">)</span>
+    <span class="n">indexes</span> <span class="o">=</span> <span class="n">indexes</span> <span class="o">+</span> <span class="n">starts</span><span class="o">.</span><span class="n">repeat_interleave</span><span class="p">(</span><span class="n">size</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">indexes</span>
+
+
 <div class="viewcode-block" id="multi_slice_mask"><a class="viewcode-back" href="../../../../api/layers.html#torchdrug.layers.functional.multi_slice_mask">[docs]</a><span class="k">def</span> <span class="nf">multi_slice_mask</span><span class="p">(</span><span class="n">starts</span><span class="p">,</span> <span class="n">ends</span><span class="p">,</span> <span class="n">length</span><span class="p">):</span>
     <span class="sd">"""</span>
 <span class="sd">    Compute the union of multiple slices into a binary mask.</span>
 
 <span class="sd">    Example::</span>
 
-<span class="sd">        &gt;&gt;&gt; mask = F.multi_slice_mask(torch.tensor([0, 1, 4]), torch.tensor([2, 3, 6]), 6)</span>
+<span class="sd">        &gt;&gt;&gt; mask = multi_slice_mask(torch.tensor([0, 1, 4]), torch.tensor([2, 3, 6]), 6)</span>
 <span class="sd">        &gt;&gt;&gt; assert (mask == torch.tensor([1, 1, 1, 0, 1, 1])).all()</span>
 
 <span class="sd">    Parameters:</span>
@@ -263,10 +290,10 @@
 <span class="sd">        length (int): length of mask</span>
 <span class="sd">    """</span>
     <span class="n">values</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">cat</span><span class="p">([</span><span class="n">torch</span><span class="o">.</span><span class="n">ones_like</span><span class="p">(</span><span class="n">starts</span><span class="p">),</span> <span class="o">-</span><span class="n">torch</span><span class="o">.</span><span class="n">ones_like</span><span class="p">(</span><span class="n">ends</span><span class="p">)])</span>
-    <span class="n">indexes</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">cat</span><span class="p">([</span><span class="n">starts</span><span class="p">,</span> <span class="n">ends</span><span class="p">])</span>
-    <span class="k">if</span> <span class="n">indexes</span><span class="o">.</span><span class="n">numel</span><span class="p">():</span>
-        <span class="k">assert</span> <span class="n">indexes</span><span class="o">.</span><span class="n">min</span><span class="p">()</span> <span class="o">&gt;=</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">indexes</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">&lt;=</span> <span class="n">length</span>
-    <span class="n">mask</span> <span class="o">=</span> <span class="n">scatter_add</span><span class="p">(</span><span class="n">values</span><span class="p">,</span> <span class="n">indexes</span><span class="p">,</span> <span class="n">dim_size</span><span class="o">=</span><span class="n">length</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">slices</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">cat</span><span class="p">([</span><span class="n">starts</span><span class="p">,</span> <span class="n">ends</span><span class="p">])</span>
+    <span class="k">if</span> <span class="n">slices</span><span class="o">.</span><span class="n">numel</span><span class="p">():</span>
+        <span class="k">assert</span> <span class="n">slices</span><span class="o">.</span><span class="n">min</span><span class="p">()</span> <span class="o">&gt;=</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">slices</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">&lt;=</span> <span class="n">length</span>
+    <span class="n">mask</span> <span class="o">=</span> <span class="n">scatter_add</span><span class="p">(</span><span class="n">values</span><span class="p">,</span> <span class="n">slices</span><span class="p">,</span> <span class="n">dim_size</span><span class="o">=</span><span class="n">length</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
     <span class="n">mask</span> <span class="o">=</span> <span class="n">mask</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">bool</span><span class="p">()</span>
     <span class="k">return</span> <span class="n">mask</span></div>
 
@@ -296,12 +323,8 @@
 <span class="sd">    Parameters:</span>
 <span class="sd">        size (LongTensor): size of each sample</span>
 <span class="sd">    """</span>
-    <span class="n">cum_size</span> <span class="o">=</span> <span class="n">size</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-    <span class="c1"># special case 1: size[-1] = 0</span>
-    <span class="n">index</span> <span class="o">=</span> <span class="n">cum_size</span><span class="p">[</span><span class="n">cum_size</span> <span class="o">&lt;</span> <span class="n">cum_size</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]]</span>
-    <span class="c1"># special case 2: size[i] = size[i+1] = 0</span>
-    <span class="n">index2sample</span> <span class="o">=</span> <span class="n">scatter_add</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">ones_like</span><span class="p">(</span><span class="n">index</span><span class="p">),</span> <span class="n">index</span><span class="p">,</span> <span class="n">dim_size</span><span class="o">=</span><span class="n">cum_size</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
-    <span class="n">index2sample</span> <span class="o">=</span> <span class="n">index2sample</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+    <span class="nb">range</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">size</span><span class="p">),</span> <span class="n">device</span><span class="o">=</span><span class="n">size</span><span class="o">.</span><span class="n">device</span><span class="p">)</span>
+    <span class="n">index2sample</span> <span class="o">=</span> <span class="nb">range</span><span class="o">.</span><span class="n">repeat_interleave</span><span class="p">(</span><span class="n">size</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">index2sample</span>
 
 
@@ -551,7 +574,7 @@
     <span class="k">return</span> <span class="n">value</span><span class="p">,</span> <span class="n">index</span></div>
 
 
-<div class="viewcode-block" id="variadic_arange"><a class="viewcode-back" href="../../../../api/layers.html#torchdrug.layers.functional.variadic_arange">[docs]</a><span class="k">def</span> <span class="nf">variadic_arange</span><span class="p">(</span><span class="n">size</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="variadic_arange"><a class="viewcode-back" href="../../../../api/layers.html#torchdrug.layers.functional.variadic_arange">[docs]</a><span class="k">def</span> <span class="nf">variadic_arange</span><span class="p">(</span><span class="n">size</span><span class="p">):</span>
     <span class="sd">"""</span>
 <span class="sd">    Return a 1-D tensor that contains integer intervals of variadic sizes.</span>
 <span class="sd">    This is a variadic variant of ``torch.arange(stop).expand(batch_size, -1)``.</span>
@@ -560,17 +583,15 @@
 
 <span class="sd">    Parameters:</span>
 <span class="sd">        size (LongTensor): size of intervals of shape :math:`(N,)`</span>
-<span class="sd">        device (torch.device, optional): device of the tensor</span>
 <span class="sd">    """</span>
-    <span class="n">index2sample</span> <span class="o">=</span> <span class="n">_size_to_index</span><span class="p">(</span><span class="n">size</span><span class="p">)</span>
     <span class="n">starts</span> <span class="o">=</span> <span class="n">size</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">-</span> <span class="n">size</span>
 
-    <span class="nb">range</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">size</span><span class="o">.</span><span class="n">sum</span><span class="p">(),</span> <span class="n">device</span><span class="o">=</span><span class="n">device</span><span class="p">)</span>
-    <span class="nb">range</span> <span class="o">=</span> <span class="nb">range</span> <span class="o">-</span> <span class="n">starts</span><span class="p">[</span><span class="n">index2sample</span><span class="p">]</span>
+    <span class="nb">range</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">size</span><span class="o">.</span><span class="n">sum</span><span class="p">(),</span> <span class="n">device</span><span class="o">=</span><span class="n">size</span><span class="o">.</span><span class="n">device</span><span class="p">)</span>
+    <span class="nb">range</span> <span class="o">=</span> <span class="nb">range</span> <span class="o">-</span> <span class="n">starts</span><span class="o">.</span><span class="n">repeat_interleave</span><span class="p">(</span><span class="n">size</span><span class="p">)</span>
     <span class="k">return</span> <span class="nb">range</span></div>
 
 
-<div class="viewcode-block" id="variadic_randperm"><a class="viewcode-back" href="../../../../api/layers.html#torchdrug.layers.functional.variadic_randperm">[docs]</a><span class="k">def</span> <span class="nf">variadic_randperm</span><span class="p">(</span><span class="n">size</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="variadic_randperm"><a class="viewcode-back" href="../../../../api/layers.html#torchdrug.layers.functional.variadic_randperm">[docs]</a><span class="k">def</span> <span class="nf">variadic_randperm</span><span class="p">(</span><span class="n">size</span><span class="p">):</span>
     <span class="sd">"""</span>
 <span class="sd">    Return random permutations for sets with variadic sizes.</span>
 <span class="sd">    The ``i``-th permutation contains integers from 0 to ``size[i] - 1``.</span>
@@ -581,7 +602,7 @@
 <span class="sd">        size (LongTensor): size of sets of shape :math:`(N,)`</span>
 <span class="sd">        device (torch.device, optional): device of the tensor</span>
 <span class="sd">    """</span>
-    <span class="n">rand</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">size</span><span class="o">.</span><span class="n">sum</span><span class="p">(),</span> <span class="n">device</span><span class="o">=</span><span class="n">device</span><span class="p">)</span>
+    <span class="n">rand</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">size</span><span class="o">.</span><span class="n">sum</span><span class="p">(),</span> <span class="n">device</span><span class="o">=</span><span class="n">size</span><span class="o">.</span><span class="n">device</span><span class="p">)</span>
     <span class="n">perm</span> <span class="o">=</span> <span class="n">variadic_sort</span><span class="p">(</span><span class="n">rand</span><span class="p">,</span> <span class="n">size</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
     <span class="k">return</span> <span class="n">perm</span></div>
 

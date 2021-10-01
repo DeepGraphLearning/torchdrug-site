@@ -369,7 +369,7 @@ Available operators are <code class="docutils literal notranslate"><span class="
 </ul>
 </dd>
 </dl>
-<p>Examples:</p>
+<p>Example:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># assume 4 workers</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">rank</span> <span class="o">=</span> <span class="n">comm</span><span class="o">.</span><span class="n">get_rank</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
@@ -391,7 +391,7 @@ Available operators are <code class="docutils literal notranslate"><span class="
 </ul>
 </dd>
 </dl>
-<p>Examples:</p>
+<p>Example:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># assume 4 workers</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">rank</span> <span class="o">=</span> <span class="n">comm</span><span class="o">.</span><span class="n">get_rank</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
@@ -414,7 +414,7 @@ Available operators are <code class="docutils literal notranslate"><span class="
 </ul>
 </dd>
 </dl>
-<p>Examples:</p>
+<p>Example:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># assume 4 workers</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">rank</span> <span class="o">=</span> <span class="n">comm</span><span class="o">.</span><span class="n">get_rank</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">rng</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
@@ -510,7 +510,7 @@ If not specified, extract all members.</p>
 <dt id="torchdrug.utils.capture_rdkit_log">
 <code class="sig-name descname">capture_rdkit_log</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/utils/io.html#capture_rdkit_log"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.utils.capture_rdkit_log" title="Permalink to this definition">¶</a></dt>
 <dd><p>Context manager to capture all rdkit loggings.</p>
-<p>Examples:</p>
+<p>Example:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">with</span> <span class="n">utils</span><span class="o">.</span><span class="n">capture_rdkit_log</span><span class="p">()</span> <span class="k">as</span> <span class="n">log</span><span class="p">:</span>
 <span class="gp">&gt;&gt;&gt; </span>    <span class="o">...</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">log</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
