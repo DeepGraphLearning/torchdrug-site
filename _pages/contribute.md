@@ -28,7 +28,7 @@ If you are a new open source contributor, we recommend you to take a look at the
 
 In the following cases, you are encouraged to [submit an issue] on GitHub.
 
-[submit an issue]: https://github.com/DeepGraphLearning/drugdiscovery/issues
+[submit an issue]: https://github.com/DeepGraphLearning/torchdrug/issues
 
 - Issues or bug reports
 - Feature requests
@@ -51,8 +51,8 @@ You can contribute code to the project through pull requests. To make a pull req
 - Push it to your GitHub repository
 - [Create a pull request] in TorchDrug
 
-[Fork the TorchDrug repository]: https://github.com/DeepGraphLearning/drugdiscovery/fork
-[Create a pull request]: https://github.com/DeepGraphLearning/drugdiscovery/pulls
+[Fork the TorchDrug repository]: https://github.com/DeepGraphLearning/torchdrug/fork
+[Create a pull request]: https://github.com/DeepGraphLearning/torchdrug/pulls
 
 If your forked repository is behind the latest version, you can create a pull request in your repository to pull the latest version from TorchDrug.
 
@@ -71,8 +71,8 @@ conda uninstall torchdrug
 Clone the repository and setup it in `develop` mode.
 
 ```bash
-git clone https://github.com/DeepGraphLearning/drugdiscovery/
-cd drugdiscovery
+git clone https://github.com/DeepGraphLearning/torchdrug/
+cd torchdrug
 python setup.py develop
 ```
 
