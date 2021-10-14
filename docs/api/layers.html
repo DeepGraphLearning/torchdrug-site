@@ -4,7 +4,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1"/><link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="torchdrug.models" href="models.html" /><link rel="prev" title="torchdrug.metrics" href="metrics.html" />
 
     <meta name="generator" content="sphinx-3.1.2, furo 2020.12.09.beta21"/>
-        <title>torchdrug.layers - TorchDrug 0.1.1 documentation</title>
+        <title>torchdrug.layers - TorchDrug 0.1.2 documentation</title>
       <link rel="stylesheet" href="../_static/styles/furo.css?digest=a3f371badb8538d75df213ccffb17a4f6e8f3ac5">
     <link rel="stylesheet" href="../_static/pygments.css">
     <link media="(prefers-color-scheme: dark)" rel="stylesheet" href="../_static/pygments_dark.css">
@@ -106,7 +106,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="../index.html"><div class="brand">TorchDrug 0.1.1 documentation</div></a>
+      <a href="../index.html"><div class="brand">TorchDrug 0.1.2 documentation</div></a>
     </div>
     <div class="header-right">
       <label class="toc-overlay-icon toc-header-icon" for="__toc">
@@ -1792,6 +1792,20 @@ Available reductions are <code class="docutils literal notranslate"><span class=
 </dl>
 </dd></dl>
 <dl class="py function">
+<dt id="torchdrug.layers.functional.variadic_softmax">
+<code class="sig-name descname">variadic_softmax</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">input</span></em>, <em class="sig-param"><span class="n">size</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/functional/functional.html#variadic_softmax"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.layers.functional.variadic_softmax" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute softmax over categories with variadic sizes.</p>
+<p>Suppose there are <span class="math notranslate nohighlight">\(N\)</span> samples, and the numbers of categories in all samples are summed to <span class="math notranslate nohighlight">\(B\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input</strong> (<em>Tensor</em>) – input of shape <span class="math notranslate nohighlight">\((B, ...)\)</span></p></li>
+<li><p><strong>size</strong> (<em>LongTensor</em>) – number of categories of shape <span class="math notranslate nohighlight">\((N,)\)</span></p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py function">
 <dt id="torchdrug.layers.functional.variadic_sort">
 <code class="sig-name descname">variadic_sort</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">input</span></em>, <em class="sig-param"><span class="n">size</span></em>, <em class="sig-param"><span class="n">descending</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/functional/functional.html#variadic_sort"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.layers.functional.variadic_sort" title="Permalink to this definition">¶</a></dt>
 <dd><p>Sort elements in sets with variadic sizes.</p>
@@ -1855,6 +1869,10 @@ The <code class="docutils literal notranslate"><span class="pre">i</span></code>
 </dd>
 </dl>
 </dd></dl>
+<dl class="py function">
+<dt id="torchdrug.layers.functional.variadic_sample">
+<code class="sig-name descname">variadic_sample</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">input</span></em>, <em class="sig-param"><span class="n">size</span></em>, <em class="sig-param"><span class="n">k</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/functional/functional.html#variadic_sample"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.layers.functional.variadic_sample" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
 </div>
 <div class="section" id="tensor-reduction">
 <h3>Tensor Reduction<a class="headerlink" href="#tensor-reduction" title="Permalink to this headline">¶</a></h3>
@@ -1912,6 +1930,24 @@ The <code class="docutils literal notranslate"><span class="pre">i</span></code>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>index</strong> (<em>Tensor</em>) – index</p></li>
 <li><p><strong>size</strong> (<em>int</em>) – size of the one-hot dimension</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py function">
+<dt id="torchdrug.layers.functional.multi_slice">
+<code class="sig-name descname">multi_slice</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">starts</span></em>, <em class="sig-param"><span class="n">ends</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/functional/functional.html#multi_slice"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.layers.functional.multi_slice" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute the union of indexes in multiple slices.</p>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mask</span> <span class="o">=</span> <span class="n">multi_slice</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">]),</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">6</span><span class="p">]),</span> <span class="mi">6</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">assert</span> <span class="p">(</span><span class="n">mask</span> <span class="o">==</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">])</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>starts</strong> (<em>LongTensor</em>) – start indexes of slices</p></li>
+<li><p><strong>ends</strong> (<em>LongTensor</em>) – end indexes of slices</p></li>
 </ul>
 </dd>
 </dl>

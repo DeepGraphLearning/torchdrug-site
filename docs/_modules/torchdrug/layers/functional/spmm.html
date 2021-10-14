@@ -4,7 +4,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1"/><link rel="index" title="Index" href="../../../../genindex.html" /><link rel="search" title="Search" href="../../../../search.html" />
 
     <meta name="generator" content="sphinx-3.1.2, furo 2020.12.09.beta21"/>
-        <title>torchdrug.layers.functional.spmm - TorchDrug 0.1.1 documentation</title>
+        <title>torchdrug.layers.functional.spmm - TorchDrug 0.1.2 documentation</title>
       <link rel="stylesheet" href="../../../../_static/styles/furo.css?digest=a3f371badb8538d75df213ccffb17a4f6e8f3ac5">
     <link rel="stylesheet" href="../../../../_static/pygments.css">
     <link media="(prefers-color-scheme: dark)" rel="stylesheet" href="../../../../_static/pygments_dark.css">
@@ -106,7 +106,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="../../../../index.html"><div class="brand">TorchDrug 0.1.1 documentation</div></a>
+      <a href="../../../../index.html"><div class="brand">TorchDrug 0.1.2 documentation</div></a>
     </div>
     <div class="header-right">
       <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
@@ -276,6 +276,31 @@
         <span class="k">return</span> <span class="n">sparse_grad</span><span class="p">,</span> <span class="n">input_grad</span>
 
 
+<span class="k">class</span> <span class="nc">SPMMAddAddFunction</span><span class="p">(</span><span class="n">autograd</span><span class="o">.</span><span class="n">Function</span><span class="p">):</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="n">ctx</span><span class="p">,</span> <span class="n">sparse</span><span class="p">,</span> <span class="nb">input</span><span class="p">):</span>
+        <span class="k">assert</span> <span class="n">sparse</span><span class="o">.</span><span class="n">is_coalesced</span><span class="p">()</span>
+        <span class="k">if</span> <span class="nb">input</span><span class="o">.</span><span class="n">device</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="s2">"cuda"</span><span class="p">:</span>
+            <span class="n">forward</span> <span class="o">=</span> <span class="n">spmm</span><span class="o">.</span><span class="n">spmm_add_add_forward_cuda</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">forward</span> <span class="o">=</span> <span class="n">spmm</span><span class="o">.</span><span class="n">spmm_add_add_forward_cpu</span>
+        <span class="n">output</span> <span class="o">=</span> <span class="n">forward</span><span class="p">(</span><span class="n">sparse</span><span class="p">,</span> <span class="nb">input</span><span class="p">)</span>
+        <span class="n">ctx</span><span class="o">.</span><span class="n">save_for_backward</span><span class="p">(</span><span class="n">sparse</span><span class="p">,</span> <span class="nb">input</span><span class="p">,</span> <span class="n">output</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">output</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">backward</span><span class="p">(</span><span class="n">ctx</span><span class="p">,</span> <span class="n">output_grad</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">output_grad</span><span class="o">.</span><span class="n">device</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="s2">"cuda"</span><span class="p">:</span>
+            <span class="n">backward</span> <span class="o">=</span> <span class="n">spmm</span><span class="o">.</span><span class="n">spmm_add_add_backward_cuda</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">backward</span> <span class="o">=</span> <span class="n">spmm</span><span class="o">.</span><span class="n">spmm_add_add_backward_cpu</span>
+        <span class="n">sparse_grad</span><span class="p">,</span> <span class="n">input_grad</span> <span class="o">=</span> <span class="n">backward</span><span class="p">(</span><span class="o">*</span><span class="n">ctx</span><span class="o">.</span><span class="n">saved_tensors</span><span class="p">,</span> <span class="n">output_grad</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">ctx</span><span class="o">.</span><span class="n">saved_tensors</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">requires_grad</span><span class="p">:</span>
+            <span class="n">sparse_grad</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">return</span> <span class="n">sparse_grad</span><span class="p">,</span> <span class="n">input_grad</span>
+
+
 <span class="k">class</span> <span class="nc">SPMMMinAddFunction</span><span class="p">(</span><span class="n">autograd</span><span class="o">.</span><span class="n">Function</span><span class="p">):</span>
 
     <span class="nd">@staticmethod</span>
@@ -395,6 +420,31 @@
             <span class="n">backward</span> <span class="o">=</span> <span class="n">spmm</span><span class="o">.</span><span class="n">rspmm_max_mul_backward_cuda</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">backward</span> <span class="o">=</span> <span class="n">spmm</span><span class="o">.</span><span class="n">rspmm_max_mul_backward_cpu</span>
+        <span class="n">sparse_grad</span><span class="p">,</span> <span class="n">relation_grad</span><span class="p">,</span> <span class="n">input_grad</span> <span class="o">=</span> <span class="n">backward</span><span class="p">(</span><span class="o">*</span><span class="n">ctx</span><span class="o">.</span><span class="n">saved_tensors</span><span class="p">,</span> <span class="n">output_grad</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">ctx</span><span class="o">.</span><span class="n">saved_tensors</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">requires_grad</span><span class="p">:</span>
+            <span class="n">sparse_grad</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">return</span> <span class="n">sparse_grad</span><span class="p">,</span> <span class="n">relation_grad</span><span class="p">,</span> <span class="n">input_grad</span>
+
+
+<span class="k">class</span> <span class="nc">RSPMMAddAddFunction</span><span class="p">(</span><span class="n">autograd</span><span class="o">.</span><span class="n">Function</span><span class="p">):</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="n">ctx</span><span class="p">,</span> <span class="n">sparse</span><span class="p">,</span> <span class="n">relation</span><span class="p">,</span> <span class="nb">input</span><span class="p">):</span>
+        <span class="k">assert</span> <span class="n">sparse</span><span class="o">.</span><span class="n">is_coalesced</span><span class="p">()</span>
+        <span class="k">if</span> <span class="nb">input</span><span class="o">.</span><span class="n">device</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="s2">"cuda"</span><span class="p">:</span>
+            <span class="n">forward</span> <span class="o">=</span> <span class="n">spmm</span><span class="o">.</span><span class="n">rspmm_add_add_forward_cuda</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">forward</span> <span class="o">=</span> <span class="n">spmm</span><span class="o">.</span><span class="n">rspmm_add_add_forward_cpu</span>
+        <span class="n">output</span> <span class="o">=</span> <span class="n">forward</span><span class="p">(</span><span class="n">sparse</span><span class="p">,</span> <span class="n">relation</span><span class="p">,</span> <span class="nb">input</span><span class="p">)</span>
+        <span class="n">ctx</span><span class="o">.</span><span class="n">save_for_backward</span><span class="p">(</span><span class="n">sparse</span><span class="p">,</span> <span class="n">relation</span><span class="p">,</span> <span class="nb">input</span><span class="p">,</span> <span class="n">output</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">output</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">backward</span><span class="p">(</span><span class="n">ctx</span><span class="p">,</span> <span class="n">output_grad</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">output_grad</span><span class="o">.</span><span class="n">device</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="s2">"cuda"</span><span class="p">:</span>
+            <span class="n">backward</span> <span class="o">=</span> <span class="n">spmm</span><span class="o">.</span><span class="n">rspmm_add_add_backward_cuda</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">backward</span> <span class="o">=</span> <span class="n">spmm</span><span class="o">.</span><span class="n">rspmm_add_add_backward_cpu</span>
         <span class="n">sparse_grad</span><span class="p">,</span> <span class="n">relation_grad</span><span class="p">,</span> <span class="n">input_grad</span> <span class="o">=</span> <span class="n">backward</span><span class="p">(</span><span class="o">*</span><span class="n">ctx</span><span class="o">.</span><span class="n">saved_tensors</span><span class="p">,</span> <span class="n">output_grad</span><span class="p">)</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">ctx</span><span class="o">.</span><span class="n">saved_tensors</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">requires_grad</span><span class="p">:</span>
             <span class="n">sparse_grad</span> <span class="o">=</span> <span class="kc">None</span>

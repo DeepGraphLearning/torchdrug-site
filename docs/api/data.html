@@ -4,7 +4,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1"/><link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="torchdrug.datasets" href="datasets.html" /><link rel="prev" title="torchdrug.core" href="core.html" />
 
     <meta name="generator" content="sphinx-3.1.2, furo 2020.12.09.beta21"/>
-        <title>torchdrug.data - TorchDrug 0.1.1 documentation</title>
+        <title>torchdrug.data - TorchDrug 0.1.2 documentation</title>
       <link rel="stylesheet" href="../_static/styles/furo.css?digest=a3f371badb8538d75df213ccffb17a4f6e8f3ac5">
     <link rel="stylesheet" href="../_static/pygments.css">
     <link media="(prefers-color-scheme: dark)" rel="stylesheet" href="../_static/pygments_dark.css">
@@ -106,7 +106,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="../index.html"><div class="brand">TorchDrug 0.1.1 documentation</div></a>
+      <a href="../index.html"><div class="brand">TorchDrug 0.1.2 documentation</div></a>
     </div>
     <div class="header-right">
       <label class="toc-overlay-icon toc-header-icon" for="__toc">
@@ -256,7 +256,7 @@ By default, it will be inferred from the largest id in <cite>edge_list</cite></p
 <dd class="field-odd"><p>connected components, number of connected components per graph</p>
 </dd>
 <dt class="field-even">Return type</dt>
-<dd class="field-even"><p>(<a class="reference internal" href="#torchdrug.data.PackedGraph" title="torchdrug.data.PackedGraph">PackedGraph</a>, Tensor)</p>
+<dd class="field-even"><p>(<a class="reference internal" href="#torchdrug.data.PackedGraph" title="torchdrug.data.PackedGraph">PackedGraph</a>, LongTensor)</p>
 </dd>
 </dl>
 </dd></dl>
@@ -360,27 +360,27 @@ For zero entries in the adjacency matrix, their edge features will be ignored.</
 <dd><p>Context manager for graph attributes.</p>
 </dd></dl>
 <dl class="py method">
-<dt id="torchdrug.data.Graph.index">
-<code class="sig-name descname">index</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">edge</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/data/graph.html#Graph.index"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.data.Graph.index" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return all indexes of the edge. Support partial match with wildcard <cite>None</cite>.</p>
-<p>Examples:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">graph</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">Graph</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">]])</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="k">assert</span> <span class="n">graph</span><span class="o">.</span><span class="n">index</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span> <span class="o">==</span> <span class="p">[]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="k">assert</span> <span class="n">graph</span><span class="o">.</span><span class="n">index</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span> <span class="o">==</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="k">assert</span> <span class="n">graph</span><span class="o">.</span><span class="n">index</span><span class="p">([</span><span class="kc">None</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="kc">None</span><span class="p">])</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span> <span class="o">==</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
-</pre></div>
-</div>
+<dt id="torchdrug.data.Graph.match">
+<code class="sig-name descname">match</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">pattern</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/data/graph.html#Graph.match"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.data.Graph.match" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return all matched indexes for each pattern. Support patterns with <code class="docutils literal notranslate"><span class="pre">-1</span></code> as the wildcard.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>edge</strong> (<em>array_like</em>) – queried edge</p>
+<dd class="field-odd"><p><strong>pattern</strong> (<em>array_like</em>) – index of shape <span class="math notranslate nohighlight">\((N, 2)\)</span> or <span class="math notranslate nohighlight">\((N, 3)\)</span></p>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>indexes of the edge</p>
+<dd class="field-even"><p>matched indexes, number of matches per edge</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>Tensor</p>
+<dd class="field-odd"><p>(LongTensor, LongTensor)</p>
 </dd>
 </dl>
+<p>Examples:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">graph</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">Graph</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">index</span><span class="p">,</span> <span class="n">num_match</span> <span class="o">=</span> <span class="n">graph</span><span class="o">.</span><span class="n">match</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">assert</span> <span class="p">(</span><span class="n">index</span> <span class="o">==</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">2</span><span class="p">]))</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">assert</span> <span class="p">(</span><span class="n">num_match</span> <span class="o">==</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">]))</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
+</pre></div>
+</div>
 </dd></dl>
 <dl class="py method">
 <dt id="torchdrug.data.Graph.node">
@@ -1230,9 +1230,22 @@ If not provided, show the figure in window.</p></li>
 <p>This is a non-op if the dictionary is already in CUDA memory.</p>
 </dd></dl>
 <dl class="py method">
+<dt id="torchdrug.data.Dictionary.get">
+<code class="sig-name descname">get</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">keys</span></em>, <em class="sig-param"><span class="n">default</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/data/dictionary.html#Dictionary.get"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.data.Dictionary.get" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the value for each key if the key is in the dictionary, otherwise the default value is returned.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>keys</strong> (<em>LongTensor</em>) – keys of arbitrary shape</p></li>
+<li><p><strong>default</strong> (<em>int</em><em> or </em><em>Tensor</em><em>, </em><em>optional</em>) – default return value. By default, 0 is used.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
 <dt id="torchdrug.data.Dictionary.has_key">
 <code class="sig-name descname">has_key</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">keys</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/data/dictionary.html#Dictionary.has_key"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.data.Dictionary.has_key" title="Permalink to this definition">¶</a></dt>
-<dd><p>Check whether each query exist in the dictionary.</p>
+<dd><p>Check whether each key exists in the dictionary.</p>
 </dd></dl>
 <dl class="py method">
 <dt id="torchdrug.data.Dictionary.to_dict">

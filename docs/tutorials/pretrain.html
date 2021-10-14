@@ -4,7 +4,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1"/><link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Molecule Generation" href="generation.html" /><link rel="prev" title="Property Prediction" href="property_prediction.html" />
 
     <meta name="generator" content="sphinx-3.1.2, furo 2020.12.09.beta21"/>
-        <title>Pretrained Molecular Representations - TorchDrug 0.1.1 documentation</title>
+        <title>Pretrained Molecular Representations - TorchDrug 0.1.2 documentation</title>
       <link rel="stylesheet" href="../_static/styles/furo.css?digest=a3f371badb8538d75df213ccffb17a4f6e8f3ac5">
     <link rel="stylesheet" href="../_static/pygments.css">
     <link media="(prefers-color-scheme: dark)" rel="stylesheet" href="../_static/pygments_dark.css">
@@ -106,7 +106,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="../index.html"><div class="brand">TorchDrug 0.1.1 documentation</div></a>
+      <a href="../index.html"><div class="brand">TorchDrug 0.1.2 documentation</div></a>
     </div>
     <div class="header-right">
       <label class="toc-overlay-icon toc-header-icon" for="__toc">
@@ -242,7 +242,7 @@ figure illustrates the high-level idea of InfoGraph.</p>
 <p>The aim of <a class="reference internal" href="#attribute-masking">Attribute Masking</a> (AM) is to capture domain knowledge by learning the
 regularities of the node/edge attributes distributed over graph structure. The high-level
 idea is to predict atom types in molecular graphs from randomly masked node features.</p>
-<img alt="../_images/attrmasking.png" src="../_images/attrmasking.png"/>
+<img alt="../_images/attribute_masking.png" src="../_images/attribute_masking.png"/>
 <p>Again, we use GIN as our graph representation model.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torch</span>
 <span class="kn">from</span> <span class="nn">torch</span> <span class="kn">import</span> <span class="n">nn</span><span class="p">,</span> <span class="n">optim</span>

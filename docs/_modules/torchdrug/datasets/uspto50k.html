@@ -4,7 +4,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1"/><link rel="index" title="Index" href="../../../genindex.html" /><link rel="search" title="Search" href="../../../search.html" />
 
     <meta name="generator" content="sphinx-3.1.2, furo 2020.12.09.beta21"/>
-        <title>torchdrug.datasets.uspto50k - TorchDrug 0.1.1 documentation</title>
+        <title>torchdrug.datasets.uspto50k - TorchDrug 0.1.2 documentation</title>
       <link rel="stylesheet" href="../../../_static/styles/furo.css?digest=a3f371badb8538d75df213ccffb17a4f6e8f3ac5">
     <link rel="stylesheet" href="../../../_static/pygments.css">
     <link media="(prefers-color-scheme: dark)" rel="stylesheet" href="../../../_static/pygments_dark.css">
@@ -106,7 +106,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="../../../index.html"><div class="brand">TorchDrug 0.1.1 documentation</div></a>
+      <a href="../../../index.html"><div class="brand">TorchDrug 0.1.2 documentation</div></a>
     </div>
     <div class="header-right">
       <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
@@ -291,6 +291,7 @@
 
         <span class="c1"># check edges in the product</span>
         <span class="n">product</span> <span class="o">=</span> <span class="n">product</span><span class="o">.</span><span class="n">directed</span><span class="p">()</span>
+        <span class="c1"># O(n^2) brute-force match is faster than O(nlogn) data.Graph.match for small molecules</span>
         <span class="n">mapped_edge</span> <span class="o">=</span> <span class="n">product</span><span class="o">.</span><span class="n">edge_list</span><span class="o">.</span><span class="n">clone</span><span class="p">()</span>
         <span class="n">mapped_edge</span><span class="p">[:,</span> <span class="p">:</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">prod2react</span><span class="p">[</span><span class="n">mapped_edge</span><span class="p">[:,</span> <span class="p">:</span><span class="mi">2</span><span class="p">]]</span>
         <span class="n">is_same_index</span> <span class="o">=</span> <span class="n">mapped_edge</span><span class="o">.</span><span class="n">unsqueeze</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">==</span> <span class="n">reactant</span><span class="o">.</span><span class="n">edge_list</span><span class="o">.</span><span class="n">unsqueeze</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
@@ -311,8 +312,10 @@
 
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">edge_added</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
             <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">edge_added</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span> <span class="c1"># add a single edge</span>
-                <span class="n">index</span> <span class="o">=</span> <span class="n">product</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">edge_added</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-                <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">index</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span>
+                <span class="nb">any</span> <span class="o">=</span> <span class="o">-</span><span class="n">torch</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">long</span><span class="p">)</span>
+                <span class="n">pattern</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">cat</span><span class="p">([</span><span class="n">edge_added</span><span class="p">,</span> <span class="nb">any</span><span class="p">],</span> <span class="n">dim</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+                <span class="n">index</span><span class="p">,</span> <span class="n">num_match</span> <span class="o">=</span> <span class="n">product</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">pattern</span><span class="p">)</span>
+                <span class="k">assert</span> <span class="n">num_match</span><span class="o">.</span><span class="n">item</span><span class="p">()</span> <span class="o">==</span> <span class="mi">1</span>
                 <span class="n">edge_label</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
                 <span class="n">h</span><span class="p">,</span> <span class="n">t</span> <span class="o">=</span> <span class="n">edge_added</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
                 <span class="n">reaction_center</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([</span><span class="n">product</span><span class="o">.</span><span class="n">atom_map</span><span class="p">[</span><span class="n">h</span><span class="p">],</span> <span class="n">product</span><span class="o">.</span><span class="n">atom_map</span><span class="p">[</span><span class="n">t</span><span class="p">]])</span>
@@ -360,7 +363,10 @@
             <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">edge_added</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>  <span class="c1"># add a single edge</span>
                 <span class="n">edge</span> <span class="o">=</span> <span class="n">edge_added</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
                 <span class="n">reverse_edge</span> <span class="o">=</span> <span class="n">edge</span><span class="o">.</span><span class="n">flip</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-                <span class="n">index</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">cat</span><span class="p">([</span><span class="n">product</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">edge</span><span class="p">),</span> <span class="n">product</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">reverse_edge</span><span class="p">)])</span>
+                <span class="nb">any</span> <span class="o">=</span> <span class="o">-</span><span class="n">torch</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">long</span><span class="p">)</span>
+                <span class="n">pattern</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">cat</span><span class="p">([</span><span class="n">edge</span><span class="p">,</span> <span class="n">reverse_edge</span><span class="p">])</span>
+                <span class="n">pattern</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">cat</span><span class="p">([</span><span class="n">pattern</span><span class="p">,</span> <span class="nb">any</span><span class="p">],</span> <span class="n">dim</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+                <span class="n">index</span><span class="p">,</span> <span class="n">num_match</span> <span class="o">=</span> <span class="n">product</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">pattern</span><span class="p">)</span>
                 <span class="n">edge_mask</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">product</span><span class="o">.</span><span class="n">num_edge</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">bool</span><span class="p">)</span>
                 <span class="n">edge_mask</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
                 <span class="n">product</span> <span class="o">=</span> <span class="n">product</span><span class="o">.</span><span class="n">edge_mask</span><span class="p">(</span><span class="n">edge_mask</span><span class="p">)</span>

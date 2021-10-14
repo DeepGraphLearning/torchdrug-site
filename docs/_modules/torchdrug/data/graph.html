@@ -4,7 +4,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1"/><link rel="index" title="Index" href="../../../genindex.html" /><link rel="search" title="Search" href="../../../search.html" />
 
     <meta name="generator" content="sphinx-3.1.2, furo 2020.12.09.beta21"/>
-        <title>torchdrug.data.graph - TorchDrug 0.1.1 documentation</title>
+        <title>torchdrug.data.graph - TorchDrug 0.1.2 documentation</title>
       <link rel="stylesheet" href="../../../_static/styles/furo.css?digest=a3f371badb8538d75df213ccffb17a4f6e8f3ac5">
     <link rel="stylesheet" href="../../../_static/pygments.css">
     <link media="(prefers-color-scheme: dark)" rel="stylesheet" href="../../../_static/pygments_dark.css">
@@ -106,7 +106,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="../../../index.html"><div class="brand">TorchDrug 0.1.1 documentation</div></a>
+      <a href="../../../index.html"><div class="brand">TorchDrug 0.1.2 documentation</div></a>
     </div>
     <div class="header-right">
       <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
@@ -188,6 +188,7 @@
         <h1>Source code for torchdrug.data.graph</h1><div class="highlight"><pre>
 <span></span><span class="kn">import</span> <span class="nn">math</span>
 <span class="kn">import</span> <span class="nn">warnings</span>
+<span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">reduce</span>
 <span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">defaultdict</span>
 
 <span class="kn">import</span> <span class="nn">networkx</span> <span class="k">as</span> <span class="nn">nx</span>
@@ -197,6 +198,7 @@
 <span class="kn">from</span> <span class="nn">torch_scatter</span> <span class="kn">import</span> <span class="n">scatter_add</span><span class="p">,</span> <span class="n">scatter_min</span>
 
 <span class="kn">from</span> <span class="nn">torchdrug</span> <span class="kn">import</span> <span class="n">core</span><span class="p">,</span> <span class="n">utils</span>
+<span class="kn">from</span> <span class="nn">torchdrug.data</span> <span class="kn">import</span> <span class="n">PerfectHash</span><span class="p">,</span> <span class="n">Dictionary</span>
 <span class="kn">from</span> <span class="nn">torchdrug.utils</span> <span class="kn">import</span> <span class="n">pretty</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">switch_backend</span><span class="p">(</span><span class="s2">"agg"</span><span class="p">)</span>
@@ -412,7 +414,7 @@
 <span class="sd">        Split this graph into connected components.</span>
 
 <span class="sd">        Returns:</span>
-<span class="sd">            (PackedGraph, Tensor): connected components, number of connected components per graph</span>
+<span class="sd">            (PackedGraph, LongTensor): connected components, number of connected components per graph</span>
 <span class="sd">        """</span>
         <span class="n">node_in</span><span class="p">,</span> <span class="n">node_out</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">edge_list</span><span class="o">.</span><span class="n">t</span><span class="p">()[:</span><span class="mi">2</span><span class="p">]</span>
         <span class="nb">range</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">num_node</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">device</span><span class="p">)</span>
@@ -553,50 +555,94 @@
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Incorrect edge index. Expect </span><span class="si">%d</span><span class="s2"> axes but got </span><span class="si">%d</span><span class="s2"> axes"</span>
                              <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">edge_list</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="nb">len</span><span class="p">(</span><span class="n">edge</span><span class="p">)))</span>
 
-        <span class="n">edge</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">as_tensor</span><span class="p">(</span><span class="n">edge</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">device</span><span class="p">)</span>
-        <span class="n">edge_index</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">edge_list</span> <span class="o">==</span> <span class="n">edge</span><span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">dim</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">edge_index</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">edge</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">edge_weight</span><span class="p">[</span><span class="n">edge_index</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span></div>
 
-    <span class="k">def</span> <span class="fm">__contains__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">edge</span><span class="p">):</span>
+<div class="viewcode-block" id="Graph.match"><a class="viewcode-back" href="../../../api/data.html#torchdrug.data.Graph.match">[docs]</a>    <span class="k">def</span> <span class="nf">match</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pattern</span><span class="p">):</span>
         <span class="sd">"""</span>
-<span class="sd">        Check whether an edge exists. Support partial match with wildcard `None`.</span>
+<span class="sd">        Return all matched indexes for each pattern. Support patterns with ``-1`` as the wildcard.</span>
 
 <span class="sd">        Parameters:</span>
-<span class="sd">            edge (array_like): queried edge</span>
+<span class="sd">            pattern (array_like): index of shape :math:`(N, 2)` or :math:`(N, 3)`</span>
 
 <span class="sd">        Returns:</span>
-<span class="sd">            bool: whether the edge exists</span>
-<span class="sd">        """</span>
-        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">edge</span><span class="p">))</span> <span class="o">&gt;</span> <span class="mi">0</span>
-
-<div class="viewcode-block" id="Graph.index"><a class="viewcode-back" href="../../../api/data.html#torchdrug.data.Graph.index">[docs]</a>    <span class="k">def</span> <span class="nf">index</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">edge</span><span class="p">):</span>
-        <span class="sd">"""</span>
-<span class="sd">        Return all indexes of the edge. Support partial match with wildcard `None`.</span>
+<span class="sd">            (LongTensor, LongTensor): matched indexes, number of matches per edge</span>
 
 <span class="sd">        Examples::</span>
 
-<span class="sd">            &gt;&gt;&gt; graph = data.Graph([[0, 1, 0], [0, 2, 1], [1, 2, 1]])</span>
-<span class="sd">            &gt;&gt;&gt; assert graph.index([0, 1, 2]).tolist() == []</span>
-<span class="sd">            &gt;&gt;&gt; assert graph.index([0, 1]).tolist() == [0]</span>
-<span class="sd">            &gt;&gt;&gt; assert graph.index([None, 2, None]).tolist() == [1, 2]</span>
+<span class="sd">            &gt;&gt;&gt; graph = data.Graph([[0, 1], [1, 0], [1, 2], [2, 1], [2, 0], [0, 2]])</span>
+<span class="sd">            &gt;&gt;&gt; index, num_match = graph.match([[0, -1], [1, 2]])</span>
+<span class="sd">            &gt;&gt;&gt; assert (index == torch.tensor([0, 5, 2])).all()</span>
+<span class="sd">            &gt;&gt;&gt; assert (num_match == torch.tensor([2, 1])).all()</span>
 
-<span class="sd">        Parameters:</span>
-<span class="sd">            edge (array_like): queried edge</span>
-
-<span class="sd">        Returns:</span>
-<span class="sd">            Tensor: indexes of the edge</span>
 <span class="sd">        """</span>
-        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">edge</span><span class="p">,</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">):</span>
-            <span class="n">index</span> <span class="o">=</span> <span class="nb">slice</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">edge</span><span class="p">))</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">index</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">edge</span><span class="p">]</span> <span class="o">+</span> <span class="p">[</span><span class="kc">False</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">edge_list</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">edge</span><span class="p">))</span>
-            <span class="n">edge</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">edge</span> <span class="k">if</span> <span class="n">x</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">]</span>
-            <span class="n">index</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">device</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">pattern</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">index</span> <span class="o">=</span> <span class="n">num_match</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">long</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">device</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">index</span><span class="p">,</span> <span class="n">num_match</span>
 
-        <span class="n">edge_list</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">edge_list</span><span class="p">[:,</span> <span class="n">index</span><span class="p">]</span>
-        <span class="n">edge</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">as_tensor</span><span class="p">(</span><span class="n">edge</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">device</span><span class="p">)</span>
-        <span class="n">match</span> <span class="o">=</span> <span class="p">(</span><span class="n">edge_list</span> <span class="o">==</span> <span class="n">edge</span><span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">dim</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">match</span><span class="o">.</span><span class="n">nonzero</span><span class="p">()</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span></div>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">"inverted_index"</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">inverted_index</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">pattern</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">as_tensor</span><span class="p">(</span><span class="n">pattern</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">long</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">device</span><span class="p">)</span>
+        <span class="n">mask</span> <span class="o">=</span> <span class="n">pattern</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span>
+        <span class="n">scale</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">**</span> <span class="n">torch</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">pattern</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">device</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">device</span><span class="p">)</span>
+        <span class="n">query_type</span> <span class="o">=</span> <span class="p">(</span><span class="n">mask</span> <span class="o">*</span> <span class="n">scale</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">dim</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">query_index</span> <span class="o">=</span> <span class="n">query_type</span><span class="o">.</span><span class="n">argsort</span><span class="p">()</span>
+        <span class="n">num_query</span> <span class="o">=</span> <span class="n">query_type</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">return_counts</span><span class="o">=</span><span class="kc">True</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">query_ends</span> <span class="o">=</span> <span class="n">num_query</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+        <span class="n">query_starts</span> <span class="o">=</span> <span class="n">query_ends</span> <span class="o">-</span> <span class="n">num_query</span>
+        <span class="n">mask_set</span> <span class="o">=</span> <span class="n">mask</span><span class="p">[</span><span class="n">query_index</span><span class="p">[</span><span class="n">query_starts</span><span class="p">]]</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+
+        <span class="n">type_ranges</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">type_orders</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="c1"># get matched range for each query type</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">mask</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">mask_set</span><span class="p">):</span>
+            <span class="n">query_type</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">mask</span><span class="p">)</span>
+            <span class="n">type_index</span> <span class="o">=</span> <span class="n">query_index</span><span class="p">[</span><span class="n">query_starts</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span> <span class="n">query_ends</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span>
+            <span class="n">type_edge</span> <span class="o">=</span> <span class="n">pattern</span><span class="p">[</span><span class="n">type_index</span><span class="p">][:,</span> <span class="n">mask</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">query_type</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">inverted_index</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">inverted_index</span><span class="p">[</span><span class="n">query_type</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_build_inverted_index</span><span class="p">(</span><span class="n">mask</span><span class="p">)</span>
+            <span class="n">inverted_range</span><span class="p">,</span> <span class="n">order</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">inverted_index</span><span class="p">[</span><span class="n">query_type</span><span class="p">]</span>
+            <span class="n">ranges</span> <span class="o">=</span> <span class="n">inverted_range</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">type_edge</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+            <span class="n">type_ranges</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ranges</span><span class="p">)</span>
+            <span class="n">type_orders</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">order</span><span class="p">)</span>
+        <span class="n">ranges</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">cat</span><span class="p">(</span><span class="n">type_ranges</span><span class="p">)</span>
+        <span class="n">orders</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">stack</span><span class="p">(</span><span class="n">type_orders</span><span class="p">)</span>
+        <span class="n">types</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">mask_set</span><span class="p">),</span> <span class="n">device</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">device</span><span class="p">)</span>
+        <span class="n">types</span> <span class="o">=</span> <span class="n">types</span><span class="o">.</span><span class="n">repeat_interleave</span><span class="p">(</span><span class="n">num_query</span><span class="p">)</span>
+
+        <span class="c1"># reorder matched ranges according to the query order</span>
+        <span class="n">ranges</span> <span class="o">=</span> <span class="n">scatter_add</span><span class="p">(</span><span class="n">ranges</span><span class="p">,</span> <span class="n">query_index</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">dim_size</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">pattern</span><span class="p">))</span>
+        <span class="n">types</span> <span class="o">=</span> <span class="n">scatter_add</span><span class="p">(</span><span class="n">types</span><span class="p">,</span> <span class="n">query_index</span><span class="p">,</span> <span class="n">dim_size</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">pattern</span><span class="p">))</span>
+        <span class="c1"># convert range to indexes</span>
+        <span class="n">starts</span><span class="p">,</span> <span class="n">ends</span> <span class="o">=</span> <span class="n">ranges</span><span class="o">.</span><span class="n">t</span><span class="p">()</span>
+        <span class="n">num_match</span> <span class="o">=</span> <span class="n">ends</span> <span class="o">-</span> <span class="n">starts</span>
+        <span class="n">offsets</span> <span class="o">=</span> <span class="n">num_match</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">-</span> <span class="n">num_match</span>
+        <span class="n">types</span> <span class="o">=</span> <span class="n">types</span><span class="o">.</span><span class="n">repeat_interleave</span><span class="p">(</span><span class="n">num_match</span><span class="p">)</span>
+        <span class="n">ranges</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">num_match</span><span class="o">.</span><span class="n">sum</span><span class="p">(),</span> <span class="n">device</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">device</span><span class="p">)</span>
+        <span class="n">ranges</span> <span class="o">=</span> <span class="n">ranges</span> <span class="o">+</span> <span class="p">(</span><span class="n">starts</span> <span class="o">-</span> <span class="n">offsets</span><span class="p">)</span><span class="o">.</span><span class="n">repeat_interleave</span><span class="p">(</span><span class="n">num_match</span><span class="p">)</span>
+        <span class="n">index</span> <span class="o">=</span> <span class="n">orders</span><span class="p">[</span><span class="n">types</span><span class="p">,</span> <span class="n">ranges</span><span class="p">]</span>
+
+        <span class="k">return</span> <span class="n">index</span><span class="p">,</span> <span class="n">num_match</span></div>
+
+    <span class="k">def</span> <span class="nf">_build_inverted_index</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mask</span><span class="p">):</span>
+        <span class="n">keys</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">edge_list</span><span class="p">[:,</span> <span class="n">mask</span><span class="p">]</span>
+        <span class="n">base</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">device</span><span class="p">)</span>
+        <span class="n">base</span> <span class="o">=</span> <span class="n">base</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span>
+        <span class="nb">max</span> <span class="o">=</span> <span class="n">reduce</span><span class="p">(</span><span class="nb">int</span><span class="o">.</span><span class="fm">__mul__</span><span class="p">,</span> <span class="n">base</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span>
+        <span class="k">if</span> <span class="nb">max</span> <span class="o">&gt;</span> <span class="n">torch</span><span class="o">.</span><span class="n">iinfo</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">int64</span><span class="p">)</span><span class="o">.</span><span class="n">max</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Fail to build an inverted index table based on sorting. "</span>
+                             <span class="s2">"The graph is too large."</span><span class="p">)</span>
+        <span class="n">scale</span> <span class="o">=</span> <span class="n">base</span><span class="o">.</span><span class="n">cumprod</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+        <span class="n">scale</span> <span class="o">=</span> <span class="n">scale</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">//</span> <span class="n">scale</span>
+        <span class="n">key</span> <span class="o">=</span> <span class="p">(</span><span class="n">keys</span> <span class="o">*</span> <span class="n">scale</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">dim</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">order</span> <span class="o">=</span> <span class="n">key</span><span class="o">.</span><span class="n">argsort</span><span class="p">()</span>
+        <span class="n">num_keys</span> <span class="o">=</span> <span class="n">key</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">return_counts</span><span class="o">=</span><span class="kc">True</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">ends</span> <span class="o">=</span> <span class="n">num_keys</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+        <span class="n">starts</span> <span class="o">=</span> <span class="n">ends</span> <span class="o">-</span> <span class="n">num_keys</span>
+        <span class="n">ranges</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">stack</span><span class="p">([</span><span class="n">starts</span><span class="p">,</span> <span class="n">ends</span><span class="p">],</span> <span class="n">dim</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">keys_set</span> <span class="o">=</span> <span class="n">keys</span><span class="p">[</span><span class="n">order</span><span class="p">[</span><span class="n">starts</span><span class="p">]]</span>
+        <span class="n">inverted_range</span> <span class="o">=</span> <span class="n">Dictionary</span><span class="p">(</span><span class="n">keys_set</span><span class="p">,</span> <span class="n">ranges</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">inverted_range</span><span class="p">,</span> <span class="n">order</span>
 
     <span class="k">def</span> <span class="fm">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
         <span class="c1"># why do we check tuple</span>

@@ -4,7 +4,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1"/><link rel="index" title="Index" href="../../../../genindex.html" /><link rel="search" title="Search" href="../../../../search.html" />
 
     <meta name="generator" content="sphinx-3.1.2, furo 2020.12.09.beta21"/>
-        <title>torchdrug.layers.functional.functional - TorchDrug 0.1.1 documentation</title>
+        <title>torchdrug.layers.functional.functional - TorchDrug 0.1.2 documentation</title>
       <link rel="stylesheet" href="../../../../_static/styles/furo.css?digest=a3f371badb8538d75df213ccffb17a4f6e8f3ac5">
     <link rel="stylesheet" href="../../../../_static/pygments.css">
     <link media="(prefers-color-scheme: dark)" rel="stylesheet" href="../../../../_static/pygments_dark.css">
@@ -106,7 +106,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="../../../../index.html"><div class="brand">TorchDrug 0.1.1 documentation</div></a>
+      <a href="../../../../index.html"><div class="brand">TorchDrug 0.1.2 documentation</div></a>
     </div>
     <div class="header-right">
       <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
@@ -248,7 +248,7 @@
     <span class="k">return</span> <span class="n">F</span><span class="o">.</span><span class="n">softplus</span><span class="p">(</span><span class="nb">input</span><span class="p">)</span> <span class="o">-</span> <span class="n">F</span><span class="o">.</span><span class="n">softplus</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="nb">input</span><span class="o">.</span><span class="n">device</span><span class="p">))</span></div>
 
 
-<span class="k">def</span> <span class="nf">multi_slice</span><span class="p">(</span><span class="n">starts</span><span class="p">,</span> <span class="n">ends</span><span class="p">):</span>
+<div class="viewcode-block" id="multi_slice"><a class="viewcode-back" href="../../../../api/layers.html#torchdrug.layers.functional.multi_slice">[docs]</a><span class="k">def</span> <span class="nf">multi_slice</span><span class="p">(</span><span class="n">starts</span><span class="p">,</span> <span class="n">ends</span><span class="p">):</span>
     <span class="sd">"""</span>
 <span class="sd">    Compute the union of indexes in multiple slices.</span>
 
@@ -270,9 +270,10 @@
     <span class="n">slices</span> <span class="o">=</span> <span class="n">slices</span><span class="p">[</span><span class="n">valid</span><span class="p">]</span>
 
     <span class="n">starts</span><span class="p">,</span> <span class="n">ends</span> <span class="o">=</span> <span class="n">slices</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">t</span><span class="p">()</span>
-    <span class="n">indexes</span> <span class="o">=</span> <span class="n">variadic_arange</span><span class="p">(</span><span class="n">ends</span> <span class="o">-</span> <span class="n">starts</span><span class="p">)</span>
+    <span class="n">size</span> <span class="o">=</span> <span class="n">ends</span> <span class="o">-</span> <span class="n">starts</span>
+    <span class="n">indexes</span> <span class="o">=</span> <span class="n">variadic_arange</span><span class="p">(</span><span class="n">size</span><span class="p">)</span>
     <span class="n">indexes</span> <span class="o">=</span> <span class="n">indexes</span> <span class="o">+</span> <span class="n">starts</span><span class="o">.</span><span class="n">repeat_interleave</span><span class="p">(</span><span class="n">size</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">indexes</span>
+    <span class="k">return</span> <span class="n">indexes</span></div>
 
 
 <div class="viewcode-block" id="multi_slice_mask"><a class="viewcode-back" href="../../../../api/layers.html#torchdrug.layers.functional.multi_slice_mask">[docs]</a><span class="k">def</span> <span class="nf">multi_slice_mask</span><span class="p">(</span><span class="n">starts</span><span class="p">,</span> <span class="n">ends</span><span class="p">,</span> <span class="n">length</span><span class="p">):</span>
@@ -445,7 +446,7 @@
     <span class="k">return</span> <span class="n">log_likelihood</span></div>
 
 
-<span class="k">def</span> <span class="nf">variadic_softmax</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="n">size</span><span class="p">):</span>
+<div class="viewcode-block" id="variadic_softmax"><a class="viewcode-back" href="../../../../api/layers.html#torchdrug.layers.functional.variadic_softmax">[docs]</a><span class="k">def</span> <span class="nf">variadic_softmax</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="n">size</span><span class="p">):</span>
     <span class="sd">"""</span>
 <span class="sd">    Compute softmax over categories with variadic sizes.</span>
 
@@ -460,7 +461,7 @@
     <span class="n">index2sample</span> <span class="o">=</span> <span class="n">index2sample</span><span class="o">.</span><span class="n">expand_as</span><span class="p">(</span><span class="nb">input</span><span class="p">)</span>
 
     <span class="n">log_likelihood</span> <span class="o">=</span> <span class="n">scatter_softmax</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="n">index2sample</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">log_likelihood</span>
+    <span class="k">return</span> <span class="n">log_likelihood</span></div>
 
 
 <div class="viewcode-block" id="variadic_cross_entropy"><a class="viewcode-back" href="../../../../api/layers.html#torchdrug.layers.functional.variadic_cross_entropy">[docs]</a><span class="k">def</span> <span class="nf">variadic_cross_entropy</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="n">target</span><span class="p">,</span> <span class="n">size</span><span class="p">,</span> <span class="n">reduction</span><span class="o">=</span><span class="s2">"mean"</span><span class="p">):</span>
@@ -605,6 +606,14 @@
     <span class="n">rand</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">size</span><span class="o">.</span><span class="n">sum</span><span class="p">(),</span> <span class="n">device</span><span class="o">=</span><span class="n">size</span><span class="o">.</span><span class="n">device</span><span class="p">)</span>
     <span class="n">perm</span> <span class="o">=</span> <span class="n">variadic_sort</span><span class="p">(</span><span class="n">rand</span><span class="p">,</span> <span class="n">size</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
     <span class="k">return</span> <span class="n">perm</span></div>
+
+
+<div class="viewcode-block" id="variadic_sample"><a class="viewcode-back" href="../../../../api/layers.html#torchdrug.layers.functional.variadic_sample">[docs]</a><span class="k">def</span> <span class="nf">variadic_sample</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="n">size</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
+    <span class="n">rand</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">size</span><span class="p">),</span> <span class="n">k</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="n">size</span><span class="o">.</span><span class="n">device</span><span class="p">)</span>
+    <span class="n">index</span> <span class="o">=</span> <span class="p">(</span><span class="n">rand</span> <span class="o">*</span> <span class="n">size</span><span class="o">.</span><span class="n">unsqueeze</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span><span class="o">.</span><span class="n">long</span><span class="p">()</span>
+    <span class="n">index</span> <span class="o">=</span> <span class="n">index</span> <span class="o">+</span> <span class="p">(</span><span class="n">size</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">-</span> <span class="n">size</span><span class="p">)</span><span class="o">.</span><span class="n">unsqueeze</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">sample</span> <span class="o">=</span> <span class="nb">input</span><span class="p">[</span><span class="n">index</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">sample</span></div>
 
 
 <div class="viewcode-block" id="one_hot"><a class="viewcode-back" href="../../../../api/layers.html#torchdrug.layers.functional.one_hot">[docs]</a><span class="k">def</span> <span class="nf">one_hot</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="n">size</span><span class="p">):</span>

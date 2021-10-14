@@ -4,7 +4,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1"/><link rel="index" title="Index" href="../../../genindex.html" /><link rel="search" title="Search" href="../../../search.html" />
 
     <meta name="generator" content="sphinx-3.1.2, furo 2020.12.09.beta21"/>
-        <title>torchdrug.data.dataset - TorchDrug 0.1.1 documentation</title>
+        <title>torchdrug.data.dataset - TorchDrug 0.1.2 documentation</title>
       <link rel="stylesheet" href="../../../_static/styles/furo.css?digest=a3f371badb8538d75df213ccffb17a4f6e8f3ac5">
     <link rel="stylesheet" href="../../../_static/pygments.css">
     <link media="(prefers-color-scheme: dark)" rel="stylesheet" href="../../../_static/pygments_dark.css">
@@ -106,7 +106,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="../../../index.html"><div class="brand">TorchDrug 0.1.1 documentation</div></a>
+      <a href="../../../index.html"><div class="brand">TorchDrug 0.1.2 documentation</div></a>
     </div>
     <div class="header-right">
       <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
@@ -359,16 +359,32 @@
     <span class="k">def</span> <span class="nf">atom_types</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">"""All atom types."""</span>
         <span class="n">atom_types</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
-        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">)):</span>
-            <span class="n">atom_types</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_item</span><span class="p">(</span><span class="n">i</span><span class="p">)[</span><span class="s2">"graph"</span><span class="p">]</span><span class="o">.</span><span class="n">atom_type</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span>
+
+        <span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">"lazy"</span><span class="p">,</span> <span class="kc">False</span><span class="p">):</span>
+            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">"Calling this function for dataset with lazy=True may take a large amount of time."</span><span class="p">)</span>             
+            <span class="k">for</span> <span class="n">smiles</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">smiles_list</span><span class="p">:</span>
+                <span class="n">graph</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">Molecule</span><span class="o">.</span><span class="n">from_smiles</span><span class="p">(</span><span class="n">smiles</span><span class="p">,</span> <span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">kwargs</span><span class="p">)</span>
+                <span class="n">atom_types</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">graph</span><span class="o">.</span><span class="n">atom_type</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">graph</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">:</span>
+                <span class="n">atom_types</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">graph</span><span class="o">.</span><span class="n">atom_type</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span>
+
         <span class="k">return</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">atom_types</span><span class="p">)</span>
 
     <span class="nd">@utils</span><span class="o">.</span><span class="n">cached_property</span>
     <span class="k">def</span> <span class="nf">bond_types</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">"""All bond types."""</span>
         <span class="n">bond_types</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
-        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">)):</span>
-            <span class="n">bond_types</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_item</span><span class="p">(</span><span class="n">i</span><span class="p">)[</span><span class="s2">"graph"</span><span class="p">]</span><span class="o">.</span><span class="n">edge_list</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span>
+
+        <span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">"lazy"</span><span class="p">,</span> <span class="kc">False</span><span class="p">):</span>
+            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">"Calling this function for dataset with lazy=True may take a large amount of time."</span><span class="p">)</span>             
+            <span class="k">for</span> <span class="n">smiles</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">smiles_list</span><span class="p">:</span>
+                <span class="n">graph</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">Molecule</span><span class="o">.</span><span class="n">from_smiles</span><span class="p">(</span><span class="n">smiles</span><span class="p">,</span> <span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">kwargs</span><span class="p">)</span>
+                <span class="n">bond_types</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">graph</span><span class="o">.</span><span class="n">edge_list</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">graph</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">:</span>
+                <span class="n">bond_types</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">graph</span><span class="o">.</span><span class="n">edge_list</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span>
+
         <span class="k">return</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">bond_types</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="fm">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -602,6 +618,30 @@
 <span class="sd">    The whole dataset contains one knowledge graph.</span>
 <span class="sd">    """</span>
 
+<div class="viewcode-block" id="KnowledgeGraphDataset.load_triplet"><a class="viewcode-back" href="../../../api/data.html#torchdrug.data.KnowledgeGraphDataset.load_triplet">[docs]</a>    <span class="k">def</span> <span class="nf">load_triplet</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">triplets</span><span class="p">,</span> <span class="n">entity_vocab</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">relation_vocab</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">inv_entity_vocab</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                     <span class="n">inv_relation_vocab</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">"""</span>
+<span class="sd">        Load the dataset from triplets.</span>
+<span class="sd">        The mapping between indexes and tokens is specified through either vocabularies or inverse vocabularies.</span>
+
+<span class="sd">        Parameters:</span>
+<span class="sd">            triplets (array_like): triplets of shape :math:`(n, 3)`</span>
+<span class="sd">            entity_vocab (dict of str, optional): maps entity indexes to tokens</span>
+<span class="sd">            relation_vocab (dict of str, optional): maps relation indexes to tokens</span>
+<span class="sd">            inv_entity_vocab (dict of str, optional): maps tokens to entity indexes</span>
+<span class="sd">            inv_relation_vocab (dict of str, optional): maps tokens to relation indexes</span>
+<span class="sd">        """</span>
+        <span class="n">entity_vocab</span><span class="p">,</span> <span class="n">inv_entity_vocab</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_standarize_vocab</span><span class="p">(</span><span class="n">entity_vocab</span><span class="p">,</span> <span class="n">inv_entity_vocab</span><span class="p">)</span>
+        <span class="n">relation_vocab</span><span class="p">,</span> <span class="n">inv_relation_vocab</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_standarize_vocab</span><span class="p">(</span><span class="n">relation_vocab</span><span class="p">,</span> <span class="n">inv_relation_vocab</span><span class="p">)</span>
+
+        <span class="n">num_node</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">entity_vocab</span><span class="p">)</span> <span class="k">if</span> <span class="n">entity_vocab</span> <span class="k">else</span> <span class="kc">None</span>
+        <span class="n">num_relation</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">relation_vocab</span><span class="p">)</span> <span class="k">if</span> <span class="n">relation_vocab</span> <span class="k">else</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">graph</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">Graph</span><span class="p">(</span><span class="n">triplets</span><span class="p">,</span> <span class="n">num_node</span><span class="o">=</span><span class="n">num_node</span><span class="p">,</span> <span class="n">num_relation</span><span class="o">=</span><span class="n">num_relation</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">entity_vocab</span> <span class="o">=</span> <span class="n">entity_vocab</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">relation_vocab</span> <span class="o">=</span> <span class="n">relation_vocab</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">inv_entity_vocab</span> <span class="o">=</span> <span class="n">inv_entity_vocab</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">inv_relation_vocab</span> <span class="o">=</span> <span class="n">inv_relation_vocab</span></div>
+
 <div class="viewcode-block" id="KnowledgeGraphDataset.load_tsv"><a class="viewcode-back" href="../../../api/data.html#torchdrug.data.KnowledgeGraphDataset.load_tsv">[docs]</a>    <span class="k">def</span> <span class="nf">load_tsv</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tsv_file</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
         <span class="sd">"""</span>
 <span class="sd">        Load the dataset from a tsv file.</span>
@@ -670,30 +710,6 @@
 
         <span class="bp">self</span><span class="o">.</span><span class="n">load_triplet</span><span class="p">(</span><span class="n">triplets</span><span class="p">,</span> <span class="n">inv_entity_vocab</span><span class="o">=</span><span class="n">inv_entity_vocab</span><span class="p">,</span> <span class="n">inv_relation_vocab</span><span class="o">=</span><span class="n">inv_relation_vocab</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">num_samples</span> <span class="o">=</span> <span class="n">num_samples</span></div>
-
-<div class="viewcode-block" id="KnowledgeGraphDataset.load_triplet"><a class="viewcode-back" href="../../../api/data.html#torchdrug.data.KnowledgeGraphDataset.load_triplet">[docs]</a>    <span class="k">def</span> <span class="nf">load_triplet</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">triplets</span><span class="p">,</span> <span class="n">entity_vocab</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">relation_vocab</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">inv_entity_vocab</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-                     <span class="n">inv_relation_vocab</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">"""</span>
-<span class="sd">        Load the dataset from triplets.</span>
-<span class="sd">        The mapping between indexes and tokens is specified through either vocabularies or inverse vocabularies.</span>
-
-<span class="sd">        Parameters:</span>
-<span class="sd">            triplets (array_like): triplets of shape :math:`(n, 3)`</span>
-<span class="sd">            entity_vocab (dict of str, optional): maps entity indexes to tokens</span>
-<span class="sd">            relation_vocab (dict of str, optional): maps relation indexes to tokens</span>
-<span class="sd">            inv_entity_vocab (dict of str, optional): maps tokens to entity indexes</span>
-<span class="sd">            inv_relation_vocab (dict of str, optional): maps tokens to relation indexes</span>
-<span class="sd">        """</span>
-        <span class="n">entity_vocab</span><span class="p">,</span> <span class="n">inv_entity_vocab</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_standarize_vocab</span><span class="p">(</span><span class="n">entity_vocab</span><span class="p">,</span> <span class="n">inv_entity_vocab</span><span class="p">)</span>
-        <span class="n">relation_vocab</span><span class="p">,</span> <span class="n">inv_relation_vocab</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_standarize_vocab</span><span class="p">(</span><span class="n">relation_vocab</span><span class="p">,</span> <span class="n">inv_relation_vocab</span><span class="p">)</span>
-
-        <span class="n">num_node</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">entity_vocab</span><span class="p">)</span> <span class="k">if</span> <span class="n">entity_vocab</span> <span class="k">else</span> <span class="kc">None</span>
-        <span class="n">num_relation</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">relation_vocab</span><span class="p">)</span> <span class="k">if</span> <span class="n">relation_vocab</span> <span class="k">else</span> <span class="kc">None</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">graph</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">Graph</span><span class="p">(</span><span class="n">triplets</span><span class="p">,</span> <span class="n">num_node</span><span class="o">=</span><span class="n">num_node</span><span class="p">,</span> <span class="n">num_relation</span><span class="o">=</span><span class="n">num_relation</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">entity_vocab</span> <span class="o">=</span> <span class="n">entity_vocab</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">relation_vocab</span> <span class="o">=</span> <span class="n">relation_vocab</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">inv_entity_vocab</span> <span class="o">=</span> <span class="n">inv_entity_vocab</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">inv_relation_vocab</span> <span class="o">=</span> <span class="n">inv_relation_vocab</span></div>
 
     <span class="k">def</span> <span class="nf">_standarize_vocab</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">vocab</span><span class="p">,</span> <span class="n">inverse_vocab</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">vocab</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
@@ -797,7 +813,7 @@
 
     <span class="k">if</span> <span class="n">key_lengths</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">assert</span> <span class="n">lengths</span> <span class="ow">is</span> <span class="kc">None</span>
-        <span class="n">key2count</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">bincount</span><span class="p">(</span><span class="n">keys</span><span class="p">)</span>
+        <span class="n">key2count</span> <span class="o">=</span> <span class="n">keys</span><span class="o">.</span><span class="n">bincount</span><span class="p">()</span>
         <span class="n">key_offset</span> <span class="o">=</span> <span class="mi">0</span>
         <span class="n">lengths</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">for</span> <span class="n">key_length</span> <span class="ow">in</span> <span class="n">key_lengths</span><span class="p">:</span>
