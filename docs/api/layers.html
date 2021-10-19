@@ -1719,10 +1719,6 @@ This behaves differently from dense-dense matrix multiplication with zero entrie
 </ul>
 </dd>
 </dl>
-<dl class="simple">
-<dt>Returns</dt><dd><p>Tensor: sum</p>
-</dd>
-</dl>
 </dd></dl>
 <dl class="py function">
 <dt id="torchdrug.layers.functional.variadic_mean">
@@ -1735,10 +1731,6 @@ This behaves differently from dense-dense matrix multiplication with zero entrie
 <li><p><strong>input</strong> (<em>Tensor</em>) – input of shape <span class="math notranslate nohighlight">\((B, ...)\)</span></p></li>
 <li><p><strong>size</strong> (<em>LongTensor</em>) – size of sets of shape <span class="math notranslate nohighlight">\((N,)\)</span></p></li>
 </ul>
-</dd>
-</dl>
-<dl class="simple">
-<dt>Returns</dt><dd><p>Tensor: mean</p>
 </dd>
 </dl>
 </dd></dl>
@@ -1871,8 +1863,19 @@ The <code class="docutils literal notranslate"><span class="pre">i</span></code>
 </dd></dl>
 <dl class="py function">
 <dt id="torchdrug.layers.functional.variadic_sample">
-<code class="sig-name descname">variadic_sample</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">input</span></em>, <em class="sig-param"><span class="n">size</span></em>, <em class="sig-param"><span class="n">k</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/functional/functional.html#variadic_sample"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.layers.functional.variadic_sample" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<code class="sig-name descname">variadic_sample</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">input</span></em>, <em class="sig-param"><span class="n">size</span></em>, <em class="sig-param"><span class="n">num_sample</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/functional/functional.html#variadic_sample"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.layers.functional.variadic_sample" title="Permalink to this definition">¶</a></dt>
+<dd><p>Draw samples with replacement from sets with variadic sizes.</p>
+<p>Suppose there are <span class="math notranslate nohighlight">\(N\)</span> sets, and the sizes of all sets are summed to <span class="math notranslate nohighlight">\(B\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input</strong> (<em>Tensor</em>) – input of shape <span class="math notranslate nohighlight">\((B, ...)\)</span></p></li>
+<li><p><strong>size</strong> (<em>LongTensor</em>) – size of sets of shape <span class="math notranslate nohighlight">\((N,)\)</span></p></li>
+<li><p><strong>num_sample</strong> (<em>int</em>) – number of samples to draw from each set</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
 </div>
 <div class="section" id="tensor-reduction">
 <h3>Tensor Reduction<a class="headerlink" href="#tensor-reduction" title="Permalink to this headline">¶</a></h3>
