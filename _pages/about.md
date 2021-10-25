@@ -42,6 +42,10 @@ team:
     url: https://chrisallenming.github.io/
     title: Shanghai Jiao Tong University
     image: assets/images/team/minghao_xu.jpg
+  - name: Xinyu Yuan
+    url: https://github.com/KatarinaYuan
+    title: Peking University
+    image: assets/images/team/xinyu_yuan.jpg
   - name: Chang Ma
     url: https://github.com/chang-github-00
     title: Peking University
