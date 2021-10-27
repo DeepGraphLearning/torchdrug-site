@@ -187,7 +187,9 @@
         </label>
         <div class="section" id="installation">
 <h1>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h1>
-<p>TorchDrug is compatible with Python 3.7/3.8 and PyTorch &gt;= 1.4.0.</p>
+<p>TorchDrug can be installed on either Linux, Windows or macOS. It is compatible with
+Python 3.7/3.8 and PyTorch &gt;= 1.4.0.</p>
+<p>For Windows</p>
 <div class="section" id="from-conda">
 <h2>From Conda<a class="headerlink" href="#from-conda" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda install -c milagraph -c conda-forge torchdrug
@@ -223,6 +225,34 @@ pip install -r requirements.txt
 python setup.py install
 </pre></div>
 </div>
+</div>
+<div class="section" id="windows-installation">
+<h2>Windows Installation<a class="headerlink" href="#windows-installation" title="Permalink to this headline">¶</a></h2>
+<p>For Windows, we need to additionally install Visual Studio to enable the JIT
+compilation. If you don’t have Visual Studio installed, you can get a minimal
+version of the build tools for Visual Studio at
+<a class="reference external" href="https://visualstudio.microsoft.com/downloads/">https://visualstudio.microsoft.com/downloads/</a>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>For non-English systems, you must select English as the language for Visual
+Studio. Otherwise, the ANSI encoding of Windows will cause errors in Python.</p>
+</div>
+<p>We then setup a command-line environment for JIT compilation. Launch a PowerShell
+as administrator, and install the following extensions.</p>
+<div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="nb">Install-Module</span> <span class="n">Pscx</span> <span class="n">-AllowClobber</span>
+<span class="nb">Install-Module</span> <span class="n">VSSetup</span>
+</pre></div>
+</div>
+<p>Initialize Visual Studio in PowerShell with the following commands. We need to
+change the library path based on our own Python path.</p>
+<div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="nb">Import-VisualStudioVars</span> <span class="n">-Architecture</span> <span class="n">x64</span>
+<span class="nv">$env:LIB</span> <span class="p">+=</span> <span class="s2">";C:\Program Files\Python37\libs"</span>
+</pre></div>
+</div>
+<p>The above commands should be executed for every PowerShell session. To setup this
+for all PowerShell sessions, we can write them to the PowerShell profile. The
+profile can be found by the <code class="docutils literal notranslate"><span class="pre">$profile</span></code> command in PowerShell. You may need to
+create the profile if you use it for the first time.</p>
 </div>
 </div>
 
@@ -284,6 +314,7 @@ python setup.py install
 <li><a class="reference internal" href="#from-conda">From Conda</a></li>
 <li><a class="reference internal" href="#from-pip">From Pip</a></li>
 <li><a class="reference internal" href="#from-source">From Source</a></li>
+<li><a class="reference internal" href="#windows-installation">Windows Installation</a></li>
 </ul>
 </li>
 </ul>
