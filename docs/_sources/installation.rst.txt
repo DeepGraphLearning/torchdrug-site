@@ -52,7 +52,7 @@ From Source
     pip install -r requirements.txt
     python setup.py install
 
-Windows Installation
+Windows (PowerShell)
 --------------------
 
 For Windows, we need to additionally install Visual Studio to enable the JIT
