@@ -62,6 +62,10 @@ team:
     url: https://www.runchengliu.com/
     title: Tsinghua University
     image: assets/images/team/runcheng_liu.jpg
+  - name: Hongyu Guo
+    url: https://uniweb.uottawa.ca/members/4499/
+    title: National Research Council Canada
+    image: assets/images/team/hongyu_guo.jpg
 
 committee:
   - name: Yoshua Bengio
