@@ -50,6 +50,10 @@ team:
     url: https://github.com/chang-github-00
     title: Peking University
     image: assets/images/team/chang_ma.jpg
+  - name: Huiyu Cai
+    url: https://hui2000ji.github.io/
+    title: Mila - Quebec AI Institute
+    image: assets/images/team/huiyu_cai.jpg
   - name: Jiarui Lu
     url: https://lujiarui.github.io/
     title: Mila - Quebec AI Institute

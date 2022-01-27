@@ -13,6 +13,8 @@ permalink: /publications
 # Publications
 
 ### Pretrained Molecular Representations
+- Shengchao Liu, Hanchen Wang, Weiyang Liu, Joan Lasenby, Hongyu Guo, Jian Tang. [Pre-training Molecular Graph Representation with 3D Geometry](https://arxiv.org/pdf/2110.07728.pdf). ICLR 2022.
+- Shengchao Liu, Meng Qu, Zuobai Zhang, Huiyu Cai, Jian Tang. [Multi-task Learning with Domain Knowledge for Molecular Property Prediction](https://openreview.net/pdf?id=6cWgY5Epwzo). AISTATS 2022.
 - Minghao Xu, Hang Wang, Bingbing Ni, Hongyu Guo, Jian Tang. [Self-supervised Graph-level Representation Learning with Local and Global Structure](https://arxiv.org/pdf/2106.04113.pdf). ICML 2021.
 - Fan-Yun Sun, Jordan Hoffmann, Vikas Verma, Jian Tang. [InfoGraph: Unsupervised and Semi-supervised Graph-Level Representation Learning via Mutual Information Maximization](https://arxiv.org/pdf/1908.01000.pdf). ICLR 2020.
 
@@ -25,12 +27,14 @@ permalink: /publications
 - Chence Shi, Minkai Xu, Hongyu Guo, Ming Zhang, Jian Tang. [A Graph to Graphs Framework for Retrosynthesis Prediction](https://arxiv.org/pdf/2003.12725.pdf). ICML 2020.
 
 ### Molecular Conformation Prediction
+- Minkai Xu, Lantao Yu, Yang Song, Chence Shi, Stefano Ermon, Jian Tang. [GeoDiff: a Geometric Diffusion Model for Molecular Conformation Generation](https://openreview.net/pdf?id=PzcvxEMzvQC). ICLR 2022.
+- Shitong Luo\*, Chence Shi\*, Minkai Xu, Jian Tang. [Predicting Molecular Conformation via Dynamic Graph Score Matching](https://proceedings.neurips.cc/paper/2021/file/a45a1d12ee0fb7f1f872ab91da18f899-Paper.pdf). NeurIPS 2021.
 - Chence Shi\*, Shitong Luo\*, Minkai Xu, Jian Tang. [Learning Gradient Fields for Molecular Conformation Generation](https://arxiv.org/pdf/2105.03902.pdf). ICML 2021.
 - Minkai Xu, Wujie Wang, Shitong Luo, Chence Shi, Yoshua Bengio, Rafael Gomez-Bombarelli, Jian Tang. [An End-to-End Framework for Molecular Conformation Generation via Bilevel Programming](https://arxiv.org/pdf/2105.07246.pdf). ICML 2021.
 - Minkai Xu\*, Shitong Luo\*, Yoshua Bengio, Jian Peng, Jian Tang. [Learning Neural Generative Dynamics for Molecular Conformation Generation](https://arxiv.org/pdf/2102.10240.pdf). ICLR 2021.
 
 ### Knowledge Graph Reasoning
-- Zhaocheng Zhu, Zuobai Zhang, Louis-Pascal Xhonneux, Jian Tang. [Neural Bellman-Ford Networks: A General Graph Neural Network Framework for Link Prediction](https://arxiv.org/pdf/2106.06935). arXiv preprint arXiv:2106.06935
+- Zhaocheng Zhu, Zuobai Zhang, Louis-Pascal Xhonneux, Jian Tang. [Neural Bellman-Ford Networks: A General Graph Neural Network Framework for Link Prediction](https://arxiv.org/pdf/2106.06935). NeurIPS 2021.
 - Meng Qu, Junkun Chen, Louis-Pascal Xhonneux, Yoshua Bengio, Jian Tang. [RNNLogic: Learning Logic Rules for Reasoning on Knowledge Graphs](https://arxiv.org/pdf/2010.04029). ICLR 2021.
 - Meng Qu, Jian Tang. [Probabilistic Logic Neural Networks for Reasoning](https://arxiv.org/pdf/1906.08495). NeurIPS 2019.
-- Zhiqing Sun, Zhi-Hong Deng, Jian-Yun Nie, Jian Tang. [Rotate: Knowledge graph embedding by relational rotation in complex space](https://arxiv.org/pdf/1902.10197.pdf). ICLR 2019.
+- Zhiqing Sun, Zhi-Hong Deng, Jian-Yun Nie, Jian Tang. [RotatE: Knowledge graph embedding by relational rotation in complex space](https://arxiv.org/pdf/1902.10197.pdf). ICLR 2019.
