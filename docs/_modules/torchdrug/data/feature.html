@@ -3,7 +3,7 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/><link rel="index" title="Index" href="../../../genindex.html" /><link rel="search" title="Search" href="../../../search.html" />
 
-    <meta name="generator" content="sphinx-3.1.2, furo 2020.12.09.beta21"/>
+    <meta name="generator" content="sphinx-4.4.0, furo 2020.12.09.beta21"/>
         <title>torchdrug.data.feature - TorchDrug 0.1.2 documentation</title>
       <link rel="stylesheet" href="../../../_static/styles/furo.css?digest=a3f371badb8538d75df213ccffb17a4f6e8f3ac5">
     <link rel="stylesheet" href="../../../_static/pygments.css">
@@ -50,14 +50,15 @@
   --color-code-foreground: #d0d0d0;
   
   }
-</style><link id="pygments_dark_css" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css" href="../../../_static/pygments_dark.css" />
+</style><link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo.css" />
+    <link id="pygments_dark_css" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css" href="../../../_static/pygments_dark.css" />
     <link rel="stylesheet" href="../../../_static/styles/furo-extensions.css?digest=26485485040e7aaf717c13fd0188a5ad2c2deb60">
     <script id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+    <script defer data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
     <script defer src="../../../_static/jquery.js"></script>
     <script defer src="../../../_static/underscore.js"></script>
     <script defer src="../../../_static/doctools.js"></script>
-    <script defer src="../../../_static/language_data.js"></script>
-    <script defer async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <script defer src="../../../_static/scripts/main.js?digest=e931d09b2a40c1bb82b542effe772014573baf67"></script></head>
   <body dir="">
     
@@ -157,7 +158,7 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../../paper.html">Papers Implemented</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Package Reference</span></p>
+<p class="caption" role="heading"><span class="caption-text">Package Reference</span></p>
 <ul>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../../api/index.html">Documentation</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label for="toctree-checkbox-4"><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../../api/core.html">torchdrug.core</a></li>
@@ -194,6 +195,7 @@
 <span class="kn">from</span> <span class="nn">torchdrug.core</span> <span class="kn">import</span> <span class="n">Registry</span> <span class="k">as</span> <span class="n">R</span>
 
 
+<span class="c1"># orderd by perodic table</span>
 <span class="n">atom_vocab</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"H"</span><span class="p">,</span> <span class="s2">"B"</span><span class="p">,</span> <span class="s2">"C"</span><span class="p">,</span> <span class="s2">"N"</span><span class="p">,</span> <span class="s2">"O"</span><span class="p">,</span> <span class="s2">"F"</span><span class="p">,</span> <span class="s2">"Mg"</span><span class="p">,</span> <span class="s2">"Si"</span><span class="p">,</span> <span class="s2">"P"</span><span class="p">,</span> <span class="s2">"S"</span><span class="p">,</span> <span class="s2">"Cl"</span><span class="p">,</span> <span class="s2">"Cu"</span><span class="p">,</span> <span class="s2">"Zn"</span><span class="p">,</span> <span class="s2">"Se"</span><span class="p">,</span> <span class="s2">"Br"</span><span class="p">,</span> <span class="s2">"Sn"</span><span class="p">,</span> <span class="s2">"I"</span><span class="p">]</span>
 <span class="n">atom_vocab</span> <span class="o">=</span> <span class="p">{</span><span class="n">a</span><span class="p">:</span> <span class="n">i</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">a</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">atom_vocab</span><span class="p">)}</span>
 <span class="n">degree_vocab</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">7</span><span class="p">)</span>
@@ -209,6 +211,11 @@
 <span class="n">bond_type_vocab</span> <span class="o">=</span> <span class="p">{</span><span class="n">b</span><span class="p">:</span> <span class="n">i</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">b</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">bond_type_vocab</span><span class="p">)}</span>
 <span class="n">bond_dir_vocab</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">Chem</span><span class="o">.</span><span class="n">rdchem</span><span class="o">.</span><span class="n">BondDir</span><span class="o">.</span><span class="n">values</span><span class="p">))</span>
 <span class="n">bond_stereo_vocab</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">Chem</span><span class="o">.</span><span class="n">rdchem</span><span class="o">.</span><span class="n">BondStereo</span><span class="o">.</span><span class="n">values</span><span class="p">))</span>
+
+<span class="c1"># orderd by molecular mass</span>
+<span class="n">residue_vocab</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"GLY"</span><span class="p">,</span> <span class="s2">"ALA"</span><span class="p">,</span> <span class="s2">"SER"</span><span class="p">,</span> <span class="s2">"PRO"</span><span class="p">,</span> <span class="s2">"VAL"</span><span class="p">,</span> <span class="s2">"THR"</span><span class="p">,</span> <span class="s2">"CYS"</span><span class="p">,</span> <span class="s2">"ILE"</span><span class="p">,</span> <span class="s2">"LEU"</span><span class="p">,</span> <span class="s2">"ASN"</span><span class="p">,</span>
+                 <span class="s2">"ASP"</span><span class="p">,</span> <span class="s2">"GLN"</span><span class="p">,</span> <span class="s2">"LYS"</span><span class="p">,</span> <span class="s2">"GLU"</span><span class="p">,</span> <span class="s2">"MET"</span><span class="p">,</span> <span class="s2">"HIS"</span><span class="p">,</span> <span class="s2">"PHE"</span><span class="p">,</span> <span class="s2">"ARG"</span><span class="p">,</span> <span class="s2">"TYR"</span><span class="p">,</span> <span class="s2">"TRP"</span><span class="p">,</span>
+                 <span class="s2">"XAA"</span><span class="p">,</span> <span class="s2">"PAD"</span><span class="p">,</span> <span class="s2">"MASK"</span><span class="p">,</span> <span class="s2">"BOS"</span><span class="p">,</span> <span class="s2">"EOS"</span><span class="p">]</span>
 
 
 <span class="k">def</span> <span class="nf">onehot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">vocab</span><span class="p">,</span> <span class="n">allow_unknown</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
@@ -256,8 +263,6 @@
 <span class="sd">        GetIsAromatic(): whether the atom is aromatic</span>
 <span class="sd">        </span>
 <span class="sd">        IsInRing(): whether the atom is in a ring</span>
-<span class="sd">        </span>
-<span class="sd">        atom_position(): the 3D position of the atom</span>
 <span class="sd">    """</span>
     <span class="k">return</span> <span class="n">onehot</span><span class="p">(</span><span class="n">atom</span><span class="o">.</span><span class="n">GetSymbol</span><span class="p">(),</span> <span class="n">atom_vocab</span><span class="p">,</span> <span class="n">allow_unknown</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="o">+</span> \
            <span class="n">onehot</span><span class="p">(</span><span class="n">atom</span><span class="o">.</span><span class="n">GetChiralTag</span><span class="p">(),</span> <span class="n">chiral_tag_vocab</span><span class="p">)</span> <span class="o">+</span> \
@@ -266,8 +271,7 @@
            <span class="n">onehot</span><span class="p">(</span><span class="n">atom</span><span class="o">.</span><span class="n">GetTotalNumHs</span><span class="p">(),</span> <span class="n">num_hs_vocab</span><span class="p">)</span> <span class="o">+</span> \
            <span class="n">onehot</span><span class="p">(</span><span class="n">atom</span><span class="o">.</span><span class="n">GetNumRadicalElectrons</span><span class="p">(),</span> <span class="n">num_radical_vocab</span><span class="p">)</span> <span class="o">+</span> \
            <span class="n">onehot</span><span class="p">(</span><span class="n">atom</span><span class="o">.</span><span class="n">GetHybridization</span><span class="p">(),</span> <span class="n">hybridization_vocab</span><span class="p">)</span> <span class="o">+</span> \
-           <span class="p">[</span><span class="n">atom</span><span class="o">.</span><span class="n">GetIsAromatic</span><span class="p">(),</span> <span class="n">atom</span><span class="o">.</span><span class="n">IsInRing</span><span class="p">()]</span> <span class="o">+</span> \
-           <span class="n">atom_position</span><span class="p">(</span><span class="n">atom</span><span class="p">)</span></div>
+           <span class="p">[</span><span class="n">atom</span><span class="o">.</span><span class="n">GetIsAromatic</span><span class="p">(),</span> <span class="n">atom</span><span class="o">.</span><span class="n">IsInRing</span><span class="p">()]</span></div>
 
 
 <div class="viewcode-block" id="atom_center_identification"><a class="viewcode-back" href="../../../api/data.html#torchdrug.data.feature.atom_center_identification">[docs]</a><span class="nd">@R</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="s2">"features.atom.center_identification"</span><span class="p">)</span>
@@ -380,8 +384,10 @@
 <div class="viewcode-block" id="atom_position"><a class="viewcode-back" href="../../../api/data.html#torchdrug.data.feature.atom_position">[docs]</a><span class="nd">@R</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="s2">"features.atom.position"</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">atom_position</span><span class="p">(</span><span class="n">atom</span><span class="p">):</span>
     <span class="sd">"""</span>
-<span class="sd">    Atom position.</span>
+<span class="sd">    Atom position in the molecular conformation.</span>
 <span class="sd">    Return 3D position if available, otherwise 2D position is returned.</span>
+
+<span class="sd">    Note it takes much time to compute the conformation for large molecules.</span>
 <span class="sd">    """</span>
     <span class="n">mol</span> <span class="o">=</span> <span class="n">atom</span><span class="o">.</span><span class="n">GetOwningMol</span><span class="p">()</span>
     <span class="k">if</span> <span class="n">mol</span><span class="o">.</span><span class="n">GetNumConformers</span><span class="p">()</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
@@ -422,13 +428,16 @@
     <span class="k">return</span> <span class="n">onehot</span><span class="p">(</span><span class="n">bond</span><span class="o">.</span><span class="n">GetBondType</span><span class="p">(),</span> <span class="n">bond_type_vocab</span><span class="p">)</span> <span class="o">+</span> \
            <span class="n">onehot</span><span class="p">(</span><span class="n">bond</span><span class="o">.</span><span class="n">GetBondDir</span><span class="p">(),</span> <span class="n">bond_dir_vocab</span><span class="p">)</span> <span class="o">+</span> \
            <span class="n">onehot</span><span class="p">(</span><span class="n">bond</span><span class="o">.</span><span class="n">GetStereo</span><span class="p">(),</span> <span class="n">bond_stereo_vocab</span><span class="p">)</span> <span class="o">+</span> \
-           <span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">bond</span><span class="o">.</span><span class="n">GetIsConjugated</span><span class="p">())]</span> <span class="o">+</span> \
-           <span class="n">bond_length</span><span class="p">(</span><span class="n">bond</span><span class="p">)</span></div>
+           <span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">bond</span><span class="o">.</span><span class="n">GetIsConjugated</span><span class="p">())]</span></div>
 
 
 <div class="viewcode-block" id="bond_length"><a class="viewcode-back" href="../../../api/data.html#torchdrug.data.feature.bond_length">[docs]</a><span class="nd">@R</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="s2">"features.bond.length"</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">bond_length</span><span class="p">(</span><span class="n">bond</span><span class="p">):</span>
-    <span class="sd">"""Bond length"""</span>
+    <span class="sd">"""</span>
+<span class="sd">    Bond length in the molecular conformation.</span>
+
+<span class="sd">    Note it takes much time to compute the conformation for large molecules.</span>
+<span class="sd">    """</span>
     <span class="n">mol</span> <span class="o">=</span> <span class="n">bond</span><span class="o">.</span><span class="n">GetOwningMol</span><span class="p">()</span>
     <span class="k">if</span> <span class="n">mol</span><span class="o">.</span><span class="n">GetNumConformers</span><span class="p">()</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
         <span class="n">mol</span><span class="o">.</span><span class="n">Compute2DCoords</span><span class="p">()</span>
@@ -481,6 +490,17 @@
 <span class="k">def</span> <span class="nf">molecule_default</span><span class="p">(</span><span class="n">mol</span><span class="p">):</span>
     <span class="sd">"""Default molecule feature."""</span>
     <span class="k">return</span> <span class="n">ExtendedConnectivityFingerprint</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span></div>
+
+
+<span class="nd">@R</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="s2">"features.residue.symbol"</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">residue_symbol</span><span class="p">(</span><span class="n">residue</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">onehot</span><span class="p">(</span><span class="n">residue</span><span class="o">.</span><span class="n">GetResidueName</span><span class="p">(),</span> <span class="n">residue_vocab</span><span class="p">,</span> <span class="n">allow_unknown</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+
+<span class="nd">@R</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="s2">"features.residue.default"</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">residue_default</span><span class="p">(</span><span class="n">residue</span><span class="p">):</span>
+    <span class="sd">"""Default residue feature."""</span>
+    <span class="k">return</span> <span class="n">residue_symbol</span><span class="p">(</span><span class="n">residue</span><span class="p">)</span>
 
 <span class="n">ECFP</span> <span class="o">=</span> <span class="n">ExtendedConnectivityFingerprint</span>
 

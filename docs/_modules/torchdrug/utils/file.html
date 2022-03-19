@@ -3,7 +3,7 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/><link rel="index" title="Index" href="../../../genindex.html" /><link rel="search" title="Search" href="../../../search.html" />
 
-    <meta name="generator" content="sphinx-3.1.2, furo 2020.12.09.beta21"/>
+    <meta name="generator" content="sphinx-4.4.0, furo 2020.12.09.beta21"/>
         <title>torchdrug.utils.file - TorchDrug 0.1.2 documentation</title>
       <link rel="stylesheet" href="../../../_static/styles/furo.css?digest=a3f371badb8538d75df213ccffb17a4f6e8f3ac5">
     <link rel="stylesheet" href="../../../_static/pygments.css">
@@ -50,14 +50,15 @@
   --color-code-foreground: #d0d0d0;
   
   }
-</style><link id="pygments_dark_css" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css" href="../../../_static/pygments_dark.css" />
+</style><link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo.css" />
+    <link id="pygments_dark_css" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css" href="../../../_static/pygments_dark.css" />
     <link rel="stylesheet" href="../../../_static/styles/furo-extensions.css?digest=26485485040e7aaf717c13fd0188a5ad2c2deb60">
     <script id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+    <script defer data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
     <script defer src="../../../_static/jquery.js"></script>
     <script defer src="../../../_static/underscore.js"></script>
     <script defer src="../../../_static/doctools.js"></script>
-    <script defer src="../../../_static/language_data.js"></script>
-    <script defer async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <script defer src="../../../_static/scripts/main.js?digest=e931d09b2a40c1bb82b542effe772014573baf67"></script></head>
   <body dir="">
     
@@ -157,7 +158,7 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../../paper.html">Papers Implemented</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Package Reference</span></p>
+<p class="caption" role="heading"><span class="caption-text">Package Reference</span></p>
 <ul>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../../api/index.html">Documentation</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label for="toctree-checkbox-4"><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../../api/core.html">torchdrug.core</a></li>
@@ -187,7 +188,9 @@
         </label>
         <h1>Source code for torchdrug.utils.file</h1><div class="highlight"><pre>
 <span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">struct</span>
 <span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">from</span> <span class="nn">tqdm</span> <span class="kn">import</span> <span class="n">tqdm</span>
 
 
 <span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
@@ -218,12 +221,35 @@
     <span class="k">return</span> <span class="n">save_file</span></div>
 
 
+<span class="k">def</span> <span class="nf">smart_open</span><span class="p">(</span><span class="n">file_name</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">"rb"</span><span class="p">):</span>
+    <span class="sd">"""</span>
+<span class="sd">    Open a regular file or a zipped file.</span>
+
+<span class="sd">    This function can be used as drop-in replacement of the builtin function `open()`.</span>
+
+<span class="sd">    Parameters:</span>
+<span class="sd">        file_name (str): file name</span>
+<span class="sd">        mode (str, optional): open mode for the file stream</span>
+<span class="sd">    """</span>
+    <span class="kn">import</span> <span class="nn">bz2</span>
+    <span class="kn">import</span> <span class="nn">gzip</span>
+
+    <span class="n">extension</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="n">file_name</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">extension</span> <span class="o">==</span> <span class="s1">'.bz2'</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">bz2</span><span class="o">.</span><span class="n">BZ2File</span><span class="p">(</span><span class="n">file_name</span><span class="p">,</span> <span class="n">mode</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">extension</span> <span class="o">==</span> <span class="s1">'.gz'</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">gzip</span><span class="o">.</span><span class="n">GzipFile</span><span class="p">(</span><span class="n">file_name</span><span class="p">,</span> <span class="n">mode</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="nb">open</span><span class="p">(</span><span class="n">file_name</span><span class="p">,</span> <span class="n">mode</span><span class="p">)</span>
+
+
 <div class="viewcode-block" id="extract"><a class="viewcode-back" href="../../../api/utils.html#torchdrug.utils.extract">[docs]</a><span class="k">def</span> <span class="nf">extract</span><span class="p">(</span><span class="n">zip_file</span><span class="p">,</span> <span class="n">member</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
     <span class="sd">"""</span>
 <span class="sd">    Extract files from a zip file. Currently, ``zip``, ``gz``, ``tar.gz``, ``tar`` file types are supported.</span>
 
 <span class="sd">    Parameters:</span>
-<span class="sd">        member (str, optional): extract a specific member from the zip file.</span>
+<span class="sd">        zip_file (str): file name</span>
+<span class="sd">        member (str, optional): extract specific member from the zip file.</span>
 <span class="sd">            If not specified, extract all members.</span>
 <span class="sd">    """</span>
     <span class="kn">import</span> <span class="nn">gzip</span>
@@ -235,40 +261,64 @@
     <span class="k">if</span> <span class="n">zip_name</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">".tar"</span><span class="p">):</span>
         <span class="n">extension</span> <span class="o">=</span> <span class="s2">".tar"</span> <span class="o">+</span> <span class="n">extension</span>
         <span class="n">zip_name</span> <span class="o">=</span> <span class="n">zip_name</span><span class="p">[:</span><span class="o">-</span><span class="mi">4</span><span class="p">]</span>
-
-    <span class="k">if</span> <span class="n">member</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="n">save_file</span> <span class="o">=</span> <span class="n">zip_name</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="n">save_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">zip_name</span><span class="p">),</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">member</span><span class="p">))</span>
-    <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">save_file</span><span class="p">):</span>
-        <span class="k">return</span> <span class="n">save_file</span>
-
-    <span class="k">if</span> <span class="n">member</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">"Extracting </span><span class="si">%s</span><span class="s2"> to </span><span class="si">%s</span><span class="s2">"</span> <span class="o">%</span> <span class="p">(</span><span class="n">zip_file</span><span class="p">,</span> <span class="n">save_file</span><span class="p">))</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">"Extracting </span><span class="si">%s</span><span class="s2"> from </span><span class="si">%s</span><span class="s2"> to </span><span class="si">%s</span><span class="s2">"</span> <span class="o">%</span> <span class="p">(</span><span class="n">member</span><span class="p">,</span> <span class="n">zip_file</span><span class="p">,</span> <span class="n">save_file</span><span class="p">))</span>
+    <span class="n">save_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">zip_file</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="n">extension</span> <span class="o">==</span> <span class="s2">".gz"</span><span class="p">:</span>
-        <span class="k">with</span> <span class="n">gzip</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">zip_file</span><span class="p">,</span> <span class="s2">"rb"</span><span class="p">)</span> <span class="k">as</span> <span class="n">fin</span><span class="p">,</span> <span class="nb">open</span><span class="p">(</span><span class="n">save_file</span><span class="p">,</span> <span class="s2">"wb"</span><span class="p">)</span> <span class="k">as</span> <span class="n">fout</span><span class="p">:</span>
-            <span class="n">shutil</span><span class="o">.</span><span class="n">copyfileobj</span><span class="p">(</span><span class="n">fin</span><span class="p">,</span> <span class="n">fout</span><span class="p">)</span>
+        <span class="n">member</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">zip_name</span><span class="p">)</span>
+        <span class="n">members</span> <span class="o">=</span> <span class="p">[</span><span class="n">member</span><span class="p">]</span>
+        <span class="n">save_files</span> <span class="o">=</span> <span class="p">[</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">save_path</span><span class="p">,</span> <span class="n">member</span><span class="p">)]</span>
+        <span class="k">for</span> <span class="n">_member</span><span class="p">,</span> <span class="n">save_file</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">members</span><span class="p">,</span> <span class="n">save_files</span><span class="p">):</span>
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">zip_file</span><span class="p">,</span> <span class="s2">"rb"</span><span class="p">)</span> <span class="k">as</span> <span class="n">fin</span><span class="p">:</span>
+                <span class="n">fin</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="o">-</span><span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+                <span class="n">file_size</span> <span class="o">=</span> <span class="n">struct</span><span class="o">.</span><span class="n">unpack</span><span class="p">(</span><span class="s2">"&lt;I"</span><span class="p">,</span> <span class="n">fin</span><span class="o">.</span><span class="n">read</span><span class="p">())[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="k">with</span> <span class="n">gzip</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">zip_file</span><span class="p">,</span> <span class="s2">"rb"</span><span class="p">)</span> <span class="k">as</span> <span class="n">fin</span><span class="p">:</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">save_file</span><span class="p">)</span> <span class="ow">or</span> <span class="n">file_size</span> <span class="o">!=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">getsize</span><span class="p">(</span><span class="n">save_file</span><span class="p">):</span>
+                    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">"Extracting </span><span class="si">%s</span><span class="s2"> to </span><span class="si">%s</span><span class="s2">"</span> <span class="o">%</span> <span class="p">(</span><span class="n">zip_file</span><span class="p">,</span> <span class="n">save_file</span><span class="p">))</span>
+                    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">save_file</span><span class="p">,</span> <span class="s2">"wb"</span><span class="p">)</span> <span class="k">as</span> <span class="n">fout</span><span class="p">:</span>
+                        <span class="n">shutil</span><span class="o">.</span><span class="n">copyfileobj</span><span class="p">(</span><span class="n">fin</span><span class="p">,</span> <span class="n">fout</span><span class="p">)</span>
     <span class="k">elif</span> <span class="n">extension</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">".tar.gz"</span><span class="p">,</span> <span class="s2">".tgz"</span><span class="p">,</span> <span class="s2">".tar"</span><span class="p">]:</span>
-        <span class="k">if</span> <span class="n">member</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="k">with</span> <span class="n">tarfile</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">zip_file</span><span class="p">,</span> <span class="s2">"r"</span><span class="p">)</span> <span class="k">as</span> <span class="n">fin</span><span class="p">:</span>
-                <span class="n">fin</span><span class="o">.</span><span class="n">extractall</span><span class="p">(</span><span class="n">save_file</span><span class="p">)</span>
+        <span class="n">tar</span> <span class="o">=</span> <span class="n">tarfile</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">zip_file</span><span class="p">,</span> <span class="s2">"r"</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">member</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">members</span> <span class="o">=</span> <span class="p">[</span><span class="n">member</span><span class="p">]</span>
+            <span class="n">save_files</span> <span class="o">=</span> <span class="p">[</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">save_path</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">member</span><span class="p">))]</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">"Extracting </span><span class="si">%s</span><span class="s2"> from </span><span class="si">%s</span><span class="s2"> to </span><span class="si">%s</span><span class="s2">"</span> <span class="o">%</span> <span class="p">(</span><span class="n">member</span><span class="p">,</span> <span class="n">zip_file</span><span class="p">,</span> <span class="n">save_files</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="k">with</span> <span class="n">tarfile</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">zip_file</span><span class="p">,</span> <span class="s2">"r"</span><span class="p">)</span><span class="o">.</span><span class="n">extractfile</span><span class="p">(</span><span class="n">member</span><span class="p">)</span> <span class="k">as</span> <span class="n">fin</span><span class="p">,</span> <span class="nb">open</span><span class="p">(</span><span class="n">save_file</span><span class="p">,</span> <span class="s2">"wb"</span><span class="p">)</span> <span class="k">as</span> <span class="n">fout</span><span class="p">:</span>
-                <span class="n">shutil</span><span class="o">.</span><span class="n">copyfileobj</span><span class="p">(</span><span class="n">fin</span><span class="p">,</span> <span class="n">fout</span><span class="p">)</span>
+            <span class="n">members</span> <span class="o">=</span> <span class="n">tar</span><span class="o">.</span><span class="n">getnames</span><span class="p">()</span>
+            <span class="n">save_files</span> <span class="o">=</span> <span class="p">[</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">save_path</span><span class="p">,</span> <span class="n">_member</span><span class="p">)</span> <span class="k">for</span> <span class="n">_member</span> <span class="ow">in</span> <span class="n">members</span><span class="p">]</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">"Extracting </span><span class="si">%s</span><span class="s2"> to </span><span class="si">%s</span><span class="s2">"</span> <span class="o">%</span> <span class="p">(</span><span class="n">zip_file</span><span class="p">,</span> <span class="n">save_path</span><span class="p">))</span>
+        <span class="k">for</span> <span class="n">_member</span><span class="p">,</span> <span class="n">save_file</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">members</span><span class="p">,</span> <span class="n">save_files</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">tar</span><span class="o">.</span><span class="n">getmember</span><span class="p">(</span><span class="n">_member</span><span class="p">)</span><span class="o">.</span><span class="n">isdir</span><span class="p">():</span>
+                <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">save_file</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+                <span class="k">continue</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">save_file</span><span class="p">),</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">save_file</span><span class="p">)</span> <span class="ow">or</span> <span class="n">tar</span><span class="o">.</span><span class="n">getmember</span><span class="p">(</span><span class="n">_member</span><span class="p">)</span><span class="o">.</span><span class="n">size</span> <span class="o">!=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">getsize</span><span class="p">(</span><span class="n">save_file</span><span class="p">):</span>
+                <span class="k">with</span> <span class="n">tar</span><span class="o">.</span><span class="n">extractfile</span><span class="p">(</span><span class="n">_member</span><span class="p">)</span> <span class="k">as</span> <span class="n">fin</span><span class="p">,</span> <span class="nb">open</span><span class="p">(</span><span class="n">save_file</span><span class="p">,</span> <span class="s2">"wb"</span><span class="p">)</span> <span class="k">as</span> <span class="n">fout</span><span class="p">:</span>
+                    <span class="n">shutil</span><span class="o">.</span><span class="n">copyfileobj</span><span class="p">(</span><span class="n">fin</span><span class="p">,</span> <span class="n">fout</span><span class="p">)</span>
     <span class="k">elif</span> <span class="n">extension</span> <span class="o">==</span> <span class="s2">".zip"</span><span class="p">:</span>
-        <span class="k">if</span> <span class="n">member</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="k">with</span> <span class="n">zipfile</span><span class="o">.</span><span class="n">ZipFile</span><span class="p">(</span><span class="n">zip_file</span><span class="p">)</span> <span class="k">as</span> <span class="n">fin</span><span class="p">:</span>
-                <span class="n">fin</span><span class="o">.</span><span class="n">extractall</span><span class="p">(</span><span class="n">save_file</span><span class="p">)</span>
+        <span class="n">zipped</span> <span class="o">=</span> <span class="n">zipfile</span><span class="o">.</span><span class="n">ZipFile</span><span class="p">(</span><span class="n">zip_file</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">member</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">members</span> <span class="o">=</span> <span class="p">[</span><span class="n">member</span><span class="p">]</span>
+            <span class="n">save_files</span> <span class="o">=</span> <span class="p">[</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">save_path</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">member</span><span class="p">))]</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">"Extracting </span><span class="si">%s</span><span class="s2"> from </span><span class="si">%s</span><span class="s2"> to </span><span class="si">%s</span><span class="s2">"</span> <span class="o">%</span> <span class="p">(</span><span class="n">member</span><span class="p">,</span> <span class="n">zip_file</span><span class="p">,</span> <span class="n">save_files</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="k">with</span> <span class="n">zipfile</span><span class="o">.</span><span class="n">ZipFile</span><span class="p">(</span><span class="n">zip_file</span><span class="p">)</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">member</span><span class="p">,</span> <span class="s2">"r"</span><span class="p">)</span> <span class="k">as</span> <span class="n">fin</span><span class="p">,</span> <span class="nb">open</span><span class="p">(</span><span class="n">save_file</span><span class="p">,</span> <span class="s2">"wb"</span><span class="p">)</span> <span class="k">as</span> <span class="n">fout</span><span class="p">:</span>
-                <span class="n">shutil</span><span class="o">.</span><span class="n">copyfileobj</span><span class="p">(</span><span class="n">fin</span><span class="p">,</span> <span class="n">fout</span><span class="p">)</span>
+            <span class="n">members</span> <span class="o">=</span> <span class="n">zipped</span><span class="o">.</span><span class="n">namelist</span><span class="p">()</span>
+            <span class="n">save_files</span> <span class="o">=</span> <span class="p">[</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">save_path</span><span class="p">,</span> <span class="n">_member</span><span class="p">)</span> <span class="k">for</span> <span class="n">_member</span> <span class="ow">in</span> <span class="n">members</span><span class="p">]</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">"Extracting </span><span class="si">%s</span><span class="s2"> to </span><span class="si">%s</span><span class="s2">"</span> <span class="o">%</span> <span class="p">(</span><span class="n">zip_file</span><span class="p">,</span> <span class="n">save_path</span><span class="p">))</span>
+        <span class="k">for</span> <span class="n">_member</span><span class="p">,</span> <span class="n">save_file</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">members</span><span class="p">,</span> <span class="n">save_files</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">zipped</span><span class="o">.</span><span class="n">getinfo</span><span class="p">(</span><span class="n">_member</span><span class="p">)</span><span class="o">.</span><span class="n">is_dir</span><span class="p">():</span>
+                <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">save_file</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+                <span class="k">continue</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">save_file</span><span class="p">),</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">save_file</span><span class="p">)</span> <span class="ow">or</span> <span class="n">zipped</span><span class="o">.</span><span class="n">getinfo</span><span class="p">(</span><span class="n">_member</span><span class="p">)</span><span class="o">.</span><span class="n">file_size</span> <span class="o">!=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">getsize</span><span class="p">(</span><span class="n">save_file</span><span class="p">):</span>
+                <span class="k">with</span> <span class="n">zipped</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">_member</span><span class="p">,</span> <span class="s2">"r"</span><span class="p">)</span> <span class="k">as</span> <span class="n">fin</span><span class="p">,</span> <span class="nb">open</span><span class="p">(</span><span class="n">save_file</span><span class="p">,</span> <span class="s2">"wb"</span><span class="p">)</span> <span class="k">as</span> <span class="n">fout</span><span class="p">:</span>
+                    <span class="n">shutil</span><span class="o">.</span><span class="n">copyfileobj</span><span class="p">(</span><span class="n">fin</span><span class="p">,</span> <span class="n">fout</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Unknown file extension `</span><span class="si">%s</span><span class="s2">`"</span> <span class="o">%</span> <span class="n">extension</span><span class="p">)</span>
 
-    <span class="k">return</span> <span class="n">save_file</span></div>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">save_files</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">save_files</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">save_path</span></div>
 
 
 <div class="viewcode-block" id="compute_md5"><a class="viewcode-back" href="../../../api/utils.html#torchdrug.utils.compute_md5">[docs]</a><span class="k">def</span> <span class="nf">compute_md5</span><span class="p">(</span><span class="n">file_name</span><span class="p">,</span> <span class="n">chunk_size</span><span class="o">=</span><span class="mi">65536</span><span class="p">):</span>

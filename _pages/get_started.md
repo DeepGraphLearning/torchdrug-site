@@ -193,6 +193,13 @@ More acceleration can be achieved by multiple GPUs. In this case, we need to lau
 solver = core.Engine(task, train_set, valid_set, test_set, optimizer, batch_size=256, gpus=[0, 1, 2, 3])
 ```
 
+We may log the training and evaluation metrics to Weights & Biases platform for
+better experiment tracking in the browser.
+
+```python
+solver = core.Engine(task, train_set, valid_set, test_set, optimizer, batch_size=1024, logger="wandb")
+```
+
 ## Test the Model
 {:.no_toc}
 

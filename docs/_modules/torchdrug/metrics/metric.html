@@ -3,7 +3,7 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/><link rel="index" title="Index" href="../../../genindex.html" /><link rel="search" title="Search" href="../../../search.html" />
 
-    <meta name="generator" content="sphinx-3.1.2, furo 2020.12.09.beta21"/>
+    <meta name="generator" content="sphinx-4.4.0, furo 2020.12.09.beta21"/>
         <title>torchdrug.metrics.metric - TorchDrug 0.1.2 documentation</title>
       <link rel="stylesheet" href="../../../_static/styles/furo.css?digest=a3f371badb8538d75df213ccffb17a4f6e8f3ac5">
     <link rel="stylesheet" href="../../../_static/pygments.css">
@@ -50,14 +50,15 @@
   --color-code-foreground: #d0d0d0;
   
   }
-</style><link id="pygments_dark_css" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css" href="../../../_static/pygments_dark.css" />
+</style><link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo.css" />
+    <link id="pygments_dark_css" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css" href="../../../_static/pygments_dark.css" />
     <link rel="stylesheet" href="../../../_static/styles/furo-extensions.css?digest=26485485040e7aaf717c13fd0188a5ad2c2deb60">
     <script id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+    <script defer data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
     <script defer src="../../../_static/jquery.js"></script>
     <script defer src="../../../_static/underscore.js"></script>
     <script defer src="../../../_static/doctools.js"></script>
-    <script defer src="../../../_static/language_data.js"></script>
-    <script defer async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <script defer src="../../../_static/scripts/main.js?digest=e931d09b2a40c1bb82b542effe772014573baf67"></script></head>
   <body dir="">
     
@@ -157,7 +158,7 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../../paper.html">Papers Implemented</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Package Reference</span></p>
+<p class="caption" role="heading"><span class="caption-text">Package Reference</span></p>
 <ul>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../../api/index.html">Documentation</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label for="toctree-checkbox-4"><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../../api/core.html">torchdrug.core</a></li>
@@ -186,15 +187,12 @@
           <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
         </label>
         <h1>Source code for torchdrug.metrics.metric</h1><div class="highlight"><pre>
-<span></span><span class="kn">import</span> <span class="nn">os</span>
-<span class="kn">import</span> <span class="nn">sys</span>
-
-<span class="kn">import</span> <span class="nn">torch</span>
+<span></span><span class="kn">import</span> <span class="nn">torch</span>
 <span class="kn">from</span> <span class="nn">torch.nn</span> <span class="kn">import</span> <span class="n">functional</span> <span class="k">as</span> <span class="n">F</span>
-<span class="kn">from</span> <span class="nn">torch_scatter</span> <span class="kn">import</span> <span class="n">scatter_max</span>
+<span class="kn">from</span> <span class="nn">torch_scatter</span> <span class="kn">import</span> <span class="n">scatter_add</span><span class="p">,</span> <span class="n">scatter_mean</span><span class="p">,</span> <span class="n">scatter_max</span>
 <span class="kn">import</span> <span class="nn">networkx</span> <span class="k">as</span> <span class="nn">nx</span>
 <span class="kn">from</span> <span class="nn">rdkit</span> <span class="kn">import</span> <span class="n">Chem</span>
-<span class="kn">from</span> <span class="nn">rdkit.Chem</span> <span class="kn">import</span> <span class="n">RDConfig</span><span class="p">,</span> <span class="n">Descriptors</span>
+<span class="kn">from</span> <span class="nn">rdkit.Chem</span> <span class="kn">import</span> <span class="n">Descriptors</span>
 
 <span class="kn">from</span> <span class="nn">torchdrug</span> <span class="kn">import</span> <span class="n">utils</span>
 <span class="kn">from</span> <span class="nn">torchdrug.layers</span> <span class="kn">import</span> <span class="n">functional</span>
@@ -211,6 +209,8 @@
 <span class="sd">        pred (Tensor): predictions of shape :math:`(n,)`</span>
 <span class="sd">        target (Tensor): binary targets of shape :math:`(n,)`</span>
 <span class="sd">    """</span>
+    <span class="k">if</span> <span class="n">target</span><span class="o">.</span><span class="n">dtype</span> <span class="o">!=</span> <span class="n">torch</span><span class="o">.</span><span class="n">long</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">"Expect `target` to be torch.long, but found </span><span class="si">%s</span><span class="s2">"</span> <span class="o">%</span> <span class="n">target</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
     <span class="n">order</span> <span class="o">=</span> <span class="n">pred</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="n">descending</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="n">target</span> <span class="o">=</span> <span class="n">target</span><span class="p">[</span><span class="n">order</span><span class="p">]</span>
     <span class="n">hit</span> <span class="o">=</span> <span class="n">target</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
@@ -228,6 +228,8 @@
 <span class="sd">        pred (Tensor): predictions of shape :math:`(n,)`</span>
 <span class="sd">        target (Tensor): binary targets of shape :math:`(n,)`</span>
 <span class="sd">    """</span>
+    <span class="k">if</span> <span class="n">target</span><span class="o">.</span><span class="n">dtype</span> <span class="o">!=</span> <span class="n">torch</span><span class="o">.</span><span class="n">long</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">"Expect `target` to be torch.long, but found </span><span class="si">%s</span><span class="s2">"</span> <span class="o">%</span> <span class="n">target</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
     <span class="n">order</span> <span class="o">=</span> <span class="n">pred</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="n">descending</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="n">target</span> <span class="o">=</span> <span class="n">target</span><span class="p">[</span><span class="n">order</span><span class="p">]</span>
     <span class="n">precision</span> <span class="o">=</span> <span class="n">target</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">/</span> <span class="n">torch</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">target</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="n">target</span><span class="o">.</span><span class="n">device</span><span class="p">)</span>
@@ -368,7 +370,46 @@
     <span class="k">return</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">validity</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">float</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="n">pred</span><span class="o">.</span><span class="n">device</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="variadic_accuracy"><a class="viewcode-back" href="../../../api/metrics.html#torchdrug.metrics.variadic_accuracy">[docs]</a><span class="k">def</span> <span class="nf">variadic_accuracy</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="n">target</span><span class="p">,</span> <span class="n">size</span><span class="p">):</span>
+<span class="nd">@R</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="s2">"metrics.variadic_auroc"</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">variadic_area_under_roc</span><span class="p">(</span><span class="n">pred</span><span class="p">,</span> <span class="n">target</span><span class="p">,</span> <span class="n">size</span><span class="p">):</span>
+    <span class="n">index2graph</span> <span class="o">=</span> <span class="n">functional</span><span class="o">.</span><span class="n">_size_to_index</span><span class="p">(</span><span class="n">size</span><span class="p">)</span>
+    <span class="n">_</span><span class="p">,</span> <span class="n">order</span> <span class="o">=</span> <span class="n">functional</span><span class="o">.</span><span class="n">variadic_sort</span><span class="p">(</span><span class="n">pred</span><span class="p">,</span> <span class="n">size</span><span class="p">,</span> <span class="n">descending</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">cum_size</span> <span class="o">=</span> <span class="p">(</span><span class="n">size</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">-</span> <span class="n">size</span><span class="p">)[</span><span class="n">index2graph</span><span class="p">]</span>
+    <span class="n">target</span> <span class="o">=</span> <span class="n">target</span><span class="p">[</span><span class="n">order</span> <span class="o">+</span> <span class="n">cum_size</span><span class="p">]</span>
+    <span class="n">total_hit</span> <span class="o">=</span> <span class="n">functional</span><span class="o">.</span><span class="n">variadic_sum</span><span class="p">(</span><span class="n">target</span><span class="p">,</span> <span class="n">size</span><span class="p">)</span>
+    <span class="n">total_hit</span> <span class="o">=</span> <span class="n">total_hit</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">-</span> <span class="n">total_hit</span>
+    <span class="n">hit</span> <span class="o">=</span> <span class="n">target</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">-</span> <span class="n">total_hit</span><span class="p">[</span><span class="n">index2graph</span><span class="p">]</span>
+    <span class="n">hit</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">target</span> <span class="o">==</span> <span class="mi">0</span><span class="p">,</span> <span class="n">hit</span><span class="p">,</span> <span class="n">torch</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">hit</span><span class="p">))</span>
+    <span class="nb">all</span> <span class="o">=</span> <span class="n">functional</span><span class="o">.</span><span class="n">variadic_sum</span><span class="p">((</span><span class="n">target</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">float</span><span class="p">(),</span> <span class="n">size</span><span class="p">)</span> <span class="o">*</span> \
+            <span class="n">functional</span><span class="o">.</span><span class="n">variadic_sum</span><span class="p">((</span><span class="n">target</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">float</span><span class="p">(),</span> <span class="n">size</span><span class="p">)</span>
+    <span class="n">auroc</span> <span class="o">=</span> <span class="n">functional</span><span class="o">.</span><span class="n">variadic_sum</span><span class="p">(</span><span class="n">hit</span><span class="p">,</span> <span class="n">size</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="nb">all</span> <span class="o">+</span> <span class="mf">1e-10</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">auroc</span>
+
+
+<span class="nd">@R</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="s2">"metrics.variadic_auprc"</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">variadic_area_under_prc</span><span class="p">(</span><span class="n">pred</span><span class="p">,</span> <span class="n">target</span><span class="p">,</span> <span class="n">size</span><span class="p">):</span>
+    <span class="n">index2graph</span> <span class="o">=</span> <span class="n">functional</span><span class="o">.</span><span class="n">_size_to_index</span><span class="p">(</span><span class="n">size</span><span class="p">)</span>
+    <span class="n">_</span><span class="p">,</span> <span class="n">order</span> <span class="o">=</span> <span class="n">functional</span><span class="o">.</span><span class="n">variadic_sort</span><span class="p">(</span><span class="n">pred</span><span class="p">,</span> <span class="n">size</span><span class="p">,</span> <span class="n">descending</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">cum_size</span> <span class="o">=</span> <span class="p">(</span><span class="n">size</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">-</span> <span class="n">size</span><span class="p">)[</span><span class="n">index2graph</span><span class="p">]</span>
+    <span class="n">target</span> <span class="o">=</span> <span class="n">target</span><span class="p">[</span><span class="n">order</span> <span class="o">+</span> <span class="n">cum_size</span><span class="p">]</span>
+    <span class="n">total_hit</span> <span class="o">=</span> <span class="n">functional</span><span class="o">.</span><span class="n">variadic_sum</span><span class="p">(</span><span class="n">target</span><span class="p">,</span> <span class="n">size</span><span class="p">)</span>
+    <span class="n">total_hit</span> <span class="o">=</span> <span class="n">total_hit</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">-</span> <span class="n">total_hit</span>
+    <span class="n">hit</span> <span class="o">=</span> <span class="n">target</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">-</span> <span class="n">total_hit</span><span class="p">[</span><span class="n">index2graph</span><span class="p">]</span>
+    <span class="n">total</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">ones_like</span><span class="p">(</span><span class="n">target</span><span class="p">)</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">-</span> <span class="p">(</span><span class="n">size</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">-</span> <span class="n">size</span><span class="p">)[</span><span class="n">index2graph</span><span class="p">]</span>
+    <span class="n">precision</span> <span class="o">=</span> <span class="n">hit</span> <span class="o">/</span> <span class="n">total</span>
+    <span class="n">precision</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">target</span> <span class="o">==</span> <span class="mi">1</span><span class="p">,</span> <span class="n">precision</span><span class="p">,</span> <span class="n">torch</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">precision</span><span class="p">))</span>
+    <span class="n">auprc</span> <span class="o">=</span> <span class="n">functional</span><span class="o">.</span><span class="n">variadic_sum</span><span class="p">(</span><span class="n">precision</span><span class="p">,</span> <span class="n">size</span><span class="p">)</span> <span class="o">/</span> \
+            <span class="p">(</span><span class="n">functional</span><span class="o">.</span><span class="n">variadic_sum</span><span class="p">((</span><span class="n">target</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">float</span><span class="p">(),</span> <span class="n">size</span><span class="p">)</span> <span class="o">+</span> <span class="mf">1e-10</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">auprc</span>
+    
+
+<span class="nd">@R</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="s2">"metrics.accuracy"</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">accuracy</span><span class="p">(</span><span class="n">pred</span><span class="p">,</span> <span class="n">target</span><span class="p">):</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">pred</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">dim</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span> <span class="o">==</span> <span class="n">target</span><span class="p">)</span><span class="o">.</span><span class="n">float</span><span class="p">()</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+
+
+<div class="viewcode-block" id="variadic_accuracy"><a class="viewcode-back" href="../../../api/metrics.html#torchdrug.metrics.variadic_accuracy">[docs]</a><span class="nd">@R</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="s2">"metrics.variadic_accuracy"</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">variadic_accuracy</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="n">target</span><span class="p">,</span> <span class="n">size</span><span class="p">):</span>
     <span class="sd">"""</span>
 <span class="sd">    Compute classification accuracy over variadic sizes of categories.</span>
 
@@ -385,6 +426,90 @@
     <span class="n">target_index</span> <span class="o">=</span> <span class="n">target</span> <span class="o">+</span> <span class="n">size</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">-</span> <span class="n">size</span>
     <span class="n">accuracy</span> <span class="o">=</span> <span class="p">(</span><span class="n">input_class</span> <span class="o">==</span> <span class="n">target_index</span><span class="p">)</span><span class="o">.</span><span class="n">float</span><span class="p">()</span>
     <span class="k">return</span> <span class="n">accuracy</span></div>
+
+
+<span class="nd">@R</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="s2">"metrics.variadic_top_precision"</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">variadic_top_precision</span><span class="p">(</span><span class="n">pred</span><span class="p">,</span> <span class="n">target</span><span class="p">,</span> <span class="n">size</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
+    <span class="n">index</span> <span class="o">=</span> <span class="n">functional</span><span class="o">.</span><span class="n">variadic_topk</span><span class="p">(</span><span class="n">pred</span><span class="p">,</span> <span class="n">size</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">largest</span><span class="o">=</span><span class="kc">True</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">index</span> <span class="o">=</span> <span class="n">index</span> <span class="o">+</span> <span class="p">(</span><span class="n">size</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">-</span> <span class="n">size</span><span class="p">)</span><span class="o">.</span><span class="n">repeat_interleave</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
+    <span class="n">precision</span> <span class="o">=</span> <span class="n">functional</span><span class="o">.</span><span class="n">variadic_sum</span><span class="p">(</span><span class="n">target</span><span class="p">[</span><span class="n">index</span><span class="p">],</span> <span class="n">k</span><span class="p">)</span> <span class="o">/</span> <span class="n">k</span>
+    <span class="n">precision</span><span class="p">[</span><span class="n">size</span> <span class="o">&lt;</span> <span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">return</span> <span class="n">precision</span>
+
+
+<span class="nd">@R</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="s2">"metrics.mcc"</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">matthews_corrcoef</span><span class="p">(</span><span class="n">pred</span><span class="p">,</span> <span class="n">target</span><span class="p">,</span> <span class="n">eps</span><span class="o">=</span><span class="mf">1e-6</span><span class="p">):</span>
+    <span class="sd">"""</span>
+<span class="sd">    Matthews correlation coefficient between target and prediction.</span>
+
+<span class="sd">    Definition follows matthews_corrcoef for K classes in sklearn.</span>
+<span class="sd">    For details, see: 'https://scikit-learn.org/stable/modules/model_evaluation.html#matthews-corrcoef'</span>
+
+<span class="sd">    Parameters:</span>
+<span class="sd">        pred (Tensor): prediction of shape :math: `(N,)`</span>
+<span class="sd">        target (Tensor): target of shape :math: `(N,)`</span>
+<span class="sd">    """</span>
+    <span class="n">num_class</span> <span class="o">=</span> <span class="n">pred</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">pred</span> <span class="o">=</span> <span class="n">pred</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">ones</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">target</span><span class="p">),</span> <span class="n">device</span><span class="o">=</span><span class="n">pred</span><span class="o">.</span><span class="n">device</span><span class="p">)</span>
+    <span class="n">confusion_matrix</span> <span class="o">=</span> <span class="n">scatter_add</span><span class="p">(</span><span class="n">ones</span><span class="p">,</span> <span class="n">target</span> <span class="o">*</span> <span class="n">num_class</span> <span class="o">+</span> <span class="n">pred</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">dim_size</span><span class="o">=</span><span class="n">num_class</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="n">confusion_matrix</span> <span class="o">=</span> <span class="n">confusion_matrix</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="n">num_class</span><span class="p">,</span> <span class="n">num_class</span><span class="p">)</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">confusion_matrix</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">p</span> <span class="o">=</span> <span class="n">confusion_matrix</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">c</span> <span class="o">=</span> <span class="n">confusion_matrix</span><span class="o">.</span><span class="n">trace</span><span class="p">()</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="n">confusion_matrix</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">c</span> <span class="o">*</span> <span class="n">s</span> <span class="o">-</span> <span class="n">t</span> <span class="o">@</span> <span class="n">p</span><span class="p">)</span> <span class="o">/</span> <span class="p">((</span><span class="n">s</span> <span class="o">*</span> <span class="n">s</span> <span class="o">-</span> <span class="n">p</span> <span class="o">@</span> <span class="n">p</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">s</span> <span class="o">*</span> <span class="n">s</span> <span class="o">-</span> <span class="n">t</span> <span class="o">@</span> <span class="n">t</span><span class="p">)</span> <span class="o">+</span> <span class="n">eps</span><span class="p">)</span><span class="o">.</span><span class="n">sqrt</span><span class="p">()</span>
+
+
+<span class="nd">@R</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="s2">"metrics.pearsonr"</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">pearsonr</span><span class="p">(</span><span class="n">pred</span><span class="p">,</span> <span class="n">target</span><span class="p">):</span>
+    <span class="sd">"""</span>
+<span class="sd">    Pearson correlation between target and prediction.</span>
+<span class="sd">    Mimics `scipy.stats.pearsonr`.</span>
+
+<span class="sd">    Parameters:</span>
+<span class="sd">        pred (Tensor): prediction of shape :math: `(N,)`</span>
+<span class="sd">        target (Tensor): target of shape :math: `(N,)`</span>
+<span class="sd">    """</span>
+    <span class="n">pred_mean</span> <span class="o">=</span> <span class="n">pred</span><span class="o">.</span><span class="n">float</span><span class="p">()</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+    <span class="n">target_mean</span> <span class="o">=</span> <span class="n">target</span><span class="o">.</span><span class="n">float</span><span class="p">()</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+    <span class="n">pred_centered</span> <span class="o">=</span> <span class="n">pred</span> <span class="o">-</span> <span class="n">pred_mean</span>
+    <span class="n">target_centered</span> <span class="o">=</span> <span class="n">target</span> <span class="o">-</span> <span class="n">target_mean</span>
+    <span class="n">pred_normalized</span> <span class="o">=</span> <span class="n">pred_centered</span> <span class="o">/</span> <span class="n">pred_centered</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">target_normalized</span> <span class="o">=</span> <span class="n">target_centered</span> <span class="o">/</span> <span class="n">target_centered</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">pearsonr</span> <span class="o">=</span> <span class="n">pred_normalized</span> <span class="o">@</span> <span class="n">target_normalized</span>
+    <span class="k">return</span> <span class="n">pearsonr</span>
+
+
+<span class="nd">@R</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="s2">"metrics.spearmanr"</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">spearmanr</span><span class="p">(</span><span class="n">pred</span><span class="p">,</span> <span class="n">target</span><span class="p">,</span> <span class="n">eps</span><span class="o">=</span><span class="mf">1e-6</span><span class="p">):</span>
+    <span class="sd">"""</span>
+<span class="sd">    Spearman correlation between target and prediction.</span>
+<span class="sd">    Implement in PyTorch, but non-diffierentiable. (validation metric only)</span>
+
+<span class="sd">    Parameters:</span>
+<span class="sd">        pred (Tensor): prediction of shape :math: `(N,)`</span>
+<span class="sd">        target (Tensor): target of shape :math: `(N,)`</span>
+<span class="sd">    """</span>
+
+    <span class="k">def</span> <span class="nf">get_ranking</span><span class="p">(</span><span class="nb">input</span><span class="p">):</span>
+        <span class="n">input_set</span><span class="p">,</span> <span class="n">input_inverse</span> <span class="o">=</span> <span class="nb">input</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">return_inverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">order</span> <span class="o">=</span> <span class="n">input_inverse</span><span class="o">.</span><span class="n">argsort</span><span class="p">()</span>
+        <span class="n">ranking</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">input_inverse</span><span class="p">),</span> <span class="n">device</span><span class="o">=</span><span class="nb">input</span><span class="o">.</span><span class="n">device</span><span class="p">)</span>
+        <span class="n">ranking</span><span class="p">[</span><span class="n">order</span><span class="p">]</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="nb">input</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">float</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="nb">input</span><span class="o">.</span><span class="n">device</span><span class="p">)</span>
+
+        <span class="c1"># for elements that have the same value, replace their rankings with the mean of their rankings</span>
+        <span class="n">mean_ranking</span> <span class="o">=</span> <span class="n">scatter_mean</span><span class="p">(</span><span class="n">ranking</span><span class="p">,</span> <span class="n">input_inverse</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">dim_size</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">input_set</span><span class="p">))</span>
+        <span class="n">ranking</span> <span class="o">=</span> <span class="n">mean_ranking</span><span class="p">[</span><span class="n">input_inverse</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">ranking</span>
+
+    <span class="n">pred</span> <span class="o">=</span> <span class="n">get_ranking</span><span class="p">(</span><span class="n">pred</span><span class="p">)</span>
+    <span class="n">target</span> <span class="o">=</span> <span class="n">get_ranking</span><span class="p">(</span><span class="n">target</span><span class="p">)</span>
+    <span class="n">covariance</span> <span class="o">=</span> <span class="p">(</span><span class="n">pred</span> <span class="o">*</span> <span class="n">target</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span> <span class="o">-</span> <span class="n">pred</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span> <span class="o">*</span> <span class="n">target</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+    <span class="n">pred_std</span> <span class="o">=</span> <span class="n">pred</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">unbiased</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">target_std</span> <span class="o">=</span> <span class="n">target</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">unbiased</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">spearmanr</span> <span class="o">=</span> <span class="n">covariance</span> <span class="o">/</span> <span class="p">(</span><span class="n">pred_std</span> <span class="o">*</span> <span class="n">target_std</span> <span class="o">+</span> <span class="n">eps</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">spearmanr</span>
 </pre></div>
       </article>
       <footer>

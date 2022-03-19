@@ -3,7 +3,7 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/><link rel="index" title="Index" href="../../../genindex.html" /><link rel="search" title="Search" href="../../../search.html" />
 
-    <meta name="generator" content="sphinx-3.1.2, furo 2020.12.09.beta21"/>
+    <meta name="generator" content="sphinx-4.4.0, furo 2020.12.09.beta21"/>
         <title>torchdrug.layers.readout - TorchDrug 0.1.2 documentation</title>
       <link rel="stylesheet" href="../../../_static/styles/furo.css?digest=a3f371badb8538d75df213ccffb17a4f6e8f3ac5">
     <link rel="stylesheet" href="../../../_static/pygments.css">
@@ -50,14 +50,15 @@
   --color-code-foreground: #d0d0d0;
   
   }
-</style><link id="pygments_dark_css" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css" href="../../../_static/pygments_dark.css" />
+</style><link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo.css" />
+    <link id="pygments_dark_css" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css" href="../../../_static/pygments_dark.css" />
     <link rel="stylesheet" href="../../../_static/styles/furo-extensions.css?digest=26485485040e7aaf717c13fd0188a5ad2c2deb60">
     <script id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+    <script defer data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
     <script defer src="../../../_static/jquery.js"></script>
     <script defer src="../../../_static/underscore.js"></script>
     <script defer src="../../../_static/doctools.js"></script>
-    <script defer src="../../../_static/language_data.js"></script>
-    <script defer async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <script defer src="../../../_static/scripts/main.js?digest=e931d09b2a40c1bb82b542effe772014573baf67"></script></head>
   <body dir="">
     
@@ -157,7 +158,7 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../../paper.html">Papers Implemented</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Package Reference</span></p>
+<p class="caption" role="heading"><span class="caption-text">Package Reference</span></p>
 <ul>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../../api/index.html">Documentation</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label for="toctree-checkbox-4"><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../../api/core.html">torchdrug.core</a></li>
@@ -188,10 +189,29 @@
         <h1>Source code for torchdrug.layers.readout</h1><div class="highlight"><pre>
 <span></span><span class="kn">import</span> <span class="nn">torch</span>
 <span class="kn">from</span> <span class="nn">torch</span> <span class="kn">import</span> <span class="n">nn</span>
-<span class="kn">from</span> <span class="nn">torch_scatter</span> <span class="kn">import</span> <span class="n">scatter_mean</span><span class="p">,</span> <span class="n">scatter_add</span><span class="p">,</span> <span class="n">scatter_max</span>
+<span class="kn">from</span> <span class="nn">torch.nn</span> <span class="kn">import</span> <span class="n">functional</span> <span class="k">as</span> <span class="n">F</span>
+<span class="kn">from</span> <span class="nn">torch_scatter</span> <span class="kn">import</span> <span class="n">scatter_mean</span><span class="p">,</span> <span class="n">scatter_add</span><span class="p">,</span> <span class="n">scatter_max</span><span class="p">,</span> <span class="n">scatter_softmax</span>
 
 
-<div class="viewcode-block" id="MeanReadout"><a class="viewcode-back" href="../../../api/layers.html#torchdrug.layers.MeanReadout">[docs]</a><span class="k">class</span> <span class="nc">MeanReadout</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+<span class="k">class</span> <span class="nc">Readout</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s2">"node"</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">Readout</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">type</span> <span class="o">=</span> <span class="nb">type</span>
+
+    <span class="k">def</span> <span class="nf">get_index2graph</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">graph</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="s2">"node"</span><span class="p">:</span>
+            <span class="n">input2graph</span> <span class="o">=</span> <span class="n">graph</span><span class="o">.</span><span class="n">node2graph</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="s2">"edge"</span><span class="p">:</span>
+            <span class="n">input2graph</span> <span class="o">=</span> <span class="n">graph</span><span class="o">.</span><span class="n">edge2graph</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="s2">"residue"</span><span class="p">:</span>
+            <span class="n">input2graph</span> <span class="o">=</span> <span class="n">graph</span><span class="o">.</span><span class="n">residue2graph</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Unknown input type `</span><span class="si">%s</span><span class="s2">` for readout functions"</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">type</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">input2graph</span>
+
+
+<div class="viewcode-block" id="MeanReadout"><a class="viewcode-back" href="../../../api/layers.html#torchdrug.layers.MeanReadout">[docs]</a><span class="k">class</span> <span class="nc">MeanReadout</span><span class="p">(</span><span class="n">Readout</span><span class="p">):</span>
     <span class="sd">"""Mean readout operator over graphs with variadic sizes."""</span>
 
 <div class="viewcode-block" id="MeanReadout.forward"><a class="viewcode-back" href="../../../api/layers.html#torchdrug.layers.MeanReadout.forward">[docs]</a>    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">graph</span><span class="p">,</span> <span class="nb">input</span><span class="p">):</span>
@@ -205,11 +225,12 @@
 <span class="sd">        Returns:</span>
 <span class="sd">            Tensor: graph representations</span>
 <span class="sd">        """</span>
-        <span class="n">output</span> <span class="o">=</span> <span class="n">scatter_mean</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="n">graph</span><span class="o">.</span><span class="n">node2graph</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">dim_size</span><span class="o">=</span><span class="n">graph</span><span class="o">.</span><span class="n">batch_size</span><span class="p">)</span>
+        <span class="n">input2graph</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_index2graph</span><span class="p">(</span><span class="n">graph</span><span class="p">)</span>
+        <span class="n">output</span> <span class="o">=</span> <span class="n">scatter_mean</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="n">input2graph</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">dim_size</span><span class="o">=</span><span class="n">graph</span><span class="o">.</span><span class="n">batch_size</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">output</span></div></div>
 
 
-<div class="viewcode-block" id="SumReadout"><a class="viewcode-back" href="../../../api/layers.html#torchdrug.layers.SumReadout">[docs]</a><span class="k">class</span> <span class="nc">SumReadout</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+<div class="viewcode-block" id="SumReadout"><a class="viewcode-back" href="../../../api/layers.html#torchdrug.layers.SumReadout">[docs]</a><span class="k">class</span> <span class="nc">SumReadout</span><span class="p">(</span><span class="n">Readout</span><span class="p">):</span>
     <span class="sd">"""Sum readout operator over graphs with variadic sizes."""</span>
 
 <div class="viewcode-block" id="SumReadout.forward"><a class="viewcode-back" href="../../../api/layers.html#torchdrug.layers.SumReadout.forward">[docs]</a>    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">graph</span><span class="p">,</span> <span class="nb">input</span><span class="p">):</span>
@@ -223,11 +244,12 @@
 <span class="sd">        Returns:</span>
 <span class="sd">            Tensor: graph representations</span>
 <span class="sd">        """</span>
-        <span class="n">output</span> <span class="o">=</span> <span class="n">scatter_add</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="n">graph</span><span class="o">.</span><span class="n">node2graph</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">dim_size</span><span class="o">=</span><span class="n">graph</span><span class="o">.</span><span class="n">batch_size</span><span class="p">)</span>
+        <span class="n">input2graph</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_index2graph</span><span class="p">(</span><span class="n">graph</span><span class="p">)</span>
+        <span class="n">output</span> <span class="o">=</span> <span class="n">scatter_add</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="n">input2graph</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">dim_size</span><span class="o">=</span><span class="n">graph</span><span class="o">.</span><span class="n">batch_size</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">output</span></div></div>
 
 
-<div class="viewcode-block" id="MaxReadout"><a class="viewcode-back" href="../../../api/layers.html#torchdrug.layers.MaxReadout">[docs]</a><span class="k">class</span> <span class="nc">MaxReadout</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+<div class="viewcode-block" id="MaxReadout"><a class="viewcode-back" href="../../../api/layers.html#torchdrug.layers.MaxReadout">[docs]</a><span class="k">class</span> <span class="nc">MaxReadout</span><span class="p">(</span><span class="n">Readout</span><span class="p">):</span>
     <span class="sd">"""Max readout operator over graphs with variadic sizes."""</span>
 
 <div class="viewcode-block" id="MaxReadout.forward"><a class="viewcode-back" href="../../../api/layers.html#torchdrug.layers.MaxReadout.forward">[docs]</a>    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">graph</span><span class="p">,</span> <span class="nb">input</span><span class="p">):</span>
@@ -241,11 +263,28 @@
 <span class="sd">        Returns:</span>
 <span class="sd">            Tensor: graph representations</span>
 <span class="sd">        """</span>
-        <span class="n">output</span> <span class="o">=</span> <span class="n">scatter_max</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="n">graph</span><span class="o">.</span><span class="n">node2graph</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">dim_size</span><span class="o">=</span><span class="n">graph</span><span class="o">.</span><span class="n">batch_size</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">input2graph</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_index2graph</span><span class="p">(</span><span class="n">graph</span><span class="p">)</span>
+        <span class="n">output</span> <span class="o">=</span> <span class="n">scatter_max</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="n">input2graph</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">dim_size</span><span class="o">=</span><span class="n">graph</span><span class="o">.</span><span class="n">batch_size</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
         <span class="k">return</span> <span class="n">output</span></div></div>
 
 
-<div class="viewcode-block" id="Softmax"><a class="viewcode-back" href="../../../api/layers.html#torchdrug.layers.Softmax">[docs]</a><span class="k">class</span> <span class="nc">Softmax</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+<span class="k">class</span> <span class="nc">AttentionReadout</span><span class="p">(</span><span class="n">Readout</span><span class="p">):</span>
+    <span class="sd">"""Attention readout operator over graphs with variadic sizes."""</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_dim</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s2">"node"</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">AttentionReadout</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="nb">type</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">input_dim</span> <span class="o">=</span> <span class="n">input_dim</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">linear</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">input_dim</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">graph</span><span class="p">,</span> <span class="nb">input</span><span class="p">):</span>
+        <span class="n">index2graph</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_index2graph</span><span class="p">(</span><span class="n">graph</span><span class="p">)</span>
+        <span class="n">weight</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">linear</span><span class="p">(</span><span class="nb">input</span><span class="p">)</span>
+        <span class="n">attention</span> <span class="o">=</span> <span class="n">scatter_softmax</span><span class="p">(</span><span class="n">weight</span><span class="p">,</span> <span class="n">index2graph</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+        <span class="n">output</span> <span class="o">=</span> <span class="n">scatter_add</span><span class="p">(</span><span class="n">attention</span> <span class="o">*</span> <span class="nb">input</span><span class="p">,</span> <span class="n">index2graph</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">dim_size</span><span class="o">=</span><span class="n">graph</span><span class="o">.</span><span class="n">batch_size</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">output</span>
+
+
+<div class="viewcode-block" id="Softmax"><a class="viewcode-back" href="../../../api/layers.html#torchdrug.layers.Softmax">[docs]</a><span class="k">class</span> <span class="nc">Softmax</span><span class="p">(</span><span class="n">Readout</span><span class="p">):</span>
     <span class="sd">"""Softmax operator over graphs with variadic sizes."""</span>
 
     <span class="n">eps</span> <span class="o">=</span> <span class="mf">1e-10</span>
@@ -261,13 +300,14 @@
 <span class="sd">        Returns:</span>
 <span class="sd">            Tensor: node probabilities</span>
 <span class="sd">        """</span>
-        <span class="n">x</span> <span class="o">=</span> <span class="nb">input</span> <span class="o">-</span> <span class="n">scatter_max</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="n">graph</span><span class="o">.</span><span class="n">node2graph</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">dim_size</span><span class="o">=</span><span class="n">graph</span><span class="o">.</span><span class="n">batch_size</span><span class="p">)[</span><span class="mi">0</span><span class="p">][</span><span class="n">graph</span><span class="o">.</span><span class="n">node2graph</span><span class="p">]</span>
+        <span class="n">input2graph</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_index2graph</span><span class="p">(</span><span class="n">graph</span><span class="p">)</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="nb">input</span> <span class="o">-</span> <span class="n">scatter_max</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="n">input2graph</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">dim_size</span><span class="o">=</span><span class="n">graph</span><span class="o">.</span><span class="n">batch_size</span><span class="p">)[</span><span class="mi">0</span><span class="p">][</span><span class="n">input2graph</span><span class="p">]</span>
         <span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">exp</span><span class="p">()</span>
-        <span class="n">normalizer</span> <span class="o">=</span> <span class="n">scatter_add</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">graph</span><span class="o">.</span><span class="n">node2graph</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">dim_size</span><span class="o">=</span><span class="n">graph</span><span class="o">.</span><span class="n">batch_size</span><span class="p">)[</span><span class="n">graph</span><span class="o">.</span><span class="n">node2graph</span><span class="p">]</span>
+        <span class="n">normalizer</span> <span class="o">=</span> <span class="n">scatter_add</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">input2graph</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">dim_size</span><span class="o">=</span><span class="n">graph</span><span class="o">.</span><span class="n">batch_size</span><span class="p">)[</span><span class="n">input2graph</span><span class="p">]</span>
         <span class="k">return</span> <span class="n">x</span> <span class="o">/</span> <span class="p">(</span><span class="n">normalizer</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">eps</span><span class="p">)</span></div></div>
 
 
-<div class="viewcode-block" id="Sort"><a class="viewcode-back" href="../../../api/layers.html#torchdrug.layers.Sort">[docs]</a><span class="k">class</span> <span class="nc">Sort</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+<div class="viewcode-block" id="Sort"><a class="viewcode-back" href="../../../api/layers.html#torchdrug.layers.Sort">[docs]</a><span class="k">class</span> <span class="nc">Sort</span><span class="p">(</span><span class="n">Readout</span><span class="p">):</span>
     <span class="sd">"""</span>
 <span class="sd">    Sort operator over graphs with variadic sizes.</span>
 
@@ -275,7 +315,8 @@
 <span class="sd">        descending (bool, optional): use descending sort order or not</span>
 <span class="sd">    """</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">descending</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s2">"node"</span><span class="p">,</span> <span class="n">descending</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">Sort</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="nb">type</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">descending</span> <span class="o">=</span> <span class="n">descending</span>
 
 <div class="viewcode-block" id="Sort.forward"><a class="viewcode-back" href="../../../api/layers.html#torchdrug.layers.Sort.forward">[docs]</a>    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">graph</span><span class="p">,</span> <span class="nb">input</span><span class="p">):</span>
@@ -289,16 +330,17 @@
 <span class="sd">        Returns:</span>
 <span class="sd">            (Tensor, LongTensor): sorted values, sorted indices</span>
 <span class="sd">        """</span>
+        <span class="n">input2graph</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_index2graph</span><span class="p">(</span><span class="n">graph</span><span class="p">)</span>
         <span class="n">step</span> <span class="o">=</span> <span class="nb">input</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> <span class="o">-</span> <span class="nb">input</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">descending</span><span class="p">:</span>
             <span class="n">step</span> <span class="o">=</span> <span class="o">-</span><span class="n">step</span>
-        <span class="n">x</span> <span class="o">=</span> <span class="nb">input</span> <span class="o">+</span> <span class="n">graph</span><span class="o">.</span><span class="n">node2graph</span> <span class="o">*</span> <span class="n">step</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="nb">input</span> <span class="o">+</span> <span class="n">input2graph</span> <span class="o">*</span> <span class="n">step</span>
         <span class="nb">sorted</span><span class="p">,</span> <span class="n">index</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">descending</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">descending</span><span class="p">)</span>
-        <span class="nb">sorted</span> <span class="o">=</span> <span class="nb">sorted</span> <span class="o">-</span> <span class="n">graph</span><span class="o">.</span><span class="n">node2graph</span> <span class="o">*</span> <span class="n">step</span>
+        <span class="nb">sorted</span> <span class="o">=</span> <span class="nb">sorted</span> <span class="o">-</span> <span class="n">input2graph</span> <span class="o">*</span> <span class="n">step</span>
         <span class="k">return</span> <span class="nb">sorted</span><span class="p">,</span> <span class="n">index</span></div></div>
 
 
-<div class="viewcode-block" id="Set2Set"><a class="viewcode-back" href="../../../api/layers.html#torchdrug.layers.Set2Set">[docs]</a><span class="k">class</span> <span class="nc">Set2Set</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+<div class="viewcode-block" id="Set2Set"><a class="viewcode-back" href="../../../api/layers.html#torchdrug.layers.Set2Set">[docs]</a><span class="k">class</span> <span class="nc">Set2Set</span><span class="p">(</span><span class="n">Readout</span><span class="p">):</span>
     <span class="sd">"""</span>
 <span class="sd">    Set2Set operator from `Order Matters: Sequence to sequence for sets`_.</span>
 
@@ -311,13 +353,13 @@
 <span class="sd">        num_lstm_layer (int, optional): number of LSTM layers</span>
 <span class="sd">    """</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_dim</span><span class="p">,</span> <span class="n">num_step</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">num_lstm_layer</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
-        <span class="nb">super</span><span class="p">(</span><span class="n">Set2Set</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_dim</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s2">"node"</span><span class="p">,</span> <span class="n">num_step</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">num_lstm_layer</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">Set2Set</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="nb">type</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">input_dim</span> <span class="o">=</span> <span class="n">input_dim</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">output_dim</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">input_dim</span> <span class="o">*</span> <span class="mi">2</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">num_step</span> <span class="o">=</span> <span class="n">num_step</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">lstm</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">LSTM</span><span class="p">(</span><span class="n">input_dim</span> <span class="o">*</span> <span class="mi">2</span><span class="p">,</span> <span class="n">input_dim</span><span class="p">,</span> <span class="n">num_lstm_layer</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">softmax</span> <span class="o">=</span> <span class="n">Softmax</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">softmax</span> <span class="o">=</span> <span class="n">Softmax</span><span class="p">(</span><span class="nb">type</span><span class="p">)</span>
 
 <div class="viewcode-block" id="Set2Set.forward"><a class="viewcode-back" href="../../../api/layers.html#torchdrug.layers.Set2Set.forward">[docs]</a>    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">graph</span><span class="p">,</span> <span class="nb">input</span><span class="p">):</span>
         <span class="sd">"""</span>
@@ -330,15 +372,16 @@
 <span class="sd">        Returns:</span>
 <span class="sd">            Tensor: graph representations</span>
 <span class="sd">        """</span>
+        <span class="n">input2graph</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_index2graph</span><span class="p">(</span><span class="n">graph</span><span class="p">)</span>
         <span class="n">hx</span> <span class="o">=</span> <span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">lstm</span><span class="o">.</span><span class="n">num_layers</span><span class="p">,</span> <span class="n">graph</span><span class="o">.</span><span class="n">batch_size</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">lstm</span><span class="o">.</span><span class="n">hidden_size</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="nb">input</span><span class="o">.</span><span class="n">device</span><span class="p">),)</span> <span class="o">*</span> <span class="mi">2</span>
         <span class="n">query_star</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">graph</span><span class="o">.</span><span class="n">batch_size</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">output_dim</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="nb">input</span><span class="o">.</span><span class="n">device</span><span class="p">)</span>
 
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">num_step</span><span class="p">):</span>
             <span class="n">query</span><span class="p">,</span> <span class="n">hx</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">lstm</span><span class="p">(</span><span class="n">query_star</span><span class="o">.</span><span class="n">unsqueeze</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="n">hx</span><span class="p">)</span>
             <span class="n">query</span> <span class="o">=</span> <span class="n">query</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-            <span class="n">product</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s2">"bd, bd -&gt; b"</span><span class="p">,</span> <span class="n">query</span><span class="p">[</span><span class="n">graph</span><span class="o">.</span><span class="n">node2graph</span><span class="p">],</span> <span class="nb">input</span><span class="p">)</span>
+            <span class="n">product</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s2">"bd, bd -&gt; b"</span><span class="p">,</span> <span class="n">query</span><span class="p">[</span><span class="n">input2graph</span><span class="p">],</span> <span class="nb">input</span><span class="p">)</span>
             <span class="n">attention</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">softmax</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">product</span><span class="p">)</span>
-            <span class="n">output</span> <span class="o">=</span> <span class="n">scatter_add</span><span class="p">(</span><span class="n">attention</span><span class="o">.</span><span class="n">unsqueeze</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="nb">input</span><span class="p">,</span> <span class="n">graph</span><span class="o">.</span><span class="n">node2graph</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">dim_size</span><span class="o">=</span><span class="n">graph</span><span class="o">.</span><span class="n">batch_size</span><span class="p">)</span>
+            <span class="n">output</span> <span class="o">=</span> <span class="n">scatter_add</span><span class="p">(</span><span class="n">attention</span><span class="o">.</span><span class="n">unsqueeze</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="nb">input</span><span class="p">,</span> <span class="n">input2graph</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">dim_size</span><span class="o">=</span><span class="n">graph</span><span class="o">.</span><span class="n">batch_size</span><span class="p">)</span>
             <span class="n">query_star</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">cat</span><span class="p">([</span><span class="n">query</span><span class="p">,</span> <span class="n">output</span><span class="p">],</span> <span class="n">dim</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
 
         <span class="k">return</span> <span class="n">query_star</span></div></div>

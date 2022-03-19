@@ -1,18 +1,19 @@
 <!doctype html>
 <html class="no-js">
   <head><meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width,initial-scale=1"/><link rel="index" title="Index" href="#" /><link rel="search" title="Search" href="search.html" />
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="#" /><link rel="search" title="Search" href="search.html" />
 
-    <meta name="generator" content="sphinx-3.1.2, furo 2020.12.09.beta21"/>
-        <title> - TorchDrug 0.1.2 documentation</title>
-      <link rel="stylesheet" href="_static/styles/furo.css?digest=a3f371badb8538d75df213ccffb17a4f6e8f3ac5">
-    <link rel="stylesheet" href="_static/pygments.css">
-    <link media="(prefers-color-scheme: dark)" rel="stylesheet" href="_static/pygments_dark.css">
+    <meta name="generator" content="sphinx-4.4.0, furo 2022.03.04"/><title>Index - TorchDrug 0.1.2 documentation</title>
+<link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?digest=935aa2abcc5c1da4283d1dc201fb1f0add16d23a" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?digest=25ceb02ed1c46dc30f2321ff83e92799f69dfdb9" />
+    
     
 
 
 <style>
-  :root {
+  body {
     --color-code-background: #f8f8f8;
   --color-code-foreground: black;
   --font-stack: Helvetica, Arial, sans-serif, -apple-system;
@@ -24,42 +25,1421 @@
   --font-size--small--2: var(--font-size--small);
   
   }
-  @media (prefers-color-scheme: dark) {
-    :root {
+  @media not print {
+    body[data-theme="dark"] {
       --color-code-background: #202020;
   --color-code-foreground: #d0d0d0;
   
     }
-  }
-
-  /* For allowing end-user-specific overrides */
-  .override-light {
-    --color-code-background: #f8f8f8;
-  --color-code-foreground: black;
-  --font-stack: Helvetica, Arial, sans-serif, -apple-system;
-  --font-stack--monospace: Courier, monospace;
-  --color-brand-primary: #E5261F;
-  --color-brand-content: #E5261F;
-  --admonition-font-size: 1rem;
-  --admonition-title-font-size: 1rem;
-  --font-size--small--2: var(--font-size--small);
-  
-  }
-  .override-dark {
-    --color-code-background: #202020;
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
   --color-code-foreground: #d0d0d0;
   
+      }
+    }
   }
-</style><link id="pygments_dark_css" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css" href="_static/pygments_dark.css" />
-    <link rel="stylesheet" href="_static/styles/furo-extensions.css?digest=26485485040e7aaf717c13fd0188a5ad2c2deb60">
-    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-    <script defer src="_static/jquery.js"></script>
-    <script defer src="_static/underscore.js"></script>
-    <script defer src="_static/doctools.js"></script>
-    <script defer src="_static/language_data.js"></script>
-    <script defer async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script defer src="_static/scripts/main.js?digest=e931d09b2a40c1bb82b542effe772014573baf67"></script></head>
-  <body dir="">
+</style></head>
+  <body>
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
     
-  </body>
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-half" viewBox="0 0 24 24">
+    <title>Auto light/dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-shadow">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M13 12h5" />
+      <path d="M13 15h4" />
+      <path d="M13 18h1" />
+      <path d="M13 9h4" />
+      <path d="M13 6h1" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="index.html"><div class="brand">TorchDrug 0.1.2 documentation</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand centered" href="https://torchdrug.ai">
+  
+  <div class="sidebar-logo-container">
+    <img class="sidebar-logo" src="_static/logo.svg" alt="Logo"/>
+  </div>
+  
+  
+</a><form class="sidebar-search-container" method="get" action="search.html" role="search">
+  <input class="sidebar-search" placeholder=Search name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <ul>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quick_start.html">Quick Start</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="benchmark/index.html">Benchmark</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="benchmark/property_prediction.html">Molecule Property Prediction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="benchmark/pretrain.html">Pretrained Molecular Representations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="benchmark/generation.html">Molecule Generation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="benchmark/retrosynthesis.html">Retrosynthesis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="benchmark/reasoning.html">Knowledge Graph Reasoning</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="tutorials/index.html">Tutorials</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="tutorials/property_prediction.html">Property Prediction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorials/pretrain.html">Pretrained Molecular Representations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorials/generation.html">Molecule Generation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorials/retrosynthesis.html">Retrosynthesis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorials/reasoning.html">Knowledge Graph Reasoning</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="notes/index.html">Notes</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="notes/graph.html">Graph Data Structures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notes/variadic.html">Batch Irregular Structures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notes/layer.html">Graph Neural Network Layers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notes/model.html">Customize Models &amp; Tasks</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="paper.html">Papers Implemented</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Package Reference</span></p>
+<ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="api/index.html">Documentation</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="api/core.html">torchdrug.core</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/data.html">torchdrug.data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/datasets.html">torchdrug.datasets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/transforms.html">torchdrug.transforms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/metrics.html">torchdrug.metrics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/layers.html">torchdrug.layers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/models.html">torchdrug.models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/tasks.html">torchdrug.tasks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/utils.html">torchdrug.utils</a></li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container"><div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main">
+          
+<section class="genindex-section">
+  <h1 id="index">Index</h1>
+  <div class="genindex-jumpbox"><a href="#_"><strong>_</strong></a> | <a href="#A"><strong>A</strong></a> | <a href="#B"><strong>B</strong></a> | <a href="#C"><strong>C</strong></a> | <a href="#D"><strong>D</strong></a> | <a href="#E"><strong>E</strong></a> | <a href="#F"><strong>F</strong></a> | <a href="#G"><strong>G</strong></a> | <a href="#H"><strong>H</strong></a> | <a href="#I"><strong>I</strong></a> | <a href="#K"><strong>K</strong></a> | <a href="#L"><strong>L</strong></a> | <a href="#M"><strong>M</strong></a> | <a href="#N"><strong>N</strong></a> | <a href="#O"><strong>O</strong></a> | <a href="#P"><strong>P</strong></a> | <a href="#Q"><strong>Q</strong></a> | <a href="#R"><strong>R</strong></a> | <a href="#S"><strong>S</strong></a> | <a href="#T"><strong>T</strong></a> | <a href="#U"><strong>U</strong></a> | <a href="#V"><strong>V</strong></a> | <a href="#W"><strong>W</strong></a> | <a href="#Z"><strong>Z</strong></a></div>
+</section>
+<section id="_" class="genindex-section">
+  <h2>_</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="api/core.html#torchdrug.core._MetaContainer">_MetaContainer (class in torchdrug.core)</a>
+</li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="A" class="genindex-section">
+  <h2>A</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="api/data.html#torchdrug.data.Graph.adjacency">adjacency (Graph property)</a>
+</li>
+        <li><a href="api/layers.html#torchdrug.layers.ChebyshevConv.aggregate">aggregate() (ChebyshevConv method)</a>
+
+        <ul>
+          <li><a href="api/layers.html#torchdrug.layers.ContinuousFilterConv.aggregate">(ContinuousFilterConv method)</a>
+</li>
+          <li><a href="api/layers.html#torchdrug.layers.GraphAttentionConv.aggregate">(GraphAttentionConv method)</a>
+</li>
+          <li><a href="api/layers.html#torchdrug.layers.GraphConv.aggregate">(GraphConv method)</a>
+</li>
+          <li><a href="api/layers.html#torchdrug.layers.GraphIsomorphismConv.aggregate">(GraphIsomorphismConv method)</a>
+</li>
+          <li><a href="api/layers.html#torchdrug.layers.MessagePassing.aggregate">(MessagePassing method)</a>
+</li>
+          <li><a href="api/layers.html#torchdrug.layers.MessagePassingBase.aggregate">(MessagePassingBase method)</a>
+</li>
+          <li><a href="api/layers.html#torchdrug.layers.NeuralFingerprintConv.aggregate">(NeuralFingerprintConv method)</a>
+</li>
+          <li><a href="api/layers.html#torchdrug.layers.RelationalGraphConv.aggregate">(RelationalGraphConv method)</a>
+</li>
+        </ul></li>
+        <li><a href="api/metrics.html#torchdrug.metrics.area_under_prc">area_under_prc() (in module torchdrug.metrics)</a>
+</li>
+        <li><a href="api/metrics.html#torchdrug.metrics.area_under_roc">area_under_roc() (in module torchdrug.metrics)</a>
+</li>
+        <li><a href="api/layers.html#torchdrug.layers.functional.as_mask">as_mask() (in module torchdrug.layers.functional)</a>
+</li>
+        <li><a href="api/data.html#torchdrug.data.Molecule.atom">atom() (Molecule method)</a>
+</li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="api/data.html#torchdrug.data.Molecule.atom2graph">atom2graph (Molecule property)</a>
+</li>
+        <li><a href="api/data.html#torchdrug.data.feature.atom_center_identification">atom_center_identification() (in module torchdrug.data.feature)</a>
+</li>
+        <li><a href="api/data.html#torchdrug.data.feature.atom_default">atom_default() (in module torchdrug.data.feature)</a>
+</li>
+        <li><a href="api/data.html#torchdrug.data.feature.atom_explicit_property_prediction">atom_explicit_property_prediction() (in module torchdrug.data.feature)</a>
+</li>
+        <li><a href="api/data.html#torchdrug.data.feature.atom_position">atom_position() (in module torchdrug.data.feature)</a>
+</li>
+        <li><a href="api/data.html#torchdrug.data.feature.atom_pretrain">atom_pretrain() (in module torchdrug.data.feature)</a>
+</li>
+        <li><a href="api/data.html#torchdrug.data.feature.atom_property_prediction">atom_property_prediction() (in module torchdrug.data.feature)</a>
+</li>
+        <li><a href="api/data.html#torchdrug.data.feature.atom_symbol">atom_symbol() (in module torchdrug.data.feature)</a>
+</li>
+        <li><a href="api/data.html#torchdrug.data.feature.atom_synthon_completion">atom_synthon_completion() (in module torchdrug.data.feature)</a>
+</li>
+        <li><a href="api/data.html#torchdrug.data.MoleculeDataset.atom_types">atom_types (MoleculeDataset property)</a>
+
+        <ul>
+          <li><a href="api/data.html#torchdrug.data.ReactionDataset.atom_types">(ReactionDataset property)</a>
+</li>
+        </ul></li>
+        <li><a href="api/tasks.html#torchdrug.tasks.AttributeMasking">AttributeMasking (class in torchdrug.tasks)</a>
+</li>
+        <li><a href="api/metrics.html#torchdrug.metrics.AUPRC">AUPRC() (in module torchdrug.metrics)</a>
+</li>
+        <li><a href="api/metrics.html#torchdrug.metrics.AUROC">AUROC() (in module torchdrug.metrics)</a>
+</li>
+        <li><a href="api/tasks.html#torchdrug.tasks.AutoregressiveGeneration">AutoregressiveGeneration (class in torchdrug.tasks)</a>
+</li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="B" class="genindex-section">
+  <h2>B</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="api/datasets.html#torchdrug.datasets.BACE">BACE (class in torchdrug.datasets)</a>
+</li>
+        <li><a href="api/data.html#torchdrug.data.Graph.batch_size">batch_size (Graph property)</a>
+
+        <ul>
+          <li><a href="api/data.html#torchdrug.data.PackedGraph.batch_size">(PackedGraph property)</a>
+</li>
+        </ul></li>
+        <li><a href="api/datasets.html#torchdrug.datasets.BBBP">BBBP (class in torchdrug.datasets)</a>
+</li>
+        <li><a href="api/data.html#torchdrug.data.Molecule.bond">bond() (Molecule method)</a>
+</li>
+        <li><a href="api/data.html#torchdrug.data.Molecule.bond2graph">bond2graph (Molecule property)</a>
+</li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="api/data.html#torchdrug.data.feature.bond_default">bond_default() (in module torchdrug.data.feature)</a>
+</li>
+        <li><a href="api/data.html#torchdrug.data.feature.bond_length">bond_length() (in module torchdrug.data.feature)</a>
+</li>
+        <li><a href="api/data.html#torchdrug.data.feature.bond_pretrain">bond_pretrain() (in module torchdrug.data.feature)</a>
+</li>
+        <li><a href="api/data.html#torchdrug.data.feature.bond_property_prediction">bond_property_prediction() (in module torchdrug.data.feature)</a>
+</li>
+        <li><a href="api/data.html#torchdrug.data.MoleculeDataset.bond_types">bond_types (MoleculeDataset property)</a>
+
+        <ul>
+          <li><a href="api/data.html#torchdrug.data.ReactionDataset.bond_types">(ReactionDataset property)</a>
+</li>
+        </ul></li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="C" class="genindex-section">
+  <h2>C</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="api/utils.html#torchdrug.utils.cached_property">cached_property() (in module torchdrug.utils)</a>
+</li>
+        <li><a href="api/utils.html#torchdrug.utils.capture_rdkit_log">capture_rdkit_log() (in module torchdrug.utils)</a>
+</li>
+        <li><a href="api/utils.html#torchdrug.utils.cat">cat() (in module torchdrug.utils)</a>
+
+        <ul>
+          <li><a href="api/utils.html#torchdrug.utils.comm.cat">(in module torchdrug.utils.comm)</a>
+</li>
+        </ul></li>
+        <li><a href="api/tasks.html#torchdrug.tasks.CenterIdentification">CenterIdentification (class in torchdrug.tasks)</a>
+</li>
+        <li><a href="api/datasets.html#torchdrug.datasets.CEP">CEP (class in torchdrug.datasets)</a>
+</li>
+        <li><a href="api/models.html#torchdrug.models.ChebNet">ChebNet (in module torchdrug.models)</a>
+</li>
+        <li><a href="api/layers.html#torchdrug.layers.ChebyshevConv">ChebyshevConv (class in torchdrug.layers)</a>
+</li>
+        <li><a href="api/models.html#torchdrug.models.ChebyshevConvolutionalNetwork">ChebyshevConvolutionalNetwork (class in torchdrug.models)</a>
+</li>
+        <li><a href="api/datasets.html#torchdrug.datasets.ChEMBLFiltered">ChEMBLFiltered (class in torchdrug.datasets)</a>
+</li>
+        <li><a href="api/metrics.html#torchdrug.metrics.chemical_validity">chemical_validity() (in module torchdrug.metrics)</a>
+</li>
+        <li><a href="api/datasets.html#torchdrug.datasets.CiteSeer">CiteSeer (class in torchdrug.datasets)</a>
+</li>
+        <li><a href="api/datasets.html#torchdrug.datasets.ClinTox">ClinTox (class in torchdrug.datasets)</a>
+</li>
+        <li><a href="api/data.html#torchdrug.data.Graph.clone">clone() (Graph method)</a>
+
+        <ul>
+          <li><a href="api/utils.html#torchdrug.utils.clone">(in module torchdrug.utils)</a>
+</li>
+          <li><a href="api/data.html#torchdrug.data.PackedGraph.clone">(PackedGraph method)</a>
+</li>
+        </ul></li>
+        <li><a href="api/layers.html#torchdrug.layers.ChebyshevConv.combine">combine() (ChebyshevConv method)</a>
+
+        <ul>
+          <li><a href="api/layers.html#torchdrug.layers.ContinuousFilterConv.combine">(ContinuousFilterConv method)</a>
+</li>
+          <li><a href="api/layers.html#torchdrug.layers.GraphAttentionConv.combine">(GraphAttentionConv method)</a>
+</li>
+          <li><a href="api/layers.html#torchdrug.layers.GraphConv.combine">(GraphConv method)</a>
+</li>
+          <li><a href="api/layers.html#torchdrug.layers.GraphIsomorphismConv.combine">(GraphIsomorphismConv method)</a>
+</li>
+          <li><a href="api/layers.html#torchdrug.layers.MessagePassing.combine">(MessagePassing method)</a>
+</li>
+          <li><a href="api/layers.html#torchdrug.layers.MessagePassingBase.combine">(MessagePassingBase method)</a>
+</li>
+          <li><a href="api/layers.html#torchdrug.layers.NeuralFingerprintConv.combine">(NeuralFingerprintConv method)</a>
+</li>
+          <li><a href="api/layers.html#torchdrug.layers.RelationalGraphConv.combine">(RelationalGraphConv method)</a>
+</li>
+        </ul></li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="api/data.html#torchdrug.data.Graph.compact">compact() (Graph method)</a>
+</li>
+        <li><a href="api/models.html#torchdrug.models.ComplEx">ComplEx (class in torchdrug.models)</a>
+</li>
+        <li><a href="api/layers.html#torchdrug.layers.functional.complex_score">complex_score() (in module torchdrug.layers.functional)</a>
+</li>
+        <li><a href="api/transforms.html#torchdrug.transforms.Compose">Compose (class in torchdrug.transforms)</a>
+</li>
+        <li><a href="api/utils.html#torchdrug.utils.compute_md5">compute_md5() (in module torchdrug.utils)</a>
+</li>
+        <li><a href="api/layers.html#torchdrug.layers.ConditionalFlow">ConditionalFlow (class in torchdrug.layers)</a>
+</li>
+        <li><a href="api/core.html#torchdrug.core.Configurable">Configurable (class in torchdrug.core)</a>
+</li>
+        <li><a href="api/data.html#torchdrug.data.Graph.connected_components">connected_components() (Graph method)</a>
+</li>
+        <li><a href="api/core.html#torchdrug.core._MetaContainer.context">context() (_MetaContainer method)</a>
+</li>
+        <li><a href="api/tasks.html#torchdrug.tasks.ContextPrediction">ContextPrediction (class in torchdrug.tasks)</a>
+</li>
+        <li><a href="api/layers.html#torchdrug.layers.ContinuousFilterConv">ContinuousFilterConv (class in torchdrug.layers)</a>
+</li>
+        <li><a href="api/data.html#torchdrug.data.Graph.copy_">copy_() (Graph method)</a>
+</li>
+        <li><a href="api/utils.html#torchdrug.utils.doc.copy_args">copy_args() (in module torchdrug.utils.doc)</a>
+</li>
+        <li><a href="api/datasets.html#torchdrug.datasets.Cora">Cora (class in torchdrug.datasets)</a>
+</li>
+        <li><a href="api/data.html#torchdrug.data.Dictionary.cpu">cpu() (Dictionary method)</a>
+
+        <ul>
+          <li><a href="api/data.html#torchdrug.data.Graph.cpu">(Graph method)</a>
+</li>
+          <li><a href="api/utils.html#torchdrug.utils.cpu">(in module torchdrug.utils)</a>
+</li>
+          <li><a href="api/data.html#torchdrug.data.PackedGraph.cpu">(PackedGraph method)</a>
+</li>
+        </ul></li>
+        <li><a href="api/data.html#torchdrug.data.Dictionary.cuda">cuda() (Dictionary method)</a>
+
+        <ul>
+          <li><a href="api/data.html#torchdrug.data.Graph.cuda">(Graph method)</a>
+</li>
+          <li><a href="api/utils.html#torchdrug.utils.cuda">(in module torchdrug.utils)</a>
+</li>
+          <li><a href="api/data.html#torchdrug.data.PackedGraph.cuda">(PackedGraph method)</a>
+</li>
+        </ul></li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="D" class="genindex-section">
+  <h2>D</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="api/core.html#torchdrug.core._MetaContainer.data_by_meta">data_by_meta() (_MetaContainer method)</a>
+</li>
+        <li><a href="api/core.html#torchdrug.core._MetaContainer.data_dict">data_dict (_MetaContainer property)</a>
+</li>
+        <li><a href="api/data.html#torchdrug.data.DataLoader">DataLoader (class in torchdrug.data)</a>
+</li>
+        <li><a href="api/data.html#torchdrug.data.Graph.degree_in">degree_in (Graph property)</a>
+</li>
+        <li><a href="api/data.html#torchdrug.data.Graph.degree_out">degree_out (Graph property)</a>
+</li>
+        <li><a href="api/datasets.html#torchdrug.datasets.Delaney">Delaney (class in torchdrug.datasets)</a>
+</li>
+        <li><a href="api/data.html#torchdrug.data.Graph.detach">detach() (Graph method)</a>
+
+        <ul>
+          <li><a href="api/utils.html#torchdrug.utils.detach">(in module torchdrug.utils)</a>
+</li>
+          <li><a href="api/data.html#torchdrug.data.PackedGraph.detach">(PackedGraph method)</a>
+</li>
+        </ul></li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="api/data.html#torchdrug.data.Dictionary.device">device (Dictionary property)</a>
+
+        <ul>
+          <li><a href="api/data.html#torchdrug.data.Graph.device">(Graph property)</a>
+</li>
+        </ul></li>
+        <li><a href="api/data.html#torchdrug.data.Dictionary">Dictionary (class in torchdrug.data)</a>
+</li>
+        <li><a href="api/layers.html#torchdrug.layers.DiffPool">DiffPool (class in torchdrug.layers)</a>
+</li>
+        <li><a href="api/data.html#torchdrug.data.Graph.directed">directed() (Graph method)</a>
+</li>
+        <li><a href="api/models.html#torchdrug.models.DistMult">DistMult (class in torchdrug.models)</a>
+</li>
+        <li><a href="api/layers.html#torchdrug.layers.functional.distmult_score">distmult_score() (in module torchdrug.layers.functional)</a>
+</li>
+        <li><a href="api/utils.html#torchdrug.utils.download">download() (in module torchdrug.utils)</a>
+</li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="E" class="genindex-section">
+  <h2>E</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="api/data.html#torchdrug.data.feature.ECFP">ECFP() (in module torchdrug.data.feature)</a>
+</li>
+        <li><a href="api/utils.html#torchdrug.utils.plot.echarts">echarts() (in module torchdrug.utils.plot)</a>
+</li>
+        <li><a href="api/data.html#torchdrug.data.Graph.edge">edge() (Graph method)</a>
+</li>
+        <li><a href="api/data.html#torchdrug.data.Graph.edge2graph">edge2graph (Graph property)</a>
+
+        <ul>
+          <li><a href="api/data.html#torchdrug.data.PackedGraph.edge2graph">(PackedGraph property)</a>
+</li>
+        </ul></li>
+        <li><a href="api/data.html#torchdrug.data.MoleculeDataset.edge_feature_dim">edge_feature_dim (MoleculeDataset property)</a>
+
+        <ul>
+          <li><a href="api/data.html#torchdrug.data.ReactionDataset.edge_feature_dim">(ReactionDataset property)</a>
+</li>
+        </ul></li>
+        <li><a href="api/data.html#torchdrug.data.Graph.edge_list">edge_list (Graph property)</a>
+</li>
+        <li><a href="api/data.html#torchdrug.data.Graph.edge_mask">edge_mask() (Graph method)</a>
+
+        <ul>
+          <li><a href="api/data.html#torchdrug.data.Molecule.edge_mask">(Molecule method)</a>
+</li>
+          <li><a href="api/data.html#torchdrug.data.PackedGraph.edge_mask">(PackedGraph method)</a>
+</li>
+          <li><a href="api/data.html#torchdrug.data.PackedMolecule.edge_mask">(PackedMolecule method)</a>
+</li>
+        </ul></li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="api/data.html#torchdrug.data.Graph.edge_reference">edge_reference() (Graph method)</a>
+</li>
+        <li><a href="api/data.html#torchdrug.data.Graph.edge_weight">edge_weight (Graph property)</a>
+</li>
+        <li><a href="api/tasks.html#torchdrug.tasks.EdgePrediction">EdgePrediction (class in torchdrug.tasks)</a>
+</li>
+        <li><a href="api/layers.html#torchdrug.layers.EdgeSampler">EdgeSampler (class in torchdrug.layers)</a>
+</li>
+        <li><a href="api/core.html#torchdrug.core.Engine">Engine (class in torchdrug.core)</a>
+</li>
+        <li><a href="api/core.html#torchdrug.core.Engine.epoch">epoch (Engine property)</a>
+</li>
+        <li><a href="api/core.html#torchdrug.core.Engine.evaluate">evaluate() (Engine method)</a>
+</li>
+        <li><a href="api/data.html#torchdrug.data.feature.ExtendedConnectivityFingerprint">ExtendedConnectivityFingerprint() (in module torchdrug.data.feature)</a>
+</li>
+        <li><a href="api/utils.html#torchdrug.utils.extract">extract() (in module torchdrug.utils)</a>
+</li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="F" class="genindex-section">
+  <h2>F</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="api/datasets.html#torchdrug.datasets.FB15k">FB15k (class in torchdrug.datasets)</a>
+</li>
+        <li><a href="api/datasets.html#torchdrug.datasets.FB15k237">FB15k237 (class in torchdrug.datasets)</a>
+</li>
+        <li><a href="api/layers.html#torchdrug.layers.ChebyshevConv.forward">forward() (ChebyshevConv method)</a>
+
+        <ul>
+          <li><a href="api/models.html#torchdrug.models.ChebyshevConvolutionalNetwork.forward">(ChebyshevConvolutionalNetwork method)</a>
+</li>
+          <li><a href="api/models.html#torchdrug.models.ComplEx.forward">(ComplEx method)</a>
+</li>
+          <li><a href="api/layers.html#torchdrug.layers.ConditionalFlow.forward">(ConditionalFlow method)</a>
+</li>
+          <li><a href="api/layers.html#torchdrug.layers.DiffPool.forward">(DiffPool method)</a>
+</li>
+          <li><a href="api/models.html#torchdrug.models.DistMult.forward">(DistMult method)</a>
+</li>
+          <li><a href="api/layers.html#torchdrug.layers.EdgeSampler.forward">(EdgeSampler method)</a>
+</li>
+          <li><a href="api/layers.html#torchdrug.layers.GaussianSmearing.forward">(GaussianSmearing method)</a>
+</li>
+          <li><a href="api/models.html#torchdrug.models.GraphAttentionNetwork.forward">(GraphAttentionNetwork method)</a>
+</li>
+          <li><a href="api/models.html#torchdrug.models.GraphAutoregressiveFlow.forward">(GraphAutoregressiveFlow method)</a>
+</li>
+          <li><a href="api/models.html#torchdrug.models.GraphConvolutionalNetwork.forward">(GraphConvolutionalNetwork method)</a>
+</li>
+          <li><a href="api/models.html#torchdrug.models.GraphIsomorphismNetwork.forward">(GraphIsomorphismNetwork method)</a>
+</li>
+          <li><a href="api/layers.html#torchdrug.layers.distribution.IndependentGaussian.forward">(IndependentGaussian method)</a>
+</li>
+          <li><a href="api/models.html#torchdrug.models.InfoGraph.forward">(InfoGraph method)</a>
+</li>
+          <li><a href="api/models.html#torchdrug.models.KnowledgeBaseGraphAttentionNetwork.forward">(KnowledgeBaseGraphAttentionNetwork method)</a>
+</li>
+          <li><a href="api/layers.html#torchdrug.layers.MaxReadout.forward">(MaxReadout method)</a>
+</li>
+          <li><a href="api/layers.html#torchdrug.layers.MeanReadout.forward">(MeanReadout method)</a>
+</li>
+          <li><a href="api/layers.html#torchdrug.layers.MessagePassingBase.forward">(MessagePassingBase method)</a>
+</li>
+          <li><a href="api/models.html#torchdrug.models.MessagePassingNeuralNetwork.forward">(MessagePassingNeuralNetwork method)</a>
+</li>
+          <li><a href="api/layers.html#torchdrug.layers.MinCutPool.forward">(MinCutPool method)</a>
+</li>
+          <li><a href="api/models.html#torchdrug.models.NeuralFingerprint.forward">(NeuralFingerprint method)</a>
+</li>
+          <li><a href="api/models.html#torchdrug.models.NeuralLogicProgramming.forward">(NeuralLogicProgramming method)</a>
+</li>
+          <li><a href="api/layers.html#torchdrug.layers.NodeSampler.forward">(NodeSampler method)</a>
+</li>
+          <li><a href="api/models.html#torchdrug.models.RelationalGraphConvolutionalNetwork.forward">(RelationalGraphConvolutionalNetwork method)</a>
+</li>
+          <li><a href="api/models.html#torchdrug.models.RotatE.forward">(RotatE method)</a>
+</li>
+          <li><a href="api/models.html#torchdrug.models.SchNet.forward">(SchNet method)</a>
+</li>
+          <li><a href="api/layers.html#torchdrug.layers.Set2Set.forward">(Set2Set method)</a>
+</li>
+          <li><a href="api/models.html#torchdrug.models.SimplE.forward">(SimplE method)</a>
+</li>
+          <li><a href="api/layers.html#torchdrug.layers.Softmax.forward">(Softmax method)</a>
+</li>
+          <li><a href="api/layers.html#torchdrug.layers.Sort.forward">(Sort method)</a>
+</li>
+          <li><a href="api/layers.html#torchdrug.layers.SumReadout.forward">(SumReadout method)</a>
+</li>
+          <li><a href="api/models.html#torchdrug.models.TransE.forward">(TransE method)</a>
+</li>
+        </ul></li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="api/datasets.html#torchdrug.datasets.FreeSolv">FreeSolv (class in torchdrug.datasets)</a>
+</li>
+        <li><a href="api/data.html#torchdrug.data.Graph.from_dense">from_dense() (Graph class method)</a>
+</li>
+        <li><a href="api/data.html#torchdrug.data.Molecule.from_molecule">from_molecule() (Molecule class method)</a>
+
+        <ul>
+          <li><a href="api/data.html#torchdrug.data.PackedMolecule.from_molecule">(PackedMolecule class method)</a>
+</li>
+        </ul></li>
+        <li><a href="api/data.html#torchdrug.data.Molecule.from_smiles">from_smiles() (Molecule class method)</a>
+
+        <ul>
+          <li><a href="api/data.html#torchdrug.data.PackedMolecule.from_smiles">(PackedMolecule class method)</a>
+</li>
+        </ul></li>
+        <li><a href="api/data.html#torchdrug.data.Graph.full">full() (Graph method)</a>
+
+        <ul>
+          <li><a href="api/data.html#torchdrug.data.PackedGraph.full">(PackedGraph method)</a>
+</li>
+        </ul></li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="G" class="genindex-section">
+  <h2>G</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="api/models.html#torchdrug.models.GAT">GAT (in module torchdrug.models)</a>
+</li>
+        <li><a href="api/layers.html#torchdrug.layers.GaussianSmearing">GaussianSmearing (class in torchdrug.layers)</a>
+</li>
+        <li><a href="api/models.html#torchdrug.models.GCN">GCN (in module torchdrug.models)</a>
+</li>
+        <li><a href="api/tasks.html#torchdrug.tasks.GCPNGeneration">GCPNGeneration (class in torchdrug.tasks)</a>
+</li>
+        <li><a href="api/layers.html#torchdrug.layers.functional.generalized_rspmm">generalized_rspmm() (in module torchdrug.layers.functional)</a>
+</li>
+        <li><a href="api/layers.html#torchdrug.layers.functional.generalized_spmm">generalized_spmm() (in module torchdrug.layers.functional)</a>
+</li>
+        <li><a href="api/data.html#torchdrug.data.Dictionary.get">get() (Dictionary method)</a>
+
+        <ul>
+          <li><a href="api/core.html#torchdrug.core.Registry.get">(Registry class method)</a>
+</li>
+        </ul></li>
+        <li><a href="api/utils.html#torchdrug.utils.comm.get_cpu_count">get_cpu_count() (in module torchdrug.utils.comm)</a>
+</li>
+        <li><a href="api/data.html#torchdrug.data.Graph.get_edge">get_edge() (Graph method)</a>
+</li>
+        <li><a href="api/utils.html#torchdrug.utils.comm.get_group">get_group() (in module torchdrug.utils.comm)</a>
+</li>
+        <li><a href="api/data.html#torchdrug.data.PackedGraph.get_item">get_item() (PackedGraph method)</a>
+</li>
+        <li><a href="api/utils.html#torchdrug.utils.get_line_count">get_line_count() (in module torchdrug.utils)</a>
+</li>
+        <li><a href="api/utils.html#torchdrug.utils.comm.get_rank">get_rank() (in module torchdrug.utils.comm)</a>
+</li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="api/utils.html#torchdrug.utils.comm.get_world_size">get_world_size() (in module torchdrug.utils.comm)</a>
+</li>
+        <li><a href="api/models.html#torchdrug.models.GIN">GIN (in module torchdrug.models)</a>
+</li>
+        <li><a href="api/data.html#torchdrug.data.Graph">Graph (class in torchdrug.data)</a>
+</li>
+        <li><a href="api/data.html#torchdrug.data.Graph.graph">graph() (Graph method)</a>
+</li>
+        <li><a href="api/data.html#torchdrug.data.graph_collate">graph_collate() (in module torchdrug.data)</a>
+</li>
+        <li><a href="api/data.html#torchdrug.data.PackedGraph.graph_mask">graph_mask() (PackedGraph method)</a>
+</li>
+        <li><a href="api/data.html#torchdrug.data.Graph.graph_reference">graph_reference() (Graph method)</a>
+</li>
+        <li><a href="api/models.html#torchdrug.models.GraphAF">GraphAF (in module torchdrug.models)</a>
+</li>
+        <li><a href="api/layers.html#torchdrug.layers.GraphAttentionConv">GraphAttentionConv (class in torchdrug.layers)</a>
+</li>
+        <li><a href="api/models.html#torchdrug.models.GraphAttentionNetwork">GraphAttentionNetwork (class in torchdrug.models)</a>
+</li>
+        <li><a href="api/models.html#torchdrug.models.GraphAutoregressiveFlow">GraphAutoregressiveFlow (class in torchdrug.models)</a>
+</li>
+        <li><a href="api/layers.html#torchdrug.layers.GraphConv">GraphConv (class in torchdrug.layers)</a>
+</li>
+        <li><a href="api/models.html#torchdrug.models.GraphConvolutionalNetwork">GraphConvolutionalNetwork (class in torchdrug.models)</a>
+</li>
+        <li><a href="api/layers.html#torchdrug.layers.GraphIsomorphismConv">GraphIsomorphismConv (class in torchdrug.layers)</a>
+</li>
+        <li><a href="api/models.html#torchdrug.models.GraphIsomorphismNetwork">GraphIsomorphismNetwork (class in torchdrug.models)</a>
+</li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="H" class="genindex-section">
+  <h2>H</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="api/data.html#torchdrug.data.Dictionary.has_key">has_key() (Dictionary method)</a>
+</li>
+        <li><a href="api/datasets.html#torchdrug.datasets.Hetionet">Hetionet (class in torchdrug.datasets)</a>
+</li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="api/utils.html#torchdrug.utils.plot.highlight">highlight() (in module torchdrug.utils.plot)</a>
+</li>
+        <li><a href="api/datasets.html#torchdrug.datasets.HIV">HIV (class in torchdrug.datasets)</a>
+</li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="I" class="genindex-section">
+  <h2>I</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="api/layers.html#torchdrug.layers.distribution.IndependentGaussian">IndependentGaussian (class in torchdrug.layers.distribution)</a>
+</li>
+        <li><a href="api/models.html#torchdrug.models.InfoGraph">InfoGraph (class in torchdrug.models)</a>
+</li>
+        <li><a href="api/utils.html#torchdrug.utils.comm.init_process_group">init_process_group() (in module torchdrug.utils.comm)</a>
+</li>
+        <li><a href="api/utils.html#torchdrug.utils.input_choice">input_choice() (in module torchdrug.utils)</a>
+</li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="api/data.html#torchdrug.data.Molecule.ion_to_molecule">ion_to_molecule() (Molecule method)</a>
+
+        <ul>
+          <li><a href="api/data.html#torchdrug.data.PackedMolecule.ion_to_molecule">(PackedMolecule method)</a>
+</li>
+        </ul></li>
+        <li><a href="api/data.html#torchdrug.data.Molecule.is_valid">is_valid (Molecule property)</a>
+
+        <ul>
+          <li><a href="api/data.html#torchdrug.data.PackedMolecule.is_valid">(PackedMolecule property)</a>
+</li>
+        </ul></li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="K" class="genindex-section">
+  <h2>K</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="api/models.html#torchdrug.models.KBGAT">KBGAT (in module torchdrug.models)</a>
+</li>
+        <li><a href="api/data.html#torchdrug.data.key_split">key_split() (in module torchdrug.data)</a>
+</li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="api/models.html#torchdrug.models.KnowledgeBaseGraphAttentionNetwork">KnowledgeBaseGraphAttentionNetwork (class in torchdrug.models)</a>
+</li>
+        <li><a href="api/tasks.html#torchdrug.tasks.KnowledgeGraphCompletion">KnowledgeGraphCompletion (class in torchdrug.tasks)</a>
+</li>
+        <li><a href="api/data.html#torchdrug.data.KnowledgeGraphDataset">KnowledgeGraphDataset (class in torchdrug.data)</a>
+</li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="L" class="genindex-section">
+  <h2>L</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="api/datasets.html#torchdrug.datasets.Lipophilicity">Lipophilicity (class in torchdrug.datasets)</a>
+</li>
+        <li><a href="api/utils.html#torchdrug.utils.literal_eval">literal_eval() (in module torchdrug.utils)</a>
+</li>
+        <li><a href="api/core.html#torchdrug.core.Engine.load">load() (Engine method)</a>
+</li>
+        <li><a href="api/core.html#torchdrug.core.Engine.load_config_dict">load_config_dict() (Engine class method)</a>
+</li>
+        <li><a href="api/data.html#torchdrug.data.MoleculeDataset.load_csv">load_csv() (MoleculeDataset method)</a>
+</li>
+        <li><a href="api/utils.html#torchdrug.utils.load_extension">load_extension() (in module torchdrug.utils)</a>
+</li>
+        <li><a href="api/data.html#torchdrug.data.MoleculeDataset.load_smiles">load_smiles() (MoleculeDataset method)</a>
+
+        <ul>
+          <li><a href="api/data.html#torchdrug.data.ReactionDataset.load_smiles">(ReactionDataset method)</a>
+</li>
+        </ul></li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="api/tasks.html#torchdrug.tasks.Retrosynthesis.load_state_dict">load_state_dict() (Retrosynthesis method)</a>
+</li>
+        <li><a href="api/data.html#torchdrug.data.KnowledgeGraphDataset.load_triplet">load_triplet() (KnowledgeGraphDataset method)</a>
+</li>
+        <li><a href="api/data.html#torchdrug.data.KnowledgeGraphDataset.load_tsv">load_tsv() (KnowledgeGraphDataset method)</a>
+
+        <ul>
+          <li><a href="api/data.html#torchdrug.data.NodeClassificationDataset.load_tsv">(NodeClassificationDataset method)</a>
+</li>
+        </ul></li>
+        <li><a href="api/data.html#torchdrug.data.KnowledgeGraphDataset.load_tsvs">load_tsvs() (KnowledgeGraphDataset method)</a>
+</li>
+        <li><a href="api/core.html#torchdrug.core.Meter.log">log() (Meter method)</a>
+</li>
+        <li><a href="api/core.html#torchdrug.core.Meter.log_config">log_config() (Meter method)</a>
+</li>
+        <li><a href="api/metrics.html#torchdrug.metrics.logP">logP() (in module torchdrug.metrics)</a>
+</li>
+        <li><a href="api/utils.html#torchdrug.utils.pretty.long_array">long_array() (in module torchdrug.utils.pretty)</a>
+</li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="M" class="genindex-section">
+  <h2>M</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="api/datasets.html#torchdrug.datasets.Malaria">Malaria (class in torchdrug.datasets)</a>
+</li>
+        <li><a href="api/layers.html#torchdrug.layers.functional.masked_mean">masked_mean() (in module torchdrug.layers.functional)</a>
+</li>
+        <li><a href="api/data.html#torchdrug.data.Graph.match">match() (Graph method)</a>
+</li>
+        <li><a href="api/layers.html#torchdrug.layers.MaxReadout">MaxReadout (class in torchdrug.layers)</a>
+</li>
+        <li><a href="api/utils.html#torchdrug.utils.mean">mean() (in module torchdrug.utils)</a>
+</li>
+        <li><a href="api/layers.html#torchdrug.layers.functional.mean_with_nan">mean_with_nan() (in module torchdrug.layers.functional)</a>
+</li>
+        <li><a href="api/layers.html#torchdrug.layers.MeanReadout">MeanReadout (class in torchdrug.layers)</a>
+</li>
+        <li><a href="api/data.html#torchdrug.data.PackedGraph.merge">merge() (PackedGraph method)</a>
+</li>
+        <li><a href="api/layers.html#torchdrug.layers.ChebyshevConv.message">message() (ChebyshevConv method)</a>
+
+        <ul>
+          <li><a href="api/layers.html#torchdrug.layers.ContinuousFilterConv.message">(ContinuousFilterConv method)</a>
+</li>
+          <li><a href="api/layers.html#torchdrug.layers.GraphAttentionConv.message">(GraphAttentionConv method)</a>
+</li>
+          <li><a href="api/layers.html#torchdrug.layers.GraphConv.message">(GraphConv method)</a>
+</li>
+          <li><a href="api/layers.html#torchdrug.layers.GraphIsomorphismConv.message">(GraphIsomorphismConv method)</a>
+</li>
+          <li><a href="api/layers.html#torchdrug.layers.MessagePassing.message">(MessagePassing method)</a>
+</li>
+          <li><a href="api/layers.html#torchdrug.layers.MessagePassingBase.message">(MessagePassingBase method)</a>
+</li>
+          <li><a href="api/layers.html#torchdrug.layers.NeuralFingerprintConv.message">(NeuralFingerprintConv method)</a>
+</li>
+          <li><a href="api/layers.html#torchdrug.layers.RelationalGraphConv.message">(RelationalGraphConv method)</a>
+</li>
+        </ul></li>
+        <li><a href="api/layers.html#torchdrug.layers.ChebyshevConv.message_and_aggregate">message_and_aggregate() (ChebyshevConv method)</a>
+
+        <ul>
+          <li><a href="api/layers.html#torchdrug.layers.ContinuousFilterConv.message_and_aggregate">(ContinuousFilterConv method)</a>
+</li>
+          <li><a href="api/layers.html#torchdrug.layers.GraphConv.message_and_aggregate">(GraphConv method)</a>
+</li>
+          <li><a href="api/layers.html#torchdrug.layers.GraphIsomorphismConv.message_and_aggregate">(GraphIsomorphismConv method)</a>
+</li>
+          <li><a href="api/layers.html#torchdrug.layers.MessagePassingBase.message_and_aggregate">(MessagePassingBase method)</a>
+</li>
+          <li><a href="api/layers.html#torchdrug.layers.NeuralFingerprintConv.message_and_aggregate">(NeuralFingerprintConv method)</a>
+</li>
+          <li><a href="api/layers.html#torchdrug.layers.RelationalGraphConv.message_and_aggregate">(RelationalGraphConv method)</a>
+</li>
+        </ul></li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="api/layers.html#torchdrug.layers.MessagePassing">MessagePassing (class in torchdrug.layers)</a>
+</li>
+        <li><a href="api/layers.html#torchdrug.layers.MessagePassingBase">MessagePassingBase (class in torchdrug.layers)</a>
+</li>
+        <li><a href="api/models.html#torchdrug.models.MessagePassingNeuralNetwork">MessagePassingNeuralNetwork (class in torchdrug.models)</a>
+</li>
+        <li><a href="api/core.html#torchdrug.core.Meter">Meter (class in torchdrug.core)</a>
+</li>
+        <li><a href="api/layers.html#torchdrug.layers.MinCutPool">MinCutPool (class in torchdrug.layers)</a>
+</li>
+        <li>
+    module
+
+        <ul>
+          <li><a href="api/utils.html#module-torchdrug.utils.pretty">torchdrug.utils.pretty</a>
+</li>
+        </ul></li>
+        <li><a href="api/data.html#torchdrug.data.Molecule">Molecule (class in torchdrug.data)</a>
+</li>
+        <li><a href="api/data.html#torchdrug.data.feature.molecule_default">molecule_default() (in module torchdrug.data.feature)</a>
+</li>
+        <li><a href="api/data.html#torchdrug.data.MoleculeDataset">MoleculeDataset (class in torchdrug.data)</a>
+</li>
+        <li><a href="api/datasets.html#torchdrug.datasets.MOSES">MOSES (class in torchdrug.datasets)</a>
+</li>
+        <li><a href="api/models.html#torchdrug.models.MPNN">MPNN (in module torchdrug.models)</a>
+</li>
+        <li><a href="api/layers.html#torchdrug.layers.functional.multi_slice">multi_slice() (in module torchdrug.layers.functional)</a>
+</li>
+        <li><a href="api/layers.html#torchdrug.layers.functional.multi_slice_mask">multi_slice_mask() (in module torchdrug.layers.functional)</a>
+</li>
+        <li><a href="api/layers.html#torchdrug.layers.MultiLayerPerceptron">MultiLayerPerceptron (class in torchdrug.layers)</a>
+</li>
+        <li><a href="api/layers.html#torchdrug.layers.functional.multinomial">multinomial() (in module torchdrug.layers.functional)</a>
+</li>
+        <li><a href="api/layers.html#torchdrug.layers.MutualInformation">MutualInformation (class in torchdrug.layers)</a>
+</li>
+        <li><a href="api/datasets.html#torchdrug.datasets.MUV">MUV (class in torchdrug.datasets)</a>
+</li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="N" class="genindex-section">
+  <h2>N</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="api/models.html#torchdrug.models.NeuralFingerprint">NeuralFingerprint (class in torchdrug.models)</a>
+</li>
+        <li><a href="api/layers.html#torchdrug.layers.NeuralFingerprintConv">NeuralFingerprintConv (class in torchdrug.layers)</a>
+</li>
+        <li><a href="api/models.html#torchdrug.models.NeuralLogicProgramming">NeuralLogicProgramming (class in torchdrug.models)</a>
+</li>
+        <li><a href="api/models.html#torchdrug.models.NeuralLP">NeuralLP (in module torchdrug.models)</a>
+</li>
+        <li><a href="api/models.html#torchdrug.models.NFP">NFP (in module torchdrug.models)</a>
+</li>
+        <li><a href="api/utils.html#torchdrug.utils.no_rdkit_log">no_rdkit_log() (in module torchdrug.utils)</a>
+</li>
+        <li><a href="api/data.html#torchdrug.data.Graph.node">node() (Graph method)</a>
+</li>
+        <li><a href="api/data.html#torchdrug.data.Graph.node2graph">node2graph (Graph property)</a>
+
+        <ul>
+          <li><a href="api/data.html#torchdrug.data.PackedGraph.node2graph">(PackedGraph property)</a>
+</li>
+        </ul></li>
+        <li><a href="api/data.html#torchdrug.data.MoleculeDataset.node_feature_dim">node_feature_dim (MoleculeDataset property)</a>
+
+        <ul>
+          <li><a href="api/data.html#torchdrug.data.NodeClassificationDataset.node_feature_dim">(NodeClassificationDataset property)</a>
+</li>
+          <li><a href="api/data.html#torchdrug.data.ReactionDataset.node_feature_dim">(ReactionDataset property)</a>
+</li>
+        </ul></li>
+        <li><a href="api/data.html#torchdrug.data.Graph.node_mask">node_mask() (Graph method)</a>
+
+        <ul>
+          <li><a href="api/data.html#torchdrug.data.Molecule.node_mask">(Molecule method)</a>
+</li>
+          <li><a href="api/data.html#torchdrug.data.PackedGraph.node_mask">(PackedGraph method)</a>
+</li>
+          <li><a href="api/data.html#torchdrug.data.PackedMolecule.node_mask">(PackedMolecule method)</a>
+</li>
+        </ul></li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="api/data.html#torchdrug.data.Graph.node_reference">node_reference() (Graph method)</a>
+</li>
+        <li><a href="api/data.html#torchdrug.data.NodeClassificationDataset">NodeClassificationDataset (class in torchdrug.data)</a>
+</li>
+        <li><a href="api/layers.html#torchdrug.layers.NodeSampler">NodeSampler (class in torchdrug.layers)</a>
+</li>
+        <li><a href="api/data.html#torchdrug.data.Molecule.num_atom">num_atom (Molecule property)</a>
+</li>
+        <li><a href="api/data.html#torchdrug.data.MoleculeDataset.num_atom_type">num_atom_type (MoleculeDataset property)</a>
+
+        <ul>
+          <li><a href="api/data.html#torchdrug.data.ReactionDataset.num_atom_type">(ReactionDataset property)</a>
+</li>
+        </ul></li>
+        <li><a href="api/data.html#torchdrug.data.Molecule.num_bond">num_bond (Molecule property)</a>
+</li>
+        <li><a href="api/data.html#torchdrug.data.MoleculeDataset.num_bond_type">num_bond_type (MoleculeDataset property)</a>
+
+        <ul>
+          <li><a href="api/data.html#torchdrug.data.ReactionDataset.num_bond_type">(ReactionDataset property)</a>
+</li>
+        </ul></li>
+        <li><a href="api/data.html#torchdrug.data.NodeClassificationDataset.num_edge">num_edge (NodeClassificationDataset property)</a>
+</li>
+        <li><a href="api/data.html#torchdrug.data.KnowledgeGraphDataset.num_entity">num_entity (KnowledgeGraphDataset property)</a>
+</li>
+        <li><a href="api/data.html#torchdrug.data.NodeClassificationDataset.num_node">num_node (NodeClassificationDataset property)</a>
+</li>
+        <li><a href="api/data.html#torchdrug.data.KnowledgeGraphDataset.num_relation">num_relation (KnowledgeGraphDataset property)</a>
+</li>
+        <li><a href="api/data.html#torchdrug.data.KnowledgeGraphDataset.num_triplet">num_triplet (KnowledgeGraphDataset property)</a>
+</li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="O" class="genindex-section">
+  <h2>O</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="api/layers.html#torchdrug.layers.functional.one_hot">one_hot() (in module torchdrug.layers.functional)</a>
+</li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="api/datasets.html#torchdrug.datasets.OPV">OPV (class in torchdrug.datasets)</a>
+</li>
+        <li><a href="api/data.html#torchdrug.data.ordered_scaffold_split">ordered_scaffold_split() (in module torchdrug.data)</a>
+</li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="P" class="genindex-section">
+  <h2>P</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="api/data.html#torchdrug.data.Graph.pack">pack() (Graph class method)</a>
+</li>
+        <li><a href="api/data.html#torchdrug.data.Graph.packed_type">packed_type (Graph attribute)</a>
+
+        <ul>
+          <li><a href="api/data.html#torchdrug.data.Molecule.packed_type">(Molecule attribute)</a>
+</li>
+        </ul></li>
+        <li><a href="api/data.html#torchdrug.data.PackedGraph">PackedGraph (class in torchdrug.data)</a>
+</li>
+        <li><a href="api/data.html#torchdrug.data.PackedMolecule">PackedMolecule (class in torchdrug.data)</a>
+</li>
+        <li><a href="api/layers.html#torchdrug.layers.PairNorm">PairNorm (class in torchdrug.layers)</a>
+</li>
+        <li><a href="api/datasets.html#torchdrug.datasets.PCQM4M">PCQM4M (class in torchdrug.datasets)</a>
+</li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="api/metrics.html#torchdrug.metrics.penalized_logP">penalized_logP() (in module torchdrug.metrics)</a>
+</li>
+        <li><a href="api/tasks.html#torchdrug.tasks.CenterIdentification.predict_synthon">predict_synthon() (CenterIdentification method)</a>
+</li>
+        <li><a href="api/tasks.html#torchdrug.tasks.AutoregressiveGeneration.preprocess">preprocess() (AutoregressiveGeneration method)</a>
+
+        <ul>
+          <li><a href="api/tasks.html#torchdrug.tasks.GCPNGeneration.preprocess">(GCPNGeneration method)</a>
+</li>
+          <li><a href="api/tasks.html#torchdrug.tasks.PropertyPrediction.preprocess">(PropertyPrediction method)</a>
+</li>
+        </ul></li>
+        <li><a href="api/tasks.html#torchdrug.tasks.PropertyPrediction">PropertyPrediction (class in torchdrug.tasks)</a>
+</li>
+        <li><a href="api/datasets.html#torchdrug.datasets.PubMed">PubMed (class in torchdrug.datasets)</a>
+</li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="Q" class="genindex-section">
+  <h2>Q</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="api/metrics.html#torchdrug.metrics.QED">QED() (in module torchdrug.metrics)</a>
+</li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="api/datasets.html#torchdrug.datasets.QM8">QM8 (class in torchdrug.datasets)</a>
+</li>
+        <li><a href="api/datasets.html#torchdrug.datasets.QM9">QM9 (class in torchdrug.datasets)</a>
+</li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="R" class="genindex-section">
+  <h2>R</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="api/metrics.html#torchdrug.metrics.r2">r2() (in module torchdrug.metrics)</a>
+</li>
+        <li><a href="api/transforms.html#torchdrug.transforms.RandomBFSOrder">RandomBFSOrder (class in torchdrug.transforms)</a>
+</li>
+        <li><a href="api/utils.html#torchdrug.utils.plot.reaction">reaction() (in module torchdrug.utils.plot)</a>
+</li>
+        <li><a href="api/datasets.html#torchdrug.datasets.USPTO50k.reaction_types">reaction_types (USPTO50k property)</a>
+</li>
+        <li><a href="api/data.html#torchdrug.data.ReactionDataset">ReactionDataset (class in torchdrug.data)</a>
+</li>
+        <li><a href="api/utils.html#torchdrug.utils.comm.reduce">reduce() (in module torchdrug.utils.comm)</a>
+</li>
+        <li><a href="api/core.html#torchdrug.core.Registry.register">register() (Registry class method)</a>
+</li>
+        <li><a href="api/core.html#torchdrug.core.Registry">Registry (class in torchdrug.core)</a>
+</li>
+        <li><a href="api/layers.html#torchdrug.layers.RelationalGraphConv">RelationalGraphConv (class in torchdrug.layers)</a>
+</li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="api/models.html#torchdrug.models.RelationalGraphConvolutionalNetwork">RelationalGraphConvolutionalNetwork (class in torchdrug.models)</a>
+</li>
+        <li><a href="api/transforms.html#torchdrug.transforms.RemapAtomType">RemapAtomType (class in torchdrug.transforms)</a>
+</li>
+        <li><a href="api/data.html#torchdrug.data.Graph.repeat">repeat() (Graph method)</a>
+
+        <ul>
+          <li><a href="api/data.html#torchdrug.data.PackedGraph.repeat">(PackedGraph method)</a>
+</li>
+        </ul></li>
+        <li><a href="api/data.html#torchdrug.data.PackedGraph.repeat_interleave">repeat_interleave() (PackedGraph method)</a>
+</li>
+        <li><a href="api/tasks.html#torchdrug.tasks.Retrosynthesis">Retrosynthesis (class in torchdrug.tasks)</a>
+</li>
+        <li><a href="api/layers.html#torchdrug.layers.ConditionalFlow.reverse">reverse() (ConditionalFlow method)</a>
+</li>
+        <li><a href="api/models.html#torchdrug.models.RGCN">RGCN (in module torchdrug.models)</a>
+</li>
+        <li><a href="api/models.html#torchdrug.models.RotatE">RotatE (class in torchdrug.models)</a>
+</li>
+        <li><a href="api/layers.html#torchdrug.layers.functional.rotate_score">rotate_score() (in module torchdrug.layers.functional)</a>
+</li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="S" class="genindex-section">
+  <h2>S</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="api/metrics.html#torchdrug.metrics.SA">SA() (in module torchdrug.metrics)</a>
+</li>
+        <li><a href="api/models.html#torchdrug.models.GraphAutoregressiveFlow.sample">sample() (GraphAutoregressiveFlow method)</a>
+
+        <ul>
+          <li><a href="api/layers.html#torchdrug.layers.distribution.IndependentGaussian.sample">(IndependentGaussian method)</a>
+</li>
+        </ul></li>
+        <li><a href="api/core.html#torchdrug.core.Engine.save">save() (Engine method)</a>
+</li>
+        <li><a href="api/data.html#torchdrug.data.scaffold_split">scaffold_split() (in module torchdrug.data)</a>
+</li>
+        <li><a href="api/models.html#torchdrug.models.SchNet">SchNet (class in torchdrug.models)</a>
+</li>
+        <li><a href="api/core.html#torchdrug.core.Registry.search">search() (Registry class method)</a>
+</li>
+        <li><a href="api/data.html#torchdrug.data.SemiSupervised">SemiSupervised (class in torchdrug.data)</a>
+</li>
+        <li><a href="api/data.html#torchdrug.data.semisupervised">semisupervised() (in module torchdrug.data)</a>
+</li>
+        <li><a href="api/layers.html#torchdrug.layers.Sequential">Sequential (class in torchdrug.layers)</a>
+</li>
+        <li><a href="api/layers.html#torchdrug.layers.Set2Set">Set2Set (class in torchdrug.layers)</a>
+</li>
+        <li><a href="api/layers.html#torchdrug.layers.functional.shifted_softplus">shifted_softplus() (in module torchdrug.layers.functional)</a>
+</li>
+        <li><a href="api/transforms.html#torchdrug.transforms.Shuffle">Shuffle (class in torchdrug.transforms)</a>
+</li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="api/datasets.html#torchdrug.datasets.SIDER">SIDER (class in torchdrug.datasets)</a>
+</li>
+        <li><a href="api/models.html#torchdrug.models.SimplE">SimplE (class in torchdrug.models)</a>
+</li>
+        <li><a href="api/layers.html#torchdrug.layers.functional.simple_score">simple_score() (in module torchdrug.layers.functional)</a>
+</li>
+        <li><a href="api/layers.html#torchdrug.layers.Softmax">Softmax (class in torchdrug.layers)</a>
+</li>
+        <li><a href="api/layers.html#torchdrug.layers.Sort">Sort (class in torchdrug.layers)</a>
+</li>
+        <li><a href="api/utils.html#torchdrug.utils.sparse_coo_tensor">sparse_coo_tensor() (in module torchdrug.utils)</a>
+</li>
+        <li><a href="api/data.html#torchdrug.data.Graph.split">split() (Graph method)</a>
+</li>
+        <li><a href="api/utils.html#torchdrug.utils.stack">stack() (in module torchdrug.utils)</a>
+
+        <ul>
+          <li><a href="api/utils.html#torchdrug.utils.comm.stack">(in module torchdrug.utils.comm)</a>
+</li>
+        </ul></li>
+        <li><a href="api/core.html#torchdrug.core.Meter.step">step() (Meter method)</a>
+</li>
+        <li><a href="api/data.html#torchdrug.data.PackedGraph.subbatch">subbatch() (PackedGraph method)</a>
+</li>
+        <li><a href="api/data.html#torchdrug.data.Graph.subgraph">subgraph() (Graph method)</a>
+</li>
+        <li><a href="api/layers.html#torchdrug.layers.SumReadout">SumReadout (class in torchdrug.layers)</a>
+</li>
+        <li><a href="api/tasks.html#torchdrug.tasks.SynthonCompletion">SynthonCompletion (class in torchdrug.tasks)</a>
+</li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="T" class="genindex-section">
+  <h2>T</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="api/transforms.html#torchdrug.transforms.TargetNormalize">TargetNormalize (class in torchdrug.transforms)</a>
+</li>
+        <li><a href="api/data.html#torchdrug.data.MoleculeDataset.tasks">tasks (MoleculeDataset property)</a>
+</li>
+        <li><a href="api/utils.html#torchdrug.utils.pretty.time">time() (in module torchdrug.utils.pretty)</a>
+</li>
+        <li><a href="api/data.html#torchdrug.data.Graph.to">to() (Graph method)</a>
+</li>
+        <li><a href="api/data.html#torchdrug.data.Dictionary.to_dict">to_dict() (Dictionary method)</a>
+</li>
+        <li><a href="api/data.html#torchdrug.data.Molecule.to_molecule">to_molecule() (Molecule method)</a>
+
+        <ul>
+          <li><a href="api/data.html#torchdrug.data.PackedMolecule.to_molecule">(PackedMolecule method)</a>
+</li>
+        </ul></li>
+        <li><a href="api/data.html#torchdrug.data.Molecule.to_scaffold">to_scaffold() (Molecule method)</a>
+</li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="api/data.html#torchdrug.data.Molecule.to_smiles">to_smiles() (Molecule method)</a>
+
+        <ul>
+          <li><a href="api/data.html#torchdrug.data.PackedMolecule.to_smiles">(PackedMolecule method)</a>
+</li>
+        </ul></li>
+        <li>
+    torchdrug.utils.pretty
+
+        <ul>
+          <li><a href="api/utils.html#module-torchdrug.utils.pretty">module</a>
+</li>
+        </ul></li>
+        <li><a href="api/datasets.html#torchdrug.datasets.Tox21">Tox21 (class in torchdrug.datasets)</a>
+</li>
+        <li><a href="api/datasets.html#torchdrug.datasets.ToxCast">ToxCast (class in torchdrug.datasets)</a>
+</li>
+        <li><a href="api/core.html#torchdrug.core.Engine.train">train() (Engine method)</a>
+</li>
+        <li><a href="api/models.html#torchdrug.models.TransE">TransE (class in torchdrug.models)</a>
+</li>
+        <li><a href="api/layers.html#torchdrug.layers.functional.transe_score">transe_score() (in module torchdrug.layers.functional)</a>
+</li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="U" class="genindex-section">
+  <h2>U</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="api/data.html#torchdrug.data.Graph.undirected">undirected() (Graph method)</a>
+
+        <ul>
+          <li><a href="api/data.html#torchdrug.data.Molecule.undirected">(Molecule method)</a>
+</li>
+          <li><a href="api/data.html#torchdrug.data.PackedGraph.undirected">(PackedGraph method)</a>
+</li>
+          <li><a href="api/data.html#torchdrug.data.PackedMolecule.undirected">(PackedMolecule method)</a>
+</li>
+        </ul></li>
+        <li><a href="api/data.html#torchdrug.data.PackedGraph.unpack">unpack() (PackedGraph method)</a>
+</li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="api/data.html#torchdrug.data.PackedGraph.unpack_data">unpack_data() (PackedGraph method)</a>
+</li>
+        <li><a href="api/data.html#torchdrug.data.PackedGraph.unpacked_type">unpacked_type (PackedGraph attribute)</a>
+
+        <ul>
+          <li><a href="api/data.html#torchdrug.data.PackedMolecule.unpacked_type">(PackedMolecule attribute)</a>
+</li>
+        </ul></li>
+        <li><a href="api/tasks.html#torchdrug.tasks.Unsupervised">Unsupervised (class in torchdrug.tasks)</a>
+</li>
+        <li><a href="api/core.html#torchdrug.core.Meter.update">update() (Meter method)</a>
+</li>
+        <li><a href="api/datasets.html#torchdrug.datasets.USPTO50k">USPTO50k (class in torchdrug.datasets)</a>
+</li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="V" class="genindex-section">
+  <h2>V</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="api/metrics.html#torchdrug.metrics.variadic_accuracy">variadic_accuracy() (in module torchdrug.metrics)</a>
+</li>
+        <li><a href="api/layers.html#torchdrug.layers.functional.variadic_arange">variadic_arange() (in module torchdrug.layers.functional)</a>
+</li>
+        <li><a href="api/layers.html#torchdrug.layers.functional.variadic_cross_entropy">variadic_cross_entropy() (in module torchdrug.layers.functional)</a>
+</li>
+        <li><a href="api/layers.html#torchdrug.layers.functional.variadic_log_softmax">variadic_log_softmax() (in module torchdrug.layers.functional)</a>
+</li>
+        <li><a href="api/layers.html#torchdrug.layers.functional.variadic_max">variadic_max() (in module torchdrug.layers.functional)</a>
+</li>
+        <li><a href="api/layers.html#torchdrug.layers.functional.variadic_mean">variadic_mean() (in module torchdrug.layers.functional)</a>
+</li>
+        <li><a href="api/layers.html#torchdrug.layers.functional.variadic_randperm">variadic_randperm() (in module torchdrug.layers.functional)</a>
+</li>
+        <li><a href="api/layers.html#torchdrug.layers.functional.variadic_sample">variadic_sample() (in module torchdrug.layers.functional)</a>
+</li>
+        <li><a href="api/layers.html#torchdrug.layers.functional.variadic_softmax">variadic_softmax() (in module torchdrug.layers.functional)</a>
+</li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="api/layers.html#torchdrug.layers.functional.variadic_sort">variadic_sort() (in module torchdrug.layers.functional)</a>
+</li>
+        <li><a href="api/layers.html#torchdrug.layers.functional.variadic_sum">variadic_sum() (in module torchdrug.layers.functional)</a>
+</li>
+        <li><a href="api/layers.html#torchdrug.layers.functional.variadic_topk">variadic_topk() (in module torchdrug.layers.functional)</a>
+</li>
+        <li><a href="api/transforms.html#torchdrug.transforms.VirtualAtom">VirtualAtom (class in torchdrug.transforms)</a>
+</li>
+        <li><a href="api/transforms.html#torchdrug.transforms.VirtualNode">VirtualNode (class in torchdrug.transforms)</a>
+</li>
+        <li><a href="api/data.html#torchdrug.data.Graph.visualize">visualize() (Graph method)</a>
+
+        <ul>
+          <li><a href="api/data.html#torchdrug.data.Molecule.visualize">(Molecule method)</a>
+</li>
+          <li><a href="api/data.html#torchdrug.data.PackedGraph.visualize">(PackedGraph method)</a>
+</li>
+          <li><a href="api/data.html#torchdrug.data.PackedMolecule.visualize">(PackedMolecule method)</a>
+</li>
+        </ul></li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="W" class="genindex-section">
+  <h2>W</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="api/datasets.html#torchdrug.datasets.WN18">WN18 (class in torchdrug.datasets)</a>
+</li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="api/datasets.html#torchdrug.datasets.WN18RR">WN18RR (class in torchdrug.datasets)</a>
+</li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="Z" class="genindex-section">
+  <h2>Z</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="api/datasets.html#torchdrug.datasets.ZINC250k">ZINC250k (class in torchdrug.datasets)</a>
+</li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="api/datasets.html#torchdrug.datasets.ZINC2m">ZINC2m (class in torchdrug.datasets)</a>
+</li>
+    </ul></td>
+  </tr></table>
+</section>
+
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          
+          
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2021, MilaGraph Group
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            <div class="icons">
+              
+            </div>
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer no-toc">
+      
+      
+      
+    </aside>
+  </div>
+</div><script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/scripts/furo.js"></script>
+    </body>
 </html>

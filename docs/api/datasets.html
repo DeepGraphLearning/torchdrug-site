@@ -1,18 +1,21 @@
 <!doctype html>
 <html class="no-js">
   <head><meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width,initial-scale=1"/><link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="torchdrug.transforms" href="transforms.html" /><link rel="prev" title="torchdrug.data" href="data.html" />
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="torchdrug.transforms" href="transforms.html" /><link rel="prev" title="torchdrug.data" href="data.html" />
 
-    <meta name="generator" content="sphinx-3.1.2, furo 2020.12.09.beta21"/>
+    <meta name="generator" content="sphinx-4.4.0, furo 2022.03.04"/>
         <title>torchdrug.datasets - TorchDrug 0.1.2 documentation</title>
-      <link rel="stylesheet" href="../_static/styles/furo.css?digest=a3f371badb8538d75df213ccffb17a4f6e8f3ac5">
-    <link rel="stylesheet" href="../_static/pygments.css">
-    <link media="(prefers-color-scheme: dark)" rel="stylesheet" href="../_static/pygments_dark.css">
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=935aa2abcc5c1da4283d1dc201fb1f0add16d23a" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?digest=25ceb02ed1c46dc30f2321ff83e92799f69dfdb9" />
+    
     
 
 
 <style>
-  :root {
+  body {
     --color-code-background: #f8f8f8;
   --color-code-foreground: black;
   --font-stack: Helvetica, Arial, sans-serif, -apple-system;
@@ -24,59 +27,37 @@
   --font-size--small--2: var(--font-size--small);
   
   }
-  @media (prefers-color-scheme: dark) {
-    :root {
+  @media not print {
+    body[data-theme="dark"] {
       --color-code-background: #202020;
   --color-code-foreground: #d0d0d0;
   
     }
-  }
-
-  /* For allowing end-user-specific overrides */
-  .override-light {
-    --color-code-background: #f8f8f8;
-  --color-code-foreground: black;
-  --font-stack: Helvetica, Arial, sans-serif, -apple-system;
-  --font-stack--monospace: Courier, monospace;
-  --color-brand-primary: #E5261F;
-  --color-brand-content: #E5261F;
-  --admonition-font-size: 1rem;
-  --admonition-title-font-size: 1rem;
-  --font-size--small--2: var(--font-size--small);
-  
-  }
-  .override-dark {
-    --color-code-background: #202020;
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
   --color-code-foreground: #d0d0d0;
   
+      }
+    }
   }
-</style><link id="pygments_dark_css" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css" href="../_static/pygments_dark.css" />
-    <link rel="stylesheet" href="../_static/styles/furo-extensions.css?digest=26485485040e7aaf717c13fd0188a5ad2c2deb60">
-    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-    <script defer src="../_static/jquery.js"></script>
-    <script defer src="../_static/underscore.js"></script>
-    <script defer src="../_static/doctools.js"></script>
-    <script defer src="../_static/language_data.js"></script>
-    <script defer async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script defer src="../_static/scripts/main.js?digest=e931d09b2a40c1bb82b542effe772014573baf67"></script></head>
-  <body dir="">
+</style></head>
+  <body>
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
     
 <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
   <symbol id="svg-toc" viewBox="0 0 24 24">
     <title>Contents</title>
-    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-      stroke-width="1.5" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
-      <path stroke="none" d="M0 0h24v24H0z"/>
-      <line x1="4" y1="6" x2="20" y2="6" />
-      <line x1="10" y1="12" x2="20" y2="12" />
-      <line x1="6" y1="18" x2="20" y2="18" />
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
     </svg>
   </symbol>
   <symbol id="svg-menu" viewBox="0 0 24 24">
     <title>Menu</title>
-    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-      stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-      class="feather feather-menu">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
       <line x1="3" y1="12" x2="21" y2="12"></line>
       <line x1="3" y1="6" x2="21" y2="6"></line>
       <line x1="3" y1="18" x2="21" y2="18"></line>
@@ -84,24 +65,65 @@
   </symbol>
   <symbol id="svg-arrow-right" viewBox="0 0 24 24">
     <title>Expand</title>
-    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-      stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-      class="feather feather-chevron-right">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
       <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-half" viewBox="0 0 24 24">
+    <title>Auto light/dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-shadow">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M13 12h5" />
+      <path d="M13 15h4" />
+      <path d="M13 18h1" />
+      <path d="M13 9h4" />
+      <path d="M13 6h1" />
     </svg>
   </symbol>
 </svg>
 
 <input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
 <input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
-<label class="overlay sidebar-overlay" for="__navigation"></label>
-<label class="overlay toc-overlay" for="__toc"></label>
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
 
 
 <div class="page">
   <header class="mobile-header">
     <div class="header-left">
       <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
         <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
       </label>
     </div>
@@ -109,7 +131,16 @@
       <a href="../index.html"><div class="brand">TorchDrug 0.1.2 documentation</div></a>
     </div>
     <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
       <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
         <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
       </label>
     </div>
@@ -124,15 +155,16 @@
   </div>
   
   
-</a><form class="sidebar-search-container" method="get" action="../search.html">
-  <input class="sidebar-search" placeholder="Search" name="q">
+</a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
+  <input class="sidebar-search" placeholder=Search name="q" aria-label="Search">
   <input type="hidden" name="check_keywords" value="yes">
   <input type="hidden" name="area" value="default">
-</form><div class="sidebar-scroll"><div class="sidebar-tree">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
   <ul>
 <li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../quick_start.html">Quick Start</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../benchmark/index.html">Benchmark</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label for="toctree-checkbox-1"><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../benchmark/index.html">Benchmark</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../benchmark/property_prediction.html">Molecule Property Prediction</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../benchmark/pretrain.html">Pretrained Molecular Representations</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../benchmark/generation.html">Molecule Generation</a></li>
@@ -140,7 +172,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../benchmark/reasoning.html">Knowledge Graph Reasoning</a></li>
 </ul>
 </li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../tutorials/index.html">Tutorials</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label for="toctree-checkbox-2"><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../tutorials/index.html">Tutorials</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../tutorials/property_prediction.html">Property Prediction</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../tutorials/pretrain.html">Pretrained Molecular Representations</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../tutorials/generation.html">Molecule Generation</a></li>
@@ -148,7 +180,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../tutorials/reasoning.html">Knowledge Graph Reasoning</a></li>
 </ul>
 </li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../notes/index.html">Notes</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label for="toctree-checkbox-3"><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../notes/index.html">Notes</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../notes/graph.html">Graph Data Structures</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../notes/variadic.html">Batch Irregular Structures</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../notes/layer.html">Graph Neural Network Layers</a></li>
@@ -157,9 +189,9 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../paper.html">Papers Implemented</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Package Reference</span></p>
+<p class="caption" role="heading"><span class="caption-text">Package Reference</span></p>
 <ul class="current">
-<li class="toctree-l1 current has-children"><a class="reference internal" href="index.html">Documentation</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label for="toctree-checkbox-4"><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l1 current has-children"><a class="reference internal" href="index.html">Documentation</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="core.html">torchdrug.core</a></li>
 <li class="toctree-l2"><a class="reference internal" href="data.html">torchdrug.data</a></li>
 <li class="toctree-l2 current current-page"><a class="current reference internal" href="#">torchdrug.datasets</a></li>
@@ -175,25 +207,43 @@
 
 </div>
 </div>
+
       </div>
       
     </div>
   </aside>
-  <main class="main">
+  <div class="main">
     <div class="content">
-      <article role="main">
-        <label class="toc-overlay-icon toc-content-icon" for="__toc">
-          <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
-        </label>
-        <div class="section" id="torchdrug-datasets">
-<h1>torchdrug.datasets<a class="headerlink" href="#torchdrug-datasets" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="knowledge-graph-datasets">
-<h2>Knowledge Graph Datasets<a class="headerlink" href="#knowledge-graph-datasets" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="fb15k">
-<h3>FB15k<a class="headerlink" href="#fb15k" title="Permalink to this headline">¶</a></h3>
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container"><div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main">
+          <section id="torchdrug-datasets">
+<h1>torchdrug.datasets<a class="headerlink" href="#torchdrug-datasets" title="Permalink to this headline">#</a></h1>
+<section id="knowledge-graph-datasets">
+<h2>Knowledge Graph Datasets<a class="headerlink" href="#knowledge-graph-datasets" title="Permalink to this headline">#</a></h2>
+<section id="fb15k">
+<h3>FB15k<a class="headerlink" href="#fb15k" title="Permalink to this headline">#</a></h3>
 <dl class="py class">
-<dt id="torchdrug.datasets.FB15k">
-<em class="property">class </em><code class="sig-name descname">FB15k</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">path</span></em>, <em class="sig-param"><span class="n">verbose</span><span class="o">=</span><span class="default_value">1</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/datasets/fb15k.html#FB15k"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.datasets.FB15k" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchdrug.datasets.FB15k">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">FB15k</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/datasets/fb15k.html#FB15k"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.datasets.FB15k" title="Permalink to this definition">#</a></dt>
 <dd><p>Subset of Freebase knowledge base for knowledge graph reasoning.</p>
 <dl class="simple">
 <dt>Statistics:</dt><dd><ul class="simple">
@@ -212,12 +262,12 @@
 </dd>
 </dl>
 </dd></dl>
-</div>
-<div class="section" id="fb15k237">
-<h3>FB15k237<a class="headerlink" href="#fb15k237" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="fb15k237">
+<h3>FB15k237<a class="headerlink" href="#fb15k237" title="Permalink to this headline">#</a></h3>
 <dl class="py class">
-<dt id="torchdrug.datasets.FB15k237">
-<em class="property">class </em><code class="sig-name descname">FB15k237</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">path</span></em>, <em class="sig-param"><span class="n">verbose</span><span class="o">=</span><span class="default_value">1</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/datasets/fb15k.html#FB15k237"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.datasets.FB15k237" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchdrug.datasets.FB15k237">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">FB15k237</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/datasets/fb15k.html#FB15k237"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.datasets.FB15k237" title="Permalink to this definition">#</a></dt>
 <dd><p>A filtered version of FB15k dataset without trivial cases.</p>
 <dl class="simple">
 <dt>Statistics:</dt><dd><ul class="simple">
@@ -236,12 +286,12 @@
 </dd>
 </dl>
 </dd></dl>
-</div>
-<div class="section" id="wn18">
-<h3>WN18<a class="headerlink" href="#wn18" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="wn18">
+<h3>WN18<a class="headerlink" href="#wn18" title="Permalink to this headline">#</a></h3>
 <dl class="py class">
-<dt id="torchdrug.datasets.WN18">
-<em class="property">class </em><code class="sig-name descname">WN18</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">path</span></em>, <em class="sig-param"><span class="n">verbose</span><span class="o">=</span><span class="default_value">1</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/datasets/wn18.html#WN18"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.datasets.WN18" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchdrug.datasets.WN18">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">WN18</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/datasets/wn18.html#WN18"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.datasets.WN18" title="Permalink to this definition">#</a></dt>
 <dd><p>WordNet knowledge base.</p>
 <dl class="simple">
 <dt>Statistics:</dt><dd><ul class="simple">
@@ -260,12 +310,12 @@
 </dd>
 </dl>
 </dd></dl>
-</div>
-<div class="section" id="wn18rr">
-<h3>WN18RR<a class="headerlink" href="#wn18rr" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="wn18rr">
+<h3>WN18RR<a class="headerlink" href="#wn18rr" title="Permalink to this headline">#</a></h3>
 <dl class="py class">
-<dt id="torchdrug.datasets.WN18RR">
-<em class="property">class </em><code class="sig-name descname">WN18RR</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">path</span></em>, <em class="sig-param"><span class="n">verbose</span><span class="o">=</span><span class="default_value">1</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/datasets/wn18.html#WN18RR"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.datasets.WN18RR" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchdrug.datasets.WN18RR">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">WN18RR</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/datasets/wn18.html#WN18RR"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.datasets.WN18RR" title="Permalink to this definition">#</a></dt>
 <dd><p>A filtered version of WN18 dataset without trivial cases.</p>
 <dl class="simple">
 <dt>Statistics:</dt><dd><ul class="simple">
@@ -284,12 +334,12 @@
 </dd>
 </dl>
 </dd></dl>
-</div>
-<div class="section" id="hetionet">
-<h3>Hetionet<a class="headerlink" href="#hetionet" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="hetionet">
+<h3>Hetionet<a class="headerlink" href="#hetionet" title="Permalink to this headline">#</a></h3>
 <dl class="py class">
-<dt id="torchdrug.datasets.Hetionet">
-<em class="property">class </em><code class="sig-name descname">Hetionet</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">path</span></em>, <em class="sig-param"><span class="n">verbose</span><span class="o">=</span><span class="default_value">1</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/datasets/hetionet.html#Hetionet"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.datasets.Hetionet" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchdrug.datasets.Hetionet">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Hetionet</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/datasets/hetionet.html#Hetionet"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.datasets.Hetionet" title="Permalink to this definition">#</a></dt>
 <dd><p>Hetionet for knowledge graph reasoning.</p>
 <dl class="simple">
 <dt>Statistics:</dt><dd><ul class="simple">
@@ -308,15 +358,15 @@
 </dd>
 </dl>
 </dd></dl>
-</div>
-</div>
-<div class="section" id="molecule-property-prediction-datasets">
-<h2>Molecule Property Prediction Datasets<a class="headerlink" href="#molecule-property-prediction-datasets" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="bace">
-<h3>BACE<a class="headerlink" href="#bace" title="Permalink to this headline">¶</a></h3>
+</section>
+</section>
+<section id="molecule-property-prediction-datasets">
+<h2>Molecule Property Prediction Datasets<a class="headerlink" href="#molecule-property-prediction-datasets" title="Permalink to this headline">#</a></h2>
+<section id="bace">
+<h3>BACE<a class="headerlink" href="#bace" title="Permalink to this headline">#</a></h3>
 <dl class="py class">
-<dt id="torchdrug.datasets.BACE">
-<em class="property">class </em><code class="sig-name descname">BACE</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">path</span></em>, <em class="sig-param"><span class="n">verbose</span><span class="o">=</span><span class="default_value">1</span></em>, <em class="sig-param"><span class="n">transform</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">lazy</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">node_feature</span><span class="o">=</span><span class="default_value">'default'</span></em>, <em class="sig-param"><span class="n">edge_feature</span><span class="o">=</span><span class="default_value">'default'</span></em>, <em class="sig-param"><span class="n">graph_feature</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">with_hydrogen</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">kekulize</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/datasets/bace.html#BACE"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.datasets.BACE" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchdrug.datasets.BACE">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">BACE</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transform</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lazy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">node_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'default'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">edge_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'default'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">graph_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">with_hydrogen</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kekulize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/datasets/bace.html#BACE"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.datasets.BACE" title="Permalink to this definition">#</a></dt>
 <dd><p>Binary binding results for a set of inhibitors of human <span class="math notranslate nohighlight">\(\beta\)</span>-secretase 1(BACE-1).</p>
 <dl class="simple">
 <dt>Statistics:</dt><dd><ul class="simple">
@@ -346,12 +396,12 @@ By default, aromatic bonds are stored.</p></li>
 </dd>
 </dl>
 </dd></dl>
-</div>
-<div class="section" id="bbbp">
-<h3>BBBP<a class="headerlink" href="#bbbp" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="bbbp">
+<h3>BBBP<a class="headerlink" href="#bbbp" title="Permalink to this headline">#</a></h3>
 <dl class="py class">
-<dt id="torchdrug.datasets.BBBP">
-<em class="property">class </em><code class="sig-name descname">BBBP</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">path</span></em>, <em class="sig-param"><span class="n">verbose</span><span class="o">=</span><span class="default_value">1</span></em>, <em class="sig-param"><span class="n">transform</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">lazy</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">node_feature</span><span class="o">=</span><span class="default_value">'default'</span></em>, <em class="sig-param"><span class="n">edge_feature</span><span class="o">=</span><span class="default_value">'default'</span></em>, <em class="sig-param"><span class="n">graph_feature</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">with_hydrogen</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">kekulize</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/datasets/bbbp.html#BBBP"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.datasets.BBBP" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchdrug.datasets.BBBP">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">BBBP</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transform</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lazy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">node_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'default'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">edge_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'default'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">graph_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">with_hydrogen</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kekulize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/datasets/bbbp.html#BBBP"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.datasets.BBBP" title="Permalink to this definition">#</a></dt>
 <dd><p>Binary labels of blood-brain barrier penetration.</p>
 <dl class="simple">
 <dt>Statistics:</dt><dd><ul class="simple">
@@ -381,12 +431,12 @@ By default, aromatic bonds are stored.</p></li>
 </dd>
 </dl>
 </dd></dl>
-</div>
-<div class="section" id="cep">
-<h3>CEP<a class="headerlink" href="#cep" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="cep">
+<h3>CEP<a class="headerlink" href="#cep" title="Permalink to this headline">#</a></h3>
 <dl class="py class">
-<dt id="torchdrug.datasets.CEP">
-<em class="property">class </em><code class="sig-name descname">CEP</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">path</span></em>, <em class="sig-param"><span class="n">verbose</span><span class="o">=</span><span class="default_value">1</span></em>, <em class="sig-param"><span class="n">transform</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">lazy</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">node_feature</span><span class="o">=</span><span class="default_value">'default'</span></em>, <em class="sig-param"><span class="n">edge_feature</span><span class="o">=</span><span class="default_value">'default'</span></em>, <em class="sig-param"><span class="n">graph_feature</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">with_hydrogen</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">kekulize</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/datasets/cep.html#CEP"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.datasets.CEP" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchdrug.datasets.CEP">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">CEP</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transform</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lazy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">node_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'default'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">edge_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'default'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">graph_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">with_hydrogen</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kekulize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/datasets/cep.html#CEP"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.datasets.CEP" title="Permalink to this definition">#</a></dt>
 <dd><p>Photovoltaic efficiency estimated by Havard clean energy project.</p>
 <dl class="simple">
 <dt>Statistics:</dt><dd><ul class="simple">
@@ -416,12 +466,12 @@ By default, aromatic bonds are stored.</p></li>
 </dd>
 </dl>
 </dd></dl>
-</div>
-<div class="section" id="chemblfiltered">
-<h3>ChEMBLFiltered<a class="headerlink" href="#chemblfiltered" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="chemblfiltered">
+<h3>ChEMBLFiltered<a class="headerlink" href="#chemblfiltered" title="Permalink to this headline">#</a></h3>
 <dl class="py class">
-<dt id="torchdrug.datasets.ChEMBLFiltered">
-<em class="property">class </em><code class="sig-name descname">ChEMBLFiltered</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">path</span></em>, <em class="sig-param"><span class="n">verbose</span><span class="o">=</span><span class="default_value">1</span></em>, <em class="sig-param"><span class="n">transform</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">lazy</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">node_feature</span><span class="o">=</span><span class="default_value">'default'</span></em>, <em class="sig-param"><span class="n">edge_feature</span><span class="o">=</span><span class="default_value">'default'</span></em>, <em class="sig-param"><span class="n">graph_feature</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">with_hydrogen</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">kekulize</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/datasets/chembl_filtered.html#ChEMBLFiltered"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.datasets.ChEMBLFiltered" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchdrug.datasets.ChEMBLFiltered">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">ChEMBLFiltered</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transform</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lazy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">node_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'default'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">edge_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'default'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">graph_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">with_hydrogen</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kekulize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/datasets/chembl_filtered.html#ChEMBLFiltered"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.datasets.ChEMBLFiltered" title="Permalink to this definition">#</a></dt>
 <dd><dl class="simple">
 <dt>Statistics:</dt><dd><ul class="simple">
 <li><p>#Molecule: 430,710</p></li>
@@ -450,12 +500,12 @@ By default, aromatic bonds are stored.</p></li>
 </dd>
 </dl>
 </dd></dl>
-</div>
-<div class="section" id="clintox">
-<h3>ClinTox<a class="headerlink" href="#clintox" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="clintox">
+<h3>ClinTox<a class="headerlink" href="#clintox" title="Permalink to this headline">#</a></h3>
 <dl class="py class">
-<dt id="torchdrug.datasets.ClinTox">
-<em class="property">class </em><code class="sig-name descname">ClinTox</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">path</span></em>, <em class="sig-param"><span class="n">verbose</span><span class="o">=</span><span class="default_value">1</span></em>, <em class="sig-param"><span class="n">transform</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">lazy</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">node_feature</span><span class="o">=</span><span class="default_value">'default'</span></em>, <em class="sig-param"><span class="n">edge_feature</span><span class="o">=</span><span class="default_value">'default'</span></em>, <em class="sig-param"><span class="n">graph_feature</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">with_hydrogen</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">kekulize</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/datasets/clintox.html#ClinTox"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.datasets.ClinTox" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchdrug.datasets.ClinTox">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">ClinTox</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transform</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lazy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">node_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'default'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">edge_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'default'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">graph_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">with_hydrogen</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kekulize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/datasets/clintox.html#ClinTox"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.datasets.ClinTox" title="Permalink to this definition">#</a></dt>
 <dd><p>Qualitative data of drugs approved by the FDA and those that have failed clinical
 trials for toxicity reasons.</p>
 <dl class="simple">
@@ -486,12 +536,12 @@ By default, aromatic bonds are stored.</p></li>
 </dd>
 </dl>
 </dd></dl>
-</div>
-<div class="section" id="delaney">
-<h3>Delaney<a class="headerlink" href="#delaney" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="delaney">
+<h3>Delaney<a class="headerlink" href="#delaney" title="Permalink to this headline">#</a></h3>
 <dl class="py class">
-<dt id="torchdrug.datasets.Delaney">
-<em class="property">class </em><code class="sig-name descname">Delaney</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">path</span></em>, <em class="sig-param"><span class="n">verbose</span><span class="o">=</span><span class="default_value">1</span></em>, <em class="sig-param"><span class="n">transform</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">lazy</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">node_feature</span><span class="o">=</span><span class="default_value">'default'</span></em>, <em class="sig-param"><span class="n">edge_feature</span><span class="o">=</span><span class="default_value">'default'</span></em>, <em class="sig-param"><span class="n">graph_feature</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">with_hydrogen</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">kekulize</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/datasets/delaney.html#Delaney"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.datasets.Delaney" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchdrug.datasets.Delaney">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Delaney</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transform</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lazy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">node_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'default'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">edge_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'default'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">graph_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">with_hydrogen</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kekulize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/datasets/delaney.html#Delaney"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.datasets.Delaney" title="Permalink to this definition">#</a></dt>
 <dd><p>Log-scale water solubility of molecules.</p>
 <dl class="simple">
 <dt>Statistics:</dt><dd><ul class="simple">
@@ -521,12 +571,12 @@ By default, aromatic bonds are stored.</p></li>
 </dd>
 </dl>
 </dd></dl>
-</div>
-<div class="section" id="freesolv">
-<h3>FreeSolv<a class="headerlink" href="#freesolv" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="freesolv">
+<h3>FreeSolv<a class="headerlink" href="#freesolv" title="Permalink to this headline">#</a></h3>
 <dl class="py class">
-<dt id="torchdrug.datasets.FreeSolv">
-<em class="property">class </em><code class="sig-name descname">FreeSolv</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">path</span></em>, <em class="sig-param"><span class="n">verbose</span><span class="o">=</span><span class="default_value">1</span></em>, <em class="sig-param"><span class="n">transform</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">lazy</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">node_feature</span><span class="o">=</span><span class="default_value">'default'</span></em>, <em class="sig-param"><span class="n">edge_feature</span><span class="o">=</span><span class="default_value">'default'</span></em>, <em class="sig-param"><span class="n">graph_feature</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">with_hydrogen</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">kekulize</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/datasets/freesolv.html#FreeSolv"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.datasets.FreeSolv" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchdrug.datasets.FreeSolv">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">FreeSolv</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transform</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lazy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">node_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'default'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">edge_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'default'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">graph_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">with_hydrogen</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kekulize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/datasets/freesolv.html#FreeSolv"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.datasets.FreeSolv" title="Permalink to this definition">#</a></dt>
 <dd><p>Experimental and calculated hydration free energy of small molecules in water.</p>
 <dl class="simple">
 <dt>Statistics:</dt><dd><ul class="simple">
@@ -556,12 +606,12 @@ By default, aromatic bonds are stored.</p></li>
 </dd>
 </dl>
 </dd></dl>
-</div>
-<div class="section" id="hiv">
-<h3>HIV<a class="headerlink" href="#hiv" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="hiv">
+<h3>HIV<a class="headerlink" href="#hiv" title="Permalink to this headline">#</a></h3>
 <dl class="py class">
-<dt id="torchdrug.datasets.HIV">
-<em class="property">class </em><code class="sig-name descname">HIV</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">path</span></em>, <em class="sig-param"><span class="n">verbose</span><span class="o">=</span><span class="default_value">1</span></em>, <em class="sig-param"><span class="n">transform</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">lazy</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">node_feature</span><span class="o">=</span><span class="default_value">'default'</span></em>, <em class="sig-param"><span class="n">edge_feature</span><span class="o">=</span><span class="default_value">'default'</span></em>, <em class="sig-param"><span class="n">graph_feature</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">with_hydrogen</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">kekulize</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/datasets/hiv.html#HIV"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.datasets.HIV" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchdrug.datasets.HIV">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">HIV</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transform</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lazy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">node_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'default'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">edge_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'default'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">graph_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">with_hydrogen</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kekulize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/datasets/hiv.html#HIV"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.datasets.HIV" title="Permalink to this definition">#</a></dt>
 <dd><p>Experimentally measured abilities to inhibit HIV replication.</p>
 <dl class="simple">
 <dt>Statistics:</dt><dd><ul class="simple">
@@ -591,12 +641,12 @@ By default, aromatic bonds are stored.</p></li>
 </dd>
 </dl>
 </dd></dl>
-</div>
-<div class="section" id="lipophilicity">
-<h3>Lipophilicity<a class="headerlink" href="#lipophilicity" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="lipophilicity">
+<h3>Lipophilicity<a class="headerlink" href="#lipophilicity" title="Permalink to this headline">#</a></h3>
 <dl class="py class">
-<dt id="torchdrug.datasets.Lipophilicity">
-<em class="property">class </em><code class="sig-name descname">Lipophilicity</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">path</span></em>, <em class="sig-param"><span class="n">verbose</span><span class="o">=</span><span class="default_value">1</span></em>, <em class="sig-param"><span class="n">transform</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">lazy</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">node_feature</span><span class="o">=</span><span class="default_value">'default'</span></em>, <em class="sig-param"><span class="n">edge_feature</span><span class="o">=</span><span class="default_value">'default'</span></em>, <em class="sig-param"><span class="n">graph_feature</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">with_hydrogen</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">kekulize</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/datasets/lipophilicity.html#Lipophilicity"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.datasets.Lipophilicity" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchdrug.datasets.Lipophilicity">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Lipophilicity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transform</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lazy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">node_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'default'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">edge_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'default'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">graph_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">with_hydrogen</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kekulize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/datasets/lipophilicity.html#Lipophilicity"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.datasets.Lipophilicity" title="Permalink to this definition">#</a></dt>
 <dd><p>Experimental results of octanol/water distribution coefficient (logD at pH 7.4).</p>
 <dl class="simple">
 <dt>Statistics:</dt><dd><ul class="simple">
@@ -626,12 +676,12 @@ By default, aromatic bonds are stored.</p></li>
 </dd>
 </dl>
 </dd></dl>
-</div>
-<div class="section" id="muv">
-<h3>MUV<a class="headerlink" href="#muv" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="muv">
+<h3>MUV<a class="headerlink" href="#muv" title="Permalink to this headline">#</a></h3>
 <dl class="py class">
-<dt id="torchdrug.datasets.MUV">
-<em class="property">class </em><code class="sig-name descname">MUV</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">path</span></em>, <em class="sig-param"><span class="n">verbose</span><span class="o">=</span><span class="default_value">1</span></em>, <em class="sig-param"><span class="n">transform</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">lazy</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">node_feature</span><span class="o">=</span><span class="default_value">'default'</span></em>, <em class="sig-param"><span class="n">edge_feature</span><span class="o">=</span><span class="default_value">'default'</span></em>, <em class="sig-param"><span class="n">graph_feature</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">with_hydrogen</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">kekulize</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/datasets/muv.html#MUV"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.datasets.MUV" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchdrug.datasets.MUV">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">MUV</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transform</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lazy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">node_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'default'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">edge_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'default'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">graph_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">with_hydrogen</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kekulize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/datasets/muv.html#MUV"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.datasets.MUV" title="Permalink to this definition">#</a></dt>
 <dd><p>Subset of PubChem BioAssay by applying a refined nearest neighbor analysis.</p>
 <dl class="simple">
 <dt>Statistics:</dt><dd><ul class="simple">
@@ -661,12 +711,12 @@ By default, aromatic bonds are stored.</p></li>
 </dd>
 </dl>
 </dd></dl>
-</div>
-<div class="section" id="malaria">
-<h3>Malaria<a class="headerlink" href="#malaria" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="malaria">
+<h3>Malaria<a class="headerlink" href="#malaria" title="Permalink to this headline">#</a></h3>
 <dl class="py class">
-<dt id="torchdrug.datasets.Malaria">
-<em class="property">class </em><code class="sig-name descname">Malaria</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">path</span></em>, <em class="sig-param"><span class="n">verbose</span><span class="o">=</span><span class="default_value">1</span></em>, <em class="sig-param"><span class="n">transform</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">lazy</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">node_feature</span><span class="o">=</span><span class="default_value">'default'</span></em>, <em class="sig-param"><span class="n">edge_feature</span><span class="o">=</span><span class="default_value">'default'</span></em>, <em class="sig-param"><span class="n">graph_feature</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">with_hydrogen</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">kekulize</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/datasets/malaria.html#Malaria"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.datasets.Malaria" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchdrug.datasets.Malaria">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Malaria</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transform</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lazy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">node_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'default'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">edge_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'default'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">graph_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">with_hydrogen</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kekulize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/datasets/malaria.html#Malaria"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.datasets.Malaria" title="Permalink to this definition">#</a></dt>
 <dd><p>Half-maximal effective concentration (EC50) against a parasite that causes malaria.</p>
 <dl class="simple">
 <dt>Statistics:</dt><dd><ul class="simple">
@@ -696,12 +746,12 @@ By default, aromatic bonds are stored.</p></li>
 </dd>
 </dl>
 </dd></dl>
-</div>
-<div class="section" id="opv">
-<h3>OPV<a class="headerlink" href="#opv" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="opv">
+<h3>OPV<a class="headerlink" href="#opv" title="Permalink to this headline">#</a></h3>
 <dl class="py class">
-<dt id="torchdrug.datasets.OPV">
-<em class="property">class </em><code class="sig-name descname">OPV</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">path</span></em>, <em class="sig-param"><span class="n">verbose</span><span class="o">=</span><span class="default_value">1</span></em>, <em class="sig-param"><span class="n">transform</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">lazy</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">node_feature</span><span class="o">=</span><span class="default_value">'default'</span></em>, <em class="sig-param"><span class="n">edge_feature</span><span class="o">=</span><span class="default_value">'default'</span></em>, <em class="sig-param"><span class="n">graph_feature</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">with_hydrogen</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">kekulize</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/datasets/opv.html#OPV"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.datasets.OPV" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchdrug.datasets.OPV">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">OPV</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transform</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lazy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">node_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'default'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">edge_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'default'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">graph_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">with_hydrogen</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kekulize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/datasets/opv.html#OPV"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.datasets.OPV" title="Permalink to this definition">#</a></dt>
 <dd><p>Quantum mechanical calculations on organic photovoltaic candidate molecules.</p>
 <dl class="simple">
 <dt>Statistics:</dt><dd><ul class="simple">
@@ -731,12 +781,12 @@ By default, aromatic bonds are stored.</p></li>
 </dd>
 </dl>
 </dd></dl>
-</div>
-<div class="section" id="qm8">
-<h3>QM8<a class="headerlink" href="#qm8" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="qm8">
+<h3>QM8<a class="headerlink" href="#qm8" title="Permalink to this headline">#</a></h3>
 <dl class="py class">
-<dt id="torchdrug.datasets.QM8">
-<em class="property">class </em><code class="sig-name descname">QM8</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">path</span></em>, <em class="sig-param"><span class="n">node_position</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">verbose</span><span class="o">=</span><span class="default_value">1</span></em>, <em class="sig-param"><span class="n">transform</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">lazy</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">node_feature</span><span class="o">=</span><span class="default_value">'default'</span></em>, <em class="sig-param"><span class="n">edge_feature</span><span class="o">=</span><span class="default_value">'default'</span></em>, <em class="sig-param"><span class="n">graph_feature</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">with_hydrogen</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">kekulize</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/datasets/qm8.html#QM8"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.datasets.QM8" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchdrug.datasets.QM8">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">QM8</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">node_position</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transform</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lazy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">node_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'default'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">edge_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'default'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">graph_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">with_hydrogen</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kekulize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/datasets/qm8.html#QM8"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.datasets.QM8" title="Permalink to this definition">#</a></dt>
 <dd><p>Electronic spectra and excited state energy of small molecules.</p>
 <dl class="simple">
 <dt>Statistics:</dt><dd><ul class="simple">
@@ -768,12 +818,12 @@ By default, aromatic bonds are stored.</p></li>
 </dd>
 </dl>
 </dd></dl>
-</div>
-<div class="section" id="qm9">
-<h3>QM9<a class="headerlink" href="#qm9" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="qm9">
+<h3>QM9<a class="headerlink" href="#qm9" title="Permalink to this headline">#</a></h3>
 <dl class="py class">
-<dt id="torchdrug.datasets.QM9">
-<em class="property">class </em><code class="sig-name descname">QM9</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">path</span></em>, <em class="sig-param"><span class="n">node_position</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">verbose</span><span class="o">=</span><span class="default_value">1</span></em>, <em class="sig-param"><span class="n">transform</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">lazy</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">node_feature</span><span class="o">=</span><span class="default_value">'default'</span></em>, <em class="sig-param"><span class="n">edge_feature</span><span class="o">=</span><span class="default_value">'default'</span></em>, <em class="sig-param"><span class="n">graph_feature</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">with_hydrogen</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">kekulize</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/datasets/qm9.html#QM9"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.datasets.QM9" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchdrug.datasets.QM9">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">QM9</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">node_position</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transform</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lazy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">node_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'default'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">edge_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'default'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">graph_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">with_hydrogen</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kekulize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/datasets/qm9.html#QM9"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.datasets.QM9" title="Permalink to this definition">#</a></dt>
 <dd><p>Geometric, energetic, electronic and thermodynamic properties of DFT-modeled small molecules.</p>
 <dl class="simple">
 <dt>Statistics:</dt><dd><ul class="simple">
@@ -805,12 +855,12 @@ By default, aromatic bonds are stored.</p></li>
 </dd>
 </dl>
 </dd></dl>
-</div>
-<div class="section" id="sider">
-<h3>SIDER<a class="headerlink" href="#sider" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="sider">
+<h3>SIDER<a class="headerlink" href="#sider" title="Permalink to this headline">#</a></h3>
 <dl class="py class">
-<dt id="torchdrug.datasets.SIDER">
-<em class="property">class </em><code class="sig-name descname">SIDER</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">path</span></em>, <em class="sig-param"><span class="n">verbose</span><span class="o">=</span><span class="default_value">1</span></em>, <em class="sig-param"><span class="n">transform</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">lazy</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">node_feature</span><span class="o">=</span><span class="default_value">'default'</span></em>, <em class="sig-param"><span class="n">edge_feature</span><span class="o">=</span><span class="default_value">'default'</span></em>, <em class="sig-param"><span class="n">graph_feature</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">with_hydrogen</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">kekulize</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/datasets/sider.html#SIDER"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.datasets.SIDER" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchdrug.datasets.SIDER">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">SIDER</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transform</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lazy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">node_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'default'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">edge_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'default'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">graph_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">with_hydrogen</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kekulize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/datasets/sider.html#SIDER"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.datasets.SIDER" title="Permalink to this definition">#</a></dt>
 <dd><p>Marketed drugs and adverse drug reactions (ADR) dataset, grouped into 27 system organ classes.</p>
 <dl class="simple">
 <dt>Statistics:</dt><dd><ul class="simple">
@@ -840,12 +890,12 @@ By default, aromatic bonds are stored.</p></li>
 </dd>
 </dl>
 </dd></dl>
-</div>
-<div class="section" id="tox21">
-<h3>Tox21<a class="headerlink" href="#tox21" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="tox21">
+<h3>Tox21<a class="headerlink" href="#tox21" title="Permalink to this headline">#</a></h3>
 <dl class="py class">
-<dt id="torchdrug.datasets.Tox21">
-<em class="property">class </em><code class="sig-name descname">Tox21</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">path</span></em>, <em class="sig-param"><span class="n">verbose</span><span class="o">=</span><span class="default_value">1</span></em>, <em class="sig-param"><span class="n">transform</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">lazy</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">node_feature</span><span class="o">=</span><span class="default_value">'default'</span></em>, <em class="sig-param"><span class="n">edge_feature</span><span class="o">=</span><span class="default_value">'default'</span></em>, <em class="sig-param"><span class="n">graph_feature</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">with_hydrogen</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">kekulize</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/datasets/tox21.html#Tox21"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.datasets.Tox21" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchdrug.datasets.Tox21">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Tox21</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transform</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lazy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">node_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'default'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">edge_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'default'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">graph_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">with_hydrogen</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kekulize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/datasets/tox21.html#Tox21"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.datasets.Tox21" title="Permalink to this definition">#</a></dt>
 <dd><p>Qualitative toxicity measurements on 12 biological targets, including nuclear receptors
 and stress response pathways.</p>
 <dl class="simple">
@@ -876,12 +926,12 @@ By default, aromatic bonds are stored.</p></li>
 </dd>
 </dl>
 </dd></dl>
-</div>
-<div class="section" id="toxcast">
-<h3>ToxCast<a class="headerlink" href="#toxcast" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="toxcast">
+<h3>ToxCast<a class="headerlink" href="#toxcast" title="Permalink to this headline">#</a></h3>
 <dl class="py class">
-<dt id="torchdrug.datasets.ToxCast">
-<em class="property">class </em><code class="sig-name descname">ToxCast</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">path</span></em>, <em class="sig-param"><span class="n">verbose</span><span class="o">=</span><span class="default_value">1</span></em>, <em class="sig-param"><span class="n">transform</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">lazy</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">node_feature</span><span class="o">=</span><span class="default_value">'default'</span></em>, <em class="sig-param"><span class="n">edge_feature</span><span class="o">=</span><span class="default_value">'default'</span></em>, <em class="sig-param"><span class="n">graph_feature</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">with_hydrogen</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">kekulize</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/datasets/toxcast.html#ToxCast"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.datasets.ToxCast" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchdrug.datasets.ToxCast">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">ToxCast</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transform</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lazy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">node_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'default'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">edge_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'default'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">graph_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">with_hydrogen</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kekulize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/datasets/toxcast.html#ToxCast"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.datasets.ToxCast" title="Permalink to this definition">#</a></dt>
 <dd><p>Toxicology data based on in vitro high-throughput screening.</p>
 <dl class="simple">
 <dt>Statistics:</dt><dd><ul class="simple">
@@ -911,12 +961,12 @@ By default, aromatic bonds are stored.</p></li>
 </dd>
 </dl>
 </dd></dl>
-</div>
-<div class="section" id="zinc250k">
-<h3>ZINC250k<a class="headerlink" href="#zinc250k" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="zinc250k">
+<h3>ZINC250k<a class="headerlink" href="#zinc250k" title="Permalink to this headline">#</a></h3>
 <dl class="py class">
-<dt id="torchdrug.datasets.ZINC250k">
-<em class="property">class </em><code class="sig-name descname">ZINC250k</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">path</span></em>, <em class="sig-param"><span class="n">verbose</span><span class="o">=</span><span class="default_value">1</span></em>, <em class="sig-param"><span class="n">transform</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">lazy</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">node_feature</span><span class="o">=</span><span class="default_value">'default'</span></em>, <em class="sig-param"><span class="n">edge_feature</span><span class="o">=</span><span class="default_value">'default'</span></em>, <em class="sig-param"><span class="n">graph_feature</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">with_hydrogen</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">kekulize</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/datasets/zinc250k.html#ZINC250k"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.datasets.ZINC250k" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchdrug.datasets.ZINC250k">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">ZINC250k</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transform</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lazy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">node_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'default'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">edge_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'default'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">graph_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">with_hydrogen</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kekulize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/datasets/zinc250k.html#ZINC250k"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.datasets.ZINC250k" title="Permalink to this definition">#</a></dt>
 <dd><p>Subset of ZINC compound database for virtual screening.</p>
 <dl class="simple">
 <dt>Statistics:</dt><dd><ul class="simple">
@@ -946,12 +996,12 @@ By default, aromatic bonds are stored.</p></li>
 </dd>
 </dl>
 </dd></dl>
-</div>
-<div class="section" id="zinc2m">
-<h3>ZINC2m<a class="headerlink" href="#zinc2m" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="zinc2m">
+<h3>ZINC2m<a class="headerlink" href="#zinc2m" title="Permalink to this headline">#</a></h3>
 <dl class="py class">
-<dt id="torchdrug.datasets.ZINC2m">
-<em class="property">class </em><code class="sig-name descname">ZINC2m</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">path</span></em>, <em class="sig-param"><span class="n">verbose</span><span class="o">=</span><span class="default_value">1</span></em>, <em class="sig-param"><span class="n">transform</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">lazy</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">node_feature</span><span class="o">=</span><span class="default_value">'default'</span></em>, <em class="sig-param"><span class="n">edge_feature</span><span class="o">=</span><span class="default_value">'default'</span></em>, <em class="sig-param"><span class="n">graph_feature</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">with_hydrogen</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">kekulize</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/datasets/zinc2m.html#ZINC2m"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.datasets.ZINC2m" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchdrug.datasets.ZINC2m">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">ZINC2m</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transform</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lazy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">node_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'default'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">edge_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'default'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">graph_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">with_hydrogen</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kekulize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/datasets/zinc2m.html#ZINC2m"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.datasets.ZINC2m" title="Permalink to this definition">#</a></dt>
 <dd><p>ZINC compound database for virtual screening.
 This dataset doesn’t contain any label information.</p>
 <dl class="simple">
@@ -981,12 +1031,12 @@ By default, aromatic bonds are stored.</p></li>
 </dd>
 </dl>
 </dd></dl>
-</div>
-<div class="section" id="moses">
-<h3>MOSES<a class="headerlink" href="#moses" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="moses">
+<h3>MOSES<a class="headerlink" href="#moses" title="Permalink to this headline">#</a></h3>
 <dl class="py class">
-<dt id="torchdrug.datasets.MOSES">
-<em class="property">class </em><code class="sig-name descname">MOSES</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">path</span></em>, <em class="sig-param"><span class="n">verbose</span><span class="o">=</span><span class="default_value">1</span></em>, <em class="sig-param"><span class="n">transform</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">lazy</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">node_feature</span><span class="o">=</span><span class="default_value">'default'</span></em>, <em class="sig-param"><span class="n">edge_feature</span><span class="o">=</span><span class="default_value">'default'</span></em>, <em class="sig-param"><span class="n">graph_feature</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">with_hydrogen</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">kekulize</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/datasets/moses.html#MOSES"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.datasets.MOSES" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchdrug.datasets.MOSES">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">MOSES</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transform</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lazy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">node_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'default'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">edge_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'default'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">graph_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">with_hydrogen</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kekulize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/datasets/moses.html#MOSES"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.datasets.MOSES" title="Permalink to this definition">#</a></dt>
 <dd><p>Subset of ZINC database for molecule generation.
 This dataset doesn’t contain any label information.</p>
 <dl class="simple">
@@ -1016,12 +1066,12 @@ By default, aromatic bonds are stored.</p></li>
 </dd>
 </dl>
 </dd></dl>
-</div>
-<div class="section" id="pcqm4m">
-<h3>PCQM4M<a class="headerlink" href="#pcqm4m" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="pcqm4m">
+<h3>PCQM4M<a class="headerlink" href="#pcqm4m" title="Permalink to this headline">#</a></h3>
 <dl class="py class">
-<dt id="torchdrug.datasets.PCQM4M">
-<em class="property">class </em><code class="sig-name descname">PCQM4M</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">path</span></em>, <em class="sig-param"><span class="n">verbose</span><span class="o">=</span><span class="default_value">1</span></em>, <em class="sig-param"><span class="n">transform</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">lazy</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">node_feature</span><span class="o">=</span><span class="default_value">'default'</span></em>, <em class="sig-param"><span class="n">edge_feature</span><span class="o">=</span><span class="default_value">'default'</span></em>, <em class="sig-param"><span class="n">graph_feature</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">with_hydrogen</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">kekulize</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/datasets/pcqm4m.html#PCQM4M"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.datasets.PCQM4M" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchdrug.datasets.PCQM4M">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">PCQM4M</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transform</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lazy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">node_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'default'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">edge_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'default'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">graph_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">with_hydrogen</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kekulize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/datasets/pcqm4m.html#PCQM4M"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.datasets.PCQM4M" title="Permalink to this definition">#</a></dt>
 <dd><p>Quantum chemistry dataset originally curated under the PubChemQC of molecules.</p>
 <dl class="simple">
 <dt>Statistics:</dt><dd><ul class="simple">
@@ -1051,15 +1101,15 @@ By default, aromatic bonds are stored.</p></li>
 </dd>
 </dl>
 </dd></dl>
-</div>
-</div>
-<div class="section" id="retrosynthesis-datasets">
-<h2>Retrosynthesis Datasets<a class="headerlink" href="#retrosynthesis-datasets" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="uspto50k">
-<h3>USPTO50k<a class="headerlink" href="#uspto50k" title="Permalink to this headline">¶</a></h3>
+</section>
+</section>
+<section id="retrosynthesis-datasets">
+<h2>Retrosynthesis Datasets<a class="headerlink" href="#retrosynthesis-datasets" title="Permalink to this headline">#</a></h2>
+<section id="uspto50k">
+<h3>USPTO50k<a class="headerlink" href="#uspto50k" title="Permalink to this headline">#</a></h3>
 <dl class="py class">
-<dt id="torchdrug.datasets.USPTO50k">
-<em class="property">class </em><code class="sig-name descname">USPTO50k</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">path</span></em>, <em class="sig-param"><span class="n">as_synthon</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">verbose</span><span class="o">=</span><span class="default_value">1</span></em>, <em class="sig-param"><span class="n">transform</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">lazy</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">node_feature</span><span class="o">=</span><span class="default_value">'default'</span></em>, <em class="sig-param"><span class="n">edge_feature</span><span class="o">=</span><span class="default_value">'default'</span></em>, <em class="sig-param"><span class="n">graph_feature</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">with_hydrogen</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">kekulize</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/datasets/uspto50k.html#USPTO50k"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.datasets.USPTO50k" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchdrug.datasets.USPTO50k">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">USPTO50k</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">as_synthon</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transform</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lazy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">node_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'default'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">edge_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'default'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">graph_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">with_hydrogen</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kekulize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/datasets/uspto50k.html#USPTO50k"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.datasets.USPTO50k" title="Permalink to this definition">#</a></dt>
 <dd><p>Chemical reactions extracted from USPTO patents.</p>
 <dl class="simple">
 <dt>Statistics:</dt><dd><ul class="simple">
@@ -1089,21 +1139,21 @@ By default, aromatic bonds are stored.</p></li>
 </ul>
 </dd>
 </dl>
-<dl class="py method">
-<dt id="torchdrug.datasets.USPTO50k.reaction_types">
-<em class="property">property </em><code class="sig-name descname">reaction_types</code><a class="headerlink" href="#torchdrug.datasets.USPTO50k.reaction_types" title="Permalink to this definition">¶</a></dt>
+<dl class="py property">
+<dt class="sig sig-object py" id="torchdrug.datasets.USPTO50k.reaction_types">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">reaction_types</span></span><a class="headerlink" href="#torchdrug.datasets.USPTO50k.reaction_types" title="Permalink to this definition">#</a></dt>
 <dd><p>All reaction types.</p>
 </dd></dl>
 </dd></dl>
-</div>
-</div>
-<div class="section" id="citation-network-datasets">
-<h2>Citation Network Datasets<a class="headerlink" href="#citation-network-datasets" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="cora">
-<h3>Cora<a class="headerlink" href="#cora" title="Permalink to this headline">¶</a></h3>
+</section>
+</section>
+<section id="citation-network-datasets">
+<h2>Citation Network Datasets<a class="headerlink" href="#citation-network-datasets" title="Permalink to this headline">#</a></h2>
+<section id="cora">
+<h3>Cora<a class="headerlink" href="#cora" title="Permalink to this headline">#</a></h3>
 <dl class="py class">
-<dt id="torchdrug.datasets.Cora">
-<em class="property">class </em><code class="sig-name descname">Cora</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">path</span></em>, <em class="sig-param"><span class="n">verbose</span><span class="o">=</span><span class="default_value">1</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/datasets/cora.html#Cora"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.datasets.Cora" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchdrug.datasets.Cora">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Cora</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/datasets/cora.html#Cora"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.datasets.Cora" title="Permalink to this definition">#</a></dt>
 <dd><p>A citation network of scientific publications with binary word features.</p>
 <dl class="simple">
 <dt>Statistics:</dt><dd><ul class="simple">
@@ -1122,12 +1172,12 @@ By default, aromatic bonds are stored.</p></li>
 </dd>
 </dl>
 </dd></dl>
-</div>
-<div class="section" id="citeseer">
-<h3>CiteSeer<a class="headerlink" href="#citeseer" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="citeseer">
+<h3>CiteSeer<a class="headerlink" href="#citeseer" title="Permalink to this headline">#</a></h3>
 <dl class="py class">
-<dt id="torchdrug.datasets.CiteSeer">
-<em class="property">class </em><code class="sig-name descname">CiteSeer</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">path</span></em>, <em class="sig-param"><span class="n">verbose</span><span class="o">=</span><span class="default_value">1</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/datasets/citeseer.html#CiteSeer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.datasets.CiteSeer" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchdrug.datasets.CiteSeer">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">CiteSeer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/datasets/citeseer.html#CiteSeer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.datasets.CiteSeer" title="Permalink to this definition">#</a></dt>
 <dd><p>A citation network of scientific publications with binary word features.</p>
 <dl class="simple">
 <dt>Statistics:</dt><dd><ul class="simple">
@@ -1146,12 +1196,12 @@ By default, aromatic bonds are stored.</p></li>
 </dd>
 </dl>
 </dd></dl>
-</div>
-<div class="section" id="pubmed">
-<h3>PubMed<a class="headerlink" href="#pubmed" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="pubmed">
+<h3>PubMed<a class="headerlink" href="#pubmed" title="Permalink to this headline">#</a></h3>
 <dl class="py class">
-<dt id="torchdrug.datasets.PubMed">
-<em class="property">class </em><code class="sig-name descname">PubMed</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">path</span></em>, <em class="sig-param"><span class="n">verbose</span><span class="o">=</span><span class="default_value">1</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/datasets/pubmed.html#PubMed"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchdrug.datasets.PubMed" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="torchdrug.datasets.PubMed">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">PubMed</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/datasets/pubmed.html#PubMed"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.datasets.PubMed" title="Permalink to this definition">#</a></dt>
 <dd><p>A citation network of scientific publications with TF-IDF word features.</p>
 <dl class="simple">
 <dt>Statistics:</dt><dd><ul class="simple">
@@ -1170,11 +1220,12 @@ By default, aromatic bonds are stored.</p></li>
 </dd>
 </dl>
 </dd></dl>
-</div>
-</div>
-</div>
+</section>
+</section>
+</section>
 
-      </article>
+        </article>
+      </div>
       <footer>
         
         <div class="related-pages">
@@ -1199,19 +1250,21 @@ By default, aromatic bonds are stored.</p></li>
               </div>
             </a>
         </div>
-
-        <div class="related-information">
-              Copyright &#169; 2021, MilaGraph Group
-            |
-            Built with <a href="https://www.sphinx-doc.org/">Sphinx</a>
-              and
-              <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
-              <a href="https://github.com/pradyunsg/furo">Furo theme</a>.
-            |
-            <a class="muted-link" href="../_sources/api/datasets.rst.txt"
-               rel="nofollow">
-              Show Source
-            </a>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2021, MilaGraph Group
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            <div class="icons">
+              
+            </div>
+          </div>
         </div>
         
       </footer>
@@ -1281,7 +1334,12 @@ By default, aromatic bonds are stored.</p></li>
       
       
     </aside>
-  </main>
-</div>
-  </body>
+  </div>
+</div><script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/scripts/furo.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    </body>
 </html>

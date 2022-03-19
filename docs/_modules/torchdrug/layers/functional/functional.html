@@ -3,7 +3,7 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/><link rel="index" title="Index" href="../../../../genindex.html" /><link rel="search" title="Search" href="../../../../search.html" />
 
-    <meta name="generator" content="sphinx-3.1.2, furo 2020.12.09.beta21"/>
+    <meta name="generator" content="sphinx-4.4.0, furo 2020.12.09.beta21"/>
         <title>torchdrug.layers.functional.functional - TorchDrug 0.1.2 documentation</title>
       <link rel="stylesheet" href="../../../../_static/styles/furo.css?digest=a3f371badb8538d75df213ccffb17a4f6e8f3ac5">
     <link rel="stylesheet" href="../../../../_static/pygments.css">
@@ -50,14 +50,15 @@
   --color-code-foreground: #d0d0d0;
   
   }
-</style><link id="pygments_dark_css" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css" href="../../../../_static/pygments_dark.css" />
+</style><link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/styles/furo.css" />
+    <link id="pygments_dark_css" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css" href="../../../../_static/pygments_dark.css" />
     <link rel="stylesheet" href="../../../../_static/styles/furo-extensions.css?digest=26485485040e7aaf717c13fd0188a5ad2c2deb60">
     <script id="documentation_options" data-url_root="../../../../" src="../../../../_static/documentation_options.js"></script>
+    <script defer data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
     <script defer src="../../../../_static/jquery.js"></script>
     <script defer src="../../../../_static/underscore.js"></script>
     <script defer src="../../../../_static/doctools.js"></script>
-    <script defer src="../../../../_static/language_data.js"></script>
-    <script defer async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <script defer src="../../../../_static/scripts/main.js?digest=e931d09b2a40c1bb82b542effe772014573baf67"></script></head>
   <body dir="">
     
@@ -157,7 +158,7 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../paper.html">Papers Implemented</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Package Reference</span></p>
+<p class="caption" role="heading"><span class="caption-text">Package Reference</span></p>
 <ul>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../../../api/index.html">Documentation</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label for="toctree-checkbox-4"><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../../../api/core.html">torchdrug.core</a></li>
@@ -294,7 +295,7 @@
     <span class="n">slices</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">cat</span><span class="p">([</span><span class="n">starts</span><span class="p">,</span> <span class="n">ends</span><span class="p">])</span>
     <span class="k">if</span> <span class="n">slices</span><span class="o">.</span><span class="n">numel</span><span class="p">():</span>
         <span class="k">assert</span> <span class="n">slices</span><span class="o">.</span><span class="n">min</span><span class="p">()</span> <span class="o">&gt;=</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">slices</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">&lt;=</span> <span class="n">length</span>
-    <span class="n">mask</span> <span class="o">=</span> <span class="n">scatter_add</span><span class="p">(</span><span class="n">values</span><span class="p">,</span> <span class="n">slices</span><span class="p">,</span> <span class="n">dim_size</span><span class="o">=</span><span class="n">length</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">mask</span> <span class="o">=</span> <span class="n">scatter_add</span><span class="p">(</span><span class="n">values</span><span class="p">,</span> <span class="n">slices</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">dim_size</span><span class="o">=</span><span class="n">length</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
     <span class="n">mask</span> <span class="o">=</span> <span class="n">mask</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">bool</span><span class="p">()</span>
     <span class="k">return</span> <span class="n">mask</span></div>
 
@@ -502,7 +503,8 @@
 <span class="sd">    Parameters:</span>
 <span class="sd">        input (Tensor): input of shape :math:`(B, ...)`</span>
 <span class="sd">        size (LongTensor): size of sets of shape :math:`(N,)`</span>
-<span class="sd">        k (int): the k in "top-k"</span>
+<span class="sd">        k (int or LongTensor): the k in "top-k". Can be a fixed value for all sets,</span>
+<span class="sd">            or different values for different sets of shape :math:`(N,)`.</span>
 <span class="sd">        largest (bool, optional): return largest or smallest elements</span>
 
 <span class="sd">    Returns</span>
@@ -520,7 +522,10 @@
         <span class="n">offset</span> <span class="o">=</span> <span class="o">-</span><span class="n">offset</span>
     <span class="n">input_ext</span> <span class="o">=</span> <span class="n">safe_input</span> <span class="o">+</span> <span class="n">offset</span> <span class="o">*</span> <span class="n">index2graph</span>
     <span class="n">index_ext</span> <span class="o">=</span> <span class="n">input_ext</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">descending</span><span class="o">=</span><span class="n">largest</span><span class="p">)</span>
-    <span class="n">num_actual</span> <span class="o">=</span> <span class="n">size</span><span class="o">.</span><span class="n">clamp</span><span class="p">(</span><span class="nb">max</span><span class="o">=</span><span class="n">k</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">)</span> <span class="ow">and</span> <span class="n">k</span><span class="o">.</span><span class="n">shape</span> <span class="o">==</span> <span class="n">size</span><span class="o">.</span><span class="n">shape</span><span class="p">:</span>
+        <span class="n">num_actual</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">size</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">num_actual</span> <span class="o">=</span> <span class="n">size</span><span class="o">.</span><span class="n">clamp</span><span class="p">(</span><span class="nb">max</span><span class="o">=</span><span class="n">k</span><span class="p">)</span>
     <span class="n">num_padding</span> <span class="o">=</span> <span class="n">k</span> <span class="o">-</span> <span class="n">num_actual</span>
     <span class="n">starts</span> <span class="o">=</span> <span class="n">size</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">-</span> <span class="n">size</span>
     <span class="n">ends</span> <span class="o">=</span> <span class="n">starts</span> <span class="o">+</span> <span class="n">num_actual</span>
@@ -534,9 +539,14 @@
 
     <span class="n">index</span> <span class="o">=</span> <span class="n">index_ext</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span> <span class="c1"># (N * k, ...)</span>
     <span class="n">value</span> <span class="o">=</span> <span class="nb">input</span><span class="o">.</span><span class="n">gather</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">index</span><span class="p">)</span>
-    <span class="n">value</span> <span class="o">=</span> <span class="n">value</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="o">*</span><span class="nb">input</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
-    <span class="n">index</span> <span class="o">=</span> <span class="n">index</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="o">*</span><span class="nb">input</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
-    <span class="n">index</span> <span class="o">=</span> <span class="n">index</span> <span class="o">-</span> <span class="p">(</span><span class="n">size</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">-</span> <span class="n">size</span><span class="p">)</span><span class="o">.</span><span class="n">view</span><span class="p">([</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="n">index</span><span class="o">.</span><span class="n">ndim</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">)</span> <span class="ow">and</span> <span class="n">k</span><span class="o">.</span><span class="n">shape</span> <span class="o">==</span> <span class="n">size</span><span class="o">.</span><span class="n">shape</span><span class="p">:</span>
+        <span class="n">value</span> <span class="o">=</span> <span class="n">value</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">*</span><span class="nb">input</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
+        <span class="n">index</span> <span class="o">=</span> <span class="n">index</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">*</span><span class="nb">input</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
+        <span class="n">index</span> <span class="o">=</span> <span class="n">index</span> <span class="o">-</span> <span class="p">(</span><span class="n">size</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">-</span> <span class="n">size</span><span class="p">)</span><span class="o">.</span><span class="n">repeat_interleave</span><span class="p">(</span><span class="n">k</span><span class="p">)</span><span class="o">.</span><span class="n">view</span><span class="p">([</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="n">index</span><span class="o">.</span><span class="n">ndim</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">value</span> <span class="o">=</span> <span class="n">value</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="o">*</span><span class="nb">input</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
+        <span class="n">index</span> <span class="o">=</span> <span class="n">index</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="o">*</span><span class="nb">input</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
+        <span class="n">index</span> <span class="o">=</span> <span class="n">index</span> <span class="o">-</span> <span class="p">(</span><span class="n">size</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">-</span> <span class="n">size</span><span class="p">)</span><span class="o">.</span><span class="n">view</span><span class="p">([</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="n">index</span><span class="o">.</span><span class="n">ndim</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span>
 
     <span class="k">return</span> <span class="n">value</span><span class="p">,</span> <span class="n">index</span></div>
 
@@ -618,6 +628,28 @@
     <span class="n">index</span> <span class="o">=</span> <span class="n">index</span> <span class="o">+</span> <span class="p">(</span><span class="n">size</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">-</span> <span class="n">size</span><span class="p">)</span><span class="o">.</span><span class="n">unsqueeze</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
     <span class="n">sample</span> <span class="o">=</span> <span class="nb">input</span><span class="p">[</span><span class="n">index</span><span class="p">]</span>
     <span class="k">return</span> <span class="n">sample</span></div>
+
+
+<span class="k">def</span> <span class="nf">variadic_to_padded</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="n">size</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+    <span class="n">num_sample</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">size</span><span class="p">)</span>
+    <span class="n">max_size</span> <span class="o">=</span> <span class="n">size</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+    <span class="n">starts</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">num_sample</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="n">size</span><span class="o">.</span><span class="n">device</span><span class="p">)</span> <span class="o">*</span> <span class="n">max_size</span>
+    <span class="n">ends</span> <span class="o">=</span> <span class="n">starts</span> <span class="o">+</span> <span class="n">size</span>
+    <span class="n">mask</span> <span class="o">=</span> <span class="n">multi_slice_mask</span><span class="p">(</span><span class="n">starts</span><span class="p">,</span> <span class="n">ends</span><span class="p">,</span> <span class="n">num_sample</span> <span class="o">*</span> <span class="n">max_size</span><span class="p">)</span>
+    <span class="n">mask</span> <span class="o">=</span> <span class="n">mask</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="n">num_sample</span><span class="p">,</span> <span class="n">max_size</span><span class="p">)</span>
+    <span class="n">shape</span> <span class="o">=</span> <span class="p">(</span><span class="n">num_sample</span><span class="p">,</span> <span class="n">max_size</span><span class="p">)</span> <span class="o">+</span> <span class="nb">input</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
+    <span class="n">padded</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">full</span><span class="p">(</span><span class="n">shape</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">input</span><span class="o">.</span><span class="n">dtype</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="n">size</span><span class="o">.</span><span class="n">device</span><span class="p">)</span>
+    <span class="n">padded</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span> <span class="o">=</span> <span class="nb">input</span>
+    <span class="k">return</span> <span class="n">padded</span><span class="p">,</span> <span class="n">mask</span>
+
+
+<span class="k">def</span> <span class="nf">padded_to_variadic</span><span class="p">(</span><span class="n">padded</span><span class="p">,</span> <span class="n">size</span><span class="p">):</span>
+    <span class="n">num_sample</span><span class="p">,</span> <span class="n">max_size</span> <span class="o">=</span> <span class="n">padded</span><span class="o">.</span><span class="n">shape</span><span class="p">[:</span><span class="mi">2</span><span class="p">]</span>
+    <span class="n">starts</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">num_sample</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="n">size</span><span class="o">.</span><span class="n">device</span><span class="p">)</span> <span class="o">*</span> <span class="n">max_size</span>
+    <span class="n">ends</span> <span class="o">=</span> <span class="n">starts</span> <span class="o">+</span> <span class="n">size</span>
+    <span class="n">mask</span> <span class="o">=</span> <span class="n">multi_slice_mask</span><span class="p">(</span><span class="n">starts</span><span class="p">,</span> <span class="n">ends</span><span class="p">,</span> <span class="n">num_sample</span> <span class="o">*</span> <span class="n">max_size</span><span class="p">)</span>
+    <span class="n">mask</span> <span class="o">=</span> <span class="n">mask</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="n">num_sample</span><span class="p">,</span> <span class="n">max_size</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">padded</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span>
 
 
 <div class="viewcode-block" id="one_hot"><a class="viewcode-back" href="../../../../api/layers.html#torchdrug.layers.functional.one_hot">[docs]</a><span class="k">def</span> <span class="nf">one_hot</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="n">size</span><span class="p">):</span>
