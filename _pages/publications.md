@@ -12,6 +12,8 @@ permalink: /publications
 
 # Publications
 
+- Zhaocheng Zhu, Chence Shi, Zuobai Zhang, Shengchao Liu, Minghao Xu, Xinyu Yuan, Yangtian Zhang, Junkun Chen, Huiyu Cai, Jiarui Lu, Chang Ma, Runcheng Liu, Louis-Pascal Xhonneux, Meng Qu, Jian Tang. [TorchDrug: A Powerful and Flexible Machine Learning Platform for Drug Discovery](https://arxiv.org/pdf/2202.08320.pdf). In submission.
+
 ### Pretrained Molecular Representations
 - Shengchao Liu, Hanchen Wang, Weiyang Liu, Joan Lasenby, Hongyu Guo, Jian Tang. [Pre-training Molecular Graph Representation with 3D Geometry](https://arxiv.org/pdf/2110.07728.pdf). ICLR 2022.
 - Shengchao Liu, Meng Qu, Zuobai Zhang, Huiyu Cai, Jian Tang. [Multi-task Learning with Domain Knowledge for Molecular Property Prediction](https://openreview.net/pdf?id=6cWgY5Epwzo). AISTATS 2022.
