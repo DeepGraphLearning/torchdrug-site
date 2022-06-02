@@ -29,19 +29,19 @@ image_grid:
   title: Solutions to Drug Discovery Tasks
   items:
     - title: Property Prediction
-      url: /docs/tutorials/property_prediction
+      url: https://colab.research.google.com/drive/1sb2w3evdEWm-GYo28RksvzJ74p63xHMn?usp=sharing#forceEdit=true&sandboxMode=true
       image: assets/images/task/property_prediction.png
     - title: Pretrained Molecular Representations
-      url: /docs/tutorials/pretrain
+      url: https://colab.research.google.com/drive/10faCIVIfln20f2h1oQk2UrXiAMqZKLoW?usp=sharing#forceEdit=true&sandboxMode=true
       image: assets/images/task/pretrain.png
     - title: De Novo Molecule Design & Optimization
-      url: /docs/tutorials/generation
+      url: https://colab.research.google.com/drive/1JEMiMvSBuqCuzzREYpviNZZRVOYsgivA?usp=sharing#forceEdit=true&sandboxMode=true
       image: assets/images/task/generation.png
     - title: Reaction Prediction & Retrosynthesis
-      url: /docs/tutorials/retrosynthesis
+      url: https://colab.research.google.com/drive/1IH1hk7K3MaxAEe5m6CFY7Eyej3RuiEL1?usp=sharing#forceEdit=true&sandboxMode=true
       image: assets/images/task/retrosynthesis.png
     - title: Biomedical Knowledge Graph Reasoning
-      url: /docs/tutorials/reasoning
+      url: https://colab.research.google.com/drive/1-sjqQZhYrGM0HiMuaqXOiqhDNlJi7g_I?usp=sharing#forceEdit=true&sandboxMode=true
       image: assets/images/task/reasoning.png
     - title: Protein Representation Learning
       url: /
