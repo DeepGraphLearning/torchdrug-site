@@ -5,11 +5,11 @@
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 <link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Batch Irregular Structures" href="variadic.html" /><link rel="prev" title="Notes" href="index.html" />
 
-    <meta name="generator" content="sphinx-4.4.0, furo 2022.03.04"/>
+    <meta name="generator" content="sphinx-4.5.0, furo 2022.04.07"/>
         <title>Graph Data Structures - TorchDrug 0.1.2 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=935aa2abcc5c1da4283d1dc201fb1f0add16d23a" />
-    <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?digest=25ceb02ed1c46dc30f2321ff83e92799f69dfdb9" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=68f4518137b9aefe99b631505a2064c3c42c9852" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
     
     
 
@@ -43,10 +43,12 @@
   }
 </style></head>
   <body>
+    
     <script>
       document.body.dataset.theme = localStorage.getItem("theme") || "auto";
     </script>
     
+
 <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
   <symbol id="svg-toc" viewBox="0 0 24 24">
     <title>Contents</title>
@@ -185,6 +187,7 @@
 <li class="toctree-l2"><a class="reference internal" href="variadic.html">Batch Irregular Structures</a></li>
 <li class="toctree-l2"><a class="reference internal" href="layer.html">Graph Neural Network Layers</a></li>
 <li class="toctree-l2"><a class="reference internal" href="model.html">Customize Models &amp; Tasks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference.html">Deal with References</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../paper.html">Papers Implemented</a></li>
@@ -253,7 +256,7 @@ operations in graph representation learning.</p>
 <p>This will plot a ring graph like the following.</p>
 <a class="reference internal image-reference" href="../_images/graph.png"><img alt="../_images/graph.png" class="align-center" src="../_images/graph.png" style="width: 33%;"/></a>
 <p>Internally, the graph is stored as a sparse edge list to save memory footprint. For
-an intuitive comparison, a <a class="reference external" href="https://en.wikipedia.org/wiki/Scale-free_network">scale-free graph</a> mayr have 1 million nodes and 10 million
+an intuitive comparison, a <a class="reference external" href="https://en.wikipedia.org/wiki/Scale-free_network">scale-free graph</a> may have 1 million nodes and 10 million
 edges. The dense version takes about 4TB, while the sparse version only requires 120MB.</p>
 <p>Here are some commonly used properties of the graph.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">graph</span><span class="o">.</span><span class="n">num_node</span><span class="p">)</span>
@@ -328,7 +331,8 @@ as the reciprocal of node degrees.</p>
 </pre></div>
 </div>
 <p>We can use <code class="docutils literal notranslate"><span class="pre">mol.node()</span></code> and <code class="docutils literal notranslate"><span class="pre">mol.graph()</span></code> for node- and graph-level attributes
-respectively.</p>
+respectively. Attributes may also be a reference to node/edge/graph indexes. See
+<a class="reference internal" href="reference.html"><span class="doc">Deal with References</span></a> for more details.</p>
 <p>Note in order to support batching and masking, attributes should always have the same
 length as their corresponding components. This means the size of the first dimension of
 the tensor should be either <code class="docutils literal notranslate"><span class="pre">num_node</span></code>, <code class="docutils literal notranslate"><span class="pre">num_edge</span></code> or <code class="docutils literal notranslate"><span class="pre">1</span></code>.</p>

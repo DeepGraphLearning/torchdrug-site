@@ -4,10 +4,10 @@
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="#" /><link rel="search" title="Search" href="search.html" />
 
-    <meta name="generator" content="sphinx-4.4.0, furo 2022.03.04"/><title>Index - TorchDrug 0.1.2 documentation</title>
+    <meta name="generator" content="sphinx-4.5.0, furo 2022.04.07"/><title>Index - TorchDrug 0.1.2 documentation</title>
 <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?digest=935aa2abcc5c1da4283d1dc201fb1f0add16d23a" />
-    <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?digest=25ceb02ed1c46dc30f2321ff83e92799f69dfdb9" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?digest=68f4518137b9aefe99b631505a2064c3c42c9852" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
     
     
 
@@ -41,10 +41,12 @@
   }
 </style></head>
   <body>
+    
     <script>
       document.body.dataset.theme = localStorage.getItem("theme") || "auto";
     </script>
     
+
 <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
   <symbol id="svg-toc" viewBox="0 0 24 24">
     <title>Contents</title>
@@ -183,6 +185,7 @@
 <li class="toctree-l2"><a class="reference internal" href="notes/variadic.html">Batch Irregular Structures</a></li>
 <li class="toctree-l2"><a class="reference internal" href="notes/layer.html">Graph Neural Network Layers</a></li>
 <li class="toctree-l2"><a class="reference internal" href="notes/model.html">Customize Models &amp; Tasks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notes/reference.html">Deal with References</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="paper.html">Papers Implemented</a></li>
@@ -282,10 +285,14 @@
 </li>
         <li><a href="api/data.html#torchdrug.data.Molecule.atom">atom() (Molecule method)</a>
 </li>
+        <li><a href="api/data.html#torchdrug.data.Molecule.atom2graph">atom2graph (Molecule property)</a>
+
+        <ul>
+          <li><a href="api/data.html#torchdrug.data.PackedMolecule.atom2graph">(PackedMolecule property)</a>
+</li>
+        </ul></li>
     </ul></td>
     <td style="width: 33%; vertical-align: top;"><ul>
-        <li><a href="api/data.html#torchdrug.data.Molecule.atom2graph">atom2graph (Molecule property)</a>
-</li>
         <li><a href="api/data.html#torchdrug.data.feature.atom_center_identification">atom_center_identification() (in module torchdrug.data.feature)</a>
 </li>
         <li><a href="api/data.html#torchdrug.data.feature.atom_default">atom_default() (in module torchdrug.data.feature)</a>
@@ -297,6 +304,8 @@
         <li><a href="api/data.html#torchdrug.data.feature.atom_pretrain">atom_pretrain() (in module torchdrug.data.feature)</a>
 </li>
         <li><a href="api/data.html#torchdrug.data.feature.atom_property_prediction">atom_property_prediction() (in module torchdrug.data.feature)</a>
+</li>
+        <li><a href="api/data.html#torchdrug.data.Molecule.atom_reference">atom_reference() (Molecule method)</a>
 </li>
         <li><a href="api/data.html#torchdrug.data.feature.atom_symbol">atom_symbol() (in module torchdrug.data.feature)</a>
 </li>
@@ -337,7 +346,11 @@
         <li><a href="api/data.html#torchdrug.data.Molecule.bond">bond() (Molecule method)</a>
 </li>
         <li><a href="api/data.html#torchdrug.data.Molecule.bond2graph">bond2graph (Molecule property)</a>
+
+        <ul>
+          <li><a href="api/data.html#torchdrug.data.PackedMolecule.bond2graph">(PackedMolecule property)</a>
 </li>
+        </ul></li>
     </ul></td>
     <td style="width: 33%; vertical-align: top;"><ul>
         <li><a href="api/data.html#torchdrug.data.feature.bond_default">bond_default() (in module torchdrug.data.feature)</a>
@@ -347,6 +360,8 @@
         <li><a href="api/data.html#torchdrug.data.feature.bond_pretrain">bond_pretrain() (in module torchdrug.data.feature)</a>
 </li>
         <li><a href="api/data.html#torchdrug.data.feature.bond_property_prediction">bond_property_prediction() (in module torchdrug.data.feature)</a>
+</li>
+        <li><a href="api/data.html#torchdrug.data.Molecule.bond_reference">bond_reference() (Molecule method)</a>
 </li>
         <li><a href="api/data.html#torchdrug.data.MoleculeDataset.bond_types">bond_types (MoleculeDataset property)</a>
 
@@ -822,6 +837,12 @@
   <h2>L</h2>
   <table style="width: 100%" class="indextable genindextable"><tr>
     <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="api/data.html#torchdrug.data.Graph.line_graph">line_graph() (Graph method)</a>
+
+        <ul>
+          <li><a href="api/data.html#torchdrug.data.PackedGraph.line_graph">(PackedGraph method)</a>
+</li>
+        </ul></li>
         <li><a href="api/datasets.html#torchdrug.datasets.Lipophilicity">Lipophilicity (class in torchdrug.datasets)</a>
 </li>
         <li><a href="api/utils.html#torchdrug.utils.literal_eval">literal_eval() (in module torchdrug.utils)</a>
@@ -941,6 +962,10 @@
           <li><a href="api/utils.html#module-torchdrug.utils.pretty">torchdrug.utils.pretty</a>
 </li>
         </ul></li>
+        <li><a href="api/data.html#torchdrug.data.Molecule.mol">mol() (Molecule method)</a>
+</li>
+        <li><a href="api/data.html#torchdrug.data.Molecule.mol_reference">mol_reference() (Molecule method)</a>
+</li>
         <li><a href="api/data.html#torchdrug.data.Molecule">Molecule (class in torchdrug.data)</a>
 </li>
         <li><a href="api/data.html#torchdrug.data.feature.molecule_default">molecule_default() (in module torchdrug.data.feature)</a>
@@ -1017,16 +1042,12 @@
 </li>
         <li><a href="api/layers.html#torchdrug.layers.NodeSampler">NodeSampler (class in torchdrug.layers)</a>
 </li>
-        <li><a href="api/data.html#torchdrug.data.Molecule.num_atom">num_atom (Molecule property)</a>
-</li>
         <li><a href="api/data.html#torchdrug.data.MoleculeDataset.num_atom_type">num_atom_type (MoleculeDataset property)</a>
 
         <ul>
           <li><a href="api/data.html#torchdrug.data.ReactionDataset.num_atom_type">(ReactionDataset property)</a>
 </li>
         </ul></li>
-        <li><a href="api/data.html#torchdrug.data.Molecule.num_bond">num_bond (Molecule property)</a>
-</li>
         <li><a href="api/data.html#torchdrug.data.MoleculeDataset.num_bond_type">num_bond_type (MoleculeDataset property)</a>
 
         <ul>

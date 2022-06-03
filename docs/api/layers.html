@@ -5,11 +5,11 @@
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 <link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="torchdrug.models" href="models.html" /><link rel="prev" title="torchdrug.metrics" href="metrics.html" />
 
-    <meta name="generator" content="sphinx-4.4.0, furo 2022.03.04"/>
+    <meta name="generator" content="sphinx-4.5.0, furo 2022.04.07"/>
         <title>torchdrug.layers - TorchDrug 0.1.2 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=935aa2abcc5c1da4283d1dc201fb1f0add16d23a" />
-    <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?digest=25ceb02ed1c46dc30f2321ff83e92799f69dfdb9" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=68f4518137b9aefe99b631505a2064c3c42c9852" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
     
     
 
@@ -43,10 +43,12 @@
   }
 </style></head>
   <body>
+    
     <script>
       document.body.dataset.theme = localStorage.getItem("theme") || "auto";
     </script>
     
+
 <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
   <symbol id="svg-toc" viewBox="0 0 24 24">
     <title>Contents</title>
@@ -185,6 +187,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../notes/variadic.html">Batch Irregular Structures</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../notes/layer.html">Graph Neural Network Layers</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../notes/model.html">Customize Models &amp; Tasks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../notes/reference.html">Deal with References</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../paper.html">Papers Implemented</a></li>
@@ -290,8 +293,8 @@
 <dl class="py class">
 <dt class="sig sig-object py" id="torchdrug.layers.MultiLayerPerceptron">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">MultiLayerPerceptron</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_dim</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hidden_dims</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">short_cut</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_norm</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">activation</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'relu'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dropout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/common.html#MultiLayerPerceptron"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.layers.MultiLayerPerceptron" title="Permalink to this definition">#</a></dt>
-<dd><p>Multi-layer Perceptron.
-Note there is no batch normalization, activation or dropout in the last layer.</p>
+<dd><p>Multi-layer Perceptron.</p>
+<p>Note there is no batch normalization, activation or dropout in the last layer.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -1202,7 +1205,7 @@ This may provide better time or memory complexity than separate calls of
 <h3>MeanReadout<a class="headerlink" href="#meanreadout" title="Permalink to this headline">#</a></h3>
 <dl class="py class">
 <dt class="sig sig-object py" id="torchdrug.layers.MeanReadout">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">MeanReadout</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'node'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/readout.html#MeanReadout"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.layers.MeanReadout" title="Permalink to this definition">#</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">MeanReadout</span></span><a class="reference internal" href="../_modules/torchdrug/layers/readout.html#MeanReadout"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.layers.MeanReadout" title="Permalink to this definition">#</a></dt>
 <dd><p>Mean readout operator over graphs with variadic sizes.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="torchdrug.layers.MeanReadout.forward">
@@ -1229,7 +1232,7 @@ This may provide better time or memory complexity than separate calls of
 <h3>SumReadout<a class="headerlink" href="#sumreadout" title="Permalink to this headline">#</a></h3>
 <dl class="py class">
 <dt class="sig sig-object py" id="torchdrug.layers.SumReadout">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">SumReadout</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'node'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/readout.html#SumReadout"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.layers.SumReadout" title="Permalink to this definition">#</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">SumReadout</span></span><a class="reference internal" href="../_modules/torchdrug/layers/readout.html#SumReadout"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.layers.SumReadout" title="Permalink to this definition">#</a></dt>
 <dd><p>Sum readout operator over graphs with variadic sizes.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="torchdrug.layers.SumReadout.forward">
@@ -1256,7 +1259,7 @@ This may provide better time or memory complexity than separate calls of
 <h3>MaxReadout<a class="headerlink" href="#maxreadout" title="Permalink to this headline">#</a></h3>
 <dl class="py class">
 <dt class="sig sig-object py" id="torchdrug.layers.MaxReadout">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">MaxReadout</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'node'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/readout.html#MaxReadout"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.layers.MaxReadout" title="Permalink to this definition">#</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">MaxReadout</span></span><a class="reference internal" href="../_modules/torchdrug/layers/readout.html#MaxReadout"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.layers.MaxReadout" title="Permalink to this definition">#</a></dt>
 <dd><p>Max readout operator over graphs with variadic sizes.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="torchdrug.layers.MaxReadout.forward">
@@ -1283,7 +1286,7 @@ This may provide better time or memory complexity than separate calls of
 <h3>Set2Set<a class="headerlink" href="#set2set" title="Permalink to this headline">#</a></h3>
 <dl class="py class">
 <dt class="sig sig-object py" id="torchdrug.layers.Set2Set">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Set2Set</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_dim</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'node'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_step</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_lstm_layer</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/readout.html#Set2Set"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.layers.Set2Set" title="Permalink to this definition">#</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Set2Set</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_dim</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_step</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_lstm_layer</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/readout.html#Set2Set"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.layers.Set2Set" title="Permalink to this definition">#</a></dt>
 <dd><p>Set2Set operator from <a class="reference external" href="https://arxiv.org/pdf/1511.06391.pdf">Order Matters: Sequence to sequence for sets</a>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -1319,7 +1322,7 @@ This may provide better time or memory complexity than separate calls of
 <h3>Softmax<a class="headerlink" href="#softmax" title="Permalink to this headline">#</a></h3>
 <dl class="py class">
 <dt class="sig sig-object py" id="torchdrug.layers.Softmax">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Softmax</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'node'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/readout.html#Softmax"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.layers.Softmax" title="Permalink to this definition">#</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Softmax</span></span><a class="reference internal" href="../_modules/torchdrug/layers/readout.html#Softmax"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.layers.Softmax" title="Permalink to this definition">#</a></dt>
 <dd><p>Softmax operator over graphs with variadic sizes.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="torchdrug.layers.Softmax.forward">
@@ -1346,7 +1349,7 @@ This may provide better time or memory complexity than separate calls of
 <h3>Sort<a class="headerlink" href="#sort" title="Permalink to this headline">#</a></h3>
 <dl class="py class">
 <dt class="sig sig-object py" id="torchdrug.layers.Sort">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Sort</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'node'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">descending</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/readout.html#Sort"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.layers.Sort" title="Permalink to this definition">#</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Sort</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">descending</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/readout.html#Sort"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.layers.Sort" title="Permalink to this definition">#</a></dt>
 <dd><p>Sort operator over graphs with variadic sizes.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>

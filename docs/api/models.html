@@ -5,11 +5,11 @@
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 <link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="torchdrug.tasks" href="tasks.html" /><link rel="prev" title="torchdrug.layers" href="layers.html" />
 
-    <meta name="generator" content="sphinx-4.4.0, furo 2022.03.04"/>
+    <meta name="generator" content="sphinx-4.5.0, furo 2022.04.07"/>
         <title>torchdrug.models - TorchDrug 0.1.2 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=935aa2abcc5c1da4283d1dc201fb1f0add16d23a" />
-    <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?digest=25ceb02ed1c46dc30f2321ff83e92799f69dfdb9" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=68f4518137b9aefe99b631505a2064c3c42c9852" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
     
     
 
@@ -43,10 +43,12 @@
   }
 </style></head>
   <body>
+    
     <script>
       document.body.dataset.theme = localStorage.getItem("theme") || "auto";
     </script>
     
+
 <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
   <symbol id="svg-toc" viewBox="0 0 24 24">
     <title>Contents</title>
@@ -185,6 +187,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../notes/variadic.html">Batch Irregular Structures</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../notes/layer.html">Graph Neural Network Layers</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../notes/model.html">Customize Models &amp; Tasks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../notes/reference.html">Deal with References</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../paper.html">Papers Implemented</a></li>
@@ -237,8 +240,8 @@
         <article role="main">
           <section id="torchdrug-models">
 <h1>torchdrug.models<a class="headerlink" href="#torchdrug-models" title="Permalink to this headline">#</a></h1>
-<section id="knowledge-graph-embedding">
-<h2>Knowledge Graph Embedding<a class="headerlink" href="#knowledge-graph-embedding" title="Permalink to this headline">#</a></h2>
+<section id="knowledge-graph-reasoning-models">
+<h2>Knowledge Graph Reasoning Models<a class="headerlink" href="#knowledge-graph-reasoning-models" title="Permalink to this headline">#</a></h2>
 <section id="transe">
 <h3>TransE<a class="headerlink" href="#transe" title="Permalink to this headline">#</a></h3>
 <dl class="py class">
@@ -418,12 +421,11 @@
 <h3>NeuralLP<a class="headerlink" href="#neurallp" title="Permalink to this headline">#</a></h3>
 <dl class="py class">
 <dt class="sig sig-object py" id="torchdrug.models.NeuralLogicProgramming">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">NeuralLogicProgramming</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">num_entity</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_relation</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hidden_dim</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_step</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_lstm_layer</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/models/neurallp.html#NeuralLogicProgramming"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.models.NeuralLogicProgramming" title="Permalink to this definition">#</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">NeuralLogicProgramming</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">num_relation</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hidden_dim</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_step</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_lstm_layer</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/models/neurallp.html#NeuralLogicProgramming"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.models.NeuralLogicProgramming" title="Permalink to this definition">#</a></dt>
 <dd><p>Neural Logic Programming proposed in <a class="reference external" href="https://papers.nips.cc/paper/2017/file/0e55666a4ad822e0e34299df3591d979-Paper.pdf">Differentiable Learning of Logical Rules for Knowledge Base Reasoning</a>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>num_entity</strong> (<em>int</em>) – number of entities</p></li>
 <li><p><strong>num_relation</strong> (<em>int</em>) – number of relations</p></li>
 <li><p><strong>hidden_dim</strong> (<em>int</em>) – dimension of hidden units in LSTM</p></li>
 <li><p><strong>num_step</strong> (<em>int</em>) – number of recurrent steps</p></li>
@@ -660,7 +662,7 @@
 <h3>GIN<a class="headerlink" href="#gin" title="Permalink to this headline">#</a></h3>
 <dl class="py class">
 <dt class="sig sig-object py" id="torchdrug.models.GraphIsomorphismNetwork">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">GraphIsomorphismNetwork</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_dim</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hidden_dims</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">edge_input_dim</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_mlp_layer</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eps</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">learn_eps</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">short_cut</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_norm</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">activation</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'relu'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">concat_hidden</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">readout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'sum'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/models/gin.html#GraphIsomorphismNetwork"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.models.GraphIsomorphismNetwork" title="Permalink to this definition">#</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">GraphIsomorphismNetwork</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_dim</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hidden_dims</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">edge_input_dim</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_mlp_layer</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eps</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">learn_eps</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">short_cut</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_norm</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">activation</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'relu'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">concat_hidden</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">readout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'sum'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/models/gin.html#GraphIsomorphismNetwork"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.models.GraphIsomorphismNetwork" title="Permalink to this definition">#</a></dt>
 <dd><p>Graph Ismorphism Network proposed in <a class="reference external" href="https://arxiv.org/pdf/1810.00826.pdf">How Powerful are Graph Neural Networks?</a></p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -904,8 +906,8 @@
 </dd></dl>
 </section>
 </section>
-<section id="normalizing-flow">
-<h2>Normalizing Flow<a class="headerlink" href="#normalizing-flow" title="Permalink to this headline">#</a></h2>
+<section id="normalizing-flows">
+<h2>Normalizing Flows<a class="headerlink" href="#normalizing-flows" title="Permalink to this headline">#</a></h2>
 <section id="graphautoregressiveflow">
 <h3>GraphAutoregressiveFlow<a class="headerlink" href="#graphautoregressiveflow" title="Permalink to this headline">#</a></h3>
 <dl class="py class">
@@ -1073,7 +1075,7 @@ Add the mutual information between graph and nodes to the loss.</p>
           <div class="toc-tree">
             <ul>
 <li><a class="reference internal" href="#">torchdrug.models</a><ul>
-<li><a class="reference internal" href="#knowledge-graph-embedding">Knowledge Graph Embedding</a><ul>
+<li><a class="reference internal" href="#knowledge-graph-reasoning-models">Knowledge Graph Reasoning Models</a><ul>
 <li><a class="reference internal" href="#transe">TransE</a></li>
 <li><a class="reference internal" href="#distmult">DistMult</a></li>
 <li><a class="reference internal" href="#complex">ComplEx</a></li>
@@ -1094,7 +1096,7 @@ Add the mutual information between graph and nodes to the loss.</p>
 <li><a class="reference internal" href="#schnet">SchNet</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#normalizing-flow">Normalizing Flow</a><ul>
+<li><a class="reference internal" href="#normalizing-flows">Normalizing Flows</a><ul>
 <li><a class="reference internal" href="#graphautoregressiveflow">GraphAutoregressiveFlow</a></li>
 </ul>
 </li>
