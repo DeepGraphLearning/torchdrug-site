@@ -6,7 +6,7 @@
 <link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="torchdrug.models" href="models.html" /><link rel="prev" title="torchdrug.metrics" href="metrics.html" />
 
     <meta name="generator" content="sphinx-4.5.0, furo 2022.04.07"/>
-        <title>torchdrug.layers - TorchDrug 0.1.2 documentation</title>
+        <title>torchdrug.layers - TorchDrug 0.1.3 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=68f4518137b9aefe99b631505a2064c3c42c9852" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
@@ -130,7 +130,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="../index.html"><div class="brand">TorchDrug 0.1.2 documentation</div></a>
+      <a href="../index.html"><div class="brand">TorchDrug 0.1.3 documentation</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -1864,6 +1864,10 @@ Available reductions are <code class="docutils literal notranslate"><span class=
 </ul>
 </dd>
 </dl>
+<dl class="simple">
+<dt>Returns</dt><dd><p>(Tensor, LongTensor): sorted values and indexes</p>
+</dd>
+</dl>
 </dd></dl>
 <dl class="py function">
 <dt class="sig sig-object py" id="torchdrug.layers.functional.variadic_topk">
@@ -1926,6 +1930,61 @@ The <code class="docutils literal notranslate"><span class="pre">i</span></code>
 <li><p><strong>input</strong> (<em>Tensor</em>) – input of shape <span class="math notranslate nohighlight">\((B, ...)\)</span></p></li>
 <li><p><strong>size</strong> (<em>LongTensor</em>) – size of sets of shape <span class="math notranslate nohighlight">\((N,)\)</span></p></li>
 <li><p><strong>num_sample</strong> (<em>int</em>) – number of samples to draw from each set</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py function">
+<dt class="sig sig-object py" id="torchdrug.layers.functional.variadic_meshgrid">
+<span class="sig-name descname"><span class="pre">variadic_meshgrid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">size1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">input2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">size2</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/functional/functional.html#variadic_meshgrid"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.layers.functional.variadic_meshgrid" title="Permalink to this definition">#</a></dt>
+<dd><p>Compute the Cartesian product for two batches of sets with variadic sizes.</p>
+<p>Suppose there are <span class="math notranslate nohighlight">\(N\)</span> sets in each input,
+and the sizes of all sets are summed to <span class="math notranslate nohighlight">\(B_1\)</span> and <span class="math notranslate nohighlight">\(B_2\)</span> respectively.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input1</strong> (<em>Tensor</em>) – input of shape <span class="math notranslate nohighlight">\((B_1, ...)\)</span></p></li>
+<li><p><strong>size1</strong> (<em>LongTensor</em>) – size of <code class="xref py py-attr docutils literal notranslate"><span class="pre">input1</span></code> of shape <span class="math notranslate nohighlight">\((N,)\)</span></p></li>
+<li><p><strong>input2</strong> (<em>Tensor</em>) – input of shape <span class="math notranslate nohighlight">\((B_2, ...)\)</span></p></li>
+<li><p><strong>size2</strong> (<em>LongTensor</em>) – size of <code class="xref py py-attr docutils literal notranslate"><span class="pre">input2</span></code> of shape <span class="math notranslate nohighlight">\((N,)\)</span></p></li>
+</ul>
+</dd>
+</dl>
+<dl class="simple">
+<dt>Returns</dt><dd><p>(Tensor, Tensor): the first and the second elements in the Cartesian product</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py function">
+<dt class="sig sig-object py" id="torchdrug.layers.functional.variadic_to_padded">
+<span class="sig-name descname"><span class="pre">variadic_to_padded</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">size</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/functional/functional.html#variadic_to_padded"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.layers.functional.variadic_to_padded" title="Permalink to this definition">#</a></dt>
+<dd><p>Convert a variadic tensor to a padded tensor.</p>
+<p>Suppose there are <span class="math notranslate nohighlight">\(N\)</span> sets, and the sizes of all sets are summed to <span class="math notranslate nohighlight">\(B\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input</strong> (<em>Tensor</em>) – input of shape <span class="math notranslate nohighlight">\((B, ...)\)</span></p></li>
+<li><p><strong>size</strong> (<em>LongTensor</em>) – size of sets of shape <span class="math notranslate nohighlight">\((N,)\)</span></p></li>
+<li><p><strong>value</strong> (<em>scalar</em>) – fill value for padding</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>padded tensor and mask</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>(Tensor, BoolTensor)</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py function">
+<dt class="sig sig-object py" id="torchdrug.layers.functional.padded_to_variadic">
+<span class="sig-name descname"><span class="pre">padded_to_variadic</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">padded</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">size</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/functional/functional.html#padded_to_variadic"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.layers.functional.padded_to_variadic" title="Permalink to this definition">#</a></dt>
+<dd><p>Convert a padded tensor to a variadic tensor.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>padded</strong> (<em>Tensor</em>) – padded tensor of shape <span class="math notranslate nohighlight">\((N, ...)\)</span></p></li>
+<li><p><strong>size</strong> (<em>LongTensor</em>) – size of sets of shape <span class="math notranslate nohighlight">\((N,)\)</span></p></li>
 </ul>
 </dd>
 </dl>

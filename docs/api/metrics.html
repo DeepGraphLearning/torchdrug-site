@@ -6,7 +6,7 @@
 <link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="torchdrug.layers" href="layers.html" /><link rel="prev" title="torchdrug.transforms" href="transforms.html" />
 
     <meta name="generator" content="sphinx-4.5.0, furo 2022.04.07"/>
-        <title>torchdrug.metrics - TorchDrug 0.1.2 documentation</title>
+        <title>torchdrug.metrics - TorchDrug 0.1.3 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=68f4518137b9aefe99b631505a2064c3c42c9852" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
@@ -130,7 +130,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="../index.html"><div class="brand">TorchDrug 0.1.2 documentation</div></a>
+      <a href="../index.html"><div class="brand">TorchDrug 0.1.3 documentation</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -300,19 +300,55 @@
 </dl>
 </dd></dl>
 </section>
-<section id="variadic-accuracy">
-<h3>Variadic Accuracy<a class="headerlink" href="#variadic-accuracy" title="Permalink to this headline">#</a></h3>
+<section id="accuracy">
+<h3>Accuracy<a class="headerlink" href="#accuracy" title="Permalink to this headline">#</a></h3>
 <dl class="py function">
-<dt class="sig sig-object py" id="torchdrug.metrics.variadic_accuracy">
-<span class="sig-name descname"><span class="pre">variadic_accuracy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">size</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/metrics/metric.html#variadic_accuracy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.metrics.variadic_accuracy" title="Permalink to this definition">#</a></dt>
-<dd><p>Compute classification accuracy over variadic sizes of categories.</p>
-<p>Suppose there are <span class="math notranslate nohighlight">\(N\)</span> samples, and the number of categories in all samples is summed to <span class="math notranslate nohighlight">\(B\)</span>.</p>
+<dt class="sig sig-object py" id="torchdrug.metrics.accuracy">
+<span class="sig-name descname"><span class="pre">accuracy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pred</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/metrics/metric.html#accuracy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.metrics.accuracy" title="Permalink to this definition">#</a></dt>
+<dd><p>Compute classification accuracy over sets with equal size.</p>
+<p>Suppose there are <span class="math notranslate nohighlight">\(N\)</span> sets and <span class="math notranslate nohighlight">\(C\)</span> categories.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>input</strong> (<em>Tensor</em>) – prediction of shape <span class="math notranslate nohighlight">\((B,)\)</span></p></li>
-<li><p><strong>target</strong> (<em>Tensor</em>) – target of shape <span class="math notranslate nohighlight">\((N,)\)</span>. Each target is a relative index in a sample.</p></li>
-<li><p><strong>size</strong> (<em>Tensor</em>) – number of categories of shape <span class="math notranslate nohighlight">\((N,)\)</span></p></li>
+<li><p><strong>pred</strong> (<em>Tensor</em>) – prediction of shape <span class="math notranslate nohighlight">\((N, C)\)</span></p></li>
+<li><p><strong>target</strong> (<em>Tensor</em>) – target of shape <span class="math notranslate nohighlight">\((N,)\)</span></p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+</section>
+<section id="matthews-correlation-coefficient">
+<h3>Matthews Correlation Coefficient<a class="headerlink" href="#matthews-correlation-coefficient" title="Permalink to this headline">#</a></h3>
+</section>
+<section id="pearson-correlation-coefficient">
+<h3>Pearson Correlation Coefficient<a class="headerlink" href="#pearson-correlation-coefficient" title="Permalink to this headline">#</a></h3>
+<dl class="py function">
+<dt class="sig sig-object py" id="torchdrug.metrics.pearsonr">
+<span class="sig-name descname"><span class="pre">pearsonr</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pred</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/metrics/metric.html#pearsonr"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.metrics.pearsonr" title="Permalink to this definition">#</a></dt>
+<dd><p>Pearson correlation between target and prediction.
+Mimics <cite>scipy.stats.pearsonr</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>pred</strong> (<em>Tensor</em>) – prediction of shape :math: <cite>(N,)</cite></p></li>
+<li><p><strong>target</strong> (<em>Tensor</em>) – target of shape :math: <cite>(N,)</cite></p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+</section>
+<section id="spearman-correlation-coefficient">
+<h3>Spearman Correlation Coefficient<a class="headerlink" href="#spearman-correlation-coefficient" title="Permalink to this headline">#</a></h3>
+<dl class="py function">
+<dt class="sig sig-object py" id="torchdrug.metrics.spearmanr">
+<span class="sig-name descname"><span class="pre">spearmanr</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pred</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eps</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1e-06</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/metrics/metric.html#spearmanr"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.metrics.spearmanr" title="Permalink to this definition">#</a></dt>
+<dd><p>Spearman correlation between target and prediction.
+Implement in PyTorch, but non-diffierentiable. (validation metric only)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>pred</strong> (<em>Tensor</em>) – prediction of shape :math: <cite>(N,)</cite></p></li>
+<li><p><strong>target</strong> (<em>Tensor</em>) – target of shape :math: <cite>(N,)</cite></p></li>
 </ul>
 </dd>
 </dl>
@@ -451,7 +487,10 @@
 <li><a class="reference internal" href="#auroc">AUROC</a></li>
 <li><a class="reference internal" href="#auprc">AUPRC</a></li>
 <li><a class="reference internal" href="#r2">R2</a></li>
-<li><a class="reference internal" href="#variadic-accuracy">Variadic Accuracy</a></li>
+<li><a class="reference internal" href="#accuracy">Accuracy</a></li>
+<li><a class="reference internal" href="#matthews-correlation-coefficient">Matthews Correlation Coefficient</a></li>
+<li><a class="reference internal" href="#pearson-correlation-coefficient">Pearson Correlation Coefficient</a></li>
+<li><a class="reference internal" href="#spearman-correlation-coefficient">Spearman Correlation Coefficient</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#chemical-metrics">Chemical Metrics</a><ul>
