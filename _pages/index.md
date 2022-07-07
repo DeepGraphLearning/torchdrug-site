@@ -44,9 +44,8 @@ image_grid:
       url: https://colab.research.google.com/drive/1-sjqQZhYrGM0HiMuaqXOiqhDNlJi7g_I?usp=sharing#forceEdit=true&sandboxMode=true
       image: assets/images/task/reasoning.png
     - title: Protein Representation Learning
-      url: /
+      url: https://torchprotein.ai/
       image: assets/images/task/protein.png
-      excerpt: Stay tuned!
 
 intro_box: "pip install torchdrug"
 intro_image: "assets/images/intro.svg"
