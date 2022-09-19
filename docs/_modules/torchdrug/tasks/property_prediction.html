@@ -5,7 +5,7 @@
     <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="../../../genindex.html" /><link rel="search" title="Search" href="../../../search.html" />
 
     <meta name="generator" content="sphinx-4.5.0, furo 2022.04.07"/>
-        <title>torchdrug.tasks.property_prediction - TorchDrug 0.1.3 documentation</title>
+        <title>torchdrug.tasks.property_prediction - TorchDrug 0.2.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo.css?digest=68f4518137b9aefe99b631505a2064c3c42c9852" />
     <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
@@ -129,7 +129,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="../../../index.html"><div class="brand">TorchDrug 0.1.3 documentation</div></a>
+      <a href="../../../index.html"><div class="brand">TorchDrug 0.2.0 documentation</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -152,7 +152,7 @@
       <div class="sidebar-sticky"><a class="sidebar-brand centered" href="https://torchdrug.ai">
   
   <div class="sidebar-logo-container">
-    <img class="sidebar-logo" src="../../../_static/logo.svg" alt="Logo"/>
+    <img class="sidebar-logo" src="../../../_static/torchdrug_logo_full.svg" alt="Logo"/>
   </div>
   
   
@@ -241,12 +241,11 @@
 <span></span><span class="kn">import</span> <span class="nn">math</span>
 <span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">defaultdict</span>
 
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">torch</span>
 <span class="kn">from</span> <span class="nn">torch</span> <span class="kn">import</span> <span class="n">nn</span>
 <span class="kn">from</span> <span class="nn">torch.nn</span> <span class="kn">import</span> <span class="n">functional</span> <span class="k">as</span> <span class="n">F</span>
 
-<span class="kn">from</span> <span class="nn">torchdrug</span> <span class="kn">import</span> <span class="n">core</span><span class="p">,</span> <span class="n">tasks</span><span class="p">,</span> <span class="n">metrics</span>
+<span class="kn">from</span> <span class="nn">torchdrug</span> <span class="kn">import</span> <span class="n">core</span><span class="p">,</span> <span class="n">layers</span><span class="p">,</span> <span class="n">tasks</span><span class="p">,</span> <span class="n">metrics</span>
 <span class="kn">from</span> <span class="nn">torchdrug.core</span> <span class="kn">import</span> <span class="n">Registry</span> <span class="k">as</span> <span class="n">R</span>
 <span class="kn">from</span> <span class="nn">torchdrug.layers</span> <span class="kn">import</span> <span class="n">functional</span>
 
@@ -254,7 +253,7 @@
 <div class="viewcode-block" id="PropertyPrediction"><a class="viewcode-back" href="../../../api/tasks.html#torchdrug.tasks.PropertyPrediction">[docs]</a><span class="nd">@R</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="s2">"tasks.PropertyPrediction"</span><span class="p">)</span>
 <span class="k">class</span> <span class="nc">PropertyPrediction</span><span class="p">(</span><span class="n">tasks</span><span class="o">.</span><span class="n">Task</span><span class="p">,</span> <span class="n">core</span><span class="o">.</span><span class="n">Configurable</span><span class="p">):</span>
     <span class="sd">"""</span>
-<span class="sd">    Graph / molecule property prediction task.</span>
+<span class="sd">    Graph / molecule / protein property prediction task.</span>
 
 <span class="sd">    This class is also compatible with semi-supervised learning.</span>
 
@@ -266,45 +265,63 @@
 <span class="sd">            are the corresponding weights. Available criterions are ``mse`` and ``bce``.</span>
 <span class="sd">        metric (str or list of str, optional): metric(s).</span>
 <span class="sd">            Available metrics are ``mae``, ``rmse``, ``auprc`` and ``auroc``.</span>
+<span class="sd">        num_mlp_layer (int, optional): number of layers in mlp prediction head</span>
+<span class="sd">        normalization (bool, optional): whether to normalize the target</span>
+<span class="sd">        num_class (int, optional): number of classes</span>
+<span class="sd">        graph_construction_model (nn.Module, optional): graph construction model</span>
 <span class="sd">        verbose (int, optional): output verbose level</span>
 <span class="sd">    """</span>
 
     <span class="n">eps</span> <span class="o">=</span> <span class="mf">1e-10</span>
-    <span class="n">_option_members</span> <span class="o">=</span> <span class="nb">set</span><span class="p">([</span><span class="s2">"task"</span><span class="p">,</span> <span class="s2">"criterion"</span><span class="p">,</span> <span class="s2">"metric"</span><span class="p">])</span>
+    <span class="n">_option_members</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"task"</span><span class="p">,</span> <span class="s2">"criterion"</span><span class="p">,</span> <span class="s2">"metric"</span><span class="p">}</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">task</span><span class="o">=</span><span class="p">(),</span> <span class="n">criterion</span><span class="o">=</span><span class="s2">"mse"</span><span class="p">,</span> <span class="n">metric</span><span class="o">=</span><span class="p">(</span><span class="s2">"mae"</span><span class="p">,</span> <span class="s2">"rmse"</span><span class="p">),</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">task</span><span class="o">=</span><span class="p">(),</span> <span class="n">criterion</span><span class="o">=</span><span class="s2">"mse"</span><span class="p">,</span> <span class="n">metric</span><span class="o">=</span><span class="p">(</span><span class="s2">"mae"</span><span class="p">,</span> <span class="s2">"rmse"</span><span class="p">),</span> <span class="n">num_mlp_layer</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+                 <span class="n">normalization</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">num_class</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">graph_construction_model</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">PropertyPrediction</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="n">model</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">task</span> <span class="o">=</span> <span class="n">task</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">criterion</span> <span class="o">=</span> <span class="n">criterion</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">metric</span> <span class="o">=</span> <span class="n">metric</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">num_mlp_layer</span> <span class="o">=</span> <span class="n">num_mlp_layer</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">normalization</span> <span class="o">=</span> <span class="n">normalization</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">num_class</span> <span class="o">=</span> <span class="p">(</span><span class="n">num_class</span><span class="p">,)</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">num_class</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span> <span class="k">else</span> <span class="n">num_class</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">graph_construction_model</span> <span class="o">=</span> <span class="n">graph_construction_model</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">verbose</span> <span class="o">=</span> <span class="n">verbose</span>
-
-        <span class="bp">self</span><span class="o">.</span><span class="n">linear</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">output_dim</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">task</span><span class="p">))</span>
 
 <div class="viewcode-block" id="PropertyPrediction.preprocess"><a class="viewcode-back" href="../../../api/tasks.html#torchdrug.tasks.PropertyPrediction.preprocess">[docs]</a>    <span class="k">def</span> <span class="nf">preprocess</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">train_set</span><span class="p">,</span> <span class="n">valid_set</span><span class="p">,</span> <span class="n">test_set</span><span class="p">):</span>
         <span class="sd">"""</span>
 <span class="sd">        Compute the mean and derivation for each task on the training set.</span>
 <span class="sd">        """</span>
         <span class="n">values</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">list</span><span class="p">)</span>
-        <span class="k">for</span> <span class="n">data</span> <span class="ow">in</span> <span class="n">train_set</span><span class="p">:</span>
-            <span class="k">if</span> <span class="ow">not</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"labeled"</span><span class="p">,</span> <span class="kc">True</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">sample</span> <span class="ow">in</span> <span class="n">train_set</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">sample</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"labeled"</span><span class="p">,</span> <span class="kc">True</span><span class="p">):</span>
                 <span class="k">continue</span>
             <span class="k">for</span> <span class="n">task</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">task</span><span class="p">:</span>
-                <span class="k">if</span> <span class="n">data</span><span class="p">[</span><span class="n">task</span><span class="p">]</span> <span class="o">!=</span> <span class="n">math</span><span class="o">.</span><span class="n">nan</span><span class="p">:</span>
-                    <span class="n">values</span><span class="p">[</span><span class="n">task</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">task</span><span class="p">])</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="n">math</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">sample</span><span class="p">[</span><span class="n">task</span><span class="p">]):</span>
+                    <span class="n">values</span><span class="p">[</span><span class="n">task</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">sample</span><span class="p">[</span><span class="n">task</span><span class="p">])</span>
         <span class="n">mean</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="n">std</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="n">weight</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">num_class</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">for</span> <span class="n">task</span><span class="p">,</span> <span class="n">w</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">task</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-            <span class="n">value</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">values</span><span class="p">[</span><span class="n">task</span><span class="p">])</span>
-            <span class="n">mean</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">value</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>
-            <span class="n">std</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">value</span><span class="o">.</span><span class="n">std</span><span class="p">())</span>
+            <span class="n">value</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">values</span><span class="p">[</span><span class="n">task</span><span class="p">])</span>
+            <span class="n">mean</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">value</span><span class="o">.</span><span class="n">float</span><span class="p">()</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>
+            <span class="n">std</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">value</span><span class="o">.</span><span class="n">float</span><span class="p">()</span><span class="o">.</span><span class="n">std</span><span class="p">())</span>
             <span class="n">weight</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">w</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">value</span><span class="o">.</span><span class="n">ndim</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">num_class</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">value</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+            <span class="k">elif</span> <span class="n">value</span><span class="o">.</span><span class="n">dtype</span> <span class="o">==</span> <span class="n">torch</span><span class="o">.</span><span class="n">long</span><span class="p">:</span>
+                <span class="n">num_class</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">value</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="o">.</span><span class="n">item</span><span class="p">()</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">num_class</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">register_buffer</span><span class="p">(</span><span class="s2">"mean"</span><span class="p">,</span> <span class="n">torch</span><span class="o">.</span><span class="n">as_tensor</span><span class="p">(</span><span class="n">mean</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">float</span><span class="p">))</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">register_buffer</span><span class="p">(</span><span class="s2">"std"</span><span class="p">,</span> <span class="n">torch</span><span class="o">.</span><span class="n">as_tensor</span><span class="p">(</span><span class="n">std</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">float</span><span class="p">))</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">register_buffer</span><span class="p">(</span><span class="s2">"weight"</span><span class="p">,</span> <span class="n">torch</span><span class="o">.</span><span class="n">as_tensor</span><span class="p">(</span><span class="n">weight</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">float</span><span class="p">))</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">register_buffer</span><span class="p">(</span><span class="s2">"weight"</span><span class="p">,</span> <span class="n">torch</span><span class="o">.</span><span class="n">as_tensor</span><span class="p">(</span><span class="n">weight</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">float</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">num_class</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_class</span> <span class="ow">or</span> <span class="n">num_class</span>
+
+        <span class="n">hidden_dims</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">output_dim</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">num_mlp_layer</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mlp</span> <span class="o">=</span> <span class="n">layers</span><span class="o">.</span><span class="n">MLP</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">output_dim</span><span class="p">,</span> <span class="n">hidden_dims</span> <span class="o">+</span> <span class="p">[</span><span class="nb">sum</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">num_class</span><span class="p">)])</span></div>
 
     <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">batch</span><span class="p">):</span>
         <span class="sd">""""""</span>
@@ -323,9 +340,13 @@
 
         <span class="k">for</span> <span class="n">criterion</span><span class="p">,</span> <span class="n">weight</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">criterion</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
             <span class="k">if</span> <span class="n">criterion</span> <span class="o">==</span> <span class="s2">"mse"</span><span class="p">:</span>
-                <span class="n">loss</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">mse_loss</span><span class="p">(</span><span class="n">pred</span><span class="p">,</span> <span class="p">(</span><span class="n">target</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">mean</span><span class="p">)</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">std</span><span class="p">,</span> <span class="n">reduction</span><span class="o">=</span><span class="s2">"none"</span><span class="p">)</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">normalization</span><span class="p">:</span>
+                    <span class="n">target</span> <span class="o">=</span> <span class="p">(</span><span class="n">target</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">mean</span><span class="p">)</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">std</span>
+                <span class="n">loss</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">mse_loss</span><span class="p">(</span><span class="n">pred</span><span class="p">,</span> <span class="n">target</span><span class="p">,</span> <span class="n">reduction</span><span class="o">=</span><span class="s2">"none"</span><span class="p">)</span>
             <span class="k">elif</span> <span class="n">criterion</span> <span class="o">==</span> <span class="s2">"bce"</span><span class="p">:</span>
                 <span class="n">loss</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">binary_cross_entropy_with_logits</span><span class="p">(</span><span class="n">pred</span><span class="p">,</span> <span class="n">target</span><span class="p">,</span> <span class="n">reduction</span><span class="o">=</span><span class="s2">"none"</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="n">criterion</span> <span class="o">==</span> <span class="s2">"ce"</span><span class="p">:</span>
+                <span class="n">loss</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">cross_entropy</span><span class="p">(</span><span class="n">pred</span><span class="p">,</span> <span class="n">target</span><span class="o">.</span><span class="n">long</span><span class="p">()</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">),</span> <span class="n">reduction</span><span class="o">=</span><span class="s2">"none"</span><span class="p">)</span><span class="o">.</span><span class="n">unsqueeze</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Unknown criterion `</span><span class="si">%s</span><span class="s2">`"</span> <span class="o">%</span> <span class="n">criterion</span><span class="p">)</span>
             <span class="n">loss</span> <span class="o">=</span> <span class="n">functional</span><span class="o">.</span><span class="n">masked_mean</span><span class="p">(</span><span class="n">loss</span><span class="p">,</span> <span class="n">labeled</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
@@ -342,8 +363,10 @@
 
     <span class="k">def</span> <span class="nf">predict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">batch</span><span class="p">,</span> <span class="n">all_loss</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">metric</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="n">graph</span> <span class="o">=</span> <span class="n">batch</span><span class="p">[</span><span class="s2">"graph"</span><span class="p">]</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">graph_construction_model</span><span class="p">:</span>
+            <span class="n">graph</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">graph_construction_model</span><span class="p">(</span><span class="n">graph</span><span class="p">)</span>
         <span class="n">output</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">graph</span><span class="o">.</span><span class="n">node_feature</span><span class="o">.</span><span class="n">float</span><span class="p">(),</span> <span class="n">all_loss</span><span class="o">=</span><span class="n">all_loss</span><span class="p">,</span> <span class="n">metric</span><span class="o">=</span><span class="n">metric</span><span class="p">)</span>
-        <span class="n">pred</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">linear</span><span class="p">(</span><span class="n">output</span><span class="p">[</span><span class="s2">"graph_feature"</span><span class="p">])</span>
+        <span class="n">pred</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mlp</span><span class="p">(</span><span class="n">output</span><span class="p">[</span><span class="s2">"graph_feature"</span><span class="p">])</span>
         <span class="k">return</span> <span class="n">pred</span>
 
     <span class="k">def</span> <span class="nf">target</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">batch</span><span class="p">):</span>
@@ -355,31 +378,66 @@
     <span class="k">def</span> <span class="nf">evaluate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pred</span><span class="p">,</span> <span class="n">target</span><span class="p">):</span>
         <span class="n">labeled</span> <span class="o">=</span> <span class="o">~</span><span class="n">torch</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">target</span><span class="p">)</span>
 
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">normalization</span><span class="p">:</span>
+            <span class="n">pred</span> <span class="o">=</span> <span class="n">pred</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">std</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">mean</span>
         <span class="n">metric</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="k">for</span> <span class="n">_metric</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">metric</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">_metric</span> <span class="o">==</span> <span class="s2">"mae"</span><span class="p">:</span>
-                <span class="n">score</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">l1_loss</span><span class="p">(</span><span class="n">pred</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">std</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">mean</span><span class="p">,</span> <span class="n">target</span><span class="p">,</span> <span class="n">reduction</span><span class="o">=</span><span class="s2">"none"</span><span class="p">)</span>
+                <span class="n">score</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">l1_loss</span><span class="p">(</span><span class="n">pred</span><span class="p">,</span> <span class="n">target</span><span class="p">,</span> <span class="n">reduction</span><span class="o">=</span><span class="s2">"none"</span><span class="p">)</span>
                 <span class="n">score</span> <span class="o">=</span> <span class="n">functional</span><span class="o">.</span><span class="n">masked_mean</span><span class="p">(</span><span class="n">score</span><span class="p">,</span> <span class="n">labeled</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
             <span class="k">elif</span> <span class="n">_metric</span> <span class="o">==</span> <span class="s2">"rmse"</span><span class="p">:</span>
-                <span class="n">score</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">mse_loss</span><span class="p">(</span><span class="n">pred</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">std</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">mean</span><span class="p">,</span> <span class="n">target</span><span class="p">,</span> <span class="n">reduction</span><span class="o">=</span><span class="s2">"none"</span><span class="p">)</span>
+                <span class="n">score</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">mse_loss</span><span class="p">(</span><span class="n">pred</span><span class="p">,</span> <span class="n">target</span><span class="p">,</span> <span class="n">reduction</span><span class="o">=</span><span class="s2">"none"</span><span class="p">)</span>
                 <span class="n">score</span> <span class="o">=</span> <span class="n">functional</span><span class="o">.</span><span class="n">masked_mean</span><span class="p">(</span><span class="n">score</span><span class="p">,</span> <span class="n">labeled</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">sqrt</span><span class="p">()</span>
+            <span class="k">elif</span> <span class="n">_metric</span> <span class="o">==</span> <span class="s2">"acc"</span><span class="p">:</span>
+                <span class="n">score</span> <span class="o">=</span> <span class="p">[]</span>
+                <span class="n">num_class</span> <span class="o">=</span> <span class="mi">0</span>
+                <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">cur_num_class</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">num_class</span><span class="p">):</span>
+                    <span class="n">_pred</span> <span class="o">=</span> <span class="n">pred</span><span class="p">[:,</span> <span class="n">num_class</span><span class="p">:</span><span class="n">num_class</span> <span class="o">+</span> <span class="n">cur_num_class</span><span class="p">]</span>
+                    <span class="n">_target</span> <span class="o">=</span> <span class="n">target</span><span class="p">[:,</span> <span class="n">i</span><span class="p">]</span>
+                    <span class="n">_labeled</span> <span class="o">=</span> <span class="n">labeled</span><span class="p">[:,</span> <span class="n">i</span><span class="p">]</span>
+                    <span class="n">_score</span> <span class="o">=</span> <span class="n">metrics</span><span class="o">.</span><span class="n">accuracy</span><span class="p">(</span><span class="n">_pred</span><span class="p">[</span><span class="n">_labeled</span><span class="p">],</span> <span class="n">_target</span><span class="p">[</span><span class="n">_labeled</span><span class="p">]</span><span class="o">.</span><span class="n">long</span><span class="p">())</span>
+                    <span class="n">score</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">_score</span><span class="p">)</span>
+                    <span class="n">num_class</span> <span class="o">+=</span> <span class="n">cur_num_class</span>
+                <span class="n">score</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">stack</span><span class="p">(</span><span class="n">score</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="n">_metric</span> <span class="o">==</span> <span class="s2">"mcc"</span><span class="p">:</span>
+                <span class="n">score</span> <span class="o">=</span> <span class="p">[]</span>
+                <span class="n">num_class</span> <span class="o">=</span> <span class="mi">0</span>
+                <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">cur_num_class</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">num_class</span><span class="p">):</span>
+                    <span class="n">_pred</span> <span class="o">=</span> <span class="n">pred</span><span class="p">[:,</span> <span class="n">num_class</span><span class="p">:</span><span class="n">num_class</span> <span class="o">+</span> <span class="n">cur_num_class</span><span class="p">]</span>
+                    <span class="n">_target</span> <span class="o">=</span> <span class="n">target</span><span class="p">[:,</span> <span class="n">i</span><span class="p">]</span>
+                    <span class="n">_labeled</span> <span class="o">=</span> <span class="n">labeled</span><span class="p">[:,</span> <span class="n">i</span><span class="p">]</span>
+                    <span class="n">_score</span> <span class="o">=</span> <span class="n">metrics</span><span class="o">.</span><span class="n">matthews_corrcoef</span><span class="p">(</span><span class="n">_pred</span><span class="p">[</span><span class="n">_labeled</span><span class="p">],</span> <span class="n">_target</span><span class="p">[</span><span class="n">_labeled</span><span class="p">]</span><span class="o">.</span><span class="n">long</span><span class="p">())</span>
+                    <span class="n">score</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">_score</span><span class="p">)</span>
+                    <span class="n">num_class</span> <span class="o">+=</span> <span class="n">cur_num_class</span>
+                <span class="n">score</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">stack</span><span class="p">(</span><span class="n">score</span><span class="p">)</span>
             <span class="k">elif</span> <span class="n">_metric</span> <span class="o">==</span> <span class="s2">"auroc"</span><span class="p">:</span>
                 <span class="n">score</span> <span class="o">=</span> <span class="p">[]</span>
-                <span class="k">for</span> <span class="n">_pred</span><span class="p">,</span> <span class="n">_target</span><span class="p">,</span> <span class="n">_labeled</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">pred</span><span class="o">.</span><span class="n">t</span><span class="p">(),</span> <span class="n">target</span><span class="o">.</span><span class="n">t</span><span class="p">(),</span> <span class="n">labeled</span><span class="o">.</span><span class="n">t</span><span class="p">()):</span>
+                <span class="k">for</span> <span class="n">_pred</span><span class="p">,</span> <span class="n">_target</span><span class="p">,</span> <span class="n">_labeled</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">pred</span><span class="o">.</span><span class="n">t</span><span class="p">(),</span> <span class="n">target</span><span class="o">.</span><span class="n">long</span><span class="p">()</span><span class="o">.</span><span class="n">t</span><span class="p">(),</span> <span class="n">labeled</span><span class="o">.</span><span class="n">t</span><span class="p">()):</span>
                     <span class="n">_score</span> <span class="o">=</span> <span class="n">metrics</span><span class="o">.</span><span class="n">area_under_roc</span><span class="p">(</span><span class="n">_pred</span><span class="p">[</span><span class="n">_labeled</span><span class="p">],</span> <span class="n">_target</span><span class="p">[</span><span class="n">_labeled</span><span class="p">])</span>
                     <span class="n">score</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">_score</span><span class="p">)</span>
                 <span class="n">score</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">stack</span><span class="p">(</span><span class="n">score</span><span class="p">)</span>
             <span class="k">elif</span> <span class="n">_metric</span> <span class="o">==</span> <span class="s2">"auprc"</span><span class="p">:</span>
                 <span class="n">score</span> <span class="o">=</span> <span class="p">[]</span>
-                <span class="k">for</span> <span class="n">_pred</span><span class="p">,</span> <span class="n">_target</span><span class="p">,</span> <span class="n">_labeled</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">pred</span><span class="o">.</span><span class="n">t</span><span class="p">(),</span> <span class="n">target</span><span class="o">.</span><span class="n">t</span><span class="p">(),</span> <span class="n">labeled</span><span class="o">.</span><span class="n">t</span><span class="p">()):</span>
+                <span class="k">for</span> <span class="n">_pred</span><span class="p">,</span> <span class="n">_target</span><span class="p">,</span> <span class="n">_labeled</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">pred</span><span class="o">.</span><span class="n">t</span><span class="p">(),</span> <span class="n">target</span><span class="o">.</span><span class="n">long</span><span class="p">()</span><span class="o">.</span><span class="n">t</span><span class="p">(),</span> <span class="n">labeled</span><span class="o">.</span><span class="n">t</span><span class="p">()):</span>
                     <span class="n">_score</span> <span class="o">=</span> <span class="n">metrics</span><span class="o">.</span><span class="n">area_under_prc</span><span class="p">(</span><span class="n">_pred</span><span class="p">[</span><span class="n">_labeled</span><span class="p">],</span> <span class="n">_target</span><span class="p">[</span><span class="n">_labeled</span><span class="p">])</span>
                     <span class="n">score</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">_score</span><span class="p">)</span>
                 <span class="n">score</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">stack</span><span class="p">(</span><span class="n">score</span><span class="p">)</span>
             <span class="k">elif</span> <span class="n">_metric</span> <span class="o">==</span> <span class="s2">"r2"</span><span class="p">:</span>
                 <span class="n">score</span> <span class="o">=</span> <span class="p">[]</span>
-                <span class="n">new_pred</span> <span class="o">=</span> <span class="n">pred</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">std</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">mean</span>
-                <span class="k">for</span> <span class="n">_pred</span><span class="p">,</span> <span class="n">_target</span><span class="p">,</span> <span class="n">_labeled</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">new_pred</span><span class="o">.</span><span class="n">t</span><span class="p">(),</span> <span class="n">target</span><span class="o">.</span><span class="n">t</span><span class="p">(),</span> <span class="n">labeled</span><span class="o">.</span><span class="n">t</span><span class="p">()):</span>
+                <span class="k">for</span> <span class="n">_pred</span><span class="p">,</span> <span class="n">_target</span><span class="p">,</span> <span class="n">_labeled</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">pred</span><span class="o">.</span><span class="n">t</span><span class="p">(),</span> <span class="n">target</span><span class="o">.</span><span class="n">t</span><span class="p">(),</span> <span class="n">labeled</span><span class="o">.</span><span class="n">t</span><span class="p">()):</span>
                     <span class="n">_score</span> <span class="o">=</span> <span class="n">metrics</span><span class="o">.</span><span class="n">r2</span><span class="p">(</span><span class="n">_pred</span><span class="p">[</span><span class="n">_labeled</span><span class="p">],</span> <span class="n">_target</span><span class="p">[</span><span class="n">_labeled</span><span class="p">])</span>
+                    <span class="n">score</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">_score</span><span class="p">)</span>
+                <span class="n">score</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">stack</span><span class="p">(</span><span class="n">score</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="n">_metric</span> <span class="o">==</span> <span class="s2">"spearmanr"</span><span class="p">:</span>
+                <span class="n">score</span> <span class="o">=</span> <span class="p">[]</span>
+                <span class="k">for</span> <span class="n">_pred</span><span class="p">,</span> <span class="n">_target</span><span class="p">,</span> <span class="n">_labeled</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">pred</span><span class="o">.</span><span class="n">t</span><span class="p">(),</span> <span class="n">target</span><span class="o">.</span><span class="n">t</span><span class="p">(),</span> <span class="n">labeled</span><span class="o">.</span><span class="n">t</span><span class="p">()):</span>
+                    <span class="n">_score</span> <span class="o">=</span> <span class="n">metrics</span><span class="o">.</span><span class="n">spearmanr</span><span class="p">(</span><span class="n">_pred</span><span class="p">[</span><span class="n">_labeled</span><span class="p">],</span> <span class="n">_target</span><span class="p">[</span><span class="n">_labeled</span><span class="p">])</span>
+                    <span class="n">score</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">_score</span><span class="p">)</span>
+                <span class="n">score</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">stack</span><span class="p">(</span><span class="n">score</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="n">_metric</span> <span class="o">==</span> <span class="s2">"pearsonr"</span><span class="p">:</span>
+                <span class="n">score</span> <span class="o">=</span> <span class="p">[]</span>
+                <span class="k">for</span> <span class="n">_pred</span><span class="p">,</span> <span class="n">_target</span><span class="p">,</span> <span class="n">_labeled</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">pred</span><span class="o">.</span><span class="n">t</span><span class="p">(),</span> <span class="n">target</span><span class="o">.</span><span class="n">t</span><span class="p">(),</span> <span class="n">labeled</span><span class="o">.</span><span class="n">t</span><span class="p">()):</span>
+                    <span class="n">_score</span> <span class="o">=</span> <span class="n">metrics</span><span class="o">.</span><span class="n">pearsonr</span><span class="p">(</span><span class="n">_pred</span><span class="p">[</span><span class="n">_labeled</span><span class="p">],</span> <span class="n">_target</span><span class="p">[</span><span class="n">_labeled</span><span class="p">])</span>
                     <span class="n">score</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">_score</span><span class="p">)</span>
                 <span class="n">score</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">stack</span><span class="p">(</span><span class="n">score</span><span class="p">)</span>
             <span class="k">else</span><span class="p">:</span>
@@ -392,7 +450,321 @@
         <span class="k">return</span> <span class="n">metric</span></div>
 
 
-<div class="viewcode-block" id="Unsupervised"><a class="viewcode-back" href="../../../api/tasks.html#torchdrug.tasks.Unsupervised">[docs]</a><span class="k">class</span> <span class="nc">Unsupervised</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+<div class="viewcode-block" id="MultipleBinaryClassification"><a class="viewcode-back" href="../../../api/tasks.html#torchdrug.tasks.MultipleBinaryClassification">[docs]</a><span class="nd">@R</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="s2">"tasks.MultipleBinaryClassification"</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">MultipleBinaryClassification</span><span class="p">(</span><span class="n">tasks</span><span class="o">.</span><span class="n">Task</span><span class="p">,</span> <span class="n">core</span><span class="o">.</span><span class="n">Configurable</span><span class="p">):</span>
+    <span class="sd">"""</span>
+<span class="sd">    Multiple binary classification task for graphs / molecules / proteins.</span>
+
+<span class="sd">    Parameters:</span>
+<span class="sd">        model (nn.Module): graph representation model</span>
+<span class="sd">        task (list of int, optional): training task id(s).</span>
+<span class="sd">        criterion (list or dict, optional): training criterion(s). For dict, the keys are criterions and the values</span>
+<span class="sd">            are the corresponding weights. Available criterions are ``bce``.</span>
+<span class="sd">        metric (str or list of str, optional): metric(s).</span>
+<span class="sd">            Available metrics are ``auroc@macro``, ``auprc@macro``, ``auroc@micro``, ``auprc@micro`` and ``f1_max``.</span>
+<span class="sd">        num_mlp_layer (int, optional): number of layers in the MLP prediction head</span>
+<span class="sd">        normalization (bool, optional): whether to normalize the target</span>
+<span class="sd">        reweight (bool, optional): whether to re-weight tasks according to the number of positive samples</span>
+<span class="sd">        graph_construction_model (nn.Module, optional): graph construction model</span>
+<span class="sd">        verbose (int, optional): output verbose level</span>
+<span class="sd">    """</span>
+
+    <span class="n">eps</span> <span class="o">=</span> <span class="mf">1e-10</span>
+    <span class="n">_option_members</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"criterion"</span><span class="p">,</span> <span class="s2">"metric"</span><span class="p">}</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">task</span><span class="o">=</span><span class="p">(),</span> <span class="n">criterion</span><span class="o">=</span><span class="s2">"bce"</span><span class="p">,</span> <span class="n">metric</span><span class="o">=</span><span class="p">(</span><span class="s2">"auprc@micro"</span><span class="p">,</span> <span class="s2">"f1_max"</span><span class="p">),</span> <span class="n">num_mlp_layer</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+                 <span class="n">normalization</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">reweight</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">graph_construction_model</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">MultipleBinaryClassification</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="n">model</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">task</span> <span class="o">=</span> <span class="n">task</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">register_buffer</span><span class="p">(</span><span class="s2">"task_indices"</span><span class="p">,</span> <span class="n">torch</span><span class="o">.</span><span class="n">LongTensor</span><span class="p">(</span><span class="n">task</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">criterion</span> <span class="o">=</span> <span class="n">criterion</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">metric</span> <span class="o">=</span> <span class="n">metric</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">num_mlp_layer</span> <span class="o">=</span> <span class="n">num_mlp_layer</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">normalization</span> <span class="o">=</span> <span class="n">normalization</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">reweight</span> <span class="o">=</span> <span class="n">reweight</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">graph_construction_model</span> <span class="o">=</span> <span class="n">graph_construction_model</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">verbose</span> <span class="o">=</span> <span class="n">verbose</span>
+
+        <span class="n">hidden_dims</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">output_dim</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">num_mlp_layer</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mlp</span> <span class="o">=</span> <span class="n">layers</span><span class="o">.</span><span class="n">MLP</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">output_dim</span><span class="p">,</span> <span class="n">hidden_dims</span> <span class="o">+</span> <span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">task</span><span class="p">)])</span>
+
+<div class="viewcode-block" id="MultipleBinaryClassification.preprocess"><a class="viewcode-back" href="../../../api/tasks.html#torchdrug.tasks.MultipleBinaryClassification.preprocess">[docs]</a>    <span class="k">def</span> <span class="nf">preprocess</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">train_set</span><span class="p">,</span> <span class="n">valid_set</span><span class="p">,</span> <span class="n">test_set</span><span class="p">):</span>
+        <span class="sd">"""</span>
+<span class="sd">        Compute the weight for each task on the training set.</span>
+<span class="sd">        """</span>
+        <span class="n">values</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">data</span> <span class="ow">in</span> <span class="n">train_set</span><span class="p">:</span>
+            <span class="n">values</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">"targets"</span><span class="p">][</span><span class="bp">self</span><span class="o">.</span><span class="n">task_indices</span><span class="p">])</span>
+        <span class="n">values</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">stack</span><span class="p">(</span><span class="n">values</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>    
+        
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">reweight</span><span class="p">:</span>
+            <span class="n">num_positive</span> <span class="o">=</span> <span class="n">values</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+            <span class="n">weight</span> <span class="o">=</span> <span class="p">(</span><span class="n">num_positive</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span> <span class="o">/</span> <span class="n">num_positive</span><span class="p">)</span><span class="o">.</span><span class="n">clamp</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">weight</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">task</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">float</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">register_buffer</span><span class="p">(</span><span class="s2">"weight"</span><span class="p">,</span> <span class="n">torch</span><span class="o">.</span><span class="n">as_tensor</span><span class="p">(</span><span class="n">weight</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">float</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="MultipleBinaryClassification.forward"><a class="viewcode-back" href="../../../api/tasks.html#torchdrug.tasks.MultipleBinaryClassification.forward">[docs]</a>    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">batch</span><span class="p">):</span>
+        <span class="n">all_loss</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">float32</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">device</span><span class="p">)</span>
+        <span class="n">metric</span> <span class="o">=</span> <span class="p">{}</span>
+
+        <span class="n">pred</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">batch</span><span class="p">,</span> <span class="n">all_loss</span><span class="p">,</span> <span class="n">metric</span><span class="p">)</span>
+        <span class="n">target</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">target</span><span class="p">(</span><span class="n">batch</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">criterion</span><span class="p">,</span> <span class="n">weight</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">criterion</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">criterion</span> <span class="o">==</span> <span class="s2">"bce"</span><span class="p">:</span>
+                <span class="n">loss</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">binary_cross_entropy_with_logits</span><span class="p">(</span><span class="n">pred</span><span class="p">,</span> <span class="n">target</span><span class="p">,</span> <span class="n">reduction</span><span class="o">=</span><span class="s2">"none"</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Unknown criterion `</span><span class="si">%s</span><span class="s2">`"</span> <span class="o">%</span> <span class="n">criterion</span><span class="p">)</span>
+            <span class="n">loss</span> <span class="o">=</span> <span class="n">loss</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+            <span class="n">loss</span> <span class="o">=</span> <span class="p">(</span><span class="n">loss</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">weight</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">weight</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+            
+            <span class="n">name</span> <span class="o">=</span> <span class="n">tasks</span><span class="o">.</span><span class="n">_get_criterion_name</span><span class="p">(</span><span class="n">criterion</span><span class="p">)</span>
+            <span class="n">metric</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">loss</span>
+            <span class="n">all_loss</span> <span class="o">+=</span> <span class="n">loss</span> <span class="o">*</span> <span class="n">weight</span>
+
+        <span class="k">return</span> <span class="n">all_loss</span><span class="p">,</span> <span class="n">metric</span></div>
+
+    <span class="k">def</span> <span class="nf">predict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">batch</span><span class="p">,</span> <span class="n">all_loss</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">metric</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="n">graph</span> <span class="o">=</span> <span class="n">batch</span><span class="p">[</span><span class="s2">"graph"</span><span class="p">]</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">graph_construction_model</span><span class="p">:</span>
+            <span class="n">graph</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">graph_construction_model</span><span class="p">(</span><span class="n">graph</span><span class="p">)</span>
+        <span class="n">output</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">graph</span><span class="o">.</span><span class="n">node_feature</span><span class="o">.</span><span class="n">float</span><span class="p">(),</span> <span class="n">all_loss</span><span class="o">=</span><span class="n">all_loss</span><span class="p">,</span> <span class="n">metric</span><span class="o">=</span><span class="n">metric</span><span class="p">)</span>
+        <span class="n">pred</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mlp</span><span class="p">(</span><span class="n">output</span><span class="p">[</span><span class="s2">"graph_feature"</span><span class="p">])</span>
+        <span class="k">return</span> <span class="n">pred</span>
+
+    <span class="k">def</span> <span class="nf">target</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">batch</span><span class="p">):</span>
+        <span class="n">target</span> <span class="o">=</span> <span class="n">batch</span><span class="p">[</span><span class="s2">"targets"</span><span class="p">][:,</span> <span class="bp">self</span><span class="o">.</span><span class="n">task_indices</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">target</span>
+
+    <span class="k">def</span> <span class="nf">evaluate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pred</span><span class="p">,</span> <span class="n">target</span><span class="p">):</span>
+        <span class="n">metric</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">_metric</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">metric</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">_metric</span> <span class="o">==</span> <span class="s2">"auroc@micro"</span><span class="p">:</span>
+                <span class="n">score</span> <span class="o">=</span> <span class="n">metrics</span><span class="o">.</span><span class="n">area_under_roc</span><span class="p">(</span><span class="n">pred</span><span class="o">.</span><span class="n">flatten</span><span class="p">(),</span> <span class="n">target</span><span class="o">.</span><span class="n">long</span><span class="p">()</span><span class="o">.</span><span class="n">flatten</span><span class="p">())</span>
+            <span class="k">elif</span> <span class="n">_metric</span> <span class="o">==</span> <span class="s2">"auroc@macro"</span><span class="p">:</span>
+                <span class="n">score</span> <span class="o">=</span> <span class="n">metrics</span><span class="o">.</span><span class="n">variadic_area_under_roc</span><span class="p">(</span><span class="n">pred</span><span class="p">,</span> <span class="n">target</span><span class="o">.</span><span class="n">long</span><span class="p">(),</span> <span class="n">dim</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+            <span class="k">elif</span> <span class="n">_metric</span> <span class="o">==</span> <span class="s2">"auprc@micro"</span><span class="p">:</span>
+                <span class="n">score</span> <span class="o">=</span> <span class="n">metrics</span><span class="o">.</span><span class="n">area_under_prc</span><span class="p">(</span><span class="n">pred</span><span class="o">.</span><span class="n">flatten</span><span class="p">(),</span> <span class="n">target</span><span class="o">.</span><span class="n">long</span><span class="p">()</span><span class="o">.</span><span class="n">flatten</span><span class="p">())</span>
+            <span class="k">elif</span> <span class="n">_metric</span> <span class="o">==</span> <span class="s2">"auprc@macro"</span><span class="p">:</span>
+                <span class="n">score</span> <span class="o">=</span> <span class="n">metrics</span><span class="o">.</span><span class="n">variadic_area_under_prc</span><span class="p">(</span><span class="n">pred</span><span class="p">,</span> <span class="n">target</span><span class="o">.</span><span class="n">long</span><span class="p">(),</span> <span class="n">dim</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+            <span class="k">elif</span> <span class="n">_metric</span> <span class="o">==</span> <span class="s2">"f1_max"</span><span class="p">:</span>
+                <span class="n">score</span> <span class="o">=</span> <span class="n">metrics</span><span class="o">.</span><span class="n">f1_max</span><span class="p">(</span><span class="n">pred</span><span class="p">,</span> <span class="n">target</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Unknown criterion `</span><span class="si">%s</span><span class="s2">`"</span> <span class="o">%</span> <span class="n">_metric</span><span class="p">)</span>
+
+            <span class="n">name</span> <span class="o">=</span> <span class="n">tasks</span><span class="o">.</span><span class="n">_get_metric_name</span><span class="p">(</span><span class="n">_metric</span><span class="p">)</span>
+            <span class="n">metric</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">score</span>
+
+        <span class="k">return</span> <span class="n">metric</span></div>
+
+
+<div class="viewcode-block" id="NodePropertyPrediction"><a class="viewcode-back" href="../../../api/tasks.html#torchdrug.tasks.NodePropertyPrediction">[docs]</a><span class="nd">@R</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="s2">"tasks.NodePropertyPrediction"</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">NodePropertyPrediction</span><span class="p">(</span><span class="n">tasks</span><span class="o">.</span><span class="n">Task</span><span class="p">,</span> <span class="n">core</span><span class="o">.</span><span class="n">Configurable</span><span class="p">):</span>
+    <span class="sd">"""</span>
+<span class="sd">    Node / atom / residue property prediction task.</span>
+
+<span class="sd">    Parameters:</span>
+<span class="sd">        model (nn.Module): graph representation model</span>
+<span class="sd">        criterion (str, list or dict, optional): training criterion(s). For dict, the keys are criterions and the values</span>
+<span class="sd">            are the corresponding weights. Available criterions are ``mse`` and ``bce``.</span>
+<span class="sd">        metric (str or list of str, optional): metric(s).</span>
+<span class="sd">            Available metrics are ``mae``, ``rmse``, ``auprc`` and ``auroc``.</span>
+<span class="sd">        num_mlp_layer (int, optional): number of layers in mlp prediction head</span>
+<span class="sd">        normalization (bool, optional): whether to normalize the target</span>
+<span class="sd">            Available entities are ``node``, ``atom`` and ``residue``.</span>
+<span class="sd">        num_class (int, optional): number of classes</span>
+<span class="sd">        verbose (int, optional): output verbose level</span>
+<span class="sd">    """</span>
+
+    <span class="n">_option_members</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"criterion"</span><span class="p">,</span> <span class="s2">"metric"</span><span class="p">}</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">criterion</span><span class="o">=</span><span class="s2">"bce"</span><span class="p">,</span> <span class="n">metric</span><span class="o">=</span><span class="p">(</span><span class="s2">"macro_auprc"</span><span class="p">,</span> <span class="s2">"macro_auroc"</span><span class="p">),</span> <span class="n">num_mlp_layer</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+                 <span class="n">normalization</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">num_class</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">NodePropertyPrediction</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="n">model</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">criterion</span> <span class="o">=</span> <span class="n">criterion</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">metric</span> <span class="o">=</span> <span class="n">metric</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">normalization</span> <span class="o">=</span> <span class="n">normalization</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">num_mlp_layer</span> <span class="o">=</span> <span class="n">num_mlp_layer</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">num_class</span> <span class="o">=</span> <span class="n">num_class</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">verbose</span> <span class="o">=</span> <span class="n">verbose</span>
+
+<div class="viewcode-block" id="NodePropertyPrediction.preprocess"><a class="viewcode-back" href="../../../api/tasks.html#torchdrug.tasks.NodePropertyPrediction.preprocess">[docs]</a>    <span class="k">def</span> <span class="nf">preprocess</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">train_set</span><span class="p">,</span> <span class="n">valid_set</span><span class="p">,</span> <span class="n">test_set</span><span class="p">):</span>
+        <span class="sd">"""</span>
+<span class="sd">        Compute the mean and derivation on the training set.</span>
+<span class="sd">        """</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">view</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">train_set</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s2">"graph"</span><span class="p">],</span> <span class="s2">"view"</span><span class="p">,</span> <span class="s2">"atom"</span><span class="p">)</span>
+        <span class="n">values</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">cat</span><span class="p">([</span><span class="n">data</span><span class="p">[</span><span class="s2">"graph"</span><span class="p">]</span><span class="o">.</span><span class="n">target</span> <span class="k">for</span> <span class="n">data</span> <span class="ow">in</span> <span class="n">train_set</span><span class="p">])</span>
+        <span class="n">mean</span> <span class="o">=</span> <span class="n">values</span><span class="o">.</span><span class="n">float</span><span class="p">()</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+        <span class="n">std</span> <span class="o">=</span> <span class="n">values</span><span class="o">.</span><span class="n">float</span><span class="p">()</span><span class="o">.</span><span class="n">std</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">values</span><span class="o">.</span><span class="n">dtype</span> <span class="o">==</span> <span class="n">torch</span><span class="o">.</span><span class="n">long</span><span class="p">:</span>
+            <span class="n">num_class</span> <span class="o">=</span> <span class="n">values</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="o">.</span><span class="n">item</span><span class="p">()</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">num_class</span> <span class="o">=</span> <span class="mi">1</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">register_buffer</span><span class="p">(</span><span class="s2">"mean"</span><span class="p">,</span> <span class="n">torch</span><span class="o">.</span><span class="n">as_tensor</span><span class="p">(</span><span class="n">mean</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">float</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">register_buffer</span><span class="p">(</span><span class="s2">"std"</span><span class="p">,</span> <span class="n">torch</span><span class="o">.</span><span class="n">as_tensor</span><span class="p">(</span><span class="n">std</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">float</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">num_class</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_class</span> <span class="ow">or</span> <span class="n">num_class</span>
+
+        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">,</span> <span class="s2">"node_output_dim"</span><span class="p">):</span>
+            <span class="n">model_output_dim</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">node_output_dim</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">model_output_dim</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">output_dim</span>
+        <span class="n">hidden_dims</span> <span class="o">=</span> <span class="p">[</span><span class="n">model_output_dim</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">num_mlp_layer</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mlp</span> <span class="o">=</span> <span class="n">layers</span><span class="o">.</span><span class="n">MLP</span><span class="p">(</span><span class="n">model_output_dim</span><span class="p">,</span> <span class="n">hidden_dims</span> <span class="o">+</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">num_class</span><span class="p">])</span></div>
+
+    <span class="k">def</span> <span class="nf">predict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">batch</span><span class="p">,</span> <span class="n">all_loss</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">metric</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="n">graph</span> <span class="o">=</span> <span class="n">batch</span><span class="p">[</span><span class="s2">"graph"</span><span class="p">]</span>
+        <span class="n">output</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">graph</span><span class="o">.</span><span class="n">node_feature</span><span class="o">.</span><span class="n">float</span><span class="p">(),</span> <span class="n">all_loss</span><span class="o">=</span><span class="n">all_loss</span><span class="p">,</span> <span class="n">metric</span><span class="o">=</span><span class="n">metric</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">view</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">"node"</span><span class="p">,</span> <span class="s2">"atom"</span><span class="p">]:</span>
+            <span class="n">output_feature</span> <span class="o">=</span> <span class="n">output</span><span class="p">[</span><span class="s2">"node_feature"</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">output_feature</span> <span class="o">=</span> <span class="n">output</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"residue_feature"</span><span class="p">,</span> <span class="n">output</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"node_feature"</span><span class="p">))</span>
+        <span class="n">pred</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mlp</span><span class="p">(</span><span class="n">output_feature</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">pred</span>
+
+    <span class="k">def</span> <span class="nf">target</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">batch</span><span class="p">):</span>
+        <span class="n">size</span> <span class="o">=</span> <span class="n">batch</span><span class="p">[</span><span class="s2">"graph"</span><span class="p">]</span><span class="o">.</span><span class="n">num_nodes</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">view</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">"node"</span><span class="p">,</span> <span class="s2">"atom"</span><span class="p">]</span> <span class="k">else</span> <span class="n">batch</span><span class="p">[</span><span class="s2">"graph"</span><span class="p">]</span><span class="o">.</span><span class="n">num_residues</span>
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="s2">"label"</span><span class="p">:</span> <span class="n">batch</span><span class="p">[</span><span class="s2">"graph"</span><span class="p">]</span><span class="o">.</span><span class="n">target</span><span class="p">,</span>
+            <span class="s2">"mask"</span><span class="p">:</span> <span class="n">batch</span><span class="p">[</span><span class="s2">"graph"</span><span class="p">]</span><span class="o">.</span><span class="n">mask</span><span class="p">,</span>
+            <span class="s2">"size"</span><span class="p">:</span> <span class="n">size</span>
+        <span class="p">}</span>
+
+    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">batch</span><span class="p">):</span>
+        <span class="sd">""""""</span>
+        <span class="n">all_loss</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">float32</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">device</span><span class="p">)</span>
+        <span class="n">metric</span> <span class="o">=</span> <span class="p">{}</span>
+
+        <span class="n">pred</span><span class="p">,</span> <span class="n">target</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">predict_and_target</span><span class="p">(</span><span class="n">batch</span><span class="p">,</span> <span class="n">all_loss</span><span class="p">,</span> <span class="n">metric</span><span class="p">)</span>
+        <span class="n">labeled</span> <span class="o">=</span> <span class="o">~</span><span class="n">torch</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">target</span><span class="p">[</span><span class="s2">"label"</span><span class="p">])</span> <span class="o">&amp;</span> <span class="n">target</span><span class="p">[</span><span class="s2">"mask"</span><span class="p">]</span>
+
+        <span class="k">for</span> <span class="n">criterion</span><span class="p">,</span> <span class="n">weight</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">criterion</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">criterion</span> <span class="o">==</span> <span class="s2">"mse"</span><span class="p">:</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">normalization</span><span class="p">:</span>
+                    <span class="n">target</span> <span class="o">=</span> <span class="p">(</span><span class="n">target</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">mean</span><span class="p">)</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">std</span>
+                <span class="n">loss</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">mse_loss</span><span class="p">(</span><span class="n">pred</span><span class="p">,</span> <span class="n">target</span><span class="p">,</span> <span class="n">reduction</span><span class="o">=</span><span class="s2">"none"</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="n">criterion</span> <span class="o">==</span> <span class="s2">"bce"</span><span class="p">:</span>
+                <span class="n">loss</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">binary_cross_entropy_with_logits</span><span class="p">(</span><span class="n">pred</span><span class="p">,</span> <span class="n">target</span><span class="p">[</span><span class="s2">"label"</span><span class="p">]</span><span class="o">.</span><span class="n">float</span><span class="p">(),</span> <span class="n">reduction</span><span class="o">=</span><span class="s2">"none"</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="n">criterion</span> <span class="o">==</span> <span class="s2">"ce"</span><span class="p">:</span>
+                <span class="n">loss</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">cross_entropy</span><span class="p">(</span><span class="n">pred</span><span class="p">,</span> <span class="n">target</span><span class="p">[</span><span class="s2">"label"</span><span class="p">],</span> <span class="n">reduction</span><span class="o">=</span><span class="s2">"none"</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Unknown criterion `</span><span class="si">%s</span><span class="s2">`"</span> <span class="o">%</span> <span class="n">criterion</span><span class="p">)</span>
+            <span class="n">loss</span> <span class="o">=</span> <span class="n">functional</span><span class="o">.</span><span class="n">masked_mean</span><span class="p">(</span><span class="n">loss</span><span class="p">,</span> <span class="n">labeled</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+            <span class="n">name</span> <span class="o">=</span> <span class="n">tasks</span><span class="o">.</span><span class="n">_get_criterion_name</span><span class="p">(</span><span class="n">criterion</span><span class="p">)</span>
+            <span class="n">metric</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">loss</span>
+            <span class="n">all_loss</span> <span class="o">+=</span> <span class="n">loss</span> <span class="o">*</span> <span class="n">weight</span>
+
+        <span class="n">all_loss</span> <span class="o">+=</span> <span class="n">loss</span>
+
+        <span class="k">return</span> <span class="n">all_loss</span><span class="p">,</span> <span class="n">metric</span>
+
+    <span class="k">def</span> <span class="nf">evaluate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pred</span><span class="p">,</span> <span class="n">target</span><span class="p">):</span>
+        <span class="n">metric</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">_target</span> <span class="o">=</span> <span class="n">target</span><span class="p">[</span><span class="s2">"label"</span><span class="p">]</span>
+        <span class="n">_labeled</span> <span class="o">=</span> <span class="o">~</span><span class="n">torch</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">_target</span><span class="p">)</span> <span class="o">&amp;</span> <span class="n">target</span><span class="p">[</span><span class="s2">"mask"</span><span class="p">]</span>
+        <span class="n">_size</span> <span class="o">=</span> <span class="n">functional</span><span class="o">.</span><span class="n">variadic_sum</span><span class="p">(</span><span class="n">_labeled</span><span class="o">.</span><span class="n">long</span><span class="p">(),</span> <span class="n">target</span><span class="p">[</span><span class="s2">"size"</span><span class="p">])</span> 
+        <span class="k">for</span> <span class="n">_metric</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">metric</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">_metric</span> <span class="o">==</span> <span class="s2">"micro_acc"</span><span class="p">:</span>
+                <span class="n">score</span> <span class="o">=</span> <span class="n">metrics</span><span class="o">.</span><span class="n">accuracy</span><span class="p">(</span><span class="n">pred</span><span class="p">[</span><span class="n">_labeled</span><span class="p">],</span> <span class="n">_target</span><span class="p">[</span><span class="n">_labeled</span><span class="p">]</span><span class="o">.</span><span class="n">long</span><span class="p">())</span>
+            <span class="k">elif</span> <span class="n">metric</span> <span class="o">==</span> <span class="s2">"micro_auroc"</span><span class="p">:</span>
+                <span class="n">score</span> <span class="o">=</span> <span class="n">metrics</span><span class="o">.</span><span class="n">area_under_roc</span><span class="p">(</span><span class="n">pred</span><span class="p">[</span><span class="n">_labeled</span><span class="p">],</span> <span class="n">_target</span><span class="p">[</span><span class="n">_labeled</span><span class="p">])</span>
+            <span class="k">elif</span> <span class="n">metric</span> <span class="o">==</span> <span class="s2">"micro_auprc"</span><span class="p">:</span>
+                <span class="n">score</span> <span class="o">=</span> <span class="n">metrics</span><span class="o">.</span><span class="n">area_under_prc</span><span class="p">(</span><span class="n">pred</span><span class="p">[</span><span class="n">_labeled</span><span class="p">],</span> <span class="n">_target</span><span class="p">[</span><span class="n">_labeled</span><span class="p">])</span>
+            <span class="k">elif</span> <span class="n">_metric</span> <span class="o">==</span> <span class="s2">"macro_auroc"</span><span class="p">:</span>
+                <span class="n">score</span> <span class="o">=</span> <span class="n">metrics</span><span class="o">.</span><span class="n">variadic_area_under_roc</span><span class="p">(</span><span class="n">pred</span><span class="p">[</span><span class="n">_labeled</span><span class="p">],</span> <span class="n">_target</span><span class="p">[</span><span class="n">_labeled</span><span class="p">],</span> <span class="n">_size</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+            <span class="k">elif</span> <span class="n">_metric</span> <span class="o">==</span> <span class="s2">"macro_auprc"</span><span class="p">:</span>
+                <span class="n">score</span> <span class="o">=</span> <span class="n">metrics</span><span class="o">.</span><span class="n">variadic_area_under_prc</span><span class="p">(</span><span class="n">pred</span><span class="p">[</span><span class="n">_labeled</span><span class="p">],</span> <span class="n">_target</span><span class="p">[</span><span class="n">_labeled</span><span class="p">],</span> <span class="n">_size</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+            <span class="k">elif</span> <span class="n">_metric</span> <span class="o">==</span> <span class="s2">"macro_acc"</span><span class="p">:</span>
+                <span class="n">score</span> <span class="o">=</span> <span class="n">pred</span><span class="p">[</span><span class="n">_labeled</span><span class="p">]</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">==</span> <span class="n">_target</span><span class="p">[</span><span class="n">_labeled</span><span class="p">]</span>
+                <span class="n">score</span> <span class="o">=</span> <span class="n">functional</span><span class="o">.</span><span class="n">variadic_mean</span><span class="p">(</span><span class="n">score</span><span class="o">.</span><span class="n">float</span><span class="p">(),</span> <span class="n">_size</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Unknown criterion `</span><span class="si">%s</span><span class="s2">`"</span> <span class="o">%</span> <span class="n">_metric</span><span class="p">)</span>
+
+            <span class="n">name</span> <span class="o">=</span> <span class="n">tasks</span><span class="o">.</span><span class="n">_get_metric_name</span><span class="p">(</span><span class="n">_metric</span><span class="p">)</span>
+            <span class="n">metric</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">score</span>
+
+        <span class="k">return</span> <span class="n">metric</span></div>
+
+
+<div class="viewcode-block" id="InteractionPrediction"><a class="viewcode-back" href="../../../api/tasks.html#torchdrug.tasks.InteractionPrediction">[docs]</a><span class="nd">@R</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="s2">"tasks.InteractionPrediction"</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">InteractionPrediction</span><span class="p">(</span><span class="n">PropertyPrediction</span><span class="p">):</span>
+    <span class="sd">"""</span>
+<span class="sd">    Predict the interaction property of graph pairs.</span>
+
+<span class="sd">    Parameters:</span>
+<span class="sd">        model (nn.Module): graph representation model</span>
+<span class="sd">        model2 (nn.Module, optional): graph representation model for the second item. If ``None``, use tied-weight </span>
+<span class="sd">            model for the second item. </span>
+<span class="sd">        task (str, list or dict, optional): training task(s).</span>
+<span class="sd">            For dict, the keys are tasks and the values are the corresponding weights.</span>
+<span class="sd">        criterion (str, list or dict, optional): training criterion(s). For dict, the keys are criterions and the values</span>
+<span class="sd">            are the corresponding weights. Available criterions are ``mse`` and ``bce``.</span>
+<span class="sd">        metric (str or list of str, optional): metric(s).</span>
+<span class="sd">            Available metrics are ``mae``, ``rmse``, ``auprc`` and ``auroc``.</span>
+<span class="sd">        num_mlp_layer (int, optional): number of layers in mlp prediction head</span>
+<span class="sd">        normalization (bool, optional): whether to normalize the target</span>
+<span class="sd">        num_class (int, optional): number of classes</span>
+<span class="sd">        verbose (int, optional): output verbose level</span>
+<span class="sd">    """</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">model2</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">task</span><span class="o">=</span><span class="p">(),</span> <span class="n">criterion</span><span class="o">=</span><span class="s2">"mse"</span><span class="p">,</span> <span class="n">metric</span><span class="o">=</span><span class="p">(</span><span class="s2">"mae"</span><span class="p">,</span> <span class="s2">"rmse"</span><span class="p">),</span>
+                 <span class="n">num_mlp_layer</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">normalization</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">num_class</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">InteractionPrediction</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">task</span><span class="o">=</span><span class="n">task</span><span class="p">,</span> <span class="n">criterion</span><span class="o">=</span><span class="n">criterion</span><span class="p">,</span> 
+            <span class="n">metric</span><span class="o">=</span><span class="n">metric</span><span class="p">,</span> <span class="n">num_mlp_layer</span><span class="o">=</span><span class="n">num_mlp_layer</span><span class="p">,</span> <span class="n">normalization</span><span class="o">=</span><span class="n">normalization</span><span class="p">,</span> 
+            <span class="n">num_class</span><span class="o">=</span><span class="n">num_class</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="n">verbose</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">model2</span> <span class="o">=</span> <span class="n">model2</span> <span class="ow">or</span> <span class="n">model</span>
+
+<div class="viewcode-block" id="InteractionPrediction.preprocess"><a class="viewcode-back" href="../../../api/tasks.html#torchdrug.tasks.InteractionPrediction.preprocess">[docs]</a>    <span class="k">def</span> <span class="nf">preprocess</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">train_set</span><span class="p">,</span> <span class="n">valid_set</span><span class="p">,</span> <span class="n">test_set</span><span class="p">):</span>
+        <span class="sd">"""</span>
+<span class="sd">        Compute the mean and derivation for each task on the training set.</span>
+<span class="sd">        """</span>
+        <span class="n">values</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">list</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">sample</span> <span class="ow">in</span> <span class="n">train_set</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">sample</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"labeled"</span><span class="p">,</span> <span class="kc">True</span><span class="p">):</span>
+                <span class="k">continue</span>
+            <span class="k">for</span> <span class="n">task</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">task</span><span class="p">:</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="n">math</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">sample</span><span class="p">[</span><span class="n">task</span><span class="p">]):</span>
+                    <span class="n">values</span><span class="p">[</span><span class="n">task</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">sample</span><span class="p">[</span><span class="n">task</span><span class="p">])</span>
+        <span class="n">mean</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">std</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">weight</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">num_class</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">task</span><span class="p">,</span> <span class="n">w</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">task</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">value</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">values</span><span class="p">[</span><span class="n">task</span><span class="p">])</span>
+            <span class="n">mean</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">value</span><span class="o">.</span><span class="n">float</span><span class="p">()</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>
+            <span class="n">std</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">value</span><span class="o">.</span><span class="n">float</span><span class="p">()</span><span class="o">.</span><span class="n">std</span><span class="p">())</span>
+            <span class="n">weight</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">w</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">value</span><span class="o">.</span><span class="n">ndim</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">num_class</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">value</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+            <span class="k">elif</span> <span class="n">value</span><span class="o">.</span><span class="n">dtype</span> <span class="o">==</span> <span class="n">torch</span><span class="o">.</span><span class="n">long</span><span class="p">:</span>
+                <span class="n">num_class</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">value</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="o">.</span><span class="n">item</span><span class="p">()</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">num_class</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">register_buffer</span><span class="p">(</span><span class="s2">"mean"</span><span class="p">,</span> <span class="n">torch</span><span class="o">.</span><span class="n">as_tensor</span><span class="p">(</span><span class="n">mean</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">float</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">register_buffer</span><span class="p">(</span><span class="s2">"std"</span><span class="p">,</span> <span class="n">torch</span><span class="o">.</span><span class="n">as_tensor</span><span class="p">(</span><span class="n">std</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">float</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">register_buffer</span><span class="p">(</span><span class="s2">"weight"</span><span class="p">,</span> <span class="n">torch</span><span class="o">.</span><span class="n">as_tensor</span><span class="p">(</span><span class="n">weight</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">float</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">num_class</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_class</span> <span class="ow">or</span> <span class="n">num_class</span>
+
+        <span class="n">hidden_dims</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">output_dim</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">num_mlp_layer</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mlp</span> <span class="o">=</span> <span class="n">layers</span><span class="o">.</span><span class="n">MLP</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">output_dim</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">model2</span><span class="o">.</span><span class="n">output_dim</span><span class="p">,</span> <span class="n">hidden_dims</span> <span class="o">+</span> <span class="p">[</span><span class="nb">sum</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">num_class</span><span class="p">)])</span></div>
+
+    <span class="k">def</span> <span class="nf">predict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">batch</span><span class="p">,</span> <span class="n">all_loss</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">metric</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="n">graph1</span> <span class="o">=</span> <span class="n">batch</span><span class="p">[</span><span class="s2">"graph1"</span><span class="p">]</span>
+        <span class="n">output1</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">(</span><span class="n">graph1</span><span class="p">,</span> <span class="n">graph1</span><span class="o">.</span><span class="n">node_feature</span><span class="o">.</span><span class="n">float</span><span class="p">(),</span> <span class="n">all_loss</span><span class="o">=</span><span class="n">all_loss</span><span class="p">,</span> <span class="n">metric</span><span class="o">=</span><span class="n">metric</span><span class="p">)</span>
+        <span class="n">graph2</span> <span class="o">=</span> <span class="n">batch</span><span class="p">[</span><span class="s2">"graph2"</span><span class="p">]</span>
+        <span class="n">output2</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model2</span><span class="p">(</span><span class="n">graph2</span><span class="p">,</span> <span class="n">graph2</span><span class="o">.</span><span class="n">node_feature</span><span class="o">.</span><span class="n">float</span><span class="p">(),</span> <span class="n">all_loss</span><span class="o">=</span><span class="n">all_loss</span><span class="p">,</span> <span class="n">metric</span><span class="o">=</span><span class="n">metric</span><span class="p">)</span>
+        <span class="n">pred</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mlp</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">cat</span><span class="p">([</span><span class="n">output1</span><span class="p">[</span><span class="s2">"graph_feature"</span><span class="p">],</span> <span class="n">output2</span><span class="p">[</span><span class="s2">"graph_feature"</span><span class="p">]],</span> <span class="n">dim</span><span class="o">=-</span><span class="mi">1</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">pred</span></div>
+
+
+<div class="viewcode-block" id="Unsupervised"><a class="viewcode-back" href="../../../api/tasks.html#torchdrug.tasks.Unsupervised">[docs]</a><span class="nd">@R</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="s2">"tasks.Unsupervised"</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">Unsupervised</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">,</span> <span class="n">core</span><span class="o">.</span><span class="n">Configurable</span><span class="p">):</span>
     <span class="sd">"""</span>
 <span class="sd">    Wrapper task for unsupervised learning.</span>
 
@@ -402,9 +774,10 @@
 <span class="sd">        model (nn.Module): any model</span>
 <span class="sd">    """</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">graph_construction_model</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">Unsupervised</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="n">model</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">graph_construction_model</span> <span class="o">=</span> <span class="n">graph_construction_model</span>
 
     <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">batch</span><span class="p">):</span>
         <span class="sd">""""""</span>
@@ -417,6 +790,8 @@
 
     <span class="k">def</span> <span class="nf">predict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">batch</span><span class="p">,</span> <span class="n">all_loss</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">metric</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="n">graph</span> <span class="o">=</span> <span class="n">batch</span><span class="p">[</span><span class="s2">"graph"</span><span class="p">]</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">graph_construction_model</span><span class="p">:</span>
+            <span class="n">graph</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">graph_construction_model</span><span class="p">(</span><span class="n">graph</span><span class="p">)</span>
         <span class="n">pred</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">graph</span><span class="o">.</span><span class="n">node_feature</span><span class="o">.</span><span class="n">float</span><span class="p">(),</span> <span class="n">all_loss</span><span class="o">=</span><span class="n">all_loss</span><span class="p">,</span> <span class="n">metric</span><span class="o">=</span><span class="n">metric</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">pred</span></div>
 </pre></div>

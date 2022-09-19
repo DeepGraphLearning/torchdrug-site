@@ -6,7 +6,7 @@
 <link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="Documentation" href="api/index.html" /><link rel="prev" title="Deal with References" href="notes/reference.html" />
 
     <meta name="generator" content="sphinx-4.5.0, furo 2022.04.07"/>
-        <title>Papers Implemented - TorchDrug 0.1.3 documentation</title>
+        <title>Papers Implemented - TorchDrug 0.2.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?digest=68f4518137b9aefe99b631505a2064c3c42c9852" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
@@ -130,7 +130,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="index.html"><div class="brand">TorchDrug 0.1.3 documentation</div></a>
+      <a href="index.html"><div class="brand">TorchDrug 0.2.0 documentation</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -153,7 +153,7 @@
       <div class="sidebar-sticky"><a class="sidebar-brand centered" href="https://torchdrug.ai">
   
   <div class="sidebar-logo-container">
-    <img class="sidebar-logo" src="_static/logo.svg" alt="Logo"/>
+    <img class="sidebar-logo" src="_static/torchdrug_logo_full.svg" alt="Logo"/>
   </div>
   
   
@@ -362,6 +362,35 @@ Klaus-Robert Müller. NeurIPS 2017.</p>
 </li>
 </ol>
 </section>
+<section id="protein-representation-learning">
+<h3>Protein Representation Learning<a class="headerlink" href="#protein-representation-learning" title="Permalink to this headline">#</a></h3>
+<ol class="arabic">
+<li><p><a class="reference external" href="https://proceedings.neurips.cc/paper/2019/file/37f65c068b7723cd7809ee2d31d7861c-Paper.pdf">Evaluating Protein Transfer Learning with TAPE</a></p>
+<p>Roshan Rao, Nicholas Bhattacharya, Neil Thomas, Yan Duan, Xi Chen, John Canny, Pieter Abbeel, Yun S Song. NeurIPS 2019.</p>
+<p><a class="reference internal" href="api/layers.html#torchdrug.layers.SinusoidalPositionEmbedding" title="torchdrug.layers.SinusoidalPositionEmbedding"><code class="xref py py-class docutils literal notranslate"><span class="pre">SinusoidalPositionEmbedding</span></code></a>
+<a class="reference internal" href="api/layers.html#torchdrug.layers.SelfAttentionBlock" title="torchdrug.layers.SelfAttentionBlock"><code class="xref py py-class docutils literal notranslate"><span class="pre">SelfAttentionBlock</span></code></a>
+<a class="reference internal" href="api/layers.html#torchdrug.layers.ProteinResNetBlock" title="torchdrug.layers.ProteinResNetBlock"><code class="xref py py-class docutils literal notranslate"><span class="pre">ProteinResNetBlock</span></code></a>
+<a class="reference internal" href="api/layers.html#torchdrug.layers.ProteinBERTBlock" title="torchdrug.layers.ProteinBERTBlock"><code class="xref py py-class docutils literal notranslate"><span class="pre">ProteinBERTBlock</span></code></a>
+<a class="reference internal" href="api/models.html#torchdrug.models.ProteinResNet" title="torchdrug.models.ProteinResNet"><code class="xref py py-class docutils literal notranslate"><span class="pre">ProteinResNet</span></code></a>
+<a class="reference internal" href="api/models.html#torchdrug.models.ProteinLSTM" title="torchdrug.models.ProteinLSTM"><code class="xref py py-class docutils literal notranslate"><span class="pre">ProteinLSTM</span></code></a>
+<a class="reference internal" href="api/models.html#torchdrug.models.ProteinBERT" title="torchdrug.models.ProteinBERT"><code class="xref py py-class docutils literal notranslate"><span class="pre">ProteinBERT</span></code></a></p>
+</li>
+<li><p><a class="reference external" href="https://arxiv.org/pdf/2011.03443.pdf">Is Transfer Learning Necessary for Protein Landscape Prediction?</a></p>
+<p>Amir Shanehsazzadeh, David Belanger, David Dohan. arXiv 2020.</p>
+<p><code class="xref py py-class docutils literal notranslate"><span class="pre">ProteinCNN</span></code></p>
+</li>
+<li><p><a class="reference external" href="https://www.biorxiv.org/content/10.1101/622803v1.full.pdf">Biological Structure and Function Emerge from Scaling Unsupervised Learning to 250 Million Protein Sequences</a></p>
+<p>Alexander Rives,  Joshua Meier, Tom Sercu, Siddharth Goyal, Zeming Lin, Jason Liu, Demi Guo, Myle Ott, C. Lawrence Zitnick, Jerry Ma, Rob Fergus. PNAS 2021.</p>
+<p><a class="reference internal" href="api/models.html#torchdrug.models.EvolutionaryScaleModeling" title="torchdrug.models.EvolutionaryScaleModeling"><code class="xref py py-class docutils literal notranslate"><span class="pre">EvolutionaryScaleModeling</span></code></a></p>
+</li>
+<li><p><a class="reference external" href="https://arxiv.org/pdf/2203.06125.pdf">Protein Representation Learning by Geometric Structure Pretraining</a></p>
+<p>Zuobai Zhang, Minghao Xu, Arian Jamasb, Vijil Chenthamarakshan, Aurélie Lozano, Payel Das, Jian Tang. arXiv 2022.</p>
+<p><a class="reference internal" href="api/layers.html#torchdrug.layers.GeometricRelationalGraphConv" title="torchdrug.layers.GeometricRelationalGraphConv"><code class="xref py py-class docutils literal notranslate"><span class="pre">GeometricRelationalGraphConv</span></code></a>
+<a class="reference internal" href="api/models.html#torchdrug.models.GeometryAwareRelationalGraphNeuralNetwork" title="torchdrug.models.GeometryAwareRelationalGraphNeuralNetwork"><code class="xref py py-class docutils literal notranslate"><span class="pre">GeometryAwareRelationalGraphNeuralNetwork</span></code></a>
+<code class="xref py py-mod docutils literal notranslate"><span class="pre">torchdrug.layers.geometry</span></code></p>
+</li>
+</ol>
+</section>
 <section id="knowledge-graph-reasoning">
 <h3>Knowledge Graph Reasoning<a class="headerlink" href="#knowledge-graph-reasoning" title="Permalink to this headline">#</a></h3>
 <ol class="arabic">
@@ -472,6 +501,7 @@ Klaus-Robert Müller. NeurIPS 2017.</p>
 <li><a class="reference internal" href="#pretrain-molecular-representations">Pretrain Molecular Representations</a></li>
 <li><a class="reference internal" href="#de-novo-molecule-design">De Novo Molecule Design</a></li>
 <li><a class="reference internal" href="#retrosynthesis">Retrosynthesis</a></li>
+<li><a class="reference internal" href="#protein-representation-learning">Protein Representation Learning</a></li>
 <li><a class="reference internal" href="#knowledge-graph-reasoning">Knowledge Graph Reasoning</a></li>
 </ul>
 </li>

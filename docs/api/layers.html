@@ -6,7 +6,7 @@
 <link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="torchdrug.models" href="models.html" /><link rel="prev" title="torchdrug.metrics" href="metrics.html" />
 
     <meta name="generator" content="sphinx-4.5.0, furo 2022.04.07"/>
-        <title>torchdrug.layers - TorchDrug 0.1.3 documentation</title>
+        <title>torchdrug.layers - TorchDrug 0.2.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=68f4518137b9aefe99b631505a2064c3c42c9852" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
@@ -130,7 +130,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="../index.html"><div class="brand">TorchDrug 0.1.3 documentation</div></a>
+      <a href="../index.html"><div class="brand">TorchDrug 0.2.0 documentation</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -153,7 +153,7 @@
       <div class="sidebar-sticky"><a class="sidebar-brand centered" href="https://torchdrug.ai">
   
   <div class="sidebar-logo-container">
-    <img class="sidebar-logo" src="../_static/logo.svg" alt="Logo"/>
+    <img class="sidebar-logo" src="../_static/torchdrug_logo_full.svg" alt="Logo"/>
   </div>
   
   
@@ -293,8 +293,8 @@
 <dl class="py class">
 <dt class="sig sig-object py" id="torchdrug.layers.MultiLayerPerceptron">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">MultiLayerPerceptron</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_dim</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hidden_dims</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">short_cut</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_norm</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">activation</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'relu'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dropout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/common.html#MultiLayerPerceptron"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.layers.MultiLayerPerceptron" title="Permalink to this definition">#</a></dt>
-<dd><p>Multi-layer Perceptron.</p>
-<p>Note there is no batch normalization, activation or dropout in the last layer.</p>
+<dd><p>Multi-layer Perceptron.
+Note there is no batch normalization, activation or dropout in the last layer.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -323,6 +323,19 @@
 <li><p><strong>num_mlp_layer</strong> (<em>int</em><em>, </em><em>optional</em>) – number of MLP layers</p></li>
 <li><p><strong>activation</strong> (<em>str</em><em> or </em><em>function</em><em>, </em><em>optional</em>) – activation function</p></li>
 </ul>
+</dd>
+</dl>
+</dd></dl>
+</section>
+<section id="sinusoidalpositionembedding">
+<h3>SinusoidalPositionEmbedding<a class="headerlink" href="#sinusoidalpositionembedding" title="Permalink to this headline">#</a></h3>
+<dl class="py class">
+<dt class="sig sig-object py" id="torchdrug.layers.SinusoidalPositionEmbedding">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">SinusoidalPositionEmbedding</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">output_dim</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/common.html#SinusoidalPositionEmbedding"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.layers.SinusoidalPositionEmbedding" title="Permalink to this definition">#</a></dt>
+<dd><p>Positional embedding based on sine and cosine functions, proposed in <a class="reference external" href="https://arxiv.org/pdf/1706.03762.pdf">Attention Is All You Need</a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>output_dim</strong> (<em>int</em>) – output dimension</p>
 </dd>
 </dl>
 </dd></dl>
@@ -666,6 +679,67 @@ This may provide better time or memory complexity than separate calls of
 <dl class="py method">
 <dt class="sig sig-object py" id="torchdrug.layers.ContinuousFilterConv.message_and_aggregate">
 <span class="sig-name descname"><span class="pre">message_and_aggregate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">input</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/conv.html#ContinuousFilterConv.message_and_aggregate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.layers.ContinuousFilterConv.message_and_aggregate" title="Permalink to this definition">#</a></dt>
+<dd><p>Fused computation of message and aggregation over the graph.
+This may provide better time or memory complexity than separate calls of
+<a class="reference internal" href="#torchdrug.layers.MessagePassingBase.message" title="torchdrug.layers.MessagePassingBase.message"><code class="xref py py-meth docutils literal notranslate"><span class="pre">message</span></code></a> and <a class="reference internal" href="#torchdrug.layers.MessagePassingBase.aggregate" title="torchdrug.layers.MessagePassingBase.aggregate"><code class="xref py py-meth docutils literal notranslate"><span class="pre">aggregate</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>graph</strong> (<a class="reference internal" href="data.html#torchdrug.data.Graph" title="torchdrug.data.Graph"><em>Graph</em></a>) – graph(s)</p></li>
+<li><p><strong>input</strong> (<em>Tensor</em>) – node representations of shape <span class="math notranslate nohighlight">\((|V|, ...)\)</span></p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>node updates of shape <span class="math notranslate nohighlight">\((|V|, ...)\)</span></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>Tensor</p>
+</dd>
+</dl>
+</dd></dl>
+</dd></dl>
+</section>
+<section id="geometricrelationalgraphconv">
+<h3>GeometricRelationalGraphConv<a class="headerlink" href="#geometricrelationalgraphconv" title="Permalink to this headline">#</a></h3>
+<dl class="py class">
+<dt class="sig sig-object py" id="torchdrug.layers.GeometricRelationalGraphConv">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">GeometricRelationalGraphConv</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_dim</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_dim</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_relation</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">edge_input_dim</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_norm</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">activation</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'relu'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/conv.html#GeometricRelationalGraphConv"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.layers.GeometricRelationalGraphConv" title="Permalink to this definition">#</a></dt>
+<dd><p>Geometry-aware relational graph convolution operator from
+<a class="reference external" href="https://arxiv.org/pdf/2203.06125.pdf">Protein Representation Learning by Geometric Structure Pretraining</a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input_dim</strong> (<em>int</em>) – input dimension</p></li>
+<li><p><strong>output_dim</strong> (<em>int</em>) – output dimension</p></li>
+<li><p><strong>num_relation</strong> (<em>int</em>) – number of relations</p></li>
+<li><p><strong>edge_input_dim</strong> (<em>int</em><em>, </em><em>optional</em>) – dimension of edge features</p></li>
+<li><p><strong>batch_norm</strong> (<em>bool</em><em>, </em><em>optional</em>) – apply batch normalization on nodes or not</p></li>
+<li><p><strong>activation</strong> (<em>str</em><em> or </em><em>function</em><em>, </em><em>optional</em>) – activation function</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="torchdrug.layers.GeometricRelationalGraphConv.aggregate">
+<span class="sig-name descname"><span class="pre">aggregate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">message</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/conv.html#GeometricRelationalGraphConv.aggregate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.layers.GeometricRelationalGraphConv.aggregate" title="Permalink to this definition">#</a></dt>
+<dd><p>Aggregate edge messages to nodes.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>graph</strong> (<a class="reference internal" href="data.html#torchdrug.data.Graph" title="torchdrug.data.Graph"><em>Graph</em></a>) – graph(s)</p></li>
+<li><p><strong>message</strong> (<em>Tensor</em>) – edge messages of shape <span class="math notranslate nohighlight">\((|E|, ...)\)</span></p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>node updates of shape <span class="math notranslate nohighlight">\((|V|, ...)\)</span></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>Tensor</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="torchdrug.layers.GeometricRelationalGraphConv.message_and_aggregate">
+<span class="sig-name descname"><span class="pre">message_and_aggregate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">input</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/conv.html#GeometricRelationalGraphConv.message_and_aggregate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.layers.GeometricRelationalGraphConv.message_and_aggregate" title="Permalink to this definition">#</a></dt>
 <dd><p>Fused computation of message and aggregation over the graph.
 This may provide better time or memory complexity than separate calls of
 <a class="reference internal" href="#torchdrug.layers.MessagePassingBase.message" title="torchdrug.layers.MessagePassingBase.message"><code class="xref py py-meth docutils literal notranslate"><span class="pre">message</span></code></a> and <a class="reference internal" href="#torchdrug.layers.MessagePassingBase.aggregate" title="torchdrug.layers.MessagePassingBase.aggregate"><code class="xref py py-meth docutils literal notranslate"><span class="pre">aggregate</span></code></a>.</p>
@@ -1205,7 +1279,7 @@ This may provide better time or memory complexity than separate calls of
 <h3>MeanReadout<a class="headerlink" href="#meanreadout" title="Permalink to this headline">#</a></h3>
 <dl class="py class">
 <dt class="sig sig-object py" id="torchdrug.layers.MeanReadout">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">MeanReadout</span></span><a class="reference internal" href="../_modules/torchdrug/layers/readout.html#MeanReadout"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.layers.MeanReadout" title="Permalink to this definition">#</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">MeanReadout</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'node'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/readout.html#MeanReadout"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.layers.MeanReadout" title="Permalink to this definition">#</a></dt>
 <dd><p>Mean readout operator over graphs with variadic sizes.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="torchdrug.layers.MeanReadout.forward">
@@ -1232,7 +1306,7 @@ This may provide better time or memory complexity than separate calls of
 <h3>SumReadout<a class="headerlink" href="#sumreadout" title="Permalink to this headline">#</a></h3>
 <dl class="py class">
 <dt class="sig sig-object py" id="torchdrug.layers.SumReadout">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">SumReadout</span></span><a class="reference internal" href="../_modules/torchdrug/layers/readout.html#SumReadout"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.layers.SumReadout" title="Permalink to this definition">#</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">SumReadout</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'node'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/readout.html#SumReadout"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.layers.SumReadout" title="Permalink to this definition">#</a></dt>
 <dd><p>Sum readout operator over graphs with variadic sizes.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="torchdrug.layers.SumReadout.forward">
@@ -1259,7 +1333,7 @@ This may provide better time or memory complexity than separate calls of
 <h3>MaxReadout<a class="headerlink" href="#maxreadout" title="Permalink to this headline">#</a></h3>
 <dl class="py class">
 <dt class="sig sig-object py" id="torchdrug.layers.MaxReadout">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">MaxReadout</span></span><a class="reference internal" href="../_modules/torchdrug/layers/readout.html#MaxReadout"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.layers.MaxReadout" title="Permalink to this definition">#</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">MaxReadout</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'node'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/readout.html#MaxReadout"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.layers.MaxReadout" title="Permalink to this definition">#</a></dt>
 <dd><p>Max readout operator over graphs with variadic sizes.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="torchdrug.layers.MaxReadout.forward">
@@ -1286,7 +1360,7 @@ This may provide better time or memory complexity than separate calls of
 <h3>Set2Set<a class="headerlink" href="#set2set" title="Permalink to this headline">#</a></h3>
 <dl class="py class">
 <dt class="sig sig-object py" id="torchdrug.layers.Set2Set">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Set2Set</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_dim</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_step</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_lstm_layer</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/readout.html#Set2Set"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.layers.Set2Set" title="Permalink to this definition">#</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Set2Set</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_dim</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'node'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_step</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_lstm_layer</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/readout.html#Set2Set"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.layers.Set2Set" title="Permalink to this definition">#</a></dt>
 <dd><p>Set2Set operator from <a class="reference external" href="https://arxiv.org/pdf/1511.06391.pdf">Order Matters: Sequence to sequence for sets</a>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -1322,7 +1396,7 @@ This may provide better time or memory complexity than separate calls of
 <h3>Softmax<a class="headerlink" href="#softmax" title="Permalink to this headline">#</a></h3>
 <dl class="py class">
 <dt class="sig sig-object py" id="torchdrug.layers.Softmax">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Softmax</span></span><a class="reference internal" href="../_modules/torchdrug/layers/readout.html#Softmax"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.layers.Softmax" title="Permalink to this definition">#</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Softmax</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'node'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/readout.html#Softmax"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.layers.Softmax" title="Permalink to this definition">#</a></dt>
 <dd><p>Softmax operator over graphs with variadic sizes.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="torchdrug.layers.Softmax.forward">
@@ -1349,7 +1423,7 @@ This may provide better time or memory complexity than separate calls of
 <h3>Sort<a class="headerlink" href="#sort" title="Permalink to this headline">#</a></h3>
 <dl class="py class">
 <dt class="sig sig-object py" id="torchdrug.layers.Sort">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Sort</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">descending</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/readout.html#Sort"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.layers.Sort" title="Permalink to this definition">#</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Sort</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'node'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">descending</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/readout.html#Sort"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.layers.Sort" title="Permalink to this definition">#</a></dt>
 <dd><p>Sort operator over graphs with variadic sizes.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -1576,6 +1650,107 @@ sparse (bool, optional): use sparse assignment or not</p>
 </dd></dl>
 </section>
 </section>
+<section id="sequence-encoder-blocks">
+<h2>Sequence Encoder Blocks<a class="headerlink" href="#sequence-encoder-blocks" title="Permalink to this headline">#</a></h2>
+<section id="proteinresnetblock">
+<h3>ProteinResNetBlock<a class="headerlink" href="#proteinresnetblock" title="Permalink to this headline">#</a></h3>
+<dl class="py class">
+<dt class="sig sig-object py" id="torchdrug.layers.ProteinResNetBlock">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">ProteinResNetBlock</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_dim</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_dim</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kernel_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stride</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">padding</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">activation</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'gelu'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/block.html#ProteinResNetBlock"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.layers.ProteinResNetBlock" title="Permalink to this definition">#</a></dt>
+<dd><p>Convolutional block with residual connection from <a class="reference external" href="https://arxiv.org/pdf/1512.03385.pdf">Deep Residual Learning for Image Recognition</a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input_dim</strong> (<em>int</em>) – input dimension</p></li>
+<li><p><strong>output_dim</strong> (<em>int</em>) – output dimension</p></li>
+<li><p><strong>kernel_size</strong> (<em>int</em><em>, </em><em>optional</em>) – size of convolutional kernel</p></li>
+<li><p><strong>stride</strong> (<em>int</em><em>, </em><em>optional</em>) – stride of convolution</p></li>
+<li><p><strong>padding</strong> (<em>int</em><em>, </em><em>optional</em>) – padding added to both sides of the input</p></li>
+<li><p><strong>activation</strong> (<em>str</em><em> or </em><em>function</em><em>, </em><em>optional</em>) – activation function</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="torchdrug.layers.ProteinResNetBlock.forward">
+<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mask</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/block.html#ProteinResNetBlock.forward"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.layers.ProteinResNetBlock.forward" title="Permalink to this definition">#</a></dt>
+<dd><p>Perform 1D convolutions over the input.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input</strong> (<em>Tensor</em>) – input representations of shape <cite>(…, length, dim)</cite></p></li>
+<li><p><strong>mask</strong> (<em>Tensor</em>) – bool mask of shape <cite>(…, length, dim)</cite></p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+</dd></dl>
+</section>
+<section id="selfattentionblock">
+<h3>SelfAttentionBlock<a class="headerlink" href="#selfattentionblock" title="Permalink to this headline">#</a></h3>
+<dl class="py class">
+<dt class="sig sig-object py" id="torchdrug.layers.SelfAttentionBlock">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">SelfAttentionBlock</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hidden_dim</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_heads</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dropout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/block.html#SelfAttentionBlock"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.layers.SelfAttentionBlock" title="Permalink to this definition">#</a></dt>
+<dd><p>Multi-head self-attention block from
+<a class="reference external" href="https://arxiv.org/pdf/1706.03762.pdf">Attention Is All You Need</a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>hidden_dim</strong> (<em>int</em>) – hidden dimension</p></li>
+<li><p><strong>num_heads</strong> (<em>int</em>) – number of attention heads</p></li>
+<li><p><strong>dropout</strong> (<em>float</em><em>, </em><em>optional</em>) – dropout ratio of attention maps</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="torchdrug.layers.SelfAttentionBlock.forward">
+<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mask</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/block.html#SelfAttentionBlock.forward"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.layers.SelfAttentionBlock.forward" title="Permalink to this definition">#</a></dt>
+<dd><p>Perform self attention over the input.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input</strong> (<em>Tensor</em>) – input representations of shape <cite>(…, length, dim)</cite></p></li>
+<li><p><strong>mask</strong> (<em>Tensor</em>) – bool mask of shape <cite>(…, length)</cite></p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+</dd></dl>
+</section>
+<section id="proteinbertblock">
+<h3>ProteinBERTBlock<a class="headerlink" href="#proteinbertblock" title="Permalink to this headline">#</a></h3>
+<dl class="py class">
+<dt class="sig sig-object py" id="torchdrug.layers.ProteinBERTBlock">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">ProteinBERTBlock</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_dim</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hidden_dim</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_heads</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">attention_dropout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hidden_dropout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">activation</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'relu'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/block.html#ProteinBERTBlock"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.layers.ProteinBERTBlock" title="Permalink to this definition">#</a></dt>
+<dd><p>Transformer encoding block from
+<a class="reference external" href="https://arxiv.org/pdf/1706.03762.pdf">Attention Is All You Need</a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input_dim</strong> (<em>int</em>) – input dimension</p></li>
+<li><p><strong>hidden_dim</strong> (<em>int</em>) – hidden dimension</p></li>
+<li><p><strong>num_heads</strong> (<em>int</em>) – number of attention heads</p></li>
+<li><p><strong>attention_dropout</strong> (<em>float</em><em>, </em><em>optional</em>) – dropout ratio of attention maps</p></li>
+<li><p><strong>hidden_dropout</strong> (<em>float</em><em>, </em><em>optional</em>) – dropout ratio of hidden features</p></li>
+<li><p><strong>activation</strong> (<em>str</em><em> or </em><em>function</em><em>, </em><em>optional</em>) – activation function</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="torchdrug.layers.ProteinBERTBlock.forward">
+<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mask</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/block.html#ProteinBERTBlock.forward"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.layers.ProteinBERTBlock.forward" title="Permalink to this definition">#</a></dt>
+<dd><p>Perform a BERT-block transformation over the input.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input</strong> (<em>Tensor</em>) – input representations of shape <cite>(…, length, dim)</cite></p></li>
+<li><p><strong>mask</strong> (<em>Tensor</em>) – bool mask of shape <cite>(…, length)</cite></p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+</dd></dl>
+</section>
+</section>
 <section id="distribution-layers">
 <h2>Distribution Layers<a class="headerlink" href="#distribution-layers" title="Permalink to this headline">#</a></h2>
 <p>These layers belong to <cite>torchdrug.layers.distribution</cite>.</p>
@@ -1611,6 +1786,319 @@ sparse (bool, optional): use sparse assignment or not</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>size</strong> (<em>tuple of int</em>) – shape of the samples</p>
+</dd>
+</dl>
+</dd></dl>
+</dd></dl>
+</section>
+</section>
+<section id="graph-construction-layers">
+<h2>Graph Construction Layers<a class="headerlink" href="#graph-construction-layers" title="Permalink to this headline">#</a></h2>
+<p>These layers belong to <cite>torchdrug.layers.geometry</cite>.</p>
+<section id="graphconstruction">
+<h3>GraphConstruction<a class="headerlink" href="#graphconstruction" title="Permalink to this headline">#</a></h3>
+<dl class="py class">
+<dt class="sig sig-object py" id="torchdrug.layers.geometry.GraphConstruction">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">GraphConstruction</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">node_layers</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">edge_layers</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">edge_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'residue_type'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/geometry/graph.html#GraphConstruction"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.layers.geometry.GraphConstruction" title="Permalink to this definition">#</a></dt>
+<dd><p>Construct a new graph from an existing graph.</p>
+<p>See <cite>torchdrug.layers.geometry</cite> for a full list of available node and edge layers.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>node_layers</strong> (<em>list of nn.Module</em><em>, </em><em>optional</em>) – modules to construct nodes of the new graph</p></li>
+<li><p><strong>edge_layers</strong> (<em>list of nn.Module</em><em>, </em><em>optional</em>) – modules to construct edges of the new graph</p></li>
+<li><p><strong>edge_feature</strong> (<em>str</em><em>, </em><em>optional</em>) – <p>edge features in the new graph.
+Available features are <code class="docutils literal notranslate"><span class="pre">residue_type</span></code>, <code class="docutils literal notranslate"><span class="pre">gearnet</span></code>.</p>
+<ol class="arabic simple">
+<li><dl class="simple">
+<dt>For <code class="docutils literal notranslate"><span class="pre">residue_type</span></code>, the feature of the edge <span class="math notranslate nohighlight">\(e_{ij}\)</span> between residue <span class="math notranslate nohighlight">\(i\)</span> and residue</dt><dd><p><span class="math notranslate nohighlight">\(j\)</span> is the concatenation <code class="docutils literal notranslate"><span class="pre">[residue_type(i),</span> <span class="pre">residue_type(j)]</span></code>.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>For <code class="docutils literal notranslate"><span class="pre">gearnet</span></code>, the feature of the edge <span class="math notranslate nohighlight">\(e_{ij}\)</span> between residue <span class="math notranslate nohighlight">\(i\)</span> and residue <span class="math notranslate nohighlight">\(j\)</span></dt><dd><p>is the concatenation <code class="docutils literal notranslate"><span class="pre">[residue_type(i),</span> <span class="pre">residue_type(j),</span> <span class="pre">edge_type(e_ij),</span>
+<span class="pre">sequential_distance(i,j),</span> <span class="pre">spatial_distance(i,j)]</span></code>.</p>
+</dd>
+</dl>
+</li>
+</ol>
+</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="torchdrug.layers.geometry.GraphConstruction.forward">
+<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/geometry/graph.html#GraphConstruction.forward"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.layers.geometry.GraphConstruction.forward" title="Permalink to this definition">#</a></dt>
+<dd><p>Generate a new graph based on the input graph and pre-defined node and edge layers.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>graph</strong> (<a class="reference internal" href="data.html#torchdrug.data.Graph" title="torchdrug.data.Graph"><em>Graph</em></a>) – <span class="math notranslate nohighlight">\(n\)</span> graph(s)</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>new graph(s)</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>graph (<a class="reference internal" href="data.html#torchdrug.data.Graph" title="torchdrug.data.Graph">Graph</a>)</p>
+</dd>
+</dl>
+</dd></dl>
+</dd></dl>
+</section>
+<section id="spatiallinegraph">
+<h3>SpatialLineGraph<a class="headerlink" href="#spatiallinegraph" title="Permalink to this headline">#</a></h3>
+<dl class="py class">
+<dt class="sig sig-object py" id="torchdrug.layers.geometry.SpatialLineGraph">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">SpatialLineGraph</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">num_angle_bin</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">8</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/geometry/graph.html#SpatialLineGraph"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.layers.geometry.SpatialLineGraph" title="Permalink to this definition">#</a></dt>
+<dd><p>Spatial line graph construction module from <a class="reference external" href="https://arxiv.org/pdf/2203.06125.pdf">Protein Representation Learning by Geometric Structure Pretraining</a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>num_angle_bin</strong> (<em>int</em><em>, </em><em>optional</em>) – number of bins to discretize angles between edges</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="torchdrug.layers.geometry.SpatialLineGraph.forward">
+<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/geometry/graph.html#SpatialLineGraph.forward"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.layers.geometry.SpatialLineGraph.forward" title="Permalink to this definition">#</a></dt>
+<dd><p>Generate the spatial line graph of the input graph.
+The edge types are decided by the angles between two adjacent edges in the input graph.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>graph</strong> (<a class="reference internal" href="data.html#torchdrug.data.PackedGraph" title="torchdrug.data.PackedGraph"><em>PackedGraph</em></a>) – <span class="math notranslate nohighlight">\(n\)</span> graph(s)</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>the spatial line graph</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>graph (<a class="reference internal" href="data.html#torchdrug.data.PackedGraph" title="torchdrug.data.PackedGraph">PackedGraph</a>)</p>
+</dd>
+</dl>
+</dd></dl>
+</dd></dl>
+</section>
+<section id="bondedge">
+<h3>BondEdge<a class="headerlink" href="#bondedge" title="Permalink to this headline">#</a></h3>
+<dl class="py class">
+<dt class="sig sig-object py" id="torchdrug.layers.geometry.BondEdge">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">BondEdge</span></span><a class="reference internal" href="../_modules/torchdrug/layers/geometry/function.html#BondEdge"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.layers.geometry.BondEdge" title="Permalink to this definition">#</a></dt>
+<dd><p>Construct all bond edges.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="torchdrug.layers.geometry.BondEdge.forward">
+<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/geometry/function.html#BondEdge.forward"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.layers.geometry.BondEdge.forward" title="Permalink to this definition">#</a></dt>
+<dd><p>Return bond edges from the input graph. Edge types are inherited from the input graph.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>graph</strong> (<a class="reference internal" href="data.html#torchdrug.data.Graph" title="torchdrug.data.Graph"><em>Graph</em></a>) – <span class="math notranslate nohighlight">\(n\)</span> graph(s)</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>edge list of shape <span class="math notranslate nohighlight">\((|E|, 3)\)</span>, number of relations</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>(Tensor, int)</p>
+</dd>
+</dl>
+</dd></dl>
+</dd></dl>
+</section>
+<section id="knnedge">
+<h3>KNNEdge<a class="headerlink" href="#knnedge" title="Permalink to this headline">#</a></h3>
+<dl class="py class">
+<dt class="sig sig-object py" id="torchdrug.layers.geometry.KNNEdge">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">KNNEdge</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_distance</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_distance</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/geometry/function.html#KNNEdge"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.layers.geometry.KNNEdge" title="Permalink to this definition">#</a></dt>
+<dd><p>Construct edges between each node and its nearest neighbors.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>k</strong> (<em>int</em><em>, </em><em>optional</em>) – number of neighbors</p></li>
+<li><p><strong>min_distance</strong> (<em>int</em><em>, </em><em>optional</em>) – minimum distance between the residues of two nodes</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="torchdrug.layers.geometry.KNNEdge.forward">
+<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/geometry/function.html#KNNEdge.forward"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.layers.geometry.KNNEdge.forward" title="Permalink to this definition">#</a></dt>
+<dd><p>Return KNN edges constructed from the input graph.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>graph</strong> (<a class="reference internal" href="data.html#torchdrug.data.Graph" title="torchdrug.data.Graph"><em>Graph</em></a>) – <span class="math notranslate nohighlight">\(n\)</span> graph(s)</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>edge list of shape <span class="math notranslate nohighlight">\((|E|, 3)\)</span>, number of relations</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>(Tensor, int)</p>
+</dd>
+</dl>
+</dd></dl>
+</dd></dl>
+</section>
+<section id="spatialedge">
+<h3>SpatialEdge<a class="headerlink" href="#spatialedge" title="Permalink to this headline">#</a></h3>
+<dl class="py class">
+<dt class="sig sig-object py" id="torchdrug.layers.geometry.SpatialEdge">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">SpatialEdge</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">radius</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_distance</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_num_neighbors</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">32</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/geometry/function.html#SpatialEdge"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.layers.geometry.SpatialEdge" title="Permalink to this definition">#</a></dt>
+<dd><p>Construct edges between nodes within a specified radius.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>radius</strong> (<em>float</em><em>, </em><em>optional</em>) – spatial radius</p></li>
+<li><p><strong>min_distance</strong> (<em>int</em><em>, </em><em>optional</em>) – minimum distance between the residues of two nodes</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="torchdrug.layers.geometry.SpatialEdge.forward">
+<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/geometry/function.html#SpatialEdge.forward"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.layers.geometry.SpatialEdge.forward" title="Permalink to this definition">#</a></dt>
+<dd><p>Return spatial radius edges constructed based on the input graph.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>graph</strong> (<a class="reference internal" href="data.html#torchdrug.data.Graph" title="torchdrug.data.Graph"><em>Graph</em></a>) – <span class="math notranslate nohighlight">\(n\)</span> graph(s)</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>edge list of shape <span class="math notranslate nohighlight">\((|E|, 3)\)</span>, number of relations</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>(Tensor, int)</p>
+</dd>
+</dl>
+</dd></dl>
+</dd></dl>
+</section>
+<section id="sequentialedge">
+<h3>SequentialEdge<a class="headerlink" href="#sequentialedge" title="Permalink to this headline">#</a></h3>
+<dl class="py class">
+<dt class="sig sig-object py" id="torchdrug.layers.geometry.SequentialEdge">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">SequentialEdge</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">max_distance</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/geometry/function.html#SequentialEdge"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.layers.geometry.SequentialEdge" title="Permalink to this definition">#</a></dt>
+<dd><p>Construct edges between atoms within close residues.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>max_distance</strong> (<em>int</em><em>, </em><em>optional</em>) – maximum distance between two residues in the sequence</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="torchdrug.layers.geometry.SequentialEdge.forward">
+<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/geometry/function.html#SequentialEdge.forward"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.layers.geometry.SequentialEdge.forward" title="Permalink to this definition">#</a></dt>
+<dd><p>Return sequential edges constructed based on the input graph.
+Edge types are defined by the relative distance between two residues in the sequence</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>graph</strong> (<a class="reference internal" href="data.html#torchdrug.data.Graph" title="torchdrug.data.Graph"><em>Graph</em></a>) – <span class="math notranslate nohighlight">\(n\)</span> graph(s)</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>edge list of shape <span class="math notranslate nohighlight">\((|E|, 3)\)</span>, number of relations</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>(Tensor, int)</p>
+</dd>
+</dl>
+</dd></dl>
+</dd></dl>
+</section>
+<section id="alphacarbonnode">
+<h3>AlphaCarbonNode<a class="headerlink" href="#alphacarbonnode" title="Permalink to this headline">#</a></h3>
+<dl class="py class">
+<dt class="sig sig-object py" id="torchdrug.layers.geometry.AlphaCarbonNode">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">AlphaCarbonNode</span></span><a class="reference internal" href="../_modules/torchdrug/layers/geometry/function.html#AlphaCarbonNode"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.layers.geometry.AlphaCarbonNode" title="Permalink to this definition">#</a></dt>
+<dd><p>Construct only alpha carbon atoms.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="torchdrug.layers.geometry.AlphaCarbonNode.forward">
+<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/geometry/function.html#AlphaCarbonNode.forward"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.layers.geometry.AlphaCarbonNode.forward" title="Permalink to this definition">#</a></dt>
+<dd><p>Return a subgraph that only consists of alpha carbon nodes.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>graph</strong> (<a class="reference internal" href="data.html#torchdrug.data.Graph" title="torchdrug.data.Graph"><em>Graph</em></a>) – <span class="math notranslate nohighlight">\(n\)</span> graph(s)</p>
+</dd>
+</dl>
+</dd></dl>
+</dd></dl>
+</section>
+<section id="identitynode">
+<h3>IdentityNode<a class="headerlink" href="#identitynode" title="Permalink to this headline">#</a></h3>
+<dl class="py class">
+<dt class="sig sig-object py" id="torchdrug.layers.geometry.IdentityNode">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">IdentityNode</span></span><a class="reference internal" href="../_modules/torchdrug/layers/geometry/function.html#IdentityNode"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.layers.geometry.IdentityNode" title="Permalink to this definition">#</a></dt>
+<dd><p>Construct all nodes as the input.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="torchdrug.layers.geometry.IdentityNode.forward">
+<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/geometry/function.html#IdentityNode.forward"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.layers.geometry.IdentityNode.forward" title="Permalink to this definition">#</a></dt>
+<dd><p>Return the input graph as is.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>graph</strong> (<a class="reference internal" href="data.html#torchdrug.data.Graph" title="torchdrug.data.Graph"><em>Graph</em></a>) – <span class="math notranslate nohighlight">\(n\)</span> graph(s)</p>
+</dd>
+</dl>
+</dd></dl>
+</dd></dl>
+</section>
+<section id="randomedgemask">
+<h3>RandomEdgeMask<a class="headerlink" href="#randomedgemask" title="Permalink to this headline">#</a></h3>
+<dl class="py class">
+<dt class="sig sig-object py" id="torchdrug.layers.geometry.RandomEdgeMask">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">RandomEdgeMask</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mask_rate</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.15</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/geometry/function.html#RandomEdgeMask"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.layers.geometry.RandomEdgeMask" title="Permalink to this definition">#</a></dt>
+<dd><p>Construct nodes by random edge masking.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>mask_rate</strong> (<em>float</em><em>, </em><em>optional</em>) – rate of masked edges</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="torchdrug.layers.geometry.RandomEdgeMask.forward">
+<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/geometry/function.html#RandomEdgeMask.forward"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.layers.geometry.RandomEdgeMask.forward" title="Permalink to this definition">#</a></dt>
+<dd><p>Return a graph with some edges masked out.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>graph</strong> (<a class="reference internal" href="data.html#torchdrug.data.Graph" title="torchdrug.data.Graph"><em>Graph</em></a>) – <span class="math notranslate nohighlight">\(n\)</span> graph(s)</p>
+</dd>
+</dl>
+</dd></dl>
+</dd></dl>
+</section>
+<section id="subsequencenode">
+<h3>SubsequenceNode<a class="headerlink" href="#subsequencenode" title="Permalink to this headline">#</a></h3>
+<dl class="py class">
+<dt class="sig sig-object py" id="torchdrug.layers.geometry.SubsequenceNode">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">SubsequenceNode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">max_length</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/geometry/function.html#SubsequenceNode"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.layers.geometry.SubsequenceNode" title="Permalink to this definition">#</a></dt>
+<dd><p>Construct nodes by taking a random subsequence of the original graph.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>max_length</strong> (<em>int</em><em>, </em><em>optional</em>) – maximal length of the sequence after cropping</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="torchdrug.layers.geometry.SubsequenceNode.forward">
+<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/geometry/function.html#SubsequenceNode.forward"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.layers.geometry.SubsequenceNode.forward" title="Permalink to this definition">#</a></dt>
+<dd><p>Randomly take a subsequence of the specified length.
+Return the full sequence if the sequence is shorter than the specified length.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>graph</strong> (<a class="reference internal" href="data.html#torchdrug.data.Graph" title="torchdrug.data.Graph"><em>Graph</em></a>) – <span class="math notranslate nohighlight">\(n\)</span> graph(s)</p>
+</dd>
+</dl>
+</dd></dl>
+</dd></dl>
+</section>
+<section id="subspacenode">
+<h3>SubspaceNode<a class="headerlink" href="#subspacenode" title="Permalink to this headline">#</a></h3>
+<dl class="py class">
+<dt class="sig sig-object py" id="torchdrug.layers.geometry.SubspaceNode">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">SubspaceNode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">entity_level</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'node'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_radius</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">15.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_neighbor</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">50</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/geometry/function.html#SubspaceNode"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.layers.geometry.SubspaceNode" title="Permalink to this definition">#</a></dt>
+<dd><p>Construct nodes by taking a spatial ball of the original graph.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>entity_level</strong> (<em>str</em><em>, </em><em>optional</em>) – level to perform cropping.
+Available options are <code class="docutils literal notranslate"><span class="pre">node</span></code>, <code class="docutils literal notranslate"><span class="pre">atom</span></code> and <code class="docutils literal notranslate"><span class="pre">residue</span></code>.</p></li>
+<li><p><strong>min_radius</strong> (<em>float</em><em>, </em><em>optional</em>) – minimum radius of the spatial ball</p></li>
+<li><p><strong>min_neighbor</strong> (<em>int</em><em>, </em><em>optional</em>) – minimum number of nodes in the spatial ball</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="torchdrug.layers.geometry.SubspaceNode.forward">
+<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/layers/geometry/function.html#SubspaceNode.forward"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.layers.geometry.SubspaceNode.forward" title="Permalink to this definition">#</a></dt>
+<dd><p>Randomly pick a node as the center, and crop a spatial ball
+that is at least <cite>radius</cite> large and contain at least <cite>k</cite> nodes.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>graph</strong> (<a class="reference internal" href="data.html#torchdrug.data.Graph" title="torchdrug.data.Graph"><em>Graph</em></a>) – <span class="math notranslate nohighlight">\(n\)</span> graph(s)</p>
 </dd>
 </dl>
 </dd></dl>
@@ -2183,6 +2671,7 @@ and the sizes of all sets are summed to <span class="math notranslate nohighligh
 <li><a class="reference internal" href="#gaussiansmearing">GaussianSmearing</a></li>
 <li><a class="reference internal" href="#multilayerperceptron">MultiLayerPerceptron</a></li>
 <li><a class="reference internal" href="#mutualinformation">MutualInformation</a></li>
+<li><a class="reference internal" href="#sinusoidalpositionembedding">SinusoidalPositionEmbedding</a></li>
 <li><a class="reference internal" href="#pairnorm">PairNorm</a></li>
 <li><a class="reference internal" href="#sequential">Sequential</a></li>
 </ul>
@@ -2190,6 +2679,7 @@ and the sizes of all sets are summed to <span class="math notranslate nohighligh
 <li><a class="reference internal" href="#convolution-layers">Convolution Layers</a><ul>
 <li><a class="reference internal" href="#chebyshevconv">ChebyshevConv</a></li>
 <li><a class="reference internal" href="#continuousfilterconv">ContinuousFilterConv</a></li>
+<li><a class="reference internal" href="#geometricrelationalgraphconv">GeometricRelationalGraphConv</a></li>
 <li><a class="reference internal" href="#graphattentionconv">GraphAttentionConv</a></li>
 <li><a class="reference internal" href="#graphconv">GraphConv</a></li>
 <li><a class="reference internal" href="#graphisomorphismconv">GraphIsomorphismConv</a></li>
@@ -2221,8 +2711,28 @@ and the sizes of all sets are summed to <span class="math notranslate nohighligh
 <li><a class="reference internal" href="#conditionalflow">ConditionalFlow</a></li>
 </ul>
 </li>
+<li><a class="reference internal" href="#sequence-encoder-blocks">Sequence Encoder Blocks</a><ul>
+<li><a class="reference internal" href="#proteinresnetblock">ProteinResNetBlock</a></li>
+<li><a class="reference internal" href="#selfattentionblock">SelfAttentionBlock</a></li>
+<li><a class="reference internal" href="#proteinbertblock">ProteinBERTBlock</a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#distribution-layers">Distribution Layers</a><ul>
 <li><a class="reference internal" href="#independentgaussian">IndependentGaussian</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#graph-construction-layers">Graph Construction Layers</a><ul>
+<li><a class="reference internal" href="#graphconstruction">GraphConstruction</a></li>
+<li><a class="reference internal" href="#spatiallinegraph">SpatialLineGraph</a></li>
+<li><a class="reference internal" href="#bondedge">BondEdge</a></li>
+<li><a class="reference internal" href="#knnedge">KNNEdge</a></li>
+<li><a class="reference internal" href="#spatialedge">SpatialEdge</a></li>
+<li><a class="reference internal" href="#sequentialedge">SequentialEdge</a></li>
+<li><a class="reference internal" href="#alphacarbonnode">AlphaCarbonNode</a></li>
+<li><a class="reference internal" href="#identitynode">IdentityNode</a></li>
+<li><a class="reference internal" href="#randomedgemask">RandomEdgeMask</a></li>
+<li><a class="reference internal" href="#subsequencenode">SubsequenceNode</a></li>
+<li><a class="reference internal" href="#subspacenode">SubspaceNode</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#functional-layers">Functional Layers</a><ul>

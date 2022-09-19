@@ -5,7 +5,7 @@
     <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="../../../genindex.html" /><link rel="search" title="Search" href="../../../search.html" />
 
     <meta name="generator" content="sphinx-4.5.0, furo 2022.04.07"/>
-        <title>torchdrug.tasks.retrosynthesis - TorchDrug 0.1.3 documentation</title>
+        <title>torchdrug.tasks.retrosynthesis - TorchDrug 0.2.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo.css?digest=68f4518137b9aefe99b631505a2064c3c42c9852" />
     <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
@@ -129,7 +129,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="../../../index.html"><div class="brand">TorchDrug 0.1.3 documentation</div></a>
+      <a href="../../../index.html"><div class="brand">TorchDrug 0.2.0 documentation</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -152,7 +152,7 @@
       <div class="sidebar-sticky"><a class="sidebar-brand centered" href="https://torchdrug.ai">
   
   <div class="sidebar-logo-container">
-    <img class="sidebar-logo" src="../../../_static/logo.svg" alt="Logo"/>
+    <img class="sidebar-logo" src="../../../_static/torchdrug_logo_full.svg" alt="Logo"/>
   </div>
   
   
@@ -273,7 +273,7 @@
 <span class="sd">        num_mlp_layer (int, optional): number of MLP layers</span>
 <span class="sd">    """</span>
 
-    <span class="n">_option_members</span> <span class="o">=</span> <span class="nb">set</span><span class="p">([</span><span class="s2">"feature"</span><span class="p">])</span>
+    <span class="n">_option_members</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"feature"</span><span class="p">}</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">feature</span><span class="o">=</span><span class="p">(</span><span class="s2">"reaction"</span><span class="p">,</span> <span class="s2">"graph"</span><span class="p">,</span> <span class="s2">"atom"</span><span class="p">,</span> <span class="s2">"bond"</span><span class="p">),</span> <span class="n">num_mlp_layer</span><span class="o">=</span><span class="mi">2</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">CenterIdentification</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
@@ -443,7 +443,7 @@
         <span class="n">center_topk_shifted</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">cat</span><span class="p">([</span><span class="o">-</span><span class="n">torch</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">long</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">device</span><span class="p">),</span>
                                          <span class="n">center_topk</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]])</span>
         <span class="n">product_id_shifted</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">cat</span><span class="p">([</span><span class="o">-</span><span class="n">torch</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">long</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">device</span><span class="p">),</span>
-                                         <span class="n">graph</span><span class="o">.</span><span class="n">product_id</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]])</span>
+                                        <span class="n">graph</span><span class="o">.</span><span class="n">product_id</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]])</span>
         <span class="n">is_duplicate</span> <span class="o">=</span> <span class="p">(</span><span class="n">center_topk</span> <span class="o">==</span> <span class="n">center_topk_shifted</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">graph</span><span class="o">.</span><span class="n">product_id</span> <span class="o">==</span> <span class="n">product_id_shifted</span><span class="p">)</span>
         <span class="n">node_index</span> <span class="o">=</span> <span class="n">node_index</span><span class="p">[</span><span class="o">~</span><span class="n">is_edge</span><span class="p">]</span>
         <span class="n">edge_index</span> <span class="o">=</span> <span class="n">edge_index</span><span class="p">[</span><span class="n">is_edge</span><span class="p">]</span>
@@ -542,7 +542,7 @@
 <span class="sd">        num_mlp_layer (int, optional): number of MLP layers</span>
 <span class="sd">    """</span>
 
-    <span class="n">_option_members</span> <span class="o">=</span> <span class="nb">set</span><span class="p">([</span><span class="s2">"feature"</span><span class="p">])</span>
+    <span class="n">_option_members</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"feature"</span><span class="p">}</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">feature</span><span class="o">=</span><span class="p">(</span><span class="s2">"reaction"</span><span class="p">,</span> <span class="s2">"graph"</span><span class="p">,</span> <span class="s2">"atom"</span><span class="p">),</span> <span class="n">num_mlp_layer</span><span class="o">=</span><span class="mi">2</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">SynthonCompletion</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
@@ -1087,11 +1087,11 @@
             <span class="n">data_dict</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
         <span class="c1"># pad 0 for node / edge attributes</span>
         <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">data_dict</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-            <span class="k">if</span> <span class="n">meta_dict</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">==</span> <span class="s2">"node"</span><span class="p">:</span>
+            <span class="k">if</span> <span class="s2">"node"</span> <span class="ow">in</span> <span class="n">meta_dict</span><span class="p">[</span><span class="n">k</span><span class="p">]:</span>
                 <span class="n">shape</span> <span class="o">=</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">new_atom_type</span><span class="p">),</span> <span class="o">*</span><span class="n">v</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
                 <span class="n">new_data</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">shape</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">v</span><span class="o">.</span><span class="n">dtype</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">device</span><span class="p">)</span>
                 <span class="n">data_dict</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">functional</span><span class="o">.</span><span class="n">_extend</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">graph</span><span class="o">.</span><span class="n">num_nodes</span><span class="p">,</span> <span class="n">new_data</span><span class="p">,</span> <span class="n">has_new_node</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
-            <span class="k">if</span> <span class="n">meta_dict</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">==</span> <span class="s2">"edge"</span><span class="p">:</span>
+            <span class="k">if</span> <span class="s2">"edge"</span> <span class="ow">in</span> <span class="n">meta_dict</span><span class="p">[</span><span class="n">k</span><span class="p">]:</span>
                 <span class="n">shape</span> <span class="o">=</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">new_edge_list</span><span class="p">)</span> <span class="o">*</span> <span class="mi">2</span><span class="p">,</span> <span class="o">*</span><span class="n">v</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
                 <span class="n">new_data</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">shape</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">v</span><span class="o">.</span><span class="n">dtype</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">device</span><span class="p">)</span>
                 <span class="n">data_dict</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">functional</span><span class="o">.</span><span class="n">_extend</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">graph</span><span class="o">.</span><span class="n">num_edges</span><span class="p">,</span> <span class="n">new_data</span><span class="p">,</span> <span class="n">has_new_edge</span> <span class="o">*</span> <span class="mi">2</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
@@ -1306,7 +1306,7 @@
 <span class="sd">        metric (str or list of str, optional): metric(s). Available metrics are ``top-K``.</span>
 <span class="sd">    """</span>
 
-    <span class="n">_option_members</span> <span class="o">=</span> <span class="nb">set</span><span class="p">([</span><span class="s2">"metric"</span><span class="p">])</span>
+    <span class="n">_option_members</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"metric"</span><span class="p">}</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">center_identification</span><span class="p">,</span> <span class="n">synthon_completion</span><span class="p">,</span> <span class="n">center_topk</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">num_synthon_beam</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">max_prediction</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span>
                  <span class="n">metric</span><span class="o">=</span><span class="p">(</span><span class="s2">"top-1"</span><span class="p">,</span> <span class="s2">"top-3"</span><span class="p">,</span> <span class="s2">"top-5"</span><span class="p">,</span> <span class="s2">"top-10"</span><span class="p">)):</span>

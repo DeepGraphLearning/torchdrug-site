@@ -5,7 +5,7 @@
     <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="../../../genindex.html" /><link rel="search" title="Search" href="../../../search.html" />
 
     <meta name="generator" content="sphinx-4.5.0, furo 2022.04.07"/>
-        <title>torchdrug.data.feature - TorchDrug 0.1.3 documentation</title>
+        <title>torchdrug.data.feature - TorchDrug 0.2.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo.css?digest=68f4518137b9aefe99b631505a2064c3c42c9852" />
     <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
@@ -129,7 +129,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="../../../index.html"><div class="brand">TorchDrug 0.1.3 documentation</div></a>
+      <a href="../../../index.html"><div class="brand">TorchDrug 0.2.0 documentation</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -152,7 +152,7 @@
       <div class="sidebar-sticky"><a class="sidebar-brand centered" href="https://torchdrug.ai">
   
   <div class="sidebar-logo-container">
-    <img class="sidebar-logo" src="../../../_static/logo.svg" alt="Logo"/>
+    <img class="sidebar-logo" src="../../../_static/torchdrug_logo_full.svg" alt="Logo"/>
   </div>
   
   
@@ -262,6 +262,10 @@
 <span class="n">bond_type_vocab</span> <span class="o">=</span> <span class="p">{</span><span class="n">b</span><span class="p">:</span> <span class="n">i</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">b</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">bond_type_vocab</span><span class="p">)}</span>
 <span class="n">bond_dir_vocab</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">Chem</span><span class="o">.</span><span class="n">rdchem</span><span class="o">.</span><span class="n">BondDir</span><span class="o">.</span><span class="n">values</span><span class="p">))</span>
 <span class="n">bond_stereo_vocab</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">Chem</span><span class="o">.</span><span class="n">rdchem</span><span class="o">.</span><span class="n">BondStereo</span><span class="o">.</span><span class="n">values</span><span class="p">))</span>
+
+<span class="c1"># orderd by molecular mass</span>
+<span class="n">residue_vocab</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"GLY"</span><span class="p">,</span> <span class="s2">"ALA"</span><span class="p">,</span> <span class="s2">"SER"</span><span class="p">,</span> <span class="s2">"PRO"</span><span class="p">,</span> <span class="s2">"VAL"</span><span class="p">,</span> <span class="s2">"THR"</span><span class="p">,</span> <span class="s2">"CYS"</span><span class="p">,</span> <span class="s2">"ILE"</span><span class="p">,</span> <span class="s2">"LEU"</span><span class="p">,</span> <span class="s2">"ASN"</span><span class="p">,</span>
+                 <span class="s2">"ASP"</span><span class="p">,</span> <span class="s2">"GLN"</span><span class="p">,</span> <span class="s2">"LYS"</span><span class="p">,</span> <span class="s2">"GLU"</span><span class="p">,</span> <span class="s2">"MET"</span><span class="p">,</span> <span class="s2">"HIS"</span><span class="p">,</span> <span class="s2">"PHE"</span><span class="p">,</span> <span class="s2">"ARG"</span><span class="p">,</span> <span class="s2">"TYR"</span><span class="p">,</span> <span class="s2">"TRP"</span><span class="p">]</span>
 
 
 <span class="k">def</span> <span class="nf">onehot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">vocab</span><span class="p">,</span> <span class="n">allow_unknown</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
@@ -431,7 +435,7 @@
     <span class="sd">"""</span>
 <span class="sd">    Atom position in the molecular conformation.</span>
 <span class="sd">    Return 3D position if available, otherwise 2D position is returned.</span>
-<span class="sd">    </span>
+
 <span class="sd">    Note it takes much time to compute the conformation for large molecules.</span>
 <span class="sd">    """</span>
     <span class="n">mol</span> <span class="o">=</span> <span class="n">atom</span><span class="o">.</span><span class="n">GetOwningMol</span><span class="p">()</span>
@@ -453,6 +457,19 @@
 <span class="sd">    """</span>
     <span class="k">return</span> <span class="n">onehot</span><span class="p">(</span><span class="n">atom</span><span class="o">.</span><span class="n">GetSymbol</span><span class="p">(),</span> <span class="n">atom_vocab</span><span class="p">,</span> <span class="n">allow_unknown</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="o">+</span> \
            <span class="n">onehot</span><span class="p">(</span><span class="n">atom</span><span class="o">.</span><span class="n">GetChiralTag</span><span class="p">(),</span> <span class="n">chiral_tag_vocab</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="atom_residue_symbol"><a class="viewcode-back" href="../../../api/data.html#torchdrug.data.feature.atom_residue_symbol">[docs]</a><span class="nd">@R</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="s2">"features.atom.residue_symbol"</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">atom_residue_symbol</span><span class="p">(</span><span class="n">atom</span><span class="p">):</span>
+    <span class="sd">"""Residue symbol as atom feature. Only support atoms in a protein.</span>
+
+<span class="sd">    Features:</span>
+<span class="sd">        GetSymbol(): one-hot embedding for the atomic symbol</span>
+<span class="sd">        GetResidueName(): one-hot embedding for the residue symbol</span>
+<span class="sd">    """</span>
+    <span class="n">residue</span> <span class="o">=</span> <span class="n">atom</span><span class="o">.</span><span class="n">GetPDBResidueInfo</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">onehot</span><span class="p">(</span><span class="n">atom</span><span class="o">.</span><span class="n">GetSymbol</span><span class="p">(),</span> <span class="n">atom_vocab</span><span class="p">,</span> <span class="n">allow_unknown</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="o">+</span> \
+           <span class="n">onehot</span><span class="p">(</span><span class="n">residue</span><span class="o">.</span><span class="n">GetResidueName</span><span class="p">()</span> <span class="k">if</span> <span class="n">residue</span> <span class="k">else</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">residue_vocab</span><span class="p">,</span> <span class="n">allow_unknown</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="bond_default"><a class="viewcode-back" href="../../../api/data.html#torchdrug.data.feature.bond_default">[docs]</a><span class="nd">@R</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="s2">"features.bond.default"</span><span class="p">)</span>
@@ -478,7 +495,7 @@
 <span class="k">def</span> <span class="nf">bond_length</span><span class="p">(</span><span class="n">bond</span><span class="p">):</span>
     <span class="sd">"""</span>
 <span class="sd">    Bond length in the molecular conformation.</span>
-<span class="sd">    </span>
+
 <span class="sd">    Note it takes much time to compute the conformation for large molecules.</span>
 <span class="sd">    """</span>
     <span class="n">mol</span> <span class="o">=</span> <span class="n">bond</span><span class="o">.</span><span class="n">GetOwningMol</span><span class="p">()</span>
@@ -518,6 +535,26 @@
            <span class="n">onehot</span><span class="p">(</span><span class="n">bond</span><span class="o">.</span><span class="n">GetBondDir</span><span class="p">(),</span> <span class="n">bond_dir_vocab</span><span class="p">)</span></div>
 
 
+<div class="viewcode-block" id="residue_symbol"><a class="viewcode-back" href="../../../api/data.html#torchdrug.data.feature.residue_symbol">[docs]</a><span class="nd">@R</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="s2">"features.residue.symbol"</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">residue_symbol</span><span class="p">(</span><span class="n">residue</span><span class="p">):</span>
+    <span class="sd">"""Symbol residue feature.</span>
+
+<span class="sd">    Features:</span>
+<span class="sd">        GetResidueName(): one-hot embedding for the residue symbol</span>
+<span class="sd">    """</span>
+    <span class="k">return</span> <span class="n">onehot</span><span class="p">(</span><span class="n">residue</span><span class="o">.</span><span class="n">GetResidueName</span><span class="p">(),</span> <span class="n">residue_vocab</span><span class="p">,</span> <span class="n">allow_unknown</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="residue_default"><a class="viewcode-back" href="../../../api/data.html#torchdrug.data.feature.residue_default">[docs]</a><span class="nd">@R</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="s2">"features.residue.default"</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">residue_default</span><span class="p">(</span><span class="n">residue</span><span class="p">):</span>
+    <span class="sd">"""Default residue feature.</span>
+
+<span class="sd">    Features:</span>
+<span class="sd">        GetResidueName(): one-hot embedding for the residue symbol</span>
+<span class="sd">    """</span>
+    <span class="k">return</span> <span class="n">residue_symbol</span><span class="p">(</span><span class="n">residue</span><span class="p">)</span></div>
+
+
 <div class="viewcode-block" id="ExtendedConnectivityFingerprint"><a class="viewcode-back" href="../../../api/data.html#torchdrug.data.feature.ExtendedConnectivityFingerprint">[docs]</a><span class="nd">@R</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="s2">"features.molecule.ecfp"</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">ExtendedConnectivityFingerprint</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">radius</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">length</span><span class="o">=</span><span class="mi">1024</span><span class="p">):</span>
     <span class="sd">"""Extended Connectivity Fingerprint molecule feature.</span>
@@ -540,8 +577,9 @@
 <span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
     <span class="s2">"atom_default"</span><span class="p">,</span> <span class="s2">"atom_center_identification"</span><span class="p">,</span> <span class="s2">"atom_synthon_completion"</span><span class="p">,</span>
     <span class="s2">"atom_symbol"</span><span class="p">,</span> <span class="s2">"atom_explicit_property_prediction"</span><span class="p">,</span> <span class="s2">"atom_property_prediction"</span><span class="p">,</span>
-    <span class="s2">"atom_position"</span><span class="p">,</span> <span class="s2">"atom_pretrain"</span><span class="p">,</span>
+    <span class="s2">"atom_position"</span><span class="p">,</span> <span class="s2">"atom_pretrain"</span><span class="p">,</span> <span class="s2">"atom_residue_symbol"</span><span class="p">,</span>
     <span class="s2">"bond_default"</span><span class="p">,</span> <span class="s2">"bond_length"</span><span class="p">,</span> <span class="s2">"bond_property_prediction"</span><span class="p">,</span> <span class="s2">"bond_pretrain"</span><span class="p">,</span>
+    <span class="s2">"residue_symbol"</span><span class="p">,</span> <span class="s2">"residue_default"</span><span class="p">,</span>
     <span class="s2">"ExtendedConnectivityFingerprint"</span><span class="p">,</span> <span class="s2">"molecule_default"</span><span class="p">,</span>
     <span class="s2">"ECFP"</span><span class="p">,</span>
 <span class="p">]</span>

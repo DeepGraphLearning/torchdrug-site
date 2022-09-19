@@ -6,7 +6,7 @@
 <link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="torchdrug.utils" href="utils.html" /><link rel="prev" title="torchdrug.models" href="models.html" />
 
     <meta name="generator" content="sphinx-4.5.0, furo 2022.04.07"/>
-        <title>torchdrug.tasks - TorchDrug 0.1.3 documentation</title>
+        <title>torchdrug.tasks - TorchDrug 0.2.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=68f4518137b9aefe99b631505a2064c3c42c9852" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
@@ -130,7 +130,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="../index.html"><div class="brand">TorchDrug 0.1.3 documentation</div></a>
+      <a href="../index.html"><div class="brand">TorchDrug 0.2.0 documentation</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -153,7 +153,7 @@
       <div class="sidebar-sticky"><a class="sidebar-brand centered" href="https://torchdrug.ai">
   
   <div class="sidebar-logo-container">
-    <img class="sidebar-logo" src="../_static/logo.svg" alt="Logo"/>
+    <img class="sidebar-logo" src="../_static/torchdrug_logo_full.svg" alt="Logo"/>
   </div>
   
   
@@ -246,8 +246,8 @@
 <h3>PropertyPrediction<a class="headerlink" href="#propertyprediction" title="Permalink to this headline">#</a></h3>
 <dl class="py class">
 <dt class="sig sig-object py" id="torchdrug.tasks.PropertyPrediction">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">PropertyPrediction</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">task</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">()</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">criterion</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'mse'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metric</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">('mae',</span> <span class="pre">'rmse')</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/tasks/property_prediction.html#PropertyPrediction"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.tasks.PropertyPrediction" title="Permalink to this definition">#</a></dt>
-<dd><p>Graph / molecule property prediction task.</p>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">PropertyPrediction</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">task</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">()</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">criterion</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'mse'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metric</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">('mae',</span> <span class="pre">'rmse')</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_mlp_layer</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">normalization</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_class</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">graph_construction_model</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/tasks/property_prediction.html#PropertyPrediction"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.tasks.PropertyPrediction" title="Permalink to this definition">#</a></dt>
+<dd><p>Graph / molecule / protein property prediction task.</p>
 <p>This class is also compatible with semi-supervised learning.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -259,6 +259,10 @@ For dict, the keys are tasks and the values are the corresponding weights.</p></
 are the corresponding weights. Available criterions are <code class="docutils literal notranslate"><span class="pre">mse</span></code> and <code class="docutils literal notranslate"><span class="pre">bce</span></code>.</p></li>
 <li><p><strong>metric</strong> (<em>str</em><em> or </em><em>list of str</em><em>, </em><em>optional</em>) – metric(s).
 Available metrics are <code class="docutils literal notranslate"><span class="pre">mae</span></code>, <code class="docutils literal notranslate"><span class="pre">rmse</span></code>, <code class="docutils literal notranslate"><span class="pre">auprc</span></code> and <code class="docutils literal notranslate"><span class="pre">auroc</span></code>.</p></li>
+<li><p><strong>num_mlp_layer</strong> (<em>int</em><em>, </em><em>optional</em>) – number of layers in mlp prediction head</p></li>
+<li><p><strong>normalization</strong> (<em>bool</em><em>, </em><em>optional</em>) – whether to normalize the target</p></li>
+<li><p><strong>num_class</strong> (<em>int</em><em>, </em><em>optional</em>) – number of classes</p></li>
+<li><p><strong>graph_construction_model</strong> (<em>nn.Module</em><em>, </em><em>optional</em>) – graph construction model</p></li>
 <li><p><strong>verbose</strong> (<em>int</em><em>, </em><em>optional</em>) – output verbose level</p></li>
 </ul>
 </dd>
@@ -266,6 +270,110 @@ Available metrics are <code class="docutils literal notranslate"><span class="pr
 <dl class="py method">
 <dt class="sig sig-object py" id="torchdrug.tasks.PropertyPrediction.preprocess">
 <span class="sig-name descname"><span class="pre">preprocess</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">train_set</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">valid_set</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_set</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/tasks/property_prediction.html#PropertyPrediction.preprocess"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.tasks.PropertyPrediction.preprocess" title="Permalink to this definition">#</a></dt>
+<dd><p>Compute the mean and derivation for each task on the training set.</p>
+</dd></dl>
+</dd></dl>
+</section>
+<section id="multiplebinaryclassification">
+<h3>MultipleBinaryClassification<a class="headerlink" href="#multiplebinaryclassification" title="Permalink to this headline">#</a></h3>
+<dl class="py class">
+<dt class="sig sig-object py" id="torchdrug.tasks.MultipleBinaryClassification">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">MultipleBinaryClassification</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">task</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">()</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">criterion</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'bce'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metric</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">('auprc@micro',</span> <span class="pre">'f1_max')</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_mlp_layer</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">normalization</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reweight</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">graph_construction_model</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/tasks/property_prediction.html#MultipleBinaryClassification"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.tasks.MultipleBinaryClassification" title="Permalink to this definition">#</a></dt>
+<dd><p>Multiple binary classification task for graphs / molecules / proteins.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>model</strong> (<em>nn.Module</em>) – graph representation model</p></li>
+<li><p><strong>task</strong> (<em>list of int</em><em>, </em><em>optional</em>) – training task id(s).</p></li>
+<li><p><strong>criterion</strong> (<em>list</em><em> or </em><em>dict</em><em>, </em><em>optional</em>) – training criterion(s). For dict, the keys are criterions and the values
+are the corresponding weights. Available criterions are <code class="docutils literal notranslate"><span class="pre">bce</span></code>.</p></li>
+<li><p><strong>metric</strong> (<em>str</em><em> or </em><em>list of str</em><em>, </em><em>optional</em>) – metric(s).
+Available metrics are <code class="docutils literal notranslate"><span class="pre">auroc@macro</span></code>, <code class="docutils literal notranslate"><span class="pre">auprc@macro</span></code>, <code class="docutils literal notranslate"><span class="pre">auroc@micro</span></code>, <code class="docutils literal notranslate"><span class="pre">auprc@micro</span></code> and <code class="docutils literal notranslate"><span class="pre">f1_max</span></code>.</p></li>
+<li><p><strong>num_mlp_layer</strong> (<em>int</em><em>, </em><em>optional</em>) – number of layers in the MLP prediction head</p></li>
+<li><p><strong>normalization</strong> (<em>bool</em><em>, </em><em>optional</em>) – whether to normalize the target</p></li>
+<li><p><strong>reweight</strong> (<em>bool</em><em>, </em><em>optional</em>) – whether to re-weight tasks according to the number of positive samples</p></li>
+<li><p><strong>graph_construction_model</strong> (<em>nn.Module</em><em>, </em><em>optional</em>) – graph construction model</p></li>
+<li><p><strong>verbose</strong> (<em>int</em><em>, </em><em>optional</em>) – output verbose level</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="torchdrug.tasks.MultipleBinaryClassification.forward">
+<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">batch</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/tasks/property_prediction.html#MultipleBinaryClassification.forward"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.tasks.MultipleBinaryClassification.forward" title="Permalink to this definition">#</a></dt>
+<dd><p>Defines the computation performed at every call.</p>
+<p>Should be overridden by all subclasses.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Although the recipe for forward pass needs to be defined within
+this function, one should call the <code class="xref py py-class docutils literal notranslate"><span class="pre">Module</span></code> instance afterwards
+instead of this since the former takes care of running the
+registered hooks while the latter silently ignores them.</p>
+</div>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="torchdrug.tasks.MultipleBinaryClassification.preprocess">
+<span class="sig-name descname"><span class="pre">preprocess</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">train_set</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">valid_set</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_set</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/tasks/property_prediction.html#MultipleBinaryClassification.preprocess"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.tasks.MultipleBinaryClassification.preprocess" title="Permalink to this definition">#</a></dt>
+<dd><p>Compute the weight for each task on the training set.</p>
+</dd></dl>
+</dd></dl>
+</section>
+<section id="nodepropertyprediction">
+<h3>NodePropertyPrediction<a class="headerlink" href="#nodepropertyprediction" title="Permalink to this headline">#</a></h3>
+<dl class="py class">
+<dt class="sig sig-object py" id="torchdrug.tasks.NodePropertyPrediction">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">NodePropertyPrediction</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">criterion</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'bce'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metric</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">('macro_auprc',</span> <span class="pre">'macro_auroc')</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_mlp_layer</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">normalization</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_class</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/tasks/property_prediction.html#NodePropertyPrediction"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.tasks.NodePropertyPrediction" title="Permalink to this definition">#</a></dt>
+<dd><p>Node / atom / residue property prediction task.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>model</strong> (<em>nn.Module</em>) – graph representation model</p></li>
+<li><p><strong>criterion</strong> (<em>str</em><em>, </em><em>list</em><em> or </em><em>dict</em><em>, </em><em>optional</em>) – training criterion(s). For dict, the keys are criterions and the values
+are the corresponding weights. Available criterions are <code class="docutils literal notranslate"><span class="pre">mse</span></code> and <code class="docutils literal notranslate"><span class="pre">bce</span></code>.</p></li>
+<li><p><strong>metric</strong> (<em>str</em><em> or </em><em>list of str</em><em>, </em><em>optional</em>) – metric(s).
+Available metrics are <code class="docutils literal notranslate"><span class="pre">mae</span></code>, <code class="docutils literal notranslate"><span class="pre">rmse</span></code>, <code class="docutils literal notranslate"><span class="pre">auprc</span></code> and <code class="docutils literal notranslate"><span class="pre">auroc</span></code>.</p></li>
+<li><p><strong>num_mlp_layer</strong> (<em>int</em><em>, </em><em>optional</em>) – number of layers in mlp prediction head</p></li>
+<li><p><strong>normalization</strong> (<em>bool</em><em>, </em><em>optional</em>) – whether to normalize the target
+Available entities are <code class="docutils literal notranslate"><span class="pre">node</span></code>, <code class="docutils literal notranslate"><span class="pre">atom</span></code> and <code class="docutils literal notranslate"><span class="pre">residue</span></code>.</p></li>
+<li><p><strong>num_class</strong> (<em>int</em><em>, </em><em>optional</em>) – number of classes</p></li>
+<li><p><strong>verbose</strong> (<em>int</em><em>, </em><em>optional</em>) – output verbose level</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="torchdrug.tasks.NodePropertyPrediction.preprocess">
+<span class="sig-name descname"><span class="pre">preprocess</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">train_set</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">valid_set</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_set</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/tasks/property_prediction.html#NodePropertyPrediction.preprocess"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.tasks.NodePropertyPrediction.preprocess" title="Permalink to this definition">#</a></dt>
+<dd><p>Compute the mean and derivation on the training set.</p>
+</dd></dl>
+</dd></dl>
+</section>
+<section id="interactionprediction">
+<h3>InteractionPrediction<a class="headerlink" href="#interactionprediction" title="Permalink to this headline">#</a></h3>
+<dl class="py class">
+<dt class="sig sig-object py" id="torchdrug.tasks.InteractionPrediction">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">InteractionPrediction</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model2</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">task</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">()</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">criterion</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'mse'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metric</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">('mae',</span> <span class="pre">'rmse')</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_mlp_layer</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">normalization</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_class</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/tasks/property_prediction.html#InteractionPrediction"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.tasks.InteractionPrediction" title="Permalink to this definition">#</a></dt>
+<dd><p>Predict the interaction property of graph pairs.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>model</strong> (<em>nn.Module</em>) – graph representation model</p></li>
+<li><p><strong>model2</strong> (<em>nn.Module</em><em>, </em><em>optional</em>) – graph representation model for the second item. If <code class="docutils literal notranslate"><span class="pre">None</span></code>, use tied-weight
+model for the second item.</p></li>
+<li><p><strong>task</strong> (<em>str</em><em>, </em><em>list</em><em> or </em><em>dict</em><em>, </em><em>optional</em>) – training task(s).
+For dict, the keys are tasks and the values are the corresponding weights.</p></li>
+<li><p><strong>criterion</strong> (<em>str</em><em>, </em><em>list</em><em> or </em><em>dict</em><em>, </em><em>optional</em>) – training criterion(s). For dict, the keys are criterions and the values
+are the corresponding weights. Available criterions are <code class="docutils literal notranslate"><span class="pre">mse</span></code> and <code class="docutils literal notranslate"><span class="pre">bce</span></code>.</p></li>
+<li><p><strong>metric</strong> (<em>str</em><em> or </em><em>list of str</em><em>, </em><em>optional</em>) – metric(s).
+Available metrics are <code class="docutils literal notranslate"><span class="pre">mae</span></code>, <code class="docutils literal notranslate"><span class="pre">rmse</span></code>, <code class="docutils literal notranslate"><span class="pre">auprc</span></code> and <code class="docutils literal notranslate"><span class="pre">auroc</span></code>.</p></li>
+<li><p><strong>num_mlp_layer</strong> (<em>int</em><em>, </em><em>optional</em>) – number of layers in mlp prediction head</p></li>
+<li><p><strong>normalization</strong> (<em>bool</em><em>, </em><em>optional</em>) – whether to normalize the target</p></li>
+<li><p><strong>num_class</strong> (<em>int</em><em>, </em><em>optional</em>) – number of classes</p></li>
+<li><p><strong>verbose</strong> (<em>int</em><em>, </em><em>optional</em>) – output verbose level</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="torchdrug.tasks.InteractionPrediction.preprocess">
+<span class="sig-name descname"><span class="pre">preprocess</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">train_set</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">valid_set</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_set</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/tasks/property_prediction.html#InteractionPrediction.preprocess"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.tasks.InteractionPrediction.preprocess" title="Permalink to this definition">#</a></dt>
 <dd><p>Compute the mean and derivation for each task on the training set.</p>
 </dd></dl>
 </dd></dl>
@@ -290,7 +398,7 @@ Available metrics are <code class="docutils literal notranslate"><span class="pr
 <h3>AttributeMasking<a class="headerlink" href="#attributemasking" title="Permalink to this headline">#</a></h3>
 <dl class="py class">
 <dt class="sig sig-object py" id="torchdrug.tasks.AttributeMasking">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">AttributeMasking</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mask_rate</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.15</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_mlp_layer</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/tasks/pretrain.html#AttributeMasking"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.tasks.AttributeMasking" title="Permalink to this definition">#</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">AttributeMasking</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mask_rate</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.15</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_mlp_layer</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">graph_construction_model</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/tasks/pretrain.html#AttributeMasking"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.tasks.AttributeMasking" title="Permalink to this definition">#</a></dt>
 <dd><p>Attribute masking proposed in <a class="reference external" href="https://arxiv.org/abs/1905.12265">Strategies for Pre-training Graph Neural Networks</a>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -328,11 +436,113 @@ By default, use the same architecture as <code class="docutils literal notransla
 </dl>
 </dd></dl>
 </section>
+<section id="distanceprediction">
+<h3>DistancePrediction<a class="headerlink" href="#distanceprediction" title="Permalink to this headline">#</a></h3>
+<dl class="py class">
+<dt class="sig sig-object py" id="torchdrug.tasks.DistancePrediction">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">DistancePrediction</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_sample</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">256</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_mlp_layer</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">graph_construction_model</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/tasks/pretrain.html#DistancePrediction"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.tasks.DistancePrediction" title="Permalink to this definition">#</a></dt>
+<dd><p>Pairwise spatial distance prediction task proposed in
+<a class="reference external" href="https://arxiv.org/pdf/2203.06125.pdf">Protein Representation Learning by Geometric Structure Pretraining</a>.</p>
+<p>Randomly select some edges and predict the lengths of the edges using the representations of two nodes.
+The selected edges are removed from the input graph to prevent trivial solutions.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>model</strong> (<em>nn.Module</em>) – node representation model</p></li>
+<li><p><strong>num_sample</strong> (<em>int</em><em>, </em><em>optional</em>) – number of edges selected from each graph</p></li>
+<li><p><strong>num_mlp_layer</strong> (<em>int</em><em>, </em><em>optional</em>) – number of MLP layers in distance predictor</p></li>
+<li><p><strong>graph_construction_model</strong> (<em>nn.Module</em><em>, </em><em>optional</em>) – graph construction model</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="torchdrug.tasks.DistancePrediction.forward">
+<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">batch</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/tasks/pretrain.html#DistancePrediction.forward"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.tasks.DistancePrediction.forward" title="Permalink to this definition">#</a></dt>
+<dd><p>Defines the computation performed at every call.</p>
+<p>Should be overridden by all subclasses.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Although the recipe for forward pass needs to be defined within
+this function, one should call the <code class="xref py py-class docutils literal notranslate"><span class="pre">Module</span></code> instance afterwards
+instead of this since the former takes care of running the
+registered hooks while the latter silently ignores them.</p>
+</div>
+</dd></dl>
+</dd></dl>
+</section>
+<section id="angleprediction">
+<h3>AnglePrediction<a class="headerlink" href="#angleprediction" title="Permalink to this headline">#</a></h3>
+<dl class="py class">
+<dt class="sig sig-object py" id="torchdrug.tasks.AnglePrediction">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">AnglePrediction</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_sample</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">256</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_class</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">8</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_mlp_layer</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">graph_construction_model</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/tasks/pretrain.html#AnglePrediction"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.tasks.AnglePrediction" title="Permalink to this definition">#</a></dt>
+<dd><p>Angle prediction task proposed in <a class="reference external" href="https://arxiv.org/pdf/2203.06125.pdf">Protein Representation Learning by Geometric Structure Pretraining</a>.</p>
+<p>Randomly select pairs of adjacent edges and predict the angles between them using the representations of three
+nodes. The selected edges are removed from the input graph to prevent trivial solutions.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>model</strong> (<em>nn.Module</em>) – node representation model</p></li>
+<li><p><strong>num_sample</strong> (<em>int</em><em>, </em><em>optional</em>) – number of edge pairs selected from each graph</p></li>
+<li><p><strong>num_class</strong> (<em>int</em><em>, </em><em>optional</em>) – number of classes to discretize the angles</p></li>
+<li><p><strong>num_mlp_layer</strong> (<em>int</em><em>, </em><em>optional</em>) – number of MLP layers in angle predictor</p></li>
+<li><p><strong>graph_construction_model</strong> (<em>nn.Module</em><em>, </em><em>optional</em>) – graph construction model</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="torchdrug.tasks.AnglePrediction.forward">
+<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">batch</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/tasks/pretrain.html#AnglePrediction.forward"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.tasks.AnglePrediction.forward" title="Permalink to this definition">#</a></dt>
+<dd><p>Defines the computation performed at every call.</p>
+<p>Should be overridden by all subclasses.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Although the recipe for forward pass needs to be defined within
+this function, one should call the <code class="xref py py-class docutils literal notranslate"><span class="pre">Module</span></code> instance afterwards
+instead of this since the former takes care of running the
+registered hooks while the latter silently ignores them.</p>
+</div>
+</dd></dl>
+</dd></dl>
+</section>
+<section id="dihedralprediction">
+<h3>DihedralPrediction<a class="headerlink" href="#dihedralprediction" title="Permalink to this headline">#</a></h3>
+<dl class="py class">
+<dt class="sig sig-object py" id="torchdrug.tasks.DihedralPrediction">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">DihedralPrediction</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_sample</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">256</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_class</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">8</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_mlp_layer</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">graph_construction_model</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/tasks/pretrain.html#DihedralPrediction"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.tasks.DihedralPrediction" title="Permalink to this definition">#</a></dt>
+<dd><p>Dihedral prediction task proposed in <a class="reference external" href="https://arxiv.org/pdf/2203.06125.pdf">Protein Representation Learning by Geometric Structure Pretraining</a>.</p>
+<p>Randomly select three consecutive edges and predict the dihedrals among them using the representations of four
+nodes. The selected edges are removed from the input graph to prevent trivial solutions.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>model</strong> (<em>nn.Module</em>) – node representation model</p></li>
+<li><p><strong>num_sample</strong> (<em>int</em><em>, </em><em>optional</em>) – number of edge triplets selected from each graph</p></li>
+<li><p><strong>num_class</strong> (<em>int</em><em>, </em><em>optional</em>) – number of classes for discretizing the dihedrals</p></li>
+<li><p><strong>num_mlp_layer</strong> (<em>int</em><em>, </em><em>optional</em>) – number of MLP layers in dihedral angle predictor</p></li>
+<li><p><strong>graph_construction_model</strong> (<em>nn.Module</em><em>, </em><em>optional</em>) – graph construction model</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="torchdrug.tasks.DihedralPrediction.forward">
+<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">batch</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/tasks/pretrain.html#DihedralPrediction.forward"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.tasks.DihedralPrediction.forward" title="Permalink to this definition">#</a></dt>
+<dd><p>Defines the computation performed at every call.</p>
+<p>Should be overridden by all subclasses.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Although the recipe for forward pass needs to be defined within
+this function, one should call the <code class="xref py py-class docutils literal notranslate"><span class="pre">Module</span></code> instance afterwards
+instead of this since the former takes care of running the
+registered hooks while the latter silently ignores them.</p>
+</div>
+</dd></dl>
+</dd></dl>
+</section>
 <section id="unsupervised">
 <h3>Unsupervised<a class="headerlink" href="#unsupervised" title="Permalink to this headline">#</a></h3>
 <dl class="py class">
 <dt class="sig sig-object py" id="torchdrug.tasks.Unsupervised">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Unsupervised</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/tasks/property_prediction.html#Unsupervised"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.tasks.Unsupervised" title="Permalink to this definition">#</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Unsupervised</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">graph_construction_model</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/tasks/property_prediction.html#Unsupervised"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.tasks.Unsupervised" title="Permalink to this definition">#</a></dt>
 <dd><p>Wrapper task for unsupervised learning.</p>
 <p>The unsupervised loss should be computed by the model.</p>
 <dl class="field-list simple">
@@ -571,6 +781,35 @@ Set <code class="docutils literal notranslate"><span class="pre">None</span></co
 </dd></dl>
 </section>
 </section>
+<section id="protein-protein-interaction-prediction-tasks">
+<h2>Protein-Protein Interaction Prediction Tasks<a class="headerlink" href="#protein-protein-interaction-prediction-tasks" title="Permalink to this headline">#</a></h2>
+<section id="contactprediction">
+<h3>ContactPrediction<a class="headerlink" href="#contactprediction" title="Permalink to this headline">#</a></h3>
+<dl class="py class">
+<dt class="sig sig-object py" id="torchdrug.tasks.ContactPrediction">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">ContactPrediction</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_length</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">500</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">random_truncate</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">threshold</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">8.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gap</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">6</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">criterion</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'bce'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metric</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">('accuracy',</span> <span class="pre">'prec@L5')</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_mlp_layer</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/tasks/contact_prediction.html#ContactPrediction"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.tasks.ContactPrediction" title="Permalink to this definition">#</a></dt>
+<dd><p>Predict whether each amino acid pair contact or not in the folding structure.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>model</strong> (<em>nn.Module</em>) – protein sequence representation model</p></li>
+<li><p><strong>max_length</strong> (<em>int</em><em>, </em><em>optional</em>) – maximal length of sequence. Truncate the sequence if it exceeds this limit.</p></li>
+<li><p><strong>random_truncate</strong> (<em>bool</em><em>, </em><em>optional</em>) – truncate the sequence at a random position.
+If not, truncate the suffix of the sequence.</p></li>
+<li><p><strong>threshold</strong> (<em>float</em><em>, </em><em>optional</em>) – distance threshold for contact</p></li>
+<li><p><strong>gap</strong> (<em>int</em><em>, </em><em>optional</em>) – sequential distance cutoff for evaluation</p></li>
+<li><p><strong>criterion</strong> (<em>str</em><em> or </em><em>dict</em><em>, </em><em>optional</em>) – training criterion. For dict, the key is criterion and the value
+is the corresponding weight. Available criterion is <code class="docutils literal notranslate"><span class="pre">bce</span></code>.</p></li>
+<li><p><strong>metric</strong> (<em>str</em><em> or </em><em>list of str</em><em>, </em><em>optional</em>) – metric(s).
+Available metrics are <code class="docutils literal notranslate"><span class="pre">accuracy</span></code>, <code class="docutils literal notranslate"><span class="pre">prec@Lk</span></code> and <code class="docutils literal notranslate"><span class="pre">prec@k</span></code>.</p></li>
+<li><p><strong>num_mlp_layer</strong> (<em>int</em><em>, </em><em>optional</em>) – number of layers in mlp prediction head</p></li>
+<li><p><strong>verbose</strong> (<em>int</em><em>, </em><em>optional</em>) – output verbose level</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+</section>
+</section>
 </section>
 
         </article>
@@ -633,12 +872,18 @@ Set <code class="docutils literal notranslate"><span class="pre">None</span></co
 <li><a class="reference internal" href="#">torchdrug.tasks</a><ul>
 <li><a class="reference internal" href="#property-prediction-tasks">Property Prediction Tasks</a><ul>
 <li><a class="reference internal" href="#propertyprediction">PropertyPrediction</a></li>
+<li><a class="reference internal" href="#multiplebinaryclassification">MultipleBinaryClassification</a></li>
+<li><a class="reference internal" href="#nodepropertyprediction">NodePropertyPrediction</a></li>
+<li><a class="reference internal" href="#interactionprediction">InteractionPrediction</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#pre-trained-molecular-representation-tasks">Pre-trained Molecular Representation Tasks</a><ul>
 <li><a class="reference internal" href="#edgeprediction">EdgePrediction</a></li>
 <li><a class="reference internal" href="#attributemasking">AttributeMasking</a></li>
 <li><a class="reference internal" href="#contextprediction">ContextPrediction</a></li>
+<li><a class="reference internal" href="#distanceprediction">DistancePrediction</a></li>
+<li><a class="reference internal" href="#angleprediction">AnglePrediction</a></li>
+<li><a class="reference internal" href="#dihedralprediction">DihedralPrediction</a></li>
 <li><a class="reference internal" href="#unsupervised">Unsupervised</a></li>
 </ul>
 </li>
@@ -655,6 +900,10 @@ Set <code class="docutils literal notranslate"><span class="pre">None</span></co
 </li>
 <li><a class="reference internal" href="#knowledge-graph-reasoning-tasks">Knowledge Graph Reasoning Tasks</a><ul>
 <li><a class="reference internal" href="#knowledgegraphcompletion">KnowledgeGraphCompletion</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#protein-protein-interaction-prediction-tasks">Protein-Protein Interaction Prediction Tasks</a><ul>
+<li><a class="reference internal" href="#contactprediction">ContactPrediction</a></li>
 </ul>
 </li>
 </ul>

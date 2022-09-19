@@ -6,7 +6,7 @@
 <link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="torchdrug.tasks" href="tasks.html" /><link rel="prev" title="torchdrug.layers" href="layers.html" />
 
     <meta name="generator" content="sphinx-4.5.0, furo 2022.04.07"/>
-        <title>torchdrug.models - TorchDrug 0.1.3 documentation</title>
+        <title>torchdrug.models - TorchDrug 0.2.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=68f4518137b9aefe99b631505a2064c3c42c9852" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
@@ -130,7 +130,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="../index.html"><div class="brand">TorchDrug 0.1.3 documentation</div></a>
+      <a href="../index.html"><div class="brand">TorchDrug 0.2.0 documentation</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -153,7 +153,7 @@
       <div class="sidebar-sticky"><a class="sidebar-brand centered" href="https://torchdrug.ai">
   
   <div class="sidebar-logo-container">
-    <img class="sidebar-logo" src="../_static/logo.svg" alt="Logo"/>
+    <img class="sidebar-logo" src="../_static/torchdrug_logo_full.svg" alt="Logo"/>
   </div>
   
   
@@ -860,6 +860,59 @@
 <dd><p>alias of <a class="reference internal" href="#torchdrug.models.RelationalGraphConvolutionalNetwork" title="torchdrug.models.gcn.RelationalGraphConvolutionalNetwork"><code class="xref py py-class docutils literal notranslate"><span class="pre">torchdrug.models.gcn.RelationalGraphConvolutionalNetwork</span></code></a></p>
 </dd></dl>
 </section>
+<section id="gearnet">
+<h3>GearNet<a class="headerlink" href="#gearnet" title="Permalink to this headline">#</a></h3>
+<dl class="py class">
+<dt class="sig sig-object py" id="torchdrug.models.GeometryAwareRelationalGraphNeuralNetwork">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">GeometryAwareRelationalGraphNeuralNetwork</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_dim</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hidden_dims</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_relation</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">edge_input_dim</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_angle_bin</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">short_cut</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_norm</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">activation</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'relu'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">concat_hidden</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">readout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'sum'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/models/gearnet.html#GeometryAwareRelationalGraphNeuralNetwork"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.models.GeometryAwareRelationalGraphNeuralNetwork" title="Permalink to this definition">#</a></dt>
+<dd><p>Geometry Aware Relational Graph Neural Network proposed in
+<a class="reference external" href="https://arxiv.org/pdf/2203.06125.pdf">Protein Representation Learning by Geometric Structure Pretraining</a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input_dim</strong> (<em>int</em>) – input dimension</p></li>
+<li><p><strong>hidden_dims</strong> (<em>list of int</em>) – hidden dimensions</p></li>
+<li><p><strong>num_relation</strong> (<em>int</em>) – number of relations</p></li>
+<li><p><strong>edge_input_dim</strong> (<em>int</em><em>, </em><em>optional</em>) – dimension of edge features</p></li>
+<li><p><strong>num_angle_bin</strong> (<em>int</em><em>, </em><em>optional</em>) – number of bins to discretize angles between edges.
+The discretized angles are used as relations in edge message passing.
+If not provided, edge message passing is disabled.</p></li>
+<li><p><strong>short_cut</strong> (<em>bool</em><em>, </em><em>optional</em>) – use short cut or not</p></li>
+<li><p><strong>batch_norm</strong> (<em>bool</em><em>, </em><em>optional</em>) – apply batch normalization or not</p></li>
+<li><p><strong>activation</strong> (<em>str</em><em> or </em><em>function</em><em>, </em><em>optional</em>) – activation function</p></li>
+<li><p><strong>concat_hidden</strong> (<em>bool</em><em>, </em><em>optional</em>) – concat hidden representations from all layers as output</p></li>
+<li><p><strong>readout</strong> (<em>str</em><em>, </em><em>optional</em>) – readout function. Available functions are <code class="docutils literal notranslate"><span class="pre">sum</span></code> and <code class="docutils literal notranslate"><span class="pre">mean</span></code>.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="torchdrug.models.GeometryAwareRelationalGraphNeuralNetwork.forward">
+<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">input</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">all_loss</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metric</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/models/gearnet.html#GeometryAwareRelationalGraphNeuralNetwork.forward"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.models.GeometryAwareRelationalGraphNeuralNetwork.forward" title="Permalink to this definition">#</a></dt>
+<dd><p>Compute the node representations and the graph representation(s).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>graph</strong> (<a class="reference internal" href="data.html#torchdrug.data.Graph" title="torchdrug.data.Graph"><em>Graph</em></a>) – <span class="math notranslate nohighlight">\(n\)</span> graph(s)</p></li>
+<li><p><strong>input</strong> (<em>Tensor</em>) – input node representations</p></li>
+<li><p><strong>all_loss</strong> (<em>Tensor</em><em>, </em><em>optional</em>) – if specified, add loss to this tensor</p></li>
+<li><p><strong>metric</strong> (<em>dict</em><em>, </em><em>optional</em>) – if specified, output metrics to this dict</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>node representations of shape <span class="math notranslate nohighlight">\((|V|, d)\)</span>, graph representations of shape <span class="math notranslate nohighlight">\((n, d)\)</span></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>dict with <code class="docutils literal notranslate"><span class="pre">node_feature</span></code> and <code class="docutils literal notranslate"><span class="pre">graph_feature</span></code> fields</p>
+</dd>
+</dl>
+</dd></dl>
+</dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="torchdrug.models.GearNet">
+<span class="sig-name descname"><span class="pre">GearNet</span></span><a class="headerlink" href="#torchdrug.models.GearNet" title="Permalink to this definition">#</a></dt>
+<dd><p>alias of <a class="reference internal" href="#torchdrug.models.GeometryAwareRelationalGraphNeuralNetwork" title="torchdrug.models.gearnet.GeometryAwareRelationalGraphNeuralNetwork"><code class="xref py py-class docutils literal notranslate"><span class="pre">torchdrug.models.gearnet.GeometryAwareRelationalGraphNeuralNetwork</span></code></a></p>
+</dd></dl>
+</section>
 <section id="schnet">
 <h3>SchNet<a class="headerlink" href="#schnet" title="Permalink to this headline">#</a></h3>
 <dl class="py class">
@@ -900,6 +953,301 @@
 </dd>
 <dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p>dict with <code class="docutils literal notranslate"><span class="pre">node_feature</span></code> and <code class="docutils literal notranslate"><span class="pre">graph_feature</span></code> fields</p>
+</dd>
+</dl>
+</dd></dl>
+</dd></dl>
+</section>
+</section>
+<section id="protein-sequence-encoders">
+<h2>Protein Sequence Encoders<a class="headerlink" href="#protein-sequence-encoders" title="Permalink to this headline">#</a></h2>
+<section id="esm">
+<h3>ESM<a class="headerlink" href="#esm" title="Permalink to this headline">#</a></h3>
+<dl class="py class">
+<dt class="sig sig-object py" id="torchdrug.models.EvolutionaryScaleModeling">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">EvolutionaryScaleModeling</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'ESM-1b'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">readout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'mean'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/models/esm.html#EvolutionaryScaleModeling"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.models.EvolutionaryScaleModeling" title="Permalink to this definition">#</a></dt>
+<dd><p>The protein language model, Evolutionary Scale Modeling (ESM) proposed in
+<a class="reference external" href="https://www.biorxiv.org/content/10.1101/622803v1.full.pdf">Biological Structure and Function Emerge from Scaling Unsupervised Learning to 250 Million Protein Sequences</a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>path</strong> (<em>str</em>) – path to store ESM model weights</p></li>
+<li><p><strong>model</strong> (<em>str</em><em>, </em><em>optional</em>) – model name. Available model names are <code class="docutils literal notranslate"><span class="pre">ESM-1b</span></code>, <code class="docutils literal notranslate"><span class="pre">ESM-1v</span></code> and <code class="docutils literal notranslate"><span class="pre">ESM-1b-regression</span></code>.</p></li>
+<li><p><strong>readout</strong> (<em>str</em><em>, </em><em>optional</em>) – readout function. Available functions are <code class="docutils literal notranslate"><span class="pre">sum</span></code> and <code class="docutils literal notranslate"><span class="pre">mean</span></code>.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="torchdrug.models.EvolutionaryScaleModeling.forward">
+<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">input</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">all_loss</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metric</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/models/esm.html#EvolutionaryScaleModeling.forward"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.models.EvolutionaryScaleModeling.forward" title="Permalink to this definition">#</a></dt>
+<dd><p>Compute the residue representations and the graph representation(s).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>graph</strong> (<a class="reference internal" href="data.html#torchdrug.data.Protein" title="torchdrug.data.Protein"><em>Protein</em></a>) – <span class="math notranslate nohighlight">\(n\)</span> protein(s)</p></li>
+<li><p><strong>input</strong> (<em>Tensor</em>) – input node representations</p></li>
+<li><p><strong>all_loss</strong> (<em>Tensor</em><em>, </em><em>optional</em>) – if specified, add loss to this tensor</p></li>
+<li><p><strong>metric</strong> (<em>dict</em><em>, </em><em>optional</em>) – if specified, output metrics to this dict</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>residue representations of shape <span class="math notranslate nohighlight">\((|V_{res}|, d)\)</span>, graph representations of shape <span class="math notranslate nohighlight">\((n, d)\)</span></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>dict with <code class="docutils literal notranslate"><span class="pre">residue_feature</span></code> and <code class="docutils literal notranslate"><span class="pre">graph_feature</span></code> fields</p>
+</dd>
+</dl>
+</dd></dl>
+</dd></dl>
+</section>
+<section id="proteincnn">
+<h3>ProteinCNN<a class="headerlink" href="#proteincnn" title="Permalink to this headline">#</a></h3>
+<dl class="py class">
+<dt class="sig sig-object py" id="torchdrug.models.ProteinConvolutionalNetwork">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">ProteinConvolutionalNetwork</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_dim</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hidden_dims</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kernel_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stride</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">padding</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">activation</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'relu'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">short_cut</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">concat_hidden</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">readout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'max'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/models/cnn.html#ProteinConvolutionalNetwork"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.models.ProteinConvolutionalNetwork" title="Permalink to this definition">#</a></dt>
+<dd><p>Protein Shallow CNN proposed in <a class="reference external" href="https://arxiv.org/pdf/2011.03443.pdf">Is Transfer Learning Necessary for Protein Landscape Prediction?</a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input_dim</strong> (<em>int</em>) – input dimension</p></li>
+<li><p><strong>hidden_dims</strong> (<em>list of int</em>) – hidden dimensions</p></li>
+<li><p><strong>kernel_size</strong> (<em>int</em><em>, </em><em>optional</em>) – size of convolutional kernel</p></li>
+<li><p><strong>stride</strong> (<em>int</em><em>, </em><em>optional</em>) – stride of convolution</p></li>
+<li><p><strong>padding</strong> (<em>int</em><em>, </em><em>optional</em>) – padding added to both sides of the input</p></li>
+<li><p><strong>activation</strong> (<em>str</em><em> or </em><em>function</em><em>, </em><em>optional</em>) – activation function</p></li>
+<li><p><strong>short_cut</strong> (<em>bool</em><em>, </em><em>optional</em>) – use short cut or not</p></li>
+<li><p><strong>concat_hidden</strong> (<em>bool</em><em>, </em><em>optional</em>) – concat hidden representations from all layers as output</p></li>
+<li><p><strong>readout</strong> (<em>str</em><em>, </em><em>optional</em>) – readout function. Available functions are <code class="docutils literal notranslate"><span class="pre">sum</span></code>, <code class="docutils literal notranslate"><span class="pre">mean</span></code>, <code class="docutils literal notranslate"><span class="pre">max</span></code> and <code class="docutils literal notranslate"><span class="pre">attention</span></code>.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="torchdrug.models.ProteinConvolutionalNetwork.forward">
+<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">input</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">all_loss</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metric</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/models/cnn.html#ProteinConvolutionalNetwork.forward"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.models.ProteinConvolutionalNetwork.forward" title="Permalink to this definition">#</a></dt>
+<dd><p>Compute the residue representations and the graph representation(s).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>graph</strong> (<a class="reference internal" href="data.html#torchdrug.data.Protein" title="torchdrug.data.Protein"><em>Protein</em></a>) – <span class="math notranslate nohighlight">\(n\)</span> protein(s)</p></li>
+<li><p><strong>input</strong> (<em>Tensor</em>) – input node representations</p></li>
+<li><p><strong>all_loss</strong> (<em>Tensor</em><em>, </em><em>optional</em>) – if specified, add loss to this tensor</p></li>
+<li><p><strong>metric</strong> (<em>dict</em><em>, </em><em>optional</em>) – if specified, output metrics to this dict</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>residue representations of shape <span class="math notranslate nohighlight">\((|V_{res}|, d)\)</span>, graph representations of shape <span class="math notranslate nohighlight">\((n, d)\)</span></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>dict with <code class="docutils literal notranslate"><span class="pre">residue_feature</span></code> and <code class="docutils literal notranslate"><span class="pre">graph_feature</span></code> fields</p>
+</dd>
+</dl>
+</dd></dl>
+</dd></dl>
+</section>
+<section id="proteinresnet">
+<h3>ProteinResNet<a class="headerlink" href="#proteinresnet" title="Permalink to this headline">#</a></h3>
+<dl class="py class">
+<dt class="sig sig-object py" id="torchdrug.models.ProteinResNet">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">ProteinResNet</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_dim</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hidden_dims</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kernel_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stride</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">padding</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">activation</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'gelu'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">short_cut</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">concat_hidden</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">layer_norm</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dropout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">readout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'attention'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/models/cnn.html#ProteinResNet"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.models.ProteinResNet" title="Permalink to this definition">#</a></dt>
+<dd><p>Protein ResNet proposed in <a class="reference external" href="https://arxiv.org/pdf/1906.08230.pdf">Evaluating Protein Transfer Learning with TAPE</a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input_dim</strong> (<em>int</em>) – input dimension</p></li>
+<li><p><strong>hidden_dims</strong> (<em>list of int</em>) – hidden dimensions</p></li>
+<li><p><strong>kernel_size</strong> (<em>int</em><em>, </em><em>optional</em>) – size of convolutional kernel</p></li>
+<li><p><strong>stride</strong> (<em>int</em><em>, </em><em>optional</em>) – stride of convolution</p></li>
+<li><p><strong>padding</strong> (<em>int</em><em>, </em><em>optional</em>) – padding added to both sides of the input</p></li>
+<li><p><strong>activation</strong> (<em>str</em><em> or </em><em>function</em><em>, </em><em>optional</em>) – activation function</p></li>
+<li><p><strong>short_cut</strong> (<em>bool</em><em>, </em><em>optional</em>) – use short cut or not</p></li>
+<li><p><strong>concat_hidden</strong> (<em>bool</em><em>, </em><em>optional</em>) – concat hidden representations from all layers as output</p></li>
+<li><p><strong>layer_norm</strong> (<em>bool</em><em>, </em><em>optional</em>) – apply layer normalization or not</p></li>
+<li><p><strong>dropout</strong> (<em>float</em><em>, </em><em>optional</em>) – dropout ratio of input features</p></li>
+<li><p><strong>readout</strong> (<em>str</em><em>, </em><em>optional</em>) – readout function. Available functions are <code class="docutils literal notranslate"><span class="pre">sum</span></code>, <code class="docutils literal notranslate"><span class="pre">mean</span></code> and <code class="docutils literal notranslate"><span class="pre">attention</span></code>.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="torchdrug.models.ProteinResNet.forward">
+<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">input</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">all_loss</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metric</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/models/cnn.html#ProteinResNet.forward"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.models.ProteinResNet.forward" title="Permalink to this definition">#</a></dt>
+<dd><p>Compute the residue representations and the graph representation(s).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>graph</strong> (<a class="reference internal" href="data.html#torchdrug.data.Protein" title="torchdrug.data.Protein"><em>Protein</em></a>) – <span class="math notranslate nohighlight">\(n\)</span> protein(s)</p></li>
+<li><p><strong>input</strong> (<em>Tensor</em>) – input node representations</p></li>
+<li><p><strong>all_loss</strong> (<em>Tensor</em><em>, </em><em>optional</em>) – if specified, add loss to this tensor</p></li>
+<li><p><strong>metric</strong> (<em>dict</em><em>, </em><em>optional</em>) – if specified, output metrics to this dict</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>residue representations of shape <span class="math notranslate nohighlight">\((|V_{res}|, d)\)</span>, graph representations of shape <span class="math notranslate nohighlight">\((n, d)\)</span></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>dict with <code class="docutils literal notranslate"><span class="pre">residue_feature</span></code> and <code class="docutils literal notranslate"><span class="pre">graph_feature</span></code> fields</p>
+</dd>
+</dl>
+</dd></dl>
+</dd></dl>
+</section>
+<section id="proteinlstm">
+<h3>ProteinLSTM<a class="headerlink" href="#proteinlstm" title="Permalink to this headline">#</a></h3>
+<dl class="py class">
+<dt class="sig sig-object py" id="torchdrug.models.ProteinLSTM">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">ProteinLSTM</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_dim</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hidden_dim</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_layers</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">activation</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'tanh'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">layer_norm</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dropout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/models/lstm.html#ProteinLSTM"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.models.ProteinLSTM" title="Permalink to this definition">#</a></dt>
+<dd><p>Protein LSTM proposed in <a class="reference external" href="https://arxiv.org/pdf/1906.08230.pdf">Evaluating Protein Transfer Learning with TAPE</a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input_dim</strong> (<em>int</em>) – input dimension</p></li>
+<li><p><strong>hidden_dim</strong> (<em>int</em><em>, </em><em>optional</em>) – hidden dimension</p></li>
+<li><p><strong>num_layers</strong> (<em>int</em><em>, </em><em>optional</em>) – number of LSTM layers</p></li>
+<li><p><strong>activation</strong> (<em>str</em><em> or </em><em>function</em><em>, </em><em>optional</em>) – activation function</p></li>
+<li><p><strong>layer_norm</strong> (<em>bool</em><em>, </em><em>optional</em>) – apply layer normalization or not</p></li>
+<li><p><strong>dropout</strong> (<em>float</em><em>, </em><em>optional</em>) – dropout ratio of input features</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="torchdrug.models.ProteinLSTM.forward">
+<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">input</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">all_loss</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metric</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/models/lstm.html#ProteinLSTM.forward"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.models.ProteinLSTM.forward" title="Permalink to this definition">#</a></dt>
+<dd><p>Compute the residue representations and the graph representation(s).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>graph</strong> (<a class="reference internal" href="data.html#torchdrug.data.Protein" title="torchdrug.data.Protein"><em>Protein</em></a>) – <span class="math notranslate nohighlight">\(n\)</span> protein(s)</p></li>
+<li><p><strong>input</strong> (<em>Tensor</em>) – input node representations</p></li>
+<li><p><strong>all_loss</strong> (<em>Tensor</em><em>, </em><em>optional</em>) – if specified, add loss to this tensor</p></li>
+<li><p><strong>metric</strong> (<em>dict</em><em>, </em><em>optional</em>) – if specified, output metrics to this dict</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>residue representations of shape <span class="math notranslate nohighlight">\((|V_{res}|, d)\)</span>, graph representations of shape <span class="math notranslate nohighlight">\((n, d)\)</span></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>dict with <code class="docutils literal notranslate"><span class="pre">residue_feature</span></code> and <code class="docutils literal notranslate"><span class="pre">graph_feature</span></code> fields</p>
+</dd>
+</dl>
+</dd></dl>
+</dd></dl>
+</section>
+<section id="proteinbert">
+<h3>ProteinBERT<a class="headerlink" href="#proteinbert" title="Permalink to this headline">#</a></h3>
+<dl class="py class">
+<dt class="sig sig-object py" id="torchdrug.models.ProteinBERT">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">ProteinBERT</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_dim</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hidden_dim</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">768</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_layers</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">12</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_heads</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">12</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">intermediate_dim</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3072</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">activation</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'gelu'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hidden_dropout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">attention_dropout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_position</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">8192</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/models/bert.html#ProteinBERT"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.models.ProteinBERT" title="Permalink to this definition">#</a></dt>
+<dd><p>Protein BERT proposed in <a class="reference external" href="https://arxiv.org/pdf/1906.08230.pdf">Evaluating Protein Transfer Learning with TAPE</a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input_dim</strong> (<em>int</em>) – input dimension</p></li>
+<li><p><strong>hidden_dim</strong> (<em>int</em><em>, </em><em>optional</em>) – hidden dimension</p></li>
+<li><p><strong>num_layers</strong> (<em>int</em><em>, </em><em>optional</em>) – number of Transformer blocks</p></li>
+<li><p><strong>num_heads</strong> (<em>int</em><em>, </em><em>optional</em>) – number of attention heads</p></li>
+<li><p><strong>intermediate_dim</strong> (<em>int</em><em>, </em><em>optional</em>) – intermediate hidden dimension of Transformer block</p></li>
+<li><p><strong>activation</strong> (<em>str</em><em> or </em><em>function</em><em>, </em><em>optional</em>) – activation function</p></li>
+<li><p><strong>hidden_dropout</strong> (<em>float</em><em>, </em><em>optional</em>) – dropout ratio of hidden features</p></li>
+<li><p><strong>attention_dropout</strong> (<em>float</em><em>, </em><em>optional</em>) – dropout ratio of attention maps</p></li>
+<li><p><strong>max_position</strong> (<em>int</em><em>, </em><em>optional</em>) – maximum number of positions</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="torchdrug.models.ProteinBERT.forward">
+<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">input</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">all_loss</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metric</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/models/bert.html#ProteinBERT.forward"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.models.ProteinBERT.forward" title="Permalink to this definition">#</a></dt>
+<dd><p>Compute the residue representations and the graph representation(s).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>graph</strong> (<a class="reference internal" href="data.html#torchdrug.data.Protein" title="torchdrug.data.Protein"><em>Protein</em></a>) – <span class="math notranslate nohighlight">\(n\)</span> protein(s)</p></li>
+<li><p><strong>input</strong> (<em>Tensor</em>) – input node representations</p></li>
+<li><p><strong>all_loss</strong> (<em>Tensor</em><em>, </em><em>optional</em>) – if specified, add loss to this tensor</p></li>
+<li><p><strong>metric</strong> (<em>dict</em><em>, </em><em>optional</em>) – if specified, output metrics to this dict</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>residue representations of shape <span class="math notranslate nohighlight">\((|V_{res}|, d)\)</span>, graph representations of shape <span class="math notranslate nohighlight">\((n, d)\)</span></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>dict with <code class="docutils literal notranslate"><span class="pre">residue_feature</span></code> and <code class="docutils literal notranslate"><span class="pre">graph_feature</span></code> fields</p>
+</dd>
+</dl>
+</dd></dl>
+</dd></dl>
+</section>
+<section id="statistic-feature-engineering">
+<h3>Statistic Feature Engineering<a class="headerlink" href="#statistic-feature-engineering" title="Permalink to this headline">#</a></h3>
+<dl class="py class">
+<dt class="sig sig-object py" id="torchdrug.models.Statistic">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Statistic</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'DDE'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hidden_dims</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">(512,)</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/models/statistic.html#Statistic"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.models.Statistic" title="Permalink to this definition">#</a></dt>
+<dd><p>The statistic feature engineering for protein sequence proposed in
+<a class="reference external" href="https://www.liebertpub.com/doi/abs/10.1089/omi.2015.0095">Harnessing Computational Biology for Exact Linear B-cell Epitope Prediction</a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>type</strong> (<em>str</em><em>, </em><em>optional</em>) – statistic feature. Available feature is <code class="docutils literal notranslate"><span class="pre">DDE</span></code>.</p></li>
+<li><p><strong>hidden_dims</strong> (<em>list of int</em><em>, </em><em>optional</em>) – hidden dimensions</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="torchdrug.models.Statistic.forward">
+<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">input</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">all_loss</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metric</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/models/statistic.html#Statistic.forward"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.models.Statistic.forward" title="Permalink to this definition">#</a></dt>
+<dd><p>Compute the residue representations and the graph representation(s).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>graph</strong> (<a class="reference internal" href="data.html#torchdrug.data.Protein" title="torchdrug.data.Protein"><em>Protein</em></a>) – <span class="math notranslate nohighlight">\(n\)</span> protein(s)</p></li>
+<li><p><strong>input</strong> (<em>Tensor</em>) – input node representations</p></li>
+<li><p><strong>all_loss</strong> (<em>Tensor</em><em>, </em><em>optional</em>) – if specified, add loss to this tensor</p></li>
+<li><p><strong>metric</strong> (<em>dict</em><em>, </em><em>optional</em>) – if specified, output metrics to this dict</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>graph representations of shape <span class="math notranslate nohighlight">\((n, d)\)</span></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>dict with <code class="docutils literal notranslate"><span class="pre">graph_feature</span></code> field</p>
+</dd>
+</dl>
+</dd></dl>
+</dd></dl>
+</section>
+<section id="physicochemical-feature-engineering">
+<h3>Physicochemical Feature Engineering<a class="headerlink" href="#physicochemical-feature-engineering" title="Permalink to this headline">#</a></h3>
+<dl class="py class">
+<dt class="sig sig-object py" id="torchdrug.models.Physicochemical">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Physicochemical</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'moran'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nlag</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">30</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hidden_dims</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">(512,)</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/models/physicochemical.html#Physicochemical"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.models.Physicochemical" title="Permalink to this definition">#</a></dt>
+<dd><p>The physicochemical feature engineering for protein sequence proposed in
+<a class="reference external" href="https://link.springer.com/article/10.1023/A:1007091128394">Prediction of Membrane Protein Types based on the Hydrophobic Index of Amino Acids</a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>path</strong> (<em>str</em>) – path to store feature file</p></li>
+<li><p><strong>type</strong> (<em>str</em><em>, </em><em>optional</em>) – physicochemical feature. Available features are <code class="docutils literal notranslate"><span class="pre">moran</span></code>, <code class="docutils literal notranslate"><span class="pre">geary</span></code> and <code class="docutils literal notranslate"><span class="pre">nmbroto</span></code>.</p></li>
+<li><p><strong>nlag</strong> (<em>int</em><em>, </em><em>optional</em>) – maximum position interval to compute features</p></li>
+<li><p><strong>hidden_dims</strong> (<em>list of int</em><em>, </em><em>optional</em>) – hidden dimensions</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="torchdrug.models.Physicochemical.forward">
+<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">input</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">all_loss</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metric</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/models/physicochemical.html#Physicochemical.forward"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.models.Physicochemical.forward" title="Permalink to this definition">#</a></dt>
+<dd><p>Compute the residue representations and the graph representation(s).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>graph</strong> (<a class="reference internal" href="data.html#torchdrug.data.Protein" title="torchdrug.data.Protein"><em>Protein</em></a>) – <span class="math notranslate nohighlight">\(n\)</span> protein(s)</p></li>
+<li><p><strong>input</strong> (<em>Tensor</em>) – input node representations</p></li>
+<li><p><strong>all_loss</strong> (<em>Tensor</em><em>, </em><em>optional</em>) – if specified, add loss to this tensor</p></li>
+<li><p><strong>metric</strong> (<em>dict</em><em>, </em><em>optional</em>) – if specified, output metrics to this dict</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>graph representations of shape <span class="math notranslate nohighlight">\((n, d)\)</span></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>dict with <code class="docutils literal notranslate"><span class="pre">graph_feature</span></code> field</p>
 </dd>
 </dl>
 </dd></dl>
@@ -1014,6 +1362,50 @@ Add the mutual information between graph and nodes to the loss.</p>
 </dd></dl>
 </dd></dl>
 </section>
+<section id="multiviewcontrast">
+<h3>MultiviewContrast<a class="headerlink" href="#multiviewcontrast" title="Permalink to this headline">#</a></h3>
+<dl class="py class">
+<dt class="sig sig-object py" id="torchdrug.models.MultiviewContrast">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">MultiviewContrast</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">crop_funcs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">noise_funcs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_mlp_layer</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">activation</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'relu'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tau</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.07</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/models/infograph.html#MultiviewContrast"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.models.MultiviewContrast" title="Permalink to this definition">#</a></dt>
+<dd><p>Multiview Contrast proposed in <a class="reference external" href="https://arxiv.org/pdf/2203.06125.pdf">Protein Representation Learning by Geometric Structure Pretraining</a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>model</strong> (<em>nn.Module</em>) – node &amp; graph representation model</p></li>
+<li><p><strong>crop_funcs</strong> (<em>list of nn.Module</em>) – list of cropping functions</p></li>
+<li><p><strong>noise_funcs</strong> (<em>list of nn.Module</em>) – list of noise functions</p></li>
+<li><p><strong>num_mlp_layer</strong> (<em>int</em><em>, </em><em>optional</em>) – number of MLP layers in mutual information estimators</p></li>
+<li><p><strong>activation</strong> (<em>str</em><em> or </em><em>function</em><em>, </em><em>optional</em>) – activation function</p></li>
+<li><p><strong>tau</strong> (<em>float</em><em>, </em><em>optional</em>) – temperature in InfoNCE loss</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="torchdrug.models.MultiviewContrast.forward">
+<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">input</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">all_loss</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metric</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/models/infograph.html#MultiviewContrast.forward"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.models.MultiviewContrast.forward" title="Permalink to this definition">#</a></dt>
+<dd><p>Compute the graph representations of two augmented views.
+Each view is generated by randomly picking a cropping function and a noise function.
+Add the mutual information between two augmented views to the loss.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>graph</strong> (<a class="reference internal" href="data.html#torchdrug.data.Graph" title="torchdrug.data.Graph"><em>Graph</em></a>) – <span class="math notranslate nohighlight">\(n\)</span> graph(s)</p></li>
+<li><p><strong>input</strong> (<em>Tensor</em>) – input node representations</p></li>
+<li><p><strong>all_loss</strong> (<em>Tensor</em><em>, </em><em>optional</em>) – if specified, add loss to this tensor</p></li>
+<li><p><strong>metric</strong> (<em>dict</em><em>, </em><em>optional</em>) – if specified, output metrics to this dict</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>node representations of shape <span class="math notranslate nohighlight">\((|V|, d)\)</span>, graph representations of shape <span class="math notranslate nohighlight">\((n, d)\)</span>
+for two augmented views respectively</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>dict with <code class="docutils literal notranslate"><span class="pre">node_feature1</span></code>, <code class="docutils literal notranslate"><span class="pre">node_feature2</span></code>, <code class="docutils literal notranslate"><span class="pre">graph_feature1</span></code> and <code class="docutils literal notranslate"><span class="pre">graph_feature2</span></code> fields</p>
+</dd>
+</dl>
+</dd></dl>
+</dd></dl>
+</section>
 </section>
 </section>
 
@@ -1093,7 +1485,18 @@ Add the mutual information between graph and nodes to the loss.</p>
 <li><a class="reference internal" href="#mpnn">MPNN</a></li>
 <li><a class="reference internal" href="#nfp">NFP</a></li>
 <li><a class="reference internal" href="#rgcn">RGCN</a></li>
+<li><a class="reference internal" href="#gearnet">GearNet</a></li>
 <li><a class="reference internal" href="#schnet">SchNet</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#protein-sequence-encoders">Protein Sequence Encoders</a><ul>
+<li><a class="reference internal" href="#esm">ESM</a></li>
+<li><a class="reference internal" href="#proteincnn">ProteinCNN</a></li>
+<li><a class="reference internal" href="#proteinresnet">ProteinResNet</a></li>
+<li><a class="reference internal" href="#proteinlstm">ProteinLSTM</a></li>
+<li><a class="reference internal" href="#proteinbert">ProteinBERT</a></li>
+<li><a class="reference internal" href="#statistic-feature-engineering">Statistic Feature Engineering</a></li>
+<li><a class="reference internal" href="#physicochemical-feature-engineering">Physicochemical Feature Engineering</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#normalizing-flows">Normalizing Flows</a><ul>
@@ -1102,6 +1505,7 @@ Add the mutual information between graph and nodes to the loss.</p>
 </li>
 <li><a class="reference internal" href="#self-supervised-models">Self-supervised Models</a><ul>
 <li><a class="reference internal" href="#infograph">InfoGraph</a></li>
+<li><a class="reference internal" href="#multiviewcontrast">MultiviewContrast</a></li>
 </ul>
 </li>
 </ul>

@@ -6,7 +6,7 @@
 <link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="Quick Start" href="quick_start.html" /><link rel="prev" title="TorchDrug - A deep learning platform for drug discovery" href="index.html" />
 
     <meta name="generator" content="sphinx-4.5.0, furo 2022.04.07"/>
-        <title>Installation - TorchDrug 0.1.3 documentation</title>
+        <title>Installation - TorchDrug 0.2.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?digest=68f4518137b9aefe99b631505a2064c3c42c9852" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
@@ -130,7 +130,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="index.html"><div class="brand">TorchDrug 0.1.3 documentation</div></a>
+      <a href="index.html"><div class="brand">TorchDrug 0.2.0 documentation</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -153,7 +153,7 @@
       <div class="sidebar-sticky"><a class="sidebar-brand centered" href="https://torchdrug.ai">
   
   <div class="sidebar-logo-container">
-    <img class="sidebar-logo" src="_static/logo.svg" alt="Logo"/>
+    <img class="sidebar-logo" src="_static/torchdrug_logo_full.svg" alt="Logo"/>
   </div>
   
   
@@ -241,7 +241,7 @@
           <section id="installation">
 <h1>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">#</a></h1>
 <p>TorchDrug can be installed on either Linux, Windows or macOS. It is compatible with
-Python 3.7/3.8 and PyTorch &gt;= 1.8.0.</p>
+Python 3.7/3.8/3.9 and PyTorch &gt;= 1.8.0.</p>
 <p>For Windows</p>
 <section id="from-conda">
 <h2>From Conda<a class="headerlink" href="#from-conda" title="Permalink to this headline">#</a></h2>
@@ -259,7 +259,7 @@ Python 3.7/3.8 and PyTorch &gt;= 1.8.0.</p>
 <p>We can get the version of PyTorch by <code class="docutils literal notranslate"><span class="pre">python3</span> <span class="pre">-c</span> <span class="pre">"import</span> <span class="pre">torch;</span> <span class="pre">print(torch.__version__")</span></code>.
 The version of CUDA can be get by <code class="docutils literal notranslate"><span class="pre">nvcc</span> <span class="pre">-V</span></code>. For example, if our PyTorch is <code class="docutils literal notranslate"><span class="pre">1.8.0</span></code>
 and CUDA is <code class="docutils literal notranslate"><span class="pre">10.2</span></code>, the command should be</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip3 install torch-scatter -f https://pytorch-geometric.com/whl/torch-1.8.0+cu102.html
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip3 install torch-scatter torch-cluster -f https://pytorch-geometric.com/whl/torch-1.8.0+cu102.html
 </pre></div>
 </div>
 <p>Replace the versions in the above url according to your case. If you don’t have GPUs

@@ -6,7 +6,7 @@
 <link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="torchdrug.datasets" href="datasets.html" /><link rel="prev" title="torchdrug.core" href="core.html" />
 
     <meta name="generator" content="sphinx-4.5.0, furo 2022.04.07"/>
-        <title>torchdrug.data - TorchDrug 0.1.3 documentation</title>
+        <title>torchdrug.data - TorchDrug 0.2.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=68f4518137b9aefe99b631505a2064c3c42c9852" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
@@ -130,7 +130,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="../index.html"><div class="brand">TorchDrug 0.1.3 documentation</div></a>
+      <a href="../index.html"><div class="brand">TorchDrug 0.2.0 documentation</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -153,7 +153,7 @@
       <div class="sidebar-sticky"><a class="sidebar-brand centered" href="https://torchdrug.ai">
   
   <div class="sidebar-logo-container">
-    <img class="sidebar-logo" src="../_static/logo.svg" alt="Logo"/>
+    <img class="sidebar-logo" src="../_static/torchdrug_logo_full.svg" alt="Logo"/>
   </div>
   
   
@@ -712,7 +712,7 @@ Each tuple is (node_in, node_out, bond_type).</p></li>
 </dd></dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="torchdrug.data.Molecule.from_molecule">
-<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_molecule</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mol</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">atom_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'default'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bond_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'default'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mol_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">with_hydrogen</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kekulize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/data/molecule.html#Molecule.from_molecule"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.data.Molecule.from_molecule" title="Permalink to this definition">#</a></dt>
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_molecule</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cls</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mol</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">atom_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'default'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bond_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'default'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mol_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">with_hydrogen</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kekulize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">node_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">edge_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">graph_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/data/molecule.html#Molecule.from_molecule"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.data.Molecule.from_molecule" title="Permalink to this definition">#</a></dt>
 <dd><p>Create a molecule from an RDKit object.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -727,13 +727,16 @@ By default, hydrogens are dropped</p></li>
 Note this only affects the relation in <code class="docutils literal notranslate"><span class="pre">edge_list</span></code>.
 For <code class="docutils literal notranslate"><span class="pre">bond_type</span></code>, aromatic bonds are always stored explicitly.
 By default, aromatic bonds are stored.</p></li>
+<li><p><strong>node_feature</strong> (<em>str</em><em> or </em><em>list of str</em><em>, </em><em>optional</em>) – Deprecated alias of <code class="docutils literal notranslate"><span class="pre">atom_feature</span></code></p></li>
+<li><p><strong>edge_feature</strong> (<em>str</em><em> or </em><em>list of str</em><em>, </em><em>optional</em>) – Deprecated alias of <code class="docutils literal notranslate"><span class="pre">bond_feature</span></code></p></li>
+<li><p><strong>graph_feature</strong> (<em>str</em><em> or </em><em>list of str</em><em>, </em><em>optional</em>) – Deprecated alias of <code class="docutils literal notranslate"><span class="pre">mol_feature</span></code></p></li>
 </ul>
 </dd>
 </dl>
 </dd></dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="torchdrug.data.Molecule.from_smiles">
-<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_smiles</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">smiles</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">atom_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'default'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bond_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'default'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mol_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">with_hydrogen</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kekulize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/data/molecule.html#Molecule.from_smiles"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.data.Molecule.from_smiles" title="Permalink to this definition">#</a></dt>
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_smiles</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cls</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">smiles</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">atom_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'default'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bond_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'default'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mol_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">with_hydrogen</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kekulize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">node_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">edge_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">graph_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/data/molecule.html#Molecule.from_smiles"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.data.Molecule.from_smiles" title="Permalink to this definition">#</a></dt>
 <dd><p>Create a molecule from a SMILES string.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -748,6 +751,9 @@ By default, hydrogens are dropped</p></li>
 Note this only affects the relation in <code class="docutils literal notranslate"><span class="pre">edge_list</span></code>.
 For <code class="docutils literal notranslate"><span class="pre">bond_type</span></code>, aromatic bonds are always stored explicitly.
 By default, aromatic bonds are stored.</p></li>
+<li><p><strong>node_feature</strong> (<em>str</em><em> or </em><em>list of str</em><em>, </em><em>optional</em>) – Deprecated alias of <code class="docutils literal notranslate"><span class="pre">atom_feature</span></code></p></li>
+<li><p><strong>edge_feature</strong> (<em>str</em><em> or </em><em>list of str</em><em>, </em><em>optional</em>) – Deprecated alias of <code class="docutils literal notranslate"><span class="pre">bond_feature</span></code></p></li>
+<li><p><strong>graph_feature</strong> (<em>str</em><em> or </em><em>list of str</em><em>, </em><em>optional</em>) – Deprecated alias of <code class="docutils literal notranslate"><span class="pre">mol_feature</span></code></p></li>
 </ul>
 </dd>
 </dl>
@@ -878,6 +884,255 @@ If not provided, show the figure in window.</p></li>
 <dt class="sig sig-object py" id="torchdrug.data.Molecule.is_valid">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">is_valid</span></span><a class="headerlink" href="#torchdrug.data.Molecule.is_valid" title="Permalink to this definition">#</a></dt>
 <dd><p>A coarse implementation of valence check.</p>
+</dd></dl>
+</dd></dl>
+</section>
+<section id="protein">
+<h3>Protein<a class="headerlink" href="#protein" title="Permalink to this headline">#</a></h3>
+<dl class="py class">
+<dt class="sig sig-object py" id="torchdrug.data.Protein">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Protein</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">edge_list</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">atom_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bond_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">residue_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">view</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">atom_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">atom2residue</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">residue_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_hetero_atom</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">occupancy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b_factor</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">residue_number</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">insertion_code</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">chain_id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/data/protein.html#Protein"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.data.Protein" title="Permalink to this definition">#</a></dt>
+<dd><p>Proteins with predefined chemical features.
+Support both residue-level and atom-level operations and ensure consistency between two views.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>The order of residues must be the same as the protein sequence.
+However, this class doesn’t enforce any order on nodes or edges.
+Nodes may have a different order with residues.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>edge_list</strong> (<em>array_like</em><em>, </em><em>optional</em>) – list of edges of shape <span class="math notranslate nohighlight">\((|E|, 3)\)</span>.
+Each tuple is (node_in, node_out, bond_type).</p></li>
+<li><p><strong>atom_type</strong> (<em>array_like</em><em>, </em><em>optional</em>) – atom types of shape <span class="math notranslate nohighlight">\((|V|,)\)</span></p></li>
+<li><p><strong>bond_type</strong> (<em>array_like</em><em>, </em><em>optional</em>) – bond types of shape <span class="math notranslate nohighlight">\((|E|,)\)</span></p></li>
+<li><p><strong>residue_type</strong> (<em>array_like</em><em>, </em><em>optional</em>) – residue types of shape <span class="math notranslate nohighlight">\((|V_{res}|,)\)</span></p></li>
+<li><p><strong>view</strong> (<em>str</em><em>, </em><em>optional</em>) – default view for this protein. Can be <code class="docutils literal notranslate"><span class="pre">atom</span></code> or <code class="docutils literal notranslate"><span class="pre">residue</span></code>.</p></li>
+<li><p><strong>atom_name</strong> (<em>array_like</em><em>, </em><em>optional</em>) – atom names in a residue of shape <span class="math notranslate nohighlight">\((|V|,)\)</span></p></li>
+<li><p><strong>atom2residue</strong> (<em>array_like</em><em>, </em><em>optional</em>) – atom id to residue id mapping of shape <span class="math notranslate nohighlight">\((|V|,)\)</span></p></li>
+<li><p><strong>residue_feature</strong> (<em>array_like</em><em>, </em><em>optional</em>) – residue features of shape <span class="math notranslate nohighlight">\((|V_{res}|, ...)\)</span></p></li>
+<li><p><strong>is_hetero_atom</strong> (<em>array_like</em><em>, </em><em>optional</em>) – hetero atom indicators of shape <span class="math notranslate nohighlight">\((|V|,)\)</span></p></li>
+<li><p><strong>occupancy</strong> (<em>array_like</em><em>, </em><em>optional</em>) – occupancy of shape <span class="math notranslate nohighlight">\((|V|,)\)</span></p></li>
+<li><p><strong>b_factor</strong> (<em>array_like</em><em>, </em><em>optional</em>) – temperature factors of shape <span class="math notranslate nohighlight">\((|V|,)\)</span></p></li>
+<li><p><strong>residue_number</strong> (<em>array_like</em><em>, </em><em>optional</em>) – residue numbers of shape <span class="math notranslate nohighlight">\((|V_{res}|,)\)</span></p></li>
+<li><p><strong>insertion_code</strong> (<em>array_like</em><em>, </em><em>optional</em>) – insertion codes of shape <span class="math notranslate nohighlight">\((|V_{res}|,)\)</span></p></li>
+<li><p><strong>chain_id</strong> (<em>array_like</em><em>, </em><em>optional</em>) – chain ids of shape <span class="math notranslate nohighlight">\((|V_{res}|,)\)</span></p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="torchdrug.data.Protein.packed_type">
+<span class="sig-name descname"><span class="pre">packed_type</span></span><a class="headerlink" href="#torchdrug.data.Protein.packed_type" title="Permalink to this definition">#</a></dt>
+<dd><p>alias of <a class="reference internal" href="#torchdrug.data.PackedProtein" title="torchdrug.data.protein.PackedProtein"><code class="xref py py-class docutils literal notranslate"><span class="pre">torchdrug.data.protein.PackedProtein</span></code></a></p>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="torchdrug.data.Protein.from_molecule">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_molecule</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cls</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mol</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">atom_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'default'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bond_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'default'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">residue_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'default'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mol_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kekulize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">node_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">edge_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">graph_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/data/protein.html#Protein.from_molecule"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.data.Protein.from_molecule" title="Permalink to this definition">#</a></dt>
+<dd><p>Create a protein from an RDKit object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>mol</strong> (<em>rdchem.Mol</em>) – molecule</p></li>
+<li><p><strong>atom_feature</strong> (<em>str</em><em> or </em><em>list of str</em><em>, </em><em>optional</em>) – atom features to extract</p></li>
+<li><p><strong>bond_feature</strong> (<em>str</em><em> or </em><em>list of str</em><em>, </em><em>optional</em>) – bond features to extract</p></li>
+<li><p><strong>residue_feature</strong> (<em>str</em><em>, </em><em>list of str</em><em>, </em><em>optional</em>) – residue features to extract</p></li>
+<li><p><strong>mol_feature</strong> (<em>str</em><em> or </em><em>list of str</em><em>, </em><em>optional</em>) – molecule features to extract</p></li>
+<li><p><strong>kekulize</strong> (<em>bool</em><em>, </em><em>optional</em>) – convert aromatic bonds to single/double bonds.
+Note this only affects the relation in <code class="docutils literal notranslate"><span class="pre">edge_list</span></code>.
+For <code class="docutils literal notranslate"><span class="pre">bond_type</span></code>, aromatic bonds are always stored explicitly.
+By default, aromatic bonds are stored.</p></li>
+<li><p><strong>node_feature</strong> (<em>str</em><em> or </em><em>list of str</em><em>, </em><em>optional</em>) – Deprecated alias of <code class="docutils literal notranslate"><span class="pre">atom_feature</span></code></p></li>
+<li><p><strong>edge_feature</strong> (<em>str</em><em> or </em><em>list of str</em><em>, </em><em>optional</em>) – Deprecated alias of <code class="docutils literal notranslate"><span class="pre">bond_feature</span></code></p></li>
+<li><p><strong>graph_feature</strong> (<em>str</em><em> or </em><em>list of str</em><em>, </em><em>optional</em>) – Deprecated alias of <code class="docutils literal notranslate"><span class="pre">mol_feature</span></code></p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="torchdrug.data.Protein.from_pdb">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_pdb</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cls</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pdb_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">atom_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'default'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bond_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'default'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">residue_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'default'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mol_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kekulize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">node_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">edge_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">graph_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/data/protein.html#Protein.from_pdb"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.data.Protein.from_pdb" title="Permalink to this definition">#</a></dt>
+<dd><p>Create a protein from a PDB file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>pdb_file</strong> (<em>str</em>) – file name</p></li>
+<li><p><strong>atom_feature</strong> (<em>str</em><em> or </em><em>list of str</em><em>, </em><em>optional</em>) – atom features to extract</p></li>
+<li><p><strong>bond_feature</strong> (<em>str</em><em> or </em><em>list of str</em><em>, </em><em>optional</em>) – bond features to extract</p></li>
+<li><p><strong>residue_feature</strong> (<em>str</em><em>, </em><em>list of str</em><em>, </em><em>optional</em>) – residue features to extract</p></li>
+<li><p><strong>mol_feature</strong> (<em>str</em><em> or </em><em>list of str</em><em>, </em><em>optional</em>) – molecule features to extract</p></li>
+<li><p><strong>kekulize</strong> (<em>bool</em><em>, </em><em>optional</em>) – convert aromatic bonds to single/double bonds.
+Note this only affects the relation in <code class="docutils literal notranslate"><span class="pre">edge_list</span></code>.
+For <code class="docutils literal notranslate"><span class="pre">bond_type</span></code>, aromatic bonds are always stored explicitly.
+By default, aromatic bonds are stored.</p></li>
+<li><p><strong>node_feature</strong> (<em>str</em><em> or </em><em>list of str</em><em>, </em><em>optional</em>) – Deprecated alias of <code class="docutils literal notranslate"><span class="pre">atom_feature</span></code></p></li>
+<li><p><strong>edge_feature</strong> (<em>str</em><em> or </em><em>list of str</em><em>, </em><em>optional</em>) – Deprecated alias of <code class="docutils literal notranslate"><span class="pre">bond_feature</span></code></p></li>
+<li><p><strong>graph_feature</strong> (<em>str</em><em> or </em><em>list of str</em><em>, </em><em>optional</em>) – Deprecated alias of <code class="docutils literal notranslate"><span class="pre">mol_feature</span></code></p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="torchdrug.data.Protein.from_sequence">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_sequence</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cls</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sequence</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">atom_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'default'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bond_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'default'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">residue_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'default'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mol_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kekulize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">node_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">edge_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">graph_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/data/protein.html#Protein.from_sequence"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.data.Protein.from_sequence" title="Permalink to this definition">#</a></dt>
+<dd><p>Create a protein from a sequence.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>It takes considerable time to construct proteins with a large number of atoms and bonds.
+If you only need residue information, you may speed up the construction by setting
+<code class="docutils literal notranslate"><span class="pre">atom_feature</span></code> and <code class="docutils literal notranslate"><span class="pre">bond_feature</span></code> to <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>sequence</strong> (<em>str</em>) – protein sequence</p></li>
+<li><p><strong>atom_feature</strong> (<em>str</em><em> or </em><em>list of str</em><em>, </em><em>optional</em>) – atom features to extract</p></li>
+<li><p><strong>bond_feature</strong> (<em>str</em><em> or </em><em>list of str</em><em>, </em><em>optional</em>) – bond features to extract</p></li>
+<li><p><strong>residue_feature</strong> (<em>str</em><em>, </em><em>list of str</em><em>, </em><em>optional</em>) – residue features to extract</p></li>
+<li><p><strong>mol_feature</strong> (<em>str</em><em> or </em><em>list of str</em><em>, </em><em>optional</em>) – molecule features to extract</p></li>
+<li><p><strong>kekulize</strong> (<em>bool</em><em>, </em><em>optional</em>) – convert aromatic bonds to single/double bonds.
+Note this only affects the relation in <code class="docutils literal notranslate"><span class="pre">edge_list</span></code>.
+For <code class="docutils literal notranslate"><span class="pre">bond_type</span></code>, aromatic bonds are always stored explicitly.
+By default, aromatic bonds are stored.</p></li>
+<li><p><strong>node_feature</strong> (<em>str</em><em> or </em><em>list of str</em><em>, </em><em>optional</em>) – Deprecated alias of <code class="docutils literal notranslate"><span class="pre">atom_feature</span></code></p></li>
+<li><p><strong>edge_feature</strong> (<em>str</em><em> or </em><em>list of str</em><em>, </em><em>optional</em>) – Deprecated alias of <code class="docutils literal notranslate"><span class="pre">bond_feature</span></code></p></li>
+<li><p><strong>graph_feature</strong> (<em>str</em><em> or </em><em>list of str</em><em>, </em><em>optional</em>) – Deprecated alias of <code class="docutils literal notranslate"><span class="pre">mol_feature</span></code></p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="torchdrug.data.Protein.pack">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">pack</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graphs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/data/protein.html#Protein.pack"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.data.Protein.pack" title="Permalink to this definition">#</a></dt>
+<dd><p>Pack a list of graphs into a PackedGraph object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>graphs</strong> (<em>list of Graph</em>) – list of graphs</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>PackedGraph</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="torchdrug.data.Protein.repeat">
+<span class="sig-name descname"><span class="pre">repeat</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">count</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/data/protein.html#Protein.repeat"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.data.Protein.repeat" title="Permalink to this definition">#</a></dt>
+<dd><p>Repeat this graph.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>count</strong> (<em>int</em>) – number of repetitions</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>PackedGraph</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="torchdrug.data.Protein.residue">
+<span class="sig-name descname"><span class="pre">residue</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/data/protein.html#Protein.residue"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.data.Protein.residue" title="Permalink to this definition">#</a></dt>
+<dd><p>Context manager for residue attributes.</p>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="torchdrug.data.Protein.residue2atom">
+<span class="sig-name descname"><span class="pre">residue2atom</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">residue_index</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/data/protein.html#Protein.residue2atom"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.data.Protein.residue2atom" title="Permalink to this definition">#</a></dt>
+<dd><p>Map residue ids to atom ids.</p>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="torchdrug.data.Protein.residue_mask">
+<span class="sig-name descname"><span class="pre">residue_mask</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">index</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">compact</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/data/protein.html#Protein.residue_mask"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.data.Protein.residue_mask" title="Permalink to this definition">#</a></dt>
+<dd><p>Return a masked protein based on the specified residues.</p>
+<p>Note the compact option is applied to both residue and atom ids.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>index</strong> (<em>array_like</em>) – residue index</p></li>
+<li><p><strong>compact</strong> (<em>bool</em><em>, </em><em>optional</em>) – compact residue ids or not</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Protein</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="torchdrug.data.Protein.residue_reference">
+<span class="sig-name descname"><span class="pre">residue_reference</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/data/protein.html#Protein.residue_reference"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.data.Protein.residue_reference" title="Permalink to this definition">#</a></dt>
+<dd><p>Context manager for residue references.</p>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="torchdrug.data.Protein.split">
+<span class="sig-name descname"><span class="pre">split</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">node2graph</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/data/protein.html#Protein.split"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.data.Protein.split" title="Permalink to this definition">#</a></dt>
+<dd><p>Split a graph into multiple disconnected graphs.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>node2graph</strong> (<em>array_like</em>) – ID of the graph each node belongs to</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>PackedGraph</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="torchdrug.data.Protein.subresidue">
+<span class="sig-name descname"><span class="pre">subresidue</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">index</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/data/protein.html#Protein.subresidue"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.data.Protein.subresidue" title="Permalink to this definition">#</a></dt>
+<dd><p>Return a subgraph based on the specified residues.
+Equivalent to <a class="reference internal" href="#torchdrug.data.Protein.residue_mask" title="torchdrug.data.Protein.residue_mask"><code class="xref py py-meth docutils literal notranslate"><span class="pre">residue_mask(index,</span> <span class="pre">compact=True)</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>index</strong> (<em>array_like</em>) – residue index</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Protein</p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#torchdrug.data.Protein.residue_mask" title="torchdrug.data.Protein.residue_mask"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Protein.residue_mask()</span></code></a></p>
+</div>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="torchdrug.data.Protein.to_molecule">
+<span class="sig-name descname"><span class="pre">to_molecule</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ignore_error</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/data/protein.html#Protein.to_molecule"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.data.Protein.to_molecule" title="Permalink to this definition">#</a></dt>
+<dd><p>Return an RDKit object of this protein.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>ignore_error</strong> (<em>bool</em><em>, </em><em>optional</em>) – if true, return <code class="docutils literal notranslate"><span class="pre">None</span></code> for illegal molecules.
+Otherwise, raise an exception.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>rdchem.Mol</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="torchdrug.data.Protein.to_pdb">
+<span class="sig-name descname"><span class="pre">to_pdb</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pdb_file</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/data/protein.html#Protein.to_pdb"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.data.Protein.to_pdb" title="Permalink to this definition">#</a></dt>
+<dd><p>Write this protein to a pdb file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>pdb_file</strong> (<em>str</em>) – file name</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="torchdrug.data.Protein.to_sequence">
+<span class="sig-name descname"><span class="pre">to_sequence</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/data/protein.html#Protein.to_sequence"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.data.Protein.to_sequence" title="Permalink to this definition">#</a></dt>
+<dd><p>Return a sequence of this protein.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py property">
+<dt class="sig sig-object py" id="torchdrug.data.Protein.connected_component_id">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">connected_component_id</span></span><a class="headerlink" href="#torchdrug.data.Protein.connected_component_id" title="Permalink to this definition">#</a></dt>
+<dd><p>Connected component id of each residue.</p>
+</dd></dl>
+<dl class="py property">
+<dt class="sig sig-object py" id="torchdrug.data.Protein.residue2graph">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">residue2graph</span></span><a class="headerlink" href="#torchdrug.data.Protein.residue2graph" title="Permalink to this definition">#</a></dt>
+<dd><p>Residue id to graph id mapping.</p>
 </dd></dl>
 </dd></dl>
 </section>
@@ -1210,7 +1465,7 @@ If provided, nodes in <cite>edge_list</cite> should be absolute index, i.e., the
 </dd></dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="torchdrug.data.PackedMolecule.from_molecule">
-<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_molecule</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mols</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">atom_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'default'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bond_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'default'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mol_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">with_hydrogen</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kekulize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/data/molecule.html#PackedMolecule.from_molecule"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.data.PackedMolecule.from_molecule" title="Permalink to this definition">#</a></dt>
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_molecule</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cls</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mols</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">atom_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'default'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bond_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'default'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mol_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">with_hydrogen</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kekulize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">node_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">edge_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">graph_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/data/molecule.html#PackedMolecule.from_molecule"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.data.PackedMolecule.from_molecule" title="Permalink to this definition">#</a></dt>
 <dd><p>Create a packed molecule from a list of RDKit objects.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -1225,13 +1480,16 @@ By default, hydrogens are dropped</p></li>
 Note this only affects the relation in <code class="docutils literal notranslate"><span class="pre">edge_list</span></code>.
 For <code class="docutils literal notranslate"><span class="pre">bond_type</span></code>, aromatic bonds are always stored explicitly.
 By default, aromatic bonds are stored.</p></li>
+<li><p><strong>node_feature</strong> (<em>str</em><em> or </em><em>list of str</em><em>, </em><em>optional</em>) – Deprecated alias of <code class="docutils literal notranslate"><span class="pre">atom_feature</span></code></p></li>
+<li><p><strong>edge_feature</strong> (<em>str</em><em> or </em><em>list of str</em><em>, </em><em>optional</em>) – Deprecated alias of <code class="docutils literal notranslate"><span class="pre">bond_feature</span></code></p></li>
+<li><p><strong>graph_feature</strong> (<em>str</em><em> or </em><em>list of str</em><em>, </em><em>optional</em>) – Deprecated alias of <code class="docutils literal notranslate"><span class="pre">mol_feature</span></code></p></li>
 </ul>
 </dd>
 </dl>
 </dd></dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="torchdrug.data.PackedMolecule.from_smiles">
-<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_smiles</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">smiles_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">atom_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'default'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bond_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'default'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mol_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">with_hydrogen</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kekulize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/data/molecule.html#PackedMolecule.from_smiles"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.data.PackedMolecule.from_smiles" title="Permalink to this definition">#</a></dt>
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_smiles</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cls</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">smiles_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">atom_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'default'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bond_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'default'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mol_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">with_hydrogen</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kekulize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">node_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">edge_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">graph_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/data/molecule.html#PackedMolecule.from_smiles"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.data.PackedMolecule.from_smiles" title="Permalink to this definition">#</a></dt>
 <dd><p>Create a packed molecule from a list of SMILES strings.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -1246,6 +1504,9 @@ By default, hydrogens are dropped</p></li>
 Note this only affects the relation in <code class="docutils literal notranslate"><span class="pre">edge_list</span></code>.
 For <code class="docutils literal notranslate"><span class="pre">bond_type</span></code>, aromatic bonds are always stored explicitly.
 By default, aromatic bonds are stored.</p></li>
+<li><p><strong>node_feature</strong> (<em>str</em><em> or </em><em>list of str</em><em>, </em><em>optional</em>) – Deprecated alias of <code class="docutils literal notranslate"><span class="pre">atom_feature</span></code></p></li>
+<li><p><strong>edge_feature</strong> (<em>str</em><em> or </em><em>list of str</em><em>, </em><em>optional</em>) – Deprecated alias of <code class="docutils literal notranslate"><span class="pre">bond_feature</span></code></p></li>
+<li><p><strong>graph_feature</strong> (<em>str</em><em> or </em><em>list of str</em><em>, </em><em>optional</em>) – Deprecated alias of <code class="docutils literal notranslate"><span class="pre">mol_feature</span></code></p></li>
 </ul>
 </dd>
 </dl>
@@ -1349,6 +1610,313 @@ If not provided, show the figure in window.</p></li>
 <dt class="sig sig-object py" id="torchdrug.data.PackedMolecule.is_valid">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">is_valid</span></span><a class="headerlink" href="#torchdrug.data.PackedMolecule.is_valid" title="Permalink to this definition">#</a></dt>
 <dd><p>A coarse implementation of valence check.</p>
+</dd></dl>
+</dd></dl>
+</section>
+<section id="packedprotein">
+<h3>PackedProtein<a class="headerlink" href="#packedprotein" title="Permalink to this headline">#</a></h3>
+<dl class="py class">
+<dt class="sig sig-object py" id="torchdrug.data.PackedProtein">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">PackedProtein</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">edge_list</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">atom_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bond_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">residue_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">view</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_nodes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_edges</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_residues</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">offsets</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/data/protein.html#PackedProtein"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.data.PackedProtein" title="Permalink to this definition">#</a></dt>
+<dd><p>Container for proteins with variadic sizes.
+Support both residue-level and atom-level operations and ensure consistency between two views.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Edges of the same graph are guaranteed to be consecutive in the edge list.
+The order of residues must be the same as the protein sequence.
+However, this class doesn’t enforce any order on nodes or edges.
+Nodes may have a different order with residues.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>edge_list</strong> (<em>array_like</em><em>, </em><em>optional</em>) – list of edges of shape <span class="math notranslate nohighlight">\((|E|, 3)\)</span>.
+Each tuple is (node_in, node_out, bond_type).</p></li>
+<li><p><strong>atom_type</strong> (<em>array_like</em><em>, </em><em>optional</em>) – atom types of shape <span class="math notranslate nohighlight">\((|V|,)\)</span></p></li>
+<li><p><strong>bond_type</strong> (<em>array_like</em><em>, </em><em>optional</em>) – bond types of shape <span class="math notranslate nohighlight">\((|E|,)\)</span></p></li>
+<li><p><strong>residue_type</strong> (<em>array_like</em><em>, </em><em>optional</em>) – residue types of shape <span class="math notranslate nohighlight">\((|V_{res}|,)\)</span></p></li>
+<li><p><strong>view</strong> (<em>str</em><em>, </em><em>optional</em>) – default view for this protein. Can be <code class="docutils literal notranslate"><span class="pre">atom</span></code> or <code class="docutils literal notranslate"><span class="pre">residue</span></code>.</p></li>
+<li><p><strong>num_nodes</strong> (<em>array_like</em><em>, </em><em>optional</em>) – number of nodes in each graph
+By default, it will be inferred from the largest id in <cite>edge_list</cite></p></li>
+<li><p><strong>num_edges</strong> (<em>array_like</em><em>, </em><em>optional</em>) – number of edges in each graph</p></li>
+<li><p><strong>num_residues</strong> (<em>array_like</em><em>, </em><em>optional</em>) – number of residues in each graph</p></li>
+<li><p><strong>offsets</strong> (<em>array_like</em><em>, </em><em>optional</em>) – node id offsets of shape <span class="math notranslate nohighlight">\((|E|,)\)</span>.
+If not provided, nodes in <cite>edge_list</cite> should be relative index, i.e., the index in each graph.
+If provided, nodes in <cite>edge_list</cite> should be absolute index, i.e., the index in the packed graph.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="torchdrug.data.PackedProtein.unpacked_type">
+<span class="sig-name descname"><span class="pre">unpacked_type</span></span><a class="headerlink" href="#torchdrug.data.PackedProtein.unpacked_type" title="Permalink to this definition">#</a></dt>
+<dd><p>alias of <a class="reference internal" href="#torchdrug.data.Protein" title="torchdrug.data.protein.Protein"><code class="xref py py-class docutils literal notranslate"><span class="pre">torchdrug.data.protein.Protein</span></code></a></p>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="torchdrug.data.PackedProtein.clone">
+<span class="sig-name descname"><span class="pre">clone</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/data/protein.html#PackedProtein.clone"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.data.PackedProtein.clone" title="Permalink to this definition">#</a></dt>
+<dd><p>Clone this packed graph.</p>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="torchdrug.data.PackedProtein.cpu">
+<span class="sig-name descname"><span class="pre">cpu</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/data/protein.html#PackedProtein.cpu"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.data.PackedProtein.cpu" title="Permalink to this definition">#</a></dt>
+<dd><p>Return a copy of this packed graph in CPU memory.</p>
+<p>This is a non-op if the graph is already in CPU memory.</p>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="torchdrug.data.PackedProtein.cuda">
+<span class="sig-name descname"><span class="pre">cuda</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/data/protein.html#PackedProtein.cuda"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.data.PackedProtein.cuda" title="Permalink to this definition">#</a></dt>
+<dd><p>Return a copy of this packed graph in CUDA memory.</p>
+<p>This is a non-op if the graph is already on the correct device.</p>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="torchdrug.data.PackedProtein.detach">
+<span class="sig-name descname"><span class="pre">detach</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/data/protein.html#PackedProtein.detach"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.data.PackedProtein.detach" title="Permalink to this definition">#</a></dt>
+<dd><p>Detach this packed graph.</p>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="torchdrug.data.PackedProtein.edge_mask">
+<span class="sig-name descname"><span class="pre">edge_mask</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">index</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/data/protein.html#PackedProtein.edge_mask"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.data.PackedProtein.edge_mask" title="Permalink to this definition">#</a></dt>
+<dd><p>Return a masked packed graph based on the specified edges.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>index</strong> (<em>array_like</em>) – edge index</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>PackedGraph</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="torchdrug.data.PackedProtein.from_molecule">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_molecule</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cls</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mols</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">atom_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'default'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bond_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'default'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">residue_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'default'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mol_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kekulize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">node_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">edge_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">graph_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/data/protein.html#PackedProtein.from_molecule"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.data.PackedProtein.from_molecule" title="Permalink to this definition">#</a></dt>
+<dd><p>Create a packed protein from a list of RDKit objects.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>mols</strong> (<em>list of rdchem.Mol</em>) – molecules</p></li>
+<li><p><strong>atom_feature</strong> (<em>str</em><em> or </em><em>list of str</em><em>, </em><em>optional</em>) – atom features to extract</p></li>
+<li><p><strong>bond_feature</strong> (<em>str</em><em> or </em><em>list of str</em><em>, </em><em>optional</em>) – bond features to extract</p></li>
+<li><p><strong>residue_feature</strong> (<em>str</em><em> or </em><em>list of str</em><em>, </em><em>optional</em>) – residue features to extract</p></li>
+<li><p><strong>mol_feature</strong> (<em>str</em><em> or </em><em>list of str</em><em>, </em><em>optional</em>) – molecule features to extract</p></li>
+<li><p><strong>kekulize</strong> (<em>bool</em><em>, </em><em>optional</em>) – convert aromatic bonds to single/double bonds.
+Note this only affects the relation in <code class="docutils literal notranslate"><span class="pre">edge_list</span></code>.
+For <code class="docutils literal notranslate"><span class="pre">bond_type</span></code>, aromatic bonds are always stored explicitly.
+By default, aromatic bonds are stored.</p></li>
+<li><p><strong>node_feature</strong> (<em>str</em><em> or </em><em>list of str</em><em>, </em><em>optional</em>) – Deprecated alias of <code class="docutils literal notranslate"><span class="pre">atom_feature</span></code></p></li>
+<li><p><strong>edge_feature</strong> (<em>str</em><em> or </em><em>list of str</em><em>, </em><em>optional</em>) – Deprecated alias of <code class="docutils literal notranslate"><span class="pre">bond_feature</span></code></p></li>
+<li><p><strong>graph_feature</strong> (<em>str</em><em> or </em><em>list of str</em><em>, </em><em>optional</em>) – Deprecated alias of <code class="docutils literal notranslate"><span class="pre">mol_feature</span></code></p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="torchdrug.data.PackedProtein.from_pdb">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_pdb</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cls</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pdb_files</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">atom_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'default'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bond_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'default'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">residue_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'default'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mol_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kekulize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">node_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">edge_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">graph_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/data/protein.html#PackedProtein.from_pdb"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.data.PackedProtein.from_pdb" title="Permalink to this definition">#</a></dt>
+<dd><p>Create a protein from a list of PDB files.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>pdb_files</strong> (<em>str</em>) – list of file names</p></li>
+<li><p><strong>atom_feature</strong> (<em>str</em><em> or </em><em>list of str</em><em>, </em><em>optional</em>) – atom features to extract</p></li>
+<li><p><strong>bond_feature</strong> (<em>str</em><em> or </em><em>list of str</em><em>, </em><em>optional</em>) – bond features to extract</p></li>
+<li><p><strong>residue_feature</strong> (<em>str</em><em>, </em><em>list of str</em><em>, </em><em>optional</em>) – residue features to extract</p></li>
+<li><p><strong>mol_feature</strong> (<em>str</em><em> or </em><em>list of str</em><em>, </em><em>optional</em>) – molecule features to extract</p></li>
+<li><p><strong>kekulize</strong> (<em>bool</em><em>, </em><em>optional</em>) – convert aromatic bonds to single/double bonds.
+Note this only affects the relation in <code class="docutils literal notranslate"><span class="pre">edge_list</span></code>.
+For <code class="docutils literal notranslate"><span class="pre">bond_type</span></code>, aromatic bonds are always stored explicitly.
+By default, aromatic bonds are stored.</p></li>
+<li><p><strong>node_feature</strong> (<em>str</em><em> or </em><em>list of str</em><em>, </em><em>optional</em>) – Deprecated alias of <code class="docutils literal notranslate"><span class="pre">atom_feature</span></code></p></li>
+<li><p><strong>edge_feature</strong> (<em>str</em><em> or </em><em>list of str</em><em>, </em><em>optional</em>) – Deprecated alias of <code class="docutils literal notranslate"><span class="pre">bond_feature</span></code></p></li>
+<li><p><strong>graph_feature</strong> (<em>str</em><em> or </em><em>list of str</em><em>, </em><em>optional</em>) – Deprecated alias of <code class="docutils literal notranslate"><span class="pre">mol_feature</span></code></p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="torchdrug.data.PackedProtein.from_sequence">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_sequence</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cls</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sequences</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">atom_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'default'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bond_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'default'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">residue_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'default'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mol_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kekulize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">node_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">edge_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">graph_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/data/protein.html#PackedProtein.from_sequence"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.data.PackedProtein.from_sequence" title="Permalink to this definition">#</a></dt>
+<dd><p>Create a packed protein from a list of sequences.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>It takes considerable time to construct proteins with a large number of atoms and bonds.
+If you only need residue information, you may speed up the construction by setting
+<code class="docutils literal notranslate"><span class="pre">atom_feature</span></code> and <code class="docutils literal notranslate"><span class="pre">bond_feature</span></code> to <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>sequences</strong> (<em>str</em>) – list of protein sequences</p></li>
+<li><p><strong>atom_feature</strong> (<em>str</em><em> or </em><em>list of str</em><em>, </em><em>optional</em>) – atom features to extract</p></li>
+<li><p><strong>bond_feature</strong> (<em>str</em><em> or </em><em>list of str</em><em>, </em><em>optional</em>) – bond features to extract</p></li>
+<li><p><strong>residue_feature</strong> (<em>str</em><em> or </em><em>list of str</em><em>, </em><em>optional</em>) – residue features to extract</p></li>
+<li><p><strong>mol_feature</strong> (<em>str</em><em> or </em><em>list of str</em><em>, </em><em>optional</em>) – molecule features to extract</p></li>
+<li><p><strong>kekulize</strong> (<em>bool</em><em>, </em><em>optional</em>) – convert aromatic bonds to single/double bonds.
+Note this only affects the relation in <code class="docutils literal notranslate"><span class="pre">edge_list</span></code>.
+For <code class="docutils literal notranslate"><span class="pre">bond_type</span></code>, aromatic bonds are always stored explicitly.
+By default, aromatic bonds are stored.</p></li>
+<li><p><strong>node_feature</strong> (<em>str</em><em> or </em><em>list of str</em><em>, </em><em>optional</em>) – Deprecated alias of <code class="docutils literal notranslate"><span class="pre">atom_feature</span></code></p></li>
+<li><p><strong>edge_feature</strong> (<em>str</em><em> or </em><em>list of str</em><em>, </em><em>optional</em>) – Deprecated alias of <code class="docutils literal notranslate"><span class="pre">bond_feature</span></code></p></li>
+<li><p><strong>graph_feature</strong> (<em>str</em><em> or </em><em>list of str</em><em>, </em><em>optional</em>) – Deprecated alias of <code class="docutils literal notranslate"><span class="pre">mol_feature</span></code></p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="torchdrug.data.PackedProtein.get_item">
+<span class="sig-name descname"><span class="pre">get_item</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">index</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/data/protein.html#PackedProtein.get_item"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.data.PackedProtein.get_item" title="Permalink to this definition">#</a></dt>
+<dd><p>Get the i-th graph from this packed graph.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>index</strong> (<em>int</em>) – graph index</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Graph</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="torchdrug.data.PackedProtein.graph_mask">
+<span class="sig-name descname"><span class="pre">graph_mask</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">index</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">compact</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/data/protein.html#PackedProtein.graph_mask"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.data.PackedProtein.graph_mask" title="Permalink to this definition">#</a></dt>
+<dd><p>Return a masked packed graph based on the specified graphs.</p>
+<p>This function can also be used to re-order the graphs.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>index</strong> (<em>array_like</em>) – graph index</p></li>
+<li><p><strong>compact</strong> (<em>bool</em><em>, </em><em>optional</em>) – compact graph ids or not</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>PackedGraph</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="torchdrug.data.PackedProtein.merge">
+<span class="sig-name descname"><span class="pre">merge</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph2graph</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/data/protein.html#PackedProtein.merge"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.data.PackedProtein.merge" title="Permalink to this definition">#</a></dt>
+<dd><p>Merge multiple graphs into a single graph.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>graph2graph</strong> (<em>array_like</em>) – ID of the new graph each graph belongs to</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="torchdrug.data.PackedProtein.node_mask">
+<span class="sig-name descname"><span class="pre">node_mask</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">index</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">compact</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/data/protein.html#PackedProtein.node_mask"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.data.PackedProtein.node_mask" title="Permalink to this definition">#</a></dt>
+<dd><p>Return a masked packed graph based on the specified nodes.</p>
+<p>Note the compact option is only applied to node ids but not graph ids.
+To generate compact graph ids, use <code class="xref py py-meth docutils literal notranslate"><span class="pre">subbatch()</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>index</strong> (<em>array_like</em>) – node index</p></li>
+<li><p><strong>compact</strong> (<em>bool</em><em>, </em><em>optional</em>) – compact node ids or not</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>PackedGraph</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="torchdrug.data.PackedProtein.repeat">
+<span class="sig-name descname"><span class="pre">repeat</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">count</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/data/protein.html#PackedProtein.repeat"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.data.PackedProtein.repeat" title="Permalink to this definition">#</a></dt>
+<dd><p>Repeat this packed graph. This function behaves similarly to <a class="reference external" href="https://pytorch.org/docs/stable/generated/torch.Tensor.repeat.html">torch.Tensor.repeat</a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>count</strong> (<em>int</em>) – number of repetitions</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>PackedGraph</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="torchdrug.data.PackedProtein.repeat_interleave">
+<span class="sig-name descname"><span class="pre">repeat_interleave</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">repeats</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/data/protein.html#PackedProtein.repeat_interleave"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.data.PackedProtein.repeat_interleave" title="Permalink to this definition">#</a></dt>
+<dd><p>Repeat this packed graph. This function behaves similarly to <a class="reference external" href="https://pytorch.org/docs/stable/generated/torch.repeat_interleave.html">torch.repeat_interleave</a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>repeats</strong> (<em>Tensor</em><em> or </em><em>int</em>) – number of repetitions for each graph</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>PackedGraph</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="torchdrug.data.PackedProtein.residue_mask">
+<span class="sig-name descname"><span class="pre">residue_mask</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">index</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">compact</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/data/protein.html#PackedProtein.residue_mask"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.data.PackedProtein.residue_mask" title="Permalink to this definition">#</a></dt>
+<dd><p>Return a masked packed protein based on the specified residues.</p>
+<p>Note the compact option is applied to both residue and atom ids, but not graph ids.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>index</strong> (<em>array_like</em>) – residue index</p></li>
+<li><p><strong>compact</strong> (<em>bool</em><em>, </em><em>optional</em>) – compact residue ids or not</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>PackedProtein</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="torchdrug.data.PackedProtein.to_molecule">
+<span class="sig-name descname"><span class="pre">to_molecule</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ignore_error</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/data/protein.html#PackedProtein.to_molecule"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.data.PackedProtein.to_molecule" title="Permalink to this definition">#</a></dt>
+<dd><p>Return a list of RDKit objects.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>ignore_error</strong> (<em>bool</em><em>, </em><em>optional</em>) – if true, return <code class="docutils literal notranslate"><span class="pre">None</span></code> for illegal molecules.
+Otherwise, raise an exception.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>list of rdchem.Mol</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="torchdrug.data.PackedProtein.to_pdb">
+<span class="sig-name descname"><span class="pre">to_pdb</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pdb_files</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/data/protein.html#PackedProtein.to_pdb"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.data.PackedProtein.to_pdb" title="Permalink to this definition">#</a></dt>
+<dd><p>Write this packed protein to several pdb files.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>pdb_files</strong> (<em>list of str</em>) – list of file names</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="torchdrug.data.PackedProtein.to_sequence">
+<span class="sig-name descname"><span class="pre">to_sequence</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/data/protein.html#PackedProtein.to_sequence"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.data.PackedProtein.to_sequence" title="Permalink to this definition">#</a></dt>
+<dd><p>Return a list of sequences.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>list of str</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="torchdrug.data.PackedProtein.undirected">
+<span class="sig-name descname"><span class="pre">undirected</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">add_inverse</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/data/protein.html#PackedProtein.undirected"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.data.PackedProtein.undirected" title="Permalink to this definition">#</a></dt>
+<dd><p>Flip all the edges to create undirected graphs.</p>
+<p>For knowledge graphs, the flipped edges can either have the original relation or an inverse relation.
+The inverse relation for relation <span class="math notranslate nohighlight">\(r\)</span> is defined as <span class="math notranslate nohighlight">\(|R| + r\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>add_inverse</strong> (<em>bool</em><em>, </em><em>optional</em>) – whether to use inverse relations for flipped edges</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py property">
+<dt class="sig sig-object py" id="torchdrug.data.PackedProtein.connected_component_id">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">connected_component_id</span></span><a class="headerlink" href="#torchdrug.data.PackedProtein.connected_component_id" title="Permalink to this definition">#</a></dt>
+<dd><p>Connected component id of each residue.</p>
+</dd></dl>
+<dl class="py property">
+<dt class="sig sig-object py" id="torchdrug.data.PackedProtein.residue2graph">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">residue2graph</span></span><a class="headerlink" href="#torchdrug.data.PackedProtein.residue2graph" title="Permalink to this definition">#</a></dt>
+<dd><p>Residue id to graph id mapping.</p>
 </dd></dl>
 </dd></dl>
 </section>
@@ -1497,13 +2065,13 @@ The mapping between indexes and tokens is specified through either vocabularies 
 <p>Each sample contains a molecule graph, and any number of prediction targets.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="torchdrug.data.MoleculeDataset.load_csv">
-<span class="sig-name descname"><span class="pre">load_csv</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">csv_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">smiles_field</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'smiles'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target_fields</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transform</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lazy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">atom_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'default'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bond_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'default'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mol_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">with_hydrogen</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kekulize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/data/dataset.html#MoleculeDataset.load_csv"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.data.MoleculeDataset.load_csv" title="Permalink to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">load_csv</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">csv_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">smiles_field</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'smiles'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target_fields</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transform</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lazy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">atom_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'default'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bond_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'default'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mol_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">with_hydrogen</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kekulize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">node_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">edge_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">graph_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/data/dataset.html#MoleculeDataset.load_csv"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.data.MoleculeDataset.load_csv" title="Permalink to this definition">#</a></dt>
 <dd><p>Load the dataset from a csv file.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>csv_file</strong> (<em>str</em>) – file name</p></li>
-<li><p><strong>smiles_field</strong> (<em>str</em><em>, </em><em>optional</em>) – name of SMILES column in the table.
+<li><p><strong>smiles_field</strong> (<em>str</em><em>, </em><em>optional</em>) – name of the SMILES column in the table.
 Use <code class="docutils literal notranslate"><span class="pre">None</span></code> if there is no SMILES column.</p></li>
 <li><p><strong>target_fields</strong> (<em>list of str</em><em>, </em><em>optional</em>) – name of target columns in the table.
 Default is all columns other than the SMILES column.</p></li>
@@ -1520,13 +2088,29 @@ By default, hydrogens are dropped</p></li>
 Note this only affects the relation in <code class="docutils literal notranslate"><span class="pre">edge_list</span></code>.
 For <code class="docutils literal notranslate"><span class="pre">bond_type</span></code>, aromatic bonds are always stored explicitly.
 By default, aromatic bonds are stored.</p></li>
+<li><p><strong>node_feature</strong> (<em>str</em><em> or </em><em>list of str</em><em>, </em><em>optional</em>) – Deprecated alias of <code class="docutils literal notranslate"><span class="pre">atom_feature</span></code></p></li>
+<li><p><strong>edge_feature</strong> (<em>str</em><em> or </em><em>list of str</em><em>, </em><em>optional</em>) – Deprecated alias of <code class="docutils literal notranslate"><span class="pre">bond_feature</span></code></p></li>
+<li><p><strong>graph_feature</strong> (<em>str</em><em> or </em><em>list of str</em><em>, </em><em>optional</em>) – Deprecated alias of <code class="docutils literal notranslate"><span class="pre">mol_feature</span></code></p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="torchdrug.data.MoleculeDataset.load_pickle">
+<span class="sig-name descname"><span class="pre">load_pickle</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pkl_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/data/dataset.html#MoleculeDataset.load_pickle"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.data.MoleculeDataset.load_pickle" title="Permalink to this definition">#</a></dt>
+<dd><p>Load the dataset from a pickle file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>pkl_file</strong> (<em>str</em>) – file name</p></li>
+<li><p><strong>verbose</strong> (<em>int</em><em>, </em><em>optional</em>) – output verbose level</p></li>
 </ul>
 </dd>
 </dl>
 </dd></dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="torchdrug.data.MoleculeDataset.load_smiles">
-<span class="sig-name descname"><span class="pre">load_smiles</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">smiles_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">targets</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transform</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lazy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">atom_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'default'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bond_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'default'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mol_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">with_hydrogen</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kekulize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/data/dataset.html#MoleculeDataset.load_smiles"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.data.MoleculeDataset.load_smiles" title="Permalink to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">load_smiles</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">smiles_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">targets</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transform</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lazy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">atom_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'default'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bond_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'default'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mol_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">with_hydrogen</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kekulize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">node_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">edge_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">graph_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/data/dataset.html#MoleculeDataset.load_smiles"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.data.MoleculeDataset.load_smiles" title="Permalink to this definition">#</a></dt>
 <dd><p>Load the dataset from SMILES and targets.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -1546,6 +2130,22 @@ By default, hydrogens are dropped</p></li>
 Note this only affects the relation in <code class="docutils literal notranslate"><span class="pre">edge_list</span></code>.
 For <code class="docutils literal notranslate"><span class="pre">bond_type</span></code>, aromatic bonds are always stored explicitly.
 By default, aromatic bonds are stored.</p></li>
+<li><p><strong>node_feature</strong> (<em>str</em><em> or </em><em>list of str</em><em>, </em><em>optional</em>) – Deprecated alias of <code class="docutils literal notranslate"><span class="pre">atom_feature</span></code></p></li>
+<li><p><strong>edge_feature</strong> (<em>str</em><em> or </em><em>list of str</em><em>, </em><em>optional</em>) – Deprecated alias of <code class="docutils literal notranslate"><span class="pre">bond_feature</span></code></p></li>
+<li><p><strong>graph_feature</strong> (<em>str</em><em> or </em><em>list of str</em><em>, </em><em>optional</em>) – Deprecated alias of <code class="docutils literal notranslate"><span class="pre">mol_feature</span></code></p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="torchdrug.data.MoleculeDataset.save_pickle">
+<span class="sig-name descname"><span class="pre">save_pickle</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pkl_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/data/dataset.html#MoleculeDataset.save_pickle"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.data.MoleculeDataset.save_pickle" title="Permalink to this definition">#</a></dt>
+<dd><p>Save the dataset to a pickle file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>pkl_file</strong> (<em>str</em>) – file name</p></li>
+<li><p><strong>verbose</strong> (<em>int</em><em>, </em><em>optional</em>) – output verbose level</p></li>
 </ul>
 </dd>
 </dl>
@@ -1584,6 +2184,341 @@ By default, aromatic bonds are stored.</p></li>
 <dt class="sig sig-object py" id="torchdrug.data.MoleculeDataset.tasks">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">tasks</span></span><a class="headerlink" href="#torchdrug.data.MoleculeDataset.tasks" title="Permalink to this definition">#</a></dt>
 <dd><p>List of tasks.</p>
+</dd></dl>
+</dd></dl>
+</section>
+<section id="proteindataset">
+<h3>ProteinDataset<a class="headerlink" href="#proteindataset" title="Permalink to this headline">#</a></h3>
+<dl class="py class">
+<dt class="sig sig-object py" id="torchdrug.data.ProteinDataset">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">ProteinDataset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwds</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/data/dataset.html#ProteinDataset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.data.ProteinDataset" title="Permalink to this definition">#</a></dt>
+<dd><p>Protein dataset.</p>
+<p>Each sample contains a protein graph, and any number of prediction targets.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="torchdrug.data.ProteinDataset.load_fasta">
+<span class="sig-name descname"><span class="pre">load_fasta</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fasta_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">attributes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transform</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lazy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">atom_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'default'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bond_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'default'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">residue_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'default'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mol_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kekulize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">node_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">edge_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">graph_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/data/dataset.html#ProteinDataset.load_fasta"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.data.ProteinDataset.load_fasta" title="Permalink to this definition">#</a></dt>
+<dd><p>Load the dataset from a fasta file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>fasta_file</strong> (<em>str</em>) – file name</p></li>
+<li><p><strong>verbose</strong> (<em>int</em><em>, </em><em>optional</em>) – output verbose level</p></li>
+<li><p><strong>attributes</strong> (<em>dict of list</em>) – protein-level attributes</p></li>
+<li><p><strong>transform</strong> (<em>Callable</em><em>, </em><em>optional</em>) – protein sequence transformation function</p></li>
+<li><p><strong>lazy</strong> (<em>bool</em><em>, </em><em>optional</em>) – if lazy mode is used, the proteins are processed in the dataloader.
+This may slow down the data loading process, but save a lot of CPU memory and dataset loading time.</p></li>
+<li><p><strong>atom_feature</strong> (<em>str</em><em> or </em><em>list of str</em><em>, </em><em>optional</em>) – atom features to extract</p></li>
+<li><p><strong>bond_feature</strong> (<em>str</em><em> or </em><em>list of str</em><em>, </em><em>optional</em>) – bond features to extract</p></li>
+<li><p><strong>residue_feature</strong> (<em>str</em><em>, </em><em>list of str</em><em>, </em><em>optional</em>) – residue features to extract</p></li>
+<li><p><strong>mol_feature</strong> (<em>str</em><em> or </em><em>list of str</em><em>, </em><em>optional</em>) – molecule features to extract</p></li>
+<li><p><strong>kekulize</strong> (<em>bool</em><em>, </em><em>optional</em>) – convert aromatic bonds to single/double bonds.
+Note this only affects the relation in <code class="docutils literal notranslate"><span class="pre">edge_list</span></code>.
+For <code class="docutils literal notranslate"><span class="pre">bond_type</span></code>, aromatic bonds are always stored explicitly.
+By default, aromatic bonds are stored.</p></li>
+<li><p><strong>node_feature</strong> (<em>str</em><em> or </em><em>list of str</em><em>, </em><em>optional</em>) – Deprecated alias of <code class="docutils literal notranslate"><span class="pre">atom_feature</span></code></p></li>
+<li><p><strong>edge_feature</strong> (<em>str</em><em> or </em><em>list of str</em><em>, </em><em>optional</em>) – Deprecated alias of <code class="docutils literal notranslate"><span class="pre">bond_feature</span></code></p></li>
+<li><p><strong>graph_feature</strong> (<em>str</em><em> or </em><em>list of str</em><em>, </em><em>optional</em>) – Deprecated alias of <code class="docutils literal notranslate"><span class="pre">mol_feature</span></code></p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="torchdrug.data.ProteinDataset.load_lmdbs">
+<span class="sig-name descname"><span class="pre">load_lmdbs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lmdb_files</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sequence_field</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'primary'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target_fields</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">number_field</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'num_examples'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transform</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lazy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">attributes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">atom_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'default'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bond_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'default'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">residue_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'default'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mol_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kekulize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">node_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">edge_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">graph_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/data/dataset.html#ProteinDataset.load_lmdbs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.data.ProteinDataset.load_lmdbs" title="Permalink to this definition">#</a></dt>
+<dd><p>Load the dataset from lmdb files.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>lmdb_files</strong> (<em>list of str</em>) – list of lmdb files</p></li>
+<li><p><strong>sequence_field</strong> (<em>str</em><em>, </em><em>optional</em>) – name of the field of protein sequence in lmdb files</p></li>
+<li><p><strong>target_fields</strong> (<em>list of str</em><em>, </em><em>optional</em>) – name of target fields in lmdb files</p></li>
+<li><p><strong>number_field</strong> (<em>str</em><em>, </em><em>optional</em>) – name of the field of sample count in lmdb files</p></li>
+<li><p><strong>transform</strong> (<em>Callable</em><em>, </em><em>optional</em>) – protein sequence transformation function</p></li>
+<li><p><strong>lazy</strong> (<em>bool</em><em>, </em><em>optional</em>) – if lazy mode is used, the proteins are processed in the dataloader.
+This may slow down the data loading process, but save a lot of CPU memory and dataset loading time.</p></li>
+<li><p><strong>verbose</strong> (<em>int</em><em>, </em><em>optional</em>) – output verbose level</p></li>
+<li><p><strong>attributes</strong> (<em>dict of list</em>) – protein-level attributes</p></li>
+<li><p><strong>atom_feature</strong> (<em>str</em><em> or </em><em>list of str</em><em>, </em><em>optional</em>) – atom features to extract</p></li>
+<li><p><strong>bond_feature</strong> (<em>str</em><em> or </em><em>list of str</em><em>, </em><em>optional</em>) – bond features to extract</p></li>
+<li><p><strong>residue_feature</strong> (<em>str</em><em>, </em><em>list of str</em><em>, </em><em>optional</em>) – residue features to extract</p></li>
+<li><p><strong>mol_feature</strong> (<em>str</em><em> or </em><em>list of str</em><em>, </em><em>optional</em>) – molecule features to extract</p></li>
+<li><p><strong>kekulize</strong> (<em>bool</em><em>, </em><em>optional</em>) – convert aromatic bonds to single/double bonds.
+Note this only affects the relation in <code class="docutils literal notranslate"><span class="pre">edge_list</span></code>.
+For <code class="docutils literal notranslate"><span class="pre">bond_type</span></code>, aromatic bonds are always stored explicitly.
+By default, aromatic bonds are stored.</p></li>
+<li><p><strong>node_feature</strong> (<em>str</em><em> or </em><em>list of str</em><em>, </em><em>optional</em>) – Deprecated alias of <code class="docutils literal notranslate"><span class="pre">atom_feature</span></code></p></li>
+<li><p><strong>edge_feature</strong> (<em>str</em><em> or </em><em>list of str</em><em>, </em><em>optional</em>) – Deprecated alias of <code class="docutils literal notranslate"><span class="pre">bond_feature</span></code></p></li>
+<li><p><strong>graph_feature</strong> (<em>str</em><em> or </em><em>list of str</em><em>, </em><em>optional</em>) – Deprecated alias of <code class="docutils literal notranslate"><span class="pre">mol_feature</span></code></p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="torchdrug.data.ProteinDataset.load_pdbs">
+<span class="sig-name descname"><span class="pre">load_pdbs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pdb_files</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transform</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lazy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">atom_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'default'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bond_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'default'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">residue_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'default'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mol_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kekulize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">node_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">edge_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">graph_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/data/dataset.html#ProteinDataset.load_pdbs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.data.ProteinDataset.load_pdbs" title="Permalink to this definition">#</a></dt>
+<dd><p>Load the dataset from pdb files.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>pdb_files</strong> (<em>list of str</em>) – pdb file names</p></li>
+<li><p><strong>transform</strong> (<em>Callable</em><em>, </em><em>optional</em>) – protein sequence transformation function</p></li>
+<li><p><strong>lazy</strong> (<em>bool</em><em>, </em><em>optional</em>) – if lazy mode is used, the proteins are processed in the dataloader.
+This may slow down the data loading process, but save a lot of CPU memory and dataset loading time.</p></li>
+<li><p><strong>verbose</strong> (<em>int</em><em>, </em><em>optional</em>) – output verbose level</p></li>
+<li><p><strong>atom_feature</strong> (<em>str</em><em> or </em><em>list of str</em><em>, </em><em>optional</em>) – atom features to extract</p></li>
+<li><p><strong>bond_feature</strong> (<em>str</em><em> or </em><em>list of str</em><em>, </em><em>optional</em>) – bond features to extract</p></li>
+<li><p><strong>residue_feature</strong> (<em>str</em><em>, </em><em>list of str</em><em>, </em><em>optional</em>) – residue features to extract</p></li>
+<li><p><strong>mol_feature</strong> (<em>str</em><em> or </em><em>list of str</em><em>, </em><em>optional</em>) – molecule features to extract</p></li>
+<li><p><strong>kekulize</strong> (<em>bool</em><em>, </em><em>optional</em>) – convert aromatic bonds to single/double bonds.
+Note this only affects the relation in <code class="docutils literal notranslate"><span class="pre">edge_list</span></code>.
+For <code class="docutils literal notranslate"><span class="pre">bond_type</span></code>, aromatic bonds are always stored explicitly.
+By default, aromatic bonds are stored.</p></li>
+<li><p><strong>node_feature</strong> (<em>str</em><em> or </em><em>list of str</em><em>, </em><em>optional</em>) – Deprecated alias of <code class="docutils literal notranslate"><span class="pre">atom_feature</span></code></p></li>
+<li><p><strong>edge_feature</strong> (<em>str</em><em> or </em><em>list of str</em><em>, </em><em>optional</em>) – Deprecated alias of <code class="docutils literal notranslate"><span class="pre">bond_feature</span></code></p></li>
+<li><p><strong>graph_feature</strong> (<em>str</em><em> or </em><em>list of str</em><em>, </em><em>optional</em>) – Deprecated alias of <code class="docutils literal notranslate"><span class="pre">mol_feature</span></code></p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="torchdrug.data.ProteinDataset.load_pickle">
+<span class="sig-name descname"><span class="pre">load_pickle</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pkl_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transform</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lazy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">atom_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'default'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bond_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'default'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">residue_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'default'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mol_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kekulize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">node_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">edge_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">graph_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/data/dataset.html#ProteinDataset.load_pickle"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.data.ProteinDataset.load_pickle" title="Permalink to this definition">#</a></dt>
+<dd><p>Load the dataset from a pickle file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>pkl_file</strong> (<em>str</em>) – file name</p></li>
+<li><p><strong>transform</strong> (<em>Callable</em><em>, </em><em>optional</em>) – protein sequence transformation function</p></li>
+<li><p><strong>lazy</strong> (<em>bool</em><em>, </em><em>optional</em>) – if lazy mode is used, the proteins are processed in the dataloader.
+This may slow down the data loading process, but save a lot of CPU memory and dataset loading time.</p></li>
+<li><p><strong>verbose</strong> (<em>int</em><em>, </em><em>optional</em>) – output verbose level</p></li>
+<li><p><strong>atom_feature</strong> (<em>str</em><em> or </em><em>list of str</em><em>, </em><em>optional</em>) – atom features to extract</p></li>
+<li><p><strong>bond_feature</strong> (<em>str</em><em> or </em><em>list of str</em><em>, </em><em>optional</em>) – bond features to extract</p></li>
+<li><p><strong>residue_feature</strong> (<em>str</em><em>, </em><em>list of str</em><em>, </em><em>optional</em>) – residue features to extract</p></li>
+<li><p><strong>mol_feature</strong> (<em>str</em><em> or </em><em>list of str</em><em>, </em><em>optional</em>) – molecule features to extract</p></li>
+<li><p><strong>kekulize</strong> (<em>bool</em><em>, </em><em>optional</em>) – convert aromatic bonds to single/double bonds.
+Note this only affects the relation in <code class="docutils literal notranslate"><span class="pre">edge_list</span></code>.
+For <code class="docutils literal notranslate"><span class="pre">bond_type</span></code>, aromatic bonds are always stored explicitly.
+By default, aromatic bonds are stored.</p></li>
+<li><p><strong>node_feature</strong> (<em>str</em><em> or </em><em>list of str</em><em>, </em><em>optional</em>) – Deprecated alias of <code class="docutils literal notranslate"><span class="pre">atom_feature</span></code></p></li>
+<li><p><strong>edge_feature</strong> (<em>str</em><em> or </em><em>list of str</em><em>, </em><em>optional</em>) – Deprecated alias of <code class="docutils literal notranslate"><span class="pre">bond_feature</span></code></p></li>
+<li><p><strong>graph_feature</strong> (<em>str</em><em> or </em><em>list of str</em><em>, </em><em>optional</em>) – Deprecated alias of <code class="docutils literal notranslate"><span class="pre">mol_feature</span></code></p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="torchdrug.data.ProteinDataset.load_sequence">
+<span class="sig-name descname"><span class="pre">load_sequence</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sequences</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">targets</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">attributes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transform</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lazy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">atom_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'default'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bond_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'default'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">residue_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'default'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mol_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kekulize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">node_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">edge_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">graph_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/data/dataset.html#ProteinDataset.load_sequence"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.data.ProteinDataset.load_sequence" title="Permalink to this definition">#</a></dt>
+<dd><p>Load the dataset from protein sequences and targets.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>sequences</strong> (<em>list of str</em>) – protein sequence strings</p></li>
+<li><p><strong>targets</strong> (<em>dict of list</em>) – prediction targets</p></li>
+<li><p><strong>attributes</strong> (<em>dict of list</em>) – protein-level attributes</p></li>
+<li><p><strong>transform</strong> (<em>Callable</em><em>, </em><em>optional</em>) – protein sequence transformation function</p></li>
+<li><p><strong>lazy</strong> (<em>bool</em><em>, </em><em>optional</em>) – if lazy mode is used, the proteins are processed in the dataloader.
+This may slow down the data loading process, but save a lot of CPU memory and dataset loading time.</p></li>
+<li><p><strong>verbose</strong> (<em>int</em><em>, </em><em>optional</em>) – output verbose level</p></li>
+<li><p><strong>atom_feature</strong> (<em>str</em><em> or </em><em>list of str</em><em>, </em><em>optional</em>) – atom features to extract</p></li>
+<li><p><strong>bond_feature</strong> (<em>str</em><em> or </em><em>list of str</em><em>, </em><em>optional</em>) – bond features to extract</p></li>
+<li><p><strong>residue_feature</strong> (<em>str</em><em>, </em><em>list of str</em><em>, </em><em>optional</em>) – residue features to extract</p></li>
+<li><p><strong>mol_feature</strong> (<em>str</em><em> or </em><em>list of str</em><em>, </em><em>optional</em>) – molecule features to extract</p></li>
+<li><p><strong>kekulize</strong> (<em>bool</em><em>, </em><em>optional</em>) – convert aromatic bonds to single/double bonds.
+Note this only affects the relation in <code class="docutils literal notranslate"><span class="pre">edge_list</span></code>.
+For <code class="docutils literal notranslate"><span class="pre">bond_type</span></code>, aromatic bonds are always stored explicitly.
+By default, aromatic bonds are stored.</p></li>
+<li><p><strong>node_feature</strong> (<em>str</em><em> or </em><em>list of str</em><em>, </em><em>optional</em>) – Deprecated alias of <code class="docutils literal notranslate"><span class="pre">atom_feature</span></code></p></li>
+<li><p><strong>edge_feature</strong> (<em>str</em><em> or </em><em>list of str</em><em>, </em><em>optional</em>) – Deprecated alias of <code class="docutils literal notranslate"><span class="pre">bond_feature</span></code></p></li>
+<li><p><strong>graph_feature</strong> (<em>str</em><em> or </em><em>list of str</em><em>, </em><em>optional</em>) – Deprecated alias of <code class="docutils literal notranslate"><span class="pre">mol_feature</span></code></p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="torchdrug.data.ProteinDataset.save_pickle">
+<span class="sig-name descname"><span class="pre">save_pickle</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pkl_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/data/dataset.html#ProteinDataset.save_pickle"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.data.ProteinDataset.save_pickle" title="Permalink to this definition">#</a></dt>
+<dd><p>Save the dataset to a pickle file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>pkl_file</strong> (<em>str</em>) – file name</p></li>
+<li><p><strong>verbose</strong> (<em>int</em><em>, </em><em>optional</em>) – output verbose level</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py property">
+<dt class="sig sig-object py" id="torchdrug.data.ProteinDataset.residue_feature_dim">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">residue_feature_dim</span></span><a class="headerlink" href="#torchdrug.data.ProteinDataset.residue_feature_dim" title="Permalink to this definition">#</a></dt>
+<dd><p>Dimension of residue features.</p>
+</dd></dl>
+</dd></dl>
+</section>
+<section id="proteinpairdataset">
+<h3>ProteinPairDataset<a class="headerlink" href="#proteinpairdataset" title="Permalink to this headline">#</a></h3>
+<dl class="py class">
+<dt class="sig sig-object py" id="torchdrug.data.ProteinPairDataset">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">ProteinPairDataset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwds</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/data/dataset.html#ProteinPairDataset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.data.ProteinPairDataset" title="Permalink to this definition">#</a></dt>
+<dd><p>Protein pair dataset.</p>
+<p>Each sample contains two protein graphs, and any number of prediction targets.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="torchdrug.data.ProteinPairDataset.load_lmdbs">
+<span class="sig-name descname"><span class="pre">load_lmdbs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lmdb_files</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sequence_field</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'primary'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target_fields</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">number_field</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'num_examples'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transform</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lazy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">attributes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">atom_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'default'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bond_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'default'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">residue_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'default'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mol_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kekulize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">node_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">edge_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">graph_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/data/dataset.html#ProteinPairDataset.load_lmdbs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.data.ProteinPairDataset.load_lmdbs" title="Permalink to this definition">#</a></dt>
+<dd><p>Load the dataset from lmdb files.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>lmdb_files</strong> (<em>list of str</em>) – file names</p></li>
+<li><p><strong>sequence_field</strong> (<em>str</em><em> or </em><em>list of str</em><em>, </em><em>optional</em>) – names of the fields of protein sequence in lmdb files</p></li>
+<li><p><strong>target_fields</strong> (<em>list of str</em><em>, </em><em>optional</em>) – name of target fields in lmdb files</p></li>
+<li><p><strong>number_field</strong> (<em>str</em><em>, </em><em>optional</em>) – name of the field of sample count in lmdb files</p></li>
+<li><p><strong>transform</strong> (<em>Callable</em><em>, </em><em>optional</em>) – protein sequence transformation function</p></li>
+<li><p><strong>lazy</strong> (<em>bool</em><em>, </em><em>optional</em>) – if lazy mode is used, the protein pairs are processed in the dataloader.
+This may slow down the data loading process, but save a lot of CPU memory and dataset loading time.</p></li>
+<li><p><strong>verbose</strong> (<em>int</em><em>, </em><em>optional</em>) – output verbose level</p></li>
+<li><p><strong>attributes</strong> (<em>dict of list</em>) – protein-level attributes</p></li>
+<li><p><strong>atom_feature</strong> (<em>str</em><em> or </em><em>list of str</em><em>, </em><em>optional</em>) – atom features to extract</p></li>
+<li><p><strong>bond_feature</strong> (<em>str</em><em> or </em><em>list of str</em><em>, </em><em>optional</em>) – bond features to extract</p></li>
+<li><p><strong>residue_feature</strong> (<em>str</em><em>, </em><em>list of str</em><em>, </em><em>optional</em>) – residue features to extract</p></li>
+<li><p><strong>mol_feature</strong> (<em>str</em><em> or </em><em>list of str</em><em>, </em><em>optional</em>) – molecule features to extract</p></li>
+<li><p><strong>kekulize</strong> (<em>bool</em><em>, </em><em>optional</em>) – convert aromatic bonds to single/double bonds.
+Note this only affects the relation in <code class="docutils literal notranslate"><span class="pre">edge_list</span></code>.
+For <code class="docutils literal notranslate"><span class="pre">bond_type</span></code>, aromatic bonds are always stored explicitly.
+By default, aromatic bonds are stored.</p></li>
+<li><p><strong>node_feature</strong> (<em>str</em><em> or </em><em>list of str</em><em>, </em><em>optional</em>) – Deprecated alias of <code class="docutils literal notranslate"><span class="pre">atom_feature</span></code></p></li>
+<li><p><strong>edge_feature</strong> (<em>str</em><em> or </em><em>list of str</em><em>, </em><em>optional</em>) – Deprecated alias of <code class="docutils literal notranslate"><span class="pre">bond_feature</span></code></p></li>
+<li><p><strong>graph_feature</strong> (<em>str</em><em> or </em><em>list of str</em><em>, </em><em>optional</em>) – Deprecated alias of <code class="docutils literal notranslate"><span class="pre">mol_feature</span></code></p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="torchdrug.data.ProteinPairDataset.load_sequence">
+<span class="sig-name descname"><span class="pre">load_sequence</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sequences</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">targets</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">attributes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transform</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lazy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">atom_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'default'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bond_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'default'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">residue_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'default'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mol_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kekulize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">node_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">edge_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">graph_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/data/dataset.html#ProteinPairDataset.load_sequence"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.data.ProteinPairDataset.load_sequence" title="Permalink to this definition">#</a></dt>
+<dd><p>Load the dataset from protein sequences and targets.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>sequences</strong> (<em>list of list of str</em>) – protein sequence string pairs</p></li>
+<li><p><strong>targets</strong> (<em>dict of list</em>) – prediction targets</p></li>
+<li><p><strong>attributes</strong> (<em>dict of list</em>) – protein-level attributes</p></li>
+<li><p><strong>transform</strong> (<em>Callable</em><em>, </em><em>optional</em>) – protein sequence transformation function</p></li>
+<li><p><strong>lazy</strong> (<em>bool</em><em>, </em><em>optional</em>) – if lazy mode is used, the protein pairs are processed in the dataloader.
+This may slow down the data loading process, but save a lot of CPU memory and dataset loading time.</p></li>
+<li><p><strong>verbose</strong> (<em>int</em><em>, </em><em>optional</em>) – output verbose level</p></li>
+<li><p><strong>atom_feature</strong> (<em>str</em><em> or </em><em>list of str</em><em>, </em><em>optional</em>) – atom features to extract</p></li>
+<li><p><strong>bond_feature</strong> (<em>str</em><em> or </em><em>list of str</em><em>, </em><em>optional</em>) – bond features to extract</p></li>
+<li><p><strong>residue_feature</strong> (<em>str</em><em>, </em><em>list of str</em><em>, </em><em>optional</em>) – residue features to extract</p></li>
+<li><p><strong>mol_feature</strong> (<em>str</em><em> or </em><em>list of str</em><em>, </em><em>optional</em>) – molecule features to extract</p></li>
+<li><p><strong>kekulize</strong> (<em>bool</em><em>, </em><em>optional</em>) – convert aromatic bonds to single/double bonds.
+Note this only affects the relation in <code class="docutils literal notranslate"><span class="pre">edge_list</span></code>.
+For <code class="docutils literal notranslate"><span class="pre">bond_type</span></code>, aromatic bonds are always stored explicitly.
+By default, aromatic bonds are stored.</p></li>
+<li><p><strong>node_feature</strong> (<em>str</em><em> or </em><em>list of str</em><em>, </em><em>optional</em>) – Deprecated alias of <code class="docutils literal notranslate"><span class="pre">atom_feature</span></code></p></li>
+<li><p><strong>edge_feature</strong> (<em>str</em><em> or </em><em>list of str</em><em>, </em><em>optional</em>) – Deprecated alias of <code class="docutils literal notranslate"><span class="pre">bond_feature</span></code></p></li>
+<li><p><strong>graph_feature</strong> (<em>str</em><em> or </em><em>list of str</em><em>, </em><em>optional</em>) – Deprecated alias of <code class="docutils literal notranslate"><span class="pre">mol_feature</span></code></p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py property">
+<dt class="sig sig-object py" id="torchdrug.data.ProteinPairDataset.node_feature_dim">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">node_feature_dim</span></span><a class="headerlink" href="#torchdrug.data.ProteinPairDataset.node_feature_dim" title="Permalink to this definition">#</a></dt>
+<dd><p>Dimension of node features.</p>
+</dd></dl>
+<dl class="py property">
+<dt class="sig sig-object py" id="torchdrug.data.ProteinPairDataset.residue_feature_dim">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">residue_feature_dim</span></span><a class="headerlink" href="#torchdrug.data.ProteinPairDataset.residue_feature_dim" title="Permalink to this definition">#</a></dt>
+<dd><p>Dimension of residue features.</p>
+</dd></dl>
+</dd></dl>
+</section>
+<section id="proteinliganddataset">
+<h3>ProteinLigandDataset<a class="headerlink" href="#proteinliganddataset" title="Permalink to this headline">#</a></h3>
+<dl class="py class">
+<dt class="sig sig-object py" id="torchdrug.data.ProteinLigandDataset">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">ProteinLigandDataset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwds</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/data/dataset.html#ProteinLigandDataset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.data.ProteinLigandDataset" title="Permalink to this definition">#</a></dt>
+<dd><p>Protein-ligand dataset.</p>
+<p>Each sample contains a protein graph and a molecule graph, and any number of prediction targets.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="torchdrug.data.ProteinLigandDataset.load_lmdbs">
+<span class="sig-name descname"><span class="pre">load_lmdbs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lmdb_files</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sequence_field</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'target'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">smiles_field</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'drug'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target_fields</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">number_field</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'num_examples'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transform</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lazy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">attributes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">atom_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'default'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bond_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'default'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">residue_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'default'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mol_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kekulize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">node_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">edge_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">graph_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/data/dataset.html#ProteinLigandDataset.load_lmdbs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.data.ProteinLigandDataset.load_lmdbs" title="Permalink to this definition">#</a></dt>
+<dd><p>Load the dataset from lmdb files.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>lmdb_files</strong> (<em>list of str</em>) – file names</p></li>
+<li><p><strong>sequence_field</strong> (<em>str</em><em>, </em><em>optional</em>) – name of the field of protein sequence in lmdb files</p></li>
+<li><p><strong>smiles_field</strong> (<em>str</em><em>, </em><em>optional</em>) – name of the field of ligand SMILES string in lmdb files</p></li>
+<li><p><strong>target_fields</strong> (<em>list of str</em><em>, </em><em>optional</em>) – name of target fields in lmdb files</p></li>
+<li><p><strong>number_field</strong> (<em>str</em><em>, </em><em>optional</em>) – name of the field of sample count in lmdb files</p></li>
+<li><p><strong>transform</strong> (<em>Callable</em><em>, </em><em>optional</em>) – protein sequence transformation function</p></li>
+<li><p><strong>lazy</strong> (<em>bool</em><em>, </em><em>optional</em>) – if lazy mode is used, the protein-ligand pairs are processed in the dataloader.
+This may slow down the data loading process, but save a lot of CPU memory and dataset loading time.</p></li>
+<li><p><strong>verbose</strong> (<em>int</em><em>, </em><em>optional</em>) – output verbose level</p></li>
+<li><p><strong>attributes</strong> (<em>dict of list</em>) – protein-level attributes</p></li>
+<li><p><strong>atom_feature</strong> (<em>str</em><em> or </em><em>list of str</em><em>, </em><em>optional</em>) – atom features to extract</p></li>
+<li><p><strong>bond_feature</strong> (<em>str</em><em> or </em><em>list of str</em><em>, </em><em>optional</em>) – bond features to extract</p></li>
+<li><p><strong>residue_feature</strong> (<em>str</em><em>, </em><em>list of str</em><em>, </em><em>optional</em>) – residue features to extract</p></li>
+<li><p><strong>mol_feature</strong> (<em>str</em><em> or </em><em>list of str</em><em>, </em><em>optional</em>) – molecule features to extract</p></li>
+<li><p><strong>kekulize</strong> (<em>bool</em><em>, </em><em>optional</em>) – convert aromatic bonds to single/double bonds.
+Note this only affects the relation in <code class="docutils literal notranslate"><span class="pre">edge_list</span></code>.
+For <code class="docutils literal notranslate"><span class="pre">bond_type</span></code>, aromatic bonds are always stored explicitly.
+By default, aromatic bonds are stored.</p></li>
+<li><p><strong>node_feature</strong> (<em>str</em><em> or </em><em>list of str</em><em>, </em><em>optional</em>) – Deprecated alias of <code class="docutils literal notranslate"><span class="pre">atom_feature</span></code></p></li>
+<li><p><strong>edge_feature</strong> (<em>str</em><em> or </em><em>list of str</em><em>, </em><em>optional</em>) – Deprecated alias of <code class="docutils literal notranslate"><span class="pre">bond_feature</span></code></p></li>
+<li><p><strong>graph_feature</strong> (<em>str</em><em> or </em><em>list of str</em><em>, </em><em>optional</em>) – Deprecated alias of <code class="docutils literal notranslate"><span class="pre">mol_feature</span></code></p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="torchdrug.data.ProteinLigandDataset.load_sequence">
+<span class="sig-name descname"><span class="pre">load_sequence</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sequences</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">smiles</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">targets</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_samples</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">attributes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transform</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lazy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">atom_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'default'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bond_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'default'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">residue_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'default'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mol_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kekulize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">node_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">edge_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">graph_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/data/dataset.html#ProteinLigandDataset.load_sequence"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.data.ProteinLigandDataset.load_sequence" title="Permalink to this definition">#</a></dt>
+<dd><p>Load the dataset from protein sequences, ligand SMILES strings and targets.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>sequences</strong> (<em>list of str</em>) – protein sequence strings</p></li>
+<li><p><strong>smiles</strong> (<em>list of str</em>) – ligand SMILES strings</p></li>
+<li><p><strong>targets</strong> (<em>dict of list</em>) – prediction targets</p></li>
+<li><p><strong>num_samples</strong> (<em>list of int</em>) – numbers of protein-ligand pairs in all splits</p></li>
+<li><p><strong>attributes</strong> (<em>dict of list</em>) – protein-level attributes</p></li>
+<li><p><strong>transform</strong> (<em>Callable</em><em>, </em><em>optional</em>) – protein sequence transformation function</p></li>
+<li><p><strong>lazy</strong> (<em>bool</em><em>, </em><em>optional</em>) – if lazy mode is used, the protein-ligand pairs are processed in the dataloader.
+This may slow down the data loading process, but save a lot of CPU memory and dataset loading time.</p></li>
+<li><p><strong>verbose</strong> (<em>int</em><em>, </em><em>optional</em>) – output verbose level</p></li>
+<li><p><strong>atom_feature</strong> (<em>str</em><em> or </em><em>list of str</em><em>, </em><em>optional</em>) – atom features to extract</p></li>
+<li><p><strong>bond_feature</strong> (<em>str</em><em> or </em><em>list of str</em><em>, </em><em>optional</em>) – bond features to extract</p></li>
+<li><p><strong>residue_feature</strong> (<em>str</em><em>, </em><em>list of str</em><em>, </em><em>optional</em>) – residue features to extract</p></li>
+<li><p><strong>mol_feature</strong> (<em>str</em><em> or </em><em>list of str</em><em>, </em><em>optional</em>) – molecule features to extract</p></li>
+<li><p><strong>kekulize</strong> (<em>bool</em><em>, </em><em>optional</em>) – convert aromatic bonds to single/double bonds.
+Note this only affects the relation in <code class="docutils literal notranslate"><span class="pre">edge_list</span></code>.
+For <code class="docutils literal notranslate"><span class="pre">bond_type</span></code>, aromatic bonds are always stored explicitly.
+By default, aromatic bonds are stored.</p></li>
+<li><p><strong>node_feature</strong> (<em>str</em><em> or </em><em>list of str</em><em>, </em><em>optional</em>) – Deprecated alias of <code class="docutils literal notranslate"><span class="pre">atom_feature</span></code></p></li>
+<li><p><strong>edge_feature</strong> (<em>str</em><em> or </em><em>list of str</em><em>, </em><em>optional</em>) – Deprecated alias of <code class="docutils literal notranslate"><span class="pre">bond_feature</span></code></p></li>
+<li><p><strong>graph_feature</strong> (<em>str</em><em> or </em><em>list of str</em><em>, </em><em>optional</em>) – Deprecated alias of <code class="docutils literal notranslate"><span class="pre">mol_feature</span></code></p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py property">
+<dt class="sig sig-object py" id="torchdrug.data.ProteinLigandDataset.ligand_node_feature_dim">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">ligand_node_feature_dim</span></span><a class="headerlink" href="#torchdrug.data.ProteinLigandDataset.ligand_node_feature_dim" title="Permalink to this definition">#</a></dt>
+<dd><p>Dimension of node features for ligands.</p>
+</dd></dl>
+<dl class="py property">
+<dt class="sig sig-object py" id="torchdrug.data.ProteinLigandDataset.protein_node_feature_dim">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">protein_node_feature_dim</span></span><a class="headerlink" href="#torchdrug.data.ProteinLigandDataset.protein_node_feature_dim" title="Permalink to this definition">#</a></dt>
+<dd><p>Dimension of node features for proteins.</p>
+</dd></dl>
+<dl class="py property">
+<dt class="sig sig-object py" id="torchdrug.data.ProteinLigandDataset.residue_feature_dim">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">residue_feature_dim</span></span><a class="headerlink" href="#torchdrug.data.ProteinLigandDataset.residue_feature_dim" title="Permalink to this definition">#</a></dt>
+<dd><p>Dimension of residue features for proteins.</p>
 </dd></dl>
 </dd></dl>
 </section>
@@ -1634,7 +2569,7 @@ By default, aromatic bonds are stored.</p></li>
 <p>Each sample contains two molecule graphs, and any number of prediction targets.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="torchdrug.data.ReactionDataset.load_smiles">
-<span class="sig-name descname"><span class="pre">load_smiles</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">smiles_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">targets</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transform</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">atom_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'default'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bond_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'default'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mol_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">with_hydrogen</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kekulize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/data/dataset.html#ReactionDataset.load_smiles"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.data.ReactionDataset.load_smiles" title="Permalink to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">load_smiles</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">smiles_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">targets</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transform</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">atom_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'default'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bond_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'default'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mol_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">with_hydrogen</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kekulize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">node_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">edge_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">graph_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/data/dataset.html#ReactionDataset.load_smiles"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.data.ReactionDataset.load_smiles" title="Permalink to this definition">#</a></dt>
 <dd><p>Load the dataset from SMILES and targets.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -1652,6 +2587,9 @@ By default, hydrogens are dropped</p></li>
 Note this only affects the relation in <code class="docutils literal notranslate"><span class="pre">edge_list</span></code>.
 For <code class="docutils literal notranslate"><span class="pre">bond_type</span></code>, aromatic bonds are always stored explicitly.
 By default, aromatic bonds are stored.</p></li>
+<li><p><strong>node_feature</strong> (<em>str</em><em> or </em><em>list of str</em><em>, </em><em>optional</em>) – Deprecated alias of <code class="docutils literal notranslate"><span class="pre">atom_feature</span></code></p></li>
+<li><p><strong>edge_feature</strong> (<em>str</em><em> or </em><em>list of str</em><em>, </em><em>optional</em>) – Deprecated alias of <code class="docutils literal notranslate"><span class="pre">bond_feature</span></code></p></li>
+<li><p><strong>graph_feature</strong> (<em>str</em><em> or </em><em>list of str</em><em>, </em><em>optional</em>) – Deprecated alias of <code class="docutils literal notranslate"><span class="pre">mol_feature</span></code></p></li>
 </ul>
 </dd>
 </dl>
@@ -1893,6 +2831,16 @@ Return 3D position if available, otherwise 2D position is returned.</p>
 </dd>
 </dl>
 </dd></dl>
+<dl class="py function">
+<dt class="sig sig-object py" id="torchdrug.data.feature.atom_residue_symbol">
+<span class="sig-name descname"><span class="pre">atom_residue_symbol</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">atom</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/data/feature.html#atom_residue_symbol"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.data.feature.atom_residue_symbol" title="Permalink to this definition">#</a></dt>
+<dd><p>Residue symbol as atom feature. Only support atoms in a protein.</p>
+<dl class="simple">
+<dt>Features:</dt><dd><p>GetSymbol(): one-hot embedding for the atomic symbol
+GetResidueName(): one-hot embedding for the residue symbol</p>
+</dd>
+</dl>
+</dd></dl>
 </section>
 <section id="bond-features">
 <h3>Bond Features<a class="headerlink" href="#bond-features" title="Permalink to this headline">#</a></h3>
@@ -1932,6 +2880,27 @@ Return 3D position if available, otherwise 2D position is returned.</p>
 <dl>
 <dt>Features:</dt><dd><p>GetBondType(): one-hot embedding for the type of the bond</p>
 <p>GetBondDir(): one-hot embedding for the direction of the bond</p>
+</dd>
+</dl>
+</dd></dl>
+</section>
+<section id="residue-features">
+<h3>Residue Features<a class="headerlink" href="#residue-features" title="Permalink to this headline">#</a></h3>
+<dl class="py function">
+<dt class="sig sig-object py" id="torchdrug.data.feature.residue_default">
+<span class="sig-name descname"><span class="pre">residue_default</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">residue</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/data/feature.html#residue_default"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.data.feature.residue_default" title="Permalink to this definition">#</a></dt>
+<dd><p>Default residue feature.</p>
+<dl class="simple">
+<dt>Features:</dt><dd><p>GetResidueName(): one-hot embedding for the residue symbol</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py function">
+<dt class="sig sig-object py" id="torchdrug.data.feature.residue_symbol">
+<span class="sig-name descname"><span class="pre">residue_symbol</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">residue</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/data/feature.html#residue_symbol"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.data.feature.residue_symbol" title="Permalink to this definition">#</a></dt>
+<dd><p>Symbol residue feature.</p>
+<dl class="simple">
+<dt>Features:</dt><dd><p>GetResidueName(): one-hot embedding for the residue symbol</p>
 </dd>
 </dl>
 </dd></dl>
@@ -2044,14 +3013,19 @@ abbreviated chemical symbol for atomic number <code class="docutils literal notr
 <li><a class="reference internal" href="#data-structures">Data Structures</a><ul>
 <li><a class="reference internal" href="#graph">Graph</a></li>
 <li><a class="reference internal" href="#molecule">Molecule</a></li>
+<li><a class="reference internal" href="#protein">Protein</a></li>
 <li><a class="reference internal" href="#packedgraph">PackedGraph</a></li>
 <li><a class="reference internal" href="#packedmolecule">PackedMolecule</a></li>
+<li><a class="reference internal" href="#packedprotein">PackedProtein</a></li>
 <li><a class="reference internal" href="#dictionary">Dictionary</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#datasets">Datasets</a><ul>
 <li><a class="reference internal" href="#knowledgegraphdataset">KnowledgeGraphDataset</a></li>
 <li><a class="reference internal" href="#moleculedataset">MoleculeDataset</a></li>
+<li><a class="reference internal" href="#proteindataset">ProteinDataset</a></li>
+<li><a class="reference internal" href="#proteinpairdataset">ProteinPairDataset</a></li>
+<li><a class="reference internal" href="#proteinliganddataset">ProteinLigandDataset</a></li>
 <li><a class="reference internal" href="#nodeclassificationdataset">NodeClassificationDataset</a></li>
 <li><a class="reference internal" href="#reactiondataset">ReactionDataset</a></li>
 <li><a class="reference internal" href="#semisupervised">SemiSupervised</a></li>
@@ -2065,6 +3039,7 @@ abbreviated chemical symbol for atomic number <code class="docutils literal notr
 <li><a class="reference internal" href="#feature-functions">Feature Functions</a><ul>
 <li><a class="reference internal" href="#atom-features">Atom Features</a></li>
 <li><a class="reference internal" href="#bond-features">Bond Features</a></li>
+<li><a class="reference internal" href="#residue-features">Residue Features</a></li>
 <li><a class="reference internal" href="#molecule-features">Molecule Features</a></li>
 </ul>
 </li>

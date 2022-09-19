@@ -6,7 +6,7 @@
 <link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="torchdrug.core" href="core.html" /><link rel="prev" title="Papers Implemented" href="../paper.html" />
 
     <meta name="generator" content="sphinx-4.5.0, furo 2022.04.07"/>
-        <title>Documentation - TorchDrug 0.1.3 documentation</title>
+        <title>Documentation - TorchDrug 0.2.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=68f4518137b9aefe99b631505a2064c3c42c9852" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
@@ -130,7 +130,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="../index.html"><div class="brand">TorchDrug 0.1.3 documentation</div></a>
+      <a href="../index.html"><div class="brand">TorchDrug 0.2.0 documentation</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -153,7 +153,7 @@
       <div class="sidebar-sticky"><a class="sidebar-brand centered" href="https://torchdrug.ai">
   
   <div class="sidebar-logo-container">
-    <img class="sidebar-logo" src="../_static/logo.svg" alt="Logo"/>
+    <img class="sidebar-logo" src="../_static/torchdrug_logo_full.svg" alt="Logo"/>
   </div>
   
   
@@ -254,14 +254,19 @@
 <li class="toctree-l2"><a class="reference internal" href="data.html#data-structures">Data Structures</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="data.html#graph">Graph</a></li>
 <li class="toctree-l3"><a class="reference internal" href="data.html#molecule">Molecule</a></li>
+<li class="toctree-l3"><a class="reference internal" href="data.html#protein">Protein</a></li>
 <li class="toctree-l3"><a class="reference internal" href="data.html#packedgraph">PackedGraph</a></li>
 <li class="toctree-l3"><a class="reference internal" href="data.html#packedmolecule">PackedMolecule</a></li>
+<li class="toctree-l3"><a class="reference internal" href="data.html#packedprotein">PackedProtein</a></li>
 <li class="toctree-l3"><a class="reference internal" href="data.html#dictionary">Dictionary</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="data.html#datasets">Datasets</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="data.html#knowledgegraphdataset">KnowledgeGraphDataset</a></li>
 <li class="toctree-l3"><a class="reference internal" href="data.html#moleculedataset">MoleculeDataset</a></li>
+<li class="toctree-l3"><a class="reference internal" href="data.html#proteindataset">ProteinDataset</a></li>
+<li class="toctree-l3"><a class="reference internal" href="data.html#proteinpairdataset">ProteinPairDataset</a></li>
+<li class="toctree-l3"><a class="reference internal" href="data.html#proteinliganddataset">ProteinLigandDataset</a></li>
 <li class="toctree-l3"><a class="reference internal" href="data.html#nodeclassificationdataset">NodeClassificationDataset</a></li>
 <li class="toctree-l3"><a class="reference internal" href="data.html#reactiondataset">ReactionDataset</a></li>
 <li class="toctree-l3"><a class="reference internal" href="data.html#semisupervised">SemiSupervised</a></li>
@@ -275,6 +280,7 @@
 <li class="toctree-l2"><a class="reference internal" href="data.html#feature-functions">Feature Functions</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="data.html#atom-features">Atom Features</a></li>
 <li class="toctree-l3"><a class="reference internal" href="data.html#bond-features">Bond Features</a></li>
+<li class="toctree-l3"><a class="reference internal" href="data.html#residue-features">Residue Features</a></li>
 <li class="toctree-l3"><a class="reference internal" href="data.html#molecule-features">Molecule Features</a></li>
 </ul>
 </li>
@@ -314,6 +320,35 @@
 <li class="toctree-l3"><a class="reference internal" href="datasets.html#pcqm4m">PCQM4M</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="datasets.html#protein-property-prediction-datasets">Protein Property Prediction Datasets</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="datasets.html#betalactamase">BetaLactamase</a></li>
+<li class="toctree-l3"><a class="reference internal" href="datasets.html#fluorescence">Fluorescence</a></li>
+<li class="toctree-l3"><a class="reference internal" href="datasets.html#stability">Stability</a></li>
+<li class="toctree-l3"><a class="reference internal" href="datasets.html#solubility">Solubility</a></li>
+<li class="toctree-l3"><a class="reference internal" href="datasets.html#binarylocalization">BinaryLocalization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="datasets.html#subcellularlocalization">SubcellularLocalization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="datasets.html#enzymecommission">EnzymeCommission</a></li>
+<li class="toctree-l3"><a class="reference internal" href="datasets.html#geneontology">GeneOntology</a></li>
+<li class="toctree-l3"><a class="reference internal" href="datasets.html#alphafolddb">AlphaFoldDB</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="datasets.html#protein-structure-prediction-datasets">Protein Structure Prediction Datasets</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="datasets.html#fold">Fold</a></li>
+<li class="toctree-l3"><a class="reference internal" href="datasets.html#secondarystructure">SecondaryStructure</a></li>
+<li class="toctree-l3"><a class="reference internal" href="datasets.html#proteinnet">ProteinNet</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="datasets.html#protein-protein-prediction-datasets">Protein-Protein Prediction Datasets</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="datasets.html#humanppi">HumanPPI</a></li>
+<li class="toctree-l3"><a class="reference internal" href="datasets.html#yeastppi">YeastPPI</a></li>
+<li class="toctree-l3"><a class="reference internal" href="datasets.html#ppiaffinity">PPIAffinity</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="datasets.html#protein-ligand-prediction-datasets">Protein Ligand Prediction Datasets</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="datasets.html#bindingdb">BindingDB</a></li>
+<li class="toctree-l3"><a class="reference internal" href="datasets.html#pdbbind">PDBBind</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="datasets.html#retrosynthesis-datasets">Retrosynthesis Datasets</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="datasets.html#uspto50k">USPTO50k</a></li>
 </ul>
@@ -328,7 +363,7 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="transforms.html">torchdrug.transforms</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="transforms.html#graph-transformations">Graph Transformations</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="transforms.html#targetnormalize">TargetNormalize</a></li>
+<li class="toctree-l3"><a class="reference internal" href="transforms.html#normalizetarget">NormalizeTarget</a></li>
 <li class="toctree-l3"><a class="reference internal" href="transforms.html#randombfsorder">RandomBFSOrder</a></li>
 <li class="toctree-l3"><a class="reference internal" href="transforms.html#shuffle">Shuffle</a></li>
 <li class="toctree-l3"><a class="reference internal" href="transforms.html#virtualnode">VirtualNode</a></li>
@@ -337,6 +372,11 @@
 <li class="toctree-l2"><a class="reference internal" href="transforms.html#molecule-transformations">Molecule Transformations</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="transforms.html#remapatomtype">RemapAtomType</a></li>
 <li class="toctree-l3"><a class="reference internal" href="transforms.html#virtualatom">VirtualAtom</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="transforms.html#protein-transformations">Protein Transformations</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="transforms.html#truncateprotein">TruncateProtein</a></li>
+<li class="toctree-l3"><a class="reference internal" href="transforms.html#proteinview">ProteinView</a></li>
 </ul>
 </li>
 </ul>
@@ -349,7 +389,12 @@
 <li class="toctree-l3"><a class="reference internal" href="metrics.html#accuracy">Accuracy</a></li>
 <li class="toctree-l3"><a class="reference internal" href="metrics.html#matthews-correlation-coefficient">Matthews Correlation Coefficient</a></li>
 <li class="toctree-l3"><a class="reference internal" href="metrics.html#pearson-correlation-coefficient">Pearson Correlation Coefficient</a></li>
-<li class="toctree-l3"><a class="reference internal" href="metrics.html#spearman-correlation-coefficient">Spearman Correlation Coefficient</a></li>
+<li class="toctree-l3"><a class="reference internal" href="metrics.html#spearman-s-rank-correlation-coefficient">Spearman’s Rank Correlation Coefficient</a></li>
+<li class="toctree-l3"><a class="reference internal" href="metrics.html#variadic-accuracy">Variadic Accuracy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="metrics.html#variadic-area-under-roc">Variadic Area Under ROC</a></li>
+<li class="toctree-l3"><a class="reference internal" href="metrics.html#variadic-area-under-prc">Variadic Area Under PRC</a></li>
+<li class="toctree-l3"><a class="reference internal" href="metrics.html#variadic-top-precision">Variadic Top Precision</a></li>
+<li class="toctree-l3"><a class="reference internal" href="metrics.html#f1-max">F1 Max</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="metrics.html#chemical-metrics">Chemical Metrics</a><ul>
@@ -367,6 +412,7 @@
 <li class="toctree-l3"><a class="reference internal" href="layers.html#gaussiansmearing">GaussianSmearing</a></li>
 <li class="toctree-l3"><a class="reference internal" href="layers.html#multilayerperceptron">MultiLayerPerceptron</a></li>
 <li class="toctree-l3"><a class="reference internal" href="layers.html#mutualinformation">MutualInformation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="layers.html#sinusoidalpositionembedding">SinusoidalPositionEmbedding</a></li>
 <li class="toctree-l3"><a class="reference internal" href="layers.html#pairnorm">PairNorm</a></li>
 <li class="toctree-l3"><a class="reference internal" href="layers.html#sequential">Sequential</a></li>
 </ul>
@@ -374,6 +420,7 @@
 <li class="toctree-l2"><a class="reference internal" href="layers.html#convolution-layers">Convolution Layers</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="layers.html#chebyshevconv">ChebyshevConv</a></li>
 <li class="toctree-l3"><a class="reference internal" href="layers.html#continuousfilterconv">ContinuousFilterConv</a></li>
+<li class="toctree-l3"><a class="reference internal" href="layers.html#geometricrelationalgraphconv">GeometricRelationalGraphConv</a></li>
 <li class="toctree-l3"><a class="reference internal" href="layers.html#graphattentionconv">GraphAttentionConv</a></li>
 <li class="toctree-l3"><a class="reference internal" href="layers.html#graphconv">GraphConv</a></li>
 <li class="toctree-l3"><a class="reference internal" href="layers.html#graphisomorphismconv">GraphIsomorphismConv</a></li>
@@ -405,8 +452,28 @@
 <li class="toctree-l3"><a class="reference internal" href="layers.html#conditionalflow">ConditionalFlow</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="layers.html#sequence-encoder-blocks">Sequence Encoder Blocks</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="layers.html#proteinresnetblock">ProteinResNetBlock</a></li>
+<li class="toctree-l3"><a class="reference internal" href="layers.html#selfattentionblock">SelfAttentionBlock</a></li>
+<li class="toctree-l3"><a class="reference internal" href="layers.html#proteinbertblock">ProteinBERTBlock</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="layers.html#distribution-layers">Distribution Layers</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="layers.html#independentgaussian">IndependentGaussian</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="layers.html#graph-construction-layers">Graph Construction Layers</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="layers.html#graphconstruction">GraphConstruction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="layers.html#spatiallinegraph">SpatialLineGraph</a></li>
+<li class="toctree-l3"><a class="reference internal" href="layers.html#bondedge">BondEdge</a></li>
+<li class="toctree-l3"><a class="reference internal" href="layers.html#knnedge">KNNEdge</a></li>
+<li class="toctree-l3"><a class="reference internal" href="layers.html#spatialedge">SpatialEdge</a></li>
+<li class="toctree-l3"><a class="reference internal" href="layers.html#sequentialedge">SequentialEdge</a></li>
+<li class="toctree-l3"><a class="reference internal" href="layers.html#alphacarbonnode">AlphaCarbonNode</a></li>
+<li class="toctree-l3"><a class="reference internal" href="layers.html#identitynode">IdentityNode</a></li>
+<li class="toctree-l3"><a class="reference internal" href="layers.html#randomedgemask">RandomEdgeMask</a></li>
+<li class="toctree-l3"><a class="reference internal" href="layers.html#subsequencenode">SubsequenceNode</a></li>
+<li class="toctree-l3"><a class="reference internal" href="layers.html#subspacenode">SubspaceNode</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="layers.html#functional-layers">Functional Layers</a><ul>
@@ -440,7 +507,18 @@
 <li class="toctree-l3"><a class="reference internal" href="models.html#mpnn">MPNN</a></li>
 <li class="toctree-l3"><a class="reference internal" href="models.html#nfp">NFP</a></li>
 <li class="toctree-l3"><a class="reference internal" href="models.html#rgcn">RGCN</a></li>
+<li class="toctree-l3"><a class="reference internal" href="models.html#gearnet">GearNet</a></li>
 <li class="toctree-l3"><a class="reference internal" href="models.html#schnet">SchNet</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="models.html#protein-sequence-encoders">Protein Sequence Encoders</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="models.html#esm">ESM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="models.html#proteincnn">ProteinCNN</a></li>
+<li class="toctree-l3"><a class="reference internal" href="models.html#proteinresnet">ProteinResNet</a></li>
+<li class="toctree-l3"><a class="reference internal" href="models.html#proteinlstm">ProteinLSTM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="models.html#proteinbert">ProteinBERT</a></li>
+<li class="toctree-l3"><a class="reference internal" href="models.html#statistic-feature-engineering">Statistic Feature Engineering</a></li>
+<li class="toctree-l3"><a class="reference internal" href="models.html#physicochemical-feature-engineering">Physicochemical Feature Engineering</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="models.html#normalizing-flows">Normalizing Flows</a><ul>
@@ -449,6 +527,7 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="models.html#self-supervised-models">Self-supervised Models</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="models.html#infograph">InfoGraph</a></li>
+<li class="toctree-l3"><a class="reference internal" href="models.html#multiviewcontrast">MultiviewContrast</a></li>
 </ul>
 </li>
 </ul>
@@ -456,12 +535,18 @@
 <li class="toctree-l1"><a class="reference internal" href="tasks.html">torchdrug.tasks</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="tasks.html#property-prediction-tasks">Property Prediction Tasks</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="tasks.html#propertyprediction">PropertyPrediction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tasks.html#multiplebinaryclassification">MultipleBinaryClassification</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tasks.html#nodepropertyprediction">NodePropertyPrediction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tasks.html#interactionprediction">InteractionPrediction</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="tasks.html#pre-trained-molecular-representation-tasks">Pre-trained Molecular Representation Tasks</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="tasks.html#edgeprediction">EdgePrediction</a></li>
 <li class="toctree-l3"><a class="reference internal" href="tasks.html#attributemasking">AttributeMasking</a></li>
 <li class="toctree-l3"><a class="reference internal" href="tasks.html#contextprediction">ContextPrediction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tasks.html#distanceprediction">DistancePrediction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tasks.html#angleprediction">AnglePrediction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tasks.html#dihedralprediction">DihedralPrediction</a></li>
 <li class="toctree-l3"><a class="reference internal" href="tasks.html#unsupervised">Unsupervised</a></li>
 </ul>
 </li>
@@ -478,6 +563,10 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="tasks.html#knowledge-graph-reasoning-tasks">Knowledge Graph Reasoning Tasks</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="tasks.html#knowledgegraphcompletion">KnowledgeGraphCompletion</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="tasks.html#protein-protein-interaction-prediction-tasks">Protein-Protein Interaction Prediction Tasks</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="tasks.html#contactprediction">ContactPrediction</a></li>
 </ul>
 </li>
 </ul>

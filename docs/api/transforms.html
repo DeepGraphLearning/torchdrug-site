@@ -6,7 +6,7 @@
 <link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="torchdrug.metrics" href="metrics.html" /><link rel="prev" title="torchdrug.datasets" href="datasets.html" />
 
     <meta name="generator" content="sphinx-4.5.0, furo 2022.04.07"/>
-        <title>torchdrug.transforms - TorchDrug 0.1.3 documentation</title>
+        <title>torchdrug.transforms - TorchDrug 0.2.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=68f4518137b9aefe99b631505a2064c3c42c9852" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
@@ -130,7 +130,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="../index.html"><div class="brand">TorchDrug 0.1.3 documentation</div></a>
+      <a href="../index.html"><div class="brand">TorchDrug 0.2.0 documentation</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -153,7 +153,7 @@
       <div class="sidebar-sticky"><a class="sidebar-brand centered" href="https://torchdrug.ai">
   
   <div class="sidebar-logo-container">
-    <img class="sidebar-logo" src="../_static/logo.svg" alt="Logo"/>
+    <img class="sidebar-logo" src="../_static/torchdrug_logo_full.svg" alt="Logo"/>
   </div>
   
   
@@ -243,17 +243,20 @@
 <dl class="py class">
 <dt class="sig sig-object py" id="torchdrug.transforms.Compose">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Compose</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">transforms</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/transforms/transform.html#Compose"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.transforms.Compose" title="Permalink to this definition">#</a></dt>
-<dd><p>Compose a list of transforms into one.
-:param transforms: list of transforms
-:type transforms: list of callable</p>
+<dd><p>Compose a list of transforms into one.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>transforms</strong> (<em>list of callable</em>) – list of transforms</p>
+</dd>
+</dl>
 </dd></dl>
 <section id="graph-transformations">
 <h2>Graph Transformations<a class="headerlink" href="#graph-transformations" title="Permalink to this headline">#</a></h2>
-<section id="targetnormalize">
-<h3>TargetNormalize<a class="headerlink" href="#targetnormalize" title="Permalink to this headline">#</a></h3>
+<section id="normalizetarget">
+<h3>NormalizeTarget<a class="headerlink" href="#normalizetarget" title="Permalink to this headline">#</a></h3>
 <dl class="py class">
-<dt class="sig sig-object py" id="torchdrug.transforms.TargetNormalize">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">TargetNormalize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mean</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">std</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/transforms/transform.html#TargetNormalize"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.transforms.TargetNormalize" title="Permalink to this definition">#</a></dt>
+<dt class="sig sig-object py" id="torchdrug.transforms.NormalizeTarget">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">NormalizeTarget</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mean</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">std</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/transforms/transform.html#NormalizeTarget"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.transforms.NormalizeTarget" title="Permalink to this definition">#</a></dt>
 <dd><p>Normalize the target values in a sample.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -278,11 +281,15 @@
 <dl class="py class">
 <dt class="sig sig-object py" id="torchdrug.transforms.Shuffle">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Shuffle</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">shuffle_node</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shuffle_edge</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/transforms/transform.html#Shuffle"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.transforms.Shuffle" title="Permalink to this definition">#</a></dt>
-<dd><p>Shuffle the order of nodes and edges in a graph.
-:param shuffle_node: shuffle node order or not
-:type shuffle_node: bool, optional
-:param shuffle_edge: shuffle edge order or not
-:type shuffle_edge: bool, optional</p>
+<dd><p>Shuffle the order of nodes and edges in a graph.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>shuffle_node</strong> (<em>bool</em><em>, </em><em>optional</em>) – shuffle node order or not</p></li>
+<li><p><strong>shuffle_edge</strong> (<em>bool</em><em>, </em><em>optional</em>) – shuffle edge order or not</p></li>
+</ul>
+</dd>
+</dl>
 </dd></dl>
 </section>
 <section id="virtualnode">
@@ -313,9 +320,12 @@ By default, use the maximal relation in the graph plus 1.</p></li>
 <dl class="py class">
 <dt class="sig sig-object py" id="torchdrug.transforms.RemapAtomType">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">RemapAtomType</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">atom_types</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/transforms/transform.html#RemapAtomType"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.transforms.RemapAtomType" title="Permalink to this definition">#</a></dt>
-<dd><p>Map atom types to their index in a vocabulary. Atom types that don’t present in the vocabulary are mapped to -1.
-:param atom_types: vocabulary of atom types
-:type atom_types: array_like</p>
+<dd><p>Map atom types to their index in a vocabulary. Atom types that don’t present in the vocabulary are mapped to -1.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>atom_types</strong> (<em>array_like</em>) – vocabulary of atom types</p>
+</dd>
+</dl>
 </dd></dl>
 </section>
 <section id="virtualatom">
@@ -323,16 +333,55 @@ By default, use the maximal relation in the graph plus 1.</p></li>
 <dl class="py class">
 <dt class="sig sig-object py" id="torchdrug.transforms.VirtualAtom">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">VirtualAtom</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">atom_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bond_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">node_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">edge_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/transforms/transform.html#VirtualAtom"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.transforms.VirtualAtom" title="Permalink to this definition">#</a></dt>
-<dd><p>Add a virtual atom and connect it with every atom in the molecule.
-:param atom_type: type of the virtual atom
-:type atom_type: int, optional
-:param bond_type: type of the virtual bonds
-:type bond_type: int, optional
-:param node_feature: feature of the virtual atom
-:type node_feature: array_like, optional
-:param edge_feature: feature of virtual bonds
-:type edge_feature: array_like, optional
-:param kwargs: other attributes of the virtual atoms or virtual bonds</p>
+<dd><p>Add a virtual atom and connect it with every atom in the molecule.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>atom_type</strong> (<em>int</em><em>, </em><em>optional</em>) – type of the virtual atom</p></li>
+<li><p><strong>bond_type</strong> (<em>int</em><em>, </em><em>optional</em>) – type of the virtual bonds</p></li>
+<li><p><strong>node_feature</strong> (<em>array_like</em><em>, </em><em>optional</em>) – feature of the virtual atom</p></li>
+<li><p><strong>edge_feature</strong> (<em>array_like</em><em>, </em><em>optional</em>) – feature of virtual bonds</p></li>
+<li><p><strong>kwargs</strong> – other attributes of the virtual atoms or virtual bonds</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+</section>
+</section>
+<section id="protein-transformations">
+<h2>Protein Transformations<a class="headerlink" href="#protein-transformations" title="Permalink to this headline">#</a></h2>
+<section id="truncateprotein">
+<h3>TruncateProtein<a class="headerlink" href="#truncateprotein" title="Permalink to this headline">#</a></h3>
+<dl class="py class">
+<dt class="sig sig-object py" id="torchdrug.transforms.TruncateProtein">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">TruncateProtein</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">max_length</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">random</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">keys</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'graph'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/transforms/transform.html#TruncateProtein"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.transforms.TruncateProtein" title="Permalink to this definition">#</a></dt>
+<dd><p>Truncate over long protein sequences into a fixed length.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>max_length</strong> (<em>int</em><em>, </em><em>optional</em>) – maximal length of the sequence. Truncate the sequence if it exceeds this limit.</p></li>
+<li><p><strong>random</strong> (<em>bool</em><em>, </em><em>optional</em>) – truncate the sequence at a random position.
+If not, truncate the suffix of the sequence.</p></li>
+<li><p><strong>keys</strong> (<em>str</em><em> or </em><em>list of str</em><em>, </em><em>optional</em>) – keys for the items that require truncation in a sample</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+</section>
+<section id="proteinview">
+<h3>ProteinView<a class="headerlink" href="#proteinview" title="Permalink to this headline">#</a></h3>
+<dl class="py class">
+<dt class="sig sig-object py" id="torchdrug.transforms.ProteinView">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">ProteinView</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">view</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">keys</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'graph'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/transforms/transform.html#ProteinView"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.transforms.ProteinView" title="Permalink to this definition">#</a></dt>
+<dd><p>Convert proteins to a specific view.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>view</strong> (<em>str</em>) – protein view. Can be <code class="docutils literal notranslate"><span class="pre">atom</span></code> or <code class="docutils literal notranslate"><span class="pre">residue</span></code>.</p></li>
+<li><p><strong>keys</strong> (<em>str</em><em> or </em><em>list of str</em><em>, </em><em>optional</em>) – keys for the items that require view change in a sample</p></li>
+</ul>
+</dd>
+</dl>
 </dd></dl>
 </section>
 </section>
@@ -397,7 +446,7 @@ By default, use the maximal relation in the graph plus 1.</p></li>
             <ul>
 <li><a class="reference internal" href="#">torchdrug.transforms</a><ul>
 <li><a class="reference internal" href="#graph-transformations">Graph Transformations</a><ul>
-<li><a class="reference internal" href="#targetnormalize">TargetNormalize</a></li>
+<li><a class="reference internal" href="#normalizetarget">NormalizeTarget</a></li>
 <li><a class="reference internal" href="#randombfsorder">RandomBFSOrder</a></li>
 <li><a class="reference internal" href="#shuffle">Shuffle</a></li>
 <li><a class="reference internal" href="#virtualnode">VirtualNode</a></li>
@@ -406,6 +455,11 @@ By default, use the maximal relation in the graph plus 1.</p></li>
 <li><a class="reference internal" href="#molecule-transformations">Molecule Transformations</a><ul>
 <li><a class="reference internal" href="#remapatomtype">RemapAtomType</a></li>
 <li><a class="reference internal" href="#virtualatom">VirtualAtom</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#protein-transformations">Protein Transformations</a><ul>
+<li><a class="reference internal" href="#truncateprotein">TruncateProtein</a></li>
+<li><a class="reference internal" href="#proteinview">ProteinView</a></li>
 </ul>
 </li>
 </ul>
