@@ -338,15 +338,13 @@ dataset by running the following commands:</p>
 <section id="id4">
 <h3>Define our Model<a class="headerlink" href="#id4" title="Permalink to this headline">#</a></h3>
 <p>Afterwards, we can now define the NeuralLP model with the following codes:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">torchdrug.models.neurallp</span> <span class="kn">import</span> <span class="n">NeuralLogicProgramming</span>
-<span class="n">model</span> <span class="o">=</span> <span class="n">NeuralLogicProgramming</span><span class="p">(</span><span class="n">num_entity</span><span class="o">=</span><span class="n">dataset</span><span class="o">.</span><span class="n">num_entity</span><span class="p">,</span>
-                               <span class="n">num_relation</span><span class="o">=</span><span class="n">dataset</span><span class="o">.</span><span class="n">num_relation</span><span class="p">,</span>
-                               <span class="n">embedding_dim</span><span class="o">=</span><span class="mi">128</span><span class="p">,</span>
-                               <span class="n">num_step</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
-                               <span class="n">num_lstm_layer</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">model</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">NeuralLP</span><span class="p">(</span><span class="n">num_relation</span><span class="o">=</span><span class="n">dataset</span><span class="o">.</span><span class="n">num_relation</span><span class="p">,</span>
+                        <span class="n">hidden_dim</span><span class="o">=</span><span class="mi">128</span><span class="p">,</span>
+                        <span class="n">num_step</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+                        <span class="n">num_lstm_layer</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>Here, <code class="docutils literal notranslate"><span class="pre">embedding_dim</span></code> is the dimension of entity and relation embeddings used in
+<p>Here, <code class="docutils literal notranslate"><span class="pre">hidden_dim</span></code> is the dimension of entity and relation embeddings used in
 NeuralLP. <code class="docutils literal notranslate"><span class="pre">num_step</span></code> is the maximum length of the chain-like rules (i.e., the
 maximum number of relations in the body of a chain-like rule), which is typically
 set to 3. <code class="docutils literal notranslate"><span class="pre">num_lstm_layer</span></code> is the number of LSTM layers used in NeuralLP.</p>
@@ -368,7 +366,7 @@ perform reasoning, and this hyperparameter is typically set to 0.75.</p>
 testing. Model training is similar to that of knowledge graph embedding models,
 where we need to create an optimizer and feed every component into an Engine instance
 by running the following code:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">optimizer</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">optim</span><span class="o">.</span><span class="n">Adam</span><span class="p">(</span><span class="n">task</span><span class="o">.</span><span class="n">parameters</span><span class="p">(),</span> <span class="n">lr</span><span class="o">=</span><span class="mf">1.0e-2</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">optimizer</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">optim</span><span class="o">.</span><span class="n">Adam</span><span class="p">(</span><span class="n">task</span><span class="o">.</span><span class="n">parameters</span><span class="p">(),</span> <span class="n">lr</span><span class="o">=</span><span class="mf">1.0e-3</span><span class="p">)</span>
 <span class="n">solver</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">Engine</span><span class="p">(</span><span class="n">task</span><span class="p">,</span> <span class="n">train_set</span><span class="p">,</span> <span class="n">valid_set</span><span class="p">,</span> <span class="n">test_set</span><span class="p">,</span> <span class="n">optimizer</span><span class="p">,</span>
                      <span class="n">gpus</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">64</span><span class="p">)</span>
 <span class="n">solver</span><span class="o">.</span><span class="n">train</span><span class="p">(</span><span class="n">num_epoch</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>

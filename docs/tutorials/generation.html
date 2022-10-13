@@ -259,7 +259,7 @@ You are encouraged to dump the preprocessed dataset to save the time for future 
 <span class="kn">from</span> <span class="nn">torchdrug</span> <span class="kn">import</span> <span class="n">datasets</span>
 
 <span class="n">dataset</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">ZINC250k</span><span class="p">(</span><span class="s2">"~/molecule-datasets/"</span><span class="p">,</span> <span class="n">kekulize</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-                            <span class="n">node_feature</span><span class="o">=</span><span class="s2">"symbol"</span><span class="p">)</span>
+                            <span class="n">atom_feature</span><span class="o">=</span><span class="s2">"symbol"</span><span class="p">)</span>
 <span class="c1"># with open("path_to_dump/zinc250k.pkl", "wb") as fout:</span>
 <span class="c1">#     pickle.dump(dataset, fout)</span>
 <span class="c1"># with open("path_to_dump/zinc250k.pkl", "rb") as fin:</span>
@@ -346,7 +346,7 @@ codes for finetuning in the following segment.</p>
 <span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">defaultdict</span>
 
 <span class="n">dataset</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">ZINC250k</span><span class="p">(</span><span class="s2">"~/molecule-datasets/"</span><span class="p">,</span> <span class="n">kekulize</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-                            <span class="n">node_feature</span><span class="o">=</span><span class="s2">"symbol"</span><span class="p">)</span>
+                            <span class="n">atom_feature</span><span class="o">=</span><span class="s2">"symbol"</span><span class="p">)</span>
 
 <span class="n">model</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">RGCN</span><span class="p">(</span><span class="n">input_dim</span><span class="o">=</span><span class="n">dataset</span><span class="o">.</span><span class="n">node_feature_dim</span><span class="p">,</span>
                     <span class="n">num_relation</span><span class="o">=</span><span class="n">dataset</span><span class="o">.</span><span class="n">num_bond_type</span><span class="p">,</span>
@@ -478,7 +478,7 @@ CCC<span class="o">(</span>C<span class="o">)(</span>NC<span class="o">(</span>C
 
 <span class="n">dataset</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">ZINC250k</span><span class="p">(</span><span class="s2">"~/molecule-datasets/"</span><span class="p">,</span>
                             <span class="n">kekulize</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-                            <span class="n">node_feature</span><span class="o">=</span><span class="s2">"symbol"</span><span class="p">)</span>
+                            <span class="n">atom_feature</span><span class="o">=</span><span class="s2">"symbol"</span><span class="p">)</span>
 
 <span class="n">model</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">RGCN</span><span class="p">(</span><span class="n">input_dim</span><span class="o">=</span><span class="n">dataset</span><span class="o">.</span><span class="n">num_atom_type</span><span class="p">,</span>
                     <span class="n">num_relation</span><span class="o">=</span><span class="n">dataset</span><span class="o">.</span><span class="n">num_bond_type</span><span class="p">,</span>

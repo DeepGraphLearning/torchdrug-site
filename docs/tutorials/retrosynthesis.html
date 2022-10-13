@@ -259,10 +259,10 @@ completion.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">torchdrug</span> <span class="kn">import</span> <span class="n">data</span><span class="p">,</span> <span class="n">datasets</span><span class="p">,</span> <span class="n">utils</span>
 
 <span class="n">reaction_dataset</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">USPTO50k</span><span class="p">(</span><span class="s2">"~/molecule-datasets/"</span><span class="p">,</span>
-                                     <span class="n">node_feature</span><span class="o">=</span><span class="s2">"center_identification"</span><span class="p">,</span>
+                                     <span class="n">atom_feature</span><span class="o">=</span><span class="s2">"center_identification"</span><span class="p">,</span>
                                      <span class="n">kekulize</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="n">synthon_dataset</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">USPTO50k</span><span class="p">(</span><span class="s2">"~/molecule-datasets/"</span><span class="p">,</span> <span class="n">as_synthon</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-                                    <span class="n">node_feature</span><span class="o">=</span><span class="s2">"synthon_completion"</span><span class="p">,</span>
+                                    <span class="n">atom_feature</span><span class="o">=</span><span class="s2">"synthon_completion"</span><span class="p">,</span>
                                     <span class="n">kekulize</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>

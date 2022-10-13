@@ -381,9 +381,22 @@
 
         <span class="c1"># generation takes less time when early_stop=True</span>
         <span class="n">graph</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">generate</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">batch</span><span class="p">[</span><span class="s2">"graph"</span><span class="p">]),</span> <span class="n">off_policy</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">early_stop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">graph</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">graph</span><span class="o">.</span><span class="n">num_nodes</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">"Generation results collapse to singleton molecules"</span><span class="p">)</span>
 
-        <span class="k">if</span> <span class="n">graph</span><span class="o">.</span><span class="n">num_nodes</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Generation results collapse to singleton molecules"</span><span class="p">)</span>
+            <span class="n">all_loss</span><span class="o">.</span><span class="n">requires_grad_</span><span class="p">()</span>
+            <span class="n">nan</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="s2">"nan"</span><span class="p">),</span> <span class="n">device</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">device</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">task</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">task</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">task</span> <span class="o">==</span> <span class="s2">"plogp"</span><span class="p">:</span>
+                    <span class="n">metric</span><span class="p">[</span><span class="s2">"Penalized logP"</span><span class="p">]</span> <span class="o">=</span> <span class="n">nan</span>
+                    <span class="n">metric</span><span class="p">[</span><span class="s2">"Penalized logP (max)"</span><span class="p">]</span> <span class="o">=</span> <span class="n">nan</span>
+                <span class="k">elif</span> <span class="n">task</span> <span class="o">==</span> <span class="s2">"qed"</span><span class="p">:</span>
+                    <span class="n">metric</span><span class="p">[</span><span class="s2">"QED"</span><span class="p">]</span> <span class="o">=</span> <span class="n">nan</span>
+                    <span class="n">metric</span><span class="p">[</span><span class="s2">"QED (max)"</span><span class="p">]</span> <span class="o">=</span> <span class="n">nan</span>
+            <span class="n">metric</span><span class="p">[</span><span class="s2">"node PPO objective"</span><span class="p">]</span> <span class="o">=</span> <span class="n">nan</span>
+            <span class="n">metric</span><span class="p">[</span><span class="s2">"edge PPO objective"</span><span class="p">]</span> <span class="o">=</span> <span class="n">nan</span>
+
+            <span class="k">return</span> <span class="n">all_loss</span><span class="p">,</span> <span class="n">metric</span>
 
         <span class="n">reward</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">graph</span><span class="p">),</span> <span class="n">device</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">device</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">task</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">task</span><span class="p">:</span>
@@ -1044,8 +1057,21 @@
 
         <span class="c1"># generation takes less time when early_stop=True</span>
         <span class="n">graph</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">generate</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">batch</span><span class="p">[</span><span class="s2">"graph"</span><span class="p">]),</span> <span class="n">max_resample</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">off_policy</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">max_step</span><span class="o">=</span><span class="mi">40</span> <span class="o">*</span> <span class="mi">2</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">graph</span><span class="o">.</span><span class="n">num_nodes</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Generation results collapse to singleton molecules"</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">graph</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">graph</span><span class="o">.</span><span class="n">num_nodes</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">"Generation results collapse to singleton molecules"</span><span class="p">)</span>
+
+            <span class="n">all_loss</span><span class="o">.</span><span class="n">requires_grad_</span><span class="p">()</span>
+            <span class="n">nan</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="s2">"nan"</span><span class="p">),</span> <span class="n">device</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">device</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">task</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">task</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">task</span> <span class="o">==</span> <span class="s2">"plogp"</span><span class="p">:</span>
+                    <span class="n">metric</span><span class="p">[</span><span class="s2">"Penalized logP"</span><span class="p">]</span> <span class="o">=</span> <span class="n">nan</span>
+                    <span class="n">metric</span><span class="p">[</span><span class="s2">"Penalized logP (max)"</span><span class="p">]</span> <span class="o">=</span> <span class="n">nan</span>
+                <span class="k">elif</span> <span class="n">task</span> <span class="o">==</span> <span class="s2">"qed"</span><span class="p">:</span>
+                    <span class="n">metric</span><span class="p">[</span><span class="s2">"QED"</span><span class="p">]</span> <span class="o">=</span> <span class="n">nan</span>
+                    <span class="n">metric</span><span class="p">[</span><span class="s2">"QED (max)"</span><span class="p">]</span> <span class="o">=</span> <span class="n">nan</span>
+            <span class="n">metric</span><span class="p">[</span><span class="s2">"PPO objective"</span><span class="p">]</span> <span class="o">=</span> <span class="n">nan</span>
+
+            <span class="k">return</span> <span class="n">all_loss</span><span class="p">,</span> <span class="n">metric</span>
 
         <span class="n">reward</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">graph</span><span class="p">),</span> <span class="n">device</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">device</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">task</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">task</span><span class="p">:</span>
