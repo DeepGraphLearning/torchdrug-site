@@ -6,7 +6,7 @@
 <link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="Quick Start" href="quick_start.html" /><link rel="prev" title="TorchDrug - A deep learning platform for drug discovery" href="index.html" />
 
     <meta name="generator" content="sphinx-4.5.0, furo 2022.04.07"/>
-        <title>Installation - TorchDrug 0.2.0 documentation</title>
+        <title>Installation - TorchDrug 0.2.1 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?digest=68f4518137b9aefe99b631505a2064c3c42c9852" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
@@ -130,7 +130,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="index.html"><div class="brand">TorchDrug 0.2.0 documentation</div></a>
+      <a href="index.html"><div class="brand">TorchDrug 0.2.1 documentation</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -241,7 +241,7 @@
           <section id="installation">
 <h1>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">#</a></h1>
 <p>TorchDrug can be installed on either Linux, Windows or macOS. It is compatible with
-Python 3.7/3.8/3.9 and PyTorch &gt;= 1.8.0.</p>
+3.7 &lt;= Python &lt;= 3.10 and PyTorch &gt;= 1.8.0.</p>
 <p>For Windows</p>
 <section id="from-conda">
 <h2>From Conda<a class="headerlink" href="#from-conda" title="Permalink to this headline">#</a></h2>
@@ -252,21 +252,21 @@ Python 3.7/3.8/3.9 and PyTorch &gt;= 1.8.0.</p>
 <section id="from-pip">
 <h2>From Pip<a class="headerlink" href="#from-pip" title="Permalink to this headline">#</a></h2>
 <p>First, let’s install PyTorch.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip3 install torch
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip install torch
 </pre></div>
 </div>
 <p>To install <code class="docutils literal notranslate"><span class="pre">torch-scatter</span></code>, we need to check the version of PyTorch and CUDA.</p>
 <p>We can get the version of PyTorch by <code class="docutils literal notranslate"><span class="pre">python3</span> <span class="pre">-c</span> <span class="pre">"import</span> <span class="pre">torch;</span> <span class="pre">print(torch.__version__")</span></code>.
 The version of CUDA can be get by <code class="docutils literal notranslate"><span class="pre">nvcc</span> <span class="pre">-V</span></code>. For example, if our PyTorch is <code class="docutils literal notranslate"><span class="pre">1.8.0</span></code>
 and CUDA is <code class="docutils literal notranslate"><span class="pre">10.2</span></code>, the command should be</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip3 install torch-scatter torch-cluster -f https://pytorch-geometric.com/whl/torch-1.8.0+cu102.html
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip install torch-scatter torch-cluster -f https://pytorch-geometric.com/whl/torch-1.8.0+cu102.html
 </pre></div>
 </div>
 <p>Replace the versions in the above url according to your case. If you don’t have GPUs
 or CUDA installed, treat the CUDA version in the url as <code class="docutils literal notranslate"><span class="pre">cpu</span></code>. See
 <a class="reference external" href="https://github.com/rusty1s/pytorch_scatter">https://github.com/rusty1s/pytorch_scatter</a> for more details about installation.</p>
 <p>Finally, install TorchDrug via</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip3 install torchdrug
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip install torchdrug
 </pre></div>
 </div>
 </section>
@@ -306,6 +306,20 @@ change the library path based on our own Python path.</p>
 for all PowerShell sessions, we can write them to the PowerShell profile. The
 profile can be found by the <code class="docutils literal notranslate"><span class="pre">$profile</span></code> command in PowerShell. You may need to
 create the profile if you use it for the first time.</p>
+</section>
+<section id="apple-silicon-m1-m2-chips">
+<h2>Apple Silicon (M1/M2 Chips)<a class="headerlink" href="#apple-silicon-m1-m2-chips" title="Permalink to this headline">#</a></h2>
+<p>PyTorch supports Apple silicon from version 1.13. While <cite>torch-scatter</cite> and
+<cite>torch-cluster</cite> don’t have pre-compiled binaries for Apple silicon, we can compile
+them from their sources. See <a class="reference external" href="https://github.com/rusty1s/pytorch_scatter/issues/241">https://github.com/rusty1s/pytorch_scatter/issues/241</a>
+for more details.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip install <span class="nv">torch</span><span class="o">==</span><span class="m">1</span>.13.0
+pip install git+https://github.com/rusty1s/pytorch_scatter.git
+pip install git+https://github.com/rusty1s/pytorch_cluster.git
+pip install torchdrug
+</pre></div>
+</div>
+<p>Note TorchDrug runs on Apple silicon CPUs, but doesn’t support <cite>mps</cite> devices.</p>
 </section>
 </section>
 
@@ -371,6 +385,7 @@ create the profile if you use it for the first time.</p>
 <li><a class="reference internal" href="#from-pip">From Pip</a></li>
 <li><a class="reference internal" href="#from-source">From Source</a></li>
 <li><a class="reference internal" href="#windows-powershell">Windows (PowerShell)</a></li>
+<li><a class="reference internal" href="#apple-silicon-m1-m2-chips">Apple Silicon (M1/M2 Chips)</a></li>
 </ul>
 </li>
 </ul>

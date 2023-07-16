@@ -5,7 +5,7 @@
     <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="../../../genindex.html" /><link rel="search" title="Search" href="../../../search.html" />
 
     <meta name="generator" content="sphinx-4.5.0, furo 2022.04.07"/>
-        <title>torchdrug.datasets.alphafolddb - TorchDrug 0.2.0 documentation</title>
+        <title>torchdrug.datasets.alphafolddb - TorchDrug 0.2.1 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo.css?digest=68f4518137b9aefe99b631505a2064c3c42c9852" />
     <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
@@ -129,7 +129,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="../../../index.html"><div class="brand">TorchDrug 0.2.0 documentation</div></a>
+      <a href="../../../index.html"><div class="brand">TorchDrug 0.2.1 documentation</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -258,10 +258,10 @@
 <span class="sd">    Parameters:</span>
 <span class="sd">        path (str): path to store the dataset</span>
 <span class="sd">        species_id (int, optional): the id of species to be loaded. The species are numbered</span>
-<span class="sd">            by the order appeared on https://alphafold.ebi.ac.uk/download (0-20 for model </span>
+<span class="sd">            by the order appeared on https://alphafold.ebi.ac.uk/download (0-20 for model</span>
 <span class="sd">            organism proteomes, 21 for Swiss-Prot)</span>
-<span class="sd">        split_id (int, optional): the id of split to be loaded. To avoid large memory consumption </span>
-<span class="sd">            for one dataset, we have cut each species into several splits, each of which contains </span>
+<span class="sd">        split_id (int, optional): the id of split to be loaded. To avoid large memory consumption</span>
+<span class="sd">            for one dataset, we have cut each species into several splits, each of which contains</span>
 <span class="sd">            at most 22000 proteins.</span>
 <span class="sd">        verbose (int, optional): output verbose level</span>
 <span class="sd">        **kwargs</span>
@@ -300,46 +300,52 @@
         <span class="s2">"https://ftp.ebi.ac.uk/pub/databases/alphafold/v2/UP000000579_71421_HAEIN_v2.tar"</span><span class="p">,</span>
         <span class="s2">"https://ftp.ebi.ac.uk/pub/databases/alphafold/v2/UP000000429_85962_HELPY_v2.tar"</span><span class="p">,</span>
         <span class="s2">"https://ftp.ebi.ac.uk/pub/databases/alphafold/v2/UP000007841_1125630_KLEPH_v2.tar"</span><span class="p">,</span>
-        <span class="s2">"https://ftp.ebi.ac.uk/pub/databases/alphafold/v2/UP000008153_5671_LEIIN_v2.tar"</span><span class="p">,</span>
+        <span class="c1"># "https://ftp.ebi.ac.uk/pub/databases/alphafold/v2/UP000008153_5671_LEIIN_v2.tar",</span>
         <span class="s2">"https://ftp.ebi.ac.uk/pub/databases/alphafold/v2/UP000078237_100816_9PEZI1_v2.tar"</span><span class="p">,</span>
         <span class="s2">"https://ftp.ebi.ac.uk/pub/databases/alphafold/v2/UP000000806_272631_MYCLE_v2.tar"</span><span class="p">,</span>
-        <span class="s2">"https://ftp.ebi.ac.uk/pub/databases/alphafold/v2/UP000001584_83332_MYCTU_v2.tar"</span><span class="p">,</span>
+        <span class="c1"># "https://ftp.ebi.ac.uk/pub/databases/alphafold/v2/UP000001584_83332_MYCTU_v2.tar",</span>
         <span class="s2">"https://ftp.ebi.ac.uk/pub/databases/alphafold/v2/UP000020681_1299332_MYCUL_v2.tar"</span><span class="p">,</span>
         <span class="s2">"https://ftp.ebi.ac.uk/pub/databases/alphafold/v2/UP000000535_242231_NEIG1_v2.tar"</span><span class="p">,</span>
         <span class="s2">"https://ftp.ebi.ac.uk/pub/databases/alphafold/v2/UP000006304_1133849_9NOCA1_v2.tar"</span><span class="p">,</span>
         <span class="s2">"https://ftp.ebi.ac.uk/pub/databases/alphafold/v2/UP000024404_6282_ONCVO_v2.tar"</span><span class="p">,</span>
         <span class="s2">"https://ftp.ebi.ac.uk/pub/databases/alphafold/v2/UP000002059_502779_PARBA_v2.tar"</span><span class="p">,</span>
-        <span class="s2">"https://ftp.ebi.ac.uk/pub/databases/alphafold/v2/UP000001450_36329_PLAF7_v2.tar"</span><span class="p">,</span>
+        <span class="c1"># "https://ftp.ebi.ac.uk/pub/databases/alphafold/v2/UP000001450_36329_PLAF7_v2.tar",</span>
         <span class="s2">"https://ftp.ebi.ac.uk/pub/databases/alphafold/v2/UP000002438_208964_PSEAE_v2.tar"</span><span class="p">,</span>
         <span class="s2">"https://ftp.ebi.ac.uk/pub/databases/alphafold/v2/UP000001014_99287_SALTY_v2.tar"</span><span class="p">,</span>
         <span class="s2">"https://ftp.ebi.ac.uk/pub/databases/alphafold/v2/UP000008854_6183_SCHMA_v2.tar"</span><span class="p">,</span>
         <span class="s2">"https://ftp.ebi.ac.uk/pub/databases/alphafold/v2/UP000002716_300267_SHIDS_v2.tar"</span><span class="p">,</span>
         <span class="s2">"https://ftp.ebi.ac.uk/pub/databases/alphafold/v2/UP000018087_1391915_SPOS1_v2.tar"</span><span class="p">,</span>
-        <span class="s2">"https://ftp.ebi.ac.uk/pub/databases/alphafold/v2/UP000008816_93061_STAA8_v2.tar"</span><span class="p">,</span>
+        <span class="c1"># "https://ftp.ebi.ac.uk/pub/databases/alphafold/v2/UP000008816_93061_STAA8_v2.tar",</span>
         <span class="s2">"https://ftp.ebi.ac.uk/pub/databases/alphafold/v2/UP000000586_171101_STRR6_v2.tar"</span><span class="p">,</span>
         <span class="s2">"https://ftp.ebi.ac.uk/pub/databases/alphafold/v2/UP000035681_6248_STRER_v2.tar"</span><span class="p">,</span>
         <span class="s2">"https://ftp.ebi.ac.uk/pub/databases/alphafold/v2/UP000030665_36087_TRITR_v2.tar"</span><span class="p">,</span>
         <span class="s2">"https://ftp.ebi.ac.uk/pub/databases/alphafold/v2/UP000008524_185431_TRYB2_v2.tar"</span><span class="p">,</span>
-        <span class="s2">"https://ftp.ebi.ac.uk/pub/databases/alphafold/v2/UP000002296_353153_TRYCC_v2.tar"</span><span class="p">,</span>
+        <span class="c1"># "https://ftp.ebi.ac.uk/pub/databases/alphafold/v2/UP000002296_353153_TRYCC_v2.tar",</span>
         <span class="s2">"https://ftp.ebi.ac.uk/pub/databases/alphafold/v2/UP000270924_6293_WUCBA_v2.tar"</span>
     <span class="p">]</span>
     <span class="n">md5s</span> <span class="o">=</span> <span class="p">[</span>
-        <span class="s2">"4cd5f596ebfc3d45d9f6b647dc5684af"</span><span class="p">,</span> <span class="s2">"9e26602ba2d9f233ef4fcf82703ddb59"</span><span class="p">,</span>
-        <span class="s2">"60a09db1e1c47a98763d09879784f536"</span><span class="p">,</span> <span class="s2">"a0ab562b7372f149673c4518f949501f"</span><span class="p">,</span> 
-        <span class="s2">"6205138b14fb7e7ec09b366e3e4f294b"</span><span class="p">,</span> <span class="s2">"31f31359cd7254f82304e3886440bdd3"</span><span class="p">,</span> 
-        <span class="s2">"a590096e65461ed4eb092b2147b97f0b"</span><span class="p">,</span> <span class="s2">"8f1e120f372995644a7101ad58e5b2ae"</span><span class="p">,</span> 
-        <span class="s2">"9a659c4aed2a8b833478dcd5fffc5fd8"</span><span class="p">,</span> <span class="s2">"95d775f2ae271cf50a101c73335cd250"</span><span class="p">,</span> 
-        <span class="s2">"e5b12da43f5bd77298ca50e19706bdeb"</span><span class="p">,</span> <span class="s2">"90e953abba9c8fe202e0adf825c0dfcc"</span><span class="p">,</span> 
-        <span class="s2">"38a11553c7e2d00482281e74f7daf321"</span><span class="p">,</span> <span class="s2">"2bcdfe2c37154a355fe4e8150c279c13"</span><span class="p">,</span> 
-        <span class="s2">"580a55e56a44fed935f0101c37a8c4ab"</span><span class="p">,</span> <span class="s2">"b8d08a9033d111429fadb4e25820f9f7"</span><span class="p">,</span> 
-        <span class="s2">"59d1167f414a86cbccfb204791fea0eb"</span><span class="p">,</span> <span class="s2">"dfde6b44026f19a88f1abc8ac2798ce6"</span><span class="p">,</span> 
-        <span class="s2">"a1c2047a16130d61cac4db23b2f5b560"</span><span class="p">,</span> <span class="s2">"e4d4b72df8d075aeb607dcb095210304"</span><span class="p">,</span> 
-        <span class="s2">"5cdad48c799ffd723636cae26433f1f9"</span><span class="p">,</span> <span class="s2">"98a7c13987f578277bfb66ac48a1e242"</span><span class="p">,</span> 
+        <span class="s2">"4cd5f596ebfc3d45d9f6b647dc5684af"</span><span class="p">,</span> <span class="s2">"b89bee5507f78f971417cc8fd75b40f7"</span><span class="p">,</span> <span class="s2">"a6459a1f1a0a22fbf25f1c05c2889ae3"</span><span class="p">,</span>
+        <span class="s2">"24dfba8ab93dbf3f51e7db6b912dd6b4"</span><span class="p">,</span> <span class="s2">"6b81b3086ed9e57e04a54f148ecf974c"</span><span class="p">,</span> <span class="s2">"a50f4fd9f581c89e79e1b2857e54b786"</span><span class="p">,</span>
+        <span class="s2">"fdd16245769bf1f7d91a0e285ac00e52"</span><span class="p">,</span> <span class="s2">"66b9750c511182bc5f8ee71fe2ab2a17"</span><span class="p">,</span> <span class="s2">"5dadeb5aac704025cac33f7557794858"</span><span class="p">,</span>
+        <span class="s2">"99b22e0f050d845782d914becbfe4d2f"</span><span class="p">,</span> <span class="s2">"da938dfae4fabf6e144f4b5ede5885ec"</span><span class="p">,</span> <span class="s2">"2003c09d437cfb4093552c588a33e06d"</span><span class="p">,</span>
+        <span class="s2">"fba59f386cfa33af3f70ae664b7feac0"</span><span class="p">,</span> <span class="s2">"d7a1a6c02213754ee1a1ffb3b41ad4ba"</span><span class="p">,</span> <span class="s2">"8a0e8deadffec2aba3b7edd6534b7481"</span><span class="p">,</span>
+        <span class="s2">"1854d0bbcf819de1de7b0cfdb6d32b2e"</span><span class="p">,</span> <span class="s2">"d9720e3809db6916405db096b520c236"</span><span class="p">,</span> <span class="s2">"6b918e9e4d645b12a80468bcea805f1f"</span><span class="p">,</span>
+        <span class="s2">"ed0eefe927eb8c3b81cf87eaabbb8d6e"</span><span class="p">,</span> <span class="s2">"051369e0dc8fed4798c8b2c68e6cbe2e"</span><span class="p">,</span> <span class="s2">"b05ff57164167851651c625dca66ed28"</span><span class="p">,</span>
+        <span class="s2">"68e7a6e57bd43cb52e344b3190073387"</span><span class="p">,</span> <span class="s2">"75d027ac7833f284fda65ea620353e8a"</span><span class="p">,</span> <span class="s2">"7d85bb2ee4130096a6d905ab8d726bcc"</span><span class="p">,</span>
+        <span class="s2">"63498210c88e8bfb1a7346c4ddf73bb1"</span><span class="p">,</span> <span class="s2">"5bf2211304ef91d60bb3838ec12d89cd"</span><span class="p">,</span> <span class="s2">"4981758eb8980e9df970ac6113e4084c"</span><span class="p">,</span>
+        <span class="s2">"322431789942595b599d2b86670f41b3"</span><span class="p">,</span> <span class="s2">"35d7b32e37bcc23d02b12b03b1e0c093"</span><span class="p">,</span> <span class="s2">"1b8847dd786fa41b5b38f5e7aa58b813"</span><span class="p">,</span>
+        <span class="s2">"126bdbe59fa82d55bfa098b710bdf650"</span><span class="p">,</span> <span class="s2">"6c6d3248ed943dd7137637fc92d7ba37"</span><span class="p">,</span> <span class="s2">"532203c6877433df5651b95d27685825"</span><span class="p">,</span>
+        <span class="s2">"6e7112411da5843bec576271c44e0a0a"</span><span class="p">,</span> <span class="s2">"0e4f913a9b4672b0ad3cc9c4f2de5c8d"</span><span class="p">,</span> <span class="s2">"a138d0060b2e8a0ef1f90cf3ab7b7ca0"</span><span class="p">,</span>
+        <span class="s2">"04d491dd1c679e91b5a2f3b9f14db555"</span><span class="p">,</span> <span class="s2">"889c051e39305614accdff00414bfa67"</span><span class="p">,</span> <span class="s2">"cd87cf24e5135c9d729940194ccc65c8"</span><span class="p">,</span>
+        <span class="s2">"75eb8bfe866cf3040f4c08a566c32bc1"</span><span class="p">,</span> <span class="s2">"fd8e6ddb9c159aab781a11c287c85feb"</span><span class="p">,</span> <span class="s2">"b91a2e103980b96f755712f2b559ad66"</span><span class="p">,</span>
+        <span class="s2">"26187d09b093649686d7c158aa4fd113"</span><span class="p">,</span> <span class="s2">"62e16894bb4b8951a82befd24ad4ee21"</span><span class="p">,</span> <span class="s2">"85c001df1d91788bf3cc1f97230b1dac"</span><span class="p">,</span>
+        <span class="s2">"91a25af808351757b101a8c9c787db9e"</span><span class="p">,</span> <span class="s2">"8b3e8645cc4c2484c331759b9d1df5bc"</span><span class="p">,</span> <span class="s2">"e8a76a6ab290e6743233510e8d1eb4a5"</span><span class="p">,</span>
+        <span class="s2">"38280bd7804f4c060b0775c4abed9b89"</span>
     <span class="p">]</span>
     <span class="n">species_nsplit</span> <span class="o">=</span> <span class="p">[</span>
         <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span>
         <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span>
-        <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span>
+        <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="c1">#1, 1, 1, 1, 1</span>
     <span class="p">]</span>
     <span class="n">split_length</span> <span class="o">=</span> <span class="mi">22000</span>
 
@@ -351,7 +357,7 @@
 
         <span class="n">species_name</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">urls</span><span class="p">[</span><span class="n">species_id</span><span class="p">])[:</span><span class="o">-</span><span class="mi">4</span><span class="p">]</span>
         <span class="k">if</span> <span class="n">split_id</span> <span class="o">&gt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">species_nsplit</span><span class="p">[</span><span class="n">species_id</span><span class="p">]:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Split id </span><span class="si">%d</span><span class="s2"> should be less than </span><span class="si">%d</span><span class="s2"> in species </span><span class="si">%s</span><span class="s2">"</span> <span class="o">%</span> 
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Split id </span><span class="si">%d</span><span class="s2"> should be less than </span><span class="si">%d</span><span class="s2"> in species </span><span class="si">%s</span><span class="s2">"</span> <span class="o">%</span>
                             <span class="p">(</span><span class="n">split_id</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">species_nsplit</span><span class="p">[</span><span class="n">species_id</span><span class="p">],</span> <span class="n">species_name</span><span class="p">))</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">processed_file</span> <span class="o">=</span> <span class="s2">"</span><span class="si">%s</span><span class="s2">_</span><span class="si">%d</span><span class="s2">.pkl.gz"</span> <span class="o">%</span> <span class="p">(</span><span class="n">species_name</span><span class="p">,</span> <span class="n">split_id</span><span class="p">)</span>
         <span class="n">pkl_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">processed_file</span><span class="p">)</span>

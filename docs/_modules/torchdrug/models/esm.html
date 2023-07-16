@@ -5,7 +5,7 @@
     <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="../../../genindex.html" /><link rel="search" title="Search" href="../../../search.html" />
 
     <meta name="generator" content="sphinx-4.5.0, furo 2022.04.07"/>
-        <title>torchdrug.models.esm - TorchDrug 0.2.0 documentation</title>
+        <title>torchdrug.models.esm - TorchDrug 0.2.1 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo.css?digest=68f4518137b9aefe99b631505a2064c3c42c9852" />
     <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
@@ -129,7 +129,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="../../../index.html"><div class="brand">TorchDrug 0.2.0 documentation</div></a>
+      <a href="../../../index.html"><div class="brand">TorchDrug 0.2.1 documentation</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -270,17 +270,46 @@
         <span class="s2">"ESM-1v"</span><span class="p">:</span> <span class="s2">"https://dl.fbaipublicfiles.com/fair-esm/models/esm1v_t33_650M_UR90S_1.pt"</span><span class="p">,</span>
         <span class="s2">"ESM-1b-regression"</span><span class="p">:</span>
             <span class="s2">"https://dl.fbaipublicfiles.com/fair-esm/regression/esm1b_t33_650M_UR50S-contact-regression.pt"</span><span class="p">,</span>
+        <span class="s2">"ESM-2-8M"</span><span class="p">:</span> <span class="s2">"https://dl.fbaipublicfiles.com/fair-esm/models/esm2_t6_8M_UR50D.pt"</span><span class="p">,</span>
+        <span class="s2">"ESM-2-35M"</span><span class="p">:</span> <span class="s2">"https://dl.fbaipublicfiles.com/fair-esm/models/esm2_t12_35M_UR50D.pt"</span><span class="p">,</span>
+        <span class="s2">"ESM-2-150M"</span><span class="p">:</span> <span class="s2">"https://dl.fbaipublicfiles.com/fair-esm/models/esm2_t30_150M_UR50D.pt"</span><span class="p">,</span>
+        <span class="s2">"ESM-2-650M"</span><span class="p">:</span> <span class="s2">"https://dl.fbaipublicfiles.com/fair-esm/models/esm2_t33_650M_UR50D.pt"</span><span class="p">,</span>
+        <span class="s2">"ESM-2-3B"</span><span class="p">:</span> <span class="s2">"https://dl.fbaipublicfiles.com/fair-esm/models/esm2_t36_3B_UR50D.pt"</span><span class="p">,</span>
+        <span class="s2">"ESM-2-15B"</span><span class="p">:</span> <span class="s2">"https://dl.fbaipublicfiles.com/fair-esm/models/esm2_t48_15B_UR50D.pt"</span><span class="p">,</span>
     <span class="p">}</span>
 
     <span class="n">md5</span> <span class="o">=</span> <span class="p">{</span>
         <span class="s2">"ESM-1b"</span><span class="p">:</span> <span class="s2">"ba8914bc3358cae2254ebc8874ee67f6"</span><span class="p">,</span>
         <span class="s2">"ESM-1v"</span><span class="p">:</span> <span class="s2">"1f04c2d2636b02b544ecb5fbbef8fefd"</span><span class="p">,</span>
         <span class="s2">"ESM-1b-regression"</span><span class="p">:</span> <span class="s2">"e7fe626dfd516fb6824bd1d30192bdb1"</span><span class="p">,</span>
+        <span class="s2">"ESM-2-8M"</span><span class="p">:</span> <span class="s2">"8039fc9cee7f71cd2633b13b5a38ff50"</span><span class="p">,</span>
+        <span class="s2">"ESM-2-35M"</span><span class="p">:</span> <span class="s2">"a894ddb31522e511e1273abb23b5f974"</span><span class="p">,</span>
+        <span class="s2">"ESM-2-150M"</span><span class="p">:</span> <span class="s2">"229fcf8f9f3d4d442215662ca001b906"</span><span class="p">,</span>
+        <span class="s2">"ESM-2-650M"</span><span class="p">:</span> <span class="s2">"ba6d997e29db07a2ad9dca20e024b102"</span><span class="p">,</span>
+        <span class="s2">"ESM-2-3B"</span><span class="p">:</span> <span class="s2">"d37a0d0dbe7431e48a72072b9180b16b"</span><span class="p">,</span>
+        <span class="s2">"ESM-2-15B"</span><span class="p">:</span> <span class="s2">"af61a9c0b792ae50e244cde443b7f4ac"</span><span class="p">,</span>
     <span class="p">}</span>
 
     <span class="n">output_dim</span> <span class="o">=</span> <span class="p">{</span>
         <span class="s2">"ESM-1b"</span><span class="p">:</span> <span class="mi">1280</span><span class="p">,</span>
         <span class="s2">"ESM-1v"</span><span class="p">:</span> <span class="mi">1280</span><span class="p">,</span>
+        <span class="s2">"ESM-2-8M"</span><span class="p">:</span> <span class="mi">320</span><span class="p">,</span>
+        <span class="s2">"ESM-2-35M"</span><span class="p">:</span> <span class="mi">480</span><span class="p">,</span>
+        <span class="s2">"ESM-2-150M"</span><span class="p">:</span> <span class="mi">640</span><span class="p">,</span>
+        <span class="s2">"ESM-2-650M"</span><span class="p">:</span> <span class="mi">1280</span><span class="p">,</span>
+        <span class="s2">"ESM-2-3B"</span><span class="p">:</span> <span class="mi">2560</span><span class="p">,</span>
+        <span class="s2">"ESM-2-15B"</span><span class="p">:</span> <span class="mi">5120</span><span class="p">,</span>
+    <span class="p">}</span>
+
+    <span class="n">num_layer</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">"ESM-1b"</span><span class="p">:</span> <span class="mi">33</span><span class="p">,</span>
+        <span class="s2">"ESM-1v"</span><span class="p">:</span> <span class="mi">33</span><span class="p">,</span>
+        <span class="s2">"ESM-2-8M"</span><span class="p">:</span> <span class="mi">6</span><span class="p">,</span>
+        <span class="s2">"ESM-2-35M"</span><span class="p">:</span> <span class="mi">12</span><span class="p">,</span>
+        <span class="s2">"ESM-2-150M"</span><span class="p">:</span> <span class="mi">30</span><span class="p">,</span>
+        <span class="s2">"ESM-2-650M"</span><span class="p">:</span> <span class="mi">33</span><span class="p">,</span>
+        <span class="s2">"ESM-2-3B"</span><span class="p">:</span> <span class="mi">36</span><span class="p">,</span>
+        <span class="s2">"ESM-2-15B"</span><span class="p">:</span> <span class="mi">48</span><span class="p">,</span>
     <span class="p">}</span>
 
     <span class="n">max_input_length</span> <span class="o">=</span> <span class="mi">1024</span> <span class="o">-</span> <span class="mi">2</span>
@@ -293,10 +322,12 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">path</span> <span class="o">=</span> <span class="n">path</span>
 
         <span class="n">_model</span><span class="p">,</span> <span class="n">alphabet</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">load_weight</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">model</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">alphabet</span> <span class="o">=</span> <span class="n">alphabet</span>
         <span class="n">mapping</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">construct_mapping</span><span class="p">(</span><span class="n">alphabet</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">output_dim</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">output_dim</span><span class="p">[</span><span class="n">model</span><span class="p">]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="n">_model</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">alphabet</span> <span class="o">=</span> <span class="n">alphabet</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">repr_layer</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_layer</span><span class="p">[</span><span class="n">model</span><span class="p">]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">register_buffer</span><span class="p">(</span><span class="s2">"mapping"</span><span class="p">,</span> <span class="n">mapping</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="n">readout</span> <span class="o">==</span> <span class="s2">"sum"</span><span class="p">:</span>
@@ -311,7 +342,7 @@
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Unknown model `</span><span class="si">%s</span><span class="s2">`"</span> <span class="o">%</span> <span class="n">model</span><span class="p">)</span>
         <span class="n">model_file</span> <span class="o">=</span> <span class="n">utils</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">url</span><span class="p">[</span><span class="n">model</span><span class="p">],</span> <span class="n">path</span><span class="p">,</span> <span class="n">md5</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">md5</span><span class="p">[</span><span class="n">model</span><span class="p">])</span>
         <span class="n">model_data</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">model_file</span><span class="p">,</span> <span class="n">map_location</span><span class="o">=</span><span class="s2">"cpu"</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">model</span> <span class="o">!=</span> <span class="s2">"ESM-1v"</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">model</span> <span class="o">!=</span> <span class="s2">"ESM-1v"</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">model</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">"ESM-2"</span><span class="p">):</span>
             <span class="n">regression_model</span> <span class="o">=</span> <span class="s2">"</span><span class="si">%s</span><span class="s2">-regression"</span> <span class="o">%</span> <span class="n">model</span>
             <span class="n">regression_file</span> <span class="o">=</span> <span class="n">utils</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">url</span><span class="p">[</span><span class="n">regression_model</span><span class="p">],</span> <span class="n">path</span><span class="p">,</span> <span class="n">md5</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">md5</span><span class="p">[</span><span class="n">regression_model</span><span class="p">])</span>
             <span class="n">regression_data</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">regression_file</span><span class="p">,</span> <span class="n">map_location</span><span class="o">=</span><span class="s2">"cpu"</span><span class="p">)</span>
@@ -321,7 +352,7 @@
         <span class="k">return</span> <span class="n">esm</span><span class="o">.</span><span class="n">pretrained</span><span class="o">.</span><span class="n">load_model_and_alphabet_core</span><span class="p">(</span><span class="n">model_name</span><span class="p">,</span> <span class="n">model_data</span><span class="p">,</span> <span class="n">regression_data</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">construct_mapping</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">alphabet</span><span class="p">):</span>
-        <span class="n">mapping</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">Protein</span><span class="o">.</span><span class="n">id2residue_symbol</span><span class="p">)</span>
+        <span class="n">mapping</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="nb">max</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">Protein</span><span class="o">.</span><span class="n">id2residue_symbol</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">alphabet</span><span class="p">))</span>
         <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">token</span> <span class="ow">in</span> <span class="n">data</span><span class="o">.</span><span class="n">Protein</span><span class="o">.</span><span class="n">id2residue_symbol</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
             <span class="n">mapping</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">alphabet</span><span class="o">.</span><span class="n">get_idx</span><span class="p">(</span><span class="n">token</span><span class="p">)</span>
         <span class="n">mapping</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">mapping</span><span class="p">)</span>
@@ -343,6 +374,7 @@
 <span class="sd">        """</span>
         <span class="nb">input</span> <span class="o">=</span> <span class="n">graph</span><span class="o">.</span><span class="n">residue_type</span>
         <span class="nb">input</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mapping</span><span class="p">[</span><span class="nb">input</span><span class="p">]</span>
+        <span class="nb">input</span><span class="p">[</span><span class="nb">input</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">graph</span><span class="o">.</span><span class="n">residue_type</span><span class="p">[</span><span class="nb">input</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">]</span>
         <span class="n">size</span> <span class="o">=</span> <span class="n">graph</span><span class="o">.</span><span class="n">num_residues</span>
         <span class="k">if</span> <span class="p">(</span><span class="n">size</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_input_length</span><span class="p">)</span><span class="o">.</span><span class="n">any</span><span class="p">():</span>
             <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">"ESM can only encode proteins within </span><span class="si">%d</span><span class="s2"> residues. Truncate the input to fit into ESM."</span>
@@ -362,8 +394,8 @@
             <span class="nb">input</span><span class="p">,</span> <span class="n">size_ext</span> <span class="o">=</span> <span class="n">functional</span><span class="o">.</span><span class="n">_extend</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="n">size_ext</span><span class="p">,</span> <span class="n">eos</span><span class="p">,</span> <span class="n">torch</span><span class="o">.</span><span class="n">ones_like</span><span class="p">(</span><span class="n">size_ext</span><span class="p">))</span>
         <span class="nb">input</span> <span class="o">=</span> <span class="n">functional</span><span class="o">.</span><span class="n">variadic_to_padded</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="n">size_ext</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">alphabet</span><span class="o">.</span><span class="n">padding_idx</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
 
-        <span class="n">output</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="n">repr_layers</span><span class="o">=</span><span class="p">[</span><span class="mi">33</span><span class="p">])</span>
-        <span class="n">residue_feature</span> <span class="o">=</span> <span class="n">output</span><span class="p">[</span><span class="s2">"representations"</span><span class="p">][</span><span class="mi">33</span><span class="p">]</span>
+        <span class="n">output</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="n">repr_layers</span><span class="o">=</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">repr_layer</span><span class="p">])</span>
+        <span class="n">residue_feature</span> <span class="o">=</span> <span class="n">output</span><span class="p">[</span><span class="s2">"representations"</span><span class="p">][</span><span class="bp">self</span><span class="o">.</span><span class="n">repr_layer</span><span class="p">]</span>
 
         <span class="n">residue_feature</span> <span class="o">=</span> <span class="n">functional</span><span class="o">.</span><span class="n">padded_to_variadic</span><span class="p">(</span><span class="n">residue_feature</span><span class="p">,</span> <span class="n">size_ext</span><span class="p">)</span>
         <span class="n">starts</span> <span class="o">=</span> <span class="n">size_ext</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">-</span> <span class="n">size_ext</span>

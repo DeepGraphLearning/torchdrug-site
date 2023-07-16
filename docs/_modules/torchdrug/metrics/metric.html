@@ -5,7 +5,7 @@
     <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="../../../genindex.html" /><link rel="search" title="Search" href="../../../search.html" />
 
     <meta name="generator" content="sphinx-4.5.0, furo 2022.04.07"/>
-        <title>torchdrug.metrics.metric - TorchDrug 0.2.0 documentation</title>
+        <title>torchdrug.metrics.metric - TorchDrug 0.2.1 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo.css?digest=68f4518137b9aefe99b631505a2064c3c42c9852" />
     <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
@@ -129,7 +129,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="../../../index.html"><div class="brand">TorchDrug 0.2.0 documentation</div></a>
+      <a href="../../../index.html"><div class="brand">TorchDrug 0.2.1 documentation</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -429,7 +429,7 @@
 <span class="sd">        target (Tensor): target of shape :math:`(B,)`.</span>
 <span class="sd">        size (Tensor): size of sets of shape :math:`(N,)`</span>
 <span class="sd">    """</span>
-    <span class="n">index2graph</span> <span class="o">=</span> <span class="n">functional</span><span class="o">.</span><span class="n">_size_to_index</span><span class="p">(</span><span class="n">size</span><span class="p">)</span>
+    <span class="n">index2graph</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">repeat_interleave</span><span class="p">(</span><span class="n">size</span><span class="p">)</span>
     <span class="n">_</span><span class="p">,</span> <span class="n">order</span> <span class="o">=</span> <span class="n">functional</span><span class="o">.</span><span class="n">variadic_sort</span><span class="p">(</span><span class="n">pred</span><span class="p">,</span> <span class="n">size</span><span class="p">,</span> <span class="n">descending</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="n">cum_size</span> <span class="o">=</span> <span class="p">(</span><span class="n">size</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">-</span> <span class="n">size</span><span class="p">)[</span><span class="n">index2graph</span><span class="p">]</span>
     <span class="n">target</span> <span class="o">=</span> <span class="n">target</span><span class="p">[</span><span class="n">order</span> <span class="o">+</span> <span class="n">cum_size</span><span class="p">]</span>
@@ -455,7 +455,7 @@
 <span class="sd">        target (Tensor): target of shape :math:`(B,)`.</span>
 <span class="sd">        size (Tensor): size of sets of shape :math:`(N,)`</span>
 <span class="sd">    """</span>
-    <span class="n">index2graph</span> <span class="o">=</span> <span class="n">functional</span><span class="o">.</span><span class="n">_size_to_index</span><span class="p">(</span><span class="n">size</span><span class="p">)</span>
+    <span class="n">index2graph</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">repeat_interleave</span><span class="p">(</span><span class="n">size</span><span class="p">)</span>
     <span class="n">_</span><span class="p">,</span> <span class="n">order</span> <span class="o">=</span> <span class="n">functional</span><span class="o">.</span><span class="n">variadic_sort</span><span class="p">(</span><span class="n">pred</span><span class="p">,</span> <span class="n">size</span><span class="p">,</span> <span class="n">descending</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="n">cum_size</span> <span class="o">=</span> <span class="p">(</span><span class="n">size</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">-</span> <span class="n">size</span><span class="p">)[</span><span class="n">index2graph</span><span class="p">]</span>
     <span class="n">target</span> <span class="o">=</span> <span class="n">target</span><span class="p">[</span><span class="n">order</span> <span class="o">+</span> <span class="n">cum_size</span><span class="p">]</span>
@@ -535,7 +535,7 @@
 <span class="sd">        target (Tensor): target of shape :math:`(N,)`. Each target is a relative index in a sample.</span>
 <span class="sd">        size (Tensor): number of categories of shape :math:`(N,)`</span>
 <span class="sd">    """</span>
-    <span class="n">index2graph</span> <span class="o">=</span> <span class="n">functional</span><span class="o">.</span><span class="n">_size_to_index</span><span class="p">(</span><span class="n">size</span><span class="p">)</span>
+    <span class="n">index2graph</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">repeat_interleave</span><span class="p">(</span><span class="n">size</span><span class="p">)</span>
 
     <span class="n">input_class</span> <span class="o">=</span> <span class="n">scatter_max</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="n">index2graph</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
     <span class="n">target_index</span> <span class="o">=</span> <span class="n">target</span> <span class="o">+</span> <span class="n">size</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">-</span> <span class="n">size</span>

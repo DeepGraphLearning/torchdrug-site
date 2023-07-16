@@ -5,7 +5,7 @@
     <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="../../../genindex.html" /><link rel="search" title="Search" href="../../../search.html" />
 
     <meta name="generator" content="sphinx-4.5.0, furo 2022.04.07"/>
-        <title>torchdrug.data.graph - TorchDrug 0.2.0 documentation</title>
+        <title>torchdrug.data.graph - TorchDrug 0.2.1 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo.css?digest=68f4518137b9aefe99b631505a2064c3c42c9852" />
     <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
@@ -129,7 +129,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="../../../index.html"><div class="brand">TorchDrug 0.2.0 documentation</div></a>
+      <a href="../../../index.html"><div class="brand">TorchDrug 0.2.1 documentation</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -779,7 +779,7 @@
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Fail to build an inverted index table based on sorting. "</span>
                              <span class="s2">"The graph is too large."</span><span class="p">)</span>
         <span class="n">scale</span> <span class="o">=</span> <span class="n">base</span><span class="o">.</span><span class="n">cumprod</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-        <span class="n">scale</span> <span class="o">=</span> <span class="n">scale</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">//</span> <span class="n">scale</span>
+        <span class="n">scale</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">div</span><span class="p">(</span><span class="n">scale</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">scale</span><span class="p">,</span> <span class="n">rounding_mode</span><span class="o">=</span><span class="s2">"floor"</span><span class="p">)</span>
         <span class="n">key</span> <span class="o">=</span> <span class="p">(</span><span class="n">keys</span> <span class="o">*</span> <span class="n">scale</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">dim</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
         <span class="n">order</span> <span class="o">=</span> <span class="n">key</span><span class="o">.</span><span class="n">argsort</span><span class="p">()</span>
         <span class="n">num_keys</span> <span class="o">=</span> <span class="n">key</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">return_counts</span><span class="o">=</span><span class="kc">True</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
@@ -965,7 +965,7 @@
         <span class="n">local_inner_size</span> <span class="o">=</span> <span class="n">degree_in</span><span class="o">.</span><span class="n">repeat_interleave</span><span class="p">(</span><span class="n">size</span><span class="p">)</span>
         <span class="n">edge_in_offset</span> <span class="o">=</span> <span class="p">(</span><span class="n">degree_out</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">-</span> <span class="n">degree_out</span><span class="p">)</span><span class="o">.</span><span class="n">repeat_interleave</span><span class="p">(</span><span class="n">size</span><span class="p">)</span>
         <span class="n">edge_out_offset</span> <span class="o">=</span> <span class="p">(</span><span class="n">degree_in</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">-</span> <span class="n">degree_in</span><span class="p">)</span><span class="o">.</span><span class="n">repeat_interleave</span><span class="p">(</span><span class="n">size</span><span class="p">)</span>
-        <span class="n">edge_in_index</span> <span class="o">=</span> <span class="n">local_index</span> <span class="o">//</span> <span class="n">local_inner_size</span> <span class="o">+</span> <span class="n">edge_in_offset</span>
+        <span class="n">edge_in_index</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">div</span><span class="p">(</span><span class="n">local_index</span><span class="p">,</span> <span class="n">local_inner_size</span><span class="p">,</span> <span class="n">rounding_mode</span><span class="o">=</span><span class="s2">"floor"</span><span class="p">)</span> <span class="o">+</span> <span class="n">edge_in_offset</span>
         <span class="n">edge_out_index</span> <span class="o">=</span> <span class="n">local_index</span> <span class="o">%</span> <span class="n">local_inner_size</span> <span class="o">+</span> <span class="n">edge_out_offset</span>
 
         <span class="n">edge_in</span> <span class="o">=</span> <span class="n">edge_in</span><span class="p">[</span><span class="n">edge_in_index</span><span class="p">]</span>
@@ -1270,6 +1270,10 @@
                 <span class="n">fig</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">save_file</span><span class="p">)</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="n">fig</span><span class="o">.</span><span class="n">show</span><span class="p">()</span></div>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">__torch_function__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">func</span><span class="p">,</span> <span class="n">types</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(),</span> <span class="n">kwargs</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">NotImplemented</span>
 
     <span class="k">def</span> <span class="nf">__getstate__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">state</span> <span class="o">=</span> <span class="p">{}</span>
@@ -1734,15 +1738,13 @@
     <span class="nd">@utils</span><span class="o">.</span><span class="n">cached_property</span>
     <span class="k">def</span> <span class="nf">node2graph</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">"""Node id to graph id mapping."""</span>
-        <span class="nb">range</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">batch_size</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">device</span><span class="p">)</span>
-        <span class="n">node2graph</span> <span class="o">=</span> <span class="nb">range</span><span class="o">.</span><span class="n">repeat_interleave</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">num_nodes</span><span class="p">)</span>
+        <span class="n">node2graph</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">repeat_interleave</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">num_nodes</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">node2graph</span>
 
     <span class="nd">@utils</span><span class="o">.</span><span class="n">cached_property</span>
     <span class="k">def</span> <span class="nf">edge2graph</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">"""Edge id to graph id mapping."""</span>
-        <span class="nb">range</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">batch_size</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">device</span><span class="p">)</span>
-        <span class="n">edge2graph</span> <span class="o">=</span> <span class="nb">range</span><span class="o">.</span><span class="n">repeat_interleave</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">num_edges</span><span class="p">)</span>
+        <span class="n">edge2graph</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">repeat_interleave</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">num_edges</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">edge2graph</span>
 
     <span class="nd">@property</span>
@@ -1904,7 +1906,7 @@
         <span class="n">local_inner_size</span> <span class="o">=</span> <span class="n">degree_in</span><span class="o">.</span><span class="n">repeat_interleave</span><span class="p">(</span><span class="n">size</span><span class="p">)</span>
         <span class="n">edge_in_offset</span> <span class="o">=</span> <span class="p">(</span><span class="n">degree_out</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">-</span> <span class="n">degree_out</span><span class="p">)</span><span class="o">.</span><span class="n">repeat_interleave</span><span class="p">(</span><span class="n">size</span><span class="p">)</span>
         <span class="n">edge_out_offset</span> <span class="o">=</span> <span class="p">(</span><span class="n">degree_in</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">-</span> <span class="n">degree_in</span><span class="p">)</span><span class="o">.</span><span class="n">repeat_interleave</span><span class="p">(</span><span class="n">size</span><span class="p">)</span>
-        <span class="n">edge_in_index</span> <span class="o">=</span> <span class="n">local_index</span> <span class="o">//</span> <span class="n">local_inner_size</span> <span class="o">+</span> <span class="n">edge_in_offset</span>
+        <span class="n">edge_in_index</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">div</span><span class="p">(</span><span class="n">local_index</span><span class="p">,</span> <span class="n">local_inner_size</span><span class="p">,</span> <span class="n">rounding_mode</span><span class="o">=</span><span class="s2">"floor"</span><span class="p">)</span> <span class="o">+</span> <span class="n">edge_in_offset</span>
         <span class="n">edge_out_index</span> <span class="o">=</span> <span class="n">local_index</span> <span class="o">%</span> <span class="n">local_inner_size</span> <span class="o">+</span> <span class="n">edge_out_offset</span>
 
         <span class="n">edge_in</span> <span class="o">=</span> <span class="n">edge_in</span><span class="p">[</span><span class="n">edge_in_index</span><span class="p">]</span>

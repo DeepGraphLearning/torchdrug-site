@@ -6,7 +6,7 @@
 <link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="prev" title="torchdrug.tasks" href="tasks.html" />
 
     <meta name="generator" content="sphinx-4.5.0, furo 2022.04.07"/>
-        <title>torchdrug.utils - TorchDrug 0.2.0 documentation</title>
+        <title>torchdrug.utils - TorchDrug 0.2.1 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=68f4518137b9aefe99b631505a2064c3c42c9852" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
@@ -130,7 +130,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="../index.html"><div class="brand">TorchDrug 0.2.0 documentation</div></a>
+      <a href="../index.html"><div class="brand">TorchDrug 0.2.1 documentation</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -319,12 +319,12 @@ Automatically decide the compilation flags if not specified.</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="torchdrug.utils.cpu">
 <span class="sig-name descname"><span class="pre">cpu</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/utils/torch.html#cpu"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.utils.cpu" title="Permalink to this definition">#</a></dt>
-<dd><p>Transfer any nested conatiner of tensors to CPU.</p>
+<dd><p>Transfer any nested container of tensors to CPU.</p>
 </dd></dl>
 <dl class="py function">
 <dt class="sig sig-object py" id="torchdrug.utils.cuda">
 <span class="sig-name descname"><span class="pre">cuda</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/utils/torch.html#cuda"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.utils.cuda" title="Permalink to this definition">#</a></dt>
-<dd><p>Transfer any nested conatiner of tensors to CUDA.</p>
+<dd><p>Transfer any nested container of tensors to CUDA.</p>
 </dd></dl>
 <dl class="py function">
 <dt class="sig sig-object py" id="torchdrug.utils.detach">
@@ -574,6 +574,11 @@ If not specified, extract all members.</p></li>
 </div>
 </dd></dl>
 <span class="target" id="module-torchdrug.utils.pretty"></span><dl class="py function">
+<dt class="sig sig-object py" id="torchdrug.utils.pretty.format">
+<span class="sig-name descname"><span class="pre">format</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">object</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/utils/pretty.html#format"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.utils.pretty.format" title="Permalink to this definition">#</a></dt>
+<dd><p>Format a python object as a string.</p>
+</dd></dl>
+<dl class="py function">
 <dt class="sig sig-object py" id="torchdrug.utils.pretty.long_array">
 <span class="sig-name descname"><span class="pre">long_array</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">array</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">truncation</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">display</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/utils/pretty.html#long_array"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.utils.pretty.long_array" title="Permalink to this definition">#</a></dt>
 <dd><p>Format an array as a string.</p>
@@ -586,6 +591,11 @@ If not specified, extract all members.</p></li>
 </ul>
 </dd>
 </dl>
+</dd></dl>
+<dl class="py function">
+<dt class="sig sig-object py" id="torchdrug.utils.pretty.print">
+<span class="sig-name descname"><span class="pre">print</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">object</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/utils/pretty.html#print"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.utils.pretty.print" title="Permalink to this definition">#</a></dt>
+<dd><p>Print a python object to a stream.</p>
 </dd></dl>
 <dl class="py function">
 <dt class="sig sig-object py" id="torchdrug.utils.pretty.time">
@@ -609,8 +619,8 @@ If not specified, extract all members.</p></li>
 <section id="helper-functions">
 <h2>Helper functions<a class="headerlink" href="#helper-functions" title="Permalink to this headline">#</a></h2>
 <dl class="py function">
-<dt class="sig sig-object py" id="torchdrug.utils.doc.copy_args">
-<span class="sig-name descname"><span class="pre">copy_args</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">args</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ignore</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/utils/doc.html#copy_args"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.utils.doc.copy_args" title="Permalink to this definition">#</a></dt>
+<dt class="sig sig-object py" id="torchdrug.utils.copy_args">
+<span class="sig-name descname"><span class="pre">copy_args</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">args</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ignore</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchdrug/utils/decorator.html#copy_args"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#torchdrug.utils.copy_args" title="Permalink to this definition">#</a></dt>
 <dd><p>Copy argument documentation from another function to fill the document of **kwargs in this function.</p>
 <p>This class should be applied as a decorator.</p>
 <dl class="field-list simple">

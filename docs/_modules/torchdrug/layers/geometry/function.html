@@ -5,7 +5,7 @@
     <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="../../../../genindex.html" /><link rel="search" title="Search" href="../../../../search.html" />
 
     <meta name="generator" content="sphinx-4.5.0, furo 2022.04.07"/>
-        <title>torchdrug.layers.geometry.function - TorchDrug 0.2.0 documentation</title>
+        <title>torchdrug.layers.geometry.function - TorchDrug 0.2.1 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/styles/furo.css?digest=68f4518137b9aefe99b631505a2064c3c42c9852" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
@@ -129,7 +129,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="../../../../index.html"><div class="brand">TorchDrug 0.2.0 documentation</div></a>
+      <a href="../../../../index.html"><div class="brand">TorchDrug 0.2.1 documentation</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -278,7 +278,7 @@
 
     <span class="n">eps</span> <span class="o">=</span> <span class="mf">1e-10</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">min_distance</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">max_distance</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">min_distance</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">max_distance</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">KNNEdge</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">k</span> <span class="o">=</span> <span class="n">k</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">min_distance</span> <span class="o">=</span> <span class="n">min_distance</span>
@@ -303,7 +303,7 @@
             <span class="n">mask</span> <span class="o">=</span> <span class="p">(</span><span class="n">graph</span><span class="o">.</span><span class="n">atom2residue</span><span class="p">[</span><span class="n">node_in</span><span class="p">]</span> <span class="o">-</span> <span class="n">graph</span><span class="o">.</span><span class="n">atom2residue</span><span class="p">[</span><span class="n">node_out</span><span class="p">])</span><span class="o">.</span><span class="n">abs</span><span class="p">()</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">min_distance</span>
             <span class="n">edge_list</span> <span class="o">=</span> <span class="n">edge_list</span><span class="p">[</span><span class="o">~</span><span class="n">mask</span><span class="p">]</span>
 
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_distance</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_distance</span><span class="p">:</span>
             <span class="n">node_in</span><span class="p">,</span> <span class="n">node_out</span> <span class="o">=</span> <span class="n">edge_list</span><span class="o">.</span><span class="n">t</span><span class="p">()[:</span><span class="mi">2</span><span class="p">]</span>
             <span class="n">mask</span> <span class="o">=</span> <span class="p">(</span><span class="n">graph</span><span class="o">.</span><span class="n">atom2residue</span><span class="p">[</span><span class="n">node_in</span><span class="p">]</span> <span class="o">-</span> <span class="n">graph</span><span class="o">.</span><span class="n">atom2residue</span><span class="p">[</span><span class="n">node_out</span><span class="p">])</span><span class="o">.</span><span class="n">abs</span><span class="p">()</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_distance</span>
             <span class="n">edge_list</span> <span class="o">=</span> <span class="n">edge_list</span><span class="p">[</span><span class="o">~</span><span class="n">mask</span><span class="p">]</span>
@@ -327,10 +327,11 @@
 
     <span class="n">eps</span> <span class="o">=</span> <span class="mf">1e-10</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">radius</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">min_distance</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">max_num_neighbors</span><span class="o">=</span><span class="mi">32</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">radius</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">min_distance</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">max_distance</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">max_num_neighbors</span><span class="o">=</span><span class="mi">32</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">SpatialEdge</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">radius</span> <span class="o">=</span> <span class="n">radius</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">min_distance</span> <span class="o">=</span> <span class="n">min_distance</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">max_distance</span> <span class="o">=</span> <span class="n">max_distance</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">max_num_neighbors</span> <span class="o">=</span> <span class="n">max_num_neighbors</span>
 
 <div class="viewcode-block" id="SpatialEdge.forward"><a class="viewcode-back" href="../../../../api/layers.html#torchdrug.layers.geometry.SpatialEdge.forward">[docs]</a>    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">graph</span><span class="p">):</span>
@@ -352,6 +353,11 @@
             <span class="n">mask</span> <span class="o">=</span> <span class="p">(</span><span class="n">graph</span><span class="o">.</span><span class="n">atom2residue</span><span class="p">[</span><span class="n">node_in</span><span class="p">]</span> <span class="o">-</span> <span class="n">graph</span><span class="o">.</span><span class="n">atom2residue</span><span class="p">[</span><span class="n">node_out</span><span class="p">])</span><span class="o">.</span><span class="n">abs</span><span class="p">()</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">min_distance</span>
             <span class="n">edge_list</span> <span class="o">=</span> <span class="n">edge_list</span><span class="p">[</span><span class="o">~</span><span class="n">mask</span><span class="p">]</span>
 
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_distance</span><span class="p">:</span>
+            <span class="n">node_in</span><span class="p">,</span> <span class="n">node_out</span> <span class="o">=</span> <span class="n">edge_list</span><span class="o">.</span><span class="n">t</span><span class="p">()[:</span><span class="mi">2</span><span class="p">]</span>
+            <span class="n">mask</span> <span class="o">=</span> <span class="p">(</span><span class="n">graph</span><span class="o">.</span><span class="n">atom2residue</span><span class="p">[</span><span class="n">node_in</span><span class="p">]</span> <span class="o">-</span> <span class="n">graph</span><span class="o">.</span><span class="n">atom2residue</span><span class="p">[</span><span class="n">node_out</span><span class="p">])</span><span class="o">.</span><span class="n">abs</span><span class="p">()</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_distance</span>
+            <span class="n">edge_list</span> <span class="o">=</span> <span class="n">edge_list</span><span class="p">[</span><span class="o">~</span><span class="n">mask</span><span class="p">]</span>
+        
         <span class="n">node_in</span><span class="p">,</span> <span class="n">node_out</span> <span class="o">=</span> <span class="n">edge_list</span><span class="o">.</span><span class="n">t</span><span class="p">()[:</span><span class="mi">2</span><span class="p">]</span>
         <span class="n">mask</span> <span class="o">=</span> <span class="p">(</span><span class="n">graph</span><span class="o">.</span><span class="n">node_position</span><span class="p">[</span><span class="n">node_in</span><span class="p">]</span> <span class="o">-</span> <span class="n">graph</span><span class="o">.</span><span class="n">node_position</span><span class="p">[</span><span class="n">node_out</span><span class="p">])</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">dim</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">eps</span>
         <span class="n">edge_list</span> <span class="o">=</span> <span class="n">edge_list</span><span class="p">[</span><span class="o">~</span><span class="n">mask</span><span class="p">]</span>
@@ -368,9 +374,10 @@
 <span class="sd">        max_distance (int, optional): maximum distance between two residues in the sequence</span>
 <span class="sd">    """</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">max_distance</span><span class="o">=</span><span class="mi">2</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">max_distance</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">only_backbone</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">SequentialEdge</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">max_distance</span> <span class="o">=</span> <span class="n">max_distance</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">only_backbone</span> <span class="o">=</span> <span class="n">only_backbone</span>
 
 <div class="viewcode-block" id="SequentialEdge.forward"><a class="viewcode-back" href="../../../../api/layers.html#torchdrug.layers.geometry.SequentialEdge.forward">[docs]</a>    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">graph</span><span class="p">):</span>
         <span class="sd">"""</span>
@@ -383,7 +390,14 @@
 <span class="sd">        Returns:</span>
 <span class="sd">            (Tensor, int): edge list of shape :math:`(|E|, 3)`, number of relations</span>
 <span class="sd">        """</span>
-        <span class="n">residue2num_atom</span> <span class="o">=</span> <span class="n">graph</span><span class="o">.</span><span class="n">atom2residue</span><span class="o">.</span><span class="n">bincount</span><span class="p">(</span><span class="n">minlength</span><span class="o">=</span><span class="n">graph</span><span class="o">.</span><span class="n">num_residue</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">only_backbone</span><span class="p">:</span>
+            <span class="n">is_backbone</span> <span class="o">=</span> <span class="p">(</span><span class="n">graph</span><span class="o">.</span><span class="n">atom_name</span> <span class="o">==</span> <span class="n">graph</span><span class="o">.</span><span class="n">atom_name2id</span><span class="p">[</span><span class="s2">"CA"</span><span class="p">])</span> \
+                        <span class="o">|</span> <span class="p">(</span><span class="n">graph</span><span class="o">.</span><span class="n">atom_name</span> <span class="o">==</span> <span class="n">graph</span><span class="o">.</span><span class="n">atom_name2id</span><span class="p">[</span><span class="s2">"C"</span><span class="p">])</span> \
+                        <span class="o">|</span> <span class="p">(</span><span class="n">graph</span><span class="o">.</span><span class="n">atom_name</span> <span class="o">==</span> <span class="n">graph</span><span class="o">.</span><span class="n">atom_name2id</span><span class="p">[</span><span class="s2">"N"</span><span class="p">])</span>
+            <span class="n">atom2residue</span> <span class="o">=</span> <span class="n">graph</span><span class="o">.</span><span class="n">atom2residue</span><span class="p">[</span><span class="n">is_backbone</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">atom2residue</span> <span class="o">=</span> <span class="n">graph</span><span class="o">.</span><span class="n">atom2residue</span>
+        <span class="n">residue2num_atom</span> <span class="o">=</span> <span class="n">atom2residue</span><span class="o">.</span><span class="n">bincount</span><span class="p">(</span><span class="n">minlength</span><span class="o">=</span><span class="n">graph</span><span class="o">.</span><span class="n">num_residue</span><span class="p">)</span>
         <span class="n">edge_list</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">max_distance</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_distance</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
             <span class="n">node_index</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">graph</span><span class="o">.</span><span class="n">num_node</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="n">graph</span><span class="o">.</span><span class="n">device</span><span class="p">)</span>
@@ -398,6 +412,9 @@
                 <span class="n">is_node_out</span> <span class="o">=</span> <span class="n">graph</span><span class="o">.</span><span class="n">atom2residue</span> <span class="o">&lt;</span> <span class="n">graph</span><span class="o">.</span><span class="n">num_cum_residues</span><span class="p">[</span><span class="n">graph</span><span class="o">.</span><span class="n">atom2graph</span><span class="p">]</span> <span class="o">+</span> <span class="n">i</span>
                 <span class="n">is_residue_in</span> <span class="o">=</span> <span class="n">residue_index</span> <span class="o">&gt;=</span> <span class="p">(</span><span class="n">graph</span><span class="o">.</span><span class="n">num_cum_residues</span> <span class="o">-</span> <span class="n">graph</span><span class="o">.</span><span class="n">num_residues</span><span class="p">)[</span><span class="n">graph</span><span class="o">.</span><span class="n">residue2graph</span><span class="p">]</span> <span class="o">-</span> <span class="n">i</span>
                 <span class="n">is_residue_out</span> <span class="o">=</span> <span class="n">residue_index</span> <span class="o">&lt;</span> <span class="n">graph</span><span class="o">.</span><span class="n">num_cum_residues</span><span class="p">[</span><span class="n">graph</span><span class="o">.</span><span class="n">residue2graph</span><span class="p">]</span> <span class="o">+</span> <span class="n">i</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">only_backbone</span><span class="p">:</span>    
+                <span class="n">is_node_in</span> <span class="o">=</span> <span class="n">is_node_in</span> <span class="o">&amp;</span> <span class="n">is_backbone</span>
+                <span class="n">is_node_out</span> <span class="o">=</span> <span class="n">is_node_out</span> <span class="o">&amp;</span> <span class="n">is_backbone</span>
             <span class="n">node_in</span> <span class="o">=</span> <span class="n">node_index</span><span class="p">[</span><span class="n">is_node_in</span><span class="p">]</span>
             <span class="n">node_out</span> <span class="o">=</span> <span class="n">node_index</span><span class="p">[</span><span class="n">is_node_out</span><span class="p">]</span>
             <span class="c1"># group atoms by residue ids</span>
@@ -480,7 +497,7 @@
 <span class="sd">        """</span>
         <span class="n">num_samples</span> <span class="o">=</span> <span class="p">(</span><span class="n">graph</span><span class="o">.</span><span class="n">num_edges</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">mask_rate</span><span class="p">)</span><span class="o">.</span><span class="n">long</span><span class="p">()</span><span class="o">.</span><span class="n">clamp</span><span class="p">(</span><span class="nb">min</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
         <span class="n">num_sample</span> <span class="o">=</span> <span class="n">num_samples</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
-        <span class="n">sample2graph</span> <span class="o">=</span> <span class="n">functional</span><span class="o">.</span><span class="n">_size_to_index</span><span class="p">(</span><span class="n">num_samples</span><span class="p">)</span>
+        <span class="n">sample2graph</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">repeat_interleave</span><span class="p">(</span><span class="n">num_samples</span><span class="p">)</span>
         <span class="n">edge_index</span> <span class="o">=</span> <span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">num_sample</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="n">graph</span><span class="o">.</span><span class="n">device</span><span class="p">)</span> <span class="o">*</span> <span class="n">graph</span><span class="o">.</span><span class="n">num_edges</span><span class="p">[</span><span class="n">sample2graph</span><span class="p">])</span><span class="o">.</span><span class="n">long</span><span class="p">()</span>
         <span class="n">edge_index</span> <span class="o">=</span> <span class="n">edge_index</span> <span class="o">+</span> <span class="p">(</span><span class="n">graph</span><span class="o">.</span><span class="n">num_cum_edges</span> <span class="o">-</span> <span class="n">graph</span><span class="o">.</span><span class="n">num_edges</span><span class="p">)[</span><span class="n">sample2graph</span><span class="p">]</span>
         <span class="n">edge_mask</span> <span class="o">=</span> <span class="o">~</span><span class="n">functional</span><span class="o">.</span><span class="n">as_mask</span><span class="p">(</span><span class="n">edge_index</span><span class="p">,</span> <span class="n">graph</span><span class="o">.</span><span class="n">num_edge</span><span class="p">)</span>
@@ -515,8 +532,7 @@
         <span class="n">starts</span> <span class="o">=</span> <span class="n">starts</span> <span class="o">+</span> <span class="n">graph</span><span class="o">.</span><span class="n">num_cum_residues</span> <span class="o">-</span> <span class="n">graph</span><span class="o">.</span><span class="n">num_residues</span>
         <span class="n">ends</span> <span class="o">=</span> <span class="n">ends</span> <span class="o">+</span> <span class="n">graph</span><span class="o">.</span><span class="n">num_cum_residues</span> <span class="o">-</span> <span class="n">graph</span><span class="o">.</span><span class="n">num_residues</span>
 
-        <span class="n">node_mask</span> <span class="o">=</span> <span class="n">functional</span><span class="o">.</span><span class="n">multi_slice_mask</span><span class="p">(</span><span class="n">starts</span><span class="p">,</span> <span class="n">ends</span><span class="p">,</span> <span class="n">graph</span><span class="o">.</span><span class="n">num_residue</span><span class="p">)</span>
-        <span class="n">residue_mask</span> <span class="o">=</span> <span class="n">node_mask</span><span class="p">[</span><span class="n">graph</span><span class="o">.</span><span class="n">atom2residue</span><span class="p">]</span>
+        <span class="n">residue_mask</span> <span class="o">=</span> <span class="n">functional</span><span class="o">.</span><span class="n">multi_slice_mask</span><span class="p">(</span><span class="n">starts</span><span class="p">,</span> <span class="n">ends</span><span class="p">,</span> <span class="n">graph</span><span class="o">.</span><span class="n">num_residue</span><span class="p">)</span>
         <span class="n">graph</span> <span class="o">=</span> <span class="n">graph</span><span class="o">.</span><span class="n">subresidue</span><span class="p">(</span><span class="n">residue_mask</span><span class="p">)</span>
 
         <span class="k">return</span> <span class="n">graph</span></div></div>

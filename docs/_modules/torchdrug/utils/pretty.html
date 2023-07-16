@@ -5,7 +5,7 @@
     <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="../../../genindex.html" /><link rel="search" title="Search" href="../../../search.html" />
 
     <meta name="generator" content="sphinx-4.5.0, furo 2022.04.07"/>
-        <title>torchdrug.utils.pretty - TorchDrug 0.2.0 documentation</title>
+        <title>torchdrug.utils.pretty - TorchDrug 0.2.1 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo.css?digest=68f4518137b9aefe99b631505a2064c3c42c9852" />
     <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
@@ -129,7 +129,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="../../../index.html"><div class="brand">TorchDrug 0.2.0 documentation</div></a>
+      <a href="../../../index.html"><div class="brand">TorchDrug 0.2.1 documentation</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -238,8 +238,47 @@
         </div>
         <article role="main">
           <h1>Source code for torchdrug.utils.pretty</h1><div class="highlight"><pre>
-<span></span><span class="n">separator</span> <span class="o">=</span> <span class="s2">"&gt;"</span> <span class="o">*</span> <span class="mi">30</span>
+<span></span><span class="kn">import</span> <span class="nn">pprint</span>
+<span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">islice</span><span class="p">,</span> <span class="n">chain</span>
+
+
+<span class="n">separator</span> <span class="o">=</span> <span class="s2">"&gt;"</span> <span class="o">*</span> <span class="mi">30</span>
 <span class="n">line</span> <span class="o">=</span> <span class="s2">"-"</span> <span class="o">*</span> <span class="mi">30</span>
+
+
+<span class="k">class</span> <span class="nc">Ellipsis</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s2">"..."</span>
+
+
+<span class="n">ellipsis</span> <span class="o">=</span> <span class="bp">Ellipsis</span><span class="p">()</span>
+
+
+<span class="k">class</span> <span class="nc">PrettyPrinter</span><span class="p">(</span><span class="n">pprint</span><span class="o">.</span><span class="n">PrettyPrinter</span><span class="p">):</span>
+
+    <span class="n">truncation</span> <span class="o">=</span> <span class="mi">10</span>
+    <span class="n">display</span> <span class="o">=</span> <span class="mi">3</span>
+
+    <span class="k">def</span> <span class="nf">_format_items</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">items</span><span class="p">,</span> <span class="n">stream</span><span class="p">,</span> <span class="n">indent</span><span class="p">,</span> <span class="n">allowance</span><span class="p">,</span> <span class="n">context</span><span class="p">,</span> <span class="n">level</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_compact</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">items</span><span class="p">)</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">truncation</span><span class="p">:</span>
+            <span class="n">items</span> <span class="o">=</span> <span class="n">chain</span><span class="p">(</span><span class="n">islice</span><span class="p">(</span><span class="n">items</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">display</span><span class="p">),</span> <span class="p">[</span><span class="n">ellipsis</span><span class="p">],</span> <span class="n">islice</span><span class="p">(</span><span class="n">items</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">items</span><span class="p">)</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">display</span><span class="p">,</span> <span class="kc">None</span><span class="p">))</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">PrettyPrinter</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">_format_items</span><span class="p">(</span><span class="n">items</span><span class="p">,</span> <span class="n">stream</span><span class="p">,</span> <span class="n">indent</span><span class="p">,</span> <span class="n">allowance</span><span class="p">,</span> <span class="n">context</span><span class="p">,</span> <span class="n">level</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="print"><a class="viewcode-back" href="../../../api/utils.html#torchdrug.utils.pretty.print">[docs]</a><span class="k">def</span> <span class="nf">print</span><span class="p">(</span><span class="nb">object</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="sd">"""</span>
+<span class="sd">    Print a python object to a stream.</span>
+<span class="sd">    """</span>
+    <span class="k">return</span> <span class="n">PrettyPrinter</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span><span class="o">.</span><span class="n">pprint</span><span class="p">(</span><span class="nb">object</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="format"><a class="viewcode-back" href="../../../api/utils.html#torchdrug.utils.pretty.format">[docs]</a><span class="k">def</span> <span class="nf">format</span><span class="p">(</span><span class="nb">object</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="sd">"""</span>
+<span class="sd">    Format a python object as a string.</span>
+<span class="sd">    """</span>
+    <span class="k">return</span> <span class="n">PrettyPrinter</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span><span class="o">.</span><span class="n">pformat</span><span class="p">(</span><span class="nb">object</span><span class="p">)</span></div>
+
 
 <div class="viewcode-block" id="time"><a class="viewcode-back" href="../../../api/utils.html#torchdrug.utils.pretty.time">[docs]</a><span class="k">def</span> <span class="nf">time</span><span class="p">(</span><span class="n">seconds</span><span class="p">):</span>
     <span class="sd">"""</span>

@@ -5,7 +5,7 @@
     <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="../../../../genindex.html" /><link rel="search" title="Search" href="../../../../search.html" />
 
     <meta name="generator" content="sphinx-4.5.0, furo 2022.04.07"/>
-        <title>torchdrug.layers.geometry.graph - TorchDrug 0.2.0 documentation</title>
+        <title>torchdrug.layers.geometry.graph - TorchDrug 0.2.1 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/styles/furo.css?digest=68f4518137b9aefe99b631505a2064c3c42c9852" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
@@ -129,7 +129,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="../../../../index.html"><div class="brand">TorchDrug 0.2.0 documentation</div></a>
+      <a href="../../../../index.html"><div class="brand">TorchDrug 0.2.1 documentation</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -266,6 +266,16 @@
 <span class="sd">            2. For ``gearnet``, the feature of the edge :math:`e_{ij}` between residue :math:`i` and residue :math:`j`</span>
 <span class="sd">                is the concatenation ``[residue_type(i), residue_type(j), edge_type(e_ij),</span>
 <span class="sd">                sequential_distance(i,j), spatial_distance(i,j)]``.</span>
+
+<span class="sd">    .. note::</span>
+<span class="sd">        You may customize your own edge features by inheriting this class and define a member function</span>
+<span class="sd">        for your features. Use ``edge_feature="my_feature"`` to call the following feature function.</span>
+
+<span class="sd">        .. code:: python</span>
+
+<span class="sd">            def edge_my_feature(self, graph, edge_list, num_relation):</span>
+<span class="sd">                ...</span>
+<span class="sd">                return feature # the first dimension must be ``graph.num_edge``</span>
 <span class="sd">    """</span>
 
     <span class="n">max_seq_dist</span> <span class="o">=</span> <span class="mi">10</span>
@@ -283,7 +293,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">edge_layers</span> <span class="o">=</span> <span class="n">edge_layers</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">edge_feature</span> <span class="o">=</span> <span class="n">edge_feature</span>
 
-    <span class="k">def</span> <span class="nf">edge_residue_type</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">graph</span><span class="p">,</span> <span class="n">edge_list</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">edge_residue_type</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">graph</span><span class="p">,</span> <span class="n">edge_list</span><span class="p">,</span> <span class="n">num_relation</span><span class="p">):</span>
         <span class="n">node_in</span><span class="p">,</span> <span class="n">node_out</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">edge_list</span><span class="o">.</span><span class="n">t</span><span class="p">()</span>
         <span class="n">residue_in</span><span class="p">,</span> <span class="n">residue_out</span> <span class="o">=</span> <span class="n">graph</span><span class="o">.</span><span class="n">atom2residue</span><span class="p">[</span><span class="n">node_in</span><span class="p">],</span> <span class="n">graph</span><span class="o">.</span><span class="n">atom2residue</span><span class="p">[</span><span class="n">node_out</span><span class="p">]</span>
         <span class="n">in_residue_type</span> <span class="o">=</span> <span class="n">graph</span><span class="o">.</span><span class="n">residue_type</span><span class="p">[</span><span class="n">residue_in</span><span class="p">]</span>
@@ -343,13 +353,15 @@
         <span class="n">num_edges</span> <span class="o">=</span> <span class="n">edge2graph</span><span class="o">.</span><span class="n">bincount</span><span class="p">(</span><span class="n">minlength</span><span class="o">=</span><span class="n">graph</span><span class="o">.</span><span class="n">batch_size</span><span class="p">)</span>
         <span class="n">offsets</span> <span class="o">=</span> <span class="p">(</span><span class="n">graph</span><span class="o">.</span><span class="n">num_cum_nodes</span> <span class="o">-</span> <span class="n">graph</span><span class="o">.</span><span class="n">num_nodes</span><span class="p">)</span><span class="o">.</span><span class="n">repeat_interleave</span><span class="p">(</span><span class="n">num_edges</span><span class="p">)</span>
 
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">edge_feature</span> <span class="o">==</span> <span class="s2">"residue_type"</span><span class="p">:</span>
-            <span class="n">edge_feature</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">edge_residue_type</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">edge_list</span><span class="p">)</span>
-        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">edge_feature</span> <span class="o">==</span> <span class="s2">"gearnet"</span><span class="p">:</span>
-            <span class="n">edge_feature</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">edge_gearnet</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">edge_list</span><span class="p">,</span> <span class="n">num_relation</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">"edge_</span><span class="si">%s</span><span class="s2">"</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">edge_feature</span><span class="p">):</span>
+            <span class="n">edge_feature</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">"edge_</span><span class="si">%s</span><span class="s2">"</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">edge_feature</span><span class="p">)(</span><span class="n">graph</span><span class="p">,</span> <span class="n">edge_list</span><span class="p">,</span> <span class="n">num_relation</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">edge_feature</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">edge_feature</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Unknown edge feature `</span><span class="si">%s</span><span class="s2">`"</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">edge_feature</span><span class="p">)</span>
-        <span class="n">data_dict</span><span class="p">,</span> <span class="n">meta_dict</span> <span class="o">=</span> <span class="n">graph</span><span class="o">.</span><span class="n">data_by_meta</span><span class="p">(</span><span class="n">include</span><span class="o">=</span><span class="p">(</span><span class="s2">"node"</span><span class="p">,</span> <span class="s2">"residue"</span><span class="p">,</span> <span class="s2">"node reference"</span><span class="p">,</span> <span class="s2">"residue reference"</span><span class="p">))</span>
+        <span class="n">data_dict</span><span class="p">,</span> <span class="n">meta_dict</span> <span class="o">=</span> <span class="n">graph</span><span class="o">.</span><span class="n">data_by_meta</span><span class="p">(</span><span class="n">include</span><span class="o">=</span><span class="p">(</span>
+            <span class="s2">"node"</span><span class="p">,</span> <span class="s2">"residue"</span><span class="p">,</span> <span class="s2">"node reference"</span><span class="p">,</span> <span class="s2">"residue reference"</span><span class="p">,</span> <span class="s2">"graph"</span>
+        <span class="p">))</span>
 
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">data</span><span class="o">.</span><span class="n">PackedProtein</span><span class="p">):</span>
             <span class="n">data_dict</span><span class="p">[</span><span class="s2">"num_residues"</span><span class="p">]</span> <span class="o">=</span> <span class="n">graph</span><span class="o">.</span><span class="n">num_residues</span>
@@ -414,7 +426,7 @@
         <span class="n">x</span> <span class="o">=</span> <span class="p">(</span><span class="n">vector1</span> <span class="o">*</span> <span class="n">vector2</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">dim</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
         <span class="n">y</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">cross</span><span class="p">(</span><span class="n">vector1</span><span class="p">,</span> <span class="n">vector2</span><span class="p">)</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">dim</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
         <span class="n">angle</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">atan2</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
-        <span class="n">relation</span> <span class="o">=</span> <span class="p">(</span><span class="n">angle</span> <span class="o">/</span> <span class="n">math</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_angle_bin</span><span class="p">)</span><span class="o">.</span><span class="n">long</span><span class="p">()</span>
+        <span class="n">relation</span> <span class="o">=</span> <span class="p">(</span><span class="n">angle</span> <span class="o">/</span> <span class="n">math</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_angle_bin</span><span class="p">)</span><span class="o">.</span><span class="n">long</span><span class="p">()</span><span class="o">.</span><span class="n">clamp</span><span class="p">(</span><span class="nb">max</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">num_angle_bin</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
         <span class="n">edge_list</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">cat</span><span class="p">([</span><span class="n">line_graph</span><span class="o">.</span><span class="n">edge_list</span><span class="p">,</span> <span class="n">relation</span><span class="o">.</span><span class="n">unsqueeze</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)],</span> <span class="n">dim</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
 
         <span class="k">return</span> <span class="nb">type</span><span class="p">(</span><span class="n">line_graph</span><span class="p">)(</span><span class="n">edge_list</span><span class="p">,</span> <span class="n">num_nodes</span><span class="o">=</span><span class="n">line_graph</span><span class="o">.</span><span class="n">num_nodes</span><span class="p">,</span> <span class="n">offsets</span><span class="o">=</span><span class="n">line_graph</span><span class="o">.</span><span class="n">_offsets</span><span class="p">,</span>

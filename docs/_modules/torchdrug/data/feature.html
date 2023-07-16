@@ -5,7 +5,7 @@
     <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="../../../genindex.html" /><link rel="search" title="Search" href="../../../search.html" />
 
     <meta name="generator" content="sphinx-4.5.0, furo 2022.04.07"/>
-        <title>torchdrug.data.feature - TorchDrug 0.2.0 documentation</title>
+        <title>torchdrug.data.feature - TorchDrug 0.2.1 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo.css?digest=68f4518137b9aefe99b631505a2064c3c42c9852" />
     <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
@@ -129,7 +129,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="../../../index.html"><div class="brand">TorchDrug 0.2.0 documentation</div></a>
+      <a href="../../../index.html"><div class="brand">TorchDrug 0.2.1 documentation</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -290,6 +290,7 @@
     <span class="k">return</span> <span class="n">feature</span>
 
 
+<span class="c1"># TODO: this one is too slow</span>
 <div class="viewcode-block" id="atom_default"><a class="viewcode-back" href="../../../api/data.html#torchdrug.data.feature.atom_default">[docs]</a><span class="nd">@R</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="s2">"features.atom.default"</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">atom_default</span><span class="p">(</span><span class="n">atom</span><span class="p">):</span>
     <span class="sd">"""Default atom feature.</span>
@@ -570,6 +571,7 @@
 <span class="k">def</span> <span class="nf">molecule_default</span><span class="p">(</span><span class="n">mol</span><span class="p">):</span>
     <span class="sd">"""Default molecule feature."""</span>
     <span class="k">return</span> <span class="n">ExtendedConnectivityFingerprint</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span></div>
+
 
 <span class="n">ECFP</span> <span class="o">=</span> <span class="n">ExtendedConnectivityFingerprint</span>
 
